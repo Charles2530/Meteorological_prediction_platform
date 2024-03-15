@@ -17,19 +17,21 @@ const router = createRouter({
 // 路由守卫
 router.beforeEach((to, from, next) => {
   const store = userStore();
-  if (store.token) {
-    next();
-  } else {
-    console.log(to.path);
-    if (
-      routes.some((item) =>
-        new RegExp("^" + item.path.split("/:")[0] + "(?:/.*)?$").test(to.path)
-      )
-    ) {
+  console.log(to.path);
+  if (
+    routes.some((item) =>
+      new RegExp("^" + item.path.split("/:")[0] + "(?:/.*)?$").test(to.path)
+    )
+  ) {
+    if (store.token) {
       next();
     } else {
-      next({ name: "404Page" });
+      next({
+        name: "Login",
+      });
     }
+  } else {
+    next({ name: "404Page" });
   }
 });
 
