@@ -15,7 +15,9 @@
     "element-plus": "^2.6.1",
     "pinia": "^2.1.7",
     "unplugin-auto-import": "^0.17.5",
+    "unplugin-icons": "^0.18.5",
     "unplugin-vue-components": "^0.26.0",
+    "vite-plugin-inspect": "^0.8.3",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
