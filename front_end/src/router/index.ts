@@ -1,8 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import { userStore } from "@/store/user.ts";
 // 定义路由部分
 // 404页面
-const Page404 = () => import("@/views/404.vue");
+const Page404 = () => import("@/views/Page404.vue");
 const routes = [
   {
     path: "/404",
@@ -13,26 +12,6 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-});
-// 路由守卫
-router.beforeEach((to, from, next) => {
-  const store = userStore();
-  console.log(to.path);
-  if (
-    routes.some((item) =>
-      new RegExp("^" + item.path.split("/:")[0] + "(?:/.*)?$").test(to.path)
-    )
-  ) {
-    if (store.token) {
-      next();
-    } else {
-      next({
-        name: "Login",
-      });
-    }
-  } else {
-    next({ name: "404Page" });
-  }
 });
 
 export default router;
