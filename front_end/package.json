@@ -12,6 +12,7 @@
     "@element-plus/icons-vue": "^2.3.1",
     "@types/node": "^20.11.27",
     "axios": "^1.6.7",
+    "echarts": "^5.5.0",
     "element-plus": "^2.6.1",
     "pinia": "^2.1.7",
     "unplugin-auto-import": "^0.17.5",
@@ -19,6 +20,7 @@
     "unplugin-vue-components": "^0.26.0",
     "vite-plugin-inspect": "^0.8.3",
     "vue": "^3.4.21",
+    "vue-echarts": "^6.6.9",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
