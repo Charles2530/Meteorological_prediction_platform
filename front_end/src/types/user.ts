@@ -26,8 +26,8 @@ export enum MessageStatus {
 }
 
 export enum NotificationType {
-  star = 0, // 收藏的课程有新评价
-  review = 1, // 评价下有新回复
+  star = 0,
+  review = 1,
 }
 
 export interface Announcement {

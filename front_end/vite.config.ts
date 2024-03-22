@@ -15,7 +15,7 @@ export default defineConfig({
     AutoImport({
       // Auto import functions from Vue, e.g. ref, reactive, toRef...
       // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
-      imports: ["vue"],
+      imports: ["vue", "vue-router"],
       // Auto import functions from Element Plus, e.g. ElMessage, ElMessageBox... (with style)
       // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
       resolvers: [
@@ -26,6 +26,14 @@ export default defineConfig({
           prefix: "Icon",
         }),
       ],
+      dts: resolve(__dirname, "src", "auto-imports.d.ts"),
+      // 解决eslint报错问题
+      eslintrc: {
+        // 这里先设置成true然后npm run dev 运行之后会生成 .eslintrc-auto-import.json 文件之后，在改为false
+        enabled: false,
+        filepath: "./.eslintrc-auto-import.json", // 生成的文件路径
+        globalsPropValue: true,
+      },
     }),
     Components({
       resolvers: [
@@ -38,6 +46,10 @@ export default defineConfig({
         // 自动导入 Element Plus 组件
         ElementPlusResolver(),
       ],
+      // 允许子目录作为组件的命名空间前缀。
+      directoryAsNamespace: true,
+
+      dts: resolve(__dirname, "src", "components.d.ts"),
     }),
     Icons({
       autoInstall: true,
