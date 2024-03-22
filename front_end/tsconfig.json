@@ -12,6 +12,7 @@
       "@/*": ["src/*"],
       "@c/*": ["src/components/*"],
       "@css/*": ["src/assets/css/*"],
+      "@img/*": ["src/assets/img/*"],
     },
 
     /* Bundler mode */
@@ -30,6 +31,6 @@
 
 
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

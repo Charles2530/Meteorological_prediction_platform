@@ -3,9 +3,11 @@ import { ElNotification } from "element-plus";
 import { Local } from "@/utils/storage";
 import pinia from "@/stores";
 import { useUserInfo } from "@/stores/userInfo";
+import { useLoginConfig } from "@/stores/loginConfig";
 
+const loginConfig = useLoginConfig(pinia);
 const service: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 10000,
 });
 
@@ -35,6 +37,7 @@ service.interceptors.response.use(
         type: "error",
         duration: 3000,
       });
+      loginConfig.setShowLoginPanel(true);
     } else {
       ElNotification({
         title: error.code,
