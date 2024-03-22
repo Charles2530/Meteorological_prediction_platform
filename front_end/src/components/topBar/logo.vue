@@ -6,8 +6,6 @@
 
 <script setup lang="ts">
 import logo from "@img/logo.png";
-
-// const isDark = useDark();
 </script>
 
 <style scoped>

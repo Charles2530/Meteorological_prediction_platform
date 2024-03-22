@@ -21,6 +21,7 @@
       </el-container>
     </el-container>
   </el-container>
+  <Login />
 </template>
 
 <script setup lang="ts">
@@ -29,6 +30,7 @@ const route = useRoute();
 const TopBar = defineAsyncComponent(() => import("@c/topBar/index.vue"));
 const Aside = defineAsyncComponent(() => import("@c/aside/index.vue"));
 const Footer = defineAsyncComponent(() => import("@c/footer/index.vue"));
+const Login = defineAsyncComponent(() => import("@c/content/login.vue"));
 const transition = computed(() => {
   return (route.meta?.transition as string) || "fade";
 });

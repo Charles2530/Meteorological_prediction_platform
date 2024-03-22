@@ -5,7 +5,10 @@
     </div>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item v-if="userInfo.role == UserRole.Visitor">
+        <el-dropdown-item
+          v-if="userInfo.role == UserRole.Visitor"
+          @click="loginConfig.setShowLoginPanel(true)"
+        >
           用户登录
         </el-dropdown-item>
         <el-dropdown-item
@@ -27,13 +30,12 @@
 
 <script setup lang="ts">
 import { useUserInfo } from "@/stores/userInfo";
-// import { useThemeConfig } from "@/stores/themeConfig";
+import { useLoginConfig } from "@/stores/loginConfig";
 import { UserRole } from "@/types/user.ts";
-import { useRouter } from "vue-router";
+import router from "@/router";
 
-const router = useRouter();
 const userInfo = useUserInfo();
-// const themeConfig = useThemeConfig();
+const loginConfig = useLoginConfig();
 </script>
 
 <style scoped>
