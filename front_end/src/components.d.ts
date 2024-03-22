@@ -8,11 +8,13 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Aside: typeof import('./components/aside/index.vue')['default']
+    AsideSideBar: typeof import('./components/aside/sideBar.vue')['default']
     Bottom: typeof import('./components/bottom/index.vue')['default']
     ContentLogin: typeof import('./components/content/login.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
@@ -22,10 +24,12 @@ declare module 'vue' {
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElHeader: typeof import('element-plus/es')['ElHeader']
+    ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElRow: typeof import('element-plus/es')['ElRow']
     Footer: typeof import('./components/footer/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -36,7 +40,10 @@ declare module 'vue' {
     TopBarLogin: typeof import('./components/topBar/login.vue')['default']
     TopBarLogo: typeof import('./components/topBar/logo.vue')['default']
     TopBarNavBar: typeof import('./components/topBar/navBar.vue')['default']
+    TopBarNavigationBar: typeof import('./components/topBar/NavigationBar.vue')['default']
+    TopBarPersonalCenterSideBar: typeof import('./components/topBar/personalCenterSideBar.vue')['default']
     TopBarPredict: typeof import('./components/topBar/Predict.vue')['default']
+    TopBarSideBar: typeof import('./components/topBar/SideBar.vue')['default']
     TopBarUserMenu: typeof import('./components/topBar/userMenu.vue')['default']
   }
 }

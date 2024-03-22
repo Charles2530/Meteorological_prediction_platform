@@ -17,7 +17,6 @@ const UserMenu = defineAsyncComponent(() => import("@c/topBar/userMenu.vue"));
   height: 50px;
   display: flex;
   align-items: center;
-  padding-left: 20px;
   padding-right: 20px;
   border-bottom: 1px solid #4c4d4f;
   background-color: var(--bg-topBar-color);

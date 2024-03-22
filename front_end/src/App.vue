@@ -1,13 +1,13 @@
 <template>
   <el-container class="full-screen">
-    <el-header class="no-padding">
-      <TopBar />
-    </el-header>
     <el-container class="no-padding">
-      <el-aside width="200px">
+      <el-aside width="250px">
         <Aside></Aside>
       </el-aside>
       <el-container>
+        <el-header class="no-padding">
+          <TopBar />
+        </el-header>
         <el-main class="no-padding">
           <router-view v-slot="{ Component }">
             <transition :name="transition">
@@ -41,8 +41,8 @@ const transition = computed(() => {
   padding: 0px;
 }
 .full-screen {
-  height: 100vh;
-  width: 100vw;
+  /* height: 200vw;
+  width: 100vw; */
   background-color: #504099;
 }
 

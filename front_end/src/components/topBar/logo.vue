@@ -16,5 +16,6 @@ import logo from "@img/logo.png";
 }
 .topbar-logo-img {
   height: inherit;
+  min-width: max-content;
 }
 </style>
