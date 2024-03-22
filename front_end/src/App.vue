@@ -4,15 +4,20 @@
       <TopBar />
     </el-header>
     <el-container class="no-padding">
-      <el-aside width="200px"><Aside /></el-aside>
+      <el-aside width="200px">
+        <Aside></Aside>
+      </el-aside>
       <el-container>
         <el-main class="no-padding">
           <router-view v-slot="{ Component }">
             <transition :name="transition">
               <component :is="Component" />
-            </transition> </router-view
-        ></el-main>
-        <el-footer><Footer /></el-footer>
+            </transition>
+          </router-view>
+        </el-main>
+        <el-footer>
+          <Footer></Footer>
+        </el-footer>
       </el-container>
     </el-container>
   </el-container>
@@ -36,6 +41,7 @@ const transition = computed(() => {
 .full-screen {
   height: 100vh;
   width: 100vw;
+  background-color: #504099;
 }
 
 .fade-enter-active,

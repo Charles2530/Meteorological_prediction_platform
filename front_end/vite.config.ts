@@ -62,6 +62,7 @@ export default defineConfig({
       "@": resolve(__dirname, "src"),
       "@c": resolve(__dirname, "src/components"),
       "@css": resolve(__dirname, "src/assets/css"),
+      "@img": resolve(__dirname, "src/assets/img"),
     },
   },
   server: {

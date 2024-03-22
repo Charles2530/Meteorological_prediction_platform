@@ -12,6 +12,7 @@
       "@/*": ["src/*"],
       "@c/*": ["src/components/*"],
       "@css/*": ["src/assets/css/*"],
+      "@img/*": ["src/assets/img/*"],
     },
 
     /* Bundler mode */
