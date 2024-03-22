@@ -23,11 +23,11 @@ import { useLoginConfig } from "./stores/loginConfig";
 const userInfo = useUserInfo(pinia);
 const loginConfig = useLoginConfig();
 
-// get<UserInfo>("/api/getInfo").then((res) => {
-//   userInfo.login(res.data);
-//   // @ts-ignore
-//   if (router.currentRoute.value.meta.permission?.includes(userInfo.role))
-//     loginConfig.showLoginPanel = false;
-// });
+get<UserInfo>("/api/getInfo").then((res) => {
+  userInfo.login(res.data);
+  // @ts-ignore
+  if (router.currentRoute.value.meta.permission?.includes(userInfo.role))
+    loginConfig.showLoginPanel = false;
+});
 
 app.mount("#app");

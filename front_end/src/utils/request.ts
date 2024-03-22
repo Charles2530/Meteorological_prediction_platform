@@ -7,7 +7,7 @@ import { useLoginConfig } from "@/stores/loginConfig";
 
 const loginConfig = useLoginConfig(pinia);
 const service: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 10000,
 });
 
