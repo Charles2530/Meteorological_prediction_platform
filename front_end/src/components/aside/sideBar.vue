@@ -17,37 +17,21 @@
             <i class="el-icon-style">
               <HomeFilled />
             </i>
-            <router-link class="nav-title" to="/personalCenter"
-              >个人中心</router-link
-            >
+            <router-link class="nav-title" to="/weather">天气数据</router-link>
           </el-menu-item>
           <el-menu-item index="2">
             <i class="el-icon-style">
               <Goods></Goods>
             </i>
-            <router-link class="nav-title" to="/ProductBuy"
-              >商品中心</router-link
+            <router-link class="nav-title" to="/geographic"
+              >地质数据</router-link
             >
           </el-menu-item>
           <el-menu-item index="3">
             <i class="el-icon-style">
               <Ticket></Ticket>
             </i>
-            <router-link class="nav-title" to="/shopping"
-              >我的购物车</router-link
-            >
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-style"><TrendCharts /></i>
-            <router-link class="nav-title" to="/rankingList"
-              >排行榜</router-link
-            >
-          </el-menu-item>
-          <el-menu-item index="5">
-            <i class="el-icon-style"><Setting /></i>
-            <router-link class="nav-title" to="/DeveloperInfo"
-              >客服中心</router-link
-            >
+            <router-link class="nav-title" to="/booking">灾害订阅</router-link>
           </el-menu-item>
         </div>
       </el-sub-menu>
@@ -62,16 +46,16 @@
               <i class="el-icon-style">
                 <Document></Document>
               </i>
-              <router-link class="nav-title" to="/ordersManagement"
-                >订单管理</router-link
+              <router-link class="nav-title" to="/dataManagement"
+                >数据管理</router-link
               >
             </el-menu-item>
             <el-menu-item index="7">
               <i class="el-icon-style">
                 <Service />
               </i>
-              <router-link class="nav-title" to="/checkOrdersView"
-                >审核商品</router-link
+              <router-link class="nav-title" to="/newsManagement"
+                >预警信息管理</router-link
               >
             </el-menu-item>
             <el-menu-item index="8">
@@ -95,7 +79,8 @@ import { useUserInfo } from "@/stores/userInfo";
 import { UserRole } from "@/types/user";
 const activeMenu = ref("0");
 const userInfo = useUserInfo();
-const adminMode = userInfo.role == UserRole.Administrator;
+// const adminMode = userInfo.role == UserRole.Administrator;
+const adminMode = true;
 </script>
 
 <style scoped>
