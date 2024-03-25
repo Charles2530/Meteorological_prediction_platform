@@ -104,7 +104,7 @@
 import { useUserInfo } from "@/stores/userInfo";
 import { useLoginConfig } from "@/stores/loginConfig";
 import router from "@/router";
-import type { FormInstance, FormRules } from "element-plus";
+import { ElMessage, type FormInstance, type FormRules } from "element-plus";
 import { UserInfo } from "@/types/user.ts";
 import { post } from "@/api/index";
 
@@ -199,6 +199,12 @@ const submitLoginForm = (formEl: FormInstance | undefined) => {
             const info = response.info!;
             userInfo.login(info.userInfo, info.token);
             loginConfig.$patch({ showLoginPanel: false });
+            ElMessage({
+              message: "登录成功",
+              type: "success",
+            });
+          } else {
+            console.log("error:", res);
           }
         },
         (error) => {
@@ -281,6 +287,10 @@ const submitRegisterForm = (formEl: FormInstance | undefined) => {
             const info = response.info!;
             userInfo.login(info.userInfo, info.token);
             loginConfig.$patch({ showLoginPanel: false });
+            ElMessage({
+              message: "注册成功",
+              type: "success",
+            });
           }
         },
         (error) => {

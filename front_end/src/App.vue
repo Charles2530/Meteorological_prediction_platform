@@ -14,8 +14,12 @@
               <component :is="Component" />
             </transition>
           </router-view>
+          <div
+            class="content-placeholder"
+            :style="{ height: contentHeight }"
+          ></div>
         </el-main>
-        <el-footer>
+        <el-footer ref="footer">
           <Footer></Footer>
         </el-footer>
       </el-container>
@@ -34,6 +38,14 @@ const Login = defineAsyncComponent(() => import("@c/content/login.vue"));
 const transition = computed(() => {
   return (route.meta?.transition as string) || "fade";
 });
+const footerRef = ref<HTMLElement | null>(null);
+const contentHeight = ref("calc(100vh - 0px)");
+
+onMounted(() => {
+  if (footerRef.value) {
+    contentHeight.value = `calc(100vh - ${footerRef.value.clientHeight}px)`;
+  }
+});
 </script>
 
 <style scoped>
@@ -49,5 +61,8 @@ const transition = computed(() => {
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;
+}
+.content-placeholder {
+  height: 0;
 }
 </style>
