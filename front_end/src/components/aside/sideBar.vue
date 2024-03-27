@@ -10,77 +10,15 @@
       <el-sub-menu index="1">
         <template #title>
           <el-icon class="el-icon-menu"><Menu></Menu></el-icon>
-          <strong class="nav-title text-md">网站导航</strong>
+          <strong class="nav-title text-md">网站公告</strong>
         </template>
-        <div class="item_container px-5">
-          <el-menu-item index="1">
-            <i class="el-icon-style">
-              <HomeFilled />
-            </i>
-            <router-link class="nav-title" to="/weather">天气数据</router-link>
-          </el-menu-item>
-          <el-menu-item index="2">
-            <i class="el-icon-style">
-              <Goods></Goods>
-            </i>
-            <router-link class="nav-title" to="/geographic"
-              >地质数据</router-link
-            >
-          </el-menu-item>
-          <el-menu-item index="3">
-            <i class="el-icon-style">
-              <Ticket></Ticket>
-            </i>
-            <router-link class="nav-title" to="/booking">灾害订阅</router-link>
-          </el-menu-item>
-        </div>
       </el-sub-menu>
-      <div v-if="adminMode">
-        <el-sub-menu index="2">
-          <template #title>
-            <el-icon class="el-icon-menu"><Monitor /></el-icon>
-            <strong class="nav-title text-md">管理员模式</strong>
-          </template>
-          <div class="item_container px-5">
-            <el-menu-item index="6">
-              <i class="el-icon-style">
-                <Document></Document>
-              </i>
-              <router-link class="nav-title" to="/dataManagement"
-                >数据管理</router-link
-              >
-            </el-menu-item>
-            <el-menu-item index="7">
-              <i class="el-icon-style">
-                <Service />
-              </i>
-              <router-link class="nav-title" to="/newsManagement"
-                >预警信息管理</router-link
-              >
-            </el-menu-item>
-            <el-menu-item index="8">
-              <i class="el-icon-style">
-                <List />
-              </i>
-              <router-link class="nav-title" to="/usersManagement"
-                >用户管理</router-link
-              >
-            </el-menu-item>
-          </div>
-        </el-sub-menu>
-      </div>
     </el-menu>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ElMenuItem, ElSubMenu } from "element-plus";
-import { useUserInfo } from "@/stores/userInfo";
-import { UserRole } from "@/types/user";
 const activeMenu = ref("0");
-const userInfo = useUserInfo();
-// const adminMode = userInfo.role == UserRole.Administrator;
-const adminMode = true;
 </script>
 
 <style scoped>
