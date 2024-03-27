@@ -35,11 +35,13 @@
                   </el-text>
                 </template>
                 <el-text>
-                  <div v-if="userInfo.role == UserRole.User">普通用户</div>
-                  <div v-else-if="userInfo.role == UserRole.Administrator">
+                  <el-text v-if="userInfo.role == UserRole.User"
+                    >普通用户</el-text
+                  >
+                  <el-text v-else-if="userInfo.role == UserRole.Administrator">
                     管理员
-                  </div>
-                  <div v-else>游客</div>
+                  </el-text>
+                  <el-text v-else>游客</el-text>
                 </el-text>
               </el-descriptions-item>
             </el-descriptions>
