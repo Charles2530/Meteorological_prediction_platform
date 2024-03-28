@@ -323,6 +323,7 @@ const getUserList = throttle(() => {
   request.page_size = pagination.page_size;
   post<QueryResponse>("/api/manage/user/list", request).then((res) => {
     const data = res.data;
+    console.log(data.userlist);
     userlist.splice(0, userlist.length, ...data.userlist);
     pagination.all = data.all;
     pagination.total = data.now;

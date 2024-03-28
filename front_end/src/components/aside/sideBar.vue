@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div
+    class="my-modal-parent"
+    @mouseover="showNoticeItems = true"
+    @mouseleave="showNoticeItems = false"
+  >
     <el-menu
       class="el-menu-vertical-demo rounded-lg"
       :default-active="activeMenu"
@@ -12,13 +16,28 @@
           <el-icon class="el-icon-menu"><Menu></Menu></el-icon>
           <strong class="nav-title text-md">网站公告</strong>
         </template>
+        <el-menu-item-group v-show="showNoticeItems">
+          <notice-item
+            v-for="(notice, index) in notices"
+            :key="index"
+            :content="notice"
+            >{{ notice }}</notice-item
+          >
+        </el-menu-item-group>
       </el-sub-menu>
     </el-menu>
   </div>
 </template>
 
 <script setup lang="ts">
+import noticeItem from "./noticeItem.vue";
+const showNoticeItems = ref(false);
 const activeMenu = ref("0");
+const notices = [
+  "公告1：欢迎来到我们的网站！",
+  "公告2：请注意网站最新动态。",
+  "公告3：如有任何问题，请及时联系我们的客服。",
+];
 </script>
 
 <style scoped>
@@ -59,5 +78,13 @@ const activeMenu = ref("0");
   color: #666;
   padding-left: 3px;
   font-style: normal !important;
+}
+.my-modal-parent {
+  position: fixed;
+  z-index: 999999;
+}
+.notice-item:hover {
+  background-color: #e0e0e0;
+  cursor: pointer;
 }
 </style>
