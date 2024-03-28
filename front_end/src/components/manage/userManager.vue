@@ -317,6 +317,7 @@ const request = reactive<QueryForm>({
   email: undefined,
   role: undefined,
 });
+
 const getUserList = throttle(() => {
   loading.value = true;
   request.page = pagination.page;
@@ -333,6 +334,7 @@ const getUserList = throttle(() => {
     jump.value = pagination.page;
   });
 });
+
 const handleCurrentChange = (page: number) => {
   pagination.page = page;
   getUserList();
