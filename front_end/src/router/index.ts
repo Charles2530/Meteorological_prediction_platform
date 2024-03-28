@@ -14,9 +14,9 @@ const User = () => import("@/views/home/personalCenter.vue");
 // 后台管理页面
 const Manage = () => import("@c/manage/index.vue");
 // 用户管理
-const UserManage = () => import("@/components/manage/user.vue");
+const UserManage = () => import("@/components/manage/userManager.vue");
 // 数据管理
-const DataManage = () => import("@/components/manage/data.vue");
+const DataManage = () => import("@/components/manage/dataManager.vue");
 // 404页面
 const Page404 = () => import("@/views/Page404.vue");
 const routes = [

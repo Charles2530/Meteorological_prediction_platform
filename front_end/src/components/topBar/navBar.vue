@@ -22,8 +22,8 @@ import { useUserInfo } from "@/stores/userInfo";
 import { UserRole } from "@/types/user";
 
 const userInfo = useUserInfo();
-const __admin = userInfo.role == UserRole.Administrator;
-// const __admin = true;
+// const __admin = userInfo.role == UserRole.Administrator;
+const __admin = true;
 </script>
 
 <style scoped>

@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Aside: typeof import('./components/aside/index.vue')['default']
+    AsideNoticeItem: typeof import('./components/aside/noticeItem.vue')['default']
     AsideSideBar: typeof import('./components/aside/sideBar.vue')['default']
     Bottom: typeof import('./components/bottom/index.vue')['default']
     ContentAvatar: typeof import('./components/content/avatar.vue')['default']
@@ -40,6 +41,7 @@ declare module 'vue' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
@@ -56,10 +58,12 @@ declare module 'vue' {
     ManageAnnouncement: typeof import('./components/manage/announcement.vue')['default']
     ManageCourse: typeof import('./components/manage/course.vue')['default']
     ManageData: typeof import('./components/manage/data.vue')['default']
+    ManageDataManager: typeof import('./components/manage/dataManager.vue')['default']
     ManageTag: typeof import('./components/manage/tag.vue')['default']
     ManageTaglist: typeof import('./components/manage/taglist.vue')['default']
     ManageTeacher: typeof import('./components/manage/teacher.vue')['default']
     ManageUser: typeof import('./components/manage/user.vue')['default']
+    ManageUserManager: typeof import('./components/manage/userManager.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TopBar: typeof import('./components/topBar/index.vue')['default']
