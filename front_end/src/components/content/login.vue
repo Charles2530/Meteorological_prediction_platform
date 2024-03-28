@@ -138,8 +138,14 @@ const userInfo = useUserInfo();
 const loginConfig = useLoginConfig();
 const isLogin = ref(true);
 const checkLogin = () => {
-  if (!router.currentRoute.value.meta.permission.includes(userInfo.role))
-    router.push({ name: "home" });
+  if (!router.currentRoute.value.meta.permission.includes(userInfo.role)) {
+    console.log(
+      "checkLogin: ",
+      router.currentRoute.value.meta.permission,
+      userInfo.role
+    );
+    router.push({ name: "Home" });
+  }
 };
 
 const loginFormRef = ref<FormInstance>();

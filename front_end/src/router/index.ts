@@ -76,16 +76,16 @@ const routes = [
         path: "user",
         component: UserManage,
         meta: {
-          permission: [UserRole.Administrator],
-          //   permission: [UserRole.Administrator, UserRole.User, UserRole.Visitor],
+          //   permission: [UserRole.Administrator],
+          permission: [UserRole.Administrator, UserRole.User, UserRole.Visitor],
         },
       },
       {
         path: "data",
         component: DataManage,
         meta: {
-          permission: [UserRole.Administrator],
-          //   permission: [UserRole.Administrator, UserRole.User, UserRole.Visitor],
+          //   permission: [UserRole.Administrator],
+          permission: [UserRole.Administrator, UserRole.User, UserRole.Visitor],
         },
       },
     ],

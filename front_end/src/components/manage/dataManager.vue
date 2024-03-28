@@ -8,30 +8,36 @@
         size="small"
         table-layout="auto"
       >
-        <el-table-column prop="city" label="城市"></el-table-column>
+        <el-table-column prop="city" label="城市"> </el-table-column>
         <el-table-column prop="temperature" label="温度 (°C)"></el-table-column>
         <el-table-column prop="humidity" label="湿度 (%)"></el-table-column>
         <el-table-column prop="windSpeed" label="风速 (m/s)"></el-table-column>
         <el-table-column prop="actions" label="操作" width="200">
           <template #default="scope">
-            <el-button type="danger" @click="deleteWeather(scope.$index)">{{
-              weather.actions.delete
-            }}</el-button>
-            <el-button type="primary" @click="editWeather(scope.row)">{{
-              weather.actions.edit
-            }}</el-button>
+            <el-button
+              type="danger"
+              size="small"
+              @click="deleteWeather(scope.$index)"
+              >{{ weatherInfo.actions.delete }}</el-button
+            >
+            <el-button
+              type="primary"
+              size="small"
+              @click="editWeather(scope.row)"
+              >{{ weatherInfo.actions.edit }}</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
     </el-main>
     <el-footer class="no-padding">
       <div style="display: flex">
-        <el-button type="primary" @click="refreshWeather">{{
-          weather.buttons.refresh
+        <el-button type="primary" size="small" @click="refreshWeather">{{
+          weatherInfo.buttons.refresh
         }}</el-button>
         <div style="flex: 1"></div>
-        <el-button type="success" @click="showAddDialog">{{
-          weather.buttons.add
+        <el-button type="success" size="small" @click="showAddDialog">{{
+          weatherInfo.buttons.add
         }}</el-button>
       </div>
     </el-footer>
@@ -39,30 +45,33 @@
 
   <!-- Add Weather Dialog -->
   <el-dialog
-    title="{{ weather.operation.addWeather }}"
+    title="{{ weatherInfo.operation.addWeather }}"
     v-model="addDialogVisible"
     @close="resetAddForm"
   >
     <el-form :model="newWeatherData" ref="addForm">
-      <el-form-item label="{{ weather.labels.city }}" prop="city">
+      <el-form-item label="{{ weatherInfo.labels.city }}" prop="city">
         <el-input v-model="newWeatherData.city"></el-input>
       </el-form-item>
-      <el-form-item label="{{ weather.labels.temperature }}" prop="temperature">
+      <el-form-item
+        label="{{ weatherInfo.labels.temperature }}"
+        prop="temperature"
+      >
         <el-input v-model.number="newWeatherData.temperature"></el-input>
       </el-form-item>
-      <el-form-item label="{{ weather.labels.humidity }}" prop="humidity">
+      <el-form-item label="{{ weatherInfo.labels.humidity }}" prop="humidity">
         <el-input v-model.number="newWeatherData.humidity"></el-input>
       </el-form-item>
-      <el-form-item label="{{ weather.labels.windSpeed }}" prop="windSpeed">
+      <el-form-item label="{{ weatherInfo.labels.windSpeed }}" prop="windSpeed">
         <el-input v-model.number="newWeatherData.windSpeed"></el-input>
       </el-form-item>
     </el-form>
     <template v-slot:footer>
       <el-button @click="addDialogVisible = false">{{
-        weather.buttons.cancel
+        weatherInfo.buttons.cancel
       }}</el-button>
       <el-button type="primary" @click="addWeather">{{
-        weather.buttons.add
+        weatherInfo.buttons.add
       }}</el-button>
     </template>
   </el-dialog>
@@ -71,22 +80,18 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 import { ElMessage } from "element-plus";
-
-interface WeatherData {
-  city: string;
-  temperature: number;
-  humidity: number;
-  windSpeed: number;
-}
+import { post } from "@/api/index";
+import throttle from "lodash/throttle";
+import { WeatherData } from "@/types/weather";
 
 const weatherData = reactive<WeatherData[]>([
-  { city: "纽约", temperature: 25, humidity: 60, windSpeed: 3 },
-  { city: "伦敦", temperature: 18, humidity: 70, windSpeed: 5 },
+  { pid: 1, city: "纽约", temperature: 25, humidity: 60, windSpeed: 3 },
+  { pid: 2, city: "伦敦", temperature: 18, humidity: 70, windSpeed: 5 },
 ]);
-
 const loading = ref(false);
 const addDialogVisible = ref(false);
 const newWeatherData = reactive<WeatherData>({
+  pid: 0,
   city: "",
   temperature: 0,
   humidity: 0,
@@ -95,7 +100,7 @@ const newWeatherData = reactive<WeatherData>({
 
 function refreshWeather() {
   // You can implement data fetching logic here
-  ElMessage.success(weather.dialogs.refresh);
+  ElMessage.success(weatherInfo.dialogs.refresh);
 }
 
 function showAddDialog() {
@@ -105,7 +110,7 @@ function showAddDialog() {
 function addWeather() {
   weatherData.push({ ...newWeatherData });
   addDialogVisible.value = false;
-  ElMessage.success(weather.dialogs.add);
+  ElMessage.success(weatherInfo.dialogs.add);
 }
 
 function resetAddForm() {
@@ -114,18 +119,31 @@ function resetAddForm() {
   newWeatherData.humidity = 0;
   newWeatherData.windSpeed = 0;
 }
-
-function deleteWeather(index: number) {
-  weatherData.splice(index, 1);
-  ElMessage.success(weather.dialogs.delete);
+interface DeleteForm {
+  pid: number;
 }
+interface DeleteResponse {
+  success: boolean;
+  reason?: string;
+}
+const deleteWeather = throttle((index: number) => {
+  const request: DeleteForm = { pid: weatherData[index].pid };
+  weatherData.splice(index, 1);
+  post<DeleteResponse>("/api/manage/data/delete", request).then((res) => {
+    const response = res.data;
+    if (response.success) {
+      ElMessage.success(weatherInfo.dialogs.delete);
+    } else ElMessage.error(weatherInfo.invaild);
+  });
+}, 500);
 
 function editWeather(weather: WeatherData) {
   // You can implement edit functionality here
-  ElMessage.info(weather.dialogs.edit);
+  console.log(weather);
+  ElMessage.info(weatherInfo.dialogs.edit);
 }
 
-const weather = {
+const weatherInfo = {
   labels: {
     city: "城市",
     temperature: "温度",
@@ -143,6 +161,7 @@ const weather = {
   },
   operation: {
     addWeather: "添加天气数据",
+    deleteWeather: "删除天气数据",
   },
   dialogs: {
     delete: "天气数据已成功删除。",
@@ -150,6 +169,7 @@ const weather = {
     add: "天气数据已成功添加。",
     refresh: "天气数据已刷新。",
   },
+  invaild: "无效的请求！",
 };
 </script>
 
