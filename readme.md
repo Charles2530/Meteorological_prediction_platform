@@ -20,7 +20,3 @@ if satisfied:
 ```
 
 otherwise, gives more specific requirement
-
-### need list
-
-- [ ] something
