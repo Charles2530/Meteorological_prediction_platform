@@ -1,13 +1,15 @@
-### How to use
+### How to propose and meet requirements
 
-#### convey need
+Communicate interface requirements in the `.\list.md`, following the steps below.
+
+#### propose requirements
 ```
 - [ ] What front end need
 ```
 which appears like:
 - [ ] What front end need
 
-#### API feedback
+#### API content feedback
 ```
 - [ ] What front end need
 - what can back end give
@@ -19,7 +21,7 @@ which appears like:
 - what can back end give
 - what can back end give
 
-#### satisfied
+#### Check the feedback
 if satisfing front's requirement, tick the box
 ```
 - [X] What front end need
@@ -30,3 +32,7 @@ which appears like:
 - ...
 
 otherwise, gives more specific requirement with some other ways
+
+### Attention
+
+It's better not to delete items whose requirements are satisfied.
