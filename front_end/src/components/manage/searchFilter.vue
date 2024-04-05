@@ -66,6 +66,7 @@
 </template>
 
 <script setup lang="ts">
+import { post } from "@/api/index";
 const searchQuery = ref("");
 const filterVisible = ref("false");
 const selectType = ref("");
@@ -113,11 +114,14 @@ const locations = [
 
 const handleSearch = () => {
   // 处理搜索逻辑，可以调用 API
+  post("/api/manage/data/search", {
+    key: searchQuery.value,
+    type: selectType.value,
+    range: timeOption.value,
+    time: selectedDate.value,
+    address: selectedLocation.value,
+  });
   console.log("搜索关键词:", searchQuery.value);
-};
-
-const handleFilter = () => {
-  // 处理过滤器逻辑，可以调用 API
   console.log("时间选项:", timeOption.value);
   console.log("选定日期范围:", selectedDate.value);
   console.log("选定地点:", selectedLocation.value);
