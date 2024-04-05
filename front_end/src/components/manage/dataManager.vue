@@ -1,54 +1,54 @@
 <template>
-  <!-- <el-container class="panel"> -->
-  <!-- <el-main class="no-padding"> -->
-  <div class="search-container">
-    <el-row>
-      <el-col :span="21">
-        <manage-search-filter></manage-search-filter>
-      </el-col>
-      <el-col :span="3" class="mt-4">
-        <el-button type="primary" size="small" @click="refreshWeather">
-          <el-icon><Refresh /></el-icon>
-          {{ weatherInfo.buttons.refresh }}</el-button
-        >
-        <el-button type="success" size="small" @click="showAddDialog"
-          ><el-icon> <Plus></Plus> </el-icon
-          >{{ weatherInfo.buttons.add }}</el-button
-        >
-      </el-col>
-      <el-col :span="4"></el-col>
-    </el-row>
-  </div>
-  <el-table
-    :data="weatherData"
-    v-loading="loading"
-    class="table mx-4 mt-20"
-    size="small"
-    table-layout="auto"
-  >
-    <el-table-column prop="city" label="城市"> </el-table-column>
-    <el-table-column prop="temperature" label="温度 (°C)"></el-table-column>
-    <el-table-column prop="humidity" label="湿度 (%)"></el-table-column>
-    <el-table-column prop="windSpeed" label="风速 (m/s)"></el-table-column>
-    <el-table-column prop="actions" label="操作" width="200">
-      <template #default="scope">
-        <el-button
-          type="danger"
-          size="small"
-          @click="deleteWeather(scope.$index)"
-          >{{ weatherInfo.actions.delete }}</el-button
-        >
-        <el-button
-          type="primary"
-          size="small"
-          @click="editWeather(scope.row)"
-          >{{ weatherInfo.actions.edit }}</el-button
-        >
-      </template>
-    </el-table-column>
-  </el-table>
-  <!-- </el-main> -->
-  <!-- </el-container> -->
+  <el-container class="panel">
+    <el-main class="no-padding">
+      <div class="search-container">
+        <el-row>
+          <el-col :span="21">
+            <manage-search-filter></manage-search-filter>
+          </el-col>
+          <el-col :span="3" class="mt-4">
+            <el-button type="primary" size="small" @click="refreshWeather">
+              <el-icon><Refresh /></el-icon>
+              {{ weatherInfo.buttons.refresh }}</el-button
+            >
+            <el-button type="success" size="small" @click="showAddDialog"
+              ><el-icon> <Plus></Plus> </el-icon
+              >{{ weatherInfo.buttons.add }}</el-button
+            >
+          </el-col>
+          <el-col :span="4"></el-col>
+        </el-row>
+      </div>
+      <el-table
+        :data="weatherData"
+        v-loading="loading"
+        class="table mx-4 mt-20"
+        size="small"
+        table-layout="auto"
+      >
+        <el-table-column prop="city" label="城市"> </el-table-column>
+        <el-table-column prop="temperature" label="温度 (°C)"></el-table-column>
+        <el-table-column prop="humidity" label="湿度 (%)"></el-table-column>
+        <el-table-column prop="windSpeed" label="风速 (m/s)"></el-table-column>
+        <el-table-column prop="actions" label="操作" width="200">
+          <template #default="scope">
+            <el-button
+              type="danger"
+              size="small"
+              @click="deleteWeather(scope.$index)"
+              >{{ weatherInfo.actions.delete }}</el-button
+            >
+            <el-button
+              type="primary"
+              size="small"
+              @click="editWeather(scope.row)"
+              >{{ weatherInfo.actions.edit }}</el-button
+            >
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-main>
+  </el-container>
 
   <!-- Add Weather Dialog -->
   <el-dialog
