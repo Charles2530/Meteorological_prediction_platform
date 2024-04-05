@@ -1,68 +1,72 @@
 <template>
-  <el-container class="panel">
-    <el-main class="no-padding">
-      <el-table
-        :data="weatherData"
-        v-loading="loading"
-        class="table"
-        size="small"
-        table-layout="auto"
-      >
-        <el-table-column prop="city" label="城市"> </el-table-column>
-        <el-table-column prop="temperature" label="温度 (°C)"></el-table-column>
-        <el-table-column prop="humidity" label="湿度 (%)"></el-table-column>
-        <el-table-column prop="windSpeed" label="风速 (m/s)"></el-table-column>
-        <el-table-column prop="actions" label="操作" width="200">
-          <template #default="scope">
-            <el-button
-              type="danger"
-              size="small"
-              @click="deleteWeather(scope.$index)"
-              >{{ weatherInfo.actions.delete }}</el-button
-            >
-            <el-button
-              type="primary"
-              size="small"
-              @click="editWeather(scope.row)"
-              >{{ weatherInfo.actions.edit }}</el-button
-            >
-          </template>
-        </el-table-column>
-      </el-table>
-    </el-main>
-    <el-footer class="no-padding">
-      <div style="display: flex">
-        <el-button type="primary" size="small" @click="refreshWeather">{{
-          weatherInfo.buttons.refresh
-        }}</el-button>
-        <div style="flex: 1"></div>
-        <el-button type="success" size="small" @click="showAddDialog">{{
-          weatherInfo.buttons.add
-        }}</el-button>
-      </div>
-    </el-footer>
-  </el-container>
+  <!-- <el-container class="panel"> -->
+  <!-- <el-main class="no-padding"> -->
+  <div class="search-container">
+    <el-row>
+      <el-col :span="21">
+        <manage-search-filter></manage-search-filter>
+      </el-col>
+      <el-col :span="3" class="mt-4">
+        <el-button type="primary" size="small" @click="refreshWeather">
+          <el-icon><Refresh /></el-icon>
+          {{ weatherInfo.buttons.refresh }}</el-button
+        >
+        <el-button type="success" size="small" @click="showAddDialog"
+          ><el-icon> <Plus></Plus> </el-icon
+          >{{ weatherInfo.buttons.add }}</el-button
+        >
+      </el-col>
+      <el-col :span="4"></el-col>
+    </el-row>
+  </div>
+  <el-table
+    :data="weatherData"
+    v-loading="loading"
+    class="table mx-4 mt-20"
+    size="small"
+    table-layout="auto"
+  >
+    <el-table-column prop="city" label="城市"> </el-table-column>
+    <el-table-column prop="temperature" label="温度 (°C)"></el-table-column>
+    <el-table-column prop="humidity" label="湿度 (%)"></el-table-column>
+    <el-table-column prop="windSpeed" label="风速 (m/s)"></el-table-column>
+    <el-table-column prop="actions" label="操作" width="200">
+      <template #default="scope">
+        <el-button
+          type="danger"
+          size="small"
+          @click="deleteWeather(scope.$index)"
+          >{{ weatherInfo.actions.delete }}</el-button
+        >
+        <el-button
+          type="primary"
+          size="small"
+          @click="editWeather(scope.row)"
+          >{{ weatherInfo.actions.edit }}</el-button
+        >
+      </template>
+    </el-table-column>
+  </el-table>
+  <!-- </el-main> -->
+  <!-- </el-container> -->
 
   <!-- Add Weather Dialog -->
   <el-dialog
-    title="{{ weatherInfo.operation.addWeather }}"
+    :title="weatherInfo.operation.addWeather"
     v-model="addDialogVisible"
     @close="resetAddForm"
   >
     <el-form :model="newWeatherData" ref="addForm">
-      <el-form-item label="{{ weatherInfo.labels.city }}" prop="city">
+      <el-form-item :label="weatherInfo.labels.city" prop="city">
         <el-input v-model="newWeatherData.city"></el-input>
       </el-form-item>
-      <el-form-item
-        label="{{ weatherInfo.labels.temperature }}"
-        prop="temperature"
-      >
+      <el-form-item :label="weatherInfo.labels.temperature" prop="temperature">
         <el-input v-model.number="newWeatherData.temperature"></el-input>
       </el-form-item>
-      <el-form-item label="{{ weatherInfo.labels.humidity }}" prop="humidity">
+      <el-form-item :label="weatherInfo.labels.humidity" prop="humidity">
         <el-input v-model.number="newWeatherData.humidity"></el-input>
       </el-form-item>
-      <el-form-item label="{{ weatherInfo.labels.windSpeed }}" prop="windSpeed">
+      <el-form-item :label="weatherInfo.labels.windSpeed" prop="windSpeed">
         <el-input v-model.number="newWeatherData.windSpeed"></el-input>
       </el-form-item>
     </el-form>
@@ -179,5 +183,13 @@ const weatherInfo = {
 }
 .no-padding {
   padding: 0px;
+}
+.search-container {
+  position: fixed; /* 使用固定定位 */
+  top: 4rem; /* 距离页面顶部 */
+  left: 11.7rem; /* 距离页面左侧 */
+  width: 80%; /* 宽度为页面宽度 */
+  background-color: white; /* 背景颜色 */
+  z-index: 999; /* 确保在页面上方 */
 }
 </style>
