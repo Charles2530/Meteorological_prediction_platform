@@ -1,6 +1,6 @@
 <template>
   <el-container class="panel">
-    <el-main class="no-padding">
+    <el-main class="no-padding" style="overflow: hidden">
       <div class="search-container">
         <el-row>
           <el-col :span="21">
@@ -22,7 +22,7 @@
       <el-table
         :data="weatherData"
         v-loading="loading"
-        class="table mx-4 mt-20"
+        class="table mt-16"
         size="small"
         table-layout="auto"
       >

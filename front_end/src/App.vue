@@ -1,5 +1,5 @@
 <template>
-  <el-container class="full-screen">
+  <el-container class="bg-top-background bg-no-repeat bg-contain bg-black">
     <el-container class="no-padding">
       <el-aside width="100px">
         <Aside></Aside>
@@ -8,7 +8,7 @@
         <el-header class="no-padding">
           <TopBar />
         </el-header>
-        <el-main class="no-padding">
+        <el-main class="no-padding" style="overflow: hidden">
           <router-view v-slot="{ Component }">
             <transition :name="transition">
               <component :is="Component" />
@@ -51,11 +51,6 @@ onMounted(() => {
 <style scoped>
 .no-padding {
   padding: 0px;
-}
-.full-screen {
-  /* height: 200vw;
-  width: 100vw; */
-  background-color: #504099;
 }
 
 .fade-enter-active,

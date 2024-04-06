@@ -1,6 +1,6 @@
 <template>
   <el-container class="panel">
-    <el-main class="no-padding">
+    <el-main class="no-padding" style="overflow: hidden">
       <el-table
         :data="userlist"
         v-loading="loading"
