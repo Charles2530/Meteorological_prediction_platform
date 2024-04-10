@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@element-plus/icons-vue": "^2.3.1",
     "@types/node": "^20.11.27",
     "axios": "^1.6.7",
@@ -39,3 +40,4 @@
     "vue-tsc": "^1.8.27"
   }
 }
+
