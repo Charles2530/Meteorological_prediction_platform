@@ -79,38 +79,6 @@ function initMap() {
         // zoom: 4.8, // 初始化地图级别
         // center: [105,36], // 初始化地图中心点位置
         zoom: 4.8, // 初始化地图级别
-<<<<<<< HEAD
-        // center: [105,36], // 初始化地图中心点位置
-        center: [112,36], // 初始化地图中心点位置
-    });
-    // 天地图图层
-    const wms = new AMap.TileLayer.WMTS({
-          url: 'http://t0.tianditu.gov.cn/ter_w/wmts',
-          blend: false,
-          opcaity:1,
-          zIndex:1,
-          tileSize: 256,
-          params: {
-              Layer: 'ter',
-              Version: '1.0.0',
-              Format: 'tiles',
-              TileMatrixSet: 'w',
-              STYLE:'default',
-              tk:'ef15c00f78f64844dcab11c1c94198e4'
-          }
-    });
-    // 行政区图层 https://lbs.amap.com/api/javascript-api/guide/layers/districtlayer
-    var disCountry = new AMap.DistrictLayer.Country({
-        SOC:'CHN',
-        depth:2,
-        styles:{
-            'nation-stroke':'grey',
-            'coastline-stroke':[0.8, 0.63, 0.94, 1],
-            'province-stroke':'#a5a5a5',
-            'city-stroke': 'rgba(255,255,255,0.5)',//中国特有字段
-            'fill':'',
-        }
-=======
         center: [105, 36], // 初始化地图中心点位置
       });
       // 天地图图层
@@ -148,7 +116,6 @@ function initMap() {
       dis_info.district = new AMap.DistrictSearch(dis_info.opts);
       dis_info.geoCoder = new AMap.Geocoder();
       handlerMapClick();
->>>>>>> master
     })
     .catch((e) => {
       console.log(e);
@@ -191,40 +158,6 @@ function handlerMapClick() {
 
     // eslint-disable-next-line no-undef
     // 根据坐标获取位置信息
-<<<<<<< HEAD
-    dis_info.geoCoder.getAddress(markersPosition, (status: string, result: { regeocode: { addressComponent: any; }; }) => {
-      if (status === 'complete' && result.regeocode) {
-        // this.address = result.regeocode.formattedAddress
-        // console.log('点击位置信息：', result.regeocode)
-        // // id
-        let addressComponent = result.regeocode.addressComponent
-        //   let reg = /.+?(省|市|自治区|自治州|县|区)/g
-        dis_info.districtName = addressComponent.province
-        dis_info.districtCode = addressComponent.adcode.substr(0, 2) + '0000'
-        // let cityId = parseInt(adcode.substr(0, 4) + '00')
-        // let areaId = adcode
-        if(dis_info.districtCode != '100000') {
-          dis_info.districtName = dis_info.districtName + "/中国"
-          drawBounds();
-        }
-        else {
-          dis_info.districtName = "中国"
-          map.remove(dis_info.polygons)//清除结果
-          map.setCenter([112,36])
-          map.setZoom(4.8)
-        }
-      }
-      else {
-        dis_info.districtName = "中国"
-        map.remove(dis_info.polygons)//清除结果
-        map.setCenter([112,36])
-        map.setZoom(4.8)
-      }
-    })
-  })
-};
-
-=======
     dis_info.geoCoder.getAddress(
       markersPosition,
       (status: string, result: { regeocode: { addressComponent: any } }) => {
@@ -257,7 +190,6 @@ function handlerMapClick() {
     );
   });
 }
->>>>>>> master
 </script>
 
 <style scoped>
