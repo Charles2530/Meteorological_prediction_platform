@@ -55,7 +55,8 @@ function initMap() {
         // zoom: 4.8, // 初始化地图级别
         // center: [105,36], // 初始化地图中心点位置
         zoom: 4.8, // 初始化地图级别
-        center: [105,36], // 初始化地图中心点位置
+        // center: [105,36], // 初始化地图中心点位置
+        center: [112,36], // 初始化地图中心点位置
     });
     // 天地图图层
     const wms = new AMap.TileLayer.WMTS({
@@ -149,14 +150,14 @@ function handlerMapClick () {
         else {
           dis_info.districtName = "中国"
           map.remove(dis_info.polygons)//清除结果
-          map.setCenter([105,36])
+          map.setCenter([112,36])
           map.setZoom(4.8)
         }
       }
       else {
         dis_info.districtName = "中国"
         map.remove(dis_info.polygons)//清除结果
-        map.setCenter([105,36])
+        map.setCenter([112,36])
         map.setZoom(4.8)
       }
     })
