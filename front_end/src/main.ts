@@ -20,6 +20,14 @@ import { useUserInfo } from "@/stores/userInfo";
 import { get } from "@/api/index";
 import { useLoginConfig } from "./stores/loginConfig";
 
+/*全局引入echarts*/
+import * as echartsComponent from "echarts"
+// echarts 挂载到 Vue实例中
+// Vue.prototype.$echarts = echarts; // vue2的挂载方式
+app.config.globalProperties.$echarts = echartsComponent; // /vue3的挂载方式（一个用于注册能够被应用内所有组件实例访问到的全局属性的对象。）
+
+
+
 const userInfo = useUserInfo(pinia);
 const loginConfig = useLoginConfig();
 
