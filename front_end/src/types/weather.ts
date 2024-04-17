@@ -5,3 +5,12 @@ export interface WeatherData {
   humidity: number;
   windSpeed: number;
 }
+
+export interface NotificationData {
+  id: number;
+  img: string;
+  title: string;
+  date: string;
+  content: string;
+  instruction: string;
+}
