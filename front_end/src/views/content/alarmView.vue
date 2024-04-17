@@ -77,6 +77,9 @@ const fetchNotifications = async () => {
       ...res.data.notifications
     );
   });
+  //   get<NotificationResponse>("/api/alarm_notices").then((res) => {
+  //     notifications.splice(0, notifications.length, ...res.data.notifications);
+  //   });
 };
 onMounted(() => {
   fetchNotifications();

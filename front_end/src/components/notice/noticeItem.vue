@@ -22,17 +22,13 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onBeforeUpdate } from "vue";
+import { defineProps } from "vue";
 import { ElCard } from "element-plus";
 import { NotificationData } from "@/types/weather";
 
 const props = defineProps<{
   notification: NotificationData;
 }>();
-
-onBeforeUpdate(() => {
-  // Perform any necessary updates or re-renders here
-});
 
 const notification = ref(props.notification);
 </script>
