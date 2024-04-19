@@ -55,6 +55,7 @@ declare module 'vue' {
     MapInfoColumn: typeof import('./components/map/InfoColumn.vue')['default']
     MapMapContainer: typeof import('./components/map/MapContainer.vue')['default']
     NoticeNoticeItem: typeof import('./components/notice/noticeItem.vue')['default']
+    NoticeNotificationHeader: typeof import('./components/notice/notificationHeader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TopBar: typeof import('./components/topBar/index.vue')['default']
