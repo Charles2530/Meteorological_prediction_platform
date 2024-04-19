@@ -1,35 +1,13 @@
-# 紫微气象（独角兽🦄）
+# 文档
+- 细化任务的粒度和完成时间的粒度
+- 整个项目的开发计划
+  - 比如 α、β 的上线时间
 
-大数据检测气象及地质数据
 
-## 前端使用指南
+# 功能
+- 短期预测
+  - 大地震之后的余震
 
-前端使用 vite + vue3 + typescript 作为基本框架进行 web 开发，集成 ECharts 库，以便在应用程序中创建各种图表和数据可视化，使用 tailwind css 和 element plus 美化网页布局，实现网页布局和样式的一致性。
 
-- 启动命令:
-
-```shell
-cd front_end
-# 安装相关依赖
-npm install 
-# 本地运行和云端运行二选一即可
-    # 本地运行
-    npm run dev
-    # 云端运行
-    npm run build
-    npm run preview
-```
-
-## 后端使用指南
-
-后端使用 Django5 作为基本框架。
-
-- 启动命令：
-
-```shell
-cd back_end
-python manage.py makemigrations
-python manage.py migrate
-python manage.py runserver
-```
-
+# 实现
+- 自动部署
