@@ -12,6 +12,7 @@
           <div
             v-for="notification in notifications"
             :key="notification.id"
+            :id="'notification-' + notification.id"
             class="text item"
           >
             <noticeItem :notification="notification" />
@@ -84,7 +85,24 @@ const fetchNotifications = async () => {
 onMounted(() => {
   fetchNotifications();
   getSubscribeStatus();
+  routerToNoticeId();
 });
+const routerToNoticeId = function () {
+  const params = window.location.hash.split("?");
+  if (params.length > 1) {
+    const query = params[1].split("=");
+    if (query[0] === "notificationId") {
+      const notificationId = parseInt(query[1]);
+      console.log(notificationId);
+      const notificationElement = document.getElementById(
+        `notification-${notificationId}`
+      );
+      if (notificationElement) {
+        notificationElement.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }
+};
 const cities = ref("");
 const tableData = ref([
   { city: "北京", status: "已订阅" },
