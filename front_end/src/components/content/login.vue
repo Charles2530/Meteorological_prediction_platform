@@ -107,7 +107,7 @@ import router from "@/router";
 import { ElMessage, type FormInstance, type FormRules } from "element-plus";
 import { UserInfo } from "@/types/user.ts";
 import { post } from "@/api/index";
-
+import { md5 } from "js-md5";
 interface LoginForm {
   username: string;
   password: string;
@@ -193,11 +193,16 @@ const loginRules = reactive<FormRules<LoginForm>>({
     },
   ],
 });
+const handleLoginFormPasswordChange = (password: string) => {
+  // 在这里使用 md5 对密码进行加密
+  loginForm.password = md5(password);
+};
 const submitLoginForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   if (loginError.username == " ") return; // 提示账号密码错误后未更改再次提交
   formEl.validate((valid) => {
     if (valid) {
+      handleLoginFormPasswordChange(loginForm.password);
       post<LoginResponse>("/api/login", loginForm).then(
         (res) => {
           const response = res.data;
@@ -281,11 +286,16 @@ const registerRules = reactive<FormRules<RegisterForm>>({
     },
   ],
 });
+const handleRegisterFormPasswordChange = (password: string) => {
+  // 在这里使用 md5 对密码进行加密
+  registerForm.password = md5(password);
+};
 const submitRegisterForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   // if (registerError.username == ' ') return; // 提示账号密码错误后未更改再次提交
   formEl.validate((valid) => {
     if (valid) {
+      handleRegisterFormPasswordChange(registerForm.password);
       post<RegisterResponse>("/api/register", registerForm).then(
         (res) => {
           const response = res.data;
