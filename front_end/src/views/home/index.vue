@@ -6,7 +6,7 @@
     <el-collapse v-model="activeNames" @change="handleChange">
       <el-collapse-item name="1">
         <template #title>
-			      <span style="float:left;font-weight:bold;font-size:14px;color:#2C8DF4;"> {{refMap?.dis_info.districtName}}</span>
+			      <span style="float:left;font-weight:530;font-size:16px;color:black;margin-top: 10px;"> &nbsp;&nbsp;&nbsp;&nbsp;{{refMap?.dis_info.districtName}}</span>
 		    </template>
         <InfoColumn/>
       </el-collapse-item>
@@ -21,7 +21,7 @@ const refMap = ref<MapContainerAPI | null>(null);
 
 // const Map = defineAsyncComponent(() => import("@c/map/MapContainer.vue"));
 const InfoColumn = defineAsyncComponent(() => import("@c/map/InfoColumn.vue"));
-const activeNames = ref([])
+const activeNames = ref(['1'])
 const handleChange = () => {
   
 }
@@ -30,7 +30,7 @@ const handleChange = () => {
 <style scoped>
 :deep(.el-collapse-item__header) {
   color: black;
-  background-color: white !important;
+  background:linear-gradient(to right top, rgba(139, 132, 219, 0.5),rgb(243, 179, 179,0.7));
   height: 35px;
   line-height: 90px;
   padding: 10px 0;
@@ -38,7 +38,13 @@ const handleChange = () => {
 
 :deep(.el-collapse-item__content) {
   color: black;
-  background-color: white !important;
+  background:linear-gradient(to right top, rgba(26, 79, 158, 0.6),rgb(243, 179, 179, 0.5)) !important;
+ /* background:radial-gradient(circle at center, #ff9966, #ff5e62); */
+    /* background:radial-gradient(circle at center, #c848b9, #f962a7, #fd836e,#eda7a7); */
+    /* background:linear-gradient(to right top,rgb(221,228,251),rgb(253,230,204)); */
+    /* background:linear-gradient(to right top, rgb(221,228,251),rgb(237,167,167,0.5)); */
+    /* background:linear-gradient(to right top, rgba(26, 79, 158, 0.6),rgb(243, 179, 179, 0.5)) !important; */
+  
 }
 
 

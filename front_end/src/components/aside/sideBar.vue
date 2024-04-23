@@ -18,11 +18,14 @@
         </template>
         <el-menu-item-group v-show="showNoticeItems">
           <notice-item
-            v-for="(notice, index) in notices"
+            v-for="(notice, index) in notifications"
             :key="index"
-            :content="notice"
-            >{{ notice }}</notice-item
+            :id="notice.id"
+            :img="notice.img"
+            :title="notice.title"
+            :date="notice.date"
           >
+          </notice-item>
         </el-menu-item-group>
       </el-sub-menu>
     </el-menu>
@@ -30,14 +33,28 @@
 </template>
 
 <script setup lang="ts">
+import { NotificationNotice } from "@/types/weather";
 import noticeItem from "./noticeItem.vue";
+import { get } from "@/api/index.ts";
 const showNoticeItems = ref(false);
 const activeMenu = ref("0");
-const notices = [
-  "公告1：欢迎来到我们的网站！",
-  "公告2：请注意网站最新动态。",
-  "公告3：如有任何问题，请及时联系我们的客服。",
-];
+const notifications = reactive<NotificationNotice[]>([]);
+interface NotificationResponse {
+  notifications: NotificationNotice[];
+}
+const getNotices = async () => {
+  get<NotificationResponse>("/api/alarm_notices_brief").then((res) => {
+    notifications.splice(0, notifications.length, ...res.data.notifications);
+  });
+};
+onMounted(() => {
+  getNotices();
+});
+// const notices = [
+//   "公告1：欢迎来到我们的网站！",
+//   "公告2：请注意网站最新动态。",
+//   "公告3：如有任何问题，请及时联系我们的客服。",
+// ];
 </script>
 
 <style scoped>
