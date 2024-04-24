@@ -162,6 +162,17 @@ const subscribe = () => {
     });
     return;
   }
+  // 完成去重功能
+  for (let i = 0; i < tableData.value.length; i++) {
+    console.log(tableData.value[i].city, cities.value);
+    if (tableData.value[i].city === cities.value) {
+      ElMessage({
+        message: "已订阅该城市",
+        type: "warning",
+      });
+      return;
+    }
+  }
   tableData.value.push({ city: cities.value, status: "已订阅" });
   post<SubscribeResponse>("/api/subscribe", { cities: cities.value }).then(
     (res) => {
