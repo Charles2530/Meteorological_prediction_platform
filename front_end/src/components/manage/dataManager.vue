@@ -1,7 +1,7 @@
 <template>
-  <el-container class="panel">
+  <el-container class="panel background-white rounded-lg">
     <el-main class="no-padding" style="overflow: hidden">
-      <div class="search-container">
+      <div class="search-container mx-4">
         <el-row>
           <el-col :span="21">
             <manage-search-filter></manage-search-filter>
@@ -22,7 +22,8 @@
       <el-table
         :data="weatherData"
         v-loading="loading"
-        class="table mt-16"
+        class="table mt-4 mx-4"
+        stripe
         size="small"
         table-layout="auto"
       >
@@ -181,15 +182,41 @@ const weatherInfo = {
 .panel {
   height: 100%;
 }
+.panel.background-white {
+  background-color: white !important;
+}
 .no-padding {
   padding: 0px;
 }
 .search-container {
-  position: fixed; /* 使用固定定位 */
-  top: 4rem; /* 距离页面顶部 */
-  left: 11.7rem; /* 距离页面左侧 */
-  width: 80%; /* 宽度为页面宽度 */
+  position: relative;
   background-color: white; /* 背景颜色 */
   z-index: 999; /* 确保在页面上方 */
+  border-radius: 8px; /* 圆角边框 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/* Search Container */
+.search-container {
+  position: relative;
+  background-color: white; /* 背景颜色 */
+  z-index: 999; /* 确保在页面上方 */
+  padding: 20px; /* 添加一些内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/* Input inside Search Container */
+.search-container input {
+  width: 100%; /* 宽度100% */
+  padding: 10px; /* 内边距 */
+  border: 1px solid #ccc; /* 边框 */
+  border-radius: 4px; /* 圆角边框 */
+  outline: none; /* 去除输入框默认轮廓 */
+  transition: border-color 0.2s ease; /* 添加过渡效果 */
+}
+
+.search-container input:focus {
+  border-color: dodgerblue; /* 输入框聚焦时的边框颜色 */
 }
 </style>

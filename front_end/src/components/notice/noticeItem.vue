@@ -1,15 +1,13 @@
 <template>
   <el-card class="box-card">
-    <div class="clearfix">
-      <img
-        class="notification-img"
-        :src="notification.img"
-        alt="Notification Image"
+    <div>
+      <notificationHeader
+        :img="notification.img"
+        :title="notification.title"
+        :date="notification.date"
       />
-      <span class="notification-title">{{ notification.title }}</span>
     </div>
     <div class="notification-content">
-      <div class="notification-date">{{ notification.date }}</div>
       <div class="notification-text">
         {{ notification.content }}
       </div>
@@ -22,17 +20,14 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onBeforeUpdate } from "vue";
+import { defineProps } from "vue";
 import { ElCard } from "element-plus";
 import { NotificationData } from "@/types/weather";
+import notificationHeader from "./notificationHeader.vue";
 
 const props = defineProps<{
   notification: NotificationData;
 }>();
-
-onBeforeUpdate(() => {
-  // Perform any necessary updates or re-renders here
-});
 
 const notification = ref(props.notification);
 </script>

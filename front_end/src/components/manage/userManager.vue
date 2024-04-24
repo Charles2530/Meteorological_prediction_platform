@@ -259,7 +259,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="operatePassword = false" text>
-              {{ "manage.cancel" }}
+              {{ manage.cancel }}
             </el-button>
             <el-button
               type="primary"
@@ -267,7 +267,7 @@
               text
               bg
             >
-              {{ "manage.confirm" }}
+              {{ manage.confirm }}
             </el-button>
           </el-form-item>
         </el-form>
@@ -282,7 +282,7 @@ import { post } from "@/api/index";
 import throttle from "lodash/throttle";
 import { Search } from "@element-plus/icons-vue";
 import type { FormInstance, FormRules } from "element-plus";
-
+import { md5 } from "js-md5";
 interface QueryForm {
   page: number;
   page_size: number;
@@ -309,6 +309,7 @@ const pagination = reactive({
   page: 1,
   page_size: 10,
 });
+
 const request = reactive<QueryForm>({
   page: pagination.page,
   page_size: pagination.page_total,
@@ -463,16 +464,22 @@ const confirmPassword = throttle((formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      post<Response>("/api/manage/user/password", passwordForm).then((res) => {
-        const response = res.data;
-        if (response.success) {
-          getUserList();
-          operatePassword.value = false;
-          ElMessage.success(manage.user.operate.password.success);
-        } else {
-          passwordError.value = `${response.reason!}`;
+      const encodePasswordForm = {
+        uid: passwordForm.uid,
+        password: md5(passwordForm.password),
+      };
+      post<Response>("/api/manage/user/password", encodePasswordForm).then(
+        (res) => {
+          const response = res.data;
+          if (response.success) {
+            getUserList();
+            operatePassword.value = false;
+            ElMessage.success(manage.user.operate.password.success);
+          } else {
+            passwordError.value = `${response.reason!}`;
+          }
         }
-      });
+      );
     } else return false;
   });
 }, 500);
