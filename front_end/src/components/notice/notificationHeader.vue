@@ -23,6 +23,9 @@ const redirectToDetails = (id: number) => {
 };
 </script>
 <style scoped>
+.clearfix {
+  background-color: inherit;
+}
 .notification-img {
   width: 60px;
   height: 60px;
