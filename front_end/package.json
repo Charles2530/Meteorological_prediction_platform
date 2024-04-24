@@ -18,6 +18,7 @@
                 "pinia": "^2.1.7",
                 "sass": "^1.72.0",
                 "scss": "^0.2.4",
+                "swiper": "^11.1.1",
                 "unplugin-auto-import": "^0.17.5",
                 "unplugin-icons": "^0.18.5",
                 "unplugin-vue-components": "^0.26.0",

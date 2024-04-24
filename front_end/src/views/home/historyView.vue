@@ -1,15 +1,24 @@
 <template>
   <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick" type="border-card">
-    <el-tab-pane label="天气" name="first">
+    <el-tab-pane label="天气速览" name="first">
       <el-container class="container">
-
+        <CurrentWeather class="md:basis-3/5"  >
+          <!-- @searchShow="changeSearchShow" -->
+          <!-- <template v-slot:search>
+            <div class="text-[#333333]">
+              <SearchLocation :show="searchShow" @searchShow="changeSearchShow" @search="locationBySearch" />
+            </div>
+          </template> -->
+        </CurrentWeather>
+        <AirQuality class="md:basis-2/5" />
+        <!-- @refresh="weatherInfo"  -->
 
 
       </el-container>
 
 
     </el-tab-pane>
-    <el-tab-pane label="30日预报" name="second">
+    <el-tab-pane label="30日天气" name="second">
       <el-calendar ref="calendar">
         <template #header="{ date }">
           <span>Custom header content</span>
@@ -32,8 +41,8 @@
         </template>
       </el-calendar>
     </el-tab-pane>
-    <el-tab-pane label="灾害预警" name="third">灾害预警</el-tab-pane>
-    <el-tab-pane label="历史数据分析" name="fourth">
+    <el-tab-pane label="空气质量" name="third">灾害预警</el-tab-pane>
+    <el-tab-pane label="数据统计" name="fourth">
 
       <div class="chart">
         <div id="chart_one" style="
@@ -51,6 +60,8 @@
 </template>
 <script lang="ts" setup>
 
+
+
 import { ref, onMounted } from 'vue';
 import type { TabsPaneContext } from 'element-plus';
 import * as echarts from 'echarts';
@@ -60,7 +71,23 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)
 }
 type ECharts = echarts.ECharts
-let echartsInstance:Ref<ECharts|null> = ref(null)
+let echartsInstance: Ref<ECharts | null> = ref(null)
+
+/** 组件  */
+import SearchLocation from '@/components/raw/SearchLocation.vue'
+import CurrentWeather from '@/components/raw/CurrentWeather.vue';
+import AirQuality from '@/components/raw/AirQuality.vue';
+import Forecast from '@/components/raw/Forecast.vue'
+const stateNavigator = ref(0) // 用于判断是否加载loading
+const cityList = ref([])
+const city = ref({})
+const weather = ref({})
+const air = ref({})
+const forecast = ref([])
+const preDayWeather = ref([])
+const ultraviolet = ref([])
+const searchShow = ref(false)
+
 /*echart*/
 onMounted(() => {
   // 解决echarts图表放大溢出父容器
@@ -89,10 +116,9 @@ onMounted(() => {
   }, 2000)
 
 });
-
-// watch(echartsInstance,()=>{
-//   console.log(echartsInstance.value)
-// })
+watch(echartsInstance, () => {
+  console.log(echartsInstance.value)
+})
 
 
 function initData() {
@@ -100,7 +126,7 @@ function initData() {
 }
 // function initChart() {}
 function initChart() {
-  
+
   const today = new Date();
   const lastWeek = new Date(
     today.getFullYear(),
@@ -230,7 +256,7 @@ const selectDate = (val: CalendarDateType) => {
   width: 95%;
   height: 92%;
   background: linear-gradient(to bottom, #ffffff, #ffffff);
-  margin:0 auto;
+  margin: 0 auto;
   /* display: flex; */
   /* justify-content: center; */
 }
@@ -285,5 +311,3 @@ h2 {
   font-size: 27px;
 }
 </style>
-
-: { data: any; }
