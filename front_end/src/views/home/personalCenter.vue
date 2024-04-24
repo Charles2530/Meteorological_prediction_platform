@@ -248,17 +248,15 @@ const passwordError = reactive({
   oldPassword: "",
   newPassword: "",
 });
-const handlePasswordChange = (oldPassword: string, newPassword: string) => {
-  // 在这里使用 md5 对密码进行加密
-  passwordForm.oldPassword = md5(oldPassword);
-  passwordForm.newPassword = md5(newPassword);
-};
 const confirmPassword = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      handlePasswordChange(passwordForm.oldPassword, passwordForm.newPassword);
-      post<PasswordResponse>("/api/operate/password", passwordForm).then(
+      const encodePasswordForm = {
+        oldPassword: md5(passwordForm.oldPassword),
+        newPassword: md5(passwordForm.newPassword),
+      };
+      post<PasswordResponse>("/api/operate/password", encodePasswordForm).then(
         (res) => {
           const response = res.data;
           if (response.success) {

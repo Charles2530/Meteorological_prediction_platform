@@ -1,11 +1,12 @@
 <template>
-  <div class="p-4 space-y-4">
+  <div class="p-2 space-y-4">
     <el-row>
       <el-col :span="10">
         <!-- 过滤器 -->
         <el-collapse v-model="filterVisible" accordion>
           <el-collapse-item title="请选择过滤参数" name="filter">
             <div class="space-y-2">
+              <div class="my-2"></div>
               <!-- 类型选择 -->
               <el-select v-model="selectType" placeholder="请选择类型">
                 <el-option label="天气数据" value="weather"></el-option>
@@ -28,8 +29,8 @@
                 range-separator="至"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
-                format="yyyy-MM-dd"
-                clearable
+                :picker-options="pickerOptions"
+                format="YYYY年MM月DD日"
               ></el-date-picker>
               <!-- 地点选择 -->
               <el-select v-model="selectedLocation" placeholder="请选择地点">
@@ -67,11 +68,18 @@
 
 <script setup lang="ts">
 import { post } from "@/api/index";
+const selectedDate = ref("");
+const pickerOptions: any = {
+  firstDayOfWeek: 1, // 设置一周的第一天为周一
+  disabledDate(time: Date): boolean {
+    // 禁止选择未来日期
+    return time.getTime() > Date.now();
+  },
+};
 const searchQuery = ref("");
 const filterVisible = ref("false");
 const selectType = ref("");
 const timeOption = ref("");
-const selectedDate = ref("");
 const selectedLocation = ref("");
 const locations = [
   { label: "北京", value: "beijing" },

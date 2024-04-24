@@ -259,7 +259,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="operatePassword = false" text>
-              {{ "manage.cancel" }}
+              {{ manage.cancel }}
             </el-button>
             <el-button
               type="primary"
@@ -267,7 +267,7 @@
               text
               bg
             >
-              {{ "manage.confirm" }}
+              {{ manage.confirm }}
             </el-button>
           </el-form-item>
         </el-form>
@@ -440,10 +440,6 @@ const passwordForm = reactive<PasswordForm>({
   uid: 0,
   password: "",
 });
-const handlePasswordChange = (password: string) => {
-  // 在这里使用 md5 对密码进行加密
-  passwordForm.password = md5(password);
-};
 const passwordRules = reactive<FormRules<PasswordForm>>({
   password: [
     {
@@ -468,17 +464,22 @@ const confirmPassword = throttle((formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      handlePasswordChange(passwordForm.password);
-      post<Response>("/api/manage/user/password", passwordForm).then((res) => {
-        const response = res.data;
-        if (response.success) {
-          getUserList();
-          operatePassword.value = false;
-          ElMessage.success(manage.user.operate.password.success);
-        } else {
-          passwordError.value = `${response.reason!}`;
+      const encodePasswordForm = {
+        uid: passwordForm.uid,
+        password: md5(passwordForm.password),
+      };
+      post<Response>("/api/manage/user/password", encodePasswordForm).then(
+        (res) => {
+          const response = res.data;
+          if (response.success) {
+            getUserList();
+            operatePassword.value = false;
+            ElMessage.success(manage.user.operate.password.success);
+          } else {
+            passwordError.value = `${response.reason!}`;
+          }
         }
-      });
+      );
     } else return false;
   });
 }, 500);
