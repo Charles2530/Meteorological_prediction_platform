@@ -259,7 +259,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="operatePassword = false" text>
-              {{ "manage.cancel" }}
+              {{ manage.cancel }}
             </el-button>
             <el-button
               type="primary"
@@ -267,7 +267,7 @@
               text
               bg
             >
-              {{ "manage.confirm" }}
+              {{ manage.confirm }}
             </el-button>
           </el-form-item>
         </el-form>
