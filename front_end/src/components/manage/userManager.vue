@@ -282,7 +282,7 @@ import { post } from "@/api/index";
 import throttle from "lodash/throttle";
 import { Search } from "@element-plus/icons-vue";
 import type { FormInstance, FormRules } from "element-plus";
-
+import { md5 } from "js-md5";
 interface QueryForm {
   page: number;
   page_size: number;
@@ -440,6 +440,10 @@ const passwordForm = reactive<PasswordForm>({
   uid: 0,
   password: "",
 });
+const handlePasswordChange = (password: string) => {
+  // 在这里使用 md5 对密码进行加密
+  passwordForm.password = md5(password);
+};
 const passwordRules = reactive<FormRules<PasswordForm>>({
   password: [
     {
@@ -464,6 +468,7 @@ const confirmPassword = throttle((formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
+      handlePasswordChange(passwordForm.password);
       post<Response>("/api/manage/user/password", passwordForm).then((res) => {
         const response = res.data;
         if (response.success) {
