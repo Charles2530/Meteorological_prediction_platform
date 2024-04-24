@@ -63,7 +63,7 @@
             <el-row :gutter="10" style="margin-bottom: 0px !important;">
                 <el-col :offset="8" :span="8">
                     <div class="grid-content">
-                        <span style="font-size: 16px;">地形概况</span>
+                        <span style="font-size: 16px;">地理概况</span>
                     </div>
                 </el-col>
             </el-row> 

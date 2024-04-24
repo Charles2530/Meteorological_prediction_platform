@@ -5,6 +5,7 @@
 <script setup lang="ts">
 import { onMounted, reactive } from "vue";
 import AMapLoader from "@amap/amap-jsapi-loader";
+import { getAssetsFile } from '@/utils/pub-use'
 
 // 设置安全密钥
 (window as any)._AMapSecurityConfig = {
@@ -26,19 +27,74 @@ const dis_info = reactive({
   },
 });
 
+//灾害标记信息
+const hazardMarkData = reactive([
+  {
+    place: '甘肃省 兰州市',
+    longitude: 114.344706,
+    latitude: 38.051262,
+    type: "地震",
+    time:'4月23日5:00',
+    level:'蓝',
+  },
+  {
+    place: '甘肃省 兰州市',
+    longitude: 103.343524,
+    latitude: 37.049604,
+    type: "大风",
+    time:'4月24日晚',
+    level:'红',
+  },
+  {
+    place: '甘肃省 兰州市',
+    longitude: 93.343524,
+    latitude: 33.049604,
+    type: "大风",
+    time:'4月24日晚',
+    level:'蓝',
+  },
+  {
+    place: '甘肃省 兰州市',
+    longitude: 110.343524,
+    latitude: 29.049604,
+    type: "大风",
+    time:'4月24日晚',
+    level:'红',
+  },
+  {
+    place: '甘肃省 兰州市',
+    longitude: 87.343524,
+    latitude: 35.049604,
+    type: "大风",
+    time:'4月24日晚',
+    level:'红',
+  }
+]);
+
 let map: {
+  getCenter: any;
   addControl: (arg0: any) => void;
   add: (arg0: any) => void;
   remove: (arg0: any) => void;
   setFitView: (arg0: any) => void;
   on: (
     arg0: string,
-    arg1: (e: { lnglat: { lng: any; lat: any } }) => void
+    arg1: (e: {
+      target: any;
+      pixel: any;
+      type: any; lnglat: { lng: any; lat: any } 
+    }) => void
   ) => void;
   setCenter: (arg0: number[]) => void;
   setZoom: (arg0: number) => void;
 } | null = null;
+
 let AAMap: {
+  Icon: any;
+  Size: any;
+  InfoWindow: any;
+  LngLat: any;
+  Marker: any;
   Polygon: new (arg0: {
     strokeWeight: number;
     path: any;
@@ -116,12 +172,14 @@ function initMap() {
       dis_info.district = new AMap.DistrictSearch(dis_info.opts);
       dis_info.geoCoder = new AMap.Geocoder();
       handlerMapClick();
+      markPoints();
     })
     .catch((e) => {
       console.log(e);
     });
 }
 
+//高亮区域
 function drawBounds() {
   //行政区查询
   dis_info.district.search(
@@ -151,6 +209,7 @@ function drawBounds() {
   );
 }
 
+//点击区域触发事件
 function handlerMapClick() {
   map.on("click", (e: { lnglat: { lng: any; lat: any } }) => {
     // 点击坐标
@@ -190,6 +249,49 @@ function handlerMapClick() {
     );
   });
 }
+
+//显示所有灾害标记
+function markPoints() {
+  hazardMarkData.forEach(item => {
+    // 创建一个Marker实例：
+    const marker = new AAMap.Marker({
+      position: new AAMap.LngLat(item.longitude, item.latitude),   // 经纬度对象，也可以是经纬度构成的一维数组[lng, lat]
+      // icon: getAssetsFile( 'pin_' + item.color +'.png'), // 添加 Icon 图标 URL
+      icon: new AAMap.Icon({
+        size: new AAMap.Size(23, 32),    // 图标尺寸
+        image: getAssetsFile( 'pin_' + item.level +'.png'),
+        imageSize: new AAMap.Size(23, 32)   // 根据所设置的大小拉伸或压缩图片
+      }),
+      title: '北京',
+    });
+    // 将创建的点标记添加到已有的地图实例：
+    map.add(marker);
+    //给标记点添加事件
+    marker.on('click', (e: any) => setMarkWindows(e, item))
+  });
+}
+
+//显示标记弹出框组件
+function setMarkWindows(_e: any, item: { place: string; longitude: number; latitude: number; type: string; time: string; level: string; }) {
+  let content = [
+    `<div style='\'padding:0px' 0px = '' 4px; \'=''><b>${item.place}</b>`,
+    `灾害类型 ：${item.type}`,
+    `时间 ：${item.time}`,
+    `等级 ：${item.level}`,
+    // `<img src=${item.img} alt="" style="width: 100px;height: 100px">`
+  ];
+  // 创建 infoWindow 实例	
+  let infoWindow = new AAMap.InfoWindow({
+    content: content.join("<br>")  //传入 dom 对象，或者 html 字符串
+  });
+  // 打开信息窗体
+  let dd = map.getCenter()
+  // dd.pos = [e.pos[0], e.pos[1]]
+  dd.lat = item.latitude
+  dd.lng = item.longitude
+  infoWindow.open(map, dd);
+}
+  
 </script>
 
 <style scoped>
