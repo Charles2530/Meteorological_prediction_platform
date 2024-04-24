@@ -22,7 +22,7 @@
       <el-table
         :data="weatherData"
         v-loading="loading"
-        class="table mt-16"
+        class="table mt-4 mr-4"
         size="small"
         table-layout="auto"
       >
@@ -185,10 +185,7 @@ const weatherInfo = {
   padding: 0px;
 }
 .search-container {
-  position: fixed; /* 使用固定定位 */
-  top: 4rem; /* 距离页面顶部 */
-  left: 11.7rem; /* 距离页面左侧 */
-  width: 80%; /* 宽度为页面宽度 */
+  position: relative;
   background-color: white; /* 背景颜色 */
   z-index: 999; /* 确保在页面上方 */
 }
