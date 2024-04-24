@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        "top-background": "url('/src/assets/img/top-background.png')",
+        "top-background": "url('/src/assets/img/top-background.jpg')",
       },
       margin: {},
     },
