@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 space-y-4">
+  <div class="p-2 space-y-4">
     <el-row>
       <el-col :span="10">
         <!-- 过滤器 -->
