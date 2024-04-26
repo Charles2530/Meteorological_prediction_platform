@@ -96,17 +96,28 @@
         </el-row>
       </div>
       <!-- Weather Table -->
+
       <div v-if="weatherData.length === 0" class="text-center mt-4">
         <h1>请点击搜索获取相关数据</h1>
       </div>
       <div v-else>
+        <div style="margin: 0 auto">
+          <el-divider></el-divider>
+          <!-- 居中显示 -->
+          <div class="text-center mt-4">
+            <h1 class="text-gray-500" style="font-size: 25px">天气数据</h1>
+          </div>
+        </div>
         <el-table
           :data="currentPageData"
           v-loading="loading"
           class="table mt-4 mx-4"
+          highlight-current-row
           stripe
           size="small"
           table-layout="auto"
+          border
+          fit
         >
           <el-table-column
             prop="time"
@@ -151,7 +162,7 @@
           <el-table-column
             prop="category"
             label="类别"
-            width="100"
+            min-width="100"
           ></el-table-column>
           <el-table-column prop="actions" label="操作" width="200">
             <template #default="scope">
@@ -159,13 +170,9 @@
                 type="danger"
                 size="small"
                 @click="deleteWeather(scope.$index)"
-                >{{ weatherInfo.actions.delete }}</el-button
               >
-              <el-button
-                type="primary"
-                size="small"
-                @click="editWeather(scope.row)"
-                >{{ weatherInfo.actions.edit }}</el-button
+                <el-icon class="mr-2"><Delete></Delete></el-icon>
+                {{ weatherInfo.actions.delete }}</el-button
               >
             </template>
           </el-table-column>
@@ -240,7 +247,6 @@ import { ref, reactive } from "vue";
 import { post } from "@/api/index";
 import { china_cities } from "@/stores/cities";
 import throttle from "lodash/throttle";
-import { WeatherData } from "@/types/weather";
 /* 搜索 */
 const selectedDate = ref("");
 const pickerOptions: any = {
@@ -307,6 +313,7 @@ const newWeatherData = reactive<WeatherTable>({
 
 function refreshWeather() {
   // You can implement data fetching logic here
+  handleSearch();
   ElMessage({
     message: weatherInfo.dialogs.refresh,
     type: "success",
@@ -316,11 +323,23 @@ function refreshWeather() {
 function showAddDialog() {
   addDialogVisible.value = true;
 }
-
+interface addWeatherResponse {
+  status: boolean;
+  reason?: string;
+}
 function addWeather() {
   weatherData.push({ ...newWeatherData });
   addDialogVisible.value = false;
-  ElMessage.success(weatherInfo.dialogs.add);
+  post<addWeatherResponse>("/api/manage/data/weather_add", newWeatherData).then(
+    (res) => {
+      const response = res.data;
+      if (!response.status) {
+        ElMessage.error(response.reason);
+      } else {
+        ElMessage.success(weatherInfo.dialogs.add);
+      }
+    }
+  );
 }
 
 function resetAddForm() {
@@ -353,12 +372,6 @@ const deleteWeather = throttle((index: number) => {
     } else ElMessage.error(weatherInfo.invaild);
   });
 }, 500);
-
-function editWeather(weather: WeatherData) {
-  // You can implement edit functionality here
-  console.log(weather);
-  ElMessage.info(weatherInfo.dialogs.edit);
-}
 
 const weatherInfo = {
   labels: {
