@@ -24,3 +24,7 @@ export interface NotificationNotice {
   date: string;
   city: string;
 }
+
+export interface GetSubscribeResponse {
+  tableData: { city: string; status: string }[];
+}

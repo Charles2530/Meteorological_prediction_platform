@@ -77,7 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import { NotificationData } from "@/types/weather";
+import { NotificationData, GetSubscribeResponse } from "@/types/weather";
 import noticeItem from "@c/notice/noticeItem.vue";
 import { post, get } from "@/api/index.ts";
 import noticeLevelList from "@/components/notice/noticeLevelList.vue";
@@ -140,9 +140,6 @@ const routerToNoticeId = function () {
 };
 const cities = ref("");
 const tableData = ref([]);
-interface GetSubscribeResponse {
-  tableData: { city: string; status: string }[];
-}
 const levels = ref([]);
 interface GetAlarmLevelResponse {
   cnt: number[];
