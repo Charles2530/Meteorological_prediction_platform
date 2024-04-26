@@ -1,7 +1,9 @@
 <template>
+  <!-- 公告栏样式 -->
   <div class="clearfix">
     <img class="notification-img" :src="props.img" alt="Notification Image" />
     <span class="notification-title">{{ props.title }}</span>
+    <span class="notification-city ml-2">{{ props.city }}</span>
     <div class="notification-date">{{ props.date }}</div>
     <!-- 点击跳转查看详情 -->
     <el-button type="text" class="text-sm" @click="redirectToDetails(props.id)">
@@ -17,6 +19,7 @@ const props = defineProps<{
   img: string;
   title: string;
   date: string;
+  city: string;
 }>();
 const redirectToDetails = (id: number) => {
   router.push({ name: "Alarm", query: { notificationId: id.toString() } });

@@ -9,7 +9,9 @@
     accept="image/jpeg, image/jpg, image/png, image/gif"
     :on-success="handleAvatarSuccess"
   >
-    <el-avatar :size="100" :src="userInfo.avatar" />
+    <div style="margin: 0 auto">
+      <el-avatar :size="150" :src="userInfo.avatar" />
+    </div>
   </el-upload>
 </template>
 

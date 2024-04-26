@@ -23,16 +23,14 @@ function initChart() {
       text: "预警级别",
       left: "center",
     },
-    legend: {
-      data: ["红", "橙", "黄", "蓝", "白"],
-      align: "right",
-    },
     xAxis: {
       type: "category",
       data: ["I级", "II级", "III级", "IV级", "V级"],
     },
     yAxis: {
       type: "value",
+      min: 0,
+      max: Math.max(...props.cnt),
     },
     series: [
       {
@@ -47,6 +45,11 @@ function initChart() {
           },
         })),
         barWidth: "60%",
+        label: {
+          show: true,
+          position: "top",
+          formatter: "{c}",
+        },
       },
     ],
   };

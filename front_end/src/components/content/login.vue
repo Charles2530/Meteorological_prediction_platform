@@ -5,6 +5,9 @@
     center
     @closed="checkLogin()"
   >
+    <div class="title-img w-72 h-18" style="margin: 0 auto">
+      <img src="@/assets/img/title.png" alt="logo" />
+    </div>
     <div class="login-panel">
       <el-form
         ref="loginFormRef"

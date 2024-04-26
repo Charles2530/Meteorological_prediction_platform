@@ -44,6 +44,25 @@
                   <el-text v-else>游客</el-text>
                 </el-text>
               </el-descriptions-item>
+              <!-- 订阅城市 -->
+              <el-descriptions-item>
+                <template #label>
+                  <el-text>
+                    <el-icon><Location /></el-icon>
+                    订阅城市
+                  </el-text>
+                </template>
+                <el-text>
+                  <el-tag
+                    v-for="city in bookingCities"
+                    :key="city.city"
+                    type="success"
+                    class="mr-1"
+                  >
+                    {{ city.city }}
+                  </el-tag>
+                </el-text>
+              </el-descriptions-item>
             </el-descriptions>
           </el-col>
           <el-col :span="8">
@@ -54,16 +73,16 @@
         <el-divider />
         <div>
           <el-button type="primary" text bg @click="operateEmail = true">
-            更新邮箱
+            <el-icon class="ml-1 mr-3"><Message /></el-icon>更新邮箱
           </el-button>
           <el-button type="primary" text bg @click="operateAvatar">
-            更新头像
+            <el-icon class="ml-1 mr-3"><User /></el-icon>更新头像
           </el-button>
           <el-button type="danger" text bg @click="operatePassword = true">
-            更新密码
+            <el-icon class="ml-1 mr-3"><Key /></el-icon>更新密码
           </el-button>
           <el-button type="danger" text bg @click="userInfo.logout">
-            退出登录
+            <el-icon class="ml-1 mr-3"><House /></el-icon>退出登录
           </el-button>
         </div>
       </el-card>
@@ -151,9 +170,10 @@ import { useLoginConfig } from "@/stores/loginConfig";
 import { UserRole } from "@/types/user.ts";
 import { User, Message, Key } from "@element-plus/icons-vue";
 import type { FormInstance, FormRules } from "element-plus";
-import { post } from "@/api/index";
+import { post, get } from "@/api/index";
 import Avatar from "@c/content/avatar.vue";
 import { md5 } from "js-md5";
+import { GetSubscribeResponse } from "@/types/weather";
 
 interface EmailForm {
   email: string;
@@ -174,11 +194,20 @@ interface PasswordResponse {
 const permission = [UserRole.User, UserRole.Administrator];
 const userInfo = useUserInfo();
 const loginConfig = useLoginConfig();
-
+const bookingCities = ref([]);
 onMounted(() => {
   if (!permission.includes(userInfo.role)) loginConfig.showLoginPanel = true;
+  getSubscribeStatus();
 });
-
+const getSubscribeStatus = () => {
+  get<GetSubscribeResponse>("/api/subscribe").then((res) => {
+    bookingCities.value.splice(
+      0,
+      bookingCities.value.length,
+      ...res.data.tableData
+    );
+  });
+};
 const operateEmail = ref(false);
 const emailFormRef = ref<FormInstance>();
 const emailForm = reactive<EmailForm>({

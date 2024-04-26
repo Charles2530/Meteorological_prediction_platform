@@ -48,11 +48,14 @@
           <div class="clearfix">
             <span>城市列表</span>
           </div>
-          <el-input
-            v-model="cities"
-            placeholder="输入城市名"
-            class="input-with-select"
-          ></el-input>
+          <el-select v-model="cities" placeholder="选择订阅城市">
+            <el-option
+              v-for="location in locations"
+              :key="location.value"
+              :label="location.label"
+              :value="location.value"
+            ></el-option>
+          </el-select>
           <el-table :data="tableData" style="width: 100%">
             <el-table-column
               prop="city"
@@ -74,10 +77,12 @@
 </template>
 
 <script setup lang="ts">
-import { NotificationData } from "@/types/weather";
+import { NotificationData, GetSubscribeResponse } from "@/types/weather";
 import noticeItem from "@c/notice/noticeItem.vue";
 import { post, get } from "@/api/index.ts";
 import noticeLevelList from "@/components/notice/noticeLevelList.vue";
+import { china_cities } from "@/stores/cities";
+const locations = china_cities;
 
 const notifications_example = ref<NotificationData[]>([
   {
@@ -135,9 +140,6 @@ const routerToNoticeId = function () {
 };
 const cities = ref("");
 const tableData = ref([]);
-interface GetSubscribeResponse {
-  tableData: { city: string; status: string }[];
-}
 const levels = ref([]);
 interface GetAlarmLevelResponse {
   cnt: number[];
