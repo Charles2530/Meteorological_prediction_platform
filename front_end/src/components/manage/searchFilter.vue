@@ -83,20 +83,43 @@ const selectType = ref("");
 const timeOption = ref("");
 const selectedLocation = ref("");
 const locations = china_cities;
+interface SearchWeatherHourlyListResponse {
+  status: boolean;
+  weatherHourlyList: WeatherTable[];
+}
+interface WeatherTable {
+  time: string;
+  temp: string;
+  text: string;
+  precip: string;
+  wind360: string;
+  windScale: string;
+  windSpeed: string;
+  humidity: string;
+  pressure: string;
+  aqi: string;
+  category: string;
+}
+const weatherTable: WeatherTable[] = reactive([]);
 
 const handleSearch = () => {
   // 处理搜索逻辑，可以调用 API
-  post("/api/manage/data/search", {
+  post<SearchWeatherHourlyListResponse>("/api/manage/data/search", {
     key: searchQuery.value,
     type: selectType.value,
     range: timeOption.value,
     time: selectedDate.value,
     address: selectedLocation.value,
+  }).then((res) => {
+    // console.log(res);
+    if (res.status) {
+      weatherTable.splice(
+        0,
+        weatherTable.length,
+        ...res.data.weatherHourlyList
+      );
+    }
   });
-  console.log("搜索关键词:", searchQuery.value);
-  console.log("时间选项:", timeOption.value);
-  console.log("选定日期范围:", selectedDate.value);
-  console.log("选定地点:", selectedLocation.value);
 };
 </script>
 
