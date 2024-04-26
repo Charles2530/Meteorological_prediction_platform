@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <div>
-      <notificationHeader
+      <subscribe-header
         :img="notification.img"
         :title="notification.title"
         :date="notification.date"
@@ -23,7 +23,7 @@
 import { defineProps } from "vue";
 import { ElCard } from "element-plus";
 import { NotificationData } from "@/types/weather";
-import notificationHeader from "./notificationHeader.vue";
+import subscribeHeader from "./subscribeHeader.vue";
 
 const props = defineProps<{
   notification: NotificationData;

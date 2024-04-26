@@ -7,7 +7,7 @@
     <el-menu
       class="el-menu-vertical-demo rounded-lg"
       :default-active="activeMenu"
-      background-color="#fff"
+      background-color="inherit"
       text-color="#000"
       active-text-color="#ffd04b"
     >
@@ -64,7 +64,8 @@ onMounted(() => {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #fff;
+  background-color: #a6a198;
+  /* opacity: 0.8; */
   overflow: hidden;
   transition: width 0.3s ease;
 }
