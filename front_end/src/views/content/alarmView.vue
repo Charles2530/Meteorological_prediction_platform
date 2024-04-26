@@ -6,11 +6,18 @@
     <el-row :gutter="20">
       <el-col :span="18">
         <!-- 加入搜索框(城市名) -->
-        <el-input
+        <el-select
           v-model="search"
-          placeholder="输入城市名"
+          placeholder="选择订阅城市"
           class="input-with-select"
-        ></el-input>
+        >
+          <el-option
+            v-for="location in locations"
+            :key="location.label"
+            :label="location.label"
+            :value="location.label"
+          ></el-option>
+        </el-select>
       </el-col>
       <el-col :span="6">
         <!-- 加入搜索按钮 -->
@@ -51,9 +58,9 @@
           <el-select v-model="cities" placeholder="选择订阅城市">
             <el-option
               v-for="location in locations"
-              :key="location.value"
+              :key="location.label"
               :label="location.label"
-              :value="location.value"
+              :value="location.label"
             ></el-option>
           </el-select>
           <el-table :data="tableData" style="width: 100%">
