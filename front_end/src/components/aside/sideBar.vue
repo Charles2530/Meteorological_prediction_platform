@@ -13,7 +13,7 @@
       <el-sub-menu index="1">
         <template #title>
           <el-icon class="el-icon-menu"><Menu></Menu></el-icon>
-          <strong class="nav-title text-md">网站公告</strong>
+          <strong class="nav-title text-md">订阅预警速递</strong>
         </template>
         <el-menu-item-group v-show="showNoticeItems">
           <notice-item
@@ -23,6 +23,7 @@
             :img="notice.img"
             :title="notice.title"
             :date="notice.date"
+            :city="notice.city"
           >
           </notice-item>
         </el-menu-item-group>

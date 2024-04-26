@@ -22,4 +22,5 @@ export interface NotificationNotice {
   img: string;
   title: string;
   date: string;
+  city: string;
 }
