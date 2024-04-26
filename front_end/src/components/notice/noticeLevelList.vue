@@ -45,6 +45,11 @@ function initChart() {
           },
         })),
         barWidth: "60%",
+        label: {
+          show: true,
+          position: "top",
+          formatter: "{c}",
+        },
       },
     ],
   };
