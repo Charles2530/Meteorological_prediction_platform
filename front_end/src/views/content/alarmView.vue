@@ -75,12 +75,45 @@
               width="180"
             ></el-table-column>
           </el-table>
-          <el-button type="primary" @click="subscribe">订阅</el-button>
+          <div class="mt-2">
+            <el-button type="primary" @click="subscribe">
+              <el-icon class="mr-3"><Plus /></el-icon>
+              添加订阅</el-button
+            >
+            <el-button type="warning" @click="undo_subscribe">
+              <el-icon class="mr-3"><Minus /></el-icon>
+              取消订阅</el-button
+            >
+          </div>
         </el-card>
         <noticeLevelList v-if="levelsLoaded" :cnt="levels" class="mt-4" />
       </el-col>
     </el-row>
   </el-container>
+  <!-- 取消城市订阅的el-dialog,参考tableData数据的el-select -->
+  <el-dialog
+    title="取消订阅"
+    v-model="undo_subscribe_dialog"
+    width="30%"
+    @close="undo_subscribe_dialog = false"
+  >
+    <!-- 取消订阅的el-select -->
+    <el-text>
+      <p class="text-gray-400">请选择要取消订阅的城市</p>
+    </el-text>
+    <el-select v-model="form.city" placeholder="请选择城市" class="my-3">
+      <el-option
+        v-for="item in tableData"
+        :key="item.city"
+        :label="item.city"
+        :value="item.city"
+      ></el-option>
+    </el-select>
+    <div class="dialog-footer">
+      <el-button @click="undo_subscribe_dialog = false">取 消</el-button>
+      <el-button type="primary" @click="deleteSubscribe">确 定</el-button>
+    </div>
+  </el-dialog>
 </template>
 
 <script setup lang="ts">
@@ -90,7 +123,23 @@ import { post, get } from "@/api/index.ts";
 import noticeLevelList from "@/components/notice/noticeLevelList.vue";
 import { china_cities } from "@/stores/cities";
 const locations = china_cities;
-
+const undo_subscribe_dialog = ref(false);
+const form = reactive({
+  city: "",
+});
+const undo_subscribe = () => {
+  undo_subscribe_dialog.value = true;
+};
+const deleteSubscribe = () => {
+  console.log(form.city);
+  undo_subscribe_dialog.value = false;
+  tableData.value = tableData.value.filter((item) => item.city !== form.city);
+  post<SubscribeResponse>("/api/subscribe", { cities: form.city }).then(
+    (res) => {
+      console.log(res.data.success);
+    }
+  );
+};
 const notifications_example = ref<NotificationData[]>([
   {
     id: 1,
@@ -251,9 +300,5 @@ watch(levels, () => {
 
 .input-with-select {
   margin-bottom: 20px;
-}
-
-el-button {
-  margin-top: 20px;
 }
 </style>
