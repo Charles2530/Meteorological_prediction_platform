@@ -3,16 +3,16 @@
     <el-main class="no-padding" style="overflow: hidden">
       <div class="search-container mx-4">
         <el-row>
-          <el-col :span="21">
+          <el-col :span="19">
             <manage-search-filter></manage-search-filter>
           </el-col>
-          <el-col :span="3" class="mt-4">
-            <el-button type="primary" size="small" @click="refreshWeather">
-              <el-icon><Refresh /></el-icon>
+          <el-col :span="5" class="mt-2">
+            <el-button type="primary" size="default" @click="refreshWeather">
+              <el-icon class="mr-3"><Refresh /></el-icon>
               {{ weatherInfo.buttons.refresh }}</el-button
             >
-            <el-button type="success" size="small" @click="showAddDialog"
-              ><el-icon> <Plus></Plus> </el-icon
+            <el-button type="success" size="default" @click="showAddDialog"
+              ><el-icon class="mr-3"> <Plus></Plus> </el-icon
               >{{ weatherInfo.buttons.add }}</el-button
             >
           </el-col>
