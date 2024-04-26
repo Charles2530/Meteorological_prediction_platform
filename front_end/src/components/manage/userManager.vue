@@ -1,5 +1,5 @@
 <template>
-  <el-container class="panel">
+  <el-container class="panel bg-white">
     <el-main class="no-padding" style="overflow: hidden">
       <el-table
         :data="userlist"
@@ -44,8 +44,8 @@
             </template>
           </el-table-column>
         </el-table-column>
-        <el-table-column :label="manage.user.role.label">
-          <el-table-column prop="role">
+        <el-table-column :label="manage.user.role.label" width="120">
+          <el-table-column prop="role" width="120">
             <template #header>
               <el-select
                 v-model="request.role"
@@ -63,22 +63,34 @@
                     {{ `manage.user.role.${item}` }}
                   </el-tag>
                 </el-option> -->
-                <el-option size="small" label="manage.user.role.User" value="1">
-                  <el-tag type="info">manage.user.role.User</el-tag>
+                <el-option
+                  size="small"
+                  :label="manage.user.role.User"
+                  value="1"
+                >
+                  <el-tag type="info">{{ manage.user.role.User }}</el-tag>
                 </el-option>
                 <el-option
                   size="small"
-                  label="manage.user.role.Administrator"
+                  :label="manage.user.role.Administrator"
                   value="2"
                 >
-                  <el-tag type="warning">manage.user.role.Administrator</el-tag>
+                  <el-tag type="warning">{{
+                    manage.user.role.Administrator
+                  }}</el-tag>
                 </el-option>
               </el-select>
             </template>
             <template #default="scope">
-              <el-tag :type="scope.row.role == 1 ? 'info' : 'warning'">
-                {{ `manage.user.role.${scope.row.role}` }}
+              <el-tag v-if="scope.row.role == 1" type="info">
+                {{ manage.user.role.User }}
               </el-tag>
+              <el-tag v-else type="warning">
+                {{ manage.user.role.Administrator }}
+              </el-tag>
+              <!-- <el-tag :type="scope.row.role == 1 ? 'info' : 'warning'">
+                {{ `manage.user.role.${scope.row.role}` }}
+              </el-tag> -->
             </template>
           </el-table-column>
         </el-table-column>
@@ -166,7 +178,7 @@
         <div class="pagination">
           <el-select
             v-model="pagination.page_size"
-            style="width: 60px; margin-right: 5px"
+            style="width: 100px; margin-right: 5px"
             @change="getUserList"
           >
             <!-- <el-option v-for="size in [10, 15, 20]" :value="size" />
@@ -511,8 +523,8 @@ const manage = {
     role: {
       label: "身份",
       0: "游客",
-      1: "用户",
-      2: "管理员",
+      User: "用户",
+      Administrator: "管理员",
     },
     last_login: "上次登录时间",
     operate: {
