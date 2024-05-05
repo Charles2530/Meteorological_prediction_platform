@@ -5,79 +5,47 @@
         <el-row>
           <el-col :span="19">
             <div class="p-2 space-y-4">
-              <el-row>
-                <el-col :span="10">
-                  <!-- 过滤器 -->
-                  <el-collapse v-model="filterVisible" accordion>
-                    <el-collapse-item title="请选择过滤参数" name="filter">
-                      <div class="space-y-2">
-                        <div class="my-2"></div>
-                        <!-- 类型选择 -->
-                        <el-select
-                          v-model="selectType"
-                          placeholder="请选择类型"
-                        >
-                          <el-option
-                            label="天气数据"
-                            value="weather"
-                          ></el-option>
-                          <el-option
-                            label="地质灾害"
-                            value="disaster"
-                          ></el-option>
-                        </el-select>
-                        <!-- 时间选项 -->
-                        <el-select
-                          v-model="timeOption"
-                          placeholder="请选择时间选项"
-                          v-if="selectType === 'weather'"
-                        >
-                          <el-option label="按月" value="month"></el-option>
-                          <el-option label="按日" value="day"></el-option>
-                          <el-option label="按周" value="week"></el-option>
-                        </el-select>
-                        <!-- 时间段选择 -->
-                        <el-date-picker
-                          v-model="selectedDate"
-                          type="daterange"
-                          range-separator="至"
-                          start-placeholder="开始日期"
-                          end-placeholder="结束日期"
-                          :picker-options="pickerOptions"
-                          format="YYYY年MM月DD日"
-                        ></el-date-picker>
-                        <!-- 地点选择 -->
-                        <el-select
-                          v-model="selectedLocation"
-                          placeholder="请选择地点"
-                        >
-                          <el-option
-                            v-for="location in locations"
-                            :key="location.value"
-                            :label="location.label"
-                            :value="location.value"
-                          ></el-option>
-                        </el-select>
-                      </div>
-                    </el-collapse-item>
-                  </el-collapse>
+              <el-row :gutter="20">
+                <el-col :span="5">
+                  <el-select v-model="selectType" placeholder="请选择数据类型">
+                    <el-option label="天气数据" value="weather"></el-option>
+                    <el-option label="地质灾害" value="disaster"></el-option>
+                  </el-select>
                 </el-col>
-                <el-col :span="4"></el-col>
-                <el-col :span="10" class="text-right">
-                  <!-- 主搜索框 -->
-                  <el-input
-                    v-model="searchQuery"
-                    placeholder="请输入搜索关键词"
+                <el-col :span="11">
+                  <el-date-picker
+                    v-model="selectedDate"
+                    type="daterange"
+                    range-separator="至"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期"
+                    :picker-options="pickerOptions"
+                    format="YYYY年MM月DD日"
                     clearable
-                    @clear="handleSearch"
+                    style="width: 100%"
+                  ></el-date-picker>
+                </el-col>
+                <el-col :span="4">
+                  <el-select
+                    v-model="selectedLocation"
+                    placeholder="请选择城市"
+                    clearable
                   >
-                    <template #append>
-                      <el-button @click="handleSearch">
-                        <el-icon class="mr-2"><Search></Search></el-icon>
-                        搜索</el-button
-                      >
-                    </template>
-                  </el-input>
+                    <el-option
+                      v-for="location in locations"
+                      :key="location.value"
+                      :label="location.label"
+                      :value="location.value"
+                    ></el-option>
+                  </el-select>
+                </el-col>
+                <el-col :span="4">
+                  <el-button @click="handleSearch">
+                    <el-icon class="mr-2"><Search></Search></el-icon>
+                    <el-text>
+                      <span>点击搜索</span>
+                    </el-text>
+                  </el-button>
                 </el-col>
               </el-row>
             </div>
@@ -125,44 +93,58 @@
             width="200"
           ></el-table-column>
           <el-table-column
+            prop="city"
+            label="城市"
+            width="100"
+            :formatter="(row: WeatherTable) => {for (let location of locations) { if (location.value === row.city) return location.label; }}"
+          ></el-table-column>
+          <el-table-column
             prop="temp"
             label="温度"
             min-width="50"
+            :formatter="(row: WeatherTable) => row.temp==undefined?'没有该数据':`${row.temp}°C`"
           ></el-table-column>
           <el-table-column
             prop="text"
             label="天气"
             width="100"
+            :formatter="(row: WeatherTable) => row.text==''?'没有该数据':row.text"
           ></el-table-column>
           <el-table-column
             prop="precip"
             label="降水"
             min-width="50"
+            :formatter="(row: WeatherTable) => row.precip==undefined?'没有该数据':`${row.precip}mm`"
           ></el-table-column>
           <el-table-column
             prop="windSpeed"
             label="风速"
             min-width="50"
+            :formatter="(row: WeatherTable) => row.windSpeed==undefined?'没有该数据':`${row.windSpeed}m/s`"
           ></el-table-column>
           <el-table-column
             prop="humidity"
             label="湿度"
             min-width="50"
+            :formatter="(row: WeatherTable) => row.humidity==undefined?'没有该数据':`${row.humidity}%`"
           ></el-table-column>
           <el-table-column
             prop="pressure"
             label="气压"
             min-width="50"
+            :formatter="(row: WeatherTable) => row.pressure==undefined?'没有该数据':`${row.pressure}hPa`"
           ></el-table-column>
           <el-table-column
             prop="aqi"
             label="空气质量"
             min-width="50"
+            :formatter="(row: WeatherTable) => row.aqi==undefined?'没有该数据':`${row.aqi}`"
           ></el-table-column>
           <el-table-column
             prop="category"
             label="类别"
             min-width="100"
+            :formatter="(row: WeatherTable) => row.category=='' ?'没有该数据':row.category"
           ></el-table-column>
           <el-table-column prop="actions" label="操作" width="200">
             <template #default="scope">
@@ -199,36 +181,140 @@
     v-model="addDialogVisible"
     @close="resetAddForm"
   >
-    <el-form :model="newWeatherData" ref="addForm">
+    <el-form
+      :model="newWeatherData"
+      ref="addForm"
+      size="small"
+      label-width="100px"
+      inline
+    >
       <el-form-item :label="weatherInfo.labels.time" prop="time">
-        <el-input v-model="newWeatherData.time"></el-input>
+        <el-date-picker
+          v-model="newWeatherData.time"
+          type="datetime"
+          placeholder="选择时间"
+          style="width: 10rem"
+          format="YYYY-MM-DD HH:mm:ss"
+          value-format="YYYY-MM-DD HH:mm:ss"
+        ></el-date-picker>
+      </el-form-item>
+      <el-form-item :label="weatherInfo.labels.city" prop="city">
+        <el-select
+          v-model="newWeatherData.city"
+          placeholder="请选择城市"
+          style="width: 10rem"
+          size="small"
+          clearable
+        >
+          <el-option
+            v-for="location in locations"
+            :key="location.value"
+            :label="location.label"
+            :value="location.value"
+          ></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item :label="weatherInfo.labels.temperature" prop="temp">
-        <el-input v-model="newWeatherData.temp"></el-input>
+        <el-input-number
+          v-model="newWeatherData.temp"
+          :min="-50"
+          :max="50"
+          :step="0.1"
+          :formatter="(value:number) => `${value}°C`"
+          style="width: 10rem"
+        ></el-input-number>
       </el-form-item>
       <el-form-item :label="weatherInfo.labels.text" prop="text">
-        <el-input v-model="newWeatherData.text"></el-input>
+        <el-select
+          v-model="newWeatherData.text"
+          placeholder="请选择天气"
+          style="width: 10rem"
+          size="small"
+          clearable
+        >
+          <el-option
+            v-for="weather in weathers"
+            :key="weather.value"
+            :label="weather.label"
+            :value="weather.value"
+          >
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item :label="weatherInfo.labels.humidity" prop="humidity">
-        <el-input v-model="newWeatherData.humidity"></el-input>
+        <el-input-number
+          v-model="newWeatherData.humidity"
+          :min="0"
+          :max="100"
+          :step="1"
+          :formatter="(value:number) => `${value}%`"
+          style="width: 10rem"
+        ></el-input-number>
       </el-form-item>
       <el-form-item :label="weatherInfo.labels.windSpeed" prop="windSpeed">
-        <el-input v-model="newWeatherData.windSpeed"></el-input>
+        <el-input-number
+          v-model="newWeatherData.windSpeed"
+          :min="0"
+          :max="100"
+          :step="0.1"
+          :formatter="(value:number) => `${value}m/s`"
+          style="width: 10rem"
+        ></el-input-number>
       </el-form-item>
       <el-form-item :label="weatherInfo.labels.wind360" prop="wind360">
-        <el-input v-model="newWeatherData.wind360"></el-input>
+        <el-input-number
+          v-model="newWeatherData.wind360"
+          :min="0"
+          :max="360"
+          :step="1"
+          :formatter="(value:number) => `${value}°`"
+          style="width: 10rem"
+        ></el-input-number>
       </el-form-item>
       <el-form-item :label="weatherInfo.labels.windScale" prop="windScale">
-        <el-input v-model="newWeatherData.windScale"></el-input>
+        <el-input-number
+          v-model="newWeatherData.windScale"
+          :min="0"
+          :max="12"
+          :step="1"
+          :formatter="(value:number) => `${value}级`"
+          style="width: 10rem"
+        ></el-input-number>
       </el-form-item>
       <el-form-item :label="weatherInfo.labels.pressure" prop="pressure">
-        <el-input v-model="newWeatherData.pressure"></el-input>
+        <el-input-number
+          v-model="newWeatherData.pressure"
+          :min="800"
+          :max="1100"
+          :step="1"
+          :formatter="(value:number) => `${value}hPa`"
+          style="width: 10rem"
+        ></el-input-number>
       </el-form-item>
       <el-form-item :label="weatherInfo.labels.aqi" prop="aqi">
-        <el-input v-model="newWeatherData.aqi"></el-input>
+        <el-input-number
+          v-model="newWeatherData.aqi"
+          :min="0"
+          :max="500"
+          :step="1"
+          style="width: 10rem"
+        ></el-input-number>
       </el-form-item>
       <el-form-item :label="weatherInfo.labels.category" prop="category">
-        <el-input v-model="newWeatherData.category"></el-input>
+        <el-select
+          v-model="newWeatherData.category"
+          placeholder="请选择空气质量等级"
+          style="width: 10rem"
+          size="small"
+          clearable
+        >
+          <el-option
+            v-for="level in aqi_level"
+            :key="level.value"
+            :label="level.label"
+            :value="level.value"
+          ></el-option>
+        </el-select>
       </el-form-item>
     </el-form>
     <template v-slot:footer>
@@ -246,50 +332,45 @@
 import { ref, reactive } from "vue";
 import { post } from "@/api/index";
 import { china_cities } from "@/stores/cities";
+import { weather, aqi_level } from "@/stores/weather";
 import throttle from "lodash/throttle";
 /* 搜索 */
 const selectedDate = ref("");
 const pickerOptions: any = {
-  firstDayOfWeek: 1, // 设置一周的第一天为周一
+  firstDayOfWeek: 1,
   disabledDate(time: Date): boolean {
-    // 禁止选择未来日期
     return time.getTime() > Date.now();
   },
 };
-const searchQuery = ref("");
-const filterVisible = ref("false");
 const selectType = ref("");
-const timeOption = ref("");
 const selectedLocation = ref("");
 const locations = china_cities;
+const weathers = weather;
 interface SearchWeatherHourlyListResponse {
   status: boolean;
   weatherHourlyList: WeatherTable[];
 }
 interface WeatherTable {
   time: string;
-  temp: string;
+  city: string;
+  temp: number;
   text: string;
-  precip: string;
-  wind360: string;
-  windScale: string;
-  windSpeed: string;
-  humidity: string;
-  pressure: string;
-  aqi: string;
+  precip: number;
+  wind360: number;
+  windScale: number;
+  windSpeed: number;
+  humidity: number;
+  pressure: number;
+  aqi: number;
   category: string;
 }
 const weatherData: WeatherTable[] = reactive([]);
 const handleSearch = () => {
-  // 处理搜索逻辑，可以调用 API
   post<SearchWeatherHourlyListResponse>("/api/manage/data/search", {
-    key: searchQuery.value,
     type: selectType.value,
-    range: timeOption.value,
     time: selectedDate.value,
     address: selectedLocation.value,
   }).then((res) => {
-    // console.log(res);
     if (res.status) {
       weatherData.splice(0, weatherData.length, ...res.data.weatherHourlyList);
     }
@@ -299,15 +380,16 @@ const loading = ref(false);
 const addDialogVisible = ref(false);
 const newWeatherData = reactive<WeatherTable>({
   time: "",
-  temp: "",
+  city: "",
+  temp: undefined,
   text: "",
-  precip: "",
-  wind360: "",
-  windScale: "",
-  windSpeed: "",
-  humidity: "",
-  pressure: "",
-  aqi: "",
+  precip: undefined,
+  wind360: undefined,
+  windScale: undefined,
+  windSpeed: undefined,
+  humidity: undefined,
+  pressure: undefined,
+  aqi: undefined,
   category: "",
 });
 
@@ -328,13 +410,18 @@ interface addWeatherResponse {
   reason?: string;
 }
 function addWeather() {
+  if (newWeatherData.time === "" || newWeatherData.city === "") {
+    ElMessage.error("请填写完整信息！时间和城市不能为空。");
+    return;
+  }
   weatherData.push({ ...newWeatherData });
   addDialogVisible.value = false;
+  console.log({ ...newWeatherData });
   post<addWeatherResponse>("/api/manage/data/weather_add", newWeatherData).then(
     (res) => {
       const response = res.data;
       if (!response.status) {
-        ElMessage.error(response.reason);
+        ElMessage.error("添加失败！");
       } else {
         ElMessage.success(weatherInfo.dialogs.add);
       }
@@ -344,26 +431,31 @@ function addWeather() {
 
 function resetAddForm() {
   newWeatherData.time = "";
-  newWeatherData.temp = "";
+  newWeatherData.city = "";
+  newWeatherData.temp = undefined;
   newWeatherData.text = "";
-  newWeatherData.precip = "";
-  newWeatherData.wind360 = "";
-  newWeatherData.windScale = "";
-  newWeatherData.windSpeed = "";
-  newWeatherData.humidity = "";
-  newWeatherData.pressure = "";
-  newWeatherData.aqi = "";
+  newWeatherData.precip = undefined;
+  newWeatherData.wind360 = undefined;
+  newWeatherData.windScale = undefined;
+  newWeatherData.windSpeed = undefined;
+  newWeatherData.humidity = undefined;
+  newWeatherData.pressure = undefined;
+  newWeatherData.aqi = undefined;
   newWeatherData.category = "";
 }
 interface DeleteForm {
   time: string;
+  city: string;
 }
 interface DeleteResponse {
   success: boolean;
   reason?: string;
 }
 const deleteWeather = throttle((index: number) => {
-  const request: DeleteForm = { time: weatherData[index].time };
+  const request: DeleteForm = {
+    time: weatherData[index].time,
+    city: weatherData[index].city,
+  };
   weatherData.splice(index, 1);
   post<DeleteResponse>("/api/manage/data/delete", request).then((res) => {
     const response = res.data;
@@ -376,6 +468,7 @@ const deleteWeather = throttle((index: number) => {
 const weatherInfo = {
   labels: {
     time: "时间",
+    city: "城市",
     temperature: "温度",
     text: "天气",
     humidity: "湿度",
