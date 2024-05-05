@@ -19,9 +19,9 @@
             :style="{ height: contentHeight }"
           ></div>
         </el-main>
-        <el-footer ref="footer">
+        <!-- <el-footer ref="footer">
           <Footer></Footer>
-        </el-footer>
+        </el-footer> -->
       </el-container>
     </el-container>
   </el-container>
