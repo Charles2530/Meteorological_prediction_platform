@@ -96,7 +96,9 @@
             prop="city"
             label="城市"
             width="100"
-            :formatter="(row: WeatherTable) => {for (let location of locations) { if (location.value === row.city) return location.label; }}"
+            :formatter="(row: WeatherTable) => {
+                return locations.find((location) => location.value === row.city)?.label||row.city;
+                }"
           ></el-table-column>
           <el-table-column
             prop="temp"
