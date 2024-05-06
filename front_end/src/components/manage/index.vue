@@ -17,7 +17,10 @@
         </el-menu-item>
       </el-menu>
     </el-aside>
-    <el-main class="no-padding" style="overflow-y: hidden">
+    <el-main
+      class="no-padding"
+      style="overflow-y: hidden; background-color: #bde3ff"
+    >
       <router-view v-slot="{ Component }">
         <transition name="fade">
           <component :is="Component" />
