@@ -3,8 +3,9 @@
 </template>
 
 <script setup>
+import SvgIcon from 'svg-icon';
 defineProps({
-    icon: { type: String },
+    icon: { type: Number },
     size: { type: Number },
     fill: { type: Boolean, default: false }
 })

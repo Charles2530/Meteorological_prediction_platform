@@ -31,26 +31,26 @@
 
 <script setup>
 import { computed } from 'vue';
-// const props = defineProps({
-//     weather: { type: Object },
-//     air: { type: Object },
-//     city: { type: Object },
-//     ultraviolet: { type: Array, default: [] }
-// })
+const props = defineProps({
+    weather: { type: Object },
+    air: { type: Object },
+    city: { type: Object },
+    ultraviolet: { type: Array, default: [] }
+})
 
 // const emits = defineEmits(['refresh'])
 // const refresh = () => {
 //   emits('refresh', props.city, false)
 // }
 
-// // 获取紫外线（太阳直射辐射）
-// const curUltraviolet = computed(()=>{
-//   const curHour = (new Date).getHours()
-//   return props.ultraviolet.find(item=>{
-//     const hour = (new Date(item.fxTime)).getUTCHours()
-//     return hour === curHour
-//   })?.direct
-// })
+// 获取紫外线（太阳直射辐射）
+const curUltraviolet = computed(()=>{
+  const curHour = (new Date).getHours()
+  return props.ultraviolet.find(item=>{
+    const hour = (new Date(item.fxTime)).getUTCHours()
+    return hour === curHour
+  })?.direct
+})
 
 const dispalyInfo = [
   {

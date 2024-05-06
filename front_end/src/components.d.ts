@@ -72,6 +72,17 @@ declare module 'vue' {
     TopBarLogo: typeof import('./components/topBar/logo.vue')['default']
     TopBarNavBar: typeof import('./components/topBar/navBar.vue')['default']
     TopBarUserMenu: typeof import('./components/topBar/userMenu.vue')['default']
+    Weatherdetails30days: typeof import('./components/weather_details/30days.vue')['default']
+    WeatherdetailsAqi: typeof import('./components/weather_details/aqi.vue')['default']
+    WeatherdetailsOverview: typeof import('./components/weather_details/overview.vue')['default']
+    WeatherdetailsStatistics: typeof import('./components/weather_details/statistics.vue')['default']
+    WeatherdetailsSubcomponentsAirQuality: typeof import('./components/weather_details/sub_components/AirQuality.vue')['default']
+    WeatherdetailsSubcomponentsCurrentWeather: typeof import('./components/weather_details/sub_components/CurrentWeather.vue')['default']
+    WeatherdetailsSubcomponentsForecast: typeof import('./components/weather_details/sub_components/Forecast.vue')['default']
+    WeatherdetailsSubcomponentsNav: typeof import('./components/weather_details/sub_components/Nav.vue')['default']
+    WeatherdetailsSubcomponentsQWeatherIcon: typeof import('./components/weather_details/sub_components/QWeatherIcon.vue')['default']
+    WeatherdetailsSubcomponentsSearchLocation: typeof import('./components/weather_details/sub_components/SearchLocation.vue')['default']
+    WeatherdetailsSubcomponentsSvgIcon: typeof import('./components/weather_details/sub_components/SvgIcon.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

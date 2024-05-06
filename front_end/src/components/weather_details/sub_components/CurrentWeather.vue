@@ -31,8 +31,8 @@
         max-md:justify-between
         relative
       ">
-        <div class="max-md:relative opacity-90">
-          <QWeatherIcon class="max-md:absolute max-md:top-[-35px]" :icon="weather.icon" :size="100" :fill="true" />
+        <div class="max-md:relative opacity-10">
+          <QWeatherIcon class="max-md:absolute " :icon="props.weather.icon" :size="300" :fill="true" />
         </div>
         <div class="flex flex-col md:ml-10 ">
           <span class="text-7xl bg-clip-text text-transparent bg-gradient-to-br from-white from-40% ...">{{
@@ -59,31 +59,27 @@ import { translateTime } from '@/utils/utilsFunc.js'
 import { defineEmits } from 'vue'
 
 
-const weather = {
-  icon: "404",
-  temp: "20℃",
-  text: "cloud"
-}
-const city = {
-  adm2: "海淀区",
-  name: "北京"
-}
-const search = true
-// const props = defineProps({
-//     weather: { type: Object },
-//     city: { type: Object },
-//     search: { type: Boolean }
-// })
-
-// // const emit = defineEmits(['searchShow'])
-
-// const searchForPC = () => {
-//   // emit('searchShow', !props.search)
+// const weather = {
+//   icon: 404,
+//   temp: "20℃",
+//   text: "cloud"
 // }
+const search = true
+const props = defineProps({
+    weather: { type: Object },
+    city: { type: Object },
+    search: { type: Boolean }
+})
 
-// // const searchForMobile = () => {
-// //   emit('searchShow', true)
-// // }
+// const emit = defineEmits(['searchShow'])
+
+const searchForPC = () => {
+  // emit('searchShow', !props.search)
+}
+
+// const searchForMobile = () => {
+//   emit('searchShow', true)
+// }
 
 const dayOfWeek = "Tue"
 const formattedDate = "4-24-2024"

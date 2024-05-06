@@ -1,8 +1,8 @@
 <template>
   <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick" type="border-card">
     <el-tab-pane label="天气速览" name="first">
-      <el-container class="container">
-        <CurrentWeather class="md:basis-3/5"  >
+   <overview/>
+        <CurrentWeather class="md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
           <!-- @searchShow="changeSearchShow" -->
           <!-- <template v-slot:search>
             <div class="text-[#333333]">
@@ -10,11 +10,11 @@
             </div>
           </template> -->
         </CurrentWeather>
-        <AirQuality class="md:basis-2/5" />
+        <AirQuality class="md:basis-2/5" :weather="weather" :air="air" :city="city" :ultraviolet="ultraviolet" />
         <!-- @refresh="weatherInfo"  -->
 
 
-      </el-container>
+     
 
 
     </el-tab-pane>
@@ -73,21 +73,51 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 type ECharts = echarts.ECharts
 let echartsInstance: Ref<ECharts | null> = ref(null)
 
-/** 组件  */
-import SearchLocation from '@/components/raw/SearchLocation.vue'
-import CurrentWeather from '@/components/raw/CurrentWeather.vue';
-import AirQuality from '@/components/raw/AirQuality.vue';
-import Forecast from '@/components/raw/Forecast.vue'
+
+/** 组件  **/
+import overview from '@/components/weather_details/overview.vue'
+
 const stateNavigator = ref(0) // 用于判断是否加载loading
 const cityList = ref([])
 const city = ref({})
-const weather = ref({})
+let weather = ref({})
 const air = ref({})
 const forecast = ref([])
 const preDayWeather = ref([])
 const ultraviolet = ref([])
 const searchShow = ref(false)
 
+
+interface WeatherHisOverview {
+  weather: {
+    icon: number;
+    temp: string;
+    text: string;
+  },
+  city: {
+    adm2: string;
+    name: string;
+  },
+  searchShow: boolean
+}
+
+
+
+
+
+import { post, get } from "@/api/index.ts";
+const get_his_overview = async () => {
+  get<WeatherHisOverview>("/api/his/overview").then((res) => {
+    weather.value = res.data.weather;
+    city.value = res.data.city;
+    searchShow.value = res.data.searchShow
+  });
+};
+
+const getData=() => {
+  get_his_overview();
+  get
+}
 /*echart*/
 onMounted(() => {
   // 解决echarts图表放大溢出父容器
@@ -108,6 +138,7 @@ onMounted(() => {
   nextTick(() => {
     initChart()
   })
+
   // 接口获取数据后，再为echarts赋值
   // 在 ECharts 的 X 轴上显示当前日期前一周的月日
   initData()
