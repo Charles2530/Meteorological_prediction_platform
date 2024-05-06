@@ -3,32 +3,19 @@
     <img class="notification-img" :src="props.img" alt="Notification Image" />
     <span class="notification-title">{{ props.title }}</span>
     <div class="notification-date">{{ props.date }}</div>
-    <!-- 点击跳转查看详情 -->
-    <el-button type="text" class="text-sm" @click="redirectToDetails(props.id)">
-      <el-icon><Link /></el-icon>
-      查看详情</el-button
-    >
   </div>
 </template>
 <script setup lang="ts">
-import router from "@/router";
 const props = defineProps<{
-  id: number;
   img: string;
   title: string;
   date: string;
 }>();
-const redirectToDetails = (id: number) => {
-  router.push({ name: "Alarm", query: { notificationId: id.toString() } });
-};
 </script>
 <style scoped>
-.clearfix {
-  background-color: inherit;
-}
 .notification-img {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   float: left;
   margin-right: 10px;
 }

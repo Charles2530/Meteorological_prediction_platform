@@ -153,6 +153,7 @@ import { User, Message, Key } from "@element-plus/icons-vue";
 import type { FormInstance, FormRules } from "element-plus";
 import { post } from "@/api/index";
 import Avatar from "@c/content/avatar.vue";
+import { md5 } from "js-md5";
 
 interface EmailForm {
   email: string;
@@ -251,7 +252,11 @@ const confirmPassword = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      post<PasswordResponse>("/api/operate/password", passwordForm).then(
+      const encodePasswordForm = {
+        oldPassword: md5(passwordForm.oldPassword),
+        newPassword: md5(passwordForm.newPassword),
+      };
+      post<PasswordResponse>("/api/operate/password", encodePasswordForm).then(
         (res) => {
           const response = res.data;
           if (response.success) {
