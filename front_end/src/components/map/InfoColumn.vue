@@ -1,6 +1,6 @@
 <template>
-    <div style="max-height: 650px; overflow: auto">
-        <el-card class="color2">
+    <div class="container" style="min-height: 600px; max-height: 600px; overflow: auto;">
+        <el-card class="color2" shadow="always">
             <el-row :gutter="20">
                 <el-col :span="12">
                     <div class="grid-content">
@@ -9,7 +9,7 @@
                 </el-col>
                 <el-col :offset="3" :span="9">
                     <div class="grid-content">
-                        <span  class="font1" style="border: 1px solid #a5a5a5;border-radius: 10px;">&nbsp;&nbsp;AQI：{{proInfo.weather.airAQI}} {{proInfo.weather.air}}&nbsp;&nbsp;</span>
+                        <span  class="font1" style="border: 1px solid #FFFFFF;border-radius: 10px;">&nbsp;&nbsp;AQI：{{proInfo.weather.airAQI}} {{proInfo.weather.air}}&nbsp;&nbsp;</span>
                     </div>
                 </el-col>
             </el-row>
@@ -80,7 +80,7 @@
         <el-card class="color2">
             <el-table :data="proInfo.hazardTable" size:mini max-height="240" style="font-size: 14px;font-weight: 500;" :row-style="{height:'40px'}">
                 <el-table-column prop="place" label="地点" width="140" :show-overflow-tooltip="true" />
-                <el-table-column prop="level" label="等级" width="70" >
+                <el-table-column prop="level" label="等级" width="80" >
                     <template #default="scope">
                         <span  class="font1" style="border: 1px solid #a5a5a5;border-radius: 10px;">&nbsp;&nbsp;&nbsp;{{ scope.row.level }}&nbsp;&nbsp;&nbsp;</span>
                     </template>
@@ -160,6 +160,9 @@ let proInfo = reactive({
 </script>
 
 <style scoped>
+* {
+  color: white !important;
+}
 
 .el-row {
   margin-bottom: 15px;
@@ -182,27 +185,53 @@ let proInfo = reactive({
 
 .color2 {
     /* background:radial-gradient(circle at center, #ff9966, #ff5e62); */
-    background-color:rgb(255,255,255,0.3);
+    background-color:rgb(255,255,255,0);
     width: 90%; 
     margin: auto;
     margin-top: 2%;
+    border-color: rgb(187, 168, 217, 0.7);
 }
 
 
 :deep(.el-table) {
-    background-color: rgba(255,255,255,0);
+    background-color: rgba(232, 232, 232, 0.03);
+    --el-table-row-hover-bg-color: rgba(232, 232, 232, 0.1);
 }
 
 :deep(.el-table tr) {
-    background-color: rgba(255,255,255,0);
+    background-color: rgba(232, 232, 232, 0.03);
 }
 
 :deep(.el-table th) {
-    background-color: rgba(255,255,255,0);
+    background-color: rgba(232, 232, 232, 0.03);
+    color: rgb(219, 219, 219);
 }
 
 
+.container::-webkit-scrollbar {
+	width: 10px;
+	height: 8px;
+}
 
+::-webkit-scrollbar-button {
+	display: none;
+}
+
+::-webkit-scrollbar-track {
+	background-color: rgba(70, 166, 255, 0.1);
+	display: none;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: rgba(105, 105, 105, 0.4);
+	border: 2px solid transparent;
+	border-radius: 6px;
+	background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+}
 
 </style>
   

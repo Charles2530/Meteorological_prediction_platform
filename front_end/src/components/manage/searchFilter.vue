@@ -68,6 +68,7 @@
 
 <script setup lang="ts">
 import { post } from "@/api/index";
+import { china_cities } from "@/stores/cities";
 const selectedDate = ref("");
 const pickerOptions: any = {
   firstDayOfWeek: 1, // 设置一周的第一天为周一
@@ -81,58 +82,44 @@ const filterVisible = ref("false");
 const selectType = ref("");
 const timeOption = ref("");
 const selectedLocation = ref("");
-const locations = [
-  { label: "北京", value: "beijing" },
-  { label: "上海", value: "shanghai" },
-  { label: "广东", value: "guangdong" },
-  { label: "深圳", value: "shenzhen" },
-  { label: "杭州", value: "hangzhou" },
-  { label: "成都", value: "chengdu" },
-  { label: "武汉", value: "wuhan" },
-  { label: "西安", value: "xian" },
-  { label: "重庆", value: "chongqing" },
-  { label: "南京", value: "nanjing" },
-  { label: "苏州", value: "suzhou" },
-  { label: "天津", value: "tianjin" },
-  { label: "厦门", value: "xiamen" },
-  { label: "青岛", value: "qingdao" },
-  { label: "大连", value: "dalian" },
-  { label: "宁波", value: "ningbo" },
-  { label: "无锡", value: "wuxi" },
-  { label: "福州", value: "fuzhou" },
-  { label: "济南", value: "jinan" },
-  { label: "长沙", value: "changsha" },
-  { label: "郑州", value: "zhengzhou" },
-  { label: "合肥", value: "hefei" },
-  { label: "南昌", value: "nanchang" },
-  { label: "贵阳", value: "guiyang" },
-  { label: "昆明", value: "kunming" },
-  { label: "兰州", value: "lanzhou" },
-  { label: "银川", value: "yinchuan" },
-  { label: "西宁", value: "xining" },
-  { label: "拉萨", value: "lasa" },
-  { label: "乌鲁木齐", value: "wulumuqi" },
-  { label: "呼和浩特", value: "huhehaote" },
-  { label: "南宁", value: "nanning" },
-  { label: "海口", value: "haikou" },
-  { label: "台北", value: "taibei" },
-  { label: "香港", value: "xianggang" },
-  { label: "澳门", value: "aomen" },
-];
+const locations = china_cities;
+interface SearchWeatherHourlyListResponse {
+  status: boolean;
+  weatherHourlyList: WeatherTable[];
+}
+interface WeatherTable {
+  time: string;
+  temp: string;
+  text: string;
+  precip: string;
+  wind360: string;
+  windScale: string;
+  windSpeed: string;
+  humidity: string;
+  pressure: string;
+  aqi: string;
+  category: string;
+}
+const weatherTable: WeatherTable[] = reactive([]);
 
 const handleSearch = () => {
   // 处理搜索逻辑，可以调用 API
-  post("/api/manage/data/search", {
+  post<SearchWeatherHourlyListResponse>("/api/manage/data/search", {
     key: searchQuery.value,
     type: selectType.value,
     range: timeOption.value,
     time: selectedDate.value,
     address: selectedLocation.value,
+  }).then((res) => {
+    // console.log(res);
+    if (res.status) {
+      weatherTable.splice(
+        0,
+        weatherTable.length,
+        ...res.data.weatherHourlyList
+      );
+    }
   });
-  console.log("搜索关键词:", searchQuery.value);
-  console.log("时间选项:", timeOption.value);
-  console.log("选定日期范围:", selectedDate.value);
-  console.log("选定地点:", selectedLocation.value);
 };
 </script>
 

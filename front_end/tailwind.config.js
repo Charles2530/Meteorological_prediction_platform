@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        "top-background": "url('/src/assets/img/top-background.png')",
+        "top-background-light": "url('/src/assets/img/top-background.jpg')",
+        "top-background": "url('/src/assets/img/top-background-dark.png')",
       },
       margin: {},
     },

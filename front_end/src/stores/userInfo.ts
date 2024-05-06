@@ -25,7 +25,7 @@ export const useUserInfo = defineStore("userInfo", {
         role: UserRole.Visitor,
       });
       Local.remove("Bearer");
-      router.push({ name: "home" });
+      router.push({ name: "Home" });
     },
     setAvatar(avatar: string) {
       this.avatar = avatar;

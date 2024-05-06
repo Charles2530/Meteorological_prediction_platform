@@ -6,10 +6,9 @@
         :img="props.img"
         :title="props.title"
         :date="props.date"
+        :city="props.city"
       />
     </div>
-
-    <!-- <el-divider></el-divider> -->
   </div>
 </template>
 
@@ -20,15 +19,15 @@ const props = defineProps<{
   img: string;
   title: string;
   date: string;
+  city: string;
 }>();
 </script>
 
 <style scoped>
 .notice-item {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f0f0f0;
+  background-color: #fafafa;
 }
 </style>
