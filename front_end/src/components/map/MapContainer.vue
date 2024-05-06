@@ -135,7 +135,7 @@ function initMap() {
         // zoom: 4.8, // 初始化地图级别
         // center: [105,36], // 初始化地图中心点位置
         zoom: 4.8, // 初始化地图级别
-        center: [105, 36], // 初始化地图中心点位置
+        center: [103, 36], // 初始化地图中心点位置
       });
       // 天地图图层
       const wms = new AMap.TileLayer.WMTS({
@@ -158,15 +158,16 @@ function initMap() {
         SOC: "CHN",
         depth: 2,
         styles: {
-          "nation-stroke": "grey",
+          // "nation-stroke": "grey",
+          "nation-stroke": "red",
           "coastline-stroke": [0.8, 0.63, 0.94, 1],
           "province-stroke": "#a5a5a5",
           "city-stroke": "rgba(255,255,255,0.5)", //中国特有字段
           fill: "",
         },
       });
-      map.addControl(new AMap.Scale());
-      map.addControl(new AMap.ToolBar({ liteStyle: true }));
+      map.addControl(new AMap.Scale({position: 'LB'}));
+      map.addControl(new AMap.ToolBar({ liteStyle: true, position: 'LT'}));
       map.add(wms);
       map.add(disCountry);
       dis_info.district = new AMap.DistrictSearch(dis_info.opts);
@@ -205,6 +206,7 @@ function drawBounds() {
 
       map.add(dis_info.polygons);
       map.setFitView(dis_info.polygons); //视口自适应
+      map.setZoom(5.4);
     }
   );
 }
@@ -298,6 +300,6 @@ function setMarkWindows(_e: any, item: { place: string; longitude: number; latit
 #container {
   width: 100%;
   height: 100%;
-  border: 1px solid red;
+  
 }
 </style>
