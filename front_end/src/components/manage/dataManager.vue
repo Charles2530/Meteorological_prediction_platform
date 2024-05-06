@@ -1,18 +1,18 @@
 <template>
   <el-container class="panel background-white rounded-lg">
-    <el-main class="no-padding" style="overflow: hidden">
+    <el-main class="no-padding">
       <div class="search-container mx-4">
         <el-row>
-          <el-col :span="19">
+          <el-col :span="16">
             <div class="p-2 space-y-4">
               <el-row :gutter="20">
-                <el-col :span="5">
+                <el-col :span="6">
                   <el-select v-model="selectType" placeholder="请选择数据类型">
                     <el-option label="天气数据" value="weather"></el-option>
                     <el-option label="地质灾害" value="disaster"></el-option>
                   </el-select>
                 </el-col>
-                <el-col :span="11">
+                <el-col :span="12">
                   <el-date-picker
                     v-model="selectedDate"
                     type="daterange"
@@ -25,7 +25,7 @@
                     style="width: 100%"
                   ></el-date-picker>
                 </el-col>
-                <el-col :span="4">
+                <el-col :span="6">
                   <el-select
                     v-model="selectedLocation"
                     placeholder="请选择城市"
@@ -39,23 +39,28 @@
                     ></el-option>
                   </el-select>
                 </el-col>
-                <el-col :span="4">
-                  <el-button @click="handleSearch">
-                    <el-icon class="mr-2"><Search></Search></el-icon>
-                    <el-text>
-                      <span>点击搜索</span>
-                    </el-text>
-                  </el-button>
-                </el-col>
               </el-row>
             </div>
           </el-col>
-          <el-col :span="5" class="mt-2">
-            <el-button type="primary" size="default" @click="refreshWeather">
+          <el-col :span="8" class="mt-2">
+            <el-button type="info" size="default" plain @click="handleSearch">
+              <el-icon class="mr-2"><Search></Search></el-icon>
+              点击搜索
+            </el-button>
+            <el-button
+              type="primary"
+              size="default"
+              plain
+              @click="refreshWeather"
+            >
               <el-icon class="mr-3"><Refresh /></el-icon>
               {{ weatherInfo.buttons.refresh }}</el-button
             >
-            <el-button type="success" size="default" @click="showAddDialog"
+            <el-button
+              type="success"
+              size="default"
+              plain
+              @click="showAddDialog"
               ><el-icon class="mr-3"> <Plus></Plus> </el-icon
               >{{ weatherInfo.buttons.add }}</el-button
             >
