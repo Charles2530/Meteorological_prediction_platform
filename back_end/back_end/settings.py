@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'rest_framework',
+    'users',
     "weather",
+    "notifications",
+    "corsheaders",
+    'django_cron',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +137,16 @@ CORS_ALLOW_HEADERS = [
     'authorization',
     # 其他需要的请求头
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',  # new
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+
+CRON_CLASSES = {
+    'weather_update_job': 'weather.cron.WeatherUpdateJob',
+}
