@@ -65,21 +65,14 @@ export default defineConfig({
       "@img": resolve(__dirname, "src/assets/img"),
     },
   },
-  //   server: {
-  //     // Enable the proxy
-  //     proxy: {
-  //       "/api": {
-  //         target: "http://localhost:3000",
-  //         changeOrigin: true,
-  //         rewrite: (path) => path.replace(/^\/api/, ""),
-  //       },
-  //     },
-  //     // Allow the CORS
-  //     headers: {
-  //       "Access-Control-Allow-Origin": "*",
-  //       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-  //       "Access-Control-Allow-Headers":
-  //         "X-Requested-With, content-type, Authorization",
-  //     },
-  //   },
+  server: {
+    port: 80,
+    // Allow the CORS
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers":
+        "X-Requested-With, content-type, Authorization",
+    },
+  },
 });

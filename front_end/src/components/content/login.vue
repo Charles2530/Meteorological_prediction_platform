@@ -5,6 +5,9 @@
     center
     @closed="checkLogin()"
   >
+    <div class="title-img w-72 h-18" style="margin: 0 auto">
+      <img src="@/assets/img/title.png" alt="logo" />
+    </div>
     <div class="login-panel">
       <el-form
         ref="loginFormRef"
@@ -107,7 +110,7 @@ import router from "@/router";
 import { ElMessage, type FormInstance, type FormRules } from "element-plus";
 import { UserInfo } from "@/types/user.ts";
 import { post } from "@/api/index";
-
+import { md5 } from "js-md5";
 interface LoginForm {
   username: string;
   password: string;
@@ -193,12 +196,17 @@ const loginRules = reactive<FormRules<LoginForm>>({
     },
   ],
 });
+
 const submitLoginForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   if (loginError.username == " ") return; // 提示账号密码错误后未更改再次提交
   formEl.validate((valid) => {
     if (valid) {
-      post<LoginResponse>("/api/login", loginForm).then(
+      const encodeLoginForm = {
+        username: loginForm.username,
+        password: md5(loginForm.password),
+      };
+      post<LoginResponse>("/api/login", encodeLoginForm).then(
         (res) => {
           const response = res.data;
           if (response.success == true) {
@@ -286,7 +294,12 @@ const submitRegisterForm = (formEl: FormInstance | undefined) => {
   // if (registerError.username == ' ') return; // 提示账号密码错误后未更改再次提交
   formEl.validate((valid) => {
     if (valid) {
-      post<RegisterResponse>("/api/register", registerForm).then(
+      const encodeRegisterForm = {
+        username: registerForm.username,
+        password: md5(registerForm.password),
+        email: registerForm.email,
+      };
+      post<RegisterResponse>("/api/register", encodeRegisterForm).then(
         (res) => {
           const response = res.data;
           if (response.success == true) {

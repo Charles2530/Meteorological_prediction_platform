@@ -6,7 +6,7 @@ const Home = () => import("@/views/home/index.vue");
 // 历史记录
 const History = () => import("@/views/home/historyView.vue");
 // AI预测
-const Predict = () => import("@/views/content/predictView.vue");
+// const Predict = () => import("@/views/content/predictView.vue");
 // 灾害订阅
 const Alarm = () => import("@/views/content/alarmView.vue");
 // 用户页面
@@ -48,14 +48,14 @@ const routes = [
       permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
     },
   },
-  {
-    path: "/predict",
-    name: "Predict",
-    component: Predict,
-    meta: {
-      permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
-    },
-  },
+  //   {
+  //     path: "/predict",
+  //     name: "Predict",
+  //     component: Predict,
+  //     meta: {
+  //       permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
+  //     },
+  //   },
   {
     path: "/alarm",
     name: "Alarm",
