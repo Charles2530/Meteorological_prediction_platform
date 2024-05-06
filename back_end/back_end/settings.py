@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     "weather",
     "notifications",
     "corsheaders",
-    'django_cron',
 ]
 
 MIDDLEWARE = [
@@ -153,6 +152,6 @@ REST_FRAMEWORK = {
     ]
 }
 
-CRON_CLASSES = {
-    'weather_update_job': 'weather.cron.WeatherUpdateJob',
-}
+# CRON_CLASSES = {
+#     'weather_update_job': 'weather.cron.WeatherUpdateJob',
+# }
