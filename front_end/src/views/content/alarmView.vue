@@ -21,7 +21,7 @@
       </el-col>
       <el-col :span="6">
         <!-- 加入搜索按钮 -->
-        <el-button type="primary" @click="searchNotice">
+        <el-button type="primary" @click="searchNotice" plain>
           <el-icon class="mr-3"><Search /></el-icon>
           搜索</el-button
         >
@@ -76,11 +76,11 @@
             ></el-table-column>
           </el-table>
           <div class="mt-2">
-            <el-button type="primary" @click="subscribe">
+            <el-button type="success" @click="subscribe" plain>
               <el-icon class="mr-3"><Plus /></el-icon>
               添加订阅</el-button
             >
-            <el-button type="warning" @click="undo_subscribe">
+            <el-button type="warning" @click="undo_subscribe" plain>
               <el-icon class="mr-3"><Minus /></el-icon>
               取消订阅</el-button
             >
@@ -161,17 +161,17 @@ const fetchNotifications = async () => {
   if (isSearching.value) {
     return;
   }
-  get<NotificationResponse>("/api/alarm_notices").then((res) => {
-    notifications.splice(
-      0,
-      notifications.length + notifications_example.value.length,
-      ...notifications_example.value,
-      ...res.data.notifications
-    );
-  });
   //   get<NotificationResponse>("/api/alarm_notices").then((res) => {
-  //     notifications.splice(0, notifications.length, ...res.data.notifications);
+  //     notifications.splice(
+  //       0,
+  //       notifications.length + notifications_example.value.length,
+  //       ...notifications_example.value,
+  //       ...res.data.notifications
+  //     );
   //   });
+  get<NotificationResponse>("/api/alarm_notices").then((res) => {
+    notifications.splice(0, notifications.length, ...res.data.notifications);
+  });
 };
 onMounted(() => {
   fetchNotifications();

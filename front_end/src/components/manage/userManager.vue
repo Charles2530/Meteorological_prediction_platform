@@ -1,6 +1,6 @@
 <template>
   <el-container class="panel bg-white">
-    <el-main class="no-padding" style="overflow: hidden">
+    <el-main class="no-padding">
       <el-table
         :data="userlist"
         v-loading="loading"
@@ -53,16 +53,6 @@
                 @change="getUserList"
                 clearable
               >
-                <!-- <el-option
-                  size="small"
-                  v-for="item in [1, 2]"
-                  :label="`manage.user.role.${item}`"
-                  :value="item"
-                >
-                  <el-tag :type="tagType(item)">
-                    {{ `manage.user.role.${item}` }}
-                  </el-tag>
-                </el-option> -->
                 <el-option
                   size="small"
                   :label="manage.user.role.User"
@@ -88,9 +78,6 @@
               <el-tag v-else type="warning">
                 {{ manage.user.role.Administrator }}
               </el-tag>
-              <!-- <el-tag :type="scope.row.role == 1 ? 'info' : 'warning'">
-                {{ `manage.user.role.${scope.row.role}` }}
-              </el-tag> -->
             </template>
           </el-table-column>
         </el-table-column>
@@ -112,7 +99,8 @@
               >
                 <template #reference>
                   <el-button type="danger" size="small">
-                    {{ manage.user.operate.delete.label }}
+                    <el-icon class="mr-2"><CircleClose /></el-icon
+                    >{{ manage.user.operate.delete.label }}
                   </el-button>
                 </template>
               </el-popconfirm>
@@ -126,6 +114,7 @@
               >
                 <template #reference>
                   <el-button type="warning" size="small">
+                    <el-icon class="mr-2"><Setting /></el-icon>
                     {{ manage.user.operate.set.label }}
                   </el-button>
                 </template>
@@ -140,6 +129,7 @@
               >
                 <template #reference>
                   <el-button type="warning" size="small">
+                    <el-icon class="mr-2"><Setting /></el-icon>
                     {{ manage.user.operate.unset.label }}
                   </el-button>
                 </template>
@@ -152,6 +142,7 @@
                   operateEmail = true;
                 "
               >
+                <el-icon class="mr-2"><EditPen /></el-icon>
                 {{ manage.user.operate.email.label }}
               </el-button>
               <el-button
@@ -162,6 +153,7 @@
                   operatePassword = true;
                 "
               >
+                <el-icon class="mr-2"><Finished /></el-icon>
                 {{ manage.user.operate.password.label }}
               </el-button>
             </el-button-group>
@@ -170,7 +162,8 @@
       </el-table>
       <div class="no-padding" style="margin-top: 10px">
         <div style="display: flex">
-          <el-button type="primary" @click="getUserList">
+          <el-button type="primary" @click="getUserList" class="ml-2" plain>
+            <el-icon class="mr-3"><Loading /></el-icon>
             {{ manage.reload }}
           </el-button>
           <div style="flex: 1"></div>
@@ -180,8 +173,6 @@
               style="width: 100px; margin-right: 5px"
               @change="getUserList"
             >
-              <!-- <el-option v-for="size in [10, 15, 20]" :value="size" />
-          -->
               <el-option :value="10" label="10" />
               <el-option :value="15" label="15" />
               <el-option :value="20" label="20" />
@@ -203,7 +194,7 @@
             />
             <el-text>{{ manage.pagination.jump }}</el-text>
             <el-input-number
-              style="width: 40px; margin-left: 5px; margin-right: 5px"
+              style="width: 60px; margin-left: 5px; margin-right: 5px"
               :controls="false"
               :min="1"
               :max="pagination.page_total"
