@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from rest_framework import generics, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import HourlyWeather, DailyWeather, MonthlyWeather
@@ -47,9 +48,6 @@ class MonthlyWeatherView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
-'''
-The following views are my exercises for the weather app.
-'''
 
 def index(request):
     return HttpResponse("Welcome to the weather app!")
