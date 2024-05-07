@@ -3,6 +3,6 @@
 while true
 do
   git pull
-  sleep 300
+  sleep 30
 done
 

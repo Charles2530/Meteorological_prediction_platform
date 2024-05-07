@@ -28,3 +28,24 @@ export interface NotificationNotice {
 export interface GetSubscribeResponse {
   tableData: { city: string; status: string }[];
 }
+
+export interface AqiRankItem {
+  city: string;
+  category: string;
+  aqi: number;
+}
+
+export interface CityWeatherData {
+  time: string;
+  city: string;
+  temp: number;
+  text: string;
+  precip: number;
+  wind360: number;
+  windScale: number;
+  windSpeed: number;
+  humidity: number;
+  pressure: number;
+  aqi: number;
+  category: string;
+}

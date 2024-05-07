@@ -1,5 +1,5 @@
 export const translateTime = (inputDate) => {
-    if(!inputDate){ return }
+    if (!inputDate) { return }
     const date = new Date(inputDate);
 
     // 获取小时
@@ -42,7 +42,7 @@ export const formatDate = (date) => {
     } else if (queryDate.toDateString() === tomorrow.toDateString()) {
         return "明天";
     } else {
-    const daysOfWeek = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        const daysOfWeek = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
         return daysOfWeek[queryDate.getDay()];
     }
 }
@@ -70,9 +70,9 @@ export const findMostFrequentItem = (arr) => {
     // 遍历数组并统计每个项出现的次数
     for (const item of arr) {
         if (itemFrequencyMap.has(item)) {
-        itemFrequencyMap.set(item, itemFrequencyMap.get(item) + 1);
+            itemFrequencyMap.set(item, itemFrequencyMap.get(item) + 1);
         } else {
-        itemFrequencyMap.set(item, 1);
+            itemFrequencyMap.set(item, 1);
         }
     }
 
@@ -82,10 +82,19 @@ export const findMostFrequentItem = (arr) => {
     // 遍历项和它们的出现次数，找到出现次数最多的项
     for (const [item, frequency] of itemFrequencyMap) {
         if (frequency > maxFrequency) {
-        mostFrequentItem = item;
-        maxFrequency = frequency;
+            mostFrequentItem = item;
+            maxFrequency = frequency;
         }
     }
 
     return mostFrequentItem
+}
+
+export const getDateToday = () => {
+    // 获取当前时间
+    const currentDate = new Date();
+    // 将时间格式化为英文形式
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = currentDate.toLocaleDateString('en-US', options);
+    return formattedDate;
 }

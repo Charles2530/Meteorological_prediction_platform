@@ -7,8 +7,16 @@
       </el-col>
       <el-col :span="7">
         <div class="infoDiv" style="height: 100% !important; margin-right: 15px">
-          <span style="float:left;font-weight:530;font-size:16px;color:white;margin-top: 10px;"> &nbsp;&nbsp;&nbsp;&nbsp;{{refMap?.dis_info.districtName}}</span>
-          <InfoColumn/>
+          <el-row>
+            <el-col :span="24">
+              <span style="float:left;font-weight:530;font-size:16px;color:white;margin-top: 10px;"> &nbsp;&nbsp;&nbsp;&nbsp;{{refMap?.dis_info.districtName}}</span>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="24">
+              <InfoColumn/>
+            </el-col>
+          </el-row>
         </div>
       </el-col>
   </el-row>
