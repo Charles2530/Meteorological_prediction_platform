@@ -10,6 +10,7 @@ declare module 'vue' {
     AirQualityAirQualityRankVM: typeof import('./components/airQuality/AirQualityRankVM.vue')['default']
     AirQualityAirQualityVM: typeof import('./components/airQuality/AirQualityVM.vue')['default']
     AirQualityAqiInstruction: typeof import('./components/airQuality/AqiInstruction.vue')['default']
+    AirQualityBriefAqi: typeof import('./components/airQuality/BriefAqi.vue')['default']
     AirQualityCityInfo: typeof import('./components/airQuality/cityInfo.vue')['default']
     AirQualityMerchantRanking: typeof import('./components/airQuality/MerchantRanking.vue')['default']
     AirQualityQualityRanking: typeof import('./components/airQuality/QualityRanking.vue')['default']

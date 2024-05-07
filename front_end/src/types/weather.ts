@@ -34,3 +34,18 @@ export interface AqiRankItem {
   category: string;
   aqi: number;
 }
+
+export interface CityWeatherData {
+  time: string;
+  city: string;
+  temp: number;
+  text: string;
+  precip: number;
+  wind360: number;
+  windScale: number;
+  windSpeed: number;
+  humidity: number;
+  pressure: number;
+  aqi: number;
+  category: string;
+}

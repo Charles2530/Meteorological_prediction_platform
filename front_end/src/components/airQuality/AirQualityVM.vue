@@ -1,16 +1,22 @@
 <template>
-  <div class="mx-auto">
+  <div class="mx-auto" style="max-height: 85vh; overflow-y: auto">
     <el-row :gutter="20">
       <el-col :span="16"> <AirQualityAirQualityRankVM /> </el-col>
       <el-col :span="8">
-        <!-- 中国城市空气质量排行图表
-        <div
-          id="chart_one"
-          class="my-4"
-          ref="chartContainer"
-          style="width: 400px; height: 400px"
-        ></div> -->
-        <AirQualityAqiInstruction />
+        <el-card>
+          <BriefAqi />
+        </el-card>
+        <el-card>
+          <div
+            id="chart_aqi_change"
+            class="my-4"
+            ref="chart_aqi_change"
+            style="height: 200px; min-width: 400px"
+          ></div>
+        </el-card>
+        <el-card>
+          <AirQualityAqiInstruction />
+        </el-card>
       </el-col>
     </el-row>
   </div>
@@ -18,70 +24,73 @@
 
 <script lang="ts" setup>
 import * as echarts from "echarts";
-
-const airQualityRank = ref<any[]>([]);
+import { get } from "@/api/index.ts";
+import BriefAqi from "./BriefAqi.vue";
 
 // 初始化 ECharts 实例
 let chartInstance: echarts.ECharts | null = null;
+interface aqiNode {
+  time: string;
+  aqi: number;
+}
+interface AqiChangeResponse {
+  status: boolean;
+  data: aqiNode[];
+}
 
-const fetchAirQualityRank = async () => {
-  try {
-    // 模拟异步请求获取城市空气质量排行数据
-    const response = await fetch("/api/air-quality-rank");
-    const data = await response.json();
-    airQualityRank.value = data;
-    renderChart();
-  } catch (error) {
-    console.error("Failed to fetch air quality rank:", error);
-  }
-};
+const fetchAirQualityRank = async () =>
+  get<AqiChangeResponse>("/api/weather/aqi/aqi_change").then((res) => {
+    renderChart(res.data.data);
+  });
 
-const renderChart = () => {
+const renderChart = (data: aqiNode[]) => {
   if (!chartInstance) {
     // 如果 ECharts 实例不存在，则创建
-    const chartDom = document.getElementById("chart_one");
+    const chartDom = document.getElementById("chart_aqi_change");
     chartInstance = echarts.init(chartDom);
   }
 
   // 绘制图表
   chartInstance.setOption({
-    title: {
-      text: "中国城市空气质量排行",
-      left: "center",
-      top: 20,
-      textStyle: {
-        fontSize: 16,
-        fontWeight: "bold",
+    // Make gradient line here
+    visualMap: [
+      {
+        show: false,
+        type: "continuous",
+        seriesIndex: 0,
+        min: 0,
+        max: 400,
       },
-    },
+    ],
+
+    title: [
+      {
+        left: "center",
+        text: "当前城市AQI变化趋势图",
+      },
+    ],
     tooltip: {
       trigger: "axis",
-      axisPointer: {
-        type: "cross",
+    },
+    xAxis: [
+      {
+        data: data.map((item) => item.time),
       },
-    },
-    xAxis: {
-      type: "category",
-      data: airQualityRank.value.map((item) => item.city),
-    },
-    yAxis: {
-      type: "value",
-    },
+    ],
+    yAxis: [{}],
+    grid: [
+      {
+        bottom: "10%",
+      },
+      {
+        top: "5%",
+      },
+    ],
     series: [
       {
-        name: "AQI指数",
         type: "line",
-        data: airQualityRank.value.map((item) => item.aqi),
-        markLine: {
-          data: [{ type: "average", name: "平均值" }],
-        },
-        itemStyle: {
-          normal: {
-            lineStyle: {
-              width: 2,
-            },
-          },
-        },
+        showSymbol: false,
+        data: data.map((item) => item.aqi),
       },
     ],
   });
@@ -89,6 +98,17 @@ const renderChart = () => {
 
 onMounted(() => {
   fetchAirQualityRank();
+  // 监听窗口大小变化
+  window.addEventListener("click", () => {
+    if (chartInstance) {
+      chartInstance.resize();
+    }
+  });
+  window.addEventListener("resize", () => {
+    if (chartInstance) {
+      chartInstance.resize();
+    }
+  });
 });
 </script>
 

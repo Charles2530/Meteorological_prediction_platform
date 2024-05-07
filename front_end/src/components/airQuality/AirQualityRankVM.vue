@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-y-auto" style="max-height: 80vh">
+  <div>
     <p class="text-2xl font-bold mb-4 text-center">
       中国城市空气质量排行
       <el-switch

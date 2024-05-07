@@ -1,13 +1,31 @@
 <template>
   <div class="bg-white p-8 rounded-lg shadow-md border-2">
-    <h1 class="text-3xl font-bold">空气质量指数等级标准</h1>
+    <h1 class="font-bold text-center text-xl text-black my-4">
+      空气质量指数等级标准
+    </h1>
     <el-row>
-      <el-col :span="8" v-for="(item, index) in levels" :key="index">
-        <div class="level-item bg-${item.color}">
-          <div class="level-name">{{ item.name }}</div>
-          <div class="level-range">{{ item.range }}</div>
-          <div class="level-description">{{ item.description }}</div>
-        </div>
+      <el-col
+        :span="24"
+        v-for="(item, index) in levels"
+        :key="index"
+        class="rounded-lg shadow-md border-2 p-2"
+      >
+        <el-row :gutter="2">
+          <el-col :span="8">
+            <p
+              class="text-xl text-center font-bold"
+              :style="colorClass(item.color)"
+            >
+              {{ item.name }}
+            </p>
+            <p class="text-center text-xl">
+              {{ item.range }}
+            </p>
+          </el-col>
+          <el-col :span="16">
+            <p class="text-center text-sm text-black">{{ item.description }}</p>
+          </el-col>
+        </el-row>
       </el-col>
     </el-row>
   </div>
@@ -23,7 +41,7 @@ const levels = [
   },
   {
     name: "良",
-    color: "yellow",
+    color: "blue",
     range: "51-100",
     description:
       "空气质量可接受，但某些污染物可能对极少数异常敏感人群健康有较弱影响。",
@@ -56,6 +74,11 @@ const levels = [
       "健康人群运动耐受力降低，有明显强烈症状，提前采取措施保护健康。",
   },
 ];
+const colorClass = (color: string) => {
+  return {
+    color: color,
+  };
+};
 </script>
 
 <style scoped></style>
