@@ -55,7 +55,7 @@ declare module 'vue' {
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTag: typeof import('element-plus/es')['ElTag']
-    ElText: typeof import('element-plus/es')['ElText']
+    ElText: typeof import("element-plus/es")["ElText"]
     Footer: typeof import('./components/footer/index.vue')['default']
     Manage: typeof import('./components/manage/index.vue')['default']
     ManageDataManager: typeof import('./components/manage/dataManager.vue')['default']
