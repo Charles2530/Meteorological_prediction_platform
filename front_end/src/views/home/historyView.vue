@@ -48,6 +48,7 @@
       <AirQualityVM />
     </el-tab-pane>
     <el-tab-pane label="数据统计" name="fourth">
+      <dataStatistics />
       <div class="chart">
         <div
           id="chart_one"
@@ -81,6 +82,7 @@ import SearchLocation from "@/components/raw/SearchLocation.vue";
 import CurrentWeather from "@/components/raw/CurrentWeather.vue";
 import AirQuality from "@/components/raw/AirQuality.vue";
 import AirQualityVM from "@/components/airQuality/AirQualityVM.vue";
+import dataStatistics from "@/components/dataStatistics/dataStatistics.vue";
 import Forecast from "@/components/raw/Forecast.vue";
 const stateNavigator = ref(0); // 用于判断是否加载loading
 const cityList = ref([]);
