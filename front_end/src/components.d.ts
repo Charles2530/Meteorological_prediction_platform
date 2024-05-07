@@ -7,6 +7,14 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AirQualityAirQualityRankVM: typeof import('./components/airQuality/AirQualityRankVM.vue')['default']
+    AirQualityAirQualityVM: typeof import('./components/airQuality/AirQualityVM.vue')['default']
+    AirQualityAqiInstruction: typeof import('./components/airQuality/AqiInstruction.vue')['default']
+    AirQualityBriefAqi: typeof import('./components/airQuality/BriefAqi.vue')['default']
+    AirQualityCityInfo: typeof import('./components/airQuality/cityInfo.vue')['default']
+    AirQualityMerchantRanking: typeof import('./components/airQuality/MerchantRanking.vue')['default']
+    AirQualityQualityRanking: typeof import('./components/airQuality/QualityRanking.vue')['default']
+    AirQualitySellerInfo: typeof import('./components/airQuality/sellerInfo.vue')['default']
     Aside: typeof import('./components/aside/index.vue')['default']
     AsideNoticeItem: typeof import('./components/aside/noticeItem.vue')['default']
     AsideSideBar: typeof import('./components/aside/sideBar.vue')['default']
@@ -44,6 +52,7 @@ declare module 'vue' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
+    ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
@@ -63,6 +72,7 @@ declare module 'vue' {
     NoticeNotificationHeader: typeof import('./components/notice/notificationHeader.vue')['default']
     NoticeSubscribeHeader: typeof import('./components/notice/subscribeHeader.vue')['default']
     RawAirQuality: typeof import('./components/raw/AirQuality.vue')['default']
+    RawAirQualityVM: typeof import('./components/raw/AirQualityVM.vue')['default']
     RawCurrentWeather: typeof import('./components/raw/CurrentWeather.vue')['default']
     RawForecast: typeof import('./components/raw/Forecast.vue')['default']
     RawNav: typeof import('./components/raw/Nav.vue')['default']
