@@ -160,7 +160,6 @@
 import { ref, reactive } from "vue";
 import { post } from "@/api/index";
 import { china_cities } from "@/stores/cities";
-import { weather, aqi_level } from "@/stores/weather";
 import { CityWeatherData } from "@/types/weather";
 /* 搜索 */
 const selectedDate = ref("");
@@ -173,7 +172,6 @@ const pickerOptions: any = {
 const selectType = ref("");
 const selectedLocation = ref("");
 const locations = china_cities;
-const weathers = weather;
 interface SearchWeatherHourlyListResponse {
   status: boolean;
   weatherHourlyList: CityWeatherData[];
@@ -200,10 +198,6 @@ function refreshWeather() {
     message: weatherInfo.dialogs.refresh,
     type: "success",
   });
-}
-
-function showAddDialog() {
-  addDialogVisible.value = true;
 }
 
 const weatherInfo = {
