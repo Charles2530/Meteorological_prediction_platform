@@ -1,5 +1,5 @@
 <template>
-  <el-container class="main-container">
+  <el-container class="main-container" style="max-height: 85vh; overflow: auto">
     <el-header>
       <h1 class="title">灾害订阅</h1>
     </el-header>
@@ -12,10 +12,10 @@
           class="input-with-select"
         >
           <el-option
-            v-for="location in locations"
-            :key="location.label"
-            :label="location.label"
-            :value="location.label"
+            v-for="location in tableData"
+            :key="location.city"
+            :label="location.city"
+            :value="location.city"
           ></el-option>
         </el-select>
       </el-col>
@@ -29,15 +29,31 @@
     </el-row>
     <el-row :gutter="20">
       <el-col :span="18">
+        <el-card class="box-card">
+          <div class="clearfix">
+            <span>全国灾害信息速递 </span>
+          </div>
+          <div
+            v-for="(notification, index) in global_notifications"
+            :key="notification.id"
+            :id="'notification-' + notification.id"
+            class="text item"
+          >
+            <div class="text-blue-500 text-xl text-center">
+              第{{ index + 1 }}条预警信息
+            </div>
+            <noticeItem :notification="notification" />
+          </div>
+        </el-card>
         <el-card class="box-card" v-if="notifications.length === 0">
           <div class="clearfix">
-            <span>灾害信息 </span>
+            <span>订阅相关灾害信息 </span>
           </div>
           <div class="text item">您所订阅的区域暂无通知</div>
         </el-card>
         <el-card class="box-card" v-else>
           <div class="clearfix">
-            <span>灾害信息 </span>
+            <span>订阅相关灾害信息 </span>
           </div>
           <div
             v-for="notification in notifications"
@@ -154,6 +170,7 @@ const notifications_example = ref<NotificationData[]>([
   },
 ]);
 const notifications = reactive<NotificationData[]>([]);
+const global_notifications = reactive<NotificationData[]>([]);
 interface NotificationResponse {
   notifications: NotificationData[];
 }
@@ -169,6 +186,13 @@ const fetchNotifications = async () => {
   //       ...res.data.notifications
   //     );
   //   });
+  get<NotificationResponse>("/api/alarm_resent_notices").then((res) => {
+    global_notifications.splice(
+      0,
+      global_notifications.length,
+      ...res.data.notifications
+    );
+  });
   get<NotificationResponse>("/api/alarm_notices").then((res) => {
     notifications.splice(0, notifications.length, ...res.data.notifications);
   });

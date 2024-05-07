@@ -14,7 +14,7 @@ const UserMenu = defineAsyncComponent(() => import("@c/topBar/userMenu.vue"));
 
 <style scoped lang="scss">
 .topbar-index {
-  height: 50px;
+  height: 6vh;
   display: flex;
   align-items: center;
   padding-right: 20px;

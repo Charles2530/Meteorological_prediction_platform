@@ -25,7 +25,13 @@ SECRET_KEY = "django-insecure-hv3m*3m&*$-331tf!fx3-lwyems)z2=@c4-t9eot@!$z5(+u%#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "114.116.201.133",
+    "localhost",
+    "127.0.0.1",
+    "192.168.1.101",
+    "192.168.1.102",
+]
 
 
 # Application definition
@@ -38,7 +44,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'rest_framework',
+    'users',
     "weather",
+    "notifications",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -133,3 +142,16 @@ CORS_ALLOW_HEADERS = [
     'authorization',
     # 其他需要的请求头
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',  # new
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+
+# CRON_CLASSES = {
+#     'weather_update_job': 'weather.cron.WeatherUpdateJob',
+# }

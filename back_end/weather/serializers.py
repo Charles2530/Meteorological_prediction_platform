@@ -1,4 +1,4 @@
-# myapp/serializers.py
+# weather/serializers.py
 
 from rest_framework import serializers
 from .models import HourlyWeather, DailyWeather, MonthlyWeather
