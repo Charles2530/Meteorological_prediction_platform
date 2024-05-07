@@ -1,5 +1,5 @@
 <template>
-    <div class="container" style="min-height: 600px; max-height: 600px; overflow: auto;">
+    <div style="min-height: 600px; max-height: 600px; overflow: auto;">
         <el-card class="color2" shadow="always">
             <el-row :gutter="20">
                 <el-col :span="12">
@@ -208,7 +208,7 @@ let proInfo = reactive({
 }
 
 
-.container::-webkit-scrollbar {
+::-webkit-scrollbar {
 	width: 10px;
 	height: 8px;
 }
