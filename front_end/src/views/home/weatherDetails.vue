@@ -1,48 +1,10 @@
 <template>
-  <el-tabs
-    v-model="activeName"
-    class="demo-tabs"
-    @tab-click="handleClick"
-    type="border-card"
-  >
+<el-tabs  v-model="activeName" class="demo-tabs mx-40 rounded-2xl " @tab-click="handleClick" type="border-card">
     <el-tab-pane label="天气速览" name="first">
-      <el-container class="weather_container">
-        <CurrentWeather class="md:basis-3/5">
-          <!-- @searchShow="changeSearchShow" -->
-          <!-- <template v-slot:search>
-            <div class="text-[#333333]">
-              <SearchLocation :show="searchShow" @searchShow="changeSearchShow" @search="locationBySearch" />
-            </div>
-          </template> -->
-        </CurrentWeather>
-        <AirQuality class="md:basis-2/5" />
-        <!-- @refresh="weatherInfo"  -->
-      </el-container>
+      <overview />
     </el-tab-pane>
     <el-tab-pane label="30日天气" name="second">
-      <el-calendar ref="calendar">
-        <template #header="{ date }">
-          <span>Custom header content</span>
-          <span>{{ date }}</span>
-          <el-button-group>
-            <el-button size="small" @click="selectDate('prev-year')">
-              Previous Year
-            </el-button>
-            <el-button size="small" @click="selectDate('prev-month')">
-              Previous Month
-            </el-button>
-            <el-button size="small" @click="selectDate('today')"
-              >Today</el-button
-            >
-            <el-button size="small" @click="selectDate('next-month')">
-              Next Month
-            </el-button>
-            <el-button size="small" @click="selectDate('next-year')">
-              Next Year
-            </el-button>
-          </el-button-group>
-        </template>
-      </el-calendar>
+      <calendar30 />
     </el-tab-pane>
     <el-tab-pane label="空气质量" name="third">
       <AirQualityVM />
@@ -64,7 +26,11 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 type ECharts = echarts.ECharts;
 let echartsInstance: Ref<ECharts | null> = ref(null);
 
-/** 组件  */
+/** 组件  **/
+import overview from '@/components/weather_details/overview.vue'
+import calendar30 from '@/components/weather_details/calendar30.vue'
+import aqi from '@/components/weather_details/aqi.vue'
+import statistics from '@/components/weather_details/statistics.vue'
 import SearchLocation from "@/components/raw/SearchLocation.vue";
 import CurrentWeather from "@/components/raw/CurrentWeather.vue";
 import AirQuality from "@/components/raw/AirQuality.vue";
