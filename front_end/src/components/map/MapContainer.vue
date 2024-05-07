@@ -1,11 +1,12 @@
 <template>
-  <div id="container"></div>
+  <div id="mapContainer"></div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, reactive } from "vue";
 import AMapLoader from "@amap/amap-jsapi-loader";
 import { getAssetsFile } from '@/utils/pub-use'
+import AMapWind from "amap-wind";
 
 // 设置安全密钥
 (window as any)._AMapSecurityConfig = {
@@ -72,11 +73,13 @@ const hazardMarkData = reactive([
 ]);
 
 let map: {
+setCenter(markersPosition: any[], arg1: boolean, arg2: number): unknown;
+setFitView(polygons: any, arg1: boolean): unknown;
+setLimitBounds(bounds: any): unknown;
   getCenter: any;
   addControl: (arg0: any) => void;
   add: (arg0: any) => void;
   remove: (arg0: any) => void;
-  setFitView: (arg0: any) => void;
   on: (
     arg0: string,
     arg1: (e: {
@@ -85,7 +88,6 @@ let map: {
       type: any; lnglat: { lng: any; lat: any } 
     }) => void
   ) => void;
-  setCenter: (arg0: number[]) => void;
   setZoom: (arg0: number) => void;
 } | null = null;
 
@@ -103,6 +105,8 @@ let AAMap: {
     strokeColor: string;
   }) => any;
 } = null;
+
+let windLayer: AMapWind = null;
 
 export interface API {
   dis_info: { districtName: String };
@@ -123,6 +127,7 @@ function initMap() {
     plugins: [
       "AMap.Scale",
       "AMap.ToolBar",
+      "AMap.MapType",
       "AMap.DistrictSearch",
       "AMap.Geocoder",
     ],
@@ -130,13 +135,14 @@ function initMap() {
     .then((AMap) => {
       // 初始化地图
       AAMap = AMap;
-      map = new AMap.Map("container", {
+      map = new AMap.Map("mapContainer", {
         viewMode: "2D", // 是否为3D地图模式
         // zoom: 4.8, // 初始化地图级别
         // center: [105,36], // 初始化地图中心点位置
         zoom: 4.8, // 初始化地图级别
         center: [103, 36], // 初始化地图中心点位置
       });
+      map.setLimitBounds(new AMap.Bounds([50,60],[150,0]));
       // 天地图图层
       const wms = new AMap.TileLayer.WMTS({
         url: "http://t0.tianditu.gov.cn/ter_w/wmts",
@@ -166,7 +172,51 @@ function initMap() {
           fill: "",
         },
       });
+      
+      //风场
+      import('amap-wind').then(({ WindLayer }) => {
+        fetch('https://sakitam.oss-cn-beijing.aliyuncs.com/codepen/wind-layer/json/wind.json')
+          .then(res => res.json())
+          .then(res => {
+            windLayer = new WindLayer(res, {
+              windOptions: {
+                // colorScale: scale,
+                velocityScale: 1 / 50,
+                paths: 1000,
+                // eslint-disable-next-line no-unused-vars
+                maxAge: 10,
+                frameRate: 2,
+                colorScale: [
+                  "rgb(36,104, 180)",
+                  "rgb(60,157, 194)",
+                  "rgb(128,205,193 )",
+                  "rgb(151,218,168 )",
+                  "rgb(198,231,181)",
+                  "rgb(238,247,217)",
+                  "rgb(255,238,159)",
+                  "rgb(252,217,125)",
+                  "rgb(255,182,100)",
+                  "rgb(252,150,75)",
+                  "rgb(250,112,52)",
+                  "rgb(245,64,32)",
+                  "rgb(237,45,28)",
+                  "rgb(220,24,32)",
+                  "rgb(180,0,35)"
+                ],
+                lineWidth: 5,
+                // colorScale: scale,
+              },
+              zIndex: 20,
+            });
+            // windLayer2 = 
+            console.log(map, windLayer);
+
+            windLayer.appendTo(map);
+          });
+      });
+    
       map.addControl(new AMap.Scale({position: 'LB'}));
+      map.addControl(new AMap.MapType());
       map.addControl(new AMap.ToolBar({ liteStyle: true, position: 'LT'}));
       map.add(wms);
       map.add(disCountry);
@@ -182,6 +232,7 @@ function initMap() {
 
 //高亮区域
 function drawBounds() {
+  var step = 15;
   //行政区查询
   dis_info.district.search(
     dis_info.districtCode,
@@ -190,11 +241,26 @@ function drawBounds() {
       dis_info.polygons = [];
       var bounds = result.districtList[0].boundaries;
       if (bounds) {
+        var bounds2 = new Array();
+        if (dis_info.districtCode != '710000' && dis_info.districtCode != '460000') {
+          bounds2.push(bounds.pop());
+          bounds = bounds2;
+        }
+        if(dis_info.districtCode == '150000') {
+          step=3;
+        }
+        else {
+          step=10;
+        }
         for (var i = 0, l = bounds.length; i < l; i++) {
-          //生成行政区划polygon
+          var bound = bounds[i];
+          var bound2 = new Array();
+          for (var j = 0, m = bound.length; j < m; j=j+step) {
+            bound2.push(bound[j]);
+          }
           const polygon = new AAMap.Polygon({
             strokeWeight: 1,
-            path: bounds[i],
+            path: bound2,
             fillOpacity: 0.4,
             fillColor: "#80d8ff",
             strokeColor: "#0091ea",
@@ -205,8 +271,7 @@ function drawBounds() {
       }
 
       map.add(dis_info.polygons);
-      map.setFitView(dis_info.polygons); //视口自适应
-      map.setZoom(5.4);
+      map.setZoom(5);
     }
   );
 }
@@ -235,16 +300,17 @@ function handlerMapClick() {
           if (dis_info.districtCode != "100000") {
             dis_info.districtName = dis_info.districtName + "/中国";
             drawBounds();
+            map.setCenter(markersPosition, false, 100);
           } else {
             dis_info.districtName = "中国";
             map.remove(dis_info.polygons); //清除结果
-            map.setCenter([105, 36]);
+            map.setCenter([105, 36], true, 80);
             map.setZoom(4.8);
           }
         } else {
           dis_info.districtName = "中国";
           map.remove(dis_info.polygons); //清除结果
-          map.setCenter([105, 36]);
+          map.setCenter([105, 36], true, 80);
           map.setZoom(4.8);
         }
       }
@@ -297,7 +363,7 @@ function setMarkWindows(_e: any, item: { place: string; longitude: number; latit
 </script>
 
 <style scoped>
-#container {
+#mapContainer {
   width: 100%;
   height: 100%;
   
