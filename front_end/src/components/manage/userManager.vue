@@ -1,6 +1,6 @@
 <template>
   <el-container class="panel bg-white">
-    <el-main class="no-padding" style="overflow: hidden">
+    <el-main class="no-padding">
       <el-table
         :data="userlist"
         v-loading="loading"
@@ -53,16 +53,6 @@
                 @change="getUserList"
                 clearable
               >
-                <!-- <el-option
-                  size="small"
-                  v-for="item in [1, 2]"
-                  :label="`manage.user.role.${item}`"
-                  :value="item"
-                >
-                  <el-tag :type="tagType(item)">
-                    {{ `manage.user.role.${item}` }}
-                  </el-tag>
-                </el-option> -->
                 <el-option
                   size="small"
                   :label="manage.user.role.User"
@@ -88,9 +78,6 @@
               <el-tag v-else type="warning">
                 {{ manage.user.role.Administrator }}
               </el-tag>
-              <!-- <el-tag :type="scope.row.role == 1 ? 'info' : 'warning'">
-                {{ `manage.user.role.${scope.row.role}` }}
-              </el-tag> -->
             </template>
           </el-table-column>
         </el-table-column>
@@ -112,7 +99,8 @@
               >
                 <template #reference>
                   <el-button type="danger" size="small">
-                    {{ manage.user.operate.delete.label }}
+                    <el-icon class="mr-2"><CircleClose /></el-icon
+                    >{{ manage.user.operate.delete.label }}
                   </el-button>
                 </template>
               </el-popconfirm>
@@ -126,6 +114,7 @@
               >
                 <template #reference>
                   <el-button type="warning" size="small">
+                    <el-icon class="mr-2"><Setting /></el-icon>
                     {{ manage.user.operate.set.label }}
                   </el-button>
                 </template>
@@ -140,6 +129,7 @@
               >
                 <template #reference>
                   <el-button type="warning" size="small">
+                    <el-icon class="mr-2"><Setting /></el-icon>
                     {{ manage.user.operate.unset.label }}
                   </el-button>
                 </template>
@@ -152,6 +142,7 @@
                   operateEmail = true;
                 "
               >
+                <el-icon class="mr-2"><EditPen /></el-icon>
                 {{ manage.user.operate.email.label }}
               </el-button>
               <el-button
@@ -162,129 +153,131 @@
                   operatePassword = true;
                 "
               >
+                <el-icon class="mr-2"><Finished /></el-icon>
                 {{ manage.user.operate.password.label }}
               </el-button>
             </el-button-group>
           </template>
         </el-table-column>
       </el-table>
-    </el-main>
-    <el-footer class="no-padding" style="margin-top: 10px">
-      <div style="display: flex">
-        <el-button type="primary" @click="getUserList">
-          {{ manage.reload }}
-        </el-button>
-        <div style="flex: 1"></div>
-        <div class="pagination">
-          <el-select
-            v-model="pagination.page_size"
-            style="width: 100px; margin-right: 5px"
-            @change="getUserList"
-          >
-            <!-- <el-option v-for="size in [10, 15, 20]" :value="size" />
-             -->
-            <el-option :value="10" label="10" />
-            <el-option :value="15" label="15" />
-            <el-option :value="20" label="20" />
-          </el-select>
-          <el-text>
-            {{ (manage.pagination.total, [pagination.all, pagination.total]) }}
-          </el-text>
-          <el-pagination
-            style="margin-left: 5px; margin-right: 5px"
-            :current-page="pagination.page"
-            :page-size="pagination.page_size"
-            :page-count="pagination.page_total"
-            :total="pagination.total"
-            background
-            layout="prev, pager, next"
-            @current-change="handleCurrentChange"
-          />
-          <el-text>{{ manage.pagination.jump }}</el-text>
-          <el-input-number
-            style="width: 40px; margin-left: 5px; margin-right: 5px"
-            :controls="false"
-            :min="1"
-            :max="pagination.page_total"
-            v-model="jump"
-            :value-on-clear="pagination.page"
-            size="small"
-            @blur="handleJump(false)"
-            @keyup.enter="handleJump(true)"
-          />
-          <el-text>{{ manage.pagination.page }}</el-text>
+      <div class="no-padding" style="margin-top: 10px">
+        <div style="display: flex">
+          <el-button type="primary" @click="getUserList" class="ml-2" plain>
+            <el-icon class="mr-3"><Loading /></el-icon>
+            {{ manage.reload }}
+          </el-button>
+          <div style="flex: 1"></div>
+          <div class="pagination">
+            <el-select
+              v-model="pagination.page_size"
+              style="width: 100px; margin-right: 5px"
+              @change="getUserList"
+            >
+              <el-option :value="10" label="10" />
+              <el-option :value="15" label="15" />
+              <el-option :value="20" label="20" />
+            </el-select>
+            <el-text>
+              {{
+                (manage.pagination.total, [pagination.all, pagination.total])
+              }}
+            </el-text>
+            <el-pagination
+              style="margin-left: 5px; margin-right: 5px"
+              :current-page="pagination.page"
+              :page-size="pagination.page_size"
+              :page-count="pagination.page_total"
+              :total="pagination.total"
+              background
+              layout="prev, pager, next"
+              @current-change="handleCurrentChange"
+            />
+            <el-text>{{ manage.pagination.jump }}</el-text>
+            <el-input-number
+              style="width: 60px; margin-left: 5px; margin-right: 5px"
+              :controls="false"
+              :min="1"
+              :max="pagination.page_total"
+              v-model="jump"
+              :value-on-clear="pagination.page"
+              size="small"
+              @blur="handleJump(false)"
+              @keyup.enter="handleJump(true)"
+            />
+            <el-text>{{ manage.pagination.page }}</el-text>
+          </div>
         </div>
+        <el-dialog
+          v-model="operateEmail"
+          :title="manage.user.operate.email.label"
+        >
+          <el-form
+            :model="emailForm"
+            ref="emailFormRef"
+            :rules="emailRules"
+            status-icon
+            @submit.prevent
+          >
+            <el-form-item :error="emailError" prop="email">
+              <el-input
+                v-model="emailForm.email"
+                autocomplete="off"
+                @keyup.enter.prevent="confirmEmail(emailFormRef)"
+              />
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="operateEmail = false" text>
+                {{ manage.cancel }}
+              </el-button>
+              <el-button
+                type="primary"
+                @click="confirmEmail(emailFormRef)"
+                text
+                bg
+              >
+                {{ manage.confirm }}
+              </el-button>
+            </el-form-item>
+          </el-form>
+        </el-dialog>
+        <el-dialog
+          v-model="operatePassword"
+          :title="manage.user.operate.password.label"
+        >
+          <el-form
+            :model="passwordForm"
+            ref="passwordFormRef"
+            :rules="passwordRules"
+            status-icon
+            hide-required-asterisk
+            @submit.prevent
+          >
+            <el-form-item :error="passwordError" prop="password">
+              <el-input
+                v-model="passwordForm.password"
+                autocomplete="off"
+                clearable
+                show-password
+                @keyup.enter="confirmPassword(passwordFormRef)"
+              />
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="operatePassword = false" text>
+                {{ manage.cancel }}
+              </el-button>
+              <el-button
+                type="primary"
+                @click="confirmPassword(passwordFormRef)"
+                text
+                bg
+              >
+                {{ manage.confirm }}
+              </el-button>
+            </el-form-item>
+          </el-form>
+        </el-dialog>
       </div>
-      <el-dialog
-        v-model="operateEmail"
-        :title="manage.user.operate.email.label"
-      >
-        <el-form
-          :model="emailForm"
-          ref="emailFormRef"
-          :rules="emailRules"
-          status-icon
-          @submit.prevent
-        >
-          <el-form-item :error="emailError" prop="email">
-            <el-input
-              v-model="emailForm.email"
-              autocomplete="off"
-              @keyup.enter.prevent="confirmEmail(emailFormRef)"
-            />
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="operateEmail = false" text>
-              {{ manage.cancel }}
-            </el-button>
-            <el-button
-              type="primary"
-              @click="confirmEmail(emailFormRef)"
-              text
-              bg
-            >
-              {{ manage.confirm }}
-            </el-button>
-          </el-form-item>
-        </el-form>
-      </el-dialog>
-      <el-dialog
-        v-model="operatePassword"
-        :title="manage.user.operate.password.label"
-      >
-        <el-form
-          :model="passwordForm"
-          ref="passwordFormRef"
-          :rules="passwordRules"
-          status-icon
-          hide-required-asterisk
-          @submit.prevent
-        >
-          <el-form-item :error="passwordError" prop="password">
-            <el-input
-              v-model="passwordForm.password"
-              autocomplete="off"
-              clearable
-              show-password
-              @keyup.enter="confirmPassword(passwordFormRef)"
-            />
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="operatePassword = false" text>
-              {{ manage.cancel }}
-            </el-button>
-            <el-button
-              type="primary"
-              @click="confirmPassword(passwordFormRef)"
-              text
-              bg
-            >
-              {{ manage.confirm }}
-            </el-button>
-          </el-form-item>
-        </el-form>
-      </el-dialog>
-    </el-footer>
+    </el-main>
   </el-container>
 </template>
 

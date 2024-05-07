@@ -1,18 +1,18 @@
 <template>
   <el-container class="panel background-white rounded-lg">
-    <el-main class="no-padding" style="overflow: hidden">
+    <el-main class="no-padding">
       <div class="search-container mx-4">
         <el-row>
-          <el-col :span="19">
+          <el-col :span="16">
             <div class="p-2 space-y-4">
               <el-row :gutter="20">
-                <el-col :span="5">
+                <el-col :span="6">
                   <el-select v-model="selectType" placeholder="请选择数据类型">
                     <el-option label="天气数据" value="weather"></el-option>
                     <el-option label="地质灾害" value="disaster"></el-option>
                   </el-select>
                 </el-col>
-                <el-col :span="11">
+                <el-col :span="12">
                   <el-date-picker
                     v-model="selectedDate"
                     type="daterange"
@@ -25,7 +25,7 @@
                     style="width: 100%"
                   ></el-date-picker>
                 </el-col>
-                <el-col :span="4">
+                <el-col :span="6">
                   <el-select
                     v-model="selectedLocation"
                     placeholder="请选择城市"
@@ -39,23 +39,28 @@
                     ></el-option>
                   </el-select>
                 </el-col>
-                <el-col :span="4">
-                  <el-button @click="handleSearch">
-                    <el-icon class="mr-2"><Search></Search></el-icon>
-                    <el-text>
-                      <span>点击搜索</span>
-                    </el-text>
-                  </el-button>
-                </el-col>
               </el-row>
             </div>
           </el-col>
-          <el-col :span="5" class="mt-2">
-            <el-button type="primary" size="default" @click="refreshWeather">
+          <el-col :span="8" class="mt-2">
+            <el-button type="info" size="default" plain @click="handleSearch">
+              <el-icon class="mr-2"><Search></Search></el-icon>
+              点击搜索
+            </el-button>
+            <el-button
+              type="primary"
+              size="default"
+              plain
+              @click="refreshWeather"
+            >
               <el-icon class="mr-3"><Refresh /></el-icon>
               {{ weatherInfo.buttons.refresh }}</el-button
             >
-            <el-button type="success" size="default" @click="showAddDialog"
+            <el-button
+              type="success"
+              size="default"
+              plain
+              @click="showAddDialog"
               ><el-icon class="mr-3"> <Plus></Plus> </el-icon
               >{{ weatherInfo.buttons.add }}</el-button
             >
@@ -96,55 +101,57 @@
             prop="city"
             label="城市"
             width="100"
-            :formatter="(row: WeatherTable) => {for (let location of locations) { if (location.value === row.city) return location.label; }}"
+            :formatter="(row: CityWeatherData) => {
+                return locations.find((location) => location.value === row.city)?.label||row.city;
+                }"
           ></el-table-column>
           <el-table-column
             prop="temp"
             label="温度"
             min-width="50"
-            :formatter="(row: WeatherTable) => row.temp==undefined?'没有该数据':`${row.temp}°C`"
+            :formatter="(row: CityWeatherData) => row.temp==undefined?'没有该数据':`${row.temp}°C`"
           ></el-table-column>
           <el-table-column
             prop="text"
             label="天气"
             width="100"
-            :formatter="(row: WeatherTable) => row.text==''?'没有该数据':row.text"
+            :formatter="(row: CityWeatherData) => row.text==''?'没有该数据':row.text"
           ></el-table-column>
           <el-table-column
             prop="precip"
             label="降水"
             min-width="50"
-            :formatter="(row: WeatherTable) => row.precip==undefined?'没有该数据':`${row.precip}mm`"
+            :formatter="(row: CityWeatherData) => row.precip==undefined?'没有该数据':`${row.precip}mm`"
           ></el-table-column>
           <el-table-column
             prop="windSpeed"
             label="风速"
             min-width="50"
-            :formatter="(row: WeatherTable) => row.windSpeed==undefined?'没有该数据':`${row.windSpeed}m/s`"
+            :formatter="(row: CityWeatherData) => row.windSpeed==undefined?'没有该数据':`${row.windSpeed}m/s`"
           ></el-table-column>
           <el-table-column
             prop="humidity"
             label="湿度"
             min-width="50"
-            :formatter="(row: WeatherTable) => row.humidity==undefined?'没有该数据':`${row.humidity}%`"
+            :formatter="(row: CityWeatherData) => row.humidity==undefined?'没有该数据':`${row.humidity}%`"
           ></el-table-column>
           <el-table-column
             prop="pressure"
             label="气压"
             min-width="50"
-            :formatter="(row: WeatherTable) => row.pressure==undefined?'没有该数据':`${row.pressure}hPa`"
+            :formatter="(row: CityWeatherData) => row.pressure==undefined?'没有该数据':`${row.pressure}hPa`"
           ></el-table-column>
           <el-table-column
             prop="aqi"
             label="空气质量"
             min-width="50"
-            :formatter="(row: WeatherTable) => row.aqi==undefined?'没有该数据':`${row.aqi}`"
+            :formatter="(row: CityWeatherData) => row.aqi==undefined?'没有该数据':`${row.aqi}`"
           ></el-table-column>
           <el-table-column
             prop="category"
             label="类别"
             min-width="100"
-            :formatter="(row: WeatherTable) => row.category=='' ?'没有该数据':row.category"
+            :formatter="(row: CityWeatherData) => row.category=='' ?'没有该数据':row.category"
           ></el-table-column>
           <el-table-column prop="actions" label="操作" width="200">
             <template #default="scope">
@@ -334,6 +341,7 @@ import { post } from "@/api/index";
 import { china_cities } from "@/stores/cities";
 import { weather, aqi_level } from "@/stores/weather";
 import throttle from "lodash/throttle";
+import { CityWeatherData } from "@/types/weather";
 /* 搜索 */
 const selectedDate = ref("");
 const pickerOptions: any = {
@@ -348,23 +356,9 @@ const locations = china_cities;
 const weathers = weather;
 interface SearchWeatherHourlyListResponse {
   status: boolean;
-  weatherHourlyList: WeatherTable[];
+  weatherHourlyList: CityWeatherData[];
 }
-interface WeatherTable {
-  time: string;
-  city: string;
-  temp: number;
-  text: string;
-  precip: number;
-  wind360: number;
-  windScale: number;
-  windSpeed: number;
-  humidity: number;
-  pressure: number;
-  aqi: number;
-  category: string;
-}
-const weatherData: WeatherTable[] = reactive([]);
+const weatherData: CityWeatherData[] = reactive([]);
 const handleSearch = () => {
   post<SearchWeatherHourlyListResponse>("/api/manage/data/search", {
     type: selectType.value,
@@ -378,7 +372,7 @@ const handleSearch = () => {
 };
 const loading = ref(false);
 const addDialogVisible = ref(false);
-const newWeatherData = reactive<WeatherTable>({
+const newWeatherData = reactive<CityWeatherData>({
   time: "",
   city: "",
   temp: undefined,
@@ -510,12 +504,12 @@ const handleSizeChange = (val: number) => {
 const handleCurrentChange = (val: number) => {
   currentPage.value = val;
 };
-const splicePage = (data: WeatherTable[]) => {
+const splicePage = (data: CityWeatherData[]) => {
   const start = (currentPage.value - 1) * pageSize.value;
   const end = currentPage.value * pageSize.value;
   return data.slice(start, end);
 };
-const currentPageData = ref<WeatherTable[]>([]);
+const currentPageData = ref<CityWeatherData[]>([]);
 watch(weatherData, () => {
   total.value = weatherData.length;
   currentPageData.value = splicePage(weatherData);

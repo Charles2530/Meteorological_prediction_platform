@@ -1,8 +1,13 @@
 <template>
-  <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick" type="border-card">
+  <el-tabs
+    v-model="activeName"
+    class="demo-tabs"
+    @tab-click="handleClick"
+    type="border-card"
+  >
     <el-tab-pane label="天气速览" name="first">
-      <el-container class="container">
-        <CurrentWeather class="md:basis-3/5"  >
+      <el-container class="weather_container">
+        <CurrentWeather class="md:basis-3/5">
           <!-- @searchShow="changeSearchShow" -->
           <!-- <template v-slot:search>
             <div class="text-[#333333]">
@@ -12,11 +17,7 @@
         </CurrentWeather>
         <AirQuality class="md:basis-2/5" />
         <!-- @refresh="weatherInfo"  -->
-
-
       </el-container>
-
-
     </el-tab-pane>
     <el-tab-pane label="30日天气" name="second">
       <el-calendar ref="calendar">
@@ -30,7 +31,9 @@
             <el-button size="small" @click="selectDate('prev-month')">
               Previous Month
             </el-button>
-            <el-button size="small" @click="selectDate('today')">Today</el-button>
+            <el-button size="small" @click="selectDate('today')"
+              >Today</el-button
+            >
             <el-button size="small" @click="selectDate('next-month')">
               Next Month
             </el-button>
@@ -41,174 +44,51 @@
         </template>
       </el-calendar>
     </el-tab-pane>
-    <el-tab-pane label="空气质量" name="third">灾害预警</el-tab-pane>
+    <el-tab-pane label="空气质量" name="third">
+      <AirQualityVM />
+    </el-tab-pane>
     <el-tab-pane label="数据统计" name="fourth">
-
-      <div class="chart">
-        <div id="chart_one" style="
-        height: 300px;
-        width: 300px;
-        padding: 10px;
-        margin: 0 auto;
-        /* align-items: center;
-        justify-content: center; */
-      "></div>
-      </div>
-
+      <dataStatistics />
     </el-tab-pane>
   </el-tabs>
 </template>
 <script lang="ts" setup>
-
-
-
-import { ref, onMounted } from 'vue';
-import type { TabsPaneContext } from 'element-plus';
-import * as echarts from 'echarts';
+import { ref, onMounted } from "vue";
+import type { TabsPaneContext } from "element-plus";
+import * as echarts from "echarts";
 /*抽屉页*/
-const activeName = ref('first')
+const activeName = ref("first");
 const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event)
-}
-type ECharts = echarts.ECharts
-let echartsInstance: Ref<ECharts | null> = ref(null)
+  console.log(tab, event);
+};
+type ECharts = echarts.ECharts;
+let echartsInstance: Ref<ECharts | null> = ref(null);
 
 /** 组件  */
-import SearchLocation from '@/components/raw/SearchLocation.vue'
-import CurrentWeather from '@/components/raw/CurrentWeather.vue';
-import AirQuality from '@/components/raw/AirQuality.vue';
-import Forecast from '@/components/raw/Forecast.vue'
-const stateNavigator = ref(0) // 用于判断是否加载loading
-const cityList = ref([])
-const city = ref({})
-const weather = ref({})
-const air = ref({})
-const forecast = ref([])
-const preDayWeather = ref([])
-const ultraviolet = ref([])
-const searchShow = ref(false)
-
-/*echart*/
-onMounted(() => {
-  // 解决echarts图表放大溢出父容器
-  // 页面上的元素进行监测和调整大小操作，当被监测的元素的大小发生变化时调用
-  // setTimeout(() => {
-  //   const resizeOb = new ResizeObserver((entries) => {
-  //     for (const entry of entries) {
-  //       echarts.getInstanceByDom(entry.target).resize()
-  //     }
-  //   })
-  //   resizeOb.observe(document.getElementById('chart_one'))
-  // })
-  // 通过id获取echarts元素初始化图表的容器：创建一个 echarts 实例，调用 methods 里的 initChart 进行图表初始化
-  // 获取id为chart_one的dom元素给chartDom容器，init初始化一个echarts实例给myChart，需以dom元素为参数
-  let chartDom = document.getElementById('chart_one')
-  // console.log(chartDom)
-  echartsInstance.value = echarts.init(chartDom)
-  nextTick(() => {
-    initChart()
-  })
-  // 接口获取数据后，再为echarts赋值
-  // 在 ECharts 的 X 轴上显示当前日期前一周的月日
-  initData()
-  setTimeout(() => {
-    initChart()
-  }, 2000)
-
-});
-watch(echartsInstance, () => {
-  console.log(echartsInstance.value)
-})
-
-
-function initData() {
-  // 模拟数据初始化
-}
-// function initChart() {}
-function initChart() {
-
-  const today = new Date();
-  const lastWeek = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate() - 6
-  );
-  const xAxisData = [];
-  for (let i = lastWeek.getTime(); i <= today.getTime(); i += 86400000) {
-    const date = new Date(i);
-    xAxisData.push(
-      date.toLocaleDateString('en-US', {
-        month: 'numeric',
-        day: 'numeric',
-      })
-    );
-  }
-  console.log(xAxisData.join(", "));
-
-  let option = {
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '4%',
-      top: '11%',
-      containLabel: true,
-    },
-    xAxis: {
-      type: 'category',
-      data: xAxisData,
-      axisLabel: {
-        formatter: '{value}',
-      },
-    },
-    yAxis: {
-      type: 'value',
-      axisLabel: {
-        formatter: '{value} m³',
-      },
-    },
-    tooltip: {
-      trigger: 'axis',
-      formatter: '用气日期：{b}<br />日用气量：{c}',
-      backgroundColor: 'rgba(255, 255, 255, 0.8)',
-      axisPointer: {
-        type: 'shadow',
-      },
-    },
-    series: [
-      {
-        data: [120, 200, 150, 80, 70, 110, 130],
-        type: 'bar',
-        showBackground: true,
-        backgroundStyle: {
-          color: 'rgba(180, 180, 180, 0.2)',
-        },
-        label: {
-          normal: {
-            show: true,
-            position: 'top',
-          },
-        },
-      },
-    ],
-  };
-
-  console.log(option)
-
-  // 根据 option 的值来设置 myChart 的选项
-  option && echartsInstance.value.setOption(option)
-}
-
-
+import SearchLocation from "@/components/raw/SearchLocation.vue";
+import CurrentWeather from "@/components/raw/CurrentWeather.vue";
+import AirQuality from "@/components/raw/AirQuality.vue";
+import AirQualityVM from "@/components/airQuality/AirQualityVM.vue";
+import dataStatistics from "@/components/dataStatistics/dataStatistics.vue";
+import Forecast from "@/components/raw/Forecast.vue";
+const stateNavigator = ref(0); // 用于判断是否加载loading
+const cityList = ref([]);
+const city = ref({});
+const weather = ref({});
+const air = ref({});
+const forecast = ref([]);
+const preDayWeather = ref([]);
+const ultraviolet = ref([]);
+const searchShow = ref(false);
 
 //----------
-import type { CalendarDateType, CalendarInstance } from 'element-plus'
+import type { CalendarDateType, CalendarInstance } from "element-plus";
 
-const calendar = ref<CalendarInstance>()
+const calendar = ref<CalendarInstance>();
 const selectDate = (val: CalendarDateType) => {
-  if (!calendar.value) return
-  calendar.value.selectDate(val)
-}
-
+  if (!calendar.value) return;
+  calendar.value.selectDate(val);
+};
 
 // export default {
 //     mounted () {
@@ -246,10 +126,6 @@ const selectDate = (val: CalendarDateType) => {
 //         }
 //     }
 // }
-
-
-
-
 </script>
 <style>
 .chart {
@@ -270,8 +146,7 @@ h2 {
 
 /*  */
 
-
-.demo-tabs>.el-tabs__content {
+.demo-tabs > .el-tabs__content {
   padding: 32px;
   color: #6b778c;
   font-size: 32px;
@@ -279,7 +154,7 @@ h2 {
 }
 
 /* demo */
-.container {
+.weather_container {
   background: linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195));
 }
 

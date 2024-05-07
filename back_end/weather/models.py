@@ -1,50 +1,72 @@
 from django.db import models
-
+from datetime import datetime
 
 # Create your models here.
 class HourlyWeather(models.Model):
-    hour_time = models.DateTimeField(auto_now_add=True)
-    location = models.CharField(max_length=200)
-    temperature = models.FloatField()
-    humidity = models.FloatField()
-    pressure = models.FloatField()
-    wind_speed = models.FloatField()
-    wind_direction = models.FloatField()
-    cloud_cover = models.FloatField()
-    precipitation = models.FloatField()
-    weather_description = models.CharField(max_length=200)
+    fxTime = models.DateTimeField(default=datetime.now)
+    temp = models.FloatField(default=0.0)
+    icon = models.CharField(max_length=10, default="")
+    text = models.CharField(max_length=200, default="")
+    wind360 = models.FloatField(default=0.0)
+    windDir = models.CharField(max_length=20, default="")
+    windScale = models.CharField(max_length=10, default="")
+    windSpeed = models.FloatField(default=0.0)
+    humidity = models.FloatField(default=0.0)
+    pop = models.FloatField(default=0.0)  # Probability of precipitation
+    precip = models.FloatField(default=0.0)
+    pressure = models.FloatField(default=0.0)
+    cloud = models.FloatField(default=0.0)
+    dew = models.FloatField(default=0.0)
 
     def __str__(self):
-        return "hourly weather for " + self.hour_time.strftime('%Y-%m-%d %H:%M:%S') + " " + self.location
+        return "hourly weather for " + self.fxTime.strftime('%Y-%m-%d %H:%M:%S')
 
 
 class DailyWeather(models.Model):
-    date_time = models.DateTimeField(auto_now_add=True)
-    location = models.CharField(max_length=200)
-    temperature = models.FloatField()
-    humidity = models.FloatField()
-    pressure = models.FloatField()
-    wind_speed = models.FloatField()
-    wind_direction = models.FloatField()
-    cloud_cover = models.FloatField()
-    precipitation = models.FloatField()
-    weather_description = models.CharField(max_length=200)
+    fxDate = models.DateField(default=datetime.now)
+    sunrise = models.DateTimeField(default=datetime.now)
+    sunset = models.DateTimeField(default=datetime.now)
+    moonrise = models.DateTimeField(default=datetime.now)
+    moonset = models.DateTimeField(default=datetime.now)
+    moonPhase = models.CharField(max_length=10, default="")
+    moonPhaseIcon = models.CharField(max_length=10, default="")
+    tempMax = models.FloatField(default=0.0)
+    tempMin = models.FloatField(default=0.0)
+    iconDay = models.CharField(max_length=10, default="")
+    textDay = models.CharField(max_length=50, default="")
+    iconNight = models.CharField(max_length=10, default="")
+    textNight = models.CharField(max_length=50, default="")
+    wind360Day = models.FloatField(default=0.0)
+    windDirDay = models.CharField(max_length=20, default="")
+    windScaleDay = models.CharField(max_length=10, default="")
+    windSpeedDay = models.FloatField(default=0.0)
+    wind360Night = models.FloatField(default=0.0)
+    windDirNight = models.CharField(max_length=20, default="")
+    windScaleNight = models.CharField(max_length=10, default="")
+    windSpeedNight = models.FloatField(default=0.0)
+    humidity = models.FloatField(default=0.0)
+    precip = models.FloatField(default=0.0)
+    pressure = models.FloatField(default=0.0)
+    vis = models.FloatField(default=0.0)
+    cloud = models.IntegerField(default=0)
+    uvIndex = models.IntegerField(default=0)
 
     def __str__(self):
-        return "daliy weather for " + self.date_time.strftime('%Y-%m-%d %H:%M:%S') + " " + self.location
+        return "daily weather for " + str(self.fxDate) + " at location"
 
 
 class MonthlyWeather(models.Model):
-    month_time = models.DateTimeField(auto_now_add=True)
-    location = models.CharField(max_length=200)
-    average_temperature = models.FloatField()
-    average_humidity = models.FloatField()
-    average_pressure = models.FloatField()
-    average_wind_speed = models.FloatField()
-    average_wind_direction = models.FloatField()
-    average_cloud_cover = models.FloatField()
-    average_precipitation = models.FloatField()
-    weather_description = models.CharField(max_length=200)
+    month_time = models.DateTimeField(default=datetime.now)
+    location = models.CharField(max_length=200, default="")
+    average_temperature = models.FloatField(default=0.0)
+    average_humidity = models.FloatField(default=0.0)
+    average_pressure = models.FloatField(default=0.0)
+    average_wind_speed = models.FloatField(default=0.0)
+    average_wind_direction = models.FloatField(default=0.0)
+    average_cloud_cover = models.FloatField(default=0.0)
+    average_precipitation = models.FloatField(default=0.0)
+    text = models.CharField(max_length=200, default="")
 
     def __str__(self):
+        return "monthly weather for " + self.month_time.strftime('%Y-%m-%d %H:%M:%S') + " " + self.location
         return "monthly weather for " + self.month_time.strftime('%Y-%m-%d %H:%M:%S') + " " + self.location

@@ -8,20 +8,24 @@
         <el-header class="no-padding">
           <TopBar />
         </el-header>
-        <el-main class="no-padding" style="overflow: hidden" :style="{ height: contentHeight }">
+        <el-main
+          class="no-padding"
+          style="overflow: hidden"
+          :style="{ height: contentHeight }"
+        >
           <router-view v-slot="{ Component }">
-            <transition :name="transition">
-              <component :is="Component" />
-            </transition>
+            <!-- <transition :name="transition"> -->
+            <component :is="Component" />
+            <!-- </transition> -->
           </router-view>
           <!-- <div
             class="content-placeholder"
             :style="{ height: contentHeight }"
           ></div> -->
         </el-main>
-        <el-footer ref="footer">
+        <!-- <el-footer ref="footer">
           <Footer></Footer>
-        </el-footer>
+        </el-footer> -->
       </el-container>
     </el-container>
   </el-container>
@@ -36,7 +40,7 @@ const Aside = defineAsyncComponent(() => import("@c/aside/index.vue"));
 const Footer = defineAsyncComponent(() => import("@c/footer/index.vue"));
 const Login = defineAsyncComponent(() => import("@c/content/login.vue"));
 const transition = computed(() => {
-  return (route.meta?.transition as string) || "fade";
+  return (route.meta?.transition as string) || "scale";
 });
 // const footerRef = ref<HTMLElement | null>(null);
 const contentHeight = ref("calc(100vh - 60px)");

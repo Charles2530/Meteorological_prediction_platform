@@ -9,8 +9,6 @@
         :city="props.city"
       />
     </div>
-
-    <!-- <el-divider></el-divider> -->
   </div>
 </template>
 
