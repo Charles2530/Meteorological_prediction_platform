@@ -28,3 +28,9 @@ export interface NotificationNotice {
 export interface GetSubscribeResponse {
   tableData: { city: string; status: string }[];
 }
+
+export interface AqiRankItem {
+  city: string;
+  category: string;
+  aqi: number;
+}
