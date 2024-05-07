@@ -1,6 +1,6 @@
 <template>
-    <el-container class="container">
-        <CurrentWeather class="md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
+    <el-container class="container rounded-lg">
+        <CurrentWeather class="md:basis-3/5 " :weather="weather" :city="city" :search="searchShow">
             <!-- @searchShow="changeSearchShow" -->
             <!-- <template v-slot:search>
               <div class="text-[#333333]">
@@ -10,6 +10,9 @@
         </CurrentWeather>
         <AirQuality class="md:basis-2/5" :weather="weather" :air="air" :city="city" :ultraviolet="ultraviolet" />
         <!-- @refresh="weatherInfo"  -->
+    </el-container>
+    <el-container>
+        <RealTimeBroadcast/>
     </el-container>
 </template>
 <script lang="ts" setup>
@@ -23,11 +26,12 @@ import SearchLocation from '@/components/weather_details/sub_components/SearchLo
 import CurrentWeather from '@/components/weather_details/sub_components/CurrentWeather.vue';
 import AirQuality from '@/components/weather_details/sub_components/AirQuality.vue';
 import Forecast from '@/components/weather_details/sub_components/Forecast.vue'
+import RealTimeBroadcast from '@/components/weather_details/sub_components/RealTimeBroadcast.vue'
 const stateNavigator = ref(0) // 用于判断是否加载loading
 const cityList = ref([])
 const city = ref({
-  name: '辽源市',
-  adm2: '区'
+    name: '北京市',
+    adm2: '昌平区'
 });
 let weather = ref({})
 const air = ref({})
@@ -57,7 +61,7 @@ interface WeatherHisOverview {
 
 import { post, get } from "@/api/index.ts";
 const get_his_overview = async () => {
-    get<WeatherHisOverview>("/api/weatherdetails/overview", city).then((res) => {
+    get<WeatherHisOverview>("/api/weather/overview", city).then((res) => {
         weather.value = res.data.weather;
         console.log("----------------------------------------------------------------")
         console.log('weather:', weather.value); // 添加这行代码用于输出 weather 的值
@@ -73,11 +77,11 @@ const get_his_overview = async () => {
 onMounted(() => {
     get_his_overview();
 
-    
+
 
 });
 console.log("----------------------------------------------------------------")
-    console.log(weather.value);
+console.log(weather.value);
 
 </script>
 <style>

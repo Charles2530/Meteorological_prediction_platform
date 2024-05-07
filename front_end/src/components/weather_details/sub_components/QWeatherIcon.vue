@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import SvgIcon from 'svg-icon';
+// import SvgIcon from 'svg-icon';
 defineProps({
     icon: { type: Number },
     size: { type: Number },

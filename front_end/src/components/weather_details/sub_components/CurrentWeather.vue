@@ -18,7 +18,7 @@
             <span>{{ `${city.adm2} ${city.name}` }}</span>
             <!-- <button @click="searchForPC"><img class="h-3 w-auto transform" :class="`${search ? 'rotate-90' : '-rotate-90'}`" src="@/assets/change.png" alt=""></button> -->
           </div>
-          <div>{{ `${dayOfWeek} ${formattedDate}` }}</div>
+          <div>{{ ` ${formattedDate}` }}</div>
         </div>
         <div class="text-[#333333]">
           <!-- <slot name="search"></slot> -->
@@ -36,7 +36,7 @@
         </div>
         <div class="flex flex-col md:ml-10 ">
           <span class="text-7xl bg-clip-text text-transparent bg-gradient-to-br from-white from-40% ...">{{
-            `${weather.temp}&#176` }}</span>
+            `${weather.temp}°C` }}</span>
           <span class="max-md:hidden">{{ weather.text }}</span>
         </div>
       </div>
@@ -56,6 +56,7 @@
 <script setup>
 import QWeatherIcon from './QWeatherIcon.vue';
 import { translateTime } from '@/utils/utilsFunc.js'
+import { getDateToday } from '@/utils/utilsFunc.js'
 import { defineEmits } from 'vue'
 
 
@@ -66,11 +67,11 @@ import { defineEmits } from 'vue'
 // }
 const search = true
 const props = defineProps({
-    weather: { type: Object },
-    city: { type: Object },
-    search: { type: Boolean }
+  weather: { type: Object },
+  city: { type: Object },
+  search: { type: Boolean }
 })
-
+let formattedDate= getDateToday()
 // const emit = defineEmits(['searchShow'])
 
 const searchForPC = () => {
@@ -80,9 +81,6 @@ const searchForPC = () => {
 // const searchForMobile = () => {
 //   emit('searchShow', true)
 // }
-
-const dayOfWeek = "Tue"
-const formattedDate = "4-24-2024"
 // const { dayOfWeek, formattedDate } = translateTime(props.weather.obsTime)
 </script>
 

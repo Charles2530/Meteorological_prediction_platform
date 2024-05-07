@@ -5,7 +5,7 @@
         flex 
         flex-col 
         p-4 
-        rounded-2xl 
+        rounded-lg 
         relative 
         bg-[#FFFFFF] 
         shadow-[0_10px_30px_-12px_rgba(7,89,133,0.45)] 
