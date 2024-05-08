@@ -73,11 +73,7 @@ def index(request):
 
 @csrf_exempt
 def my_login(request):
-<<<<<<< HEAD
     data = json.loads(request.body)
-=======
-    data=json.loads(request.body)
->>>>>>> master
     username = data.get('username')
     password = data.get('password')
 
@@ -117,12 +113,6 @@ def my_login(request):
 @csrf_exempt
 @require_http_methods(["POST"])
 def my_register(request):
-<<<<<<< HEAD
-=======
-    # username = request.POST.get('username')
-    # password = request.POST.get('password')
-    # email = request.POST.get('email')
->>>>>>> master
     data = json.loads(request.body)
     username = data.get('username')
     password = data.get('password')
@@ -432,19 +422,11 @@ def user_info(request):
     if not auth_header:
         return JsonResponse({'reason': 'manage.invalid'}, status=400)
 
-<<<<<<< HEAD
     try:
         auth_header = auth_header.decode(HTTP_HEADER_ENCODING)
         token = auth_header.split(' ')[1]  # 假设token在Authorization头的'Bearer '之后
     except (UnicodeDecodeError, AttributeError, IndexError):
         return JsonResponse({'reason': 'manage.invalid'}, status=400)
-=======
-    # try:
-    #     auth_header = auth_header.decode(HTTP_HEADER_ENCODING)
-    #     token = auth_header.split(' ')[1]  # 假设token在Authorization头的'Bearer '之后
-    # except (UnicodeDecodeError, AttributeError, IndexError):
-    #     return JsonResponse({'reason': 'manage.invaild'}, status=400)
->>>>>>> master
 
     try:
         # 使用Django REST framework的token认证系统解析token
