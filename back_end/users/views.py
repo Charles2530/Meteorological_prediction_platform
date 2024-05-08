@@ -149,7 +149,7 @@ def my_register(request):
 
     # 创建用户
     new_user = User.objects.create_user(
-        username=username, email=email, role=2, password=password)
+        username=username, email=email, password=password)
 
     # 准备返回的信息
     info = {
