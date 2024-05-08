@@ -13,8 +13,8 @@ urlpatterns = [
     path('manage/user/email', views.update_user_email, name='change_email'),
     path('manage/user/password', views.update_user_password, name='change_password'),
 
-    path('login/', views._login, name='login'),
-    path('register/', views._register, name='register'),
+    path('login/', views.my_login, name='login'),
+    path('register/', views.my_register, name='register'),
 
     path('get_info/', views.user_info, name='get_info'),
 
