@@ -3553,3 +3553,555 @@ spawned uWSGI worker 4 (pid: 1776023, cores: 2)
 [pid: 1776022|app: 0|req: 1/1] 219.239.227.217 () {48 vars in 1091 bytes} [Wed May  8 16:29:47 2024] POST /api/login/ => generated 172 bytes in 1980 msecs (HTTP/1.1 200) 10 headers in 534 bytes (1 switches on core 0)
 Not Found: /api/manage/user/list/
 [pid: 1776022|app: 0|req: 2/2] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 16:29:54 2024] POST /api/manage/user/list/ => generated 5054 bytes in 8 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 1)
+Not Found: /api/manage/data/search/
+[pid: 1776023|app: 0|req: 1/3] 219.239.227.217 () {50 vars in 1009 bytes} [Wed May  8 17:18:50 2024] POST /api/manage/data/search/ => generated 5060 bytes in 150 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 0)
+Not Found: /api/weather/overview/
+[pid: 1776023|app: 0|req: 2/4] 219.239.227.217 () {44 vars in 1330 bytes} [Wed May  8 17:18:52 2024] GET /api/weather/overview/?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5299 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_worst/
+[pid: 1776023|app: 0|req: 3/5] 219.239.227.217 () {44 vars in 899 bytes} [Wed May  8 17:18:52 2024] GET /api/weather/aqi/rank_worst/ => generated 5071 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/city_change/
+Not Found: /api/weather/temp/city_change/
+[pid: 1776022|app: 0|req: 4/6] 219.239.227.217 () {44 vars in 912 bytes} [Wed May  8 17:18:52 2024] GET /api/weather/aqi/city_change/?city= => generated 5080 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1776022|app: 0|req: 4/7] 219.239.227.217 () {44 vars in 914 bytes} [Wed May  8 17:18:52 2024] GET /api/weather/temp/city_change/?city= => generated 5083 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/humid/city_change/
+[pid: 1776022|app: 0|req: 5/8] 219.239.227.217 () {44 vars in 916 bytes} [Wed May  8 17:18:52 2024] GET /api/weather/humid/city_change/?city= => generated 5086 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/pressure/city_change
+[pid: 1776022|app: 0|req: 6/9] 219.239.227.217 () {44 vars in 920 bytes} [Wed May  8 17:18:52 2024] GET /api/weather/pressure/city_change?city= => generated 5092 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_best/
+[pid: 1776019|app: 0|req: 1/10] 219.239.227.217 () {44 vars in 897 bytes} [Wed May  8 17:18:52 2024] GET /api/weather/aqi/rank_best/ => generated 5068 bytes in 164 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/aqi_change/
+[pid: 1776016|app: 0|req: 2/11] 219.239.227.217 () {44 vars in 899 bytes} [Wed May  8 17:18:52 2024] GET /api/weather/aqi/aqi_change/ => generated 5071 bytes in 164 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/getCityInfo/
+[pid: 1776016|app: 0|req: 2/12] 219.239.227.217 () {44 vars in 877 bytes} [Wed May  8 17:18:52 2024] GET /api/getCityInfo/ => generated 5038 bytes in 166 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/overview/
+[pid: 1776023|app: 0|req: 4/13] 219.239.227.217 () {44 vars in 1330 bytes} [Wed May  8 17:20:31 2024] GET /api/weather/overview/?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5299 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/rank_best/
+[pid: 1776022|app: 0|req: 8/14] 219.239.227.217 () {44 vars in 897 bytes} [Wed May  8 17:20:31 2024] GET /api/weather/aqi/rank_best/ => generated 5068 bytes in 10 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/getCityInfo/
+[pid: 1776023|app: 0|req: 5/15] 219.239.227.217 () {44 vars in 877 bytes} [Wed May  8 17:20:31 2024] GET /api/getCityInfo/ => generated 5038 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_worst/
+[pid: 1776022|app: 0|req: 8/16] 219.239.227.217 () {44 vars in 899 bytes} [Wed May  8 17:20:31 2024] GET /api/weather/aqi/rank_worst/ => generated 5071 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/aqi_change/
+[pid: 1776016|app: 0|req: 4/17] 219.239.227.217 () {44 vars in 899 bytes} [Wed May  8 17:20:31 2024] GET /api/weather/aqi/aqi_change/ => generated 5071 bytes in 10 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/city_change/
+[pid: 1776016|app: 0|req: 4/18] 219.239.227.217 () {44 vars in 912 bytes} [Wed May  8 17:20:31 2024] GET /api/weather/aqi/city_change/?city= => generated 5080 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/pressure/city_change
+[pid: 1776016|app: 0|req: 5/19] 219.239.227.217 () {44 vars in 920 bytes} [Wed May  8 17:20:31 2024] GET /api/weather/pressure/city_change?city= => generated 5092 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/humid/city_change/
+Not Found: /api/weather/temp/city_change/
+[pid: 1776019|app: 0|req: 3/21] 219.239.227.217 () {44 vars in 914 bytes} [Wed May  8 17:20:31 2024] GET /api/weather/temp/city_change/?city= => generated 5083 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1776019|app: 0|req: 3/20] 219.239.227.217 () {44 vars in 916 bytes} [Wed May  8 17:20:31 2024] GET /api/weather/humid/city_change/?city= => generated 5086 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Bad Request: /api/get_info/
+[pid: 1776023|app: 0|req: 6/22] 219.239.227.168 () {42 vars in 729 bytes} [Wed May  8 17:20:40 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief/
+[pid: 1776019|app: 0|req: 4/23] 219.239.227.168 () {42 vars in 751 bytes} [Wed May  8 17:20:40 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/overview/
+[pid: 1776023|app: 0|req: 7/24] 219.239.227.168 () {42 vars in 1188 bytes} [Wed May  8 17:20:44 2024] GET /api/weather/overview/?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5299 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_best/
+[pid: 1776023|app: 0|req: 8/25] 219.239.227.168 () {42 vars in 755 bytes} [Wed May  8 17:20:44 2024] GET /api/weather/aqi/rank_best/ => generated 5068 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/getCityInfo/
+[pid: 1776016|app: 0|req: 6/26] 219.239.227.168 () {42 vars in 735 bytes} [Wed May  8 17:20:44 2024] GET /api/getCityInfo/ => generated 5038 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/aqi_change/
+Not Found: /api/weather/aqi/city_change/
+[pid: 1776019|app: 0|req: 6/27] 219.239.227.168 () {42 vars in 770 bytes} [Wed May  8 17:20:44 2024] GET /api/weather/aqi/city_change/?city= => generated 5080 bytes in 10 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1776019|app: 0|req: 6/28] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 17:20:44 2024] GET /api/weather/aqi/aqi_change/ => generated 5071 bytes in 11 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/rank_worst/
+[pid: 1776016|app: 0|req: 7/29] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 17:20:44 2024] GET /api/weather/aqi/rank_worst/ => generated 5071 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/temp/city_change/
+[pid: 1776022|app: 0|req: 10/30] 219.239.227.168 () {42 vars in 772 bytes} [Wed May  8 17:20:44 2024] GET /api/weather/temp/city_change/?city= => generated 5083 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/humid/city_change/
+[pid: 1776022|app: 0|req: 11/31] 219.239.227.168 () {42 vars in 774 bytes} [Wed May  8 17:20:44 2024] GET /api/weather/humid/city_change/?city= => generated 5086 bytes in 10 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/pressure/city_change
+[pid: 1776022|app: 0|req: 11/32] 219.239.227.168 () {42 vars in 778 bytes} [Wed May  8 17:20:44 2024] GET /api/weather/pressure/city_change?city= => generated 5092 bytes in 6 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./back_end/settings.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./back_end/settings.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1776016)...
+Gracefully killing worker 2 (pid: 1776019)...
+Gracefully killing worker 3 (pid: 1776022)...
+Gracefully killing worker 4 (pid: 1776023)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./back_end/settings.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./back_end/settings.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 17:22:06 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x27785b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+Traceback (most recent call last):
+  File "/root/Meteorological_prediction_platform/back_end/./back_end/wsgi.py", line 16, in <module>
+    application = get_wsgi_application()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/__init__.py", line 19, in setup
+    configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/conf/__init__.py", line 89, in __getattr__
+    self._setup(name)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/conf/__init__.py", line 76, in _setup
+    self._wrapped = Settings(settings_module)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/conf/__init__.py", line 190, in __init__
+    mod = importlib.import_module(self.SETTINGS_MODULE)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/root/Meteorological_prediction_platform/back_end/./back_end/settings.py", line 14, in <module>
+    from celery.schedules import crontab
+ModuleNotFoundError: No module named 'celery'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1784487, cores: 2)
+spawned uWSGI worker 2 (pid: 1784488, cores: 2)
+spawned uWSGI worker 3 (pid: 1784489, cores: 2)
+spawned uWSGI worker 4 (pid: 1784490, cores: 2)
+Python auto-reloader enabled
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/1] 219.239.227.168 () {42 vars in 753 bytes} [Wed May  8 17:22:36 2024] GET /api/alarm_resent_notices/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/2] 219.239.227.168 () {42 vars in 739 bytes} [Wed May  8 17:22:36 2024] GET /api/alarm_notices/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/3] 219.239.227.168 () {42 vars in 731 bytes} [Wed May  8 17:22:36 2024] GET /api/subscribe/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/4] 219.239.227.168 () {42 vars in 743 bytes} [Wed May  8 17:22:36 2024] GET /api/get_alarm_level/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/5] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:22:41 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/6] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:22:44 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/7] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:22:44 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/8] 219.239.227.168 () {48 vars in 849 bytes} [Wed May  8 17:22:46 2024] POST /api/subscribe/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/9] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:22:53 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/10] 219.239.227.168 () {48 vars in 849 bytes} [Wed May  8 17:22:58 2024] POST /api/subscribe/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/11] 219.239.227.168 () {48 vars in 863 bytes} [Wed May  8 17:23:02 2024] POST /api/manage/user/list/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/12] 219.239.227.168 () {42 vars in 739 bytes} [Wed May  8 17:23:06 2024] GET /api/alarm_notices/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/13] 219.239.227.168 () {42 vars in 753 bytes} [Wed May  8 17:23:06 2024] GET /api/alarm_resent_notices/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/14] 219.239.227.168 () {42 vars in 731 bytes} [Wed May  8 17:23:06 2024] GET /api/subscribe/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784490|app: -1|req: -1/15] 219.239.227.168 () {42 vars in 743 bytes} [Wed May  8 17:23:06 2024] GET /api/get_alarm_level/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784490|app: -1|req: -1/16] 219.239.227.168 () {48 vars in 863 bytes} [Wed May  8 17:23:07 2024] POST /api/manage/user/list/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/17] 219.239.227.168 () {48 vars in 863 bytes} [Wed May  8 17:23:10 2024] POST /api/manage/user/list/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/18] 219.239.227.168 () {42 vars in 731 bytes} [Wed May  8 17:23:12 2024] GET /api/subscribe/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/19] 219.239.227.168 () {42 vars in 753 bytes} [Wed May  8 17:23:12 2024] GET /api/alarm_resent_notices/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/20] 219.239.227.168 () {42 vars in 743 bytes} [Wed May  8 17:23:12 2024] GET /api/get_alarm_level/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/21] 219.239.227.168 () {42 vars in 739 bytes} [Wed May  8 17:23:12 2024] GET /api/alarm_notices/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/22] 219.239.227.168 () {42 vars in 735 bytes} [Wed May  8 17:23:13 2024] GET /api/getCityInfo/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784490|app: -1|req: -1/23] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 17:23:13 2024] GET /api/weather/aqi/rank_worst/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784490|app: -1|req: -1/24] 219.239.227.168 () {42 vars in 755 bytes} [Wed May  8 17:23:13 2024] GET /api/weather/aqi/rank_best/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/25] 219.239.227.168 () {42 vars in 1188 bytes} [Wed May  8 17:23:13 2024] GET /api/weather/overview/?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+--- no python application found, check your startup logs for errors ---
+[pid: 1784490|app: -1|req: -1/27] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 17:23:13 2024] GET /api/weather/aqi/aqi_change/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+[pid: 1784487|app: -1|req: -1/27] 219.239.227.168 () {42 vars in 770 bytes} [Wed May  8 17:23:13 2024] GET /api/weather/aqi/city_change/?city= => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/28] 219.239.227.168 () {42 vars in 772 bytes} [Wed May  8 17:23:13 2024] GET /api/weather/temp/city_change/?city= => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/29] 219.239.227.168 () {42 vars in 778 bytes} [Wed May  8 17:23:13 2024] GET /api/weather/pressure/city_change?city= => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/30] 219.239.227.168 () {42 vars in 774 bytes} [Wed May  8 17:23:13 2024] GET /api/weather/humid/city_change/?city= => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/31] 219.239.227.217 () {44 vars in 844 bytes} [Wed May  8 17:23:28 2024] GET /api/get_info/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/32] 219.239.227.217 () {44 vars in 866 bytes} [Wed May  8 17:23:29 2024] GET /api/alarm_notices_brief/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/33] 219.239.227.139 () {42 vars in 724 bytes} [Wed May  8 17:23:34 2024] GET /api/get_info/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/34] 219.239.227.139 () {42 vars in 748 bytes} [Wed May  8 17:23:34 2024] GET /api/alarm_resent_notices/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/35] 219.239.227.139 () {42 vars in 726 bytes} [Wed May  8 17:23:34 2024] GET /api/subscribe/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/36] 219.239.227.139 () {42 vars in 734 bytes} [Wed May  8 17:23:34 2024] GET /api/alarm_notices/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/37] 219.239.227.139 () {42 vars in 738 bytes} [Wed May  8 17:23:34 2024] GET /api/get_alarm_level/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/38] 219.239.227.139 () {42 vars in 746 bytes} [Wed May  8 17:23:36 2024] GET /api/alarm_notices_brief/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/39] 219.239.227.168 () {42 vars in 735 bytes} [Wed May  8 17:23:42 2024] GET /api/getCityInfo/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/40] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 17:23:42 2024] GET /api/weather/aqi/rank_worst/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/41] 219.239.227.168 () {42 vars in 1188 bytes} [Wed May  8 17:23:42 2024] GET /api/weather/overview/?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/42] 219.239.227.168 () {42 vars in 755 bytes} [Wed May  8 17:23:42 2024] GET /api/weather/aqi/rank_best/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784490|app: -1|req: -1/43] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 17:23:42 2024] GET /api/weather/aqi/aqi_change/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784490|app: -1|req: -1/44] 219.239.227.168 () {42 vars in 770 bytes} [Wed May  8 17:23:42 2024] GET /api/weather/aqi/city_change/?city= => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/45] 219.239.227.168 () {42 vars in 774 bytes} [Wed May  8 17:23:42 2024] GET /api/weather/humid/city_change/?city= => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/46] 219.239.227.168 () {42 vars in 772 bytes} [Wed May  8 17:23:42 2024] GET /api/weather/temp/city_change/?city= => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/47] 219.239.227.168 () {42 vars in 778 bytes} [Wed May  8 17:23:42 2024] GET /api/weather/pressure/city_change?city= => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/48] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:23:45 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/49] 219.239.227.168 () {48 vars in 863 bytes} [Wed May  8 17:23:46 2024] POST /api/manage/user/list/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/50] 219.239.227.168 () {42 vars in 731 bytes} [Wed May  8 17:23:50 2024] GET /api/subscribe/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/52] 219.239.227.168 () {42 vars in 739 bytes} [Wed May  8 17:23:50 2024] GET /api/alarm_notices/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/53] 219.239.227.168 () {42 vars in 753 bytes} [Wed May  8 17:23:50 2024] GET /api/alarm_resent_notices/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+[pid: 1784490|app: -1|req: -1/53] 219.239.227.168 () {42 vars in 743 bytes} [Wed May  8 17:23:50 2024] GET /api/get_alarm_level/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784490|app: -1|req: -1/54] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 17:23:53 2024] GET /api/weather/aqi/rank_worst/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/55] 219.239.227.168 () {42 vars in 1188 bytes} [Wed May  8 17:23:53 2024] GET /api/weather/overview/?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/56] 219.239.227.168 () {42 vars in 755 bytes} [Wed May  8 17:23:53 2024] GET /api/weather/aqi/rank_best/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/58] 219.239.227.168 () {42 vars in 735 bytes} [Wed May  8 17:23:53 2024] GET /api/getCityInfo/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/59] 219.239.227.168 () {42 vars in 770 bytes} [Wed May  8 17:23:53 2024] GET /api/weather/aqi/city_change/?city= => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+[pid: 1784489|app: -1|req: -1/59] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 17:23:53 2024] GET /api/weather/aqi/aqi_change/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784490|app: -1|req: -1/60] 219.239.227.168 () {42 vars in 772 bytes} [Wed May  8 17:23:53 2024] GET /api/weather/temp/city_change/?city= => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/61] 219.239.227.168 () {42 vars in 774 bytes} [Wed May  8 17:23:53 2024] GET /api/weather/humid/city_change/?city= => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/62] 219.239.227.168 () {42 vars in 778 bytes} [Wed May  8 17:23:53 2024] GET /api/weather/pressure/city_change?city= => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784490|app: -1|req: -1/63] 219.239.227.139 () {48 vars in 842 bytes} [Wed May  8 17:23:57 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784489|app: -1|req: -1/64] 219.239.227.139 () {48 vars in 842 bytes} [Wed May  8 17:23:58 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/65] 219.239.227.139 () {48 vars in 842 bytes} [Wed May  8 17:23:59 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/66] 219.239.227.139 () {48 vars in 842 bytes} [Wed May  8 17:24:00 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/67] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:25:53 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/68] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:26:23 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/69] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:26:23 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/70] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:26:41 2024] POST /api/register/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/71] 219.239.227.217 () {50 vars in 956 bytes} [Wed May  8 17:26:51 2024] POST /api/login/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784487|app: -1|req: -1/72] 219.239.227.217 () {50 vars in 956 bytes} [Wed May  8 17:26:51 2024] POST /api/login/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/73] 219.239.227.217 () {50 vars in 956 bytes} [Wed May  8 17:26:51 2024] POST /api/login/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1784488|app: -1|req: -1/74] 219.239.227.217 () {50 vars in 956 bytes} [Wed May  8 17:26:57 2024] POST /api/login/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 01:28:00 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x137bef0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+Traceback (most recent call last):
+  File "/root/Meteorological_prediction_platform/back_end/./back_end/wsgi.py", line 16, in <module>
+    application = get_wsgi_application()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/__init__.py", line 19, in setup
+    configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/conf/__init__.py", line 89, in __getattr__
+    self._setup(name)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/conf/__init__.py", line 76, in _setup
+    self._wrapped = Settings(settings_module)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/conf/__init__.py", line 190, in __init__
+    mod = importlib.import_module(self.SETTINGS_MODULE)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/root/Meteorological_prediction_platform/back_end/./back_end/settings.py", line 14, in <module>
+    from celery.schedules import crontab
+ModuleNotFoundError: No module named 'celery'
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1785731)
+spawned uWSGI worker 1 (pid: 1785737, cores: 2)
+spawned uWSGI worker 2 (pid: 1785738, cores: 2)
+spawned uWSGI worker 3 (pid: 1785741, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1785742, cores: 2)
+--- no python application found, check your startup logs for errors ---
+[pid: 1785742|app: -1|req: -1/1] 219.239.227.217 () {50 vars in 956 bytes} [Thu May  9 01:28:18 2024] POST /api/login/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1785742|app: -1|req: -1/2] 219.239.227.217 () {44 vars in 844 bytes} [Thu May  9 01:28:22 2024] GET /api/get_info/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1785742|app: -1|req: -1/3] 219.239.227.217 () {44 vars in 866 bytes} [Thu May  9 01:28:22 2024] GET /api/alarm_notices_brief/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1785742|app: -1|req: -1/4] 219.239.227.217 () {44 vars in 844 bytes} [Thu May  9 01:28:26 2024] GET /api/get_info/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 1785742|app: -1|req: -1/5] 219.239.227.217 () {44 vars in 866 bytes} [Thu May  9 01:28:26 2024] GET /api/alarm_notices_brief/ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1785742|app: -1|req: -1/6] 219.239.227.217 () {42 vars in 889 bytes} [Thu May  9 01:28:42 2024] GET /api => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 01:29:01 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (127.0.0.1:8000).
+bind(): Address already in use [core/socket.c line 769]
+--- no python application found, check your startup logs for errors ---
+[pid: 1785742|app: -1|req: -1/7] 219.239.227.217 () {44 vars in 920 bytes} [Thu May  9 01:32:21 2024] GET /api => generated 21 bytes in 17 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1785737|app: -1|req: -1/8] 219.239.227.217 () {44 vars in 920 bytes} [Thu May  9 01:32:22 2024] GET /api => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 1785742|app: -1|req: -1/9] 219.239.227.217 () {44 vars in 920 bytes} [Thu May  9 01:32:22 2024] GET /api => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 01:32:38 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x14adef0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x14adef0 pid: 1787485 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1787485)
+spawned uWSGI worker 1 (pid: 1787521, cores: 2)
+spawned uWSGI worker 2 (pid: 1787524, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1787525, cores: 2)
+spawned uWSGI worker 4 (pid: 1787528, cores: 2)
+[pid: 1787528|app: 0|req: 1/1] 219.239.227.217 () {44 vars in 920 bytes} [Wed May  8 17:32:41 2024] GET /api => generated 0 bytes in 325 msecs (HTTP/1.1 301) 5 headers in 195 bytes (1 switches on core 0)
+[pid: 1787528|app: 0|req: 2/2] 219.239.227.217 () {44 vars in 922 bytes} [Wed May  8 17:32:41 2024] GET /api/ => generated 13 bytes in 0 msecs (HTTP/1.1 200) 7 headers in 220 bytes (1 switches on core 1)
+Internal Server Error: /api/register/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 151, in my_register
+    new_user = User.objects.create_user(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/contrib/auth/models.py", line 161, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/contrib/auth/models.py", line 153, in _create_user
+    user = self.model(username=username, email=email, **extra_fields)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/base.py", line 567, in __init__
+    raise TypeError(
+TypeError: User() got unexpected keyword arguments: 'role'
+[pid: 1787528|app: 0|req: 3/3] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:32:59 2024] POST /api/register/ => generated 82156 bytes in 126 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 0)
+Internal Server Error: /api/register/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 151, in my_register
+    new_user = User.objects.create_user(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/contrib/auth/models.py", line 161, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/contrib/auth/models.py", line 153, in _create_user
+    user = self.model(username=username, email=email, **extra_fields)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/base.py", line 567, in __init__
+    raise TypeError(
+TypeError: User() got unexpected keyword arguments: 'role'
+[pid: 1787528|app: 0|req: 4/4] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:33:07 2024] POST /api/register/ => generated 82155 bytes in 21 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 1)
+Internal Server Error: /api/register/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 151, in my_register
+    new_user = User.objects.create_user(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/contrib/auth/models.py", line 161, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/contrib/auth/models.py", line 153, in _create_user
+    user = self.model(username=username, email=email, **extra_fields)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/base.py", line 567, in __init__
+    raise TypeError(
+TypeError: User() got unexpected keyword arguments: 'role'
+[pid: 1787528|app: 0|req: 5/5] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:34:48 2024] POST /api/register/ => generated 82155 bytes in 22 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 0)
+Internal Server Error: /api/register/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 151, in my_register
+    new_user = User.objects.create_user(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/contrib/auth/models.py", line 161, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/contrib/auth/models.py", line 153, in _create_user
+    user = self.model(username=username, email=email, **extra_fields)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/base.py", line 567, in __init__
+    raise TypeError(
+TypeError: User() got unexpected keyword arguments: 'role'
+[pid: 1787525|app: 0|req: 1/6] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:34:56 2024] POST /api/register/ => generated 82156 bytes in 156 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 3 (pid: 1787525)...
+Gracefully killing worker 1 (pid: 1787521)...
+Gracefully killing worker 2 (pid: 1787524)...
+Gracefully killing worker 4 (pid: 1787528)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 17:35:30 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x26825b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x26825b0 pid: 1787485 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1787485)
+spawned uWSGI worker 1 (pid: 1788098, cores: 2)
+spawned uWSGI worker 2 (pid: 1788100, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1788102, cores: 2)
+spawned uWSGI worker 4 (pid: 1788105, cores: 2)
+[pid: 1788102|app: 0|req: 1/1] 219.239.227.217 () {50 vars in 962 bytes} [Wed May  8 17:35:57 2024] POST /api/register/ => generated 376 bytes in 615 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 0)
+Not Found: /api/subscribe/
+[pid: 1788102|app: 0|req: 2/2] 219.239.227.217 () {44 vars in 1082 bytes} [Wed May  8 17:36:04 2024] GET /api/subscribe/ => generated 5032 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/manage/user/list/
+[pid: 1788102|app: 0|req: 3/3] 219.239.227.217 () {50 vars in 1214 bytes} [Wed May  8 17:36:07 2024] POST /api/manage/user/list/ => generated 5054 bytes in 4 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 0)
+Not Found: /api/manage/user/list/
+[pid: 1788102|app: 0|req: 4/4] 219.239.227.217 () {50 vars in 1214 bytes} [Wed May  8 17:36:17 2024] POST /api/manage/user/list/ => generated 5054 bytes in 4 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 1)
