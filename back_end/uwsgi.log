@@ -1,0 +1,78 @@
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 18:37:51 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (127.0.0.1:8000).
+bind(): Address already in use [core/socket.c line 769]
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 18:39:03 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (127.0.0.1:8000).
+bind(): Address already in use [core/socket.c line 769]
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 18:39:51 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x2458e80
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x2458e80 pid: 1726761 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1726761)
+spawned uWSGI worker 1 (pid: 1726763, cores: 2)
+spawned uWSGI worker 2 (pid: 1726764, cores: 2)
+spawned uWSGI worker 3 (pid: 1726766, cores: 2)
+spawned uWSGI worker 4 (pid: 1726768, cores: 2)
+[pid: 1726768|app: 0|req: 1/1] 219.239.227.114 () {42 vars in 819 bytes} [Wed May  8 10:44:11 2024] GET /api => generated 0 bytes in 185 msecs (HTTP/1.1 301) 5 headers in 195 bytes (1 switches on core 0)
+[pid: 1726768|app: 0|req: 2/2] 219.239.227.114 () {42 vars in 821 bytes} [Wed May  8 10:44:11 2024] GET /api/ => generated 13 bytes in 0 msecs (HTTP/1.1 200) 7 headers in 220 bytes (1 switches on core 1)
