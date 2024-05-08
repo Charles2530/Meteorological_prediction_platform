@@ -23,5 +23,6 @@ urlpatterns = [
     path('', views.index),
     path('api/', include('users.urls')),
     path('api/', include('weather.urls')),
+    path('api/', include('notifications.urls')),
     path('auth/', include('rest_framework.urls')),
 ]
