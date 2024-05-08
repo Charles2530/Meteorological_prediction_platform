@@ -1,5 +1,42 @@
 <template>
-  <div id="mapContainer"></div>
+  <div id="mapContainer">
+    <div class="input-card" style="position: relative; z-index: 100; top:30%; width: 100px;">
+      <div class="layerbtns">
+        <el-button :class="{ 'selected': buttonActive.A, 'unselected': !buttonActive.A }"  :active="buttonActive.A" @click="clickA">
+          <div class="btnDiv">
+            <div class="btnName2">标准图层</div>
+          </div>
+        </el-button>
+        <el-button :class="{ 'selected': buttonActive.B, 'unselected': !buttonActive.B }"  :active="buttonActive.B" @click="clickB">
+          <div class="btnDiv">
+            <div class="btnName2">地形图层</div>
+          </div>
+        </el-button>
+        <el-button :class="{ 'selected': buttonActive.C, 'unselected': !buttonActive.C }"  :active="buttonActive.C" @click="clickC">
+          <div class="btnDiv">
+            <div class="btnName2">卫星图层</div>
+          </div>
+        </el-button>
+      </div>
+      <br/>
+      <br/>
+      <div class="layerbtns">
+        <el-button :class="{ 'selected': buttonActive.a, 'unselected': !buttonActive.a }"  :active="buttonActive.A" @click="clicka">
+          <div class="btnDiv">
+            <div class="btnName">风场</div>
+            <div class="btnIcon" style='background-image: "src\\assets\\img\\阴.png"'></div>
+          </div>
+        </el-button>
+        <el-button :class="{ 'selected': buttonActive.b, 'unselected': !buttonActive.b }"  :active="buttonActive.A" @click="clickb">
+          <div class="btnDiv">
+            <div class="btnName">地震</div>
+            <div class="btnIcon" style='background-image: "src\\assets\\img\\阴.png"'></div>
+          </div>
+        </el-button>
+      </div>
+    </div>
+  </div>
+ 
 </template>
 
 <script setup lang="ts">
@@ -72,6 +109,14 @@ const hazardMarkData = reactive([
   }
 ]);
 
+const buttonActive = reactive({
+  A:false,
+  B:true,
+  C:false,
+  a:false,
+  b:false,
+});
+
 let map: {
 setCenter(markersPosition: any[], arg1: boolean, arg2: number): unknown;
 setFitView(polygons: any, arg1: boolean): unknown;
@@ -106,7 +151,23 @@ let AAMap: {
   }) => any;
 } = null;
 
+declare let Loca:any
+
+let loca: {
+remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; 
+}=null;
+
 let windLayer: AMapWind = null;
+
+let wms: null = null;
+
+let sate: null = null;
+
+let pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; } = null;
+
+// let dat: {
+// removeLayer(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; addLayer: (arg0: any, arg1: string) => void; 
+// } = null;
 
 export interface API {
   dis_info: { districtName: String };
@@ -124,6 +185,9 @@ function initMap() {
   AMapLoader.load({
     key: "671116f417c14e708dd09edf8d4ab63a",
     version: "2.0",
+    Loca:{                // 是否加载 Loca， 缺省不加载
+      version: "2.0.0",  // Loca 版本，缺省 1.3.2
+    },
     plugins: [
       "AMap.Scale",
       "AMap.ToolBar",
@@ -141,10 +205,19 @@ function initMap() {
         // center: [105,36], // 初始化地图中心点位置
         zoom: 4.8, // 初始化地图级别
         center: [103, 36], // 初始化地图中心点位置
+        // mapStyle: 'amap://styles/dark',
+        // showLabel: true,
+        // features: ['bg', 'road', 'building', 'point'],
+        // layers: [new AMap.TileLayer(), new AMap.TileLayer.Satellite()],
       });
       map.setLimitBounds(new AMap.Bounds([50,60],[150,0]));
+      loca = new Loca.Container({
+        map: map
+      });
+      //卫星图层
+      sate = new AMap.TileLayer.Satellite({zIndex:1});
       // 天地图图层
-      const wms = new AMap.TileLayer.WMTS({
+      wms = new AMap.TileLayer.WMTS({
         url: "http://t0.tianditu.gov.cn/ter_w/wmts",
         blend: false,
         opcaity: 1,
@@ -173,57 +246,16 @@ function initMap() {
         },
       });
       
-      //风场
-      import('amap-wind').then(({ WindLayer }) => {
-        fetch('https://sakitam.oss-cn-beijing.aliyuncs.com/codepen/wind-layer/json/wind.json')
-          .then(res => res.json())
-          .then(res => {
-            windLayer = new WindLayer(res, {
-              windOptions: {
-                // colorScale: scale,
-                velocityScale: 1 / 50,
-                paths: 1000,
-                // eslint-disable-next-line no-unused-vars
-                maxAge: 10,
-                frameRate: 2,
-                colorScale: [
-                  "rgb(36,104, 180)",
-                  "rgb(60,157, 194)",
-                  "rgb(128,205,193 )",
-                  "rgb(151,218,168 )",
-                  "rgb(198,231,181)",
-                  "rgb(238,247,217)",
-                  "rgb(255,238,159)",
-                  "rgb(252,217,125)",
-                  "rgb(255,182,100)",
-                  "rgb(252,150,75)",
-                  "rgb(250,112,52)",
-                  "rgb(245,64,32)",
-                  "rgb(237,45,28)",
-                  "rgb(220,24,32)",
-                  "rgb(180,0,35)"
-                ],
-                lineWidth: 5,
-                // colorScale: scale,
-              },
-              zIndex: 20,
-            });
-            // windLayer2 = 
-            console.log(map, windLayer);
-
-            windLayer.appendTo(map);
-          });
-      });
-    
       map.addControl(new AMap.Scale({position: 'LB'}));
-      map.addControl(new AMap.MapType());
       map.addControl(new AMap.ToolBar({ liteStyle: true, position: 'LT'}));
       map.add(wms);
+      // map.add(sate);
       map.add(disCountry);
       dis_info.district = new AMap.DistrictSearch(dis_info.opts);
       dis_info.geoCoder = new AMap.Geocoder();
       handlerMapClick();
       markPoints();
+      InitEarthQuake();
     })
     .catch((e) => {
       console.log(e);
@@ -232,6 +264,7 @@ function initMap() {
 
 //高亮区域
 function drawBounds() {
+  console.log("ccc");
   var step = 15;
   //行政区查询
   dis_info.district.search(
@@ -281,6 +314,7 @@ function handlerMapClick() {
   map.on("click", (e: { lnglat: { lng: any; lat: any } }) => {
     // 点击坐标
     const markersPosition = [e.lnglat.lng, e.lnglat.lat];
+    console.log(markersPosition);
 
     // eslint-disable-next-line no-undef
     // 根据坐标获取位置信息
@@ -300,17 +334,17 @@ function handlerMapClick() {
           if (dis_info.districtCode != "100000") {
             dis_info.districtName = dis_info.districtName + "/中国";
             drawBounds();
-            map.setCenter(markersPosition, false, 100);
+            map.setCenter(markersPosition, false, 300);
           } else {
             dis_info.districtName = "中国";
             map.remove(dis_info.polygons); //清除结果
-            map.setCenter([105, 36], true, 80);
+            map.setCenter([105, 36], false, 30);
             map.setZoom(4.8);
           }
         } else {
           dis_info.districtName = "中国";
           map.remove(dis_info.polygons); //清除结果
-          map.setCenter([105, 36], true, 80);
+          map.setCenter([105, 36], false, 30);
           map.setZoom(4.8);
         }
       }
@@ -359,6 +393,153 @@ function setMarkWindows(_e: any, item: { place: string; longitude: number; latit
   dd.lng = item.longitude
   infoWindow.open(map, dd);
 }
+
+function clickA() {
+  buttonActive.A = true;
+  buttonActive.B = false;
+  buttonActive.C = false;
+  map.remove(wms);
+  map.remove(sate);
+}
+
+
+function clickB() {
+  buttonActive.A = false;
+  buttonActive.B = true;
+  buttonActive.C = false;
+  map.remove(sate);
+  map.add(wms);
+  console.log("ccc");
+}
+
+function clickC() {
+  buttonActive.A = false;
+  buttonActive.B = false;
+  buttonActive.C = true;
+  map.remove(wms);
+  map.add(sate);
+}
+
+function clicka() {
+  buttonActive.a = !buttonActive.a;
+  if (buttonActive.a) {
+    showWind();
+  }
+  else {
+    windLayer.remove();
+  }
+}
+
+function clickb() {
+  buttonActive.b = !buttonActive.b;
+  if (buttonActive.b) {
+    loca.add(pl);
+  }
+  else {
+    loca.remove(pl);
+  }
+}
+
+
+
+//显示风场图层
+function showWind() {
+ import('amap-wind').then(({ WindLayer }) => {
+  fetch('https://sakitam.oss-cn-beijing.aliyuncs.com/codepen/wind-layer/json/wind.json')
+    .then(res => res.json())
+    .then(res => {
+      windLayer = new WindLayer(res, {
+        windOptions: {
+          // colorScale: scale,
+          velocityScale: 1 / 50,
+          paths: 1000,
+          // eslint-disable-next-line no-unused-vars
+          maxAge: 10,
+          frameRate: 2,
+          colorScale: [
+            "rgb(36,104, 180)",
+            "rgb(60,157, 194)",
+            "rgb(128,205,193 )",
+            "rgb(151,218,168 )",
+            "rgb(198,231,181)",
+            "rgb(238,247,217)",
+            "rgb(255,238,159)",
+            "rgb(252,217,125)",
+            "rgb(255,182,100)",
+            "rgb(252,150,75)",
+            "rgb(250,112,52)",
+            "rgb(245,64,32)",
+            "rgb(237,45,28)",
+            "rgb(220,24,32)",
+            "rgb(180,0,35)"
+          ],
+          lineWidth: 5,
+          // colorScale: scale,
+        },
+        zIndex: 20,
+      });
+      console.log(map, windLayer);
+
+      windLayer.appendTo(map);
+    });
+  });
+}
+
+//初始化地震图层
+function InitEarthQuake() {
+  var geo = new Loca.GeoJSONSource({
+    url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/earthquake.json',
+  });
+
+  // dat = new Loca.Dat();
+
+  pl = new Loca.PointLayer({
+      zIndex: 10,
+      blend: 'lighter' //lighter normal
+  });
+
+  var colors = [
+      '#F86615',
+      '#F86615',
+      '#F86615',
+      '#F86615',
+      '#D60352',
+  ];
+
+  pl.setSource(geo);
+  pl.setStyle({
+      radius: function(_i: any, feature: { properties: { level: string | number; }; }) {
+          let level = +feature.properties.level;
+          if (level < 7) {
+              return level / 2;
+          }
+          return 8;
+      },
+      color: function(_i: any, feature: { properties: any; }) {
+          let data = feature.properties;
+          let ci = ~~(data.depth / 120 * colors.length) % colors.length;
+          return colors[ci];
+      },
+      borderWidth: 0,
+      blurRadius: -1,
+      unit: 'px',
+  });
+  // loca.add(pl);
+
+  pl.addAnimate({
+    key: 'radius',
+    value: [0, 1],
+    duration: 500,
+    easing: 'Linear',
+    transform: 2000,
+    random: true,
+    delay: 8000,
+    yoyo:true,
+    repeat: 100000
+  });
+  // dat.addLayer(pl, '点图层');
+}
+
   
 </script>
 
@@ -368,4 +549,94 @@ function setMarkWindows(_e: any, item: { place: string; longitude: number; latit
   height: 100%;
   
 }
+
+.layerbtns[data-iconsize="0"] {
+  margin-right: 11px;
+  display: grid;
+  justify-items: end;
+  align-items: start;
+  font-size: 6px;
+  width:100px;
+}
+
+.btnDiv {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0.3em 0 0.3em 0.4em;
+}
+
+.layerbtn {
+  height: 40px;
+  border: 1px solid #3924a7; 
+  border-radius: 30px;
+  background-color: rgba(45,45,45,0.2);
+  display: flex;
+  width: 90px;
+  margin: 0.3em 0 0.3em 0.4em;
+  position: relative;
+}
+
+.layerbtn2 {
+  height: 35px;
+  border: 1px solid #3924a7; 
+  border-radius: 30px;
+  background-color: rgba(45,45,45,0.2);
+  display: flex;
+  width: 90px;
+  margin: 0.3em 0 0.3em 0.4em;
+  position: relative;
+}
+
+.unselected {
+  height: 35px;
+  border: 1px solid #3924a7; 
+  border-radius: 30px;
+  background-color: rgba(45,45,45,0.1);
+  display: flex;
+  width: 90px;
+  margin: 0.3em 0 0.3em 0.4em;
+  position: relative;
+}
+
+.selected {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  height: 35px;
+  border: 1px solid #3924a7; 
+  border-radius: 30px;
+  /* background-color: rgba(8, 122, 0, 0.5); */
+  background:linear-gradient(to right top, rgba(26, 79, 158, 0.5),rgb(243, 179, 179, 0.5));
+  display: flex;
+  width: 90px;
+  margin: 0.3em 0 0.3em 0.4em;
+  position: relative;
+}
+
+.btnIcon {
+  width: 2.8em;
+  height: 2.8em;
+  border-radius: 3em;
+  box-shadow: 0 0 4px 0 black;
+  background-color: var(--color-transparent);
+  background-size: 65px;
+  z-index: 1;
+  text-align: center;
+  position: absolute;
+  right:0;
+}
+
+.btnName {
+  position: absolute;
+  left: 15%;
+  color: black;
+  font-weight: 600;
+}
+
+.btnName2 {
+  position: absolute;
+  left: 20%;
+  color: black;
+  font-weight: 600;
+}
+
 </style>
