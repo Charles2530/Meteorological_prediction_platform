@@ -1727,3 +1727,1829 @@ Not Found: /api/weather/temp/city_change
 [pid: 1726766|app: 0|req: 162/727] 219.239.227.168 () {42 vars in 723 bytes} [Wed May  8 13:40:53 2024] GET /api/weather/temp/city_change?city= => generated 5080 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
 Not Found: /api/weather/pressure/city_change
 [pid: 1726766|app: 0|req: 162/728] 219.239.227.168 () {42 vars in 731 bytes} [Wed May  8 13:40:53 2024] GET /api/weather/pressure/city_change?city= => generated 5092 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 22:47:06 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (127.0.0.1:8000).
+bind(): Address already in use [core/socket.c line 769]
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 22:47:27 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (127.0.0.1:8000).
+bind(): Address already in use [core/socket.c line 769]
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 22:47:49 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (127.0.0.1:8000).
+bind(): Address already in use [core/socket.c line 769]
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 22:53:06 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (127.0.0.1:8000).
+bind(): Address already in use [core/socket.c line 769]
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 22:53:14 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (127.0.0.1:8000).
+bind(): Address already in use [core/socket.c line 769]
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 22:55:35 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x26ceef0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x26ceef0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1760739, cores: 2)
+spawned uWSGI worker 2 (pid: 1760742, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1760743, cores: 2)
+spawned uWSGI worker 4 (pid: 1760745, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1760745|app: 0|req: 2/1] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 14:57:23 2024] GET /api/get_info/ => generated 17 bytes in 1439 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief/
+[pid: 1760745|app: 0|req: 2/2] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 14:57:23 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 995 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1760739)...
+Gracefully killing worker 3 (pid: 1760743)...
+Gracefully killing worker 2 (pid: 1760742)...
+Gracefully killing worker 4 (pid: 1760745)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 14:58:33 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x1ecb5b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x1ecb5b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1761262, cores: 2)
+spawned uWSGI worker 2 (pid: 1761263, cores: 2)
+spawned uWSGI worker 3 (pid: 1761266, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1761267, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1761263|app: 0|req: 1/1] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 14:58:34 2024] GET /api/get_info/ => generated 49 bytes in 144 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief/
+[pid: 1761267|app: 0|req: 1/2] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 14:58:35 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 147 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1761262)...
+Gracefully killing worker 2 (pid: 1761263)...
+Gracefully killing worker 3 (pid: 1761266)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+Gracefully killing worker 4 (pid: 1761267)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 14:59:05 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0xf705b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0xf705b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1761344, cores: 2)
+spawned uWSGI worker 2 (pid: 1761346, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1761348, cores: 2)
+spawned uWSGI worker 4 (pid: 1761351, cores: 2)
+Internal Server Error: /api/get_info/
+Traceback (most recent call last):
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 430, in user_info
+    user = Token.objects.get(key=token).user
+AttributeError: type object 'Token' has no attribute 'objects'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 431, in user_info
+    except Token.DoesNotExist:
+AttributeError: type object 'Token' has no attribute 'DoesNotExist'
+[pid: 1761346|app: 0|req: 1/1] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 15:00:51 2024] GET /api/get_info/ => generated 63602 bytes in 179 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief/
+[pid: 1761348|app: 0|req: 1/2] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 15:00:52 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 145 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Bad Request: /api/register/
+[pid: 1761348|app: 0|req: 2/3] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:01:30 2024] POST /api/register/ => generated 52 bytes in 1 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1761344)...
+Gracefully killing worker 3 (pid: 1761348)...
+Gracefully killing worker 4 (pid: 1761351)...
+Gracefully killing worker 2 (pid: 1761346)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:08:21 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x23345b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x23345b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1762654, cores: 2)
+spawned uWSGI worker 2 (pid: 1762655, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1762658, cores: 2)
+spawned uWSGI worker 4 (pid: 1762661, cores: 2)
+Bad Request: /api/register/
+[pid: 1762658|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:08:27 2024] POST /api/register/ => generated 53 bytes in 143 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1762654)...
+Gracefully killing worker 2 (pid: 1762655)...
+Gracefully killing worker 3 (pid: 1762658)...
+Gracefully killing worker 4 (pid: 1762661)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:09:30 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x25955b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x25955b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1762802, cores: 2)
+spawned uWSGI worker 2 (pid: 1762803, cores: 2)
+spawned uWSGI worker 3 (pid: 1762806, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1762807, cores: 2)
+Internal Server Error: /api/get_info/
+Traceback (most recent call last):
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 434, in user_info
+    user = Token.objects.get(key=token).user
+AttributeError: type object 'Token' has no attribute 'objects'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 435, in user_info
+    except Token.DoesNotExist:
+AttributeError: type object 'Token' has no attribute 'DoesNotExist'
+[pid: 1762806|app: 0|req: 1/1] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 15:09:32 2024] GET /api/get_info/ => generated 63602 bytes in 161 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief/
+[pid: 1762807|app: 0|req: 1/2] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 15:09:32 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 146 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Bad Request: /api/register/
+[pid: 1762807|app: 0|req: 2/3] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:09:45 2024] POST /api/register/ => generated 34 bytes in 1 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1762802)...
+Gracefully killing worker 2 (pid: 1762803)...
+Gracefully killing worker 3 (pid: 1762806)...
+Gracefully killing worker 4 (pid: 1762807)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:15:05 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0xd135b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0xd135b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1763741, cores: 2)
+spawned uWSGI worker 2 (pid: 1763742, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1763745, cores: 2)
+spawned uWSGI worker 4 (pid: 1763748, cores: 2)
+Internal Server Error: /api/get_info/
+Traceback (most recent call last):
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 434, in user_info
+    user = Token.objects.get(key=token).user
+AttributeError: type object 'Token' has no attribute 'objects'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 435, in user_info
+    except Token.DoesNotExist:
+AttributeError: type object 'Token' has no attribute 'DoesNotExist'
+[pid: 1763745|app: 0|req: 1/1] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 15:15:17 2024] GET /api/get_info/ => generated 63602 bytes in 162 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief/
+[pid: 1763745|app: 0|req: 2/2] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 15:15:18 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Internal Server Error: /api/register/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 114, in my_register
+    username = request.POST.get(username)
+UnboundLocalError: local variable 'username' referenced before assignment
+[pid: 1763745|app: 0|req: 3/3] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:15:44 2024] POST /api/register/ => generated 58968 bytes in 15 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1763741)...
+Gracefully killing worker 2 (pid: 1763742)...
+Gracefully killing worker 3 (pid: 1763745)...
+Gracefully killing worker 4 (pid: 1763748)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:16:07 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x127b5b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x127b5b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1763870, cores: 2)
+spawned uWSGI worker 2 (pid: 1763872, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1763874, cores: 2)
+spawned uWSGI worker 4 (pid: 1763877, cores: 2)
+Internal Server Error: /api/get_info/
+Traceback (most recent call last):
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 434, in user_info
+    user = Token.objects.get(key=token).user
+AttributeError: type object 'Token' has no attribute 'objects'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 435, in user_info
+    except Token.DoesNotExist:
+AttributeError: type object 'Token' has no attribute 'DoesNotExist'
+[pid: 1763874|app: 0|req: 1/1] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 15:16:23 2024] GET /api/get_info/ => generated 63602 bytes in 166 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief/
+[pid: 1763874|app: 0|req: 2/2] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 15:16:24 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/manage/user/list/
+[pid: 1763874|app: 0|req: 3/3] 219.239.227.102 () {48 vars in 912 bytes} [Wed May  8 15:16:27 2024] POST /api/manage/user/list/ => generated 5054 bytes in 5 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 0)
+Bad Request: /api/register/
+[pid: 1763874|app: 0|req: 4/4] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:16:39 2024] POST /api/register/ => generated 32 bytes in 1 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1763870)...
+Gracefully killing worker 2 (pid: 1763872)...
+Gracefully killing worker 3 (pid: 1763874)...
+Gracefully killing worker 4 (pid: 1763877)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:16:52 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x27555b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x27555b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1763996, cores: 2)
+spawned uWSGI worker 2 (pid: 1763997, cores: 2)
+spawned uWSGI worker 3 (pid: 1764000, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1764001, cores: 2)
+Internal Server Error: /api/register/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 128, in my_register
+    return JsonResponse({
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/http/response.py", line 733, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type WSGIRequest is not JSON serializable
+[pid: 1764000|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:16:54 2024] POST /api/register/ => generated 85341 bytes in 237 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 3 (pid: 1764000)...
+Gracefully killing worker 1 (pid: 1763996)...
+Gracefully killing worker 2 (pid: 1763997)...
+Gracefully killing worker 4 (pid: 1764001)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:17:53 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x20b25b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x20b25b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1764133, cores: 2)
+spawned uWSGI worker 2 (pid: 1764134, cores: 2)
+spawned uWSGI worker 3 (pid: 1764137, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1764138, cores: 2)
+Internal Server Error: /api/get_info/
+Traceback (most recent call last):
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 434, in user_info
+    user = Token.objects.get(key=token).user
+AttributeError: type object 'Token' has no attribute 'objects'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 435, in user_info
+    except Token.DoesNotExist:
+AttributeError: type object 'Token' has no attribute 'DoesNotExist'
+[pid: 1764134|app: 0|req: 1/1] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 15:17:55 2024] GET /api/get_info/ => generated 63602 bytes in 217 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Not Found: /api/manage/user/list/
+[pid: 1764134|app: 0|req: 2/2] 219.239.227.102 () {48 vars in 912 bytes} [Wed May  8 15:17:56 2024] POST /api/manage/user/list/ => generated 5054 bytes in 5 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief/
+[pid: 1764138|app: 0|req: 1/3] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 15:17:56 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 146 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Bad Request: /api/register/
+[pid: 1764138|app: 0|req: 2/4] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:18:02 2024] POST /api/register/ => generated 36 bytes in 1 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 2 (pid: 1764134)...
+Gracefully killing worker 3 (pid: 1764137)...
+Gracefully killing worker 4 (pid: 1764138)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+Gracefully killing worker 1 (pid: 1764133)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:18:18 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x28745b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x28745b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1764211, cores: 2)
+spawned uWSGI worker 2 (pid: 1764212, cores: 2)
+spawned uWSGI worker 3 (pid: 1764215, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1764216, cores: 2)
+Internal Server Error: /api/register/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 128, in my_register
+    return JsonResponse({
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/http/response.py", line 733, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type WSGIRequest is not JSON serializable
+[pid: 1764216|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:18:20 2024] POST /api/register/ => generated 85341 bytes in 278 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1764211)...
+Gracefully killing worker 2 (pid: 1764212)...
+Gracefully killing worker 3 (pid: 1764215)...
+Gracefully killing worker 4 (pid: 1764216)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:19:46 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x166d5b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x166d5b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1764428, cores: 2)
+spawned uWSGI worker 2 (pid: 1764431, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1764432, cores: 2)
+spawned uWSGI worker 4 (pid: 1764433, cores: 2)
+Bad Request: /api/register/
+[pid: 1764428|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:19:48 2024] POST /api/register/ => generated 32 bytes in 144 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1764428)...
+Gracefully killing worker 2 (pid: 1764431)...
+Gracefully killing worker 3 (pid: 1764432)...
+Gracefully killing worker 4 (pid: 1764433)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:21:05 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0xcc75b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0xcc75b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1764630, cores: 2)
+spawned uWSGI worker 2 (pid: 1764631, cores: 2)
+spawned uWSGI worker 3 (pid: 1764632, cores: 2)
+spawned uWSGI worker 4 (pid: 1764635, cores: 2)
+Python auto-reloader enabled
+Internal Server Error: /api/register/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 128, in my_register
+    return JsonResponse({
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/http/response.py", line 733, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bytes is not JSON serializable
+[pid: 1764632|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:21:12 2024] POST /api/register/ => generated 86496 bytes in 166 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1764630)...
+Gracefully killing worker 3 (pid: 1764632)...
+Gracefully killing worker 2 (pid: 1764631)...
+Gracefully killing worker 4 (pid: 1764635)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:21:27 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0xba95b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0xba95b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1764686, cores: 2)
+spawned uWSGI worker 2 (pid: 1764687, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1764690, cores: 2)
+spawned uWSGI worker 4 (pid: 1764693, cores: 2)
+Internal Server Error: /api/get_info/
+Traceback (most recent call last):
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 434, in user_info
+    user = Token.objects.get(key=token).user
+AttributeError: type object 'Token' has no attribute 'objects'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 435, in user_info
+    except Token.DoesNotExist:
+AttributeError: type object 'Token' has no attribute 'DoesNotExist'
+[pid: 1764693|app: 0|req: 1/1] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 15:21:29 2024] GET /api/get_info/ => generated 63602 bytes in 167 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Not Found: /api/manage/user/list/
+[pid: 1764693|app: 0|req: 2/2] 219.239.227.102 () {48 vars in 912 bytes} [Wed May  8 15:21:29 2024] POST /api/manage/user/list/ => generated 5054 bytes in 5 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief/
+[pid: 1764690|app: 0|req: 1/3] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 15:21:30 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 147 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Bad Request: /api/register/
+[pid: 1764690|app: 0|req: 2/4] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:21:35 2024] POST /api/register/ => generated 32 bytes in 1 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1764686)...
+Gracefully killing worker 3 (pid: 1764690)...
+Gracefully killing worker 2 (pid: 1764687)...
+Gracefully killing worker 4 (pid: 1764693)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:21:44 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x19e65b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x19e65b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1764735, cores: 2)
+spawned uWSGI worker 2 (pid: 1764736, cores: 2)
+spawned uWSGI worker 3 (pid: 1764739, cores: 2)
+spawned uWSGI worker 4 (pid: 1764740, cores: 2)
+Python auto-reloader enabled
+Internal Server Error: /api/register/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 128, in my_register
+    return JsonResponse({
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/http/response.py", line 733, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bytes is not JSON serializable
+[pid: 1764735|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:21:44 2024] POST /api/register/ => generated 86504 bytes in 173 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1764735)...
+Gracefully killing worker 2 (pid: 1764736)...
+Gracefully killing worker 3 (pid: 1764739)...
+Gracefully killing worker 4 (pid: 1764740)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:27:27 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0xdbe5b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0xdbe5b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1765469, cores: 2)
+spawned uWSGI worker 2 (pid: 1765470, cores: 2)
+spawned uWSGI worker 3 (pid: 1765473, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1765474, cores: 2)
+Bad Request: /api/register/
+[pid: 1765474|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:27:32 2024] POST /api/register/ => generated 32 bytes in 143 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+Not Found: /api/getInfo
+[pid: 1765474|app: 0|req: 2/2] 122.13.77.124 () {36 vars in 459 bytes} [Wed May  8 15:35:10 2024] HEAD /api/getInfo => generated 5024 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 4 (pid: 1765474)...
+Gracefully killing worker 1 (pid: 1765469)...
+Gracefully killing worker 3 (pid: 1765473)...
+Gracefully killing worker 2 (pid: 1765470)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:35:53 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x1aab5b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x1aab5b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1766420, cores: 2)
+spawned uWSGI worker 2 (pid: 1766421, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1766424, cores: 2)
+spawned uWSGI worker 4 (pid: 1766427, cores: 2)
+Bad Request: /api/register/
+[pid: 1766424|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:36:08 2024] POST /api/register/ => generated 128 bytes in 145 msecs (HTTP/1.1 400) 8 headers in 254 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 3 (pid: 1766424)...
+Gracefully killing worker 1 (pid: 1766420)...
+Gracefully killing worker 2 (pid: 1766421)...
+Gracefully killing worker 4 (pid: 1766427)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:37:36 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x27925b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x27925b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1766701, cores: 2)
+spawned uWSGI worker 2 (pid: 1766702, cores: 2)
+spawned uWSGI worker 3 (pid: 1766705, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1766706, cores: 2)
+Internal Server Error: /api/register/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 167, in my_register
+    return JsonResponse({
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/http/response.py", line 733, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type RefreshToken is not JSON serializable
+[pid: 1766706|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:37:39 2024] POST /api/register/ => generated 89584 bytes in 678 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 0)
+Bad Request: /api/register/
+[pid: 1766706|app: 0|req: 2/2] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:38:41 2024] POST /api/register/ => generated 55 bytes in 2 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1766701)...
+Gracefully killing worker 3 (pid: 1766705)...
+Gracefully killing worker 4 (pid: 1766706)...
+Gracefully killing worker 2 (pid: 1766702)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:51:57 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x221a5b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x221a5b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1768738, cores: 2)
+spawned uWSGI worker 2 (pid: 1768739, cores: 2)
+spawned uWSGI worker 3 (pid: 1768742, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1768743, cores: 2)
+Internal Server Error: /api/get_info/
+Traceback (most recent call last):
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 434, in user_info
+    user = Token.objects.get(key=token).user
+AttributeError: type object 'Token' has no attribute 'objects'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 435, in user_info
+    except Token.DoesNotExist:
+AttributeError: type object 'Token' has no attribute 'DoesNotExist'
+[pid: 1768743|app: 0|req: 1/1] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 15:52:04 2024] GET /api/get_info/ => generated 63602 bytes in 168 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Not Found: /api/manage/user/list/
+[pid: 1768743|app: 0|req: 2/2] 219.239.227.102 () {48 vars in 912 bytes} [Wed May  8 15:52:04 2024] POST /api/manage/user/list/ => generated 5054 bytes in 5 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief/
+[pid: 1768739|app: 0|req: 1/3] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 15:52:04 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 150 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1768739|app: 0|req: 2/4] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 15:52:12 2024] POST /api/register/ => generated 372 bytes in 493 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 1)
+[pid: 1768742|app: 0|req: 1/5] 219.239.227.102 () {48 vars in 861 bytes} [Wed May  8 15:52:42 2024] POST /api/register/ => generated 375 bytes in 602 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 0)
+Not Found: /api/subscribe/
+[pid: 1768743|app: 0|req: 3/6] 219.239.227.102 () {42 vars in 981 bytes} [Wed May  8 15:52:46 2024] GET /api/subscribe/ => generated 5032 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Forbidden: /api/operate/email/
+[pid: 1768743|app: 0|req: 4/7] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 15:53:02 2024] POST /api/operate/email/ => generated 82 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 251 bytes (1 switches on core 1)
+Forbidden: /api/operate/email/
+[pid: 1768743|app: 0|req: 5/8] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 15:53:03 2024] POST /api/operate/email/ => generated 82 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 251 bytes (1 switches on core 0)
+Forbidden: /api/operate/email/
+[pid: 1768743|app: 0|req: 6/9] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 15:53:04 2024] POST /api/operate/email/ => generated 82 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 251 bytes (1 switches on core 1)
+Forbidden: /api/operate/email/
+[pid: 1768742|app: 0|req: 2/10] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 15:53:17 2024] POST /api/operate/email/ => generated 82 bytes in 3 msecs (HTTP/1.1 403) 8 headers in 251 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1768738)...
+Gracefully killing worker 3 (pid: 1768742)...
+Gracefully killing worker 2 (pid: 1768739)...
+Gracefully killing worker 4 (pid: 1768743)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:54:07 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x1e9e5b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x1e9e5b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1769050, cores: 2)
+spawned uWSGI worker 2 (pid: 1769052, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1769054, cores: 2)
+spawned uWSGI worker 4 (pid: 1769057, cores: 2)
+Bad Request: /api/operate/email/
+[pid: 1769057|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 15:54:09 2024] POST /api/operate/email/ => generated 46 bytes in 145 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1769050)...
+Gracefully killing worker 4 (pid: 1769057)...
+Gracefully killing worker 3 (pid: 1769054)...
+Gracefully killing worker 2 (pid: 1769052)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:55:02 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0xeb05b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0xeb05b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1769204, cores: 2)
+spawned uWSGI worker 2 (pid: 1769205, cores: 2)
+spawned uWSGI worker 3 (pid: 1769208, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1769209, cores: 2)
+Bad Request: /api/operate/email/
+[pid: 1769209|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 15:55:04 2024] POST /api/operate/email/ => generated 46 bytes in 147 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+Bad Request: /api/operate/email/
+[pid: 1769208|app: 0|req: 1/2] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 15:55:08 2024] POST /api/operate/email/ => generated 46 bytes in 146 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1769204)...
+Gracefully killing worker 2 (pid: 1769205)...
+Gracefully killing worker 3 (pid: 1769208)...
+Gracefully killing worker 4 (pid: 1769209)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:55:15 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x1a365b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x1a365b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1769255, cores: 2)
+spawned uWSGI worker 2 (pid: 1769256, cores: 2)
+spawned uWSGI worker 3 (pid: 1769259, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1769260, cores: 2)
+Internal Server Error: /api/operate/email/
+Traceback (most recent call last):
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 332, in update_user_email
+    user = User.objects.get(uid=uid)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1495, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1307, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1772, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'uid' into field. Choices are: date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, password, user_permissions, username
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 351, in update_user_email
+    return JsonResponse({"success": False, "reason": e}, status=400)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/http/response.py", line 733, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type FieldError is not JSON serializable
+[pid: 1769260|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 15:55:36 2024] POST /api/operate/email/ => generated 141459 bytes in 249 msecs (HTTP/1.1 500) 8 headers in 283 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1769255)...
+Gracefully killing worker 3 (pid: 1769259)...
+Gracefully killing worker 4 (pid: 1769260)...
+Gracefully killing worker 2 (pid: 1769256)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:58:34 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x21a45b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x21a45b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1769749, cores: 2)
+spawned uWSGI worker 2 (pid: 1769750, cores: 2)
+spawned uWSGI worker 3 (pid: 1769753, cores: 2)
+spawned uWSGI worker 4 (pid: 1769754, cores: 2)
+Python auto-reloader enabled
+Bad Request: /api/operate/email/
+[pid: 1769753|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 15:58:37 2024] POST /api/operate/email/ => generated 46 bytes in 150 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 3 (pid: 1769753)...
+Gracefully killing worker 1 (pid: 1769749)...
+Gracefully killing worker 4 (pid: 1769754)...
+Gracefully killing worker 2 (pid: 1769750)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 15:59:06 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x23e65b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x23e65b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1769840, cores: 2)
+spawned uWSGI worker 2 (pid: 1769842, cores: 2)
+spawned uWSGI worker 3 (pid: 1769844, cores: 2)
+spawned uWSGI worker 4 (pid: 1769847, cores: 2)
+Python auto-reloader enabled
+Bad Request: /api/operate/email/
+[pid: 1769847|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 15:59:15 2024] POST /api/operate/email/ => generated 46 bytes in 149 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1769840)...
+Gracefully killing worker 4 (pid: 1769847)...
+Gracefully killing worker 3 (pid: 1769844)...
+Gracefully killing worker 2 (pid: 1769842)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 16:01:17 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x11675b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x11675b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1770203, cores: 2)
+spawned uWSGI worker 2 (pid: 1770204, cores: 2)
+spawned uWSGI worker 3 (pid: 1770207, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1770208, cores: 2)
+Bad Request: /api/operate/email/
+[pid: 1770208|app: 0|req: 1/1] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 16:01:19 2024] POST /api/operate/email/ => generated 32 bytes in 149 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+Bad Request: /api/operate/email/
+[pid: 1770208|app: 0|req: 2/2] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 16:03:38 2024] POST /api/operate/email/ => generated 32 bytes in 2 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+Bad Request: /api/operate/email/
+[pid: 1770207|app: 0|req: 1/3] 219.239.227.102 () {48 vars in 1107 bytes} [Wed May  8 16:15:29 2024] POST /api/operate/email/ => generated 32 bytes in 144 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+Bad Request: /api/login/
+Bad Request: /api/login/
+[pid: 1770207|app: 0|req: 3/4] 219.239.227.102 () {48 vars in 1091 bytes} [Wed May  8 16:22:04 2024] POST /api/login/ => generated 50 bytes in 144187 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+Bad Request: /api/login/
+[pid: 1770208|app: 0|req: 4/5] 219.239.227.102 () {48 vars in 1091 bytes} [Wed May  8 16:22:20 2024] POST /api/login/ => generated 50 bytes in 128181 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+[pid: 1770208|app: 0|req: 4/6] 219.239.227.217 () {48 vars in 1091 bytes} [Wed May  8 16:24:00 2024] POST /api/login/ => generated 50 bytes in 28235 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief/
+[pid: 1770207|app: 0|req: 3/7] 219.239.227.102 () {42 vars in 1001 bytes} [Wed May  8 16:21:46 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 162282 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Bad Request: /api/login/
+Bad Request: /api/login/
+[pid: 1770203|app: 0|req: 2/8] 219.239.227.102 () {48 vars in 1091 bytes} [Wed May  8 16:23:15 2024] POST /api/login/ => generated 50 bytes in 75162 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+[pid: 1770203|app: 0|req: 2/9] 219.239.227.102 () {48 vars in 1091 bytes} [Wed May  8 16:22:26 2024] POST /api/login/ => generated 50 bytes in 124147 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+Not Found: /api/manage/user/list/
+[pid: 1770204|app: 0|req: 2/10] 219.239.227.102 () {48 vars in 1113 bytes} [Wed May  8 16:22:01 2024] POST /api/manage/user/list/ => generated 5054 bytes in 149230 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 1)
+Internal Server Error: /api/get_info/
+Traceback (most recent call last):
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 434, in user_info
+    user = Token.objects.get(key=token).user
+AttributeError: type object 'Token' has no attribute 'objects'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 435, in user_info
+    except Token.DoesNotExist:
+AttributeError: type object 'Token' has no attribute 'DoesNotExist'
+[pid: 1770204|app: 0|req: 2/11] 219.239.227.102 () {42 vars in 979 bytes} [Wed May  8 16:21:43 2024] GET /api/get_info/ => generated 64253 bytes in 167208 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief/
+[pid: 1770208|app: 0|req: 6/12] 219.239.227.217 () {42 vars in 1001 bytes} [Wed May  8 16:28:11 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 77 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Internal Server Error: /api/get_info/
+Traceback (most recent call last):
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 434, in user_info
+    user = Token.objects.get(key=token).user
+AttributeError: type object 'Token' has no attribute 'objects'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 435, in user_info
+    except Token.DoesNotExist:
+AttributeError: type object 'Token' has no attribute 'DoesNotExist'
+[pid: 1770208|app: 0|req: 6/13] 219.239.227.217 () {42 vars in 979 bytes} [Wed May  8 16:28:11 2024] GET /api/get_info/ => generated 64253 bytes in 319 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Bad Request: /api/login/
+[pid: 1770208|app: 0|req: 7/14] 219.239.227.217 () {48 vars in 1091 bytes} [Wed May  8 16:28:17 2024] POST /api/login/ => generated 50 bytes in 2 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+Bad Request: /api/login/
+[pid: 1770204|app: 0|req: 3/15] 219.239.227.217 () {48 vars in 1091 bytes} [Wed May  8 16:28:23 2024] POST /api/login/ => generated 50 bytes in 1 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 2 (pid: 1770204)...
+Gracefully killing worker 1 (pid: 1770203)...
+Gracefully killing worker 3 (pid: 1770207)...
+Gracefully killing worker 4 (pid: 1770208)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+worker 1 buried after 2 seconds
+worker 2 buried after 2 seconds
+worker 3 buried after 2 seconds
+worker 4 buried after 2 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 16:29:42 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0xe395b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0xe395b0 pid: 1760722 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1760722)
+spawned uWSGI worker 1 (pid: 1776016, cores: 2)
+spawned uWSGI worker 2 (pid: 1776019, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1776022, cores: 2)
+spawned uWSGI worker 4 (pid: 1776023, cores: 2)
+[pid: 1776022|app: 0|req: 1/1] 219.239.227.217 () {48 vars in 1091 bytes} [Wed May  8 16:29:47 2024] POST /api/login/ => generated 172 bytes in 1980 msecs (HTTP/1.1 200) 10 headers in 534 bytes (1 switches on core 0)
+Not Found: /api/manage/user/list/
+[pid: 1776022|app: 0|req: 2/2] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 16:29:54 2024] POST /api/manage/user/list/ => generated 5054 bytes in 8 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 1)

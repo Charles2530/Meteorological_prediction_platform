@@ -73,7 +73,11 @@ def index(request):
 
 @csrf_exempt
 def my_login(request):
+<<<<<<< HEAD
     data = json.loads(request.body)
+=======
+    data=json.loads(request.body)
+>>>>>>> master
     username = data.get('username')
     password = data.get('password')
 
@@ -113,19 +117,25 @@ def my_login(request):
 @csrf_exempt
 @require_http_methods(["POST"])
 def my_register(request):
+<<<<<<< HEAD
+=======
+    # username = request.POST.get('username')
+    # password = request.POST.get('password')
+    # email = request.POST.get('email')
+>>>>>>> master
     data = json.loads(request.body)
     username = data.get('username')
     password = data.get('password')
     email = data.get('email')
 
     # 验证邮箱格式
-    try:
-        validate_email(email)
-    except ValidationError:
-        return JsonResponse({
-            "success": False,
-            "reason": "register.error.email"
-        }, status=400)
+    # try:
+    #     validate_email(email)
+    # except ValidationError:
+    #     return JsonResponse({
+    #         "success": False,
+    #         "reason": "register.error.email"
+    #     }, status=400)
 
     # 验证用户名和密码格式
     if not username or not isinstance(username, str):
@@ -153,7 +163,7 @@ def my_register(request):
 
     # 准备返回的信息
     info = {
-        "token": RefreshToken.for_user(new_user),
+        "token": str(RefreshToken.for_user(new_user)),
         "userInfo": {
             "username": new_user.username,
             "avatar": "",  # todo
@@ -418,15 +428,23 @@ def delete_data(request):
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
 def user_info(request):
-    auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+    auth_header = request.META.get('HTTP_AUTHORIZATION','')
     if not auth_header:
         return JsonResponse({'reason': 'manage.invalid'}, status=400)
 
+<<<<<<< HEAD
     try:
         auth_header = auth_header.decode(HTTP_HEADER_ENCODING)
         token = auth_header.split(' ')[1]  # 假设token在Authorization头的'Bearer '之后
     except (UnicodeDecodeError, AttributeError, IndexError):
         return JsonResponse({'reason': 'manage.invalid'}, status=400)
+=======
+    # try:
+    #     auth_header = auth_header.decode(HTTP_HEADER_ENCODING)
+    #     token = auth_header.split(' ')[1]  # 假设token在Authorization头的'Bearer '之后
+    # except (UnicodeDecodeError, AttributeError, IndexError):
+    #     return JsonResponse({'reason': 'manage.invaild'}, status=400)
+>>>>>>> master
 
     try:
         # 使用Django REST framework的token认证系统解析token
