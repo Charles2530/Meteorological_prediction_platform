@@ -62,20 +62,21 @@ def getProInfo(request):
     assert request.method == 'GET'
     proName = request.GET.get('proName')
     cityId = Pro2City.objects.get(proName=proName).cityId
+    ### TODO get cityName
+    cityName = getCityName(cityId)
+
     ### TODO use API to get weather and hazardTable
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
+    # air : 实时空气质量 https://dev.qweather.com/docs/resource/indices-info/
     # indices : 天气指数 https://dev.qweather.com/docs/resource/indices-info/
-    # harzard :
+    ## 运动指数，紫外线指数
+    # harzard : 天气灾害预警 https://dev.qweather.com/docs/api/warning/weather-warning/
     # json to dict TODO fill load paras
     weather = json.load(...)
+    air = json.load(...)
     indices = json.load(...)
-    hazrdTable = json.load(...)
+    hazard  = json.load(...)
     geography = ProGeography.objects.get(proName=proName).geographyInfo
-
-    # retList = dict()
-    # retList["weather"] = dict()
-    # retList["geography"] = geography
-    # retList["hazrdTable"] = dict()
 
 
     date_time = datetime.fromisoformat(weather["updateTime"])
@@ -83,29 +84,36 @@ def getProInfo(request):
     retList = {
         "weather": {
             "time": date_time.astimezone(timezon).strftime("%Y-%m-%d %H:%M"),
-            "tem": ... ,
-            "condition": ... ,
-            "infos": ... ,
-            "wind": ... ,
-            "windDir": ... ,
-            "hum": ... ,
-            "ray": ... ,
-            "air": ... ,
-            "airAQI": ... ,
-            "visibility": ... ,
-            "rainfall": ... ,
-            "pressure": ... ,
+            "tem": float(weather["now"]["temp"]) ,
+            "condition": weather["now"]["text"] ,
+            "infos": "", # fill later
+            "wind": int(weather["now"]["windScale"]) ,
+            "windDir": weather["now"]["windDir"] ,
+            "hum": int(weather["now"]["humidity"]) ,
+            "ray": "" , # fill later
+            "air": air["now"]["category"] ,
+            "airAQI": int(air["now"]["aqi"]) ,
+            "visibility": int(weather["now"]["vis"]) ,
+            "rainfall": float(weather["now"]["precip"]) ,
+            "pressure": int(weather["now"]["pressure"]) ,
         },
         "geography": geography,
-        "hazardTable": [
-            {
-                "place": ... ,
-                "level": ... ,
-                "type": ... ,
-            },
-            ...
-        ]
+        "hazardTable": [],
     }
+
+    for daily in indices["daily"]:
+        if daily.type == "1": # 运动指数
+            retList["weather"]["infos"] = daily["text"]
+        if daily.type == "5": # 紫外线
+            retList["weather"]["ray"] = daily["category"]
+
+    for warning in hazard["warning"]:
+        retList["hazardTable"].append({
+            "place": cityName + ", " + proName ,
+            "level": warning["severityColor"] ,
+            "type": warning["typeName"],
+        })
+
 
     return JsonResponse(retList, status=200)
 
@@ -139,11 +147,11 @@ def getCityInfo(request: HttpRequest):
             "text": weather["now"]["text"],
             "precip": float(weather["now"]["precip"]),
             "wind360": float(weather["now"]["wind360"]),
-            "windScale": float(weather["now"]["windScale"]),
+            "windScale": int(weather["now"]["windScale"]),
             "windSpeed": float(weather["now"]["windSpeed"]),
-            "humidity": float(weather["now"]["humidity"]),
-            "pressure": float(weather["now"]["pressure"]),
-            "aqi": float(air["now"]["aqi"]),
+            "humidity": int(weather["now"]["humidity"]),
+            "pressure": int(weather["now"]["pressure"]),
+            "aqi": int(air["now"]["aqi"]),
             "category": air["now"]["category"],
         },
     }
