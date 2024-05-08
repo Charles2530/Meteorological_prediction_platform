@@ -29,6 +29,7 @@ from django.http import HttpResponse, JsonResponse
 import json
 import os
 import re
+from datetime import datetime
 
 # 当前应用的模块导入
 from .serializers import RegisterSerializer
@@ -94,7 +95,7 @@ def my_login(request):
             "userInfo": {
                 "username": username,
                 "avatar": "http://dummyimage.com/88x31",
-                "role": user.role,  # 这里根据实际情况设置用户的角色
+                "role": 2,  # 这里根据实际情况设置用户的角色
                 "email": user.email
             }
         }
@@ -185,7 +186,7 @@ def user_list(request):
         page_size = data.get('page_size')
         email = data.get('email')
         role = data.get('role')
-        uid = data.get('uid')
+        uid = data.get('id')
         username = data.get('username')
     except json.JSONDecodeError:
         # 返回400错误，请求格式不正确
@@ -216,13 +217,13 @@ def user_list(request):
     # 遍历当前页的用户，构造userlist
     for user in page_obj:
         user_data = {
-            "uid": user.uid,
+            "uid": user.id,
             "username": user.username,
             "email": user.email,
-            "avatar": user.avatar,
+            "avatar": "https://charles2530.github.io/image/background/logo2.jpg",
             "email": user.email,
-            "role": user.role,
-            "last_login": user.last_login.strftime('%Y-%m-%d %H:%M:%S')
+            "role": 2,
+            "last_login": user.last_login.strftime('%Y-%m-%d %H:%M:%S') if user.last_login != None else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         }
         response_json['userlist'].append(user_data)
 
@@ -253,7 +254,7 @@ def delete_user(request):
     # 添加业务逻辑，例如根据uid获取用户信息等
     # 假设这里仅检查User模型中是否存在对应的uid
     try:
-        User.objects.get(uid=uid)
+        User.objects.get(id=uid)
         # 如果用户存在，设置success为True
         response_data = {"success": True}
         return JsonResponse(response_data, status=200)  # 返回200成功响应
@@ -274,7 +275,7 @@ def user_authorization(request):
     # 从请求体中获取uid和role
     try:
         data = json.loads(request.body)
-        uid = data.get('uid')
+        uid = data.get('id')
         role = data.get('role')
     except json.JSONDecodeError:
         # 返回400错误，请求格式不正确
@@ -287,7 +288,9 @@ def user_authorization(request):
     # 在这里添加你的业务逻辑，例如验证用户权限等
     # 假设我们只是简单地检查User模型中是否存在对应的uid和role
     try:
-        user = User.objects.get(uid=uid, role=role)
+        # TODO:
+        # user = User.objects.get(id=uid, role=role)
+        user = User.objects.get(id=uid)
         # 如果用户存在且角色匹配，设置success为True
         response_data = {"success": True}
         return JsonResponse(response_data, status=200)  # 返回200成功响应
@@ -311,7 +314,7 @@ def update_user_email(request):
     try:
         # 从请求体中获取uid、role和email
         data = json.loads(request.body)
-        uid = data.get('uid')
+        uid = data.get('id')
         role = data.get('role')
         new_email = data.get('email')
 
@@ -357,7 +360,7 @@ def update_user_password(request):
 
     # 从请求体中获取uid、role、password
     data = json.loads(request.body)
-    uid = data.get('uid')
+    uid = data.get('id')
     role = data.get('role')
     password = data.get('password')
 
@@ -365,7 +368,7 @@ def update_user_password(request):
     try:
         # 假设我们通过某种方式验证管理员的Authorization
         # 例如，使用Django的authenticate函数，或者自定义的验证逻辑
-        admin_user = User.objects.get(uid=uid)
+        admin_user = User.objects.get(id=uid)
         if not check_password(authorization, admin_user.password):
             raise PermissionDenied
 
@@ -379,7 +382,7 @@ def update_user_password(request):
 
     # 检查用户是否存在
     try:
-        user_to_update = User.objects.get(uid=uid)
+        user_to_update = User.objects.get(id=uid)
     except User.DoesNotExist:
         return JsonResponse({"success": False, "reason": "manage.invaild"}, status=400)
 
