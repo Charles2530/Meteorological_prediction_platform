@@ -1,115 +1,159 @@
 <template>
-    <div class="calendar-container">
-      <!-- <el-date-picker
+  <div class="calendar-container">
+    <!-- <el-date-picker
         v-model="currentDate"
         type="month"
         placeholder="选择月份"
         @change="handleDateChange"
       ></el-date-picker> -->
-      <div class="calendar-grid">
-        <div class="calendar-column" v-for="(day, index) in daysInMonth" :key="index">
+    <el-row :gutter="20" justify="center">
+      <el-col :span="2">
+        <div class="ep-bg-purple-dark" />
+        <!-- <el-card style="width:auto;" shadow="hover"> -->
+        <div class="day-content">
+          <div class="temperature">天气</div>
+          <div class="temperature">温度</div>
+          <div class="humidity">湿度</div>
+          <div class="wind-speed">风速</div>
+          <div class="wind-speed">风向</div>
+          <div class="time">时间</div>
+        </div>
+        <!-- </el-card> -->
+      </el-col>
+      <el-col :span="2" v-for="(day, index) in realTimeWeatherList" :key="index">
+        <div class="ep-bg-purple-dark" />
+        <el-card style="width:auto" shadow="hover">
           <div class="day-content">
             <div class="weather-icon">
-              <img :src="day.image" alt="Weather Image">
+              <div class="temperature">{{ day.condition }}</div>
             </div>
-            <div class="temperature">{{ day.lowTemp }} ~ {{ day.highTemp }}</div>
-            <div class="humidity">{{ day.humidity }}</div>
-            <div class="wind-speed">{{ day.windSpeed }}</div>
-            <div class="time">{{ day.time }}</div>
+            <div class="temperature">{{ day.temperature }}℃</div>
+            <div class="humidity">{{ day.humidity }}%</div>
+            <div class="wind-speed">{{ day.windSpeed }}m/s</div>
+            <div class="wind-speed">{{ day.windDirection }}</div>
+            <div class="time" style="color:black;font-size: 0.6cm;">{{ day.time }}</div>
           </div>
+        </el-card>
+      </el-col>
+    </el-row>
+
+  </div>
+</template>
+
+<!-- <template>
+  <div class="calendar-container">
+    <el-date-picker
+        v-model="currentDate"
+        type="month"
+        placeholder="选择月份"
+        @change="handleDateChange"
+      ></el-date-picker>
+    <div class="calendar-grid">
+      <div class="calendar-column" v-for="(day, index) in realTimeWeatherList" :key="index">
+        <div class="day-content">
+          <div class="weather-icon">
+            <img :src="day.condition" alt="Weather Image">
+            <div class="temperature">{{ day.condition }}℃</div>
+          </div>
+          <div class="temperature">{{ day.temperature }}℃</div>
+          <div class="humidity">{{ day.humidity }}%</div>
+          <div class="wind-speed">{{ day.windSpeed }}m/s</div>
+          <div class="wind-speed">{{ day.windDirection }}</div>
+          <div class="time">{{ day.time }}</div>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script lang="ts">
-  import { defineComponent, ref, computed } from 'vue';
-  
-  interface DayInfo {
-    image: string;
-    lowTemp: string;
-    highTemp: string;
-    humidity: string;
-    windSpeed: string;
-    time: string;
-  }
-  
-  export default defineComponent({
-    name: 'CalendarView',
-    setup() {
-      // 当前选中日期
-      const currentDate = ref<string>(new Date().toISOString().substr(0, 7));
-  
-      // 模拟每一天的信息
-      const daysInMonth = computed(() => {
-        const days: DayInfo[] = [];
-        // 假设每一天的信息
-        for (let i = 1; i <= 31; i++) { // 假设每月最多31天
-          days.push({
-            image: 'https://example.com/weather-image.jpg', // 替换为实际的天气图片链接
-            lowTemp: '10°C', // 替换为实际的最低气温
-            highTemp: '20°C', // 替换为实际的最高气温
-            humidity: '50%', // 替换为实际的湿度
-            windSpeed: '10m/s', // 替换为实际的风速
-            time: '12:00' // 替换为实际的时间
-          });
-        }
-        return days;
-      });
-  
-      // 处理日期变化事件
-      const handleDateChange = (date: string) => {
-        currentDate.value = date;
-      };
-  
-      return {
-        currentDate,
-        daysInMonth,
-        handleDateChange
-      };
-    }
+  </div>
+</template> -->
+
+<script lang="ts" setup>
+
+const city = ref({
+  name: '北京市',
+  adm2: '昌平区'
+});
+const realTimeWeatherList = ref<RealTimeWeather[]>([]);
+interface RealTimeWeather {
+  time: string,
+  condition: string,
+  temperature: number,
+  humidity: number,
+  windSpeed: number,
+  windDirection: string
+}
+
+interface WeatherHisOverview {
+  realTimeWeatherList: RealTimeWeather[];
+}
+
+import { post, get } from "@/api/index.ts";
+const get_data = async () => {
+  get<WeatherHisOverview>("/api/weather/overview_realtime", {city:city.value.name + city.value.adm2}).then((res) => {
+    realTimeWeatherList.value = res.data.realTimeWeatherList;
   });
-  </script>
-  
-  <style lang="scss" scoped>
-  .calendar-container {
-    background-color: #EAF2F8;
-    padding: 20px;
-  }
-  
-  .calendar-grid {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .calendar-column {
-    width: 100%;
-  }
-  
-  .day-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  .weather-icon img {
-    max-width: 50px;
-    max-height: 50px;
-  }
-  
-  .temperature,
-  .humidity,
-  .wind-speed,
-  .time {
-    margin-top: 10px;
-  }
-  
-  .temperature,
-  .humidity,
-  .wind-speed,
-  .time {
-    font-size: 16px;
-  }
-  </style>
-  
+};
+onMounted(() => {
+  get_data();
+  // console.log("----------------------------------------------------------------")
+  // console.log(realTimeWeatherList);
+});
+
+
+
+</script>
+
+<style lang="scss" scoped>
+.calendar-container {
+  background-color: #EAF2F8;
+  padding: 20px;
+}
+
+.calendar-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-column {
+  width: 100%;
+}
+
+.day-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.weather-icon img {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.temperature,
+.humidity,
+.wind-speed,
+.time {
+  margin-top: 10px;
+}
+
+.temperature,
+.humidity,
+.wind-speed,
+.time {
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace
+}
+
+
+.el-card {
+  background-color: rgb(188, 243, 243);
+  margin: 0px;
+  border-radius: 20px;
+  // border-color: #1058e9;
+}
+
+.el-card:hover {
+  margin-top: -10px;
+  margin: -1px;
+}
+</style>
