@@ -52,7 +52,5 @@ class MonthlyWeatherView(APIView):
 def index(request):
     return HttpResponse("Welcome to the weather app!")
 
-# def home(request):
-#     path = request.path
-#     response = HttpResponse("Welcome to the home page!")
-#     return HttpResponse(path, content_type='text/html', charset='utf-8')
+
+# def overview(request):
