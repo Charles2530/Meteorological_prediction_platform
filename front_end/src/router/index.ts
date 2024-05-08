@@ -4,7 +4,7 @@ import { UserRole } from "@/types/user";
 // 网站首页
 const Home = () => import("@/views/home/index.vue");
 // 历史记录
-const History = () => import("@/views/home/historyView.vue");
+const History = () => import("@/views/home/weatherDetails.vue");
 // AI预测
 // const Predict = () => import("@/views/content/predictView.vue");
 // 灾害订阅
