@@ -360,7 +360,7 @@ interface SearchWeatherHourlyListResponse {
 }
 const weatherData: CityWeatherData[] = reactive([]);
 const handleSearch = () => {
-  post<SearchWeatherHourlyListResponse>("/api/manage/data/search", {
+  post<SearchWeatherHourlyListResponse>("/api/manage/data/search/", {
     type: selectType.value,
     time: selectedDate.value,
     address: selectedLocation.value,
@@ -411,7 +411,7 @@ function addWeather() {
   weatherData.push({ ...newWeatherData });
   addDialogVisible.value = false;
   console.log({ ...newWeatherData });
-  post<addWeatherResponse>("/api/manage/data/weather_add", newWeatherData).then(
+  post<addWeatherResponse>("/api/manage/data/weather_add/", newWeatherData).then(
     (res) => {
       const response = res.data;
       if (!response.status) {
@@ -451,7 +451,7 @@ const deleteWeather = throttle((index: number) => {
     city: weatherData[index].city,
   };
   weatherData.splice(index, 1);
-  post<DeleteResponse>("/api/manage/data/delete", request).then((res) => {
+  post<DeleteResponse>("/api/manage/data/delete/", request).then((res) => {
     const response = res.data;
     if (response.success) {
       ElMessage.success(weatherInfo.dialogs.delete);

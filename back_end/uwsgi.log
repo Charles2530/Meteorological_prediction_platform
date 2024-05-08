@@ -76,3 +76,628 @@ spawned uWSGI worker 3 (pid: 1726766, cores: 2)
 spawned uWSGI worker 4 (pid: 1726768, cores: 2)
 [pid: 1726768|app: 0|req: 1/1] 219.239.227.114 () {42 vars in 819 bytes} [Wed May  8 10:44:11 2024] GET /api => generated 0 bytes in 185 msecs (HTTP/1.1 301) 5 headers in 195 bytes (1 switches on core 0)
 [pid: 1726768|app: 0|req: 2/2] 219.239.227.114 () {42 vars in 821 bytes} [Wed May  8 10:44:11 2024] GET /api/ => generated 13 bytes in 0 msecs (HTTP/1.1 200) 7 headers in 220 bytes (1 switches on core 1)
+Not Found: /api/getInfo
+[pid: 1726768|app: 0|req: 3/3] 219.239.227.114 () {42 vars in 774 bytes} [Wed May  8 10:45:15 2024] GET /api/getInfo => generated 5023 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief
+[pid: 1726766|app: 0|req: 1/4] 219.239.227.114 () {42 vars in 798 bytes} [Wed May  8 10:45:15 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 149 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 4/5] 219.239.227.114 () {48 vars in 888 bytes} [Wed May  8 10:45:22 2024] POST /api/login => generated 60464 bytes in 51 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 1)
+Not Found: /api/getInfo
+[pid: 1726768|app: 0|req: 5/6] 219.239.227.114 () {40 vars in 804 bytes} [Wed May  8 10:45:37 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 6/7] 219.239.227.114 () {48 vars in 888 bytes} [Wed May  8 10:49:31 2024] POST /api/login => generated 60464 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 1)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 7/8] 219.239.227.114 () {48 vars in 888 bytes} [Wed May  8 10:49:31 2024] POST /api/login => generated 60464 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 0)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 8/9] 219.239.227.114 () {48 vars in 888 bytes} [Wed May  8 10:49:31 2024] POST /api/login => generated 60464 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 1)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 9/10] 219.239.227.114 () {48 vars in 888 bytes} [Wed May  8 10:49:31 2024] POST /api/login => generated 60464 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 0)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726766|app: 0|req: 2/11] 219.239.227.114 () {48 vars in 888 bytes} [Wed May  8 10:49:32 2024] POST /api/login => generated 60464 bytes in 21 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 1)
+Not Found: /api/getInfo
+[pid: 1726766|app: 0|req: 3/12] 219.239.227.113 () {44 vars in 737 bytes} [Wed May  8 10:54:44 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief
+[pid: 1726764|app: 0|req: 1/13] 219.239.227.113 () {44 vars in 761 bytes} [Wed May  8 10:54:44 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 147 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/rank_best
+[pid: 1726768|app: 0|req: 10/14] 219.239.227.102 () {42 vars in 802 bytes} [Wed May  8 11:03:02 2024] GET /api/weather/aqi/rank_best => generated 5065 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/overview
+[pid: 1726768|app: 0|req: 11/15] 219.239.227.102 () {42 vars in 1235 bytes} [Wed May  8 11:03:02 2024] GET /api/weather/overview?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5296 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/rank_worst
+[pid: 1726764|app: 0|req: 3/16] 219.239.227.102 () {42 vars in 804 bytes} [Wed May  8 11:03:02 2024] GET /api/weather/aqi/rank_worst => generated 5068 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/aqi_change
+[pid: 1726764|app: 0|req: 3/17] 219.239.227.102 () {42 vars in 804 bytes} [Wed May  8 11:03:02 2024] GET /api/weather/aqi/aqi_change => generated 5068 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/temp/city_change
+[pid: 1726766|app: 0|req: 4/18] 219.239.227.102 () {42 vars in 819 bytes} [Wed May  8 11:03:02 2024] GET /api/weather/temp/city_change?city= => generated 5080 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/humid/city_change
+[pid: 1726768|app: 0|req: 12/19] 219.239.227.102 () {42 vars in 821 bytes} [Wed May  8 11:03:02 2024] GET /api/weather/humid/city_change?city= => generated 5083 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/pressure/city_change
+[pid: 1726766|app: 0|req: 5/20] 219.239.227.102 () {42 vars in 827 bytes} [Wed May  8 11:03:02 2024] GET /api/weather/pressure/city_change?city= => generated 5092 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/getCityInfo
+Not Found: /api/weather/aqi/city_change
+[pid: 1726763|app: 0|req: 2/21] 219.239.227.102 () {42 vars in 817 bytes} [Wed May  8 11:03:02 2024] GET /api/weather/aqi/city_change?city= => generated 5077 bytes in 160 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1726763|app: 0|req: 2/22] 219.239.227.102 () {42 vars in 782 bytes} [Wed May  8 11:03:02 2024] GET /api/getCityInfo => generated 5035 bytes in 159 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_resent_notices
+[pid: 1726766|app: 0|req: 6/23] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 11:03:02 2024] GET /api/alarm_resent_notices => generated 5062 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/subscribe
+[pid: 1726764|app: 0|req: 4/24] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 11:03:02 2024] GET /api/subscribe => generated 5029 bytes in 6 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices
+[pid: 1726768|app: 0|req: 13/25] 219.239.227.102 () {42 vars in 786 bytes} [Wed May  8 11:03:02 2024] GET /api/alarm_notices => generated 5041 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/get_alarm_level
+[pid: 1726768|app: 0|req: 14/26] 219.239.227.102 () {42 vars in 790 bytes} [Wed May  8 11:03:02 2024] GET /api/get_alarm_level => generated 5047 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:194: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+[pid: 1726768|app: 0|req: 15/27] 219.239.227.102 () {48 vars in 910 bytes} [Wed May  8 11:03:03 2024] POST /api/manage/user/list => generated 64 bytes in 6 msecs (HTTP/1.1 200) 8 headers in 244 bytes (1 switches on core 0)
+Not Found: /api/getInfo
+[pid: 1726766|app: 0|req: 7/28] 219.239.227.222 () {42 vars in 677 bytes} [Wed May  8 11:03:30 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_resent_notices
+[pid: 1726764|app: 0|req: 6/29] 219.239.227.222 () {42 vars in 703 bytes} [Wed May  8 11:03:30 2024] GET /api/alarm_resent_notices => generated 5062 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices
+[pid: 1726764|app: 0|req: 6/30] 219.239.227.222 () {42 vars in 689 bytes} [Wed May  8 11:03:30 2024] GET /api/alarm_notices => generated 5041 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/subscribe
+Not Found: /api/get_alarm_level
+[pid: 1726766|app: 0|req: 8/31] 219.239.227.222 () {42 vars in 681 bytes} [Wed May  8 11:03:30 2024] GET /api/subscribe => generated 5029 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1726763|app: 0|req: 3/32] 219.239.227.222 () {42 vars in 693 bytes} [Wed May  8 11:03:30 2024] GET /api/get_alarm_level => generated 5047 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief
+[pid: 1726768|app: 0|req: 16/33] 219.239.227.222 () {42 vars in 701 bytes} [Wed May  8 11:03:30 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_worst
+[pid: 1726768|app: 0|req: 17/34] 219.239.227.222 () {42 vars in 707 bytes} [Wed May  8 11:03:33 2024] GET /api/weather/aqi/rank_worst => generated 5068 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/overview
+[pid: 1726763|app: 0|req: 4/35] 219.239.227.222 () {42 vars in 1138 bytes} [Wed May  8 11:03:33 2024] GET /api/weather/overview?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5296 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_best
+[pid: 1726766|app: 0|req: 10/36] 219.239.227.222 () {42 vars in 705 bytes} [Wed May  8 11:03:33 2024] GET /api/weather/aqi/rank_best => generated 5065 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/getCityInfo
+[pid: 1726766|app: 0|req: 10/37] 219.239.227.222 () {42 vars in 685 bytes} [Wed May  8 11:03:33 2024] GET /api/getCityInfo => generated 5035 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/aqi_change
+[pid: 1726768|app: 0|req: 18/38] 219.239.227.222 () {42 vars in 707 bytes} [Wed May  8 11:03:33 2024] GET /api/weather/aqi/aqi_change => generated 5068 bytes in 6 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/humid/city_change
+[pid: 1726763|app: 0|req: 5/39] 219.239.227.222 () {42 vars in 724 bytes} [Wed May  8 11:03:33 2024] GET /api/weather/humid/city_change?city= => generated 5083 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/city_change
+Not Found: /api/weather/temp/city_change
+Not Found: /api/weather/pressure/city_change
+[pid: 1726763|app: 0|req: 6/41] 219.239.227.222 () {42 vars in 730 bytes} [Wed May  8 11:03:33 2024] GET /api/weather/pressure/city_change?city= => generated 5092 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1726764|app: 0|req: 8/41] 219.239.227.222 () {42 vars in 722 bytes} [Wed May  8 11:03:33 2024] GET /api/weather/temp/city_change?city= => generated 5080 bytes in 14 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1726764|app: 0|req: 8/42] 219.239.227.222 () {42 vars in 720 bytes} [Wed May  8 11:03:33 2024] GET /api/weather/aqi/city_change?city= => generated 5077 bytes in 15 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 19/43] 219.239.227.102 () {48 vars in 888 bytes} [Wed May  8 11:04:19 2024] POST /api/login => generated 60464 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 0)
+Not Found: /api/getInfo
+[pid: 1726766|app: 0|req: 11/44] 219.239.227.102 () {40 vars in 804 bytes} [Wed May  8 11:04:33 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1726768|app: 0|req: 20/45] 219.239.227.102 () {40 vars in 800 bytes} [Wed May  8 11:05:48 2024] GET /api/login => generated 0 bytes in 4 msecs (HTTP/1.1 301) 5 headers in 201 bytes (1 switches on core 1)
+Bad Request: /api/login/
+[pid: 1726763|app: 0|req: 7/46] 219.239.227.102 () {40 vars in 802 bytes} [Wed May  8 11:05:48 2024] GET /api/login/ => generated 50 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726763|app: 0|req: 8/47] 219.239.227.102 () {48 vars in 888 bytes} [Wed May  8 11:05:58 2024] POST /api/login => generated 60464 bytes in 21 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 1)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 21/48] 219.239.227.102 () {48 vars in 888 bytes} [Wed May  8 11:06:04 2024] POST /api/login => generated 60464 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 0)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 22/49] 219.239.227.102 () {48 vars in 888 bytes} [Wed May  8 11:06:38 2024] POST /api/login => generated 60464 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 1)
+[pid: 1726768|app: 0|req: 23/50] 101.126.172.51 () {34 vars in 535 bytes} [Wed May  8 11:06:52 2024] GET /api/login => generated 0 bytes in 4 msecs (HTTP/1.1 301) 5 headers in 201 bytes (1 switches on core 0)
+Bad Request: /api/login/
+[pid: 1726764|app: 0|req: 9/51] 101.126.172.59 () {36 vars in 585 bytes} [Wed May  8 11:06:52 2024] GET /api/login/ => generated 50 bytes in 0 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Not Found: /api/getInfo
+[pid: 1726768|app: 0|req: 24/52] 219.239.227.102 () {42 vars in 774 bytes} [Wed May  8 11:08:10 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief
+[pid: 1726768|app: 0|req: 25/53] 219.239.227.102 () {42 vars in 798 bytes} [Wed May  8 11:08:11 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:194: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+[pid: 1726763|app: 0|req: 9/54] 219.239.227.102 () {48 vars in 910 bytes} [Wed May  8 11:08:21 2024] POST /api/manage/user/list => generated 64 bytes in 5 msecs (HTTP/1.1 200) 8 headers in 244 bytes (1 switches on core 0)
+Not Found: /api/getInfo
+[pid: 1726768|app: 0|req: 26/55] 219.239.227.102 () {42 vars in 774 bytes} [Wed May  8 11:08:23 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1726768|app: 0|req: 27/56] 219.239.227.102 () {48 vars in 910 bytes} [Wed May  8 11:08:23 2024] POST /api/manage/user/list => generated 64 bytes in 2 msecs (HTTP/1.1 200) 8 headers in 244 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief
+[pid: 1726766|app: 0|req: 12/57] 219.239.227.102 () {42 vars in 798 bytes} [Wed May  8 11:08:24 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/overview
+[pid: 1726766|app: 0|req: 14/58] 219.239.227.102 () {42 vars in 1235 bytes} [Wed May  8 11:08:37 2024] GET /api/weather/overview?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5296 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_worst
+[pid: 1726764|app: 0|req: 11/59] 219.239.227.102 () {42 vars in 804 bytes} [Wed May  8 11:08:37 2024] GET /api/weather/aqi/rank_worst => generated 5068 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/aqi_change
+[pid: 1726766|app: 0|req: 14/60] 219.239.227.102 () {42 vars in 804 bytes} [Wed May  8 11:08:37 2024] GET /api/weather/aqi/aqi_change => generated 5068 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/getCityInfo
+[pid: 1726764|app: 0|req: 11/61] 219.239.227.102 () {42 vars in 782 bytes} [Wed May  8 11:08:37 2024] GET /api/getCityInfo => generated 5035 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/rank_best
+[pid: 1726763|app: 0|req: 11/62] 219.239.227.102 () {42 vars in 802 bytes} [Wed May  8 11:08:37 2024] GET /api/weather/aqi/rank_best => generated 5065 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/city_change
+[pid: 1726763|app: 0|req: 11/63] 219.239.227.102 () {42 vars in 817 bytes} [Wed May  8 11:08:37 2024] GET /api/weather/aqi/city_change?city= => generated 5077 bytes in 15 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/humid/city_change
+Not Found: /api/weather/temp/city_change
+[pid: 1726768|app: 0|req: 29/64] 219.239.227.102 () {42 vars in 819 bytes} [Wed May  8 11:08:37 2024] GET /api/weather/temp/city_change?city= => generated 5080 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1726768|app: 0|req: 29/65] 219.239.227.102 () {42 vars in 821 bytes} [Wed May  8 11:08:37 2024] GET /api/weather/humid/city_change?city= => generated 5083 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/pressure/city_change
+[pid: 1726766|app: 0|req: 15/66] 219.239.227.102 () {42 vars in 827 bytes} [Wed May  8 11:08:37 2024] GET /api/weather/pressure/city_change?city= => generated 5092 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_resent_notices
+[pid: 1726764|app: 0|req: 12/67] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 11:08:42 2024] GET /api/alarm_resent_notices => generated 5062 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/subscribe
+[pid: 1726763|app: 0|req: 12/68] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 11:08:42 2024] GET /api/subscribe => generated 5029 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices
+[pid: 1726766|app: 0|req: 16/69] 219.239.227.102 () {42 vars in 786 bytes} [Wed May  8 11:08:42 2024] GET /api/alarm_notices => generated 5041 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/get_alarm_level
+[pid: 1726768|app: 0|req: 30/70] 219.239.227.102 () {42 vars in 790 bytes} [Wed May  8 11:08:42 2024] GET /api/get_alarm_level => generated 5047 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 31/71] 219.239.227.102 () {48 vars in 888 bytes} [Wed May  8 11:09:12 2024] POST /api/login => generated 60464 bytes in 17 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 0)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726764|app: 0|req: 13/72] 219.239.227.102 () {48 vars in 888 bytes} [Wed May  8 11:09:13 2024] POST /api/login => generated 60464 bytes in 21 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 0)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726763|app: 0|req: 13/73] 219.239.227.102 () {48 vars in 888 bytes} [Wed May  8 11:09:13 2024] POST /api/login => generated 60464 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 0)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 32/74] 219.239.227.102 () {48 vars in 888 bytes} [Wed May  8 11:09:14 2024] POST /api/login => generated 60464 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 1)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 33/75] 219.239.227.102 () {48 vars in 888 bytes} [Wed May  8 11:09:54 2024] POST /api/login => generated 60464 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 0)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 34/76] 219.239.227.102 () {48 vars in 888 bytes} [Wed May  8 11:09:55 2024] POST /api/login => generated 60464 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 1)
+Bad Request: /api/login/
+[pid: 1726768|app: 0|req: 35/77] 219.239.227.102 () {42 vars in 833 bytes} [Wed May  8 11:11:24 2024] GET /api/login/ => generated 50 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Bad Request: /api/login/
+[pid: 1726768|app: 0|req: 36/78] 219.239.227.102 () {42 vars in 833 bytes} [Wed May  8 11:11:25 2024] GET /api/login/ => generated 50 bytes in 0 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+Bad Request: /api/login/
+[pid: 1726768|app: 0|req: 37/79] 219.239.227.102 () {42 vars in 833 bytes} [Wed May  8 11:11:26 2024] GET /api/login/ => generated 50 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Not Found: /api/getInfo
+[pid: 1726768|app: 0|req: 38/80] 219.239.227.102 () {42 vars in 835 bytes} [Wed May  8 11:11:30 2024] GET /api/getInfo => generated 5023 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Bad Request: /api/login/
+[pid: 1726768|app: 0|req: 39/81] 219.239.227.102 () {40 vars in 802 bytes} [Wed May  8 11:11:34 2024] GET /api/login/ => generated 50 bytes in 0 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1726768|app: 0|req: 40/82] 219.239.227.102 () {40 vars in 806 bytes} [Wed May  8 11:11:41 2024] GET /api/register => generated 0 bytes in 4 msecs (HTTP/1.1 301) 5 headers in 204 bytes (1 switches on core 1)
+Bad Request: /api/register/
+[pid: 1726768|app: 0|req: 41/83] 219.239.227.102 () {40 vars in 808 bytes} [Wed May  8 11:11:41 2024] GET /api/register/ => generated 52 bytes in 0 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Not Found: /api/getInfo
+[pid: 1726768|app: 0|req: 42/84] 219.239.227.102 () {42 vars in 774 bytes} [Wed May  8 11:11:49 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_resent_notices
+[pid: 1726768|app: 0|req: 43/85] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 11:11:49 2024] GET /api/alarm_resent_notices => generated 5062 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/get_alarm_level
+[pid: 1726764|app: 0|req: 15/86] 219.239.227.102 () {42 vars in 790 bytes} [Wed May  8 11:11:49 2024] GET /api/get_alarm_level => generated 5047 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices
+[pid: 1726764|app: 0|req: 15/87] 219.239.227.102 () {42 vars in 786 bytes} [Wed May  8 11:11:49 2024] GET /api/alarm_notices => generated 5041 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/subscribe
+[pid: 1726763|app: 0|req: 14/88] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 11:11:49 2024] GET /api/subscribe => generated 5029 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief
+[pid: 1726764|app: 0|req: 16/89] 219.239.227.102 () {42 vars in 798 bytes} [Wed May  8 11:11:50 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/get_alarm_level
+[pid: 1726768|app: 0|req: 44/90] 219.239.227.102 () {40 vars in 820 bytes} [Wed May  8 11:13:08 2024] GET /api/get_alarm_level => generated 5047 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief
+[pid: 1726768|app: 0|req: 45/91] 219.239.227.102 () {40 vars in 828 bytes} [Wed May  8 11:13:30 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/get_alarm_level
+[pid: 1726766|app: 0|req: 17/92] 219.239.227.102 () {40 vars in 820 bytes} [Wed May  8 11:13:36 2024] GET /api/get_alarm_level => generated 5047 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/getInfo
+[pid: 1726768|app: 0|req: 46/93] 219.239.227.102 () {42 vars in 774 bytes} [Wed May  8 11:13:50 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices
+[pid: 1726768|app: 0|req: 47/94] 219.239.227.102 () {42 vars in 786 bytes} [Wed May  8 11:13:51 2024] GET /api/alarm_notices => generated 5041 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_resent_notices
+[pid: 1726764|app: 0|req: 17/95] 219.239.227.102 () {42 vars in 800 bytes} [Wed May  8 11:13:51 2024] GET /api/alarm_resent_notices => generated 5062 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/get_alarm_level
+[pid: 1726763|app: 0|req: 15/96] 219.239.227.102 () {42 vars in 790 bytes} [Wed May  8 11:13:51 2024] GET /api/get_alarm_level => generated 5047 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/subscribe
+[pid: 1726766|app: 0|req: 18/97] 219.239.227.102 () {42 vars in 778 bytes} [Wed May  8 11:13:51 2024] GET /api/subscribe => generated 5029 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief
+[pid: 1726768|app: 0|req: 48/98] 219.239.227.102 () {42 vars in 798 bytes} [Wed May  8 11:13:51 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/getInfo
+[pid: 1726764|app: 0|req: 18/99] 219.239.227.102 () {42 vars in 774 bytes} [Wed May  8 11:13:53 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief
+[pid: 1726768|app: 0|req: 49/100] 219.239.227.102 () {42 vars in 798 bytes} [Wed May  8 11:13:53 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Internal Server Error: /api/register
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/register/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 50/101] 219.239.227.102 () {48 vars in 894 bytes} [Wed May  8 11:14:28 2024] POST /api/register => generated 60515 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 0)
+Bad Request: /api/register/
+[pid: 1726768|app: 0|req: 51/102] 219.239.227.102 () {40 vars in 808 bytes} [Wed May  8 11:14:49 2024] GET /api/register/ => generated 52 bytes in 0 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+Internal Server Error: /api/register
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/register/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 52/103] 219.239.227.102 () {48 vars in 894 bytes} [Wed May  8 11:16:56 2024] POST /api/register => generated 60515 bytes in 18 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 0)
+Internal Server Error: /api/register
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/register/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726766|app: 0|req: 19/104] 219.239.227.102 () {48 vars in 894 bytes} [Wed May  8 11:16:57 2024] POST /api/register => generated 60515 bytes in 19 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 0)
+Internal Server Error: /api/register
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/register/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 53/105] 219.239.227.102 () {48 vars in 894 bytes} [Wed May  8 11:18:45 2024] POST /api/register => generated 60515 bytes in 17 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 1)
+Bad Request: /api/register/
+[pid: 1726768|app: 0|req: 54/106] 219.239.227.102 () {40 vars in 808 bytes} [Wed May  8 11:22:05 2024] GET /api/register/ => generated 52 bytes in 0 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Bad Request: /api/register/
+[pid: 1726768|app: 0|req: 55/107] 219.239.227.102 () {40 vars in 808 bytes} [Wed May  8 11:22:09 2024] GET /api/register/ => generated 52 bytes in 0 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+[pid: 1726766|app: 0|req: 20/108] 219.239.227.102 () {42 vars in 821 bytes} [Wed May  8 11:22:49 2024] GET /api/ => generated 13 bytes in 0 msecs (HTTP/1.1 200) 7 headers in 220 bytes (1 switches on core 1)
+Not Found: /api/getInfo
+[pid: 1726768|app: 0|req: 56/109] 219.239.227.102 () {42 vars in 774 bytes} [Wed May  8 11:22:54 2024] GET /api/getInfo => generated 5023 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief
+[pid: 1726768|app: 0|req: 57/110] 219.239.227.102 () {42 vars in 798 bytes} [Wed May  8 11:22:55 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 114.116.201.133/api/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[pid: 1726768|app: 0|req: 58/111] 219.239.227.102 () {48 vars in 888 bytes} [Wed May  8 11:23:04 2024] POST /api/login => generated 60464 bytes in 66 msecs (HTTP/1.1 500) 5 headers in 196 bytes (1 switches on core 0)
+Not Found: /api/api/getInfo
+[pid: 1726768|app: 0|req: 59/112] 219.239.227.102 () {42 vars in 782 bytes} [Wed May  8 11:25:20 2024] GET /api/api/getInfo => generated 5035 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/api/alarm_notices_brief
+[pid: 1726768|app: 0|req: 60/113] 219.239.227.102 () {42 vars in 806 bytes} [Wed May  8 11:25:20 2024] GET /api/api/alarm_notices_brief => generated 5071 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/api/login/
+[pid: 1726768|app: 0|req: 61/114] 219.239.227.102 () {48 vars in 898 bytes} [Wed May  8 11:25:27 2024] POST /api/api/login/ => generated 5033 bytes in 4 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 1)
+Not Found: /api/getInfo
+[pid: 1726768|app: 0|req: 62/115] 219.239.227.102 () {42 vars in 774 bytes} [Wed May  8 11:26:30 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief
+[pid: 1726764|app: 0|req: 19/116] 219.239.227.102 () {42 vars in 798 bytes} [Wed May  8 11:26:31 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Bad Request: /api/login/
+[pid: 1726768|app: 0|req: 63/117] 219.239.227.102 () {48 vars in 890 bytes} [Wed May  8 11:26:38 2024] POST /api/login/ => generated 50 bytes in 0 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+Not Found: /api/getInfo
+[pid: 1726766|app: 0|req: 21/118] 219.239.227.102 () {42 vars in 774 bytes} [Wed May  8 11:27:36 2024] GET /api/getInfo => generated 5023 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief
+[pid: 1726763|app: 0|req: 16/119] 219.239.227.102 () {42 vars in 798 bytes} [Wed May  8 11:27:36 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 64/120] 219.239.227.102 () {48 vars in 896 bytes} [Wed May  8 11:27:56 2024] POST /api/register/ => generated 2869 bytes in 25 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 65/121] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:31:13 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 66/122] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:31:14 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726766|app: 0|req: 22/123] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:31:45 2024] POST /api/register/ => generated 2869 bytes in 7 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 67/124] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:32:01 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726764|app: 0|req: 20/125] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:32:02 2024] POST /api/register/ => generated 2869 bytes in 7 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726766|app: 0|req: 23/126] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:32:02 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 68/127] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:32:02 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 69/128] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:35:43 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 70/129] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:35:44 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Bad Request: /api/login/
+[pid: 1726768|app: 0|req: 71/130] 219.239.227.102 () {48 vars in 889 bytes} [Wed May  8 11:35:56 2024] POST /api/login/ => generated 50 bytes in 1 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+[pid: 1726768|app: 0|req: 72/131] 219.239.227.102 () {48 vars in 909 bytes} [Wed May  8 11:36:26 2024] POST /api/manage/user/list => generated 64 bytes in 30 msecs (HTTP/1.1 200) 8 headers in 244 bytes (1 switches on core 1)
+Not Found: /api/manage/data/search
+[pid: 1726768|app: 0|req: 73/132] 219.239.227.102 () {48 vars in 913 bytes} [Wed May  8 11:36:37 2024] POST /api/manage/data/search => generated 5057 bytes in 4 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 0)
+[pid: 1726768|app: 0|req: 74/133] 219.239.227.102 () {48 vars in 909 bytes} [Wed May  8 11:37:01 2024] POST /api/manage/user/list => generated 64 bytes in 2 msecs (HTTP/1.1 200) 8 headers in 244 bytes (1 switches on core 1)
+[pid: 1726768|app: 0|req: 75/134] 219.239.227.102 () {48 vars in 909 bytes} [Wed May  8 11:37:07 2024] POST /api/manage/user/list => generated 64 bytes in 2 msecs (HTTP/1.1 200) 8 headers in 244 bytes (1 switches on core 0)
+[pid: 1726768|app: 0|req: 76/135] 219.239.227.102 () {48 vars in 909 bytes} [Wed May  8 11:37:07 2024] POST /api/manage/user/list => generated 64 bytes in 2 msecs (HTTP/1.1 200) 8 headers in 244 bytes (1 switches on core 1)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:194: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+[pid: 1726766|app: 0|req: 24/136] 219.239.227.102 () {48 vars in 909 bytes} [Wed May  8 11:37:08 2024] POST /api/manage/user/list => generated 64 bytes in 5 msecs (HTTP/1.1 200) 8 headers in 244 bytes (1 switches on core 1)
+[pid: 1726763|app: 0|req: 17/137] 219.239.227.102 () {48 vars in 909 bytes} [Wed May  8 11:37:08 2024] POST /api/manage/user/list => generated 64 bytes in 2 msecs (HTTP/1.1 200) 8 headers in 244 bytes (1 switches on core 0)
+[pid: 1726766|app: 0|req: 25/138] 219.239.227.102 () {48 vars in 909 bytes} [Wed May  8 11:37:09 2024] POST /api/manage/user/list => generated 64 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 244 bytes (1 switches on core 0)
+[pid: 1726766|app: 0|req: 26/139] 219.239.227.102 () {42 vars in 820 bytes} [Wed May  8 11:44:42 2024] GET /api/ => generated 13 bytes in 0 msecs (HTTP/1.1 200) 7 headers in 220 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_best
+Not Found: /api/weather/overview
+[pid: 1726763|app: 0|req: 18/141] 219.239.227.102 () {42 vars in 1234 bytes} [Wed May  8 11:44:57 2024] GET /api/weather/overview?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5296 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1726768|app: 0|req: 77/141] 219.239.227.102 () {42 vars in 801 bytes} [Wed May  8 11:44:57 2024] GET /api/weather/aqi/rank_best => generated 5065 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/aqi_change
+[pid: 1726768|app: 0|req: 78/142] 219.239.227.102 () {42 vars in 803 bytes} [Wed May  8 11:44:57 2024] GET /api/weather/aqi/aqi_change => generated 5068 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/city_change
+[pid: 1726763|app: 0|req: 19/143] 219.239.227.102 () {42 vars in 816 bytes} [Wed May  8 11:44:57 2024] GET /api/weather/aqi/city_change?city= => generated 5077 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/getCityInfo
+Not Found: /api/weather/aqi/rank_worst
+[pid: 1726764|app: 0|req: 22/145] 219.239.227.102 () {42 vars in 781 bytes} [Wed May  8 11:44:57 2024] GET /api/getCityInfo => generated 5035 bytes in 12 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1726764|app: 0|req: 22/145] 219.239.227.102 () {42 vars in 803 bytes} [Wed May  8 11:44:57 2024] GET /api/weather/aqi/rank_worst => generated 5068 bytes in 12 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/humid/city_change
+[pid: 1726766|app: 0|req: 28/146] 219.239.227.102 () {42 vars in 820 bytes} [Wed May  8 11:44:57 2024] GET /api/weather/humid/city_change?city= => generated 5083 bytes in 6 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/temp/city_change
+[pid: 1726766|app: 0|req: 28/147] 219.239.227.102 () {42 vars in 818 bytes} [Wed May  8 11:44:57 2024] GET /api/weather/temp/city_change?city= => generated 5080 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/pressure/city_change
+[pid: 1726763|app: 0|req: 20/148] 219.239.227.102 () {42 vars in 826 bytes} [Wed May  8 11:44:57 2024] GET /api/weather/pressure/city_change?city= => generated 5092 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 79/149] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:45:02 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726766|app: 0|req: 29/150] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:45:29 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+[pid: 1726768|app: 0|req: 80/151] 123.249.90.23 () {34 vars in 562 bytes} [Wed May  8 11:47:01 2024] GET /api => generated 0 bytes in 4 msecs (HTTP/1.1 301) 5 headers in 195 bytes (1 switches on core 0)
+[pid: 1726768|app: 0|req: 81/152] 123.249.90.23 () {34 vars in 564 bytes} [Wed May  8 11:47:02 2024] GET /api/ => generated 13 bytes in 0 msecs (HTTP/1.1 200) 7 headers in 220 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726766|app: 0|req: 30/153] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:52:11 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 82/154] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:52:11 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Not Found: /api/getInfo
+[pid: 1726766|app: 0|req: 31/155] 219.239.227.102 () {42 vars in 773 bytes} [Wed May  8 11:52:16 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/overview
+[pid: 1726768|app: 0|req: 83/156] 219.239.227.102 () {42 vars in 1234 bytes} [Wed May  8 11:52:17 2024] GET /api/weather/overview?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5296 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_best
+[pid: 1726766|app: 0|req: 33/157] 219.239.227.102 () {42 vars in 801 bytes} [Wed May  8 11:52:17 2024] GET /api/weather/aqi/rank_best => generated 5065 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_worst
+[pid: 1726766|app: 0|req: 33/158] 219.239.227.102 () {42 vars in 803 bytes} [Wed May  8 11:52:17 2024] GET /api/weather/aqi/rank_worst => generated 5068 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/getCityInfo
+[pid: 1726766|app: 0|req: 34/159] 219.239.227.102 () {42 vars in 781 bytes} [Wed May  8 11:52:17 2024] GET /api/getCityInfo => generated 5035 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/temp/city_change
+[pid: 1726768|app: 0|req: 84/160] 219.239.227.102 () {42 vars in 818 bytes} [Wed May  8 11:52:17 2024] GET /api/weather/temp/city_change?city= => generated 5080 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/city_change
+[pid: 1726764|app: 0|req: 24/161] 219.239.227.102 () {42 vars in 816 bytes} [Wed May  8 11:52:17 2024] GET /api/weather/aqi/city_change?city= => generated 5077 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/aqi_change
+[pid: 1726764|app: 0|req: 24/162] 219.239.227.102 () {42 vars in 803 bytes} [Wed May  8 11:52:17 2024] GET /api/weather/aqi/aqi_change => generated 5068 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/humid/city_change
+[pid: 1726763|app: 0|req: 21/163] 219.239.227.102 () {42 vars in 820 bytes} [Wed May  8 11:52:17 2024] GET /api/weather/humid/city_change?city= => generated 5083 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/pressure/city_change
+[pid: 1726766|app: 0|req: 35/164] 219.239.227.102 () {42 vars in 826 bytes} [Wed May  8 11:52:17 2024] GET /api/weather/pressure/city_change?city= => generated 5092 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief
+[pid: 1726763|app: 0|req: 22/165] 219.239.227.102 () {42 vars in 797 bytes} [Wed May  8 11:52:17 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 85/166] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:52:30 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 86/167] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:54:08 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 87/168] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:54:09 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 88/169] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:56:17 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726763|app: 0|req: 23/170] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:56:56 2024] POST /api/register/ => generated 2869 bytes in 8 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Not Found: /api/getInfo
+[pid: 1726766|app: 0|req: 36/171] 219.239.227.102 () {42 vars in 773 bytes} [Wed May  8 11:57:05 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_best
+Not Found: /api/weather/aqi/rank_worst
+[pid: 1726764|app: 0|req: 25/172] 219.239.227.102 () {42 vars in 803 bytes} [Wed May  8 11:57:05 2024] GET /api/weather/aqi/rank_worst => generated 5068 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1726768|app: 0|req: 90/173] 219.239.227.102 () {42 vars in 801 bytes} [Wed May  8 11:57:05 2024] GET /api/weather/aqi/rank_best => generated 5065 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/getCityInfo
+[pid: 1726768|app: 0|req: 90/174] 219.239.227.102 () {42 vars in 781 bytes} [Wed May  8 11:57:05 2024] GET /api/getCityInfo => generated 5035 bytes in 8 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/overview
+[pid: 1726766|app: 0|req: 37/175] 219.239.227.102 () {42 vars in 1234 bytes} [Wed May  8 11:57:05 2024] GET /api/weather/overview?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5296 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/aqi_change
+[pid: 1726764|app: 0|req: 26/176] 219.239.227.102 () {42 vars in 803 bytes} [Wed May  8 11:57:05 2024] GET /api/weather/aqi/aqi_change => generated 5068 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/city_change
+[pid: 1726763|app: 0|req: 24/177] 219.239.227.102 () {42 vars in 816 bytes} [Wed May  8 11:57:05 2024] GET /api/weather/aqi/city_change?city= => generated 5077 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/temp/city_change
+[pid: 1726766|app: 0|req: 38/178] 219.239.227.102 () {42 vars in 818 bytes} [Wed May  8 11:57:05 2024] GET /api/weather/temp/city_change?city= => generated 5080 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/pressure/city_change
+[pid: 1726763|app: 0|req: 25/179] 219.239.227.102 () {42 vars in 826 bytes} [Wed May  8 11:57:05 2024] GET /api/weather/pressure/city_change?city= => generated 5092 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/humid/city_change
+[pid: 1726768|app: 0|req: 91/180] 219.239.227.102 () {42 vars in 820 bytes} [Wed May  8 11:57:05 2024] GET /api/weather/humid/city_change?city= => generated 5083 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief
+[pid: 1726763|app: 0|req: 26/181] 219.239.227.102 () {42 vars in 797 bytes} [Wed May  8 11:57:05 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 92/182] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 11:57:24 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 93/183] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:00:29 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 94/184] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:01:15 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 95/185] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:01:58 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 96/186] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:01:58 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726766|app: 0|req: 39/187] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:01:59 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 97/188] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:01:59 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 98/189] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:01:59 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 99/190] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:01:59 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726764|app: 0|req: 27/191] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:01:59 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726764|app: 0|req: 28/192] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:01:59 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 100/193] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:01:59 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 101/194] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:02:00 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726764|app: 0|req: 29/195] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:02:00 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726764|app: 0|req: 30/196] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:02:00 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726766|app: 0|req: 40/197] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:02:00 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726763|app: 0|req: 27/198] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:02:00 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 102/199] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:02:00 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 103/200] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:02:00 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726764|app: 0|req: 31/201] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:02:01 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726766|app: 0|req: 41/202] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:02:01 2024] POST /api/register/ => generated 2869 bytes in 1 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 104/203] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:02:01 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF cookie not set.): /api/register/
+[pid: 1726768|app: 0|req: 105/204] 219.239.227.102 () {48 vars in 895 bytes} [Wed May  8 12:02:01 2024] POST /api/register/ => generated 2869 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+Not Found: /api/getInfo
+[pid: 1726768|app: 0|req: 106/205] 219.239.227.102 () {42 vars in 773 bytes} [Wed May  8 12:02:04 2024] GET /api/getInfo => generated 5023 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/getCityInfo
+[pid: 1726766|app: 0|req: 43/206] 219.239.227.102 () {42 vars in 781 bytes} [Wed May  8 12:02:05 2024] GET /api/getCityInfo => generated 5035 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_worst
+[pid: 1726766|app: 0|req: 43/207] 219.239.227.102 () {42 vars in 803 bytes} [Wed May  8 12:02:05 2024] GET /api/weather/aqi/rank_worst => generated 5068 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/overview
+[pid: 1726768|app: 0|req: 107/208] 219.239.227.102 () {42 vars in 1234 bytes} [Wed May  8 12:02:05 2024] GET /api/weather/overview?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5296 bytes in 10 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/city_change
+[pid: 1726764|app: 0|req: 32/209] 219.239.227.102 () {42 vars in 816 bytes} [Wed May  8 12:02:05 2024] GET /api/weather/aqi/city_change?city= => generated 5077 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_best
+Not Found: /api/weather/aqi/aqi_change
+[pid: 1726763|app: 0|req: 29/211] 219.239.227.102 () {42 vars in 803 bytes} [Wed May  8 12:02:05 2024] GET /api/weather/aqi/aqi_change => generated 5068 bytes in 17 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1726763|app: 0|req: 29/210] 219.239.227.102 () {42 vars in 801 bytes} [Wed May  8 12:02:05 2024] GET /api/weather/aqi/rank_best => generated 5065 bytes in 16 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/pressure/city_change
+[pid: 1726768|app: 0|req: 108/212] 219.239.227.102 () {42 vars in 826 bytes} [Wed May  8 12:02:05 2024] GET /api/weather/pressure/city_change?city= => generated 5092 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/humid/city_change
+[pid: 1726764|app: 0|req: 34/213] 219.239.227.102 () {42 vars in 820 bytes} [Wed May  8 12:02:05 2024] GET /api/weather/humid/city_change?city= => generated 5083 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/temp/city_change
+[pid: 1726764|app: 0|req: 34/214] 219.239.227.102 () {42 vars in 818 bytes} [Wed May  8 12:02:05 2024] GET /api/weather/temp/city_change?city= => generated 5080 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief
+[pid: 1726768|app: 0|req: 109/215] 219.239.227.102 () {42 vars in 797 bytes} [Wed May  8 12:02:05 2024] GET /api/alarm_notices_brief => generated 5059 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
