@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "192.168.1.101",
     "192.168.1.102",
+    "*"
 ]
 
 
@@ -155,3 +156,6 @@ REST_FRAMEWORK = {
 # CRON_CLASSES = {
 #     'weather_update_job': 'weather.cron.WeatherUpdateJob',
 # }
+# SECURE_SSL_RESIRECT = False
+# SESSION_COOKIE_SECURE = False
+# CSRF_COOKIE_SECURE = False

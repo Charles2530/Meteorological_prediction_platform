@@ -178,7 +178,7 @@ interface SearchWeatherHourlyListResponse {
 }
 const weatherData: CityWeatherData[] = reactive([]);
 const handleSearch = () => {
-  post<SearchWeatherHourlyListResponse>("/api/manage/data/search", {
+  post<SearchWeatherHourlyListResponse>("/api/manage/data/search/", {
     type: selectType.value,
     time: selectedDate.value,
     address: selectedLocation.value,

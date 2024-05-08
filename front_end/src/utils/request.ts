@@ -10,10 +10,21 @@ const service: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 10000,
 });
+const getCsrfToken = () => {
+// 返回 CSRF 令牌
+// 例如，从浏览器 Cookie 中获取
+return document.cookie.replace(/(?:(?:^|.*;\s*)csrf\-token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+};
+
 
 service.interceptors.request.use(
   (config) => {
     config.headers["Authorization"] = `${Local.get("Bearer")?.Bearer ?? ""}`;
+    const csrfToken = getCsrfToken();
+    console.log("csrfToken",csrfToken)
+    if (csrfToken) {
+      config.headers["X-CSRFToken"] = csrfToken;
+    }
     return config;
   },
   (error) => {

@@ -61,7 +61,7 @@ interface WeatherHisOverview {
 
 import { post, get } from "@/api/index.ts";
 const get_his_overview = async () => {
-    get<WeatherHisOverview>("/api/weather/overview", city).then((res) => {
+    get<WeatherHisOverview>("/api/weather/overview/", city).then((res) => {
         weather.value = res.data.weather;
         console.log("----------------------------------------------------------------")
         console.log('weather:', weather.value); // 添加这行代码用于输出 weather 的值
