@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container"
+    class="info_container"
     style="min-height: 600px; max-height: 85vh; overflow: auto"
   >
     <el-card class="color2" shadow="always">
@@ -230,7 +230,7 @@ let proInfo = reactive({
   color: rgb(219, 219, 219);
 }
 
-.container::-webkit-scrollbar {
+.info_container::-webkit-scrollbar {
   width: 10px;
   height: 8px;
 }
