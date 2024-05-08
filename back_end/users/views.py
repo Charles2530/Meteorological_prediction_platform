@@ -72,9 +72,10 @@ def index(request):
 
 
 @csrf_exempt
-def _login(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
+def my_login(request):
+    data = json.loads(request.body)
+    username = data.get('username')
+    password = data.get('password')
 
     # 验证用户名格式
     if not username or not isinstance(username, str):
@@ -93,8 +94,8 @@ def _login(request):
             "userInfo": {
                 "username": username,
                 "avatar": "http://dummyimage.com/88x31",
-                "role": 2,  # 这里根据实际情况设置用户的角色
-                "email": "user.email" # TODO
+                "role": user.role,  # 这里根据实际情况设置用户的角色
+                "email": user.email
             }
         }
         return JsonResponse({
@@ -109,19 +110,22 @@ def _login(request):
         }, status=401)
 
 
-def _register(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    email = request.POST.get('email')
+@csrf_exempt
+@require_http_methods(["POST"])
+def my_register(request):
+    data = json.loads(request.body)
+    username = data.get('username')
+    password = data.get('password')
+    email = data.get('email')
 
     # 验证邮箱格式
-    try:
-        validate_email(email)
-    except ValidationError:
-        return JsonResponse({
-            "success": False,
-            "reason": "register.error.email"
-        }, status=400)
+    # try:
+    #     validate_email(email)
+    # except ValidationError:
+    #     return JsonResponse({
+    #         "success": False,
+    #         "reason": "register.error.email"
+    #     }, status=400)
 
     # 验证用户名和密码格式
     if not username or not isinstance(username, str):
@@ -149,12 +153,12 @@ def _register(request):
 
     # 准备返回的信息
     info = {
-        "token": RefreshToken.for_user(new_user),
+        "token": str(RefreshToken.for_user(new_user)),
         "userInfo": {
             "username": new_user.username,
             "avatar": "",  # todo
             "email": new_user.email,
-            "role": 1
+            "role": 2
         }
     }
 
@@ -317,16 +321,16 @@ def update_user_email(request):
         except ValidationError:
             return JsonResponse({"success": False, "reason": "manage.user.operate.email.format"}, status=400)
 
-        # 检查管理员权限
-        if role != 1:  # 假设role为1代表管理员
-            raise PermissionDenied(
-                "User does not have the permission to change email.")
+        # # 检查管理员权限
+        # if role != 1:  # 假设role为1代表管理员
+        #     raise PermissionDenied(
+        #         "User does not have the permission to change email.")
 
         # 检查用户是否存在
         try:
-            user = User.objects.get(uid=uid)
+            user = User.objects.get(id=uid)
         except User.DoesNotExist:
-            return JsonResponse({"success": False, "reason": "manage.invaild"}, status=400)
+            return JsonResponse({"success": False, "reason": request.POST}, status=400)
 
         # 更新用户邮箱
         user.email = new_email
@@ -343,7 +347,7 @@ def update_user_email(request):
     except Exception as e:
         # 其他错误
         # 你需要在你的urls.py文件中添加URL配置，以便将请求映射到这个视图函数
-        return JsonResponse({"success": False, "reason": "manage.invaild"}, status=400)
+        return JsonResponse({"success": False, "reason": "other user"}, status=400)
 
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
@@ -414,15 +418,15 @@ def delete_data(request):
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
 def user_info(request):
-    auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+    auth_header = request.META.get('HTTP_AUTHORIZATION','')
     if not auth_header:
-        return JsonResponse({'reason': 'manage.invaild'}, status=400)
+        return JsonResponse({'reason': 'manage.invalid'}, status=400)
 
     try:
         auth_header = auth_header.decode(HTTP_HEADER_ENCODING)
         token = auth_header.split(' ')[1]  # 假设token在Authorization头的'Bearer '之后
     except (UnicodeDecodeError, AttributeError, IndexError):
-        return JsonResponse({'reason': 'manage.invaild'}, status=400)
+        return JsonResponse({'reason': 'manage.invalid'}, status=400)
 
     try:
         # 使用Django REST framework的token认证系统解析token
@@ -589,36 +593,3 @@ def upload_avatar(request):
             "success": False,
             "reason": str(e)
         }, status=500)
-
-
-# def get_disaster_subscriptions(request):
-#     # 获取所有灾害订阅信息
-#     notifications = Notification.objects.all().order_by('-date')
-
-#     # 将灾害订阅信息格式化为JSON
-#     notifications_list = [
-#         {
-#             "id": notification.id,
-#             "img": notification.img,
-#             "title": notification.title,
-#             "date": notification.date.isoformat(),
-#             "content": notification.content,
-#             "instruction": notification.instruction,
-#         }
-#         for notification in notifications
-#     ]
-
-#     # 返回JSON响应
-#     return JsonResponse({
-#         "success": True,
-#         "notifications": notifications_list
-#     }, safe=False)
-
-
-# 例如：
-# from django.urls import path
-# from .views import user_authorization
-
-# urlpatterns = [
-#     path('api/user_authorization/', user_authorization, name='user_authorization'),
-# ]

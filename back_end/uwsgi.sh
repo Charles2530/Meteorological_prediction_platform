@@ -1,0 +1,12 @@
+uwsgi   --uid root \
+        --gid root \
+        --socket 127.0.0.1:8000 \
+        --chdir ~/Meteorological_prediction_platform/back_end \
+        -w back_end.wsgi:application \
+        --master --enable-threads \
+        --threads 2 --processes 4 \
+        --buffer-size 65536 --vacuum \
+        --daemonize uwsgi.log \
+        --pidfile uwsgi.pid \
+        --chmod-socket=777 \
+        --py-autoreload 1

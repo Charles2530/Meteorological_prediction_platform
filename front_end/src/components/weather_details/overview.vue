@@ -95,7 +95,7 @@ interface Weather{
 
 import { post, get } from "@/api/index.ts";
 const get_his_overview = async () => {
-    get<WeatherHisOverview>("/api/weather/overview", city).then((res) => {
+    get<WeatherHisOverview>("/api/weather/overview/", city).then((res) => {
         weather.value = res.data.weather;
         console.log(weather.value);
         // city.value = res.data.city;

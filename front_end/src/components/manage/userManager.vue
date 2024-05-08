@@ -328,7 +328,7 @@ const getUserList = throttle(() => {
   loading.value = true;
   request.page = pagination.page;
   request.page_size = pagination.page_size;
-  post<QueryResponse>("/api/manage/user/list", request).then((res) => {
+  post<QueryResponse>("/api/manage/user/list/", request).then((res) => {
     const data = res.data;
     console.log(data.userlist);
     userlist.splice(0, userlist.length, ...data.userlist);
@@ -364,7 +364,7 @@ const handleDelete = throttle((id: number) => {
   const request: DeleteForm = {
     uid: id,
   };
-  post<Response>("/api/manage/user/delete", request).then((res) => {
+  post<Response>("/api/manage/user/delete/", request).then((res) => {
     const response = res.data;
     getUserList();
     if (response.success) {
@@ -382,7 +382,7 @@ const handleSet = throttle((id: number, role: UserRole) => {
     uid: id,
     role: role,
   };
-  post<Response>("/api/manage/user/set", request).then((res) => {
+  post<Response>("/api/manage/user/set/", request).then((res) => {
     const response = res.data;
     getUserList();
     if (response.success) {
@@ -418,7 +418,7 @@ const confirmEmail = throttle((formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      post<Response>("/api/manage/user/email", emailForm).then((res) => {
+      post<Response>("/api/manage/user/email/", emailForm).then((res) => {
         const response = res.data;
         if (response.success) {
           getUserList();
@@ -473,7 +473,7 @@ const confirmPassword = throttle((formEl: FormInstance | undefined) => {
         uid: passwordForm.uid,
         password: md5(passwordForm.password),
       };
-      post<Response>("/api/manage/user/password", encodePasswordForm).then(
+      post<Response>("/api/manage/user/password/", encodePasswordForm).then(
         (res) => {
           const response = res.data;
           if (response.success) {

@@ -39,7 +39,7 @@ interface AqiChangeResponse {
 }
 
 const fetchAirQualityRank = async () =>
-  get<AqiChangeResponse>("/api/weather/aqi/aqi_change").then((res) => {
+  get<AqiChangeResponse>("/api/weather/aqi/aqi_change/").then((res) => {
     renderChart(res.data.data);
   });
 
