@@ -57,6 +57,46 @@ def index(request):
     return HttpResponse("Welcome to the weather app!")
 
 
+def overview(request):
+    return HttpResponse("This is the weather app overview page!")
+
+
+def thirty_days_forecast(request):
+    return HttpResponse("This is the 30 days forecast page!")
+
+
+def realtime(request):
+    return HttpResponse("This is the realtime weather page!")
+
+
+def aqi_best(request):
+    return HttpResponse("This is the AQI best stations page!")
+
+
+def aqi_worst(request):
+    return HttpResponse("This is the AQI worst stations page!")
+
+
+def aqi_current_city_change(request):
+    return HttpResponse("This is the AQI current city change page!")
+
+
+def aqi_target_city_change(request):
+    return HttpResponse("This is the AQI target city change page!")
+
+
+def temp_city_change(request):
+    return HttpResponse("This is the temp city change page!")
+
+
+def pressure_city_change(request):
+    return HttpResponse("This is the pressure city change page!")
+
+
+def humid_city_change(request):
+    return HttpResponse("This is the humid city change page!")
+
+
 # @csrf_exempt
 # def getProInfo(request):
 #     assert request.method == 'GET'
