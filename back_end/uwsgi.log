@@ -4105,3 +4105,798 @@ Not Found: /api/manage/user/list/
 [pid: 1788102|app: 0|req: 3/3] 219.239.227.217 () {50 vars in 1214 bytes} [Wed May  8 17:36:07 2024] POST /api/manage/user/list/ => generated 5054 bytes in 4 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 0)
 Not Found: /api/manage/user/list/
 [pid: 1788102|app: 0|req: 4/4] 219.239.227.217 () {50 vars in 1214 bytes} [Wed May  8 17:36:17 2024] POST /api/manage/user/list/ => generated 5054 bytes in 4 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 1)
+Bad Request: /api/get_info/
+[pid: 1788105|app: 0|req: 1/5] 219.239.227.217 () {44 vars in 1080 bytes} [Wed May  8 17:38:16 2024] GET /api/get_info/ => generated 28 bytes in 123 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Not Found: /api/manage/user/list/
+[pid: 1788105|app: 0|req: 2/6] 219.239.227.217 () {50 vars in 1214 bytes} [Wed May  8 17:38:17 2024] POST /api/manage/user/list/ => generated 5054 bytes in 9 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief/
+[pid: 1788102|app: 0|req: 5/7] 219.239.227.217 () {44 vars in 1102 bytes} [Wed May  8 17:38:17 2024] GET /api/alarm_notices_brief/ => generated 5062 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Internal Server Error: /api/login/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 97, in my_login
+    "role": user.role,  # 这里根据实际情况设置用户的角色
+AttributeError: 'User' object has no attribute 'role'
+[pid: 1788102|app: 0|req: 6/8] 219.239.227.217 () {50 vars in 1192 bytes} [Wed May  8 17:38:22 2024] POST /api/login/ => generated 61885 bytes in 482 msecs (HTTP/1.1 500) 9 headers in 418 bytes (1 switches on core 1)
+Internal Server Error: /api/login/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 97, in my_login
+    "role": user.role,  # 这里根据实际情况设置用户的角色
+AttributeError: 'User' object has no attribute 'role'
+[pid: 1788102|app: 0|req: 7/9] 219.239.227.217 () {50 vars in 1192 bytes} [Wed May  8 17:38:23 2024] POST /api/login/ => generated 61885 bytes in 480 msecs (HTTP/1.1 500) 9 headers in 418 bytes (1 switches on core 0)
+Internal Server Error: /api/login/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 97, in my_login
+    "role": user.role,  # 这里根据实际情况设置用户的角色
+AttributeError: 'User' object has no attribute 'role'
+[pid: 1788102|app: 0|req: 8/10] 219.239.227.217 () {50 vars in 1192 bytes} [Wed May  8 17:38:28 2024] POST /api/login/ => generated 61885 bytes in 483 msecs (HTTP/1.1 500) 9 headers in 418 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/urls.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1788098)...
+Gracefully killing worker 2 (pid: 1788100)...
+Gracefully killing worker 3 (pid: 1788102)...
+Gracefully killing worker 4 (pid: 1788105)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 17:40:28 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x1eeb5b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x1eeb5b0 pid: 1787485 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1787485)
+spawned uWSGI worker 1 (pid: 1789146, cores: 2)
+spawned uWSGI worker 2 (pid: 1789147, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1789150, cores: 2)
+spawned uWSGI worker 4 (pid: 1789153, cores: 2)
+Internal Server Error: /api/login/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 97, in my_login
+    "role": user.role,  # 这里根据实际情况设置用户的角色
+AttributeError: 'User' object has no attribute 'role'
+[pid: 1789153|app: 0|req: 1/1] 219.239.227.217 () {50 vars in 1192 bytes} [Wed May  8 17:40:37 2024] POST /api/login/ => generated 61885 bytes in 612 msecs (HTTP/1.1 500) 9 headers in 418 bytes (1 switches on core 0)
+Internal Server Error: /api/login/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 97, in my_login
+    "role": user.role,  # 这里根据实际情况设置用户的角色
+AttributeError: 'User' object has no attribute 'role'
+[pid: 1789153|app: 0|req: 2/2] 219.239.227.217 () {50 vars in 1192 bytes} [Wed May  8 17:40:42 2024] POST /api/login/ => generated 61885 bytes in 484 msecs (HTTP/1.1 500) 9 headers in 418 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1789146)...
+Gracefully killing worker 2 (pid: 1789147)...
+Gracefully killing worker 3 (pid: 1789150)...
+Gracefully killing worker 4 (pid: 1789153)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 17:41:45 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x19a95b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x19a95b0 pid: 1787485 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1787485)
+spawned uWSGI worker 1 (pid: 1789470, cores: 2)
+spawned uWSGI worker 2 (pid: 1789471, cores: 2)
+spawned uWSGI worker 3 (pid: 1789472, cores: 2)
+spawned uWSGI worker 4 (pid: 1789473, cores: 2)
+Python auto-reloader enabled
+[pid: 1789470|app: 0|req: 1/1] 219.239.227.217 () {50 vars in 1192 bytes} [Wed May  8 17:41:46 2024] POST /api/login/ => generated 180 bytes in 624 msecs (HTTP/1.1 200) 10 headers in 534 bytes (1 switches on core 0)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:198: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+Internal Server Error: /api/manage/user/list/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 219, in user_list
+    "uid": user.uid,
+AttributeError: 'User' object has no attribute 'uid'
+[pid: 1789470|app: 0|req: 2/2] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:41:55 2024] POST /api/manage/user/list/ => generated 63224 bytes in 26 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1789470)...
+Gracefully killing worker 4 (pid: 1789473)...
+Gracefully killing worker 2 (pid: 1789471)...
+Gracefully killing worker 3 (pid: 1789472)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 17:42:57 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x20b25b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x20b25b0 pid: 1787485 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1787485)
+spawned uWSGI worker 1 (pid: 1789733, cores: 2)
+spawned uWSGI worker 2 (pid: 1789734, cores: 2)
+spawned uWSGI worker 3 (pid: 1789737, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1789738, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1789737|app: 0|req: 1/1] 219.239.227.217 () {44 vars in 871 bytes} [Wed May  8 17:44:52 2024] GET /api/get_info/ => generated 28 bytes in 126 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:198: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+Internal Server Error: /api/manage/user/list/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 222, in user_list
+    "avatar": user.avatar,
+AttributeError: 'User' object has no attribute 'avatar'
+[pid: 1789737|app: 0|req: 2/2] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:44:52 2024] POST /api/manage/user/list/ => generated 63224 bytes in 30 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief/
+[pid: 1789737|app: 0|req: 3/3] 219.239.227.217 () {44 vars in 893 bytes} [Wed May  8 17:44:53 2024] GET /api/alarm_notices_brief/ => generated 5066 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1789737|app: 0|req: 4/4] 219.239.227.217 () {50 vars in 983 bytes} [Wed May  8 17:44:56 2024] POST /api/login/ => generated 179 bytes in 482 msecs (HTTP/1.1 200) 10 headers in 534 bytes (1 switches on core 1)
+Internal Server Error: /api/manage/user/list/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 222, in user_list
+    "avatar": user.avatar,
+AttributeError: 'User' object has no attribute 'avatar'
+[pid: 1789737|app: 0|req: 5/5] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:45:00 2024] POST /api/manage/user/list/ => generated 63226 bytes in 21 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1789733)...
+Gracefully killing worker 3 (pid: 1789737)...
+Gracefully killing worker 2 (pid: 1789734)...
+Gracefully killing worker 4 (pid: 1789738)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 17:49:38 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x20825b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x20825b0 pid: 1787485 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1787485)
+spawned uWSGI worker 1 (pid: 1791168, cores: 2)
+spawned uWSGI worker 2 (pid: 1791169, cores: 2)
+spawned uWSGI worker 3 (pid: 1791172, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1791173, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1791173|app: 0|req: 1/1] 219.239.227.217 () {44 vars in 871 bytes} [Wed May  8 17:49:46 2024] GET /api/get_info/ => generated 28 bytes in 132 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:198: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+Internal Server Error: /api/manage/user/list/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 225, in user_list
+    "last_login": user.last_login.strftime('%Y-%m-%d %H:%M:%S')
+AttributeError: 'NoneType' object has no attribute 'strftime'
+[pid: 1791172|app: 0|req: 1/2] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:49:46 2024] POST /api/manage/user/list/ => generated 63351 bytes in 151 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief/
+[pid: 1791173|app: 0|req: 2/3] 219.239.227.217 () {44 vars in 893 bytes} [Wed May  8 17:49:46 2024] GET /api/alarm_notices_brief/ => generated 5066 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1791172|app: 0|req: 2/4] 219.239.227.217 () {50 vars in 983 bytes} [Wed May  8 17:49:49 2024] POST /api/login/ => generated 179 bytes in 464 msecs (HTTP/1.1 200) 10 headers in 534 bytes (1 switches on core 1)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:198: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+Internal Server Error: /api/manage/user/list/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 225, in user_list
+    "last_login": user.last_login.strftime('%Y-%m-%d %H:%M:%S')
+AttributeError: 'NoneType' object has no attribute 'strftime'
+[pid: 1791173|app: 0|req: 3/5] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:49:57 2024] POST /api/manage/user/list/ => generated 63351 bytes in 27 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 4 (pid: 1791173)...
+Gracefully killing worker 1 (pid: 1791168)...
+Gracefully killing worker 2 (pid: 1791169)...
+Gracefully killing worker 3 (pid: 1791172)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 17:53:33 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0xc4f5b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0xc4f5b0 pid: 1787485 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1787485)
+spawned uWSGI worker 1 (pid: 1791991, cores: 2)
+spawned uWSGI worker 2 (pid: 1791992, cores: 2)
+spawned uWSGI worker 3 (pid: 1791995, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1791996, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1791995|app: 0|req: 1/1] 219.239.227.217 () {44 vars in 871 bytes} [Wed May  8 17:54:17 2024] GET /api/get_info/ => generated 28 bytes in 126 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:199: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+Internal Server Error: /api/manage/user/list/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 226, in user_list
+    "last_login": user.last_login.strftime('%Y-%m-%d %H:%M:%S') if user.last_login != None else datetime.now.strftime('%Y-%m-%d %H:%M:%S')
+AttributeError: 'builtin_function_or_method' object has no attribute 'strftime'
+[pid: 1791995|app: 0|req: 2/2] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:54:17 2024] POST /api/manage/user/list/ => generated 63593 bytes in 30 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief/
+[pid: 1791992|app: 0|req: 1/3] 219.239.227.217 () {44 vars in 893 bytes} [Wed May  8 17:54:17 2024] GET /api/alarm_notices_brief/ => generated 5066 bytes in 129 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1791995|app: 0|req: 3/4] 219.239.227.217 () {50 vars in 983 bytes} [Wed May  8 17:54:20 2024] POST /api/login/ => generated 180 bytes in 470 msecs (HTTP/1.1 200) 10 headers in 534 bytes (1 switches on core 0)
+Internal Server Error: /api/manage/user/list/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 226, in user_list
+    "last_login": user.last_login.strftime('%Y-%m-%d %H:%M:%S') if user.last_login != None else datetime.now.strftime('%Y-%m-%d %H:%M:%S')
+AttributeError: 'builtin_function_or_method' object has no attribute 'strftime'
+[pid: 1791995|app: 0|req: 4/5] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:54:21 2024] POST /api/manage/user/list/ => generated 63591 bytes in 20 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1791991)...
+Gracefully killing worker 2 (pid: 1791992)...
+Gracefully killing worker 3 (pid: 1791995)...
+Gracefully killing worker 4 (pid: 1791996)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 17:54:53 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x110c5b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x110c5b0 pid: 1787485 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1787485)
+spawned uWSGI worker 1 (pid: 1792287, cores: 2)
+spawned uWSGI worker 2 (pid: 1792288, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1792291, cores: 2)
+spawned uWSGI worker 4 (pid: 1792294, cores: 2)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:199: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+Internal Server Error: /api/manage/user/list/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 231, in user_list
+    return JsonResponse(response_json)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/http/response.py", line 733, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type builtin_function_or_method is not JSON serializable
+[pid: 1792294|app: 0|req: 1/1] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:54:55 2024] POST /api/manage/user/list/ => generated 101316 bytes in 174 msecs (HTTP/1.1 500) 8 headers in 283 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 4 (pid: 1792294)...
+Gracefully killing worker 1 (pid: 1792287)...
+Gracefully killing worker 2 (pid: 1792288)...
+Gracefully killing worker 3 (pid: 1792291)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 17:55:11 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x15e15b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x15e15b0 pid: 1787485 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1787485)
+spawned uWSGI worker 1 (pid: 1792386, cores: 2)
+spawned uWSGI worker 2 (pid: 1792387, cores: 2)
+spawned uWSGI worker 3 (pid: 1792390, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1792391, cores: 2)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:199: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+[pid: 1792387|app: 0|req: 1/1] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:55:12 2024] POST /api/manage/user/list/ => generated 860 bytes in 130 msecs (HTTP/1.1 200) 8 headers in 245 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1792386)...
+Gracefully killing worker 3 (pid: 1792390)...
+Gracefully killing worker 4 (pid: 1792391)...
+Gracefully killing worker 2 (pid: 1792387)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 17:57:16 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x23295b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x23295b0 pid: 1787485 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1787485)
+spawned uWSGI worker 1 (pid: 1792828, cores: 2)
+spawned uWSGI worker 2 (pid: 1792829, cores: 2)
+spawned uWSGI worker 3 (pid: 1792832, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1792833, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1792833|app: 0|req: 1/1] 219.239.227.217 () {44 vars in 871 bytes} [Wed May  8 17:57:21 2024] GET /api/get_info/ => generated 28 bytes in 127 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:199: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+[pid: 1792833|app: 0|req: 2/2] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:57:21 2024] POST /api/manage/user/list/ => generated 790 bytes in 7 msecs (HTTP/1.1 200) 8 headers in 245 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief/
+[pid: 1792832|app: 0|req: 1/3] 219.239.227.217 () {44 vars in 893 bytes} [Wed May  8 17:57:21 2024] GET /api/alarm_notices_brief/ => generated 5066 bytes in 134 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1792833|app: 0|req: 3/4] 219.239.227.217 () {50 vars in 983 bytes} [Wed May  8 17:57:24 2024] POST /api/login/ => generated 180 bytes in 474 msecs (HTTP/1.1 200) 10 headers in 534 bytes (1 switches on core 0)
+Bad Request: /api/manage/user/delete/
+[pid: 1792833|app: 0|req: 4/5] 219.239.227.217 () {50 vars in 1007 bytes} [Wed May  8 17:57:31 2024] POST /api/manage/user/delete/ => generated 39 bytes in 1 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+Bad Request: /api/manage/user/delete/
+[pid: 1792833|app: 0|req: 5/6] 219.239.227.217 () {50 vars in 1007 bytes} [Wed May  8 17:57:40 2024] POST /api/manage/user/delete/ => generated 39 bytes in 1 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+Bad Request: /api/get_info/
+[pid: 1792833|app: 0|req: 6/7] 219.239.227.168 () {42 vars in 729 bytes} [Wed May  8 17:57:42 2024] GET /api/get_info/ => generated 28 bytes in 0 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief/
+[pid: 1792832|app: 0|req: 2/8] 219.239.227.168 () {42 vars in 751 bytes} [Wed May  8 17:57:43 2024] GET /api/alarm_notices_brief/ => generated 5066 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1792828)...
+Gracefully killing worker 2 (pid: 1792829)...
+Gracefully killing worker 3 (pid: 1792832)...
+Gracefully killing worker 4 (pid: 1792833)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Wed May  8 17:58:11 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x257b5b0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x257b5b0 pid: 1787485 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1787485)
+spawned uWSGI worker 1 (pid: 1793003, cores: 2)
+spawned uWSGI worker 2 (pid: 1793004, cores: 2)
+spawned uWSGI worker 3 (pid: 1793007, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1793008, cores: 2)
+[pid: 1793007|app: 0|req: 1/1] 219.239.227.217 () {50 vars in 1007 bytes} [Wed May  8 17:58:26 2024] POST /api/manage/user/delete/ => generated 17 bytes in 130 msecs (HTTP/1.1 200) 8 headers in 244 bytes (1 switches on core 0)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:199: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+[pid: 1793007|app: 0|req: 2/2] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:58:27 2024] POST /api/manage/user/list/ => generated 790 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 245 bytes (1 switches on core 1)
+Bad Request: /api/get_info/
+[pid: 1793007|app: 0|req: 3/3] 219.239.227.217 () {44 vars in 871 bytes} [Wed May  8 17:58:32 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1793007|app: 0|req: 4/4] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:58:32 2024] POST /api/manage/user/list/ => generated 790 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 245 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief/
+[pid: 1793008|app: 0|req: 1/5] 219.239.227.217 () {44 vars in 893 bytes} [Wed May  8 17:58:33 2024] GET /api/alarm_notices_brief/ => generated 5066 bytes in 131 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1793007|app: 0|req: 5/6] 219.239.227.217 () {50 vars in 983 bytes} [Wed May  8 17:58:34 2024] POST /api/login/ => generated 180 bytes in 468 msecs (HTTP/1.1 200) 10 headers in 534 bytes (1 switches on core 0)
+[pid: 1793007|app: 0|req: 6/7] 219.239.227.217 () {50 vars in 1007 bytes} [Wed May  8 17:58:48 2024] POST /api/manage/user/delete/ => generated 17 bytes in 2 msecs (HTTP/1.1 200) 8 headers in 244 bytes (1 switches on core 1)
+[pid: 1793007|app: 0|req: 7/8] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:58:48 2024] POST /api/manage/user/list/ => generated 790 bytes in 2 msecs (HTTP/1.1 200) 8 headers in 245 bytes (1 switches on core 0)
+Bad Request: /api/get_info/
+[pid: 1793007|app: 0|req: 8/9] 219.239.227.217 () {44 vars in 871 bytes} [Wed May  8 17:58:51 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+[pid: 1793007|app: 0|req: 9/10] 219.239.227.217 () {50 vars in 1005 bytes} [Wed May  8 17:58:52 2024] POST /api/manage/user/list/ => generated 790 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 245 bytes (1 switches on core 0)
+Not Found: /api/alarm_notices_brief/
+[pid: 1793007|app: 0|req: 10/11] 219.239.227.217 () {44 vars in 893 bytes} [Wed May  8 17:58:52 2024] GET /api/alarm_notices_brief/ => generated 5066 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/manage/user/set/
+[pid: 1793007|app: 0|req: 11/12] 219.239.227.217 () {50 vars in 1003 bytes} [Wed May  8 17:59:33 2024] POST /api/manage/user/set/ => generated 5055 bytes in 5 msecs (HTTP/1.1 404) 8 headers in 261 bytes (1 switches on core 0)
+Not Found: /api/weather/overview/
+Not Found: /api/weather/aqi/city_change/
+[pid: 1793007|app: 0|req: 13/13] 219.239.227.168 () {42 vars in 770 bytes} [Wed May  8 18:00:14 2024] GET /api/weather/aqi/city_change/?city= => generated 5084 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1793007|app: 0|req: 13/14] 219.239.227.168 () {42 vars in 1188 bytes} [Wed May  8 18:00:14 2024] GET /api/weather/overview/?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5303 bytes in 10 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_worst/
+[pid: 1793008|app: 0|req: 3/15] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 18:00:14 2024] GET /api/weather/aqi/rank_worst/ => generated 5075 bytes in 12 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_best/
+[pid: 1793008|app: 0|req: 3/16] 219.239.227.168 () {42 vars in 755 bytes} [Wed May  8 18:00:14 2024] GET /api/weather/aqi/rank_best/ => generated 5072 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/pressure/city_change
+[pid: 1793007|app: 0|req: 14/17] 219.239.227.168 () {42 vars in 778 bytes} [Wed May  8 18:00:14 2024] GET /api/weather/pressure/city_change?city= => generated 5096 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/getCityInfo/
+[pid: 1793004|app: 0|req: 2/18] 219.239.227.168 () {42 vars in 735 bytes} [Wed May  8 18:00:14 2024] GET /api/getCityInfo/ => generated 5042 bytes in 142 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/aqi_change/
+[pid: 1793004|app: 0|req: 2/19] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 18:00:14 2024] GET /api/weather/aqi/aqi_change/ => generated 5075 bytes in 142 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/humid/city_change/
+Not Found: /api/weather/temp/city_change/
+[pid: 1793003|app: 0|req: 2/20] 219.239.227.168 () {42 vars in 772 bytes} [Wed May  8 18:00:14 2024] GET /api/weather/temp/city_change/?city= => generated 5087 bytes in 146 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1793003|app: 0|req: 2/21] 219.239.227.168 () {42 vars in 774 bytes} [Wed May  8 18:00:14 2024] GET /api/weather/humid/city_change/?city= => generated 5090 bytes in 145 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices/
+[pid: 1793007|app: 0|req: 15/22] 219.239.227.168 () {42 vars in 739 bytes} [Wed May  8 18:00:18 2024] GET /api/alarm_notices/ => generated 5048 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/subscribe/
+[pid: 1793003|app: 0|req: 3/23] 219.239.227.168 () {42 vars in 731 bytes} [Wed May  8 18:00:18 2024] GET /api/subscribe/ => generated 5036 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/get_alarm_level/
+Not Found: /api/alarm_resent_notices/
+[pid: 1793004|app: 0|req: 4/25] 219.239.227.168 () {42 vars in 743 bytes} [Wed May  8 18:00:18 2024] GET /api/get_alarm_level/ => generated 5054 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1793004|app: 0|req: 4/25] 219.239.227.168 () {42 vars in 753 bytes} [Wed May  8 18:00:18 2024] GET /api/alarm_resent_notices/ => generated 5069 bytes in 12 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/getCityInfo/
+[pid: 1793007|app: 0|req: 16/26] 219.239.227.168 () {42 vars in 735 bytes} [Wed May  8 18:00:18 2024] GET /api/getCityInfo/ => generated 5042 bytes in 6 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/city_change/
+Not Found: /api/weather/aqi/rank_worst/
+[pid: 1793007|app: 0|req: 17/27] 219.239.227.168 () {42 vars in 770 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/aqi/city_change/?city= => generated 5084 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1793008|app: 0|req: 5/28] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/aqi/rank_worst/ => generated 5075 bytes in 11 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/overview/
+[pid: 1793008|app: 0|req: 5/29] 219.239.227.168 () {42 vars in 1188 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/overview/?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5303 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/aqi_change/
+Not Found: /api/weather/aqi/rank_best/
+[pid: 1793003|app: 0|req: 5/30] 219.239.227.168 () {42 vars in 755 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/aqi/rank_best/ => generated 5072 bytes in 16 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1793003|app: 0|req: 5/31] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/aqi/aqi_change/ => generated 5075 bytes in 17 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/temp/city_change/
+[pid: 1793004|app: 0|req: 5/32] 219.239.227.168 () {42 vars in 772 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/temp/city_change/?city= => generated 5087 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/pressure/city_change
+[pid: 1793007|app: 0|req: 18/33] 219.239.227.168 () {42 vars in 778 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/pressure/city_change?city= => generated 5096 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/humid/city_change/
+[pid: 1793004|app: 0|req: 6/34] 219.239.227.168 () {42 vars in 774 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/humid/city_change/?city= => generated 5090 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Bad Request: /api/get_info/
+[pid: 1793007|app: 0|req: 19/35] 219.239.227.168 () {42 vars in 729 bytes} [Wed May  8 18:00:22 2024] GET /api/get_info/ => generated 28 bytes in 0 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+Not Found: /api/weather/overview/
+Not Found: /api/getCityInfo/
+Not Found: /api/weather/aqi/aqi_change/
+Not Found: /api/weather/aqi/rank_worst/
+[pid: 1793004|app: 0|req: 8/38] 219.239.227.168 () {42 vars in 735 bytes} [Wed May  8 18:00:22 2024] GET /api/getCityInfo/ => generated 5042 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/city_change/
+[pid: 1793003|app: 0|req: 7/40] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/aqi/rank_worst/ => generated 5075 bytes in 14 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1793007|app: 0|req: 21/36] 219.239.227.168 () {42 vars in 1188 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/overview/?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5303 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1793004|app: 0|req: 8/37] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/aqi/aqi_change/ => generated 5075 bytes in 12 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_best/
+[pid: 1793007|app: 0|req: 21/40] 219.239.227.168 () {42 vars in 770 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/aqi/city_change/?city= => generated 5084 bytes in 11 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1793003|app: 0|req: 7/41] 219.239.227.168 () {42 vars in 755 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/aqi/rank_best/ => generated 5072 bytes in 15 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/temp/city_change/
+[pid: 1793007|app: 0|req: 22/42] 219.239.227.168 () {42 vars in 772 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/temp/city_change/?city= => generated 5087 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/humid/city_change/
+[pid: 1793008|app: 0|req: 7/43] 219.239.227.168 () {42 vars in 774 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/humid/city_change/?city= => generated 5090 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/pressure/city_change
+[pid: 1793008|app: 0|req: 7/44] 219.239.227.168 () {42 vars in 778 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/pressure/city_change?city= => generated 5096 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief/
+[pid: 1793007|app: 0|req: 23/45] 219.239.227.168 () {42 vars in 751 bytes} [Wed May  8 18:00:22 2024] GET /api/alarm_notices_brief/ => generated 5066 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_resent_notices/
+[pid: 1793007|app: 0|req: 24/46] 219.239.227.168 () {42 vars in 753 bytes} [Wed May  8 18:00:27 2024] GET /api/alarm_resent_notices/ => generated 5069 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/subscribe/
+[pid: 1793003|app: 0|req: 8/47] 219.239.227.168 () {42 vars in 731 bytes} [Wed May  8 18:00:27 2024] GET /api/subscribe/ => generated 5036 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices/
+[pid: 1793007|app: 0|req: 25/48] 219.239.227.168 () {42 vars in 739 bytes} [Wed May  8 18:00:27 2024] GET /api/alarm_notices/ => generated 5048 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/get_alarm_level/
+[pid: 1793008|app: 0|req: 8/49] 219.239.227.168 () {42 vars in 743 bytes} [Wed May  8 18:00:27 2024] GET /api/get_alarm_level/ => generated 5054 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Unauthorized: /api/manage/user/list/
+[pid: 1793007|app: 0|req: 26/50] 219.239.227.168 () {48 vars in 863 bytes} [Wed May  8 18:00:29 2024] POST /api/manage/user/list/ => generated 46 bytes in 0 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 1)
+Unauthorized: /api/manage/user/list/
+[pid: 1793007|app: 0|req: 27/51] 219.239.227.168 () {48 vars in 863 bytes} [Wed May  8 18:00:31 2024] POST /api/manage/user/list/ => generated 46 bytes in 0 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 0)
+Unauthorized: /api/manage/user/list/
+[pid: 1793007|app: 0|req: 28/52] 219.239.227.168 () {48 vars in 863 bytes} [Wed May  8 18:02:04 2024] POST /api/manage/user/list/ => generated 46 bytes in 1 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 1)
+[pid: 1793007|app: 0|req: 29/53] 219.239.227.168 () {48 vars in 847 bytes} [Wed May  8 18:02:32 2024] POST /api/register/ => generated 378 bytes in 462 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 0)
+Not Found: /api/alarm_resent_notices/
+Not Found: /api/alarm_notices/
+[pid: 1793007|app: 0|req: 30/54] 219.239.227.168 () {42 vars in 989 bytes} [Wed May  8 18:02:36 2024] GET /api/alarm_resent_notices/ => generated 5069 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1793003|app: 0|req: 9/55] 219.239.227.168 () {42 vars in 975 bytes} [Wed May  8 18:02:36 2024] GET /api/alarm_notices/ => generated 5048 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/subscribe/
+[pid: 1793007|app: 0|req: 31/56] 219.239.227.168 () {42 vars in 967 bytes} [Wed May  8 18:02:36 2024] GET /api/subscribe/ => generated 5036 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/get_alarm_level/
+[pid: 1793004|app: 0|req: 9/57] 219.239.227.168 () {42 vars in 979 bytes} [Wed May  8 18:02:36 2024] GET /api/get_alarm_level/ => generated 5054 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:199: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+[pid: 1793004|app: 0|req: 10/58] 219.239.227.168 () {48 vars in 1099 bytes} [Wed May  8 18:02:37 2024] POST /api/manage/user/list/ => generated 976 bytes in 5 msecs (HTTP/1.1 200) 8 headers in 245 bytes (1 switches on core 1)
+[pid: 1793007|app: 0|req: 32/59] 219.239.227.168 () {48 vars in 1099 bytes} [Wed May  8 18:02:47 2024] POST /api/manage/user/list/ => generated 976 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 245 bytes (1 switches on core 1)
