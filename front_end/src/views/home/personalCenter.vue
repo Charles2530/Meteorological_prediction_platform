@@ -200,7 +200,7 @@ onMounted(() => {
   getSubscribeStatus();
 });
 const getSubscribeStatus = () => {
-  get<GetSubscribeResponse>("/api/subscribe").then((res) => {
+  get<GetSubscribeResponse>("/api/subscribe/").then((res) => {
     bookingCities.value.splice(
       0,
       bookingCities.value.length,
@@ -227,7 +227,7 @@ const confirmEmail = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      post<EmailResponse>("/api/operate/email", emailForm).then((res) => {
+      post<EmailResponse>("/api/operate/email/", emailForm).then((res) => {
         const response = res.data;
         if (response.success) {
           userInfo.email = emailForm.email;
@@ -285,12 +285,12 @@ const confirmPassword = (formEl: FormInstance | undefined) => {
         oldPassword: md5(passwordForm.oldPassword),
         newPassword: md5(passwordForm.newPassword),
       };
-      post<PasswordResponse>("/api/operate/password", encodePasswordForm).then(
+      post<PasswordResponse>("/api/operate/password/", encodePasswordForm).then(
         (res) => {
           const response = res.data;
           if (response.success) {
             operatePassword.value = false;
-            userInfo.logout();
+            //userInfo.logout();
           }
         }
       );

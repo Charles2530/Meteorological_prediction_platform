@@ -104,7 +104,7 @@ const weatherTable: WeatherTable[] = reactive([]);
 
 const handleSearch = () => {
   // 处理搜索逻辑，可以调用 API
-  post<SearchWeatherHourlyListResponse>("/api/manage/data/search", {
+  post<SearchWeatherHourlyListResponse>("/api/manage/data/search/", {
     key: searchQuery.value,
     type: selectType.value,
     range: timeOption.value,

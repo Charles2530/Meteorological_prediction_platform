@@ -34,7 +34,7 @@ app.config.globalProperties.$echarts = echartsComponent; // /vue3的挂载方式
 const userInfo = useUserInfo(pinia);
 const loginConfig = useLoginConfig();
 
-get<UserInfo>("/api/getInfo").then((res) => {
+get<UserInfo>("/api/get_info/").then((res) => {
   userInfo.login(res.data);
   // @ts-ignore
   if (router.currentRoute.value.meta.permission?.includes(userInfo.role))

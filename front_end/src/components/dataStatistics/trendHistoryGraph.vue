@@ -73,28 +73,28 @@ const HumidDataList = ref<humidNode[]>([]);
 const AqiDataList = ref<aqiNode[]>([]);
 const PressureDataList = ref<pressureNode[]>([]);
 const fetchCityTempChange = async () =>
-  get<TempChangeResponse>("/api/weather/temp/city_change", {
+  get<TempChangeResponse>("/api/weather/temp/city_change/", {
     city: selectedLocation.value,
   }).then((res) => {
     TempDataList.value.splice(0, TempDataList.value.length, ...res.data.data);
   });
 
 const fetchCityHumidChange = async () =>
-  get<HumidChangeResponse>("/api/weather/humid/city_change", {
+  get<HumidChangeResponse>("/api/weather/humid/city_change/", {
     city: selectedLocation.value,
   }).then((res) => {
     HumidDataList.value.splice(0, HumidDataList.value.length, ...res.data.data);
   });
 
 const fetchCityAqiChange = async () =>
-  get<AqiChangeResponse>("/api/weather/aqi/city_change", {
+  get<AqiChangeResponse>("/api/weather/aqi/city_change/", {
     city: selectedLocation.value,
   }).then((res) => {
     AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
   });
 
 const fetchCityPressureChange = async () =>
-  get<PressureChangeResponse>("/api/weather/pressure/city_change", {
+  get<PressureChangeResponse>("/api/weather/pressure/city_change/", {
     city: selectedLocation.value,
   }).then((res) => {
     PressureDataList.value.splice(

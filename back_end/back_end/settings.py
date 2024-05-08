@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "192.168.1.101",
     "192.168.1.102",
+    "*"
 ]
 
 
@@ -152,6 +154,17 @@ REST_FRAMEWORK = {
     ]
 }
 
-# CRON_CLASSES = {
-#     'weather_update_job': 'weather.cron.WeatherUpdateJob',
-# }
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+CELERY_BEAT_SCHEDULE = {
+    'fetch_api_data': {
+        'task': 'weather.tasks.fetch_and_save_api_data',
+        'schedule': crontab(minute='*/5'),
+    },
+}
+
+
+CURRENT_UNAME = None
