@@ -4825,3 +4825,78 @@ Not Found: /api/weather/humid/city_change/
 Not Found: /api/weather/temp/city_change/
 [pid: 1793003|app: 0|req: 2/20] 219.239.227.168 () {42 vars in 772 bytes} [Wed May  8 18:00:14 2024] GET /api/weather/temp/city_change/?city= => generated 5087 bytes in 146 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
 [pid: 1793003|app: 0|req: 2/21] 219.239.227.168 () {42 vars in 774 bytes} [Wed May  8 18:00:14 2024] GET /api/weather/humid/city_change/?city= => generated 5090 bytes in 145 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices/
+[pid: 1793007|app: 0|req: 15/22] 219.239.227.168 () {42 vars in 739 bytes} [Wed May  8 18:00:18 2024] GET /api/alarm_notices/ => generated 5048 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/subscribe/
+[pid: 1793003|app: 0|req: 3/23] 219.239.227.168 () {42 vars in 731 bytes} [Wed May  8 18:00:18 2024] GET /api/subscribe/ => generated 5036 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/get_alarm_level/
+Not Found: /api/alarm_resent_notices/
+[pid: 1793004|app: 0|req: 4/25] 219.239.227.168 () {42 vars in 743 bytes} [Wed May  8 18:00:18 2024] GET /api/get_alarm_level/ => generated 5054 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1793004|app: 0|req: 4/25] 219.239.227.168 () {42 vars in 753 bytes} [Wed May  8 18:00:18 2024] GET /api/alarm_resent_notices/ => generated 5069 bytes in 12 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/getCityInfo/
+[pid: 1793007|app: 0|req: 16/26] 219.239.227.168 () {42 vars in 735 bytes} [Wed May  8 18:00:18 2024] GET /api/getCityInfo/ => generated 5042 bytes in 6 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/city_change/
+Not Found: /api/weather/aqi/rank_worst/
+[pid: 1793007|app: 0|req: 17/27] 219.239.227.168 () {42 vars in 770 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/aqi/city_change/?city= => generated 5084 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1793008|app: 0|req: 5/28] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/aqi/rank_worst/ => generated 5075 bytes in 11 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/overview/
+[pid: 1793008|app: 0|req: 5/29] 219.239.227.168 () {42 vars in 1188 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/overview/?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5303 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/aqi_change/
+Not Found: /api/weather/aqi/rank_best/
+[pid: 1793003|app: 0|req: 5/30] 219.239.227.168 () {42 vars in 755 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/aqi/rank_best/ => generated 5072 bytes in 16 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1793003|app: 0|req: 5/31] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/aqi/aqi_change/ => generated 5075 bytes in 17 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/temp/city_change/
+[pid: 1793004|app: 0|req: 5/32] 219.239.227.168 () {42 vars in 772 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/temp/city_change/?city= => generated 5087 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/pressure/city_change
+[pid: 1793007|app: 0|req: 18/33] 219.239.227.168 () {42 vars in 778 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/pressure/city_change?city= => generated 5096 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/humid/city_change/
+[pid: 1793004|app: 0|req: 6/34] 219.239.227.168 () {42 vars in 774 bytes} [Wed May  8 18:00:18 2024] GET /api/weather/humid/city_change/?city= => generated 5090 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Bad Request: /api/get_info/
+[pid: 1793007|app: 0|req: 19/35] 219.239.227.168 () {42 vars in 729 bytes} [Wed May  8 18:00:22 2024] GET /api/get_info/ => generated 28 bytes in 0 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+Not Found: /api/weather/overview/
+Not Found: /api/getCityInfo/
+Not Found: /api/weather/aqi/aqi_change/
+Not Found: /api/weather/aqi/rank_worst/
+[pid: 1793004|app: 0|req: 8/38] 219.239.227.168 () {42 vars in 735 bytes} [Wed May  8 18:00:22 2024] GET /api/getCityInfo/ => generated 5042 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/aqi/city_change/
+[pid: 1793003|app: 0|req: 7/40] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/aqi/rank_worst/ => generated 5075 bytes in 14 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1793007|app: 0|req: 21/36] 219.239.227.168 () {42 vars in 1188 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/overview/?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 5303 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1793004|app: 0|req: 8/37] 219.239.227.168 () {42 vars in 757 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/aqi/aqi_change/ => generated 5075 bytes in 12 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_best/
+[pid: 1793007|app: 0|req: 21/40] 219.239.227.168 () {42 vars in 770 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/aqi/city_change/?city= => generated 5084 bytes in 11 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1793003|app: 0|req: 7/41] 219.239.227.168 () {42 vars in 755 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/aqi/rank_best/ => generated 5072 bytes in 15 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/temp/city_change/
+[pid: 1793007|app: 0|req: 22/42] 219.239.227.168 () {42 vars in 772 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/temp/city_change/?city= => generated 5087 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/humid/city_change/
+[pid: 1793008|app: 0|req: 7/43] 219.239.227.168 () {42 vars in 774 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/humid/city_change/?city= => generated 5090 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/pressure/city_change
+[pid: 1793008|app: 0|req: 7/44] 219.239.227.168 () {42 vars in 778 bytes} [Wed May  8 18:00:22 2024] GET /api/weather/pressure/city_change?city= => generated 5096 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices_brief/
+[pid: 1793007|app: 0|req: 23/45] 219.239.227.168 () {42 vars in 751 bytes} [Wed May  8 18:00:22 2024] GET /api/alarm_notices_brief/ => generated 5066 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/alarm_resent_notices/
+[pid: 1793007|app: 0|req: 24/46] 219.239.227.168 () {42 vars in 753 bytes} [Wed May  8 18:00:27 2024] GET /api/alarm_resent_notices/ => generated 5069 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/subscribe/
+[pid: 1793003|app: 0|req: 8/47] 219.239.227.168 () {42 vars in 731 bytes} [Wed May  8 18:00:27 2024] GET /api/subscribe/ => generated 5036 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/alarm_notices/
+[pid: 1793007|app: 0|req: 25/48] 219.239.227.168 () {42 vars in 739 bytes} [Wed May  8 18:00:27 2024] GET /api/alarm_notices/ => generated 5048 bytes in 9 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/get_alarm_level/
+[pid: 1793008|app: 0|req: 8/49] 219.239.227.168 () {42 vars in 743 bytes} [Wed May  8 18:00:27 2024] GET /api/get_alarm_level/ => generated 5054 bytes in 13 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Unauthorized: /api/manage/user/list/
+[pid: 1793007|app: 0|req: 26/50] 219.239.227.168 () {48 vars in 863 bytes} [Wed May  8 18:00:29 2024] POST /api/manage/user/list/ => generated 46 bytes in 0 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 1)
+Unauthorized: /api/manage/user/list/
+[pid: 1793007|app: 0|req: 27/51] 219.239.227.168 () {48 vars in 863 bytes} [Wed May  8 18:00:31 2024] POST /api/manage/user/list/ => generated 46 bytes in 0 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 0)
+Unauthorized: /api/manage/user/list/
+[pid: 1793007|app: 0|req: 28/52] 219.239.227.168 () {48 vars in 863 bytes} [Wed May  8 18:02:04 2024] POST /api/manage/user/list/ => generated 46 bytes in 1 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 1)
+[pid: 1793007|app: 0|req: 29/53] 219.239.227.168 () {48 vars in 847 bytes} [Wed May  8 18:02:32 2024] POST /api/register/ => generated 378 bytes in 462 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 0)
+Not Found: /api/alarm_resent_notices/
+Not Found: /api/alarm_notices/
+[pid: 1793007|app: 0|req: 30/54] 219.239.227.168 () {42 vars in 989 bytes} [Wed May  8 18:02:36 2024] GET /api/alarm_resent_notices/ => generated 5069 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1793003|app: 0|req: 9/55] 219.239.227.168 () {42 vars in 975 bytes} [Wed May  8 18:02:36 2024] GET /api/alarm_notices/ => generated 5048 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/subscribe/
+[pid: 1793007|app: 0|req: 31/56] 219.239.227.168 () {42 vars in 967 bytes} [Wed May  8 18:02:36 2024] GET /api/subscribe/ => generated 5036 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/get_alarm_level/
+[pid: 1793004|app: 0|req: 9/57] 219.239.227.168 () {42 vars in 979 bytes} [Wed May  8 18:02:36 2024] GET /api/get_alarm_level/ => generated 5054 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:199: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+[pid: 1793004|app: 0|req: 10/58] 219.239.227.168 () {48 vars in 1099 bytes} [Wed May  8 18:02:37 2024] POST /api/manage/user/list/ => generated 976 bytes in 5 msecs (HTTP/1.1 200) 8 headers in 245 bytes (1 switches on core 1)
+[pid: 1793007|app: 0|req: 32/59] 219.239.227.168 () {48 vars in 1099 bytes} [Wed May  8 18:02:47 2024] POST /api/manage/user/list/ => generated 976 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 245 bytes (1 switches on core 1)
