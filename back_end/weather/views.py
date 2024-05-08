@@ -1,10 +1,13 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
 from rest_framework import generics, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import HourlyWeather, DailyWeather, MonthlyWeather, Pro2City, ProGeography
+from .models import HourlyWeather, DailyWeather, MonthlyWeather, Pro2City, ProGeography, City2CityId
 from django.views.decorators.csrf import csrf_exempt
 from .serializers import HourlyWeatherSerializer, DailyWeatherSerializer, MonthlyWeatherSerializer
+import json
+from datetime import datetime
+import pytz
 
 
 # Create your views here.
@@ -59,16 +62,96 @@ def getProInfo(request):
     assert request.method == 'GET'
     proName = request.GET.get('proName')
     cityId = Pro2City.objects.get(proName=proName).cityId
-    ### TODO use API to get weatherTable and hazardTable
-    weather = ...
-    hazrdTable = ...
-
+    ### TODO use API to get weather and hazardTable
+    # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
+    # indices : 天气指数 https://dev.qweather.com/docs/resource/indices-info/
+    # harzard :
+    # json to dict TODO fill load paras
+    weather = json.load(...)
+    indices = json.load(...)
+    hazrdTable = json.load(...)
     geography = ProGeography.objects.get(proName=proName).geographyInfo
-    return JsonResponse({
-        "weather": weather,
-        "hazrdTable": hazrdTable,
-        "geography": geography
-    }, status=200)
+
+    # retList = dict()
+    # retList["weather"] = dict()
+    # retList["geography"] = geography
+    # retList["hazrdTable"] = dict()
+
+
+    date_time = datetime.fromisoformat(weather["updateTime"])
+    timezon = pytz.timezone('Asia/Shanghai')
+    retList = {
+        "weather": {
+            "time": date_time.astimezone(timezon).strftime("%Y-%m-%d %H:%M"),
+            "tem": ... ,
+            "condition": ... ,
+            "infos": ... ,
+            "wind": ... ,
+            "windDir": ... ,
+            "hum": ... ,
+            "ray": ... ,
+            "air": ... ,
+            "airAQI": ... ,
+            "visibility": ... ,
+            "rainfall": ... ,
+            "pressure": ... ,
+        },
+        "geography": geography,
+        "hazardTable": [
+            {
+                "place": ... ,
+                "level": ... ,
+                "type": ... ,
+            },
+            ...
+        ]
+    }
+
+    return JsonResponse(retList, status=200)
+
+@csrf_exempt
+def getHazard(request: HttpRequest):
+    assert request.method == 'GET'
+
+
+@csrf_exempt
+def getCityInfo(request: HttpRequest):
+    assert request.method == 'GET'
+
+    city = request.GET.get("city")
+    cityId = City2CityId.objects.get(cityName=city)
+    ### TODO use API to get weather and air
+    # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
+    # air : 实时空气质量 https://dev.qweather.com/docs/resource/indices-info/
+    # json to dict TODO fill load paras
+    weather = json.load(...)
+    air = json.load(...)
+
+
+    date_time = datetime.fromisoformat(weather["updateTime"])
+    timezon = pytz.timezone('Asia/Shanghai')
+    retList = {
+        "status": True,
+        "message": {
+            "time": date_time.astimezone(timezon).strftime("%Y-%m-%d %H:%M"),
+            "city": city,
+            "temp": float(weather["now"]["temp"]),
+            "text": weather["now"]["text"],
+            "precip": float(weather["now"]["precip"]),
+            "wind360": float(weather["now"]["wind360"]),
+            "windScale": float(weather["now"]["windScale"]),
+            "windSpeed": float(weather["now"]["windSpeed"]),
+            "humidity": float(weather["now"]["humidity"]),
+            "pressure": float(weather["now"]["pressure"]),
+            "aqi": float(air["now"]["aqi"]),
+            "category": air["now"]["category"],
+        },
+    }
+    return JsonResponse(retList, status=200)
+
+
+
+
 
 
 

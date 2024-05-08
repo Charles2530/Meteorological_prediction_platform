@@ -10,5 +10,7 @@ urlpatterns = [
     path('hourly/', DailyWeatherView.as_view(), name='hourly-weather'),
     path('daily/', HourlyWeatherView.as_view(), name='daily-weather'),
     path('monthly/', MonthlyWeatherView.as_view(), name='monthly-weather'),
-    path('getProInfo/', views.getProInfo, name='get-pro-info'),
+    path('getProInfo/', views.getProInfo, name='get-pro-info'), # TODO
+    path('getHazard/', views.getHazard), #TODO
+    path('getCityInfo', views.getCityInfo), #TODO
 ]
