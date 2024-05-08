@@ -19,12 +19,22 @@
     </el-tab-pane>
   </el-tabs>
 </template>
+
+
+
+
+
+
+
+
+
+
 <script lang="ts" setup>
 import type { TabsPaneContext } from "element-plus";
 /*抽屉页*/
 const activeName = ref("first");
 const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event);
+
 };
 
 /** 组件  **/

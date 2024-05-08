@@ -85,6 +85,7 @@ declare module 'vue' {
     WeatherdetailsStatistics: typeof import('./components/weather_details/statistics.vue')['default']
     WeatherdetailsSubcomponentsAirQuality: typeof import('./components/weather_details/sub_components/AirQuality.vue')['default']
     WeatherdetailsSubcomponentsCurrentWeather: typeof import('./components/weather_details/sub_components/CurrentWeather.vue')['default']
+    WeatherdetailsSubcomponentsCurrentWeatherRight: typeof import('./components/weather_details/sub_components/CurrentWeatherRight.vue')['default']
     WeatherdetailsSubcomponentsForecast: typeof import('./components/weather_details/sub_components/Forecast.vue')['default']
     WeatherdetailsSubcomponentsNav: typeof import('./components/weather_details/sub_components/Nav.vue')['default']
     WeatherdetailsSubcomponentsQWeatherIcon: typeof import('./components/weather_details/sub_components/QWeatherIcon.vue')['default']
