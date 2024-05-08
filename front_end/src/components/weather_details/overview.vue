@@ -8,10 +8,10 @@
               </div>
             </template> -->
         </CurrentWeather>
-        <AirQuality class="md:basis-2/5" :weather="weather" :air="air" :city="city" :ultraviolet="ultraviolet" />
+        <CurrentWeatherRight class="md:basis-2/5" :weather="weather" />
         <!-- @refresh="weatherInfo"  -->
     </el-container>
-    <el-container>
+    <el-container class="">
         <RealTimeBroadcast/>
     </el-container>
 </template>
@@ -24,7 +24,7 @@ import { ref, onMounted } from 'vue';
 /** 组件  **/
 import SearchLocation from '@/components/weather_details/sub_components/SearchLocation.vue'
 import CurrentWeather from '@/components/weather_details/sub_components/CurrentWeather.vue';
-import AirQuality from '@/components/weather_details/sub_components/AirQuality.vue';
+import CurrentWeatherRight from '@/components/weather_details/sub_components/CurrentWeatherRight.vue';
 import Forecast from '@/components/weather_details/sub_components/Forecast.vue'
 import RealTimeBroadcast from '@/components/weather_details/sub_components/RealTimeBroadcast.vue'
 const stateNavigator = ref(0) // 用于判断是否加载loading
@@ -48,13 +48,47 @@ const searchShow = ref(false)
 
 
 interface WeatherHisOverview {
-    weather: {
-        icon: number;
-        temp: string;
-        text: string;
-    }
+    weather: Weather;
 }
-
+interface Weather{
+    /**
+     * 以百分之多少为单位
+     */
+    aqi: number;
+    condition: string;
+    /**
+     * 降水量：mm
+     */
+    precip: number;
+    /**
+     * 降水概率：%
+     */
+    precip_probability: number;
+    /**
+     * 大气压强：hPa
+     */
+    pressure: number;
+    /**
+     * 中等，很强，较弱等
+     */
+    ray: string;
+    /**
+     * 示例：18:00
+     */
+    sunrise_time?: string;
+    /**
+     * 示例：18:00
+     */
+    sunset_time?: string;
+    /**
+     * ℃
+     */
+    temp: number;
+    /**
+     * ℃
+     */
+    temp_feel: number;
+}
 //     searchShow: boolean
 
 
@@ -63,8 +97,7 @@ import { post, get } from "@/api/index.ts";
 const get_his_overview = async () => {
     get<WeatherHisOverview>("/api/weather/overview", city).then((res) => {
         weather.value = res.data.weather;
-        console.log("----------------------------------------------------------------")
-        console.log('weather:', weather.value); // 添加这行代码用于输出 weather 的值
+        console.log(weather.value);
         // city.value = res.data.city;
         // searchShow.value = res.data.searchShow
     });
@@ -76,12 +109,9 @@ const get_his_overview = async () => {
 // }
 onMounted(() => {
     get_his_overview();
-
-
-
 });
 console.log("----------------------------------------------------------------")
-console.log(weather.value);
+// console.log(weather.value);
 
 </script>
 <style>
