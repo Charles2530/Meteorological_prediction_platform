@@ -70,3 +70,19 @@ class MonthlyWeather(models.Model):
     def __str__(self):
         return "monthly weather for " + self.month_time.strftime('%Y-%m-%d %H:%M:%S') + " " + self.location
         return "monthly weather for " + self.month_time.strftime('%Y-%m-%d %H:%M:%S') + " " + self.location
+
+### TODO pro2city data
+class Pro2City(models.Model):
+    proName = models.CharField(max_length=200, default="")
+    cityId = models.CharField(default=0)
+
+### TODO pro2city data
+class City2CityId(models.Model):
+    cityName = models.CharField(max_length=200, default="")
+    cityId = models.CharField(default=0)
+
+
+### TODO pro_geography data
+class ProGeography(models.Model):
+    proName = models.CharField(max_length=200, default="")
+    geographyInfo = models.CharField(max_length=2000)

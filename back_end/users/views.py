@@ -30,8 +30,8 @@ import json
 import os
 import re
 
-# 当前应用的模块导入
-from .serializers import RegisterSerializer
+# 暂时性导入
+from django.conf import settings
 
 
 # Create your views here.
@@ -88,6 +88,7 @@ def my_login(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         # 登录成功
+        settings.CURRENT_UID = user.id
         login(request, user)
         info = {
             "token": "aliqua commodo Lorem",
@@ -104,6 +105,7 @@ def my_login(request):
         })
     else:
         # 登录失败
+        settings.CURRENT_UID = None
         return JsonResponse({
             "success": False,
             "reason": "login.error.auth"
