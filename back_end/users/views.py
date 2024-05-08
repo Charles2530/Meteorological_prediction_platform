@@ -72,7 +72,7 @@ def index(request):
 
 
 @csrf_exempt
-def _login(request):
+def my_login(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
 
@@ -109,7 +109,8 @@ def _login(request):
         }, status=401)
 
 
-def _register(request):
+@csrf_exempt
+def my_register(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
     email = request.POST.get('email')

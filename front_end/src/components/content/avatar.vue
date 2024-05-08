@@ -22,7 +22,7 @@ import type { UploadProps } from "element-plus";
 import { UploadInstance } from "element-plus";
 
 const userInfo = useUserInfo();
-const url = import.meta.env.VITE_APP_BASE_API + "/api/operate/upload";
+const url = import.meta.env.VITE_APP_BASE_API + "/api/operate/upload/";
 const header = reactive({
   Authorization: `${Local.get("Bearer")?.Bearer ?? ""}`,
 });

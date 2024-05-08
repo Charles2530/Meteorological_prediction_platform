@@ -37,7 +37,7 @@ interface GetCityResponse {
 }
 const bestCityAqiRankings = reactive<AqiRankItem[]>([]);
 const getBestAqiCityRankings = async () => {
-  get<GetCityResponse>("/api/weather/aqi/rank_best").then((res) => {
+  get<GetCityResponse>("/api/weather/aqi/rank_best/").then((res) => {
     bestCityAqiRankings.splice(
       0,
       bestCityAqiRankings.length,
@@ -47,7 +47,7 @@ const getBestAqiCityRankings = async () => {
 };
 const worstCityAqiRankings = reactive<AqiRankItem[]>([]);
 const getWorstAqiCityRankings = async () => {
-  get<GetCityResponse>("/api/weather/aqi/rank_worst").then((res) => {
+  get<GetCityResponse>("/api/weather/aqi/rank_worst/").then((res) => {
     worstCityAqiRankings.splice(
       0,
       worstCityAqiRankings.length,

@@ -150,7 +150,7 @@ const deleteSubscribe = () => {
   console.log(form.city);
   undo_subscribe_dialog.value = false;
   tableData.value = tableData.value.filter((item) => item.city !== form.city);
-  post<SubscribeResponse>("/api/subscribe", { cities: form.city }).then(
+  post<SubscribeResponse>("/api/subscribe/", { cities: form.city }).then(
     (res) => {
       console.log(res.data.success);
     }
@@ -186,14 +186,14 @@ const fetchNotifications = async () => {
   //       ...res.data.notifications
   //     );
   //   });
-  get<NotificationResponse>("/api/alarm_resent_notices").then((res) => {
+  get<NotificationResponse>("/api/alarm_resent_notices/").then((res) => {
     global_notifications.splice(
       0,
       global_notifications.length,
       ...res.data.notifications
     );
   });
-  get<NotificationResponse>("/api/alarm_notices").then((res) => {
+  get<NotificationResponse>("/api/alarm_notices/").then((res) => {
     notifications.splice(0, notifications.length, ...res.data.notifications);
   });
 };
@@ -225,10 +225,10 @@ interface GetAlarmLevelResponse {
   cnt: number[];
 }
 const getSubscribeStatus = () => {
-  get<GetSubscribeResponse>("/api/subscribe").then((res) => {
+  get<GetSubscribeResponse>("/api/subscribe/").then((res) => {
     tableData.value.splice(0, tableData.value.length, ...res.data.tableData);
   });
-  get<GetAlarmLevelResponse>("/api/get_alarm_level").then((res) => {
+  get<GetAlarmLevelResponse>("/api/get_alarm_level/").then((res) => {
     console.log(res.data.cnt);
     levels.value = res.data.cnt;
   });
@@ -256,7 +256,7 @@ const subscribe = () => {
     }
   }
   tableData.value.push({ city: cities.value, status: "已订阅" });
-  post<SubscribeResponse>("/api/subscribe", { cities: cities.value }).then(
+  post<SubscribeResponse>("/api/subscribe/", { cities: cities.value }).then(
     (res) => {
       console.log(res.data.success);
     }

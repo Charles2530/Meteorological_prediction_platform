@@ -43,7 +43,7 @@ interface NotificationResponse {
   notifications: NotificationNotice[];
 }
 const getNotices = async () => {
-  get<NotificationResponse>("/api/alarm_notices_brief").then((res) => {
+  get<NotificationResponse>("/api/alarm_notices_brief/").then((res) => {
     notifications.splice(0, notifications.length, ...res.data.notifications);
   });
 };
