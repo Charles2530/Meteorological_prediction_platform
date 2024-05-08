@@ -86,10 +86,11 @@ def my_login(request):
         }, status=400)
 
     # 验证用户名和密码
-    user = authenticate(username=username, password=password)
+    # user = authenticate(username=username, password=password)
+    user = User.objects.filter(username=username, password=password).first()
     if user is not None:
         # 登录成功
-        settings.CURRENT_UID = user.id
+        settings.CURRENT_UNAME = user.username
         login(request, user)
         info = {
             "token": "aliqua commodo Lorem",
@@ -106,7 +107,7 @@ def my_login(request):
         })
     else:
         # 登录失败
-        settings.CURRENT_UID = None
+        settings.CURRENT_UNAME = None
         return JsonResponse({
             "success": False,
             "reason": "login.error.auth"
@@ -154,7 +155,7 @@ def my_register(request):
     new_user = User.objects.create_user(
         username=username, email=email, password=password)
     
-    settings.CURRENT_UID = new_user.id
+    settings.CURRENT_UNAME = new_user.username
  
 
     # 准备返回的信息
@@ -398,7 +399,8 @@ def update_user_password(request):
         return JsonResponse({"success": False, "reason": "manage.user.operate.password.format"}, status=400)
 
     # 更新用户密码
-    user_to_update.password = make_password(password)
+    # user_to_update.password = make_password(password)
+    user_to_update.password = password
     user_to_update.save()
 
     # 操作成功，返回success为True
@@ -477,7 +479,7 @@ def update_current_user_password(request):
             "reason": "Authorization header is missing"
         }, status=401)
 
-    user = User.objects.get(id=settings.CURRENT_UID)
+    user = User.objects.filter(username=settings.CURRENT_UNAME).first()
 
    
     # # 验证旧密码
@@ -510,7 +512,6 @@ def update_current_user_password(request):
         return JsonResponse({
             "success": False,
             "reason": str(e),
-            "id":settings.CURRENT_UID
         }, status=500)
 
 
@@ -539,7 +540,7 @@ def update_current_user_email(request):
         }, status=400)
 
     # 假设你已经验证了token并获取了用户对象
-    user = User.objects.get(id=settings.CURRENT_UID) # 获取当前认证的用户对象
+    user = User.objects.filter(username=settings.CURRENT_UNAME).first() # 获取当前认证的用户对象
 
     # 更新用户的邮箱
     try:
