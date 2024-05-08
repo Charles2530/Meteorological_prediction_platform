@@ -31,8 +31,8 @@ import os
 import re
 from datetime import datetime
 
-# 当前应用的模块导入
-from .serializers import RegisterSerializer
+# 暂时性导入
+from django.conf import settings
 
 
 # Create your views here.
@@ -89,6 +89,7 @@ def my_login(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         # 登录成功
+        settings.CURRENT_UID = user.id
         login(request, user)
         info = {
             "token": "aliqua commodo Lorem",
@@ -105,6 +106,7 @@ def my_login(request):
         })
     else:
         # 登录失败
+        settings.CURRENT_UID = None
         return JsonResponse({
             "success": False,
             "reason": "login.error.auth"
@@ -314,7 +316,7 @@ def update_user_email(request):
     try:
         # 从请求体中获取uid、role和email
         data = json.loads(request.body)
-        uid = data.get('id')
+        uid = data.get('uid')
         role = data.get('role')
         new_email = data.get('email')
 
@@ -453,96 +455,98 @@ def user_info(request):
     return JsonResponse(user_info)
 
 
-# @require_http_methods(["POST"])
-# def update_user_email(request):
-#     # 获取Authorization头中的token和请求体中的邮箱
-#     auth_header = request.META.get('HTTP_AUTHORIZATION', '')
-#     email = request.POST.get('email')
+@csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@require_http_methods(["POST"])
+def update_current_user_password(request):
+    # 获取Authorization头中的token和请求体中的oldPassword和newPassword
+    auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+    data = json.loads(request.body)
+    old_password = data.get('oldPassword')
+    new_password = data.get('newPassword')
 
-#     # 验证Authorization头
-#     if not auth_header:
-#         return JsonResponse({
-#             "success": False,
-#             "reason": "Authorization header is missing"
-#         }, status=401)
+    # 验证Authorization头
+    if not auth_header:
+        return JsonResponse({
+            "success": False,
+            "reason": "Authorization header is missing"
+        }, status=401)
 
-#     # 验证邮箱格式
-#     try:
-#         validate_email(email)
-#     except ValidationError:
-#         return JsonResponse({
-#             "success": False,
-#             "reason": "manage.user.operate.email.format"
-#         }, status=400)
+    user = User.objects.get(id=settings.CURRENT_UID)
 
-#     # 假设你已经验证了token并获取了用户对象
-#     user = ... # 获取当前认证的用户对象
+    # # 验证旧密码
+    # if not user or not check_password(old_password, user.password):
+    #     return JsonResponse({
+    #         "success": False,
+    #         "reason": _("userInfo.operate.password.auth")
+    #     }, status=400)
 
-#     # 更新用户的邮箱
-#     try:
-#         user.email = email
-#         user.save()
-#         return JsonResponse({
-#             "success": True,
-#             "reason": ""  # 成功时reason字段可以为空字符串
-#         })
-#     except Exception as e:
-#         # 处理其他可能的异常
-#         return JsonResponse({
-#             "success": False,
-#             "reason": str(e)
-#         }, status=500)
+    # # 验证新密码格式（例如，密码长度或复杂性要求）
+    # if not new_password or len(new_password) < 8:  # 假设密码长度至少8位
+    #     return JsonResponse({
+    #         "success": False,
+    #         "reason": _("userInfo.operate.password.format")
+    #     }, status=400)
+
+    # 更新用户密码
+    try:
+        user.password = make_password(new_password)  # 使用Django内置的密码散列
+        user.save()
+        # 如果使用Django的session，更新session中的密码
+        update_session_auth_hash(request, user)
+
+        # 返回成功响应
+        return JsonResponse({
+            "success": True
+        })
+    except Exception as e:
+        # 处理其他可能的异常
+        return JsonResponse({
+            "success": False,
+            "reason": str(e)
+        }, status=500)
 
 
-# @require_http_methods(["POST"])
-# def change_user_password(request):
-#     # 获取Authorization头中的token和请求体中的oldPassword和newPassword
-#     auth_header = request.META.get('HTTP_AUTHORIZATION', '')
-#     old_password = request.POST.get('oldPassword')
-#     new_password = request.POST.get('newPassword')
+@csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@require_http_methods(["POST"])
+def update_current_user_email(request):
+    # 获取Authorization头中的token和请求体中的邮箱
+    auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+    data = json.loads(request.body)
+    email = data.get('email')
 
-#     # 验证Authorization头
-#     if not auth_header:
-#         return JsonResponse({
-#             "success": False,
-#             "reason": "Authorization header is missing"
-#         }, status=401)
+    # 验证Authorization头
+    if not auth_header:
+        return JsonResponse({
+            "success": False,
+            "reason": "Authorization header is missing"
+        }, status=401)
 
-#     # 尝试解析token并验证用户
-#     # 注意：这里的token解析和用户验证逻辑需要你根据实际情况来实现
-#     user = ...
+    # 验证邮箱格式
+    try:
+        validate_email(email)
+    except ValidationError:
+        return JsonResponse({
+            "success": False,
+            "reason": "manage.user.operate.email.format"
+        }, status=400)
 
-#     # 验证旧密码
-#     if not user or not check_password(old_password, user.password):
-#         return JsonResponse({
-#             "success": False,
-#             "reason": _("userInfo.operate.password.auth")
-#         }, status=400)
+    # 假设你已经验证了token并获取了用户对象
+    user = User.objects.get(id=settings.CURRENT_UID) # 获取当前认证的用户对象
 
-#     # 验证新密码格式（例如，密码长度或复杂性要求）
-#     if not new_password or len(new_password) < 8:  # 假设密码长度至少8位
-#         return JsonResponse({
-#             "success": False,
-#             "reason": _("userInfo.operate.password.format")
-#         }, status=400)
-
-#     # 更新用户密码
-#     try:
-#         user.password = make_password(new_password)  # 使用Django内置的密码散列
-#         user.save()
-#         # 如果使用Django的session，更新session中的密码
-#         update_session_auth_hash(request, user)
-
-#         # 返回成功响应
-#         return JsonResponse({
-#             "success": True
-#         })
-#     except Exception as e:
-#         # 处理其他可能的异常
-#         return JsonResponse({
-#             "success": False,
-#             "reason": str(e)
-#         }, status=500)
+    # 更新用户的邮箱
+    try:
+        user.email = email
+        user.save()
+        return JsonResponse({
+            "success": True,
+            "reason": ""  # 成功时reason字段可以为空字符串
+        })
+    except Exception as e:
+        # 处理其他可能的异常
+        return JsonResponse({
+            "success": False,
+            "reason": str(e)
+        }, status=500)
 
 
 @deconstructible

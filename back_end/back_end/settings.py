@@ -165,3 +165,6 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute='*/5'),
     },
 }
+
+
+CURRENT_UID = None
