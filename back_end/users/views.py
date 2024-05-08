@@ -109,6 +109,7 @@ def _login(request):
         }, status=401)
 
 
+@csrf_exempt
 def _register(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
