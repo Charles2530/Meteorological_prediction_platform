@@ -8,6 +8,7 @@ from .serializers import HourlyWeatherSerializer, DailyWeatherSerializer, Monthl
 import json
 from datetime import datetime
 import pytz
+import csv
 
 
 # Create your views here.
@@ -54,6 +55,16 @@ class MonthlyWeatherView(APIView):
 
 
 def index(request):
+    ### TODO tochec and set path
+    with open('.....', 'w', newline='', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        for i, row in enumerate(reader):
+            if i < 2:
+                continue
+            cityId = row[0]
+            cityName = row[7]
+            #### TODO save to Model
+
     return HttpResponse("Welcome to the weather app!")
 
 
