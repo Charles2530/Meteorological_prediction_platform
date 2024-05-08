@@ -73,8 +73,9 @@ def index(request):
 
 @csrf_exempt
 def my_login(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
+    data=json.loads(request.body)
+    username = data.get('username')
+    password = data.get('password')
 
     # 验证用户名格式
     if not username or not isinstance(username, str):
@@ -111,18 +112,22 @@ def my_login(request):
 
 @csrf_exempt
 def my_register(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    email = request.POST.get('email')
+    # username = request.POST.get('username')
+    # password = request.POST.get('password')
+    # email = request.POST.get('email')
+    data = json.loads(request.body)
+    username = data.get('username')
+    password = data.get('password')
+    email = data.get('email')
 
     # 验证邮箱格式
-    try:
-        validate_email(email)
-    except ValidationError:
-        return JsonResponse({
-            "success": False,
-            "reason": "register.error.email"
-        }, status=400)
+    # try:
+    #     validate_email(email)
+    # except ValidationError:
+    #     return JsonResponse({
+    #         "success": False,
+    #         "reason": "register.error.email"
+    #     }, status=400)
 
     # 验证用户名和密码格式
     if not username or not isinstance(username, str):
@@ -150,7 +155,7 @@ def my_register(request):
 
     # 准备返回的信息
     info = {
-        "token": RefreshToken.for_user(new_user),
+        "token": str(RefreshToken.for_user(new_user)),
         "userInfo": {
             "username": new_user.username,
             "avatar": "",  # todo
@@ -318,16 +323,16 @@ def update_user_email(request):
         except ValidationError:
             return JsonResponse({"success": False, "reason": "manage.user.operate.email.format"}, status=400)
 
-        # 检查管理员权限
-        if role != 1:  # 假设role为1代表管理员
-            raise PermissionDenied(
-                "User does not have the permission to change email.")
+        # # 检查管理员权限
+        # if role != 1:  # 假设role为1代表管理员
+        #     raise PermissionDenied(
+        #         "User does not have the permission to change email.")
 
         # 检查用户是否存在
         try:
-            user = User.objects.get(uid=uid)
+            user = User.objects.get(id=uid)
         except User.DoesNotExist:
-            return JsonResponse({"success": False, "reason": "manage.invaild"}, status=400)
+            return JsonResponse({"success": False, "reason": request.POST}, status=400)
 
         # 更新用户邮箱
         user.email = new_email
@@ -344,7 +349,7 @@ def update_user_email(request):
     except Exception as e:
         # 其他错误
         # 你需要在你的urls.py文件中添加URL配置，以便将请求映射到这个视图函数
-        return JsonResponse({"success": False, "reason": "manage.invaild"}, status=400)
+        return JsonResponse({"success": False, "reason": "other user"}, status=400)
 
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
@@ -415,15 +420,15 @@ def delete_data(request):
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
 def user_info(request):
-    auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+    auth_header = request.META.get('HTTP_AUTHORIZATION','')
     if not auth_header:
         return JsonResponse({'reason': 'manage.invaild'}, status=400)
 
-    try:
-        auth_header = auth_header.decode(HTTP_HEADER_ENCODING)
-        token = auth_header.split(' ')[1]  # 假设token在Authorization头的'Bearer '之后
-    except (UnicodeDecodeError, AttributeError, IndexError):
-        return JsonResponse({'reason': 'manage.invaild'}, status=400)
+    # try:
+    #     auth_header = auth_header.decode(HTTP_HEADER_ENCODING)
+    #     token = auth_header.split(' ')[1]  # 假设token在Authorization头的'Bearer '之后
+    # except (UnicodeDecodeError, AttributeError, IndexError):
+    #     return JsonResponse({'reason': 'manage.invaild'}, status=400)
 
     try:
         # 使用Django REST framework的token认证系统解析token

@@ -8,4 +8,5 @@ uwsgi   --uid root \
         --buffer-size 65536 --vacuum \
         --daemonize uwsgi.log \
         --pidfile uwsgi.pid \
-        --chmod-socket=777
+        --chmod-socket=777 \
+        --py-autoreload 1
