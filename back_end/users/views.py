@@ -289,7 +289,7 @@ def user_authorization(request):
     # 在这里添加你的业务逻辑，例如验证用户权限等
     # 假设我们只是简单地检查User模型中是否存在对应的uid和role
     try:
-        user = User.objects.get(uid=uid, role=role)
+        user = User.objects.get(id=uid, role=role)
         # 如果用户存在且角色匹配，设置success为True
         response_data = {"success": True}
         return JsonResponse(response_data, status=200)  # 返回200成功响应
