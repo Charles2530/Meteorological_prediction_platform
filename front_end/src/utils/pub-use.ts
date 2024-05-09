@@ -4,6 +4,6 @@ export const getAssetsFileIcon = (url: string) => {
   return new URL(`../assets/icons/color-256/${url}`, import.meta.url).href;
 };
 //灾害图标
-export const getAssetsFileHazard = (url: string) => {
+export const getAssetsFile = (url: string) => {
   return new URL(`../assets/img/${url}`, import.meta.url).href;
 };
