@@ -33,7 +33,7 @@ class Command(BaseCommand):
                 timezon = pytz.timezone('Asia/Shanghai')
                 date_time = date_time.astimezone(timezon)
 
-                temp_aqi = 28 + random.uniform(-40, 40)
+                temp_aqi = 28 + random.uniform(-10, 40)
 
                 data = WeatherInfo(
                     # time = date_time,
