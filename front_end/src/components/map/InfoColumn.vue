@@ -25,7 +25,7 @@
         <el-col :offset="2" :span="8">
           <div class="grid-content">
             <img
-              :src="getAssetsFile(proInfo.weather.icoid + '.png')"
+              :src="getAssetsFileIcon(proInfo.weather.icoid + '.png')"
               style="width: 100px; height: 90px"
             />
           </div>
@@ -50,16 +50,16 @@
         </el-col>
       </el-row>
       <el-row :gutter="20">
-        <el-col :offset="2" :span="6">
+        <el-col :offset="1" :span="7">
           <div class="grid-content" style="text-align: center">
-            <span class="font1">{{ proInfo.weather.wind }}</span>
+            <span class="font1">{{ proInfo.weather.wind }}级</span>
             <br />
             <span class="font1">{{ proInfo.weather.windDir }}</span>
           </div>
         </el-col>
         <el-col :offset="1" :span="7" style="text-align: center">
           <div class="grid-content">
-            <span class="font1">{{ proInfo.weather.hum }}</span>
+            <span class="font1">{{ proInfo.weather.hum }}%</span>
             <br />
             <span class="font1">相对湿度</span>
           </div>
@@ -121,7 +121,7 @@
 </template>
 
 <script setup lang="ts">
-import { getAssetsFile } from "@/utils/pub-use";
+import { getAssetsFileIcon } from "@/utils/pub-use";
 import { get } from "@/api/index";
 import { ProInfo } from "@/types/weather";
 import { ref, watch} from 'vue';
@@ -133,9 +133,9 @@ const proInfo = ref({
     tem: "18", //温度
     condition: "阴", //晴雨状况
     infos: "今晚多云。明天晴，比今天热很多，空气一般。", //详细天气状况
-    wind: "2级", //风力等级
-    windDir: "西南风", //风向
-    hum: "70%", //相对湿度
+    wind: "2", //风力等级
+    windDir: "无持续风向", //风向
+    hum: "70", //相对湿度
     ray: "中等", //紫外线
     air: "污染严重", //空气质量状况
     airAQI: "91", //空气质量指数
