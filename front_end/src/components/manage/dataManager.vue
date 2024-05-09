@@ -248,6 +248,16 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item :label="weatherInfo.labels.precip" prop="precip">
+        <el-input-number
+          v-model="newWeatherData.precip"
+          :min="0"
+          :max="100"
+          :step="1"
+          :formatter="(value:number) => `${value}mm`"
+          style="width: 10rem"
+        ></el-input-number>
+      </el-form-item>
       <el-form-item :label="weatherInfo.labels.humidity" prop="humidity">
         <el-input-number
           v-model="newWeatherData.humidity"
@@ -411,16 +421,17 @@ function addWeather() {
   weatherData.push({ ...newWeatherData });
   addDialogVisible.value = false;
   console.log({ ...newWeatherData });
-  post<addWeatherResponse>("/api/manage/data/weather_add/", newWeatherData).then(
-    (res) => {
-      const response = res.data;
-      if (!response.status) {
-        ElMessage.error("添加失败！");
-      } else {
-        ElMessage.success(weatherInfo.dialogs.add);
-      }
+  post<addWeatherResponse>(
+    "/api/manage/data/weather_add/",
+    newWeatherData
+  ).then((res) => {
+    const response = res.data;
+    if (!response.status) {
+      ElMessage.error("添加失败！");
+    } else {
+      ElMessage.success(weatherInfo.dialogs.add);
     }
-  );
+  });
 }
 
 function resetAddForm() {
@@ -465,6 +476,7 @@ const weatherInfo = {
     city: "城市",
     temperature: "温度",
     text: "天气",
+    precip: "降水量",
     humidity: "湿度",
     windSpeed: "风速",
     wind360: "风向",

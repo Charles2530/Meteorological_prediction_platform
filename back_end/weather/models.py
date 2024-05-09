@@ -2,6 +2,8 @@ from django.db import models
 from datetime import datetime
 
 # Create your models here.
+
+
 class HourlyWeather(models.Model):
     fxTime = models.DateTimeField(default=datetime.now)
     temp = models.FloatField(default=0.0)
@@ -69,20 +71,59 @@ class MonthlyWeather(models.Model):
 
     def __str__(self):
         return "monthly weather for " + self.month_time.strftime('%Y-%m-%d %H:%M:%S') + " " + self.location
-        return "monthly weather for " + self.month_time.strftime('%Y-%m-%d %H:%M:%S') + " " + self.location
 
-### TODO pro2city data
+# TODO pro2city data
+
+
 class Pro2City(models.Model):
     proName = models.CharField(max_length=200, default="")
-    cityId = models.CharField(max_length=200,default=0)
+    cityId = models.CharField(max_length=200, default=0)
 
-### TODO pro2city data
+# TODO pro2city data
+
+
 class City2CityId(models.Model):
     cityName = models.CharField(max_length=200, default="")
-    cityId = models.CharField(max_length=200,default=0)
+    cityId = models.CharField(max_length=200, default=0)
 
 
-### TODO pro_geography data
+# TODO pro_geography data
 class ProGeography(models.Model):
     proName = models.CharField(max_length=200, default="")
     geographyInfo = models.CharField(max_length=2000)
+
+
+# {
+#     "time": "2020-07-25 00:00",
+#     "city": "北京",
+#     "temp": "28",
+#     "text": "晴",
+#     "precip": "0.0",
+#     "wind360": "246",
+#     "windScale": "2",
+#     "windSpeed": "8",
+#     "humidity": "49",
+#     "pressure": "1001",
+#     "aqi": "52",
+#     "category": "良",
+# },
+
+class WeatherInfo(models.Model):
+    time = models.DateTimeField(default=datetime.now, primary_key=True)
+    city = models.CharField(max_length=200, default="北京")
+    temp = models.FloatField(default=0.0)
+    text = models.CharField(max_length=200, default="")
+    precip = models.FloatField(default=0.0)
+    wind360 = models.FloatField(default=0.0)
+    windScale = models.IntegerField(default=0)
+    windSpeed = models.FloatField(default=0.0)
+    humidity = models.FloatField(default=0.0)
+    pressure = models.FloatField(default=0.0)
+    aqi = models.IntegerField(default=0)
+    category = models.CharField(max_length=200, default="")
+
+    def __str__(self):
+        return "weather info for " + self.city + " " + self.time.strftime('%Y-%m-%d %H:%M:%S')
+    
+    class Meta:
+        unique_together = ('time', 'city')

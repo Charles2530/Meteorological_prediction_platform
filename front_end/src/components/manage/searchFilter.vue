@@ -128,7 +128,7 @@ const handleSearch = () => {
 
 /* 修改标题样式 */
 .el-collapse-item__header {
-  font-family: sans-serif; /* 将 YourCustomFont 替换为您想要应用的字体名称 */
+  /*font-family: sans-serif; */ /* 将 YourCustomFont 替换为您想要应用的字体名称 */
   padding-left: 10px; /* 左边留出 10 像素的空间 */
   margin: 0%; /* 设置标题的外边距为 0% */
   height: 30px; /* 设置标题的宽度为 2 像素 */

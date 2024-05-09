@@ -114,7 +114,7 @@ console.log("----------------------------------------------------------------")
 // console.log(weather.value);
 
 </script>
-<style>
+<style scoped>
 .chart {
     width: 95%;
     height: 92%;

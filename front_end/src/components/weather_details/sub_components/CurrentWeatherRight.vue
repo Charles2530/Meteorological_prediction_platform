@@ -1,6 +1,6 @@
 <template>
   <div class="w-full text-[#333333] font-semibold text-md flex-wrap"
-    style="font-family:'Courier New', Courier, monospace">
+    >
     <div class="
         flex 
         flex-col 

@@ -2,7 +2,7 @@ from django.http import HttpRequest, HttpResponse, JsonResponse
 from rest_framework import generics, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import HourlyWeather, DailyWeather, MonthlyWeather, Pro2City, ProGeography, City2CityId
+from .models import HourlyWeather, DailyWeather, MonthlyWeather, Pro2City, ProGeography, City2CityId, WeatherInfo
 from django.views.decorators.csrf import csrf_exempt
 from .serializers import HourlyWeatherSerializer, DailyWeatherSerializer, MonthlyWeatherSerializer
 import json
@@ -199,10 +199,104 @@ def humid_city_change(request):
 #     return JsonResponse(retList, status=200)
 
 
+# path('manage/data/weather_add/', views.add_weather_data, name='add_weather'),
+# path('manage/data/delete/', views.delete_weather_data, name='delete_weather'),
+# path('manage/data/search/', views.search_weather_data, name='search_weather'),
+# class WeatherInfo(models.Model):
+#     time = models.DateTimeField(default=datetime.now, primary_key=True)
+#     city = models.CharField(max_length=200, default="北京", primary_key=True)
+#     temp = models.FloatField(default=0.0)
+#     text = models.CharField(max_length=200, default="")
+#     precip = models.FloatField(default=0.0)
+#     wind360 = models.FloatField(default=0.0)
+#     windScale = models.IntegerField(default=0)
+#     windSpeed = models.FloatField(default=0.0)
+#     humidity = models.FloatField(default=0.0)
+#     pressure = models.FloatField(default=0.0)
+#     aqi = models.IntegerField(default=0)
+#     category = models.CharField(max_length=200, default="")
+@csrf_exempt
+def add_weather_data(request):
+    response_json = {
+        "status": True,
+    }
+    data = json.loads(request.body)
+    weather_info = WeatherInfo(
+        time=data['time'],
+        city=data['city'],
+        temp=data['temp'],
+        text=data['text'],
+        precip=data['precip'],
+        wind360=data['wind360'],
+        windScale=data['windScale'],
+        windSpeed=data['windSpeed'],
+        humidity=data['humidity'],
+        pressure=data['pressure'],
+        aqi=data['aqi'],
+        category=data['category'],
+    )
+    weather_info.save()
+    return JsonResponse(response_json, status=200)
 
 
+@csrf_exempt
+def delete_weather_data(request):
+    response_json = {
+        "status": True,
+    }
+    data = json.loads(request.body)
+    WeatherInfo.objects.filter(time=data['time'], city=data['city']).delete()
+    return JsonResponse(response_json, status=200)
 
 
+@csrf_exempt
+def search_weather_data(request):
+    data = json.loads(request.body)
+    data_type = data['type'] if data['type'] else 'weather'
+    from_time = data['time'][0] if len(data['time']) > 0 else None
+    to_time = data['time'][1] if len(data['time']) > 1 else None
+    address = data['address'] if data['address'] else None
 
+    if data_type == 'weather':
+        from django.db.models import Q
 
+        # 定义时间范围过滤条件
+        time_filter = Q(time__range=(from_time, to_time)) if from_time and to_time else Q()
 
+        # 定义城市包含过滤条件
+        city_filter = Q(city__contains=address) if address else Q()
+
+        # 执行查询
+        weather_data = WeatherInfo.objects.filter(time_filter & city_filter)
+        # weather_data = WeatherInfo.objects.filter(
+        #     time__range=(from_time, to_time) if from_time and to_time else all,
+        #     city__contains=address if address else all
+        # )
+        weather_data_list = []
+        for data in weather_data:
+            weather_data_list.append({
+                'time': data.time,
+                'city': data.city,
+                'temp': data.temp,
+                'text': data.text,
+                'precip': data.precip,
+                'wind360': data.wind360,
+                'windScale': data.windScale,
+                'windSpeed': data.windSpeed,
+                'humidity': data.humidity,
+                'pressure': data.pressure,
+                'aqi': data.aqi,
+                'category': data.category,
+            })
+
+        response_json = {
+            "Status": True,
+            "weatherHourlyList": weather_data_list
+        }
+        return JsonResponse(response_json, status=200)
+    else:
+        response_json = {
+            "Status": False,
+            "message": "Invalid data type"
+        }
+        return JsonResponse(response_json, status=400)

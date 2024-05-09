@@ -24,13 +24,13 @@
         <el-button :class="{ 'selected': buttonActive.a, 'unselected': !buttonActive.a }"  :active="buttonActive.A" @click="clicka">
           <div class="btnDiv">
             <div class="btnName">风场</div>
-            <div class="btnIcon" style='background-image: "src\\assets\\img\\阴.png"'></div>
+            <div class="btnIcon1"></div>
           </div>
         </el-button>
         <el-button :class="{ 'selected': buttonActive.b, 'unselected': !buttonActive.b }"  :active="buttonActive.A" @click="clickb">
           <div class="btnDiv">
             <div class="btnName">地震</div>
-            <div class="btnIcon" style='background-image: "src\\assets\\img\\阴.png"'></div>
+            <div class="btnIcon2"></div>
           </div>
         </el-button>
       </div>
@@ -44,6 +44,7 @@ import { onMounted, reactive } from "vue";
 import AMapLoader from "@amap/amap-jsapi-loader";
 import { getAssetsFile } from '@/utils/pub-use'
 import AMapWind from "amap-wind";
+import { get } from "@/api/index";
 
 // 设置安全密钥
 (window as any)._AMapSecurityConfig = {
@@ -66,7 +67,7 @@ const dis_info = reactive({
 });
 
 //灾害标记信息
-const hazardMarkData = reactive([
+let hazardMarkData = reactive([
   {
     place: '甘肃省 兰州市',
     longitude: 114.344706,
@@ -169,17 +170,27 @@ let pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, fe
 // removeLayer(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; addLayer: (arg0: any, arg1: string) => void; 
 // } = null;
 
-export interface API {
-  dis_info: { districtName: String };
+// 使用defineEmits注册一个自定义事件
+const emit = defineEmits(["getValue"])
+ 
+// 点击事件触发emit，去调用我们注册的自定义事件getValue,并传递value参数至父组件
+const transValue = () => {
+  emit("getValue", dis_info.districtName);
+  getHazardInfo();
 }
 
-defineExpose({
-  dis_info,
-});
-
 onMounted(() => {
+  getHazardInfo();
   initMap();
 });
+
+const getHazardInfo = async () => {
+  get<Array<any>>("/api/getHazard/").then((res) => {
+    hazardMarkData = res.data;
+    // HazardInfo = res.data;
+    // console.log("222", hazardMarkData);
+  });
+}
 
 function initMap() {
   AMapLoader.load({
@@ -264,7 +275,6 @@ function initMap() {
 
 //高亮区域
 function drawBounds() {
-  console.log("ccc");
   var step = 15;
   //行政区查询
   dis_info.district.search(
@@ -314,9 +324,7 @@ function handlerMapClick() {
   map.on("click", (e: { lnglat: { lng: any; lat: any } }) => {
     // 点击坐标
     const markersPosition = [e.lnglat.lng, e.lnglat.lat];
-    console.log(markersPosition);
-
-    // eslint-disable-next-line no-undef
+    // console.log(markersPosition);
     // 根据坐标获取位置信息
     dis_info.geoCoder.getAddress(
       markersPosition,
@@ -333,16 +341,22 @@ function handlerMapClick() {
           // let areaId = adcode
           if (dis_info.districtCode != "100000") {
             dis_info.districtName = dis_info.districtName + "/中国";
+            //向父组件传省份名
+            transValue();
             drawBounds();
             map.setCenter(markersPosition, false, 300);
           } else {
             dis_info.districtName = "中国";
+            //向父组件传省份名
+            transValue();
             map.remove(dis_info.polygons); //清除结果
             map.setCenter([105, 36], false, 30);
             map.setZoom(4.8);
           }
         } else {
           dis_info.districtName = "中国";
+          //向父组件传省份名
+          transValue();
           map.remove(dis_info.polygons); //清除结果
           map.setCenter([105, 36], false, 30);
           map.setZoom(4.8);
@@ -409,7 +423,6 @@ function clickB() {
   buttonActive.C = false;
   map.remove(sate);
   map.add(wms);
-  console.log("ccc");
 }
 
 function clickC() {
@@ -478,7 +491,6 @@ function showWind() {
         },
         zIndex: 20,
       });
-      console.log(map, windLayer);
 
       windLayer.appendTo(map);
     });
@@ -612,13 +624,26 @@ function InitEarthQuake() {
   position: relative;
 }
 
-.btnIcon {
-  width: 2.8em;
-  height: 2.8em;
+.btnIcon1 {
+  width: 2.4em;
+  height: 2.4em;
   border-radius: 3em;
   box-shadow: 0 0 4px 0 black;
-  background-color: var(--color-transparent);
-  background-size: 65px;
+  background-image: url("../../assets/img/wind.png");
+  background-size: 100% 100%;/*按比例缩放*/
+  z-index: 1;
+  text-align: center;
+  position: absolute;
+  right:0;
+}
+
+.btnIcon2 {
+  width: 2.4em;
+  height: 2.4em;
+  border-radius: 3em;
+  box-shadow: 0 0 4px 0 black;
+  background-image: url("../../assets/img/earthquake.png");
+  background-size: 100% 100%;/*按比例缩放*/
   z-index: 1;
   text-align: center;
   position: absolute;
