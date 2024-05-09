@@ -1,4 +1,5 @@
 from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.views.decorators.http import require_http_methods
 from rest_framework import generics, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -69,8 +70,10 @@ def index(request):
     return HttpResponse("Welcome to the weather app!")
 
 
+@require_http_methods(['GET'])
 def overview(request):
-    return HttpResponse("This is the weather app overview page!")
+    # query daily weather data
+    return HttpResponse("This is the overview weather page!")
 
 
 def thirty_days_forecast(request):
@@ -78,6 +81,7 @@ def thirty_days_forecast(request):
 
 
 def realtime(request):
+    # query realtime weather data
     return HttpResponse("This is the realtime weather page!")
 
 
@@ -114,7 +118,19 @@ def aqi_worst(request):
 
 
 def aqi_current_city_change(request):
-    return HttpResponse("This is the AQI current city change page!")
+    forecast_month_data = forecast_month_data.filter(
+        city='北京').order_by("fxDate")
+    response_json = {
+        "status": True,
+        "data": []
+    }
+    for i in range(min(30, len(forecast_month_data))):
+        response_json["data"].append({
+            "time": forecast_month_data[i].fxDate,
+            "aqi": forecast_month_data[i].humidity,
+        })
+
+    return JsonResponse(response_json, status=200)
 
 
 def aqi_target_city_change(request):
