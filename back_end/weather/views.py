@@ -76,12 +76,12 @@ def overview(request):
         "weather": {
             "condition": data.get("text", "Unknown"),  # 天气状况
             "temp": int(data.get("temp", 0)),  # 温度
-            "temp_feel": int(data.get("temp", 0) + random.uniform(0, 5)),  # 体感温度
+            "temp_feel": int(data.get("temp", 0)),  # 体感温度
             "precip": float(data.get("precip", 0)),  # 降水量
-            "precip_probability": random.uniform(30, 75),
+            "precip_probability": 10,
             "aqi": 63,
             "pressure": int(data.get("pressure", 0)),  # 气压
-            "ray": "中等",  # 紫外线指数，输入中没有提供，这里用"中等"作为占位符
+            "ray": "中等",
             "sunrise_time": "5:04",
             "sunset_time": "19:19"
         },
@@ -164,91 +164,84 @@ def aqi_worst(request):
 
 @require_http_methods(['GET'])
 def aqi_current_city_change(request):
-    forecast_month_data = forecast_month_data.filter(
-        city='北京市').order_by("fxDate")
+    length = min(30, len(DailyWeather.objects.all()))
+    all_info = DailyWeather.objects.filter(city='北京市').order_by('-fxDate')[:length]
     response_json = {
         "status": True,
-        "data": []
+        "data": [
+            {
+                "time": info.fxDate,
+                "aqi": info.aqi,
+            }
+            for info in all_info
+        ]
     }
-    for i in range(min(30, len(forecast_month_data))):
-        response_json["data"].append({
-            "time": forecast_month_data[i].fxDate,
-            "aqi": forecast_month_data[i].humidity,
-        })
-
     return JsonResponse(response_json, status=200)
 
 
 def aqi_target_city_change(request):
-    forecast_month_data = DailyWeather.objects.all()
     data = json.load(request.body)
     city = data["city"]
-    forecast_month_data = forecast_month_data.filter(
-        city=city).order_by("fxDate")
+    length = min(30, len(DailyWeather.objects.all()))
+    all_info = DailyWeather.objects.filter(city=city).order_by('-fxDate')[:length]
     response_json = {
         "status": True,
-        "data": []
+        "data": [
+            {
+                "time": info.fxDate,
+                "aqi": info.aqi,
+            }
+            for info in all_info
+        ]
     }
-    for i in range(min(30, len(forecast_month_data))):
-        response_json["data"].append({
-            "time": forecast_month_data[i].fxDate,
-            "aqi": forecast_month_data[i].humidity,
-        })
-
     return JsonResponse(response_json, status=200)
 
 
 def temp_city_change(request):
-    forecast_month_data = DailyWeather.objects.all()
-    data = json.load(request.body)
-    city = data["city"]
-    forecast_month_data = forecast_month_data.filter(
-        city=city).order_by("fxDate")
+    length = min(30, len(DailyWeather.objects.all()))
+    all_info = DailyWeather.objects.filter(city='北京市').order_by('-fxDate')[:length]
     response_json = {
         "status": True,
-        "data": []
+        "data": [
+            {
+                "time": info.fxDate,
+                "temp": info.tempMax,
+            }
+            for info in all_info
+        ]
     }
-    for i in range(min(30, len(forecast_month_data))):
-        response_json["data"].append({
-            "time": forecast_month_data[i].fxDate,
-            "temp": forecast_month_data[i].tempMax,
-        })
     return JsonResponse(response_json, status=200)
 
 
 def pressure_city_change(request):
-    forecast_month_data = DailyWeather.objects.all()
-    data = json.load(request.body)
-    city = data["city"]
-    forecast_month_data = forecast_month_data.filter(
-        city=city).order_by("fxDate")
+    length = min(30, len(DailyWeather.objects.all()))
+    all_info = DailyWeather.objects.filter(city='北京市').order_by('-fxDate')[:length]
     response_json = {
         "status": True,
-        "data": []
+        "data": [
+            {
+                "time": info.fxDate,
+                "pressure": info.pressure,
+            }
+            for info in all_info
+        ]
     }
-    for i in range(min(30, len(forecast_month_data))):
-        response_json["data"].append({
-            "time": forecast_month_data[i].fxDate,
-            "pressure": forecast_month_data[i].pressure,
-        })
     return JsonResponse(response_json, status=200)
 
 
 def humid_city_change(request):
-    forecast_month_data = DailyWeather.objects.all()
-    data = json.load(request.body)
-    city = data["city"]
-    forecast_month_data = forecast_month_data.filter(
-        city=city).order_by("fxDate")
+    length = min(30, len(DailyWeather.objects.all()))
+    all_info = DailyWeather.objects.filter(city='北京市').order_by('-fxDate')[:length]
     response_json = {
         "status": True,
-        "data": []
+        "data": [
+            {
+                "time": info.fxDate,
+                "humid": info.humidity,
+            }
+            for info in all_info
+        ]
     }
-    for i in range(min(30, len(forecast_month_data))):
-        response_json["data"].append({
-            "time": forecast_month_data[i].fxDate,
-            "humid": forecast_month_data[i].humidity,
-        })
     return JsonResponse(response_json, status=200)
 
 
