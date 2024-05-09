@@ -72,11 +72,35 @@ def realtime(request):
 
 
 def aqi_best(request):
-    return HttpResponse("This is the AQI best stations page!")
+    weatherInfo = WeatherInfo.objects.all()
+    sorted_weatherInfo = sorted(weatherInfo, key=lambda x: x.aqi, reverse=True)
+    response_json = {
+        "status": True,
+        "ranks": []
+    }
+    for i in range(min(10, len(sorted_weatherInfo))):
+        response_json["ranks"].append({
+            "city": sorted_weatherInfo[i].city,
+            "category": sorted_weatherInfo[i].category,
+            "aqi": sorted_weatherInfo[i].aqi
+        })
+    return JsonResponse(response_json, status=200)
 
 
 def aqi_worst(request):
-    return HttpResponse("This is the AQI worst stations page!")
+    weatherInfo = WeatherInfo.objects.all()
+    sorted_weatherInfo = sorted(weatherInfo, key=lambda x: x.aqi)
+    response_json = {
+        "status": True,
+        "ranks": []
+    }
+    for i in range(min(10, len(sorted_weatherInfo))):
+        response_json["ranks"].append({
+            "city": sorted_weatherInfo[i].city,
+            "category": sorted_weatherInfo[i].category,
+            "aqi": sorted_weatherInfo[i].aqi
+        })
+    return JsonResponse(response_json, status=200)
 
 
 def aqi_current_city_change(request):
@@ -84,19 +108,76 @@ def aqi_current_city_change(request):
 
 
 def aqi_target_city_change(request):
-    return HttpResponse("This is the AQI target city change page!")
+    forecast_month_data = DailyWeather.objects.all()
+    data = json.load(request.body)
+    city = data["city"]
+    forecast_month_data = forecast_month_data.filter(
+        city=city).order_by("fxDate")
+    response_json = {
+        "status": True,
+        "data": []
+    }
+    for i in range(min(30, len(forecast_month_data))):
+        response_json["data"].append({
+            "time": forecast_month_data[i].fxDate,
+            "aqi": forecast_month_data[i].humidity,
+        })
+
+    return JsonResponse(response_json, status=200)
 
 
 def temp_city_change(request):
-    return HttpResponse("This is the temp city change page!")
+    forecast_month_data = DailyWeather.objects.all()
+    data = json.load(request.body)
+    city = data["city"]
+    forecast_month_data = forecast_month_data.filter(
+        city=city).order_by("fxDate")
+    response_json = {
+        "status": True,
+        "data": []
+    }
+    for i in range(min(30, len(forecast_month_data))):
+        response_json["data"].append({
+            "time": forecast_month_data[i].fxDate,
+            "temp": forecast_month_data[i].tempMax,
+        })
+    return JsonResponse(response_json, status=200)
 
 
 def pressure_city_change(request):
-    return HttpResponse("This is the pressure city change page!")
+    forecast_month_data = DailyWeather.objects.all()
+    data = json.load(request.body)
+    city = data["city"]
+    forecast_month_data = forecast_month_data.filter(
+        city=city).order_by("fxDate")
+    response_json = {
+        "status": True,
+        "data": []
+    }
+    for i in range(min(30, len(forecast_month_data))):
+        response_json["data"].append({
+            "time": forecast_month_data[i].fxDate,
+            "pressure": forecast_month_data[i].pressure,
+        })
+    return JsonResponse(response_json, status=200)
 
 
 def humid_city_change(request):
-    return HttpResponse("This is the humid city change page!")
+    forecast_month_data = DailyWeather.objects.all()
+    data = json.load(request.body)
+    city = data["city"]
+    forecast_month_data = forecast_month_data.filter(
+        city=city).order_by("fxDate")
+    response_json = {
+        "status": True,
+        "data": []
+    }
+    for i in range(min(30, len(forecast_month_data))):
+        response_json["data"].append({
+            "time": forecast_month_data[i].fxDate,
+            "humid": forecast_month_data[i].humidity,
+        })
+    return JsonResponse(response_json, status=200)
 
 
 @csrf_exempt
@@ -277,15 +358,26 @@ def delete_weather_data(request):
 def search_weather_data(request):
     data = json.loads(request.body)
     data_type = data['type'] if data['type'] else 'weather'
-    from_time = data['time'][0] if data['time'][0] else None
-    to_time = data['time'][1] if data['time'][1] else None
+    from_time = data['time'][0] if len(data['time']) > 0 else None
+    to_time = data['time'][1] if len(data['time']) > 1 else None
     address = data['address'] if data['address'] else None
 
     if data_type == 'weather':
-        weather_data = WeatherInfo.objects.filter(
-            time__range=(from_time, to_time) if from_time and to_time else all,
-            city__contains=address if address else all
-        )
+        from django.db.models import Q
+
+        # 定义时间范围过滤条件
+        time_filter = Q(time__range=(from_time, to_time)
+                        ) if from_time and to_time else Q()
+
+        # 定义城市包含过滤条件
+        city_filter = Q(city__contains=address) if address else Q()
+
+        # 执行查询
+        weather_data = WeatherInfo.objects.filter(time_filter & city_filter)
+        # weather_data = WeatherInfo.objects.filter(
+        #     time__range=(from_time, to_time) if from_time and to_time else all,
+        #     city__contains=address if address else all
+        # )
         weather_data_list = []
         for data in weather_data:
             weather_data_list.append({

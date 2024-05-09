@@ -25,6 +25,8 @@ class HourlyWeather(models.Model):
 
 
 class DailyWeather(models.Model):
+    id = models.AutoField(primary_key=True)
+    city = models.CharField(max_length=50, default="")
     fxDate = models.DateField(default=datetime.now)
     sunrise = models.DateTimeField(default=datetime.now)
     sunset = models.DateTimeField(default=datetime.now)
@@ -110,7 +112,7 @@ class ProGeography(models.Model):
 
 class WeatherInfo(models.Model):
     time = models.DateTimeField(default=datetime.now, primary_key=True)
-    city = models.CharField(max_length=200, default="北京", primary_key=True)
+    city = models.CharField(max_length=200, default="北京")
     temp = models.FloatField(default=0.0)
     text = models.CharField(max_length=200, default="")
     precip = models.FloatField(default=0.0)
@@ -124,3 +126,6 @@ class WeatherInfo(models.Model):
 
     def __str__(self):
         return "weather info for " + self.city + " " + self.time.strftime('%Y-%m-%d %H:%M:%S')
+
+    class Meta:
+        unique_together = ('time', 'city')

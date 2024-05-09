@@ -27,10 +27,10 @@ class CitySubscription(models.Model):
 
 
 class WeatherForecast(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.CharField(max_length=255, primary_key=True)
     img = models.URLField()
     title = models.CharField(max_length=255)
-    date = models.DateTimeField()
+    # date = models.DateTimeField()
     city = models.CharField(max_length=100)
     level = models.IntegerField()
     content = models.TextField()
