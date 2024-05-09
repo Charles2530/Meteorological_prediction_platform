@@ -5,10 +5,15 @@ from openpyxl import load_workbook
 
 class Command(BaseCommand):
 <<<<<<< HEAD
+<<<<<<< HEAD
     help = 'Store catastrophic forecast data into the database'
 
     def handle(self, *args, **kwargs):
         try: 
+=======
+    def handle(self, *args, **kwargs):
+        try:
+>>>>>>> master
 =======
     def handle(self, *args, **kwargs):
         try:
