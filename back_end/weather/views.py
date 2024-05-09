@@ -321,16 +321,6 @@ def getProInfo(request):
 def getCityInfo(request: HttpRequest):
     assert request.method == 'GET'
 
-<<<<<<< HEAD
-#     city = request.GET.get("city")
-#     cityId = City2CityId.objects.get(cityName=city)
-#     ### TODO use API to get weather and air
-#     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
-#     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
-#     # json to dict TODO fill load paras
-#     weather = json.load(...)
-#     air = json.load(...)
-=======
     city = request.GET.get("city")
     ### TODO to remove
     city = "北京市"
@@ -349,7 +339,6 @@ def getCityInfo(request: HttpRequest):
 
     weather = json.loads(weather.content.decode('utf-8'))
     air = json.loads(air.content.decode('utf-8'))
->>>>>>> master
 
 
     date_time = datetime.fromisoformat(weather["updateTime"])
