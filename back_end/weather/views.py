@@ -57,16 +57,6 @@ class MonthlyWeatherView(APIView):
 
 
 def index(request):
-    ### TODO tochec and set path
-    with open('.....', 'w', newline='', encoding='utf-8') as file:
-        reader = csv.reader(file)
-        for i, row in enumerate(reader):
-            if i < 2:
-                continue
-            cityId = row[0]
-            cityName = row[7]
-            #### TODO save to Model
-
     return HttpResponse("Welcome to the weather app!")
 
 
@@ -210,31 +200,20 @@ def humid_city_change(request):
 def getProInfo(request):
     assert request.method == 'GET'
     proName = request.GET.get('proName')
-    # cityId = Pro2City.objects.get(proName=proName).cityId
+    cityId = Pro2City.objects.get(proName=proName).cityId
     ### TODO get cityName to remove
-    # cityName = getCityName(cityId)
-    cityName = proName
+    cityName = City2CityId.objects.get(cityId=cityId).cityName
+    # cityName = proName
+    # cityId = "101010100"
+    # cityName = '北京市'
+    # proName = "北京"
 
-    ### TODO use API to get weather and hazardTable
+    ### use API to get weather and hazardTable
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
     # indices : 天气指数 https://dev.qweather.com/docs/resource/indices-info/
     ## 运动指数，紫外线指数
     # harzard : 天气灾害预警 https://dev.qweather.com/docs/api/warning/weather-warning/
-    # json to dict TODO fill load paras
-
-    # TODO to remove
-    cityId = "101010100"
-    cityName = '北京市'
-    proName = "北京"
-
-    # ### TODO use API to get weather and hazardTable
-    # # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
-    # # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
-    # # indices : 天气指数 https://dev.qweather.com/docs/resource/indices-info/
-    # ## 运动指数，紫外线指数
-    # # harzard : 天气灾害预警 https://dev.qweather.com/docs/api/warning/weather-warning/
-    # # json to dict TODO fill load paras
     weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
         'key': 'aa7975af7b564c60804b6b08fab2e2c5',
         'location': cityId,
@@ -253,8 +232,6 @@ def getProInfo(request):
         'location': cityId,
     })
 
-    print(type(air.content))
-
     weather = json.loads(weather.content.decode('utf-8'))
     air = json.loads(air.content.decode('utf-8'))
     indices = json.loads(indices.content.decode('utf-8'))
@@ -266,7 +243,7 @@ def getProInfo(request):
     date_time = datetime.fromisoformat(weather["updateTime"])
     timezon = pytz.timezone('Asia/Shanghai')
     date_time = date_time.astimezone(timezon).strftime("%Y-%m-%d %H:%M")
-    # print(date_time)
+
     retList = {
         "weather": {
             "time": date_time,

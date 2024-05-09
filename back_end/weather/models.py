@@ -78,15 +78,15 @@ class MonthlyWeather(models.Model):
 
 
 class Pro2City(models.Model):
-    proName = models.CharField(max_length=200, default="")
+    proName = models.CharField(max_length=200, default="", primary_key=True)
     cityId = models.CharField(max_length=200, default=0)
 
 # TODO pro2city data
 
 
 class City2CityId(models.Model):
+    cityId = models.CharField(max_length=200, default=0, primary_key=True)
     cityName = models.CharField(max_length=200, default="")
-    cityId = models.CharField(max_length=200, default=0)
 
 
 # TODO pro_geography data
