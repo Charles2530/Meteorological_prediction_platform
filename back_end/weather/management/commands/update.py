@@ -1,21 +1,30 @@
-# import requests
-# from myapp.models import MyModel
+# D:/weather/management/commands/fetch_api_data.py
+from django.core.management.base import BaseCommand
+from celery.schedules import crontab
+from weather.tasks import fetch_and_save_api_data
 
-# # 发送HTTP请求
-# response = requests.get('http://example.com/api/data')
 
-# # 确保请求成功
-# if response.status_code == 200:
-#     # 接收响应数据
-#     data = response.json()
+class Command(BaseCommand):
+    help = 'Schedules a task to fetch and save data from an API'
 
-#     # 序列化数据
-#     for item in data:
-#         # 假设我们有一个字段叫'name'和'value'
-#         name = item.get('name')
-#         value = item.get('value')
+    def handle(self, *args, **kwargs):
+        # 每5分钟执行一次任务
+        from django_celery_beat.models import PeriodicTask, IntervalSchedule
+        from django_celery_beat.utils import get_schedule
 
-#         # 创建模型实例并存储数据
-#         MyModel.objects.create(name=name, value=value)
-# else:
-#     print('Failed to fetch data:', response.status_code)
+        if not PeriodicTask.objects.filter(name='fetch_api_data').exists():
+            schedule, _ = IntervalSchedule.objects.get_or_create(
+                every=5,
+                period=IntervalSchedule.MINUTES
+            )
+            periodic_task = PeriodicTask.objects.create(
+                crontab=crontab(minute='*/5'),
+                task='weather.tasks.fetch_and_save_api_data',
+                name='fetch_api_data',
+                one_off=False,
+                start_time=get_schedule(schedule).datetime,
+            )
+            self.stdout.write(self.style.SUCCESS(
+                'Scheduled fetch_and_save_api_data task to run every 5 minutes'))
+        else:
+            self.stdout.write(self.style.WARNING('Task already scheduled'))

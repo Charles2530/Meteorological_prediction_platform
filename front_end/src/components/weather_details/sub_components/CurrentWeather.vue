@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full font-semibold text-md flex-wrap text-white">
+  <div class="w-full font-semibold text-md flex-wrap text-white" style="font-family:'Courier New', Courier, monospace">
     <div class="
         flex 
         flex-col 
@@ -37,7 +37,7 @@
         <div class="flex flex-col md:ml-10 ">
           <span class="text-7xl bg-clip-text text-transparent bg-gradient-to-br from-white from-40% ...">{{
             `${weather.temp}°C` }}</span>
-          <span class="max-md:hidden">{{ weather.text }}</span>
+          <span class="max-md:hidden">{{ weather.condition }}</span>
         </div>
       </div>
       <!-- 移动端的地区、状态、温度 -->

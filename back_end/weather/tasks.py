@@ -1,11 +1,10 @@
-# # weather_fetcher.py
-# from django_cron import CronJobBase
+from celery import shared_task
+from .models import DailyWeather, HourlyWeather, MonthlyWeather
+from .serializers import DailyWeatherSerializer, HourlyWeatherSerializer, MonthlyWeatherSerializer
+from datetime import datetime
 # from .views import fetch_weather_data
 # from django.utils import timezone
-# import requests
-# from datetime import datetime
-# from .models import HourlyWeather, DailyWeather, MonthlyWeather
-# from .serializers import HourlyWeatherSerializer, DailyWeatherSerializer, MonthlyWeatherSerializer
+import requests
 
 
 # def fetch_weather_and_save_to_database():
@@ -14,44 +13,45 @@
 #     # fetch_monthly_weather_and_save_to_database();
 
 
-# def fetch_realtime_weather_and_save_to_database():
-#     # todo 默认为北京，需要根据前端的返回值进行更改
-#     now_url = 'https://devapi.qweather.com/v7/weather/now'
-#     now_params = {
-#         'key': 'HE2404232054111443',
-#         'location': '101010100',
-#     }
-#     now_response = requests.get(now_url, params=now_params)
-#     now_data = now_response.json()
-#     now_item = now_data['now']
+@shared_task
+def fetch_realtime_weather_and_save_to_database():
+    # todo 默认为北京，需要根据前端的返回值进行更改
+    now_url = 'https://devapi.qweather.com/v7/weather/now'
+    now_params = {
+        'key': 'HE2404232054111443',
+        'location': '101010100',
+    }
+    now_response = requests.get(now_url, params=now_params)
+    now_data = now_response.json()
+    now_item = now_data['now']
 
-#     air_url = 'https://devapi.qweather.com/airquality/v1/now'
-#     air_params = {
-#         'key': 'HE2404232054111443',
-#         'location': '101010100',
-#     }
-#     air_response = requests.get(air_url, params=air_params)
-#     air_data = air_response.json()
-#     air_item = air_data['aqi']
+    air_url = 'https://devapi.qweather.com/airquality/v1/now'
+    air_params = {
+        'key': 'HE2404232054111443',
+        'location': '101010100',
+    }
+    air_response = requests.get(air_url, params=air_params)
+    air_data = air_response.json()
+    air_item = air_data['aqi']
 
-#     realtime_overall_weather = HourlyWeather(
-#         obsTime=datetime.strptime(now_item['obsTime'], '%Y-%m-%dT%H:%M%z'),
-#         # location=params['location'],
-#         temp=now_item['temp'],
-#         text=now_item['text'],
-#         windDir=now_item['windDir'],
-#         windScale=now_item['windScale'],
-#         humidity=now_item['humidity'],
-#         pop=now_item['pop'],
-#         pressure=now_item['pressure'],
-#         air=air_item['category'],
-#         airAQI=air_item['value'],
-#     )
-#     # serializer = HourlyWeatherSerializer(data=data)
-#     # if serializer.is_valid():
-#     #     serializer.save()
-#     # else:
-#     #     print(serializer.errors)
+    realtime_overall_weather = HourlyWeather(
+        obsTime=datetime.strptime(now_item['obsTime'], '%Y-%m-%dT%H:%M%z'),
+        # location=params['location'],
+        temp=now_item['temp'],
+        text=now_item['text'],
+        windDir=now_item['windDir'],
+        windScale=now_item['windScale'],
+        humidity=now_item['humidity'],
+        pop=now_item['pop'],
+        pressure=now_item['pressure'],
+        air=air_item['category'],
+        airAQI=air_item['value'],
+    )
+    # serializer = HourlyWeatherSerializer(data=data)
+    # if serializer.is_valid():
+    #     serializer.save()
+    # else:
+    #     print(serializer.errors)
 
 
 # def fetch_hourly_weather_and_save_to_database():
@@ -170,3 +170,19 @@
 
 #     def do(self):
 #         fetch_weather_data()
+
+# import gzip
+# import io
+# import json
+# import requests
+
+# # 发起API请求并得到gzip数据
+# api_response = requests.get('your_api_url_here')
+
+# # 将gzip数据解压缩并解析为JSON格式
+# gzip_data = api_response.content
+# with gzip.open(io.BytesIO(gzip_data), 'rb') as f:
+#     decompressed_data = f.read()
+
+# # 将解压后的数据解析为JSON格式
+# json_data = json.loads(decompressed_data)
