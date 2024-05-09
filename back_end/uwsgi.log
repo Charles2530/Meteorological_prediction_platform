@@ -6469,3 +6469,840 @@ spawned uWSGI worker 2 (pid: 1856971, cores: 2)
 Python auto-reloader enabled
 spawned uWSGI worker 3 (pid: 1856973, cores: 2)
 spawned uWSGI worker 4 (pid: 1856976, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1856976|app: 0|req: 1/1] 219.239.227.114 () {44 vars in 844 bytes} [Thu May  9 04:29:57 2024] GET /api/get_info/ => generated 28 bytes in 135 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Internal Server Error: /api/alarm_notices/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+sqlite3.OperationalError: no such table: notifications_weatherforecast
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 53, in get_alarm_notice
+    for forecast in locations:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+django.db.utils.OperationalError: no such table: notifications_weatherforecast
+[pid: 1856976|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 854 bytes} [Thu May  9 04:29:57 2024] GET /api/alarm_notices/ => generated 122031 bytes in 43 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 1)
+Internal Server Error: /api/subscribe/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+sqlite3.OperationalError: no such table: notifications_citysubscription
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 109, in subscribe
+    for city in cities:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+django.db.utils.OperationalError: no such table: notifications_citysubscription
+[pid: 1856969|app: 0|req: 1/3] 219.239.227.114 () {44 vars in 846 bytes} [Thu May  9 04:29:57 2024] GET /api/subscribe/ => generated 124157 bytes in 194 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 0)
+Internal Server Error: /api/get_alarm_level/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+sqlite3.OperationalError: no such table: notifications_weatherforecast
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 156, in get_alarm_level
+    for forecast in locations:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+django.db.utils.OperationalError: no such table: notifications_weatherforecast
+Internal Server Error: /api/alarm_notices_brief/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+sqlite3.OperationalError: no such table: notifications_weatherforecast
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 128, in get_brief
+    for forecast in locations:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+django.db.utils.OperationalError: no such table: notifications_weatherforecast
+[pid: 1856973|app: 0|req: 2/4] 219.239.227.114 () {44 vars in 866 bytes} [Thu May  9 04:29:57 2024] GET /api/alarm_notices_brief/ => generated 122067 bytes in 219 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 1)
+[pid: 1856973|app: 0|req: 2/5] 219.239.227.114 () {44 vars in 858 bytes} [Thu May  9 04:29:57 2024] GET /api/get_alarm_level/ => generated 121821 bytes in 326 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 0)
+Internal Server Error: /api/alarm_resent_notices/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+sqlite3.OperationalError: no such table: notifications_weatherforecast
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 172, in get_recent
+    for (forecast, idx) in enumerate(locations):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+django.db.utils.OperationalError: no such table: notifications_weatherforecast
+[pid: 1856971|app: 0|req: 1/6] 219.239.227.114 () {44 vars in 868 bytes} [Thu May  9 04:29:57 2024] GET /api/alarm_resent_notices/ => generated 121693 bytes in 345 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 0)
+Bad Request: /api/get_info/
+[pid: 1856973|app: 0|req: 3/7] 219.239.227.114 () {44 vars in 844 bytes} [Thu May  9 04:30:49 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+[pid: 1856973|app: 0|req: 4/8] 219.239.227.114 () {44 vars in 868 bytes} [Thu May  9 04:30:49 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1856971|app: 0|req: 3/9] 219.239.227.114 () {44 vars in 854 bytes} [Thu May  9 04:30:49 2024] GET /api/alarm_notices/ => generated 38 bytes in 4 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1856971|app: 0|req: 3/10] 219.239.227.114 () {44 vars in 846 bytes} [Thu May  9 04:30:49 2024] GET /api/subscribe/ => generated 34 bytes in 6 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1856969|app: 0|req: 2/11] 219.239.227.114 () {44 vars in 858 bytes} [Thu May  9 04:30:49 2024] GET /api/get_alarm_level/ => generated 41 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1856976|app: 0|req: 3/12] 219.239.227.114 () {44 vars in 866 bytes} [Thu May  9 04:30:49 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 4 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Bad Request: /api/get_info/
+[pid: 1856976|app: 0|req: 4/13] 219.239.227.114 () {44 vars in 844 bytes} [Thu May  9 04:32:31 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+[pid: 1856971|app: 0|req: 4/14] 219.239.227.114 () {44 vars in 858 bytes} [Thu May  9 04:32:31 2024] GET /api/get_alarm_level/ => generated 41 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1856976|app: 0|req: 6/15] 219.239.227.114 () {44 vars in 868 bytes} [Thu May  9 04:32:31 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 6 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1856973|app: 0|req: 5/16] 219.239.227.114 () {44 vars in 846 bytes} [Thu May  9 04:32:31 2024] GET /api/subscribe/ => generated 34 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1856976|app: 0|req: 6/17] 219.239.227.114 () {44 vars in 854 bytes} [Thu May  9 04:32:31 2024] GET /api/alarm_notices/ => generated 38 bytes in 10 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1856976|app: 0|req: 7/18] 219.239.227.114 () {44 vars in 866 bytes} [Thu May  9 04:32:31 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/rank_worst/
+Not Found: /api/weather/30days
+Not Found: /api/weather/overview/
+Not Found: /api/weather/aqi/rank_best/
+[pid: 1856971|app: 0|req: 6/20] 219.239.227.114 () {44 vars in 870 bytes} [Thu May  9 04:32:40 2024] GET /api/weather/aqi/rank_best/ => generated 6012 bytes in 11 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1856973|app: 0|req: 6/21] 219.239.227.114 () {44 vars in 1303 bytes} [Thu May  9 04:32:40 2024] GET /api/weather/overview/?__v_isShallow=false&dep=[object+Map]&__v_isRef=true&_rawValue[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_rawValue[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA&_value[name]=%E5%8C%97%E4%BA%AC%E5%B8%82&_value[adm2]=%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 6243 bytes in 11 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1856976|app: 0|req: 8/22] 219.239.227.114 () {44 vars in 973 bytes} [Thu May  9 04:32:40 2024] GET /api/weather/30days?city=%E5%8C%97%E4%BA%AC%E5%B8%82%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 6048 bytes in 11 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1856971|app: 0|req: 6/19] 219.239.227.114 () {44 vars in 872 bytes} [Thu May  9 04:32:40 2024] GET /api/weather/aqi/rank_worst/ => generated 6015 bytes in 12 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/overview_realtime
+[pid: 1856969|app: 0|req: 3/23] 219.239.227.114 () {44 vars in 995 bytes} [Thu May  9 04:32:40 2024] GET /api/weather/overview_realtime?city=%E5%8C%97%E4%BA%AC%E5%B8%82%E6%98%8C%E5%B9%B3%E5%8C%BA => generated 6081 bytes in 16 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/getCityInfo/
+[pid: 1856976|app: 0|req: 9/24] 219.239.227.114 () {44 vars in 850 bytes} [Thu May  9 04:32:40 2024] GET /api/getCityInfo/ => generated 5982 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/aqi_change/
+[pid: 1856973|app: 0|req: 7/25] 219.239.227.114 () {44 vars in 872 bytes} [Thu May  9 04:32:40 2024] GET /api/weather/aqi/aqi_change/ => generated 6015 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+Not Found: /api/weather/aqi/city_change/
+[pid: 1856971|app: 0|req: 7/26] 219.239.227.114 () {44 vars in 885 bytes} [Thu May  9 04:32:40 2024] GET /api/weather/aqi/city_change/?city= => generated 6024 bytes in 4 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+Not Found: /api/weather/humid/city_change/
+Not Found: /api/weather/pressure/city_change/
+Not Found: /api/weather/temp/city_change/
+[pid: 1856969|app: 0|req: 5/28] 219.239.227.114 () {44 vars in 887 bytes} [Thu May  9 04:32:40 2024] GET /api/weather/temp/city_change/?city= => generated 6027 bytes in 10 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 1)
+[pid: 1856976|app: 0|req: 10/28] 219.239.227.114 () {44 vars in 889 bytes} [Thu May  9 04:32:40 2024] GET /api/weather/humid/city_change/?city= => generated 6030 bytes in 10 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1856969|app: 0|req: 5/29] 219.239.227.114 () {44 vars in 895 bytes} [Thu May  9 04:32:40 2024] GET /api/weather/pressure/city_change/?city= => generated 6039 bytes in 7 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+[pid: 1856976|app: 0|req: 11/30] 219.239.227.114 () {44 vars in 846 bytes} [Thu May  9 04:33:07 2024] GET /api/subscribe/ => generated 34 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1856973|app: 0|req: 8/31] 219.239.227.114 () {44 vars in 858 bytes} [Thu May  9 04:33:07 2024] GET /api/get_alarm_level/ => generated 41 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1856971|app: 0|req: 9/32] 219.239.227.114 () {44 vars in 868 bytes} [Thu May  9 04:33:07 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1856971|app: 0|req: 9/33] 219.239.227.114 () {44 vars in 854 bytes} [Thu May  9 04:33:07 2024] GET /api/alarm_notices/ => generated 38 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Forbidden (CSRF token missing.): /api/subscribe/
+[pid: 1856976|app: 0|req: 12/34] 219.239.227.114 () {50 vars in 964 bytes} [Thu May  9 04:33:11 2024] POST /api/subscribe/ => generated 2505 bytes in 10 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 0)
+Forbidden (CSRF token missing.): /api/subscribe/
+[pid: 1856976|app: 0|req: 13/35] 219.239.227.114 () {50 vars in 964 bytes} [Thu May  9 04:33:19 2024] POST /api/subscribe/ => generated 2505 bytes in 2 msecs (HTTP/1.1 403) 8 headers in 261 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 2 (pid: 1856971)...
+Gracefully killing worker 1 (pid: 1856969)...
+Gracefully killing worker 3 (pid: 1856973)...
+Gracefully killing worker 4 (pid: 1856976)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 04:34:10 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x133d5c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x133d5c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1858360, cores: 2)
+spawned uWSGI worker 2 (pid: 1858361, cores: 2)
+spawned uWSGI worker 3 (pid: 1858362, cores: 2)
+spawned uWSGI worker 4 (pid: 1858363, cores: 2)
+Python auto-reloader enabled
+Bad Request: /api/get_info/
+[pid: 1858361|app: 0|req: 1/1] 219.239.227.114 () {44 vars in 844 bytes} [Thu May  9 04:35:00 2024] GET /api/get_info/ => generated 28 bytes in 125 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1858361|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 868 bytes} [Thu May  9 04:35:00 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 4 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1858361|app: 0|req: 3/3] 219.239.227.114 () {44 vars in 866 bytes} [Thu May  9 04:35:00 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1858362|app: 0|req: 1/4] 219.239.227.114 () {44 vars in 854 bytes} [Thu May  9 04:35:00 2024] GET /api/alarm_notices/ => generated 38 bytes in 135 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1858360|app: 0|req: 2/5] 219.239.227.114 () {44 vars in 858 bytes} [Thu May  9 04:35:00 2024] GET /api/get_alarm_level/ => generated 41 bytes in 140 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1858360|app: 0|req: 2/6] 219.239.227.114 () {44 vars in 846 bytes} [Thu May  9 04:35:00 2024] GET /api/subscribe/ => generated 34 bytes in 135 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+Method Not Allowed (POST): /api/subscribe/
+[pid: 1858362|app: 0|req: 2/7] 219.239.227.114 () {50 vars in 964 bytes} [Thu May  9 04:35:04 2024] POST /api/subscribe/ => generated 0 bytes in 1 msecs (HTTP/1.1 405) 9 headers in 279 bytes (1 switches on core 1)
+Unauthorized: /api/login/
+[pid: 1858363|app: 0|req: 1/8] 219.239.227.114 () {50 vars in 956 bytes} [Thu May  9 04:35:50 2024] POST /api/login/ => generated 48 bytes in 128 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 0)
+Unauthorized: /api/login/
+[pid: 1858363|app: 0|req: 2/9] 219.239.227.114 () {50 vars in 956 bytes} [Thu May  9 04:35:53 2024] POST /api/login/ => generated 48 bytes in 3 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 1)
+Bad Request: /api/register/
+[pid: 1858363|app: 0|req: 3/10] 219.239.227.114 () {50 vars in 962 bytes} [Thu May  9 04:36:00 2024] POST /api/register/ => generated 55 bytes in 3 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+Bad Request: /api/register/
+[pid: 1858363|app: 0|req: 4/11] 219.239.227.114 () {50 vars in 962 bytes} [Thu May  9 04:36:02 2024] POST /api/register/ => generated 55 bytes in 2 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+Bad Request: /api/register/
+[pid: 1858361|app: 0|req: 4/12] 219.239.227.114 () {50 vars in 962 bytes} [Thu May  9 04:36:03 2024] POST /api/register/ => generated 55 bytes in 3 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+[pid: 1858361|app: 0|req: 5/13] 219.239.227.114 () {50 vars in 962 bytes} [Thu May  9 04:36:12 2024] POST /api/register/ => generated 376 bytes in 463 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 1)
+[pid: 1858363|app: 0|req: 5/14] 219.239.227.114 () {44 vars in 1106 bytes} [Thu May  9 04:36:19 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1858362|app: 0|req: 4/15] 219.239.227.114 () {44 vars in 1096 bytes} [Thu May  9 04:36:19 2024] GET /api/get_alarm_level/ => generated 41 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1858363|app: 0|req: 6/16] 219.239.227.114 () {44 vars in 1084 bytes} [Thu May  9 04:36:19 2024] GET /api/subscribe/ => generated 34 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1858362|app: 0|req: 4/17] 219.239.227.114 () {44 vars in 1092 bytes} [Thu May  9 04:36:19 2024] GET /api/alarm_notices/ => generated 38 bytes in 5 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Method Not Allowed (POST): /api/subscribe/
+[pid: 1858362|app: 0|req: 5/18] 219.239.227.114 () {50 vars in 1202 bytes} [Thu May  9 04:36:22 2024] POST /api/subscribe/ => generated 0 bytes in 1 msecs (HTTP/1.1 405) 9 headers in 279 bytes (1 switches on core 1)
+Method Not Allowed (POST): /api/subscribe/
+[pid: 1858363|app: 0|req: 7/19] 219.239.227.114 () {50 vars in 1202 bytes} [Thu May  9 04:37:07 2024] POST /api/subscribe/ => generated 0 bytes in 1 msecs (HTTP/1.1 405) 9 headers in 279 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 2 (pid: 1858361)...
+Gracefully killing worker 1 (pid: 1858360)...
+Gracefully killing worker 3 (pid: 1858362)...
+Gracefully killing worker 4 (pid: 1858363)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 04:43:54 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x1bc55c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x1bc55c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1859716, cores: 2)
+spawned uWSGI worker 2 (pid: 1859717, cores: 2)
+spawned uWSGI worker 3 (pid: 1859718, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1859721, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1859717|app: 0|req: 1/1] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 04:44:22 2024] GET /api/get_info/ => generated 28 bytes in 134 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1859718|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 1084 bytes} [Thu May  9 04:44:23 2024] GET /api/subscribe/ => generated 34 bytes in 181 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+Internal Server Error: /api/get_alarm_level/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 307, in get_alarm_level
+    cities = fetch_catastrophic_forecast_cities_list()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/local.py", line 182, in __call__
+    return self._get_current_object()(*a, **kw)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/app/task.py", line 411, in __call__
+    return self.run(*args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/task.py", line 29, in fetch_catastrophic_forecast_cities_list
+    decompressed_data = gzip.decompress(response.content)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 557, in decompress
+    return f.read()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 301, in read
+    return self._buffer.read(size)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/_compression.py", line 118, in readall
+    while data := self.read(sys.maxsize):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 488, in read
+    if not self._read_gzip_header():
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 436, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'{"')
+[pid: 1859717|app: 0|req: 2/3] 219.239.227.114 () {44 vars in 1096 bytes} [Thu May  9 04:44:23 2024] GET /api/get_alarm_level/ => generated 94930 bytes in 220 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 1)
+Internal Server Error: /api/alarm_resent_notices/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 325, in get_recent
+    cities = fetch_catastrophic_forecast_cities_list()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/local.py", line 182, in __call__
+    return self._get_current_object()(*a, **kw)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/app/task.py", line 411, in __call__
+    return self.run(*args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/task.py", line 29, in fetch_catastrophic_forecast_cities_list
+    decompressed_data = gzip.decompress(response.content)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 557, in decompress
+    return f.read()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 301, in read
+    return self._buffer.read(size)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/_compression.py", line 118, in readall
+    while data := self.read(sys.maxsize):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 488, in read
+    if not self._read_gzip_header():
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 436, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'{"')
+[pid: 1859716|app: 0|req: 1/4] 219.239.227.114 () {44 vars in 1106 bytes} [Thu May  9 04:44:23 2024] GET /api/alarm_resent_notices/ => generated 94983 bytes in 341 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Internal Server Error: /api/alarm_notices/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 209, in get_alarm_notice
+    cities = fetch_catastrophic_forecast_cities_list()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/local.py", line 182, in __call__
+    return self._get_current_object()(*a, **kw)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/app/task.py", line 411, in __call__
+    return self.run(*args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/task.py", line 29, in fetch_catastrophic_forecast_cities_list
+    decompressed_data = gzip.decompress(response.content)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 557, in decompress
+    return f.read()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 301, in read
+    return self._buffer.read(size)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/_compression.py", line 118, in readall
+    while data := self.read(sys.maxsize):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 488, in read
+    if not self._read_gzip_header():
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 436, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'{"')
+[pid: 1859718|app: 0|req: 2/5] 219.239.227.114 () {44 vars in 1092 bytes} [Thu May  9 04:44:23 2024] GET /api/alarm_notices/ => generated 94883 bytes in 374 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Internal Server Error: /api/alarm_notices_brief/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 282, in get_brief
+    cities = fetch_catastrophic_forecast_cities_list()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/local.py", line 182, in __call__
+    return self._get_current_object()(*a, **kw)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/app/task.py", line 411, in __call__
+    return self.run(*args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/task.py", line 29, in fetch_catastrophic_forecast_cities_list
+    decompressed_data = gzip.decompress(response.content)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 557, in decompress
+    return f.read()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 301, in read
+    return self._buffer.read(size)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/_compression.py", line 118, in readall
+    while data := self.read(sys.maxsize):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 488, in read
+    if not self._read_gzip_header():
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 436, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'{"')
+[pid: 1859721|app: 0|req: 1/6] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 04:44:23 2024] GET /api/alarm_notices_brief/ => generated 94968 bytes in 278 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/task.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 3 (pid: 1859718)...
+Gracefully killing worker 1 (pid: 1859716)...
+Gracefully killing worker 2 (pid: 1859717)...
+Gracefully killing worker 4 (pid: 1859721)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/task.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 04:46:09 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x25115c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x25115c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1860015, cores: 2)
+spawned uWSGI worker 2 (pid: 1860016, cores: 2)
+spawned uWSGI worker 3 (pid: 1860017, cores: 2)
+spawned uWSGI worker 4 (pid: 1860020, cores: 2)
+Python auto-reloader enabled
+Bad Request: /api/get_info/
+[pid: 1860017|app: 0|req: 1/1] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 04:47:16 2024] GET /api/get_info/ => generated 28 bytes in 125 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1860015|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 1084 bytes} [Thu May  9 04:47:17 2024] GET /api/subscribe/ => generated 34 bytes in 222 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Internal Server Error: /api/alarm_resent_notices/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 332, in get_recent
+    forecast = fetch_weather_catastrophic_forecast(location=locationId)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/local.py", line 182, in __call__
+    return self._get_current_object()(*a, **kw)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/app/task.py", line 411, in __call__
+    return self.run(*args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/task.py", line 16, in fetch_weather_catastrophic_forecast
+    decompressed_data = gzip.decompress(response.content)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 557, in decompress
+    return f.read()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 301, in read
+    return self._buffer.read(size)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/_compression.py", line 118, in readall
+    while data := self.read(sys.maxsize):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 488, in read
+    if not self._read_gzip_header():
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 436, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'{"')
+[pid: 1860017|app: 0|req: 3/3] 219.239.227.114 () {44 vars in 1106 bytes} [Thu May  9 04:47:17 2024] GET /api/alarm_resent_notices/ => generated 101683 bytes in 287 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 1)
+Internal Server Error: /api/alarm_notices_brief/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 291, in get_brief
+    forecast = fetch_weather_catastrophic_forecast(location=locationId)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/local.py", line 182, in __call__
+    return self._get_current_object()(*a, **kw)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/app/task.py", line 411, in __call__
+    return self.run(*args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/task.py", line 16, in fetch_weather_catastrophic_forecast
+    decompressed_data = gzip.decompress(response.content)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 557, in decompress
+    return f.read()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 301, in read
+    return self._buffer.read(size)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/_compression.py", line 118, in readall
+    while data := self.read(sys.maxsize):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 488, in read
+    if not self._read_gzip_header():
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 436, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'{"')
+[pid: 1860017|app: 0|req: 3/4] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 04:47:17 2024] GET /api/alarm_notices_brief/ => generated 96055 bytes in 275 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Internal Server Error: /api/alarm_notices/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 218, in get_alarm_notice
+    forecast = fetch_weather_catastrophic_forecast(location=locationId)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/local.py", line 182, in __call__
+    return self._get_current_object()(*a, **kw)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/app/task.py", line 411, in __call__
+    return self.run(*args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/task.py", line 16, in fetch_weather_catastrophic_forecast
+    decompressed_data = gzip.decompress(response.content)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 557, in decompress
+    return f.read()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 301, in read
+    return self._buffer.read(size)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/_compression.py", line 118, in readall
+    while data := self.read(sys.maxsize):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 488, in read
+    if not self._read_gzip_header():
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 436, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'{"')
+[pid: 1860016|app: 0|req: 1/5] 219.239.227.114 () {44 vars in 1092 bytes} [Thu May  9 04:47:17 2024] GET /api/alarm_notices/ => generated 96024 bytes in 398 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Internal Server Error: /api/get_alarm_level/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 317, in get_alarm_level
+    forecast = fetch_weather_catastrophic_forecast(location=locationId)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/local.py", line 182, in __call__
+    return self._get_current_object()(*a, **kw)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/celery/app/task.py", line 411, in __call__
+    return self.run(*args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/task.py", line 16, in fetch_weather_catastrophic_forecast
+    decompressed_data = gzip.decompress(response.content)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 557, in decompress
+    return f.read()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 301, in read
+    return self._buffer.read(size)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/_compression.py", line 118, in readall
+    while data := self.read(sys.maxsize):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 488, in read
+    if not self._read_gzip_header():
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/gzip.py", line 436, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'{"')
+[pid: 1860015|app: 0|req: 2/6] 219.239.227.114 () {44 vars in 1096 bytes} [Thu May  9 04:47:17 2024] GET /api/get_alarm_level/ => generated 101587 bytes in 424 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/task.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1860015)...
+Gracefully killing worker 2 (pid: 1860016)...
+Gracefully killing worker 3 (pid: 1860017)...
+Gracefully killing worker 4 (pid: 1860020)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 04:47:39 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x194b5c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x194b5c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1860235, cores: 2)
+spawned uWSGI worker 2 (pid: 1860237, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1860239, cores: 2)
+spawned uWSGI worker 4 (pid: 1860242, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1860242|app: 0|req: 1/1] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 04:47:40 2024] GET /api/get_info/ => generated 28 bytes in 129 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1860237|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 1084 bytes} [Thu May  9 04:47:41 2024] GET /api/subscribe/ => generated 34 bytes in 200 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+Internal Server Error: /api/alarm_resent_notices/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 333, in get_recent
+    forecast = forecast["warning"]
+KeyError: 'warning'
+[pid: 1860242|app: 0|req: 3/3] 219.239.227.114 () {44 vars in 1106 bytes} [Thu May  9 04:47:41 2024] GET /api/alarm_resent_notices/ => generated 70924 bytes in 310 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+Internal Server Error: /api/get_alarm_level/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 318, in get_alarm_level
+    count[getLevel(forecast['severity'])] += 1
+KeyError: 'severity'
+[pid: 1860239|app: 0|req: 1/4] 219.239.227.114 () {44 vars in 1096 bytes} [Thu May  9 04:47:41 2024] GET /api/get_alarm_level/ => generated 70646 bytes in 462 msecs (HTTP/1.1 500) 7 headers in 250 bytes (1 switches on core 0)
+[pid: 1860242|app: 0|req: 3/5] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 04:47:41 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 56893 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1860237|app: 0|req: 2/6] 219.239.227.114 () {44 vars in 1092 bytes} [Thu May  9 04:47:41 2024] GET /api/alarm_notices/ => generated 38 bytes in 56844 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1860235)...
+Gracefully killing worker 2 (pid: 1860237)...
+Gracefully killing worker 4 (pid: 1860242)...
+Gracefully killing worker 3 (pid: 1860239)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 04:50:47 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x1fae5c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x1fae5c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1860642, cores: 2)
+spawned uWSGI worker 2 (pid: 1860643, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1860646, cores: 2)
+spawned uWSGI worker 4 (pid: 1860649, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1860649|app: 0|req: 1/1] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 04:50:56 2024] GET /api/get_info/ => generated 28 bytes in 128 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1860649|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 1106 bytes} [Thu May  9 04:50:56 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1860642|app: 0|req: 1/3] 219.239.227.114 () {44 vars in 1084 bytes} [Thu May  9 04:50:56 2024] GET /api/subscribe/ => generated 34 bytes in 135 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1860643|app: 0|req: 1/4] 219.239.227.114 () {44 vars in 1092 bytes} [Thu May  9 04:50:56 2024] GET /api/alarm_notices/ => generated 38 bytes in 199 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1860646|app: 0|req: 2/5] 219.239.227.114 () {44 vars in 1096 bytes} [Thu May  9 04:50:56 2024] GET /api/get_alarm_level/ => generated 41 bytes in 200 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1860646|app: 0|req: 2/6] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 04:50:56 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 99 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1860642)...
+Gracefully killing worker 2 (pid: 1860643)...
+Gracefully killing worker 3 (pid: 1860646)...
+Gracefully killing worker 4 (pid: 1860649)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 04:51:03 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x17f15c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x17f15c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1860675, cores: 2)
+spawned uWSGI worker 2 (pid: 1860676, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1860679, cores: 2)
+spawned uWSGI worker 4 (pid: 1860682, cores: 2)
