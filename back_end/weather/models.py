@@ -91,7 +91,7 @@ class City2CityId(models.Model):
 
 # TODO pro_geography data
 class ProGeography(models.Model):
-    proName = models.CharField(max_length=200, default="", primary_key=True)
+    proName = models.CharField(primary_key=True, max_length=200, default="")
     geographyInfo = models.CharField(max_length=2000)
 
 
@@ -117,7 +117,7 @@ class WeatherInfo(models.Model):
     text = models.CharField(max_length=200, default="")
     precip = models.FloatField(default=0.0)
     wind360 = models.FloatField(default=0.0)
-    windScale = models.IntegerField(default=0)
+    windScale = models.CharField(max_length=10, default=0)
     windSpeed = models.FloatField(default=0.0)
     humidity = models.FloatField(default=0.0)
     pressure = models.FloatField(default=0.0)

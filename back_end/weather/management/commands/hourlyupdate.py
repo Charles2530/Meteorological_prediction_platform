@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from weather.models import HourlyWeather
+from weather.models import WeatherInfo
 import json
 from datetime import datetime, timedelta
 import requests
@@ -19,40 +19,38 @@ class Command(BaseCommand):
             timezon = pytz.timezone('Asia/Shanghai')
             date_time = date_time.astimezone(timezon)
 
-            data = HourlyWeather(
-                fxTime = date_time,
+            data = WeatherInfo(
+                time = date_time,
                 temp = hourly["temp"],
-                icon = hourly["icon"],
                 text = hourly["text"],
                 wind360 = hourly["wind360"],
-                windDir = hourly["windDir"],
+                # windDir = hourly["windDir"],
                 windScale = hourly["windScale"],
                 windSpeed = hourly["windSpeed"],
                 humidity = hourly["humidity"],
-                pop = hourly["pop"],
                 precip = hourly["precip"],
                 pressure = hourly["pressure"],
-                cloud = hourly["cloud"],
-                dew = hourly["dew"],
+                # cloud = hourly["cloud"],
+                # dew = hourly["dew"],
             )
 
             data.save()
 
-            data = HourlyWeather(
-                fxTime = date_time + timedelta(days = -1),
+            data = WeatherInfo(
+                time = date_time + timedelta(days = -1),
                 temp = hourly["temp"],
-                icon = hourly["icon"],
                 text = hourly["text"],
                 wind360 = hourly["wind360"],
-                windDir = hourly["windDir"],
+                # windDir = hourly["windDir"],
                 windScale = hourly["windScale"],
                 windSpeed = hourly["windSpeed"],
                 humidity = hourly["humidity"],
-                pop = hourly["pop"],
                 precip = hourly["precip"],
                 pressure = hourly["pressure"],
-                cloud = hourly["cloud"],
-                dew = hourly["dew"],
+                # cloud = hourly["cloud"],
+                # dew = hourly["dew"],
             )
 
             data.save()
+
+        self.stdout.write(self.style.SUCCESS('Successfully updated weather info.'))
