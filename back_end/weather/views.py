@@ -229,8 +229,9 @@ def humid_city_change(request):
 def getProInfo(request):
     assert request.method == 'GET'
     proName = request.GET.get('proName')
+    if proName == '中国':
+        proName = '北京市'
     cityId = Pro2City.objects.get(proName=proName).cityId
-    ### TODO get cityName to remove
     cityName = City2CityId.objects.get(cityId=cityId).cityName
     # cityName = proName
     # cityId = "101010100"
@@ -244,20 +245,20 @@ def getProInfo(request):
     ## 运动指数，紫外线指数
     # harzard : 天气灾害预警 https://dev.qweather.com/docs/api/warning/weather-warning/
     weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
-        'key': 'aa7975af7b564c60804b6b08fab2e2c5',
+        'key': '52c4d25aafb147c5bc6e4df6cc52afc6',
         'location': cityId,
     })
     air = requests.get('https://devapi.qweather.com/v7/air/now', params={
-        'key': 'aa7975af7b564c60804b6b08fab2e2c5',
+        'key': '52c4d25aafb147c5bc6e4df6cc52afc6',
         'location': cityId,
     })
     indices = requests.get('https://devapi.qweather.com/v7/indices/1d', params={
-        'key': 'aa7975af7b564c60804b6b08fab2e2c5',
+        'key': '52c4d25aafb147c5bc6e4df6cc52afc6',
         'location': cityId,
         'type': "1,5",
     })
     hazard = requests.get('https://devapi.qweather.com/v7/warning/now', params={
-        'key': 'aa7975af7b564c60804b6b08fab2e2c5',
+        'key': '52c4d25aafb147c5bc6e4df6cc52afc6',
         'location': cityId,
     })
 
@@ -265,8 +266,9 @@ def getProInfo(request):
     air = json.loads(air.content.decode('utf-8'))
     indices = json.loads(indices.content.decode('utf-8'))
     hazard  = json.loads(hazard.content.decode('utf-8'))
-    # geography = ProGeography.objects.get(proName=proName).geographyInfo
-    geography = "geographyInf"
+    geography = ProGeography.objects.get(proName=proName).geographyInfo
+    # geography = "geographyInf"
+
 
 
     date_time = datetime.fromisoformat(weather["updateTime"])
@@ -278,6 +280,7 @@ def getProInfo(request):
             "time": date_time,
             "tem": float(weather["now"]["temp"]) ,
             "condition": weather["now"]["text"] ,
+            "icoid": weather["now"]["icon"],
             "infos": "", # fill later
             "wind": int(weather["now"]["windScale"]) ,
             "windDir": weather["now"]["windDir"] ,

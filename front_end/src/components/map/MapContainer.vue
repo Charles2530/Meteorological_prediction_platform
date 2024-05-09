@@ -176,7 +176,6 @@ const emit = defineEmits(["getValue"])
 // 点击事件触发emit，去调用我们注册的自定义事件getValue,并传递value参数至父组件
 const transValue = () => {
   emit("getValue", dis_info.districtName);
-  getHazardInfo();
 }
 
 onMounted(() => {
