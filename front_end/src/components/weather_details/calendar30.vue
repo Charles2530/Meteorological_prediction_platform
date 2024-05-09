@@ -561,12 +561,12 @@ export default {
   /* margin: 0px; */
   margin-top: 0px;
   border-radius: 20px;
-  font-family: 'Courier New', Courier, monospace
+  /*font-family: 'Courier New', Courier, monospace*/
 }
 
 .el-calendar {
   background: linear-gradient(to right, #dee5f8, #f4e2e2);
   border-radius: 20px;
-  font-family: 'Courier New', Courier, monospace
+  /*font-family: 'Courier New', Courier, monospace*/
 }
 </style>

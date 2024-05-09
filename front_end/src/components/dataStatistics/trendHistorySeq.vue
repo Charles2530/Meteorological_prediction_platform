@@ -94,7 +94,7 @@ const fetchCityAqiChange = async () =>
   });
 
 const fetchCityPressureChange = async () =>
-  get<PressureChangeResponse>("/api/weather/pressure/city_change", {
+  get<PressureChangeResponse>("/api/weather/pressure/city_change/", {
     city: selectedLocation.value,
   }).then((res) => {
     PressureDataList.value.splice(

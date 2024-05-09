@@ -1,7 +1,7 @@
 <template>
   <div
-    class="container"
-    style="min-height: 600px; max-height: 85vh; overflow: auto"
+    class="info_container"
+    style="min-height: 85vh; max-height: 85vh; overflow: auto"
   >
     <el-card class="color2" shadow="always">
       <el-row :gutter="20">
@@ -122,25 +122,11 @@
 
 <script setup lang="ts">
 import { getAssetsFile } from "@/utils/pub-use";
+import { get } from "@/api/index";
+import { ProInfo } from "@/types/weather";
+import { ref, watch} from 'vue';
 
-// const getTime = new Date().getTime(); //获取到当前时间戳
-// const atime = new Date(getTime); //创建一个日期对象
-// const nowDate = (atime: Date) => {
-//     var year = atime.getFullYear(); // 年
-//     var month = (atime.getMonth() + 1).toString().padStart(2, '0'); // 月
-//     var date = atime.getDate().toString().padStart(2, '0'); // 日
-//     var hour = atime.getHours().toString().padStart(2, '0'); // 时
-//     var minute = atime.getMinutes().toString().padStart(2, '0'); // 分
-//     var second = atime.getSeconds().toString().padStart(2, '0'); // 秒
-//     return (
-//       year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second
-//     )
-// }
-// let time = nowDate(atime)
-
-// let time = "2024-04-10 17:33"
-
-let proInfo = reactive({
+const proInfo = ref({
   weather: {
     time: "2024-04-10 17:33", //时间
     tem: "11℃", //温度
@@ -181,6 +167,32 @@ let proInfo = reactive({
     },
   ],
 });
+
+const props = defineProps<{
+  proName: string;
+}>(); // 定义 props
+
+const proName = ref(props.proName); // 将 props 中的 propName 赋值给 ref
+
+// 监听 propName 的变化
+watch(() => props.proName, () => {
+  getProInfo();
+});
+
+onMounted(() => {
+  getProInfo();
+});
+
+const getProInfo = async () => {
+  console.log(proName);
+  get<ProInfo>("/api/getProInfo/", {proName: proName.value}
+).then((res) => {
+    proInfo.value = res.data;
+    // console.log("111", proInfo);
+    // console.log("time",proInfo.value.weather.time);
+    // console.log(res.data);
+  });
+};
 </script>
 
 <style scoped>
@@ -225,12 +237,13 @@ let proInfo = reactive({
   background-color: rgba(232, 232, 232, 0.03);
 }
 
-:deep(.el-table th) {
+:deep(.el-table th.el-table__cell) {
   background-color: rgba(232, 232, 232, 0.03);
   color: rgb(219, 219, 219);
 }
 
-.container::-webkit-scrollbar {
+
+.info_container::-webkit-scrollbar {
   width: 10px;
   height: 8px;
 }
