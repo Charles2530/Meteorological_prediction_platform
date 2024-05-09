@@ -248,6 +248,16 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item :label="weatherInfo.labels.precip" prop="precip">
+        <el-input-number
+          v-model="newWeatherData.precip"
+          :min="0"
+          :max="100"
+          :step="1"
+          :formatter="(value:number) => `${value}`"
+          style="width: 10rem"
+        ></el-input-number>
+      </el-form-item>
       <el-form-item :label="weatherInfo.labels.humidity" prop="humidity">
         <el-input-number
           v-model="newWeatherData.humidity"
@@ -465,6 +475,7 @@ const weatherInfo = {
     city: "城市",
     temperature: "温度",
     text: "天气",
+    precip: "降水量",
     humidity: "湿度",
     windSpeed: "风速",
     wind360: "风向",
