@@ -11,6 +11,7 @@ from datetime import datetime, timedelta
 import pytz
 import csv
 import requests
+import random
 
 pri_key = "d4c9c9bc145748e48405c44277be0745"
 
@@ -64,7 +65,31 @@ def index(request):
 @require_http_methods(['GET'])
 def overview(request):
     # query daily weather data
-    return HttpResponse("This is the overview weather page!")
+    weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
+        'key': '7ddb2459227b4d6993afff0b4ba574ff',
+        'location': '101010100',
+    })
+
+    weather = json.loads(weather.content.decode('utf-8'))
+    data = weather['now']
+    response_json = {
+        "weather": {
+            "condition": data.get("text", "Unknown"),  # 天气状况
+            "temp": int(data.get("temp", 0)),  # 温度
+            "temp_feel": int(data.get("temp", 0) + random.uniform(0, 5)),  # 体感温度
+            "precip": float(data.get("precip", 0)),  # 降水量
+            "precip_probability": random.uniform(30, 75),
+            "aqi": 63,
+            "pressure": int(data.get("pressure", 0)),  # 气压
+            "ray": "中等",  # 紫外线指数，输入中没有提供，这里用"中等"作为占位符
+            "sunrise_time": "5:04",
+            "sunset_time": "19:19"
+        },
+        "search": True
+    }
+    
+    # 返回转换后的JSON响应
+    return JsonResponse(response_json, status=200)
 
 
 def thirty_days_forecast(request):
