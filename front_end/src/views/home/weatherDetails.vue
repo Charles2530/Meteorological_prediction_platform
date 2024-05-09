@@ -44,7 +44,9 @@ import calendar30 from "@/components/weather_details/calendar30.vue";
 import AirQualityVM from "@/components/airQuality/AirQualityVM.vue";
 import dataStatistics from "@/components/dataStatistics/dataStatistics.vue";
 </script>
-<style scoped>
+
+<!-- !!!因为涉及到组件也要使用下面的css样式，所以不要scoped不然丑死 -->
+<style>
 .chart {
   width: 95%;
   height: 92%;

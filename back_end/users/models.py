@@ -1,11 +1,19 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
 # Create your models here.
-# class UserManager(models.Manager):
-#     def create_user(self, username, avatar, email, password, role, last_login):
-#         user = self.create(username=username, avatar=avatar, email=email, password=password, role=role, last_login=last_login)
-#         return user
+class UserCity(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="用户名")
+    city = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.username} - {self.city}"
+
+    class Meta:
+        verbose_name = "用户城市"
+        verbose_name_plural = "用户城市"
+
 
 
 # class User(models.Model):

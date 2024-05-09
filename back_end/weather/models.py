@@ -26,34 +26,35 @@ class HourlyWeather(models.Model):
 
 class DailyWeather(models.Model):
     id = models.AutoField(primary_key=True)
-    city = models.CharField(max_length=50, default="")
+    city = models.CharField(max_length=50, default="北京市")
     fxDate = models.DateField(default=datetime.now)
-    sunrise = models.DateTimeField(default=datetime.now)
-    sunset = models.DateTimeField(default=datetime.now)
-    moonrise = models.DateTimeField(default=datetime.now)
-    moonset = models.DateTimeField(default=datetime.now)
-    moonPhase = models.CharField(max_length=10, default="")
-    moonPhaseIcon = models.CharField(max_length=10, default="")
+    # sunrise = models.DateTimeField(default=datetime.now)
+    # sunset = models.DateTimeField(default=datetime.now)
+    # moonrise = models.DateTimeField(default=datetime.now)
+    # moonset = models.DateTimeField(default=datetime.now)
+    # moonPhase = models.CharField(max_length=10, default="")
+    # moonPhaseIcon = models.CharField(max_length=10, default="")
     tempMax = models.FloatField(default=0.0)
     tempMin = models.FloatField(default=0.0)
-    iconDay = models.CharField(max_length=10, default="")
-    textDay = models.CharField(max_length=50, default="")
-    iconNight = models.CharField(max_length=10, default="")
-    textNight = models.CharField(max_length=50, default="")
-    wind360Day = models.FloatField(default=0.0)
-    windDirDay = models.CharField(max_length=20, default="")
-    windScaleDay = models.CharField(max_length=10, default="")
-    windSpeedDay = models.FloatField(default=0.0)
-    wind360Night = models.FloatField(default=0.0)
-    windDirNight = models.CharField(max_length=20, default="")
-    windScaleNight = models.CharField(max_length=10, default="")
-    windSpeedNight = models.FloatField(default=0.0)
+    # iconDay = models.CharField(max_length=10, default="")
+    # textDay = models.CharField(max_length=50, default="")
+    # iconNight = models.CharField(max_length=10, default="")
+    # textNight = models.CharField(max_length=50, default="")
+    # wind360Day = models.FloatField(default=0.0)
+    # windDirDay = models.CharField(max_length=20, default="")
+    # windScaleDay = models.CharField(max_length=10, default="")
+    # windSpeedDay = models.FloatField(default=0.0)
+    # wind360Night = models.FloatField(default=0.0)
+    # windDirNight = models.CharField(max_length=20, default="")
+    # windScaleNight = models.CharField(max_length=10, default="")
+    # windSpeedNight = models.FloatField(default=0.0)
     humidity = models.FloatField(default=0.0)
     precip = models.FloatField(default=0.0)
     pressure = models.FloatField(default=0.0)
     vis = models.FloatField(default=0.0)
     cloud = models.IntegerField(default=0)
     uvIndex = models.IntegerField(default=0)
+    aqi = models.IntegerField(default=0)
 
     def __str__(self):
         return "daily weather for " + str(self.fxDate) + " at location"
@@ -78,20 +79,20 @@ class MonthlyWeather(models.Model):
 
 
 class Pro2City(models.Model):
-    proName = models.CharField(max_length=200, default="")
+    proName = models.CharField(max_length=200, default="", primary_key=True)
     cityId = models.CharField(max_length=200, default=0)
 
 # TODO pro2city data
 
 
 class City2CityId(models.Model):
+    cityId = models.CharField(max_length=200, default=0, primary_key=True)
     cityName = models.CharField(max_length=200, default="")
-    cityId = models.CharField(max_length=200, default=0)
 
 
 # TODO pro_geography data
 class ProGeography(models.Model):
-    proName = models.CharField(max_length=200, default="")
+    proName = models.CharField(primary_key=True, max_length=200, default="")
     geographyInfo = models.CharField(max_length=2000)
 
 
@@ -117,7 +118,7 @@ class WeatherInfo(models.Model):
     text = models.CharField(max_length=200, default="")
     precip = models.FloatField(default=0.0)
     wind360 = models.FloatField(default=0.0)
-    windScale = models.IntegerField(default=0)
+    windScale = models.CharField(max_length=10, default=0)
     windSpeed = models.FloatField(default=0.0)
     humidity = models.FloatField(default=0.0)
     pressure = models.FloatField(default=0.0)

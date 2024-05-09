@@ -1,4 +1,9 @@
 // 获取assets静态资源
+//天气图标
+export const getAssetsFileIcon = (url: string) => {
+  return new URL(`../assets/icons/png/${url}`, import.meta.url).href;
+};
+//灾害图标
 export const getAssetsFile = (url: string) => {
   return new URL(`../assets/img/${url}`, import.meta.url).href;
 };

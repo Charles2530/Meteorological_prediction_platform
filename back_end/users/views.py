@@ -1,5 +1,4 @@
 # Django核心和框架相关的导入
-from calendar import c
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.hashers import check_password, make_password
@@ -31,43 +30,10 @@ import os
 import re
 from datetime import datetime
 
-# 暂时性导入
-from django.conf import settings
+from .models import UserCity
 
 
 # Create your views here.
-'''
-class RegisterView(APIView):
-    permission_classes = [AllowAny]
-
-    def post(self, request, *args, **kwargs):
-        serializer = RegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            # token = RefreshToken.for_user(user)
-            token = "token4display"
-            return Response({
-                'success': True,
-                'info': {
-                    'token': token,
-                    'userInfo': {
-                        'username': user.username,
-                        'avatar': '',  # 用实际的avatar替换
-                        'email': user.email,
-                        'role': 1  # 用实际的role替换
-                    }
-                },
-                'reason': '注册成功'
-            }, status=status.HTTP_201_CREATED)
-        else:
-            return Response({
-                'success': False,
-                'info': {},
-                'reason': '无效的输入'
-            }, status=status.HTTP_400_BAD_REQUEST)
-'''
-
-
 def index(request):
     return HttpResponse("User Homepage")
 
@@ -92,6 +58,12 @@ def my_login(request):
         # 登录成功
         # settings.CURRENT_UNAME = user.username
         login(request, user)
+
+        # register current city
+        # if not UserCity.objects.filter(user=user).exists():
+        #     user_city = UserCity(user=user, city='北京')
+        #     user_city.save()
+
         info = {
             "token": "aliqua commodo Lorem",
             "userInfo": {
@@ -155,9 +127,9 @@ def my_register(request):
     new_user = User.objects.create_user(
         username=username, email=email, password=password)
     # authenticate(username=username, password=password)
-    
+
     # settings.CURRENT_UNAME = new_user.username
- 
+
 
     # 准备返回的信息
     info = {
@@ -198,7 +170,7 @@ def user_list(request):
     except json.JSONDecodeError:
         # 返回400错误，请求格式不正确
         return JsonResponse({"error": "Invalid JSON format in request body."}, status=400)
-    
+
     # 获取用户数据
     users = User.objects.all()
 
@@ -228,7 +200,6 @@ def user_list(request):
             "username": user.username,
             "email": user.email,
             "avatar": "https://charles2530.github.io/image/background/logo2.jpg",
-            "email": user.email,
             "role": 2,
             "last_login": user.last_login.strftime('%Y-%m-%d %H:%M:%S') if user.last_login != None else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         }
@@ -482,9 +453,9 @@ def update_current_user_password(request):
 
     # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
     # user = User.objects.filter(username=request.user.username).first()
-    user= request.user
+    user = request.user
 
-   
+
     # # 验证旧密码
     # if not user or not check_password(old_password, user.password):
     #     return JsonResponse({
@@ -544,7 +515,7 @@ def update_current_user_email(request):
 
     # 假设你已经验证了token并获取了用户对象
     # user = User.objects.filter(username=settings.CURRENT_UNAME).first() # 获取当前认证的用户对象
-    user=request.user
+    user = request.user
 
     # 更新用户的邮箱
     try:
@@ -613,3 +584,4 @@ def upload_avatar(request):
             "success": False,
             "reason": str(e)
         }, status=500)
+

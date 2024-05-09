@@ -13,7 +13,7 @@ class Notification(models.Model):
 
 class CitySubscription(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, verbose_name="订阅用户")
+        User, on_delete=models.CASCADE, verbose_name="订阅用户", default=None)
     city_name = models.CharField(max_length=100, verbose_name="城市名称")
     subscription_time = models.DateTimeField(
         auto_now_add=True, verbose_name="订阅时间")
@@ -27,10 +27,10 @@ class CitySubscription(models.Model):
 
 
 class WeatherForecast(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.CharField(max_length=255, primary_key=True)
     img = models.URLField()
     title = models.CharField(max_length=255)
-    date = models.DateTimeField()
+    # date = models.DateTimeField()
     city = models.CharField(max_length=100)
     level = models.IntegerField()
     content = models.TextField()
