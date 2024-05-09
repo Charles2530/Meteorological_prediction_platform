@@ -1,7 +1,7 @@
 <template>
   <el-tabs
     v-model="activeName"
-    class="demo-tabs mx-40 rounded-2xl"
+    class="demo-tabs mx-5 rounded-2xl"
     @tab-click="handleClick"
     type="border-card"
   >
@@ -20,22 +20,11 @@
   </el-tabs>
 </template>
 
-
-
-
-
-
-
-
-
-
 <script lang="ts" setup>
 import type { TabsPaneContext } from "element-plus";
 /*抽屉页*/
 const activeName = ref("first");
-const handleClick = (tab: TabsPaneContext, event: Event) => {
-
-};
+const handleClick = (tab: TabsPaneContext, event: Event) => {};
 
 /** 组件  **/
 import overview from "@/components/weather_details/overview.vue";
