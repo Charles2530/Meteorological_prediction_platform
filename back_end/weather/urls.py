@@ -30,5 +30,5 @@ urlpatterns = [
 
     path('getProInfo/', views.getProInfo, name='get-pro-info'), # TODO
     # path('getHazard/', views.getHazard), #TODO
-    # path('getCityInfo', views.getCityInfo), #TODO
+    path('getCityInfo', views.getCityInfo), #TODO
 ]
