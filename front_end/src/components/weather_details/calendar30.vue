@@ -16,7 +16,7 @@
             </el-row>
             <el-row>
               <span class="p-1 text-xl shadow-sm rounded-full"
-                style="font-style: normal;font-family:'Courier New', Courier, monospace">
+                style="font-style: normal;">
                 <!-- {{ getWeather(data.day.split("-")[2]).min_temp }}~{{ getWeather(data.day.split("-")[2]).max_temp }} -->
               </span>
             </el-row>
@@ -233,7 +233,7 @@ export default {
 }
 </script> -->
 
-<style>
+<style scoped>
 .is-selected {
   color: #1989fa;
 }
@@ -277,12 +277,12 @@ export default {
   /* margin: 0px; */
   margin-top: 0px;
   border-radius: 20px;
-  font-family: 'Courier New', Courier, monospace
+  /*font-family: 'Courier New', Courier, monospace*/
 }
 
 .el-calendar {
   background: linear-gradient(to right, #dee5f8, #f4e2e2);
   border-radius: 20px;
-  font-family: 'Courier New', Courier, monospace
+  /*font-family: 'Courier New', Courier, monospace*/
 }
 </style>
