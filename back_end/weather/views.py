@@ -194,14 +194,10 @@ def humid_city_change(request):
 def getProInfo(request):
     assert request.method == 'GET'
     proName = request.GET.get('proName')
-    cityId = Pro2City.objects.get(proName=proName).cityId
-    ### TODO get cityName
+    # cityId = Pro2City.objects.get(proName=proName).cityId
+    ### TODO get cityName to remove
     # cityName = getCityName(cityId)
     cityName = proName
-
-    ###  TODO to remove
-    cityId = "101010100"
-    cityName = '北京市'
 
     ### TODO use API to get weather and hazardTable
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
@@ -210,6 +206,8 @@ def getProInfo(request):
     ## 运动指数，紫外线指数
     # harzard : 天气灾害预警 https://dev.qweather.com/docs/api/warning/weather-warning/
     # json to dict TODO fill load paras
+
+    # TODO to remove
     cityId = "101010100"
     cityName = '北京市'
     proName = "北京"

@@ -28,7 +28,7 @@ urlpatterns = [
     path('temp/pressure/city_change/',
          views.pressure_city_change, name='pressure-city-change'),
 
-    # path('getProInfo/', views.getProInfo, name='get-pro-info'), # TODO
+    path('getProInfo/', views.getProInfo, name='get-pro-info'), # TODO
     # path('getHazard/', views.getHazard), #TODO
     # path('getCityInfo', views.getCityInfo), #TODO
 ]
