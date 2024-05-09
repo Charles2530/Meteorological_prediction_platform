@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { onMounted, reactive } from "vue";
 import AMapLoader from "@amap/amap-jsapi-loader";
-import { getAssetsFileHazard } from '@/utils/pub-use'
+import { getAssetsFile } from '@/utils/pub-use'
 import AMapWind from "amap-wind";
 import { get } from "@/api/index";
 
@@ -371,10 +371,10 @@ function markPoints() {
     // 创建一个Marker实例：
     const marker = new AAMap.Marker({
       position: new AAMap.LngLat(item.longitude, item.latitude),   // 经纬度对象，也可以是经纬度构成的一维数组[lng, lat]
-      // icon: getAssetsFileHazard( 'pin_' + item.color +'.png'), // 添加 Icon 图标 URL
+      // icon: getAssetsFile( 'pin_' + item.color +'.png'), // 添加 Icon 图标 URL
       icon: new AAMap.Icon({
         size: new AAMap.Size(23, 32),    // 图标尺寸
-        image: getAssetsFileHazard( 'pin_' + item.level +'.png'),
+        image: getAssetsFile( 'pin_' + item.level +'.png'),
         imageSize: new AAMap.Size(23, 32)   // 根据所设置的大小拉伸或压缩图片
       }),
       title: '北京',
