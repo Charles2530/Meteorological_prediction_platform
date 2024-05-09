@@ -221,8 +221,9 @@ def getProInfo(request):
     air = json.loads(air.content.decode('utf-8'))
     indices = json.loads(indices.content.decode('utf-8'))
     hazard  = json.loads(hazard.content.decode('utf-8'))
-    # geography = ProGeography.objects.get(proName=proName).geographyInfo
-    geography = "geographyInf"
+    geography = ProGeography.objects.get(proName=proName).geographyInfo
+    # geography = "geographyInf"
+
 
 
     date_time = datetime.fromisoformat(weather["updateTime"])

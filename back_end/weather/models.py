@@ -91,7 +91,7 @@ class City2CityId(models.Model):
 
 # TODO pro_geography data
 class ProGeography(models.Model):
-    proName = models.CharField(max_length=200, default="")
+    proName = models.CharField(max_length=200, default="", primary_key=True)
     geographyInfo = models.CharField(max_length=2000)
 
 
