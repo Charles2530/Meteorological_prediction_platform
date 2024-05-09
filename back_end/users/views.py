@@ -1,5 +1,4 @@
 # Django核心和框架相关的导入
-from calendar import c
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.hashers import check_password, make_password
@@ -31,43 +30,10 @@ import os
 import re
 from datetime import datetime
 
-# 暂时性导入
-from django.conf import settings
+from users.models import UserCity
 
 
 # Create your views here.
-'''
-class RegisterView(APIView):
-    permission_classes = [AllowAny]
-
-    def post(self, request, *args, **kwargs):
-        serializer = RegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            # token = RefreshToken.for_user(user)
-            token = "token4display"
-            return Response({
-                'success': True,
-                'info': {
-                    'token': token,
-                    'userInfo': {
-                        'username': user.username,
-                        'avatar': '',  # 用实际的avatar替换
-                        'email': user.email,
-                        'role': 1  # 用实际的role替换
-                    }
-                },
-                'reason': '注册成功'
-            }, status=status.HTTP_201_CREATED)
-        else:
-            return Response({
-                'success': False,
-                'info': {},
-                'reason': '无效的输入'
-            }, status=status.HTTP_400_BAD_REQUEST)
-'''
-
-
 def index(request):
     return HttpResponse("User Homepage")
 
@@ -92,6 +58,12 @@ def my_login(request):
         # 登录成功
         # settings.CURRENT_UNAME = user.username
         login(request, user)
+
+        # register current city
+        if not UserCity.objects.filter(username=username).exists():
+            user_city = UserCity(username=username, city='北京')
+            user_city.save()
+
         info = {
             "token": "aliqua commodo Lorem",
             "userInfo": {
@@ -228,7 +200,6 @@ def user_list(request):
             "username": user.username,
             "email": user.email,
             "avatar": "https://charles2530.github.io/image/background/logo2.jpg",
-            "email": user.email,
             "role": 2,
             "last_login": user.last_login.strftime('%Y-%m-%d %H:%M:%S') if user.last_login != None else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         }
