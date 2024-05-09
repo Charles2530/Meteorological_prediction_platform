@@ -30,7 +30,7 @@ import os
 import re
 from datetime import datetime
 
-from users.models import UserCity
+from .models import UserCity
 
 
 # Create your views here.
