@@ -6170,3 +6170,302 @@ Not Found: /api/subscribe/
 [pid: 1823591|app: 0|req: 3/23] 219.239.227.217 () {44 vars in 873 bytes} [Wed May  8 20:58:11 2024] GET /api/subscribe/ => generated 5542 bytes in 6 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
 Not Found: /api/alarm_notices_brief/
 [pid: 1823598|app: 0|req: 13/24] 219.239.227.217 () {44 vars in 893 bytes} [Wed May  8 20:58:12 2024] GET /api/alarm_notices_brief/ => generated 5572 bytes in 5 msecs (HTTP/1.1 404) 7 headers in 229 bytes (1 switches on core 0)
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 12:19:17 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+writing pidfile to uwsgi.pid
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x2664f00
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x2664f00 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1856174, cores: 2)
+spawned uWSGI worker 2 (pid: 1856175, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1856178, cores: 2)
+spawned uWSGI worker 4 (pid: 1856180, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1856180|app: 0|req: 1/1] 219.239.227.114 () {44 vars in 844 bytes} [Thu May  9 04:19:44 2024] GET /api/get_info/ => generated 28 bytes in 125 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Internal Server Error: /api/alarm_resent_notices/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+sqlite3.OperationalError: no such table: notifications_weatherforecast
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 172, in get_recent
+    for (forecast, idx) in enumerate(locations):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+django.db.utils.OperationalError: no such table: notifications_weatherforecast
+Internal Server Error: /api/alarm_notices/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+sqlite3.OperationalError: no such table: notifications_weatherforecast
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 53, in get_alarm_notice
+    for forecast in locations:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+django.db.utils.OperationalError: no such table: notifications_weatherforecast
+[pid: 1856180|app: 0|req: 3/2] 219.239.227.114 () {44 vars in 854 bytes} [Thu May  9 04:19:45 2024] GET /api/alarm_notices/ => generated 122031 bytes in 111 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 1)
+[pid: 1856180|app: 0|req: 3/3] 219.239.227.114 () {44 vars in 868 bytes} [Thu May  9 04:19:45 2024] GET /api/alarm_resent_notices/ => generated 121693 bytes in 109 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 0)
+Internal Server Error: /api/get_alarm_level/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+sqlite3.OperationalError: no such table: notifications_weatherforecast
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 156, in get_alarm_level
+    for forecast in locations:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+django.db.utils.OperationalError: no such table: notifications_weatherforecast
+[pid: 1856178|app: 0|req: 1/4] 219.239.227.114 () {44 vars in 858 bytes} [Thu May  9 04:19:45 2024] GET /api/get_alarm_level/ => generated 121821 bytes in 206 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 0)
+Internal Server Error: /api/alarm_notices_brief/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+sqlite3.OperationalError: no such table: notifications_weatherforecast
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 128, in get_brief
+    for forecast in locations:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+django.db.utils.OperationalError: no such table: notifications_weatherforecast
+Internal Server Error: /api/subscribe/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+sqlite3.OperationalError: no such table: notifications_citysubscription
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 109, in subscribe
+    for city in cities:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 329, in execute
+    return super().execute(query, params)
+django.db.utils.OperationalError: no such table: notifications_citysubscription
+[pid: 1856175|app: 0|req: 2/5] 219.239.227.114 () {44 vars in 866 bytes} [Thu May  9 04:19:45 2024] GET /api/alarm_notices_brief/ => generated 122067 bytes in 261 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 1)
+[pid: 1856175|app: 0|req: 2/6] 219.239.227.114 () {44 vars in 846 bytes} [Thu May  9 04:19:45 2024] GET /api/subscribe/ => generated 124157 bytes in 264 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/serializers.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1856174)...
+Gracefully killing worker 3 (pid: 1856178)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/serializers.py has been modified
+Gracefully killing worker 4 (pid: 1856180)...
+Gracefully killing worker 2 (pid: 1856175)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/serializers.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 04:24:33 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x20b75c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x20b75c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1856969, cores: 2)
+spawned uWSGI worker 2 (pid: 1856971, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1856973, cores: 2)
+spawned uWSGI worker 4 (pid: 1856976, cores: 2)
