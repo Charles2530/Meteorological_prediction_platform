@@ -340,9 +340,9 @@ function handlerMapClick() {
           // let cityId = parseInt(adcode.substr(0, 4) + '00')
           // let areaId = adcode
           if (dis_info.districtCode != "100000") {
-            dis_info.districtName = dis_info.districtName + "/中国";
             //向父组件传省份名
             transValue();
+            dis_info.districtName = dis_info.districtName + "/中国";
             drawBounds();
             map.setCenter(markersPosition, false, 300);
           } else {
