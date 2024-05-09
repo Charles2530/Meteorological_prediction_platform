@@ -60,9 +60,9 @@ def my_login(request):
         login(request, user)
 
         # register current city
-        if not UserCity.objects.filter(user=user).exists():
-            user_city = UserCity(user=user, city='北京')
-            user_city.save()
+        # if not UserCity.objects.filter(user=user).exists():
+        #     user_city = UserCity(user=user, city='北京')
+        #     user_city.save()
 
         info = {
             "token": "aliqua commodo Lorem",
