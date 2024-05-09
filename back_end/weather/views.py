@@ -258,10 +258,20 @@ def search_weather_data(request):
     address = data['address'] if data['address'] else None
 
     if data_type == 'weather':
-        weather_data = WeatherInfo.objects.filter(
-            time__range=(from_time, to_time) if from_time and to_time else all,
-            city__contains=address if address else all
-        ).all()
+        from django.db.models import Q
+
+        # 定义时间范围过滤条件
+        time_filter = Q(time__range=(from_time, to_time)) if from_time and to_time else Q()
+
+        # 定义城市包含过滤条件
+        city_filter = Q(city__contains=address) if address else Q()
+
+        # 执行查询
+        weather_data = WeatherInfo.objects.filter(time_filter & city_filter)
+        # weather_data = WeatherInfo.objects.filter(
+        #     time__range=(from_time, to_time) if from_time and to_time else all,
+        #     city__contains=address if address else all
+        # )
         weather_data_list = []
         for data in weather_data:
             weather_data_list.append({
