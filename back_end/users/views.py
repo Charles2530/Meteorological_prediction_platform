@@ -453,7 +453,7 @@ def update_current_user_password(request):
 
     # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
     # user = User.objects.filter(username=request.user.username).first()
-    user= request.user
+    user = request.user
 
 
     # # 验证旧密码
@@ -515,7 +515,7 @@ def update_current_user_email(request):
 
     # 假设你已经验证了token并获取了用户对象
     # user = User.objects.filter(username=settings.CURRENT_UNAME).first() # 获取当前认证的用户对象
-    user=request.user
+    user = request.user
 
     # 更新用户的邮箱
     try:

@@ -104,7 +104,7 @@ def realtime(request):
 @require_http_methods(['GET'])
 def aqi_best(request):
     length = min(10, len(WeatherInfo.objects.all()))
-    top_weather_info = WeatherInfo.objects.all().order_by('aqi')[:length]
+    top_weather_info = WeatherInfo.objects.all().order_by('-aqi')[:length]
     response_json = {
         "status": True,
         "ranks": [
@@ -121,18 +121,19 @@ def aqi_best(request):
 
 @require_http_methods(['GET'])
 def aqi_worst(request):
-    weatherInfo = WeatherInfo.objects.all()
-    sorted_weatherInfo = sorted(weatherInfo, key=lambda x: x.aqi)
+    length = min(10, len(WeatherInfo.objects.all()))
+    lowest_weather_info = WeatherInfo.objects.all().order_by('aqi')[:length]
     response_json = {
         "status": True,
-        "ranks": []
+        "ranks": [
+            {
+                "city": info.city,
+                "category": info.category,
+                "aqi": info.aqi
+            }
+            for info in lowest_weather_info
+        ]
     }
-    for i in range(min(10, len(sorted_weatherInfo))):
-        response_json["ranks"].append({
-            "city": sorted_weatherInfo[i].city,
-            "category": sorted_weatherInfo[i].category,
-            "aqi": sorted_weatherInfo[i].aqi
-        })
     return JsonResponse(response_json, status=200)
 
 

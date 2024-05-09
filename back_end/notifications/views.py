@@ -104,6 +104,7 @@ if not JSON_MODE:
                     user=user,
                     city_name=cities,
                 )
+                city_obj.save()
 
                 return JsonResponse({'status': True})
             except json.JSONDecodeError:
@@ -266,8 +267,8 @@ else:
                     defaults={'subscription_date': timezone.now()}
                 )
 
-                if not created:
-                    city_obj.delete()
+                if created:
+                    city_obj.save()
 
             return JsonResponse({'status': True})
         except json.JSONDecodeError:
@@ -291,8 +292,8 @@ else:
                 defaults={'subscription_date': timezone.now()}
             )
 
-            if not created:
-                city_obj.delete()
+            if created:
+                city_obj.save()
 
             return JsonResponse({'status': True})
 
