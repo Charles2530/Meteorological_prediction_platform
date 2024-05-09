@@ -68,7 +68,7 @@ def index(request):
 def overview(request):
     # query daily weather data
     weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
-        'key': '7ddb2459227b4d6993afff0b4ba574ff',
+        'key': 'feec92fecc5042f0b48e49c33529de89',
         'location': '101010100',
     })
 
@@ -104,7 +104,7 @@ def realtime(request):
     current_time = datetime.now()
     url = 'https://devapi.qweather.com/v7/weather/now'
     params = {
-        'key': 'f1aeb78d689f43bcafbba151a030019c',
+        'key': 'feec92fecc5042f0b48e49c33529de89',
         'location': '101010100',  # TODO change to current cityId
     }
     response = requests.get(url, params=params)
