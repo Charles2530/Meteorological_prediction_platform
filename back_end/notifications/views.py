@@ -1,11 +1,10 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils import timezone
-from .models import CitySubscription
 import json
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-from .models import Notification
+from .models import Notification,WeatherForecast,CitySubscription
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import NotificationSerializer
@@ -164,10 +163,11 @@ def get_recent(request):
         "success": True,
         "notifications": []
     }
-    for (locationId, idx) in locations:
+    for (locationId, idx) in enumerate(locations):
         forecast = fetch_weather_catastrophic_forecast(location=locationId)
+        forecast = forecast["warning"]
         forecast_json = {
-            "id": forecast['id'],
+            "id": forecast["id"],
             # TODO:change pic
             "img": "https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
             "title": forecast['title'],
@@ -181,3 +181,34 @@ def get_recent(request):
         if idx == 3:
             break
     return JsonResponse(response_json, status=200)
+
+def get_notification_data():
+    notifications = []  
+
+    for notification_data in notifications:
+        city_name = notification_data['city']
+        city_subscription = CitySubscription.objects.filter(city_name=city_name).first()
+        if city_subscription:
+            notification_data['city'] = city_subscription
+            Notification.objects.create(**notification_data)
+
+def get_weather_forecast_data():
+    forecasts = []  
+
+    for forecast_data in forecasts:
+        WeatherForecast.objects.create(**forecast_data)
+
+def notification_view(request):
+    get_notification_data()
+
+    notifications = Notification.objects.all()
+    serializer = NotificationSerializer(notifications, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+def weather_forecast_view(request):
+    get_weather_forecast_data()
+
+    forecasts = WeatherForecast.objects.all()
+    serialized_data = []
+
+    return JsonResponse(serialized_data, safe=False)
