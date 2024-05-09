@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 import csv
-from models import City2CityId, Pro2City
+from weather.models import City2CityId, Pro2City
 
 
 class Command(BaseCommand):
