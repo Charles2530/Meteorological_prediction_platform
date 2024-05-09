@@ -20,11 +20,11 @@ return document.cookie.replace(/(?:(?:^|.*;\s*)csrf\-token\s*\=\s*([^;]*).*$)|^.
 service.interceptors.request.use(
   (config) => {
     config.headers["Authorization"] = `${Local.get("Bearer")?.Bearer ?? ""}`;
-    const csrfToken = getCsrfToken();
-    console.log("csrfToken",csrfToken)
-    if (csrfToken) {
-      config.headers["X-CSRFToken"] = csrfToken;
-    }
+    // const csrfToken = getCsrfToken();
+    // console.log("csrfToken",csrfToken)
+    // if (csrfToken) {
+    //   config.headers["X-CSRFToken"] = csrfToken;
+    // }
     return config;
   },
   (error) => {
