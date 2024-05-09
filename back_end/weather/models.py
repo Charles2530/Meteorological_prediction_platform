@@ -25,6 +25,8 @@ class HourlyWeather(models.Model):
 
 
 class DailyWeather(models.Model):
+    id = models.AutoField(primary_key=True)
+    city = models.CharField(max_length=50, default="")
     fxDate = models.DateField(default=datetime.now)
     sunrise = models.DateTimeField(default=datetime.now)
     sunset = models.DateTimeField(default=datetime.now)
@@ -124,6 +126,6 @@ class WeatherInfo(models.Model):
 
     def __str__(self):
         return "weather info for " + self.city + " " + self.time.strftime('%Y-%m-%d %H:%M:%S')
-    
+
     class Meta:
         unique_together = ('time', 'city')
