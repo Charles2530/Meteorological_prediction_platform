@@ -15,8 +15,8 @@ def fetch_weather_catastrophic_forecast(location):
         'location': location,
     }
     response = requests.get(url, params=params)
-    decompressed_data = gzip.decompress(response.content)
-    data = json.loads(decompressed_data.decode('utf-8'))
+    data = json.loads(response.content.decode('utf-8'))
+    # print('weather_catastrophic_forecast', data)
     return data
 
 
@@ -28,8 +28,8 @@ def fetch_catastrophic_forecast_cities_list():
         'range': 'cn',
     }
     response = requests.get(url, params=params)
-    decompressed_data = gzip.decompress(response.content)
-    data = json.loads(decompressed_data.decode('utf-8'))
+    data = json.loads(response.content.decode('utf-8'))
+    # print("data", data)
     return data
 
 
@@ -49,19 +49,28 @@ def getLevel(severity):
 def store_catastrophic_forecast_data():
     cities = fetch_catastrophic_forecast_cities_list()
     locations = cities['warningLocList']
-    for locationId in locations:
+    count = 0
+    for location in locations:
+        if count > 30:
+            break
+        count += 1
+        locationId = location['locationId']
         forecast = fetch_weather_catastrophic_forecast(location=locationId)
-        forecast = forecast["warning"]
-        weatherForecast = WeatherForecast(
+        if not forecast or not forecast.get("warning"):
+            continue
+        forecast = forecast["warning"].pop()
+        # print('forecast', forecast)
+        weather_forecast = WeatherForecast(
             id=forecast['id'],
             img="https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
             title=forecast['title'],
-            date=forecast['startTime'],
+            # date=forecast['startTime'],
             city=forecast['sender'],
             level=getLevel(forecast['severity']),
             content=forecast['text'],
             instruction="请有关单位和人员做好防范准备。"
         )
-        weatherForecast.save()
+        weather_forecast.save()
+    print("store_catastrophic_forecast_data done")
 
 # store_catastrophic_forecast_data()
