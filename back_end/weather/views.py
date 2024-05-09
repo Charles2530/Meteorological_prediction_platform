@@ -321,8 +321,10 @@ def getCityInfo(request: HttpRequest):
     assert request.method == 'GET'
 
     city = request.GET.get("city")
+    ### TODO to remove
+    city = "北京市"
     cityId = City2CityId.objects.get(cityName=city).cityId
-    ### TODO use API to get weather and air
+    ### use API to get weather and air
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
     weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
