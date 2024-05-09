@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c51231d-02c7-49f9-af96-f5cef1d6f197" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/back_end/China-City-List-latest.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notifications/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/notifications/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/weather/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weather/management/commands/loadCityId.py" beforeDir="false" afterPath="$PROJECT_DIR$/weather/management/commands/loadCityId.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weather/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/weather/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +89,7 @@
       <updated>1715239518837</updated>
       <workItem from="1715239520201" duration="482000" />
       <workItem from="1715252989720" duration="994000" />
-      <workItem from="1715254003918" duration="1431000" />
+      <workItem from="1715254003918" duration="2255000" />
     </task>
     <servers />
   </component>

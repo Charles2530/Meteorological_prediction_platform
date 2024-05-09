@@ -7,7 +7,13 @@ class Command(BaseCommand):
     help = 'Store catastrophic forecast data into the database'
 
     def handle(self, *args, **kwargs):
-        f = open(r'/root/China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
+        try: 
+            f = open(r'/root/China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
+        except FileNotFoundError:
+            try:
+                f = open(r'D:\Programing\SoftwareEngineering\Meteorological_prediction_platform\back_end\China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
+            except FileNotFoundError:
+                pass
         reader = csv.reader(f)
         cnt = 0
         capital = dict()
@@ -24,6 +30,9 @@ class Command(BaseCommand):
         for pro, city in capital.items():
             Proinfo = Pro2City(proName=pro, cityId=city)
             Proinfo.save()
+
+        self.stdout.write(self.style.SUCCESS(
+            'City2CityId and Pro2City data stored successfully'))
 
 
 
