@@ -31,7 +31,7 @@ const stateNavigator = ref(0) // 用于判断是否加载loading
 const cityList = ref([])
 const city = ref({
     name: '北京市',
-    adm2: '昌平区'
+    adm2: '海淀区'
 });
 let weather = ref({})
 const air = ref({})
@@ -47,10 +47,10 @@ const searchShow = ref(false)
 // }
 
 
-interface WeatherHisOverview {
-    weather: Weather;
+interface WeatherData41 {
+    weather: Weather41;
 }
-interface Weather{
+interface Weather41{
     /**
      * 以百分之多少为单位
      */
@@ -95,7 +95,7 @@ interface Weather{
 
 import { post, get } from "@/api/index.ts";
 const get_his_overview = async () => {
-    get<WeatherHisOverview>("/api/weather/overview/", city).then((res) => {
+    get<WeatherData41>("/api/weather/overview/", city).then((res) => {
         weather.value = res.data.weather;
         console.log(weather.value);
         // city.value = res.data.city;
@@ -114,7 +114,7 @@ console.log("----------------------------------------------------------------")
 // console.log(weather.value);
 
 </script>
-<style>
+<style scoped>
 .chart {
     width: 95%;
     height: 92%;
