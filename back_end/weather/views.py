@@ -240,6 +240,43 @@ def getProInfo(request):
     # cityName = '北京市'
     # proName = "北京"
 
+
+    retList = {
+        "weather": {
+            "time": "2024-04-10 17:33",
+            "tem": "11",
+            "condition": "阴",
+            "infos": "今晚多云。明天晴，比今天热很多，空气一般。",
+            "icoid": "151",
+            "wind": "2级",
+            "windDir": "西南风",
+            "hum": "70%",
+            "ray": "中等",
+            "air": "良",
+            "airAQI": "91",
+            "visibility": "9km",
+            "rainfall": "0.0mm",
+            "pressure": "1006hPa"
+        },
+        "geography": "河南省地势西高东低、北坦南凹，北、西、南三面有太行山、伏牛山、桐柏山、大别山四大山脉呈半环形分布， 中部和东部为辽阔的黄淮海冲积平原，西南部为南阳盆地。境内有黄河、淮河、卫河、汉水四大水系。大地构造跨华北板块和扬子板块，地层发育齐全，土壤分布大致以秦岭—淮河一线为界，此线以北为暖温带地带性土壤,此线以南地带性土壤为黄棕壤。",
+        "hazardTable": [
+            {
+            "place": "葫芦岛市，河南省",
+            "level": "蓝",
+            "type": "大风"
+            },
+            {
+            "place": "松原市，河南省",
+            "level": "黄",
+            "type": "森林火险"
+            }
+        ]
+    }
+    return JsonResponse(retList, status=200)
+    ## TODO tochange
+
+
+
     ### use API to get weather and hazardTable
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
@@ -270,7 +307,6 @@ def getProInfo(request):
     hazard  = json.loads(hazard.content.decode('utf-8'))
     geography = ProGeography.objects.get(proName=proName).geographyInfo
     # geography = "geographyInf"
-
 
 
     date_time = datetime.fromisoformat(weather["updateTime"])

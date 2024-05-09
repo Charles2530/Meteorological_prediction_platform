@@ -22,16 +22,16 @@
         </el-col>
       </el-row>
       <el-row :gutter="20" style="height: 80px">
-        <el-col :offset="2" :span="8">
+        <el-col :offset="4" :span="6">
           <div class="grid-content">
             <img
               :src="getAssetsFileIcon(proInfo.weather.icoid + '.png')"
-              style="width: 100px; height: 90px"
+              style="width: 60px; height: 60px"
             />
           </div>
         </el-col>
-        <el-col :span="12">
-          <div class="grid-content" style="margin-top: 10px;">
+        <el-col :span="14">
+          <div class="grid-content">
             <span style="font-size: 44px">{{ proInfo.weather.tem }}℃&nbsp;</span>
             <span style="font-size: 22px">{{ proInfo.weather.condition }}</span>
           </div>
@@ -128,7 +128,7 @@ import { ref, watch} from 'vue';
 
 const proInfo = ref({
   weather: {
-    icoid: "317",
+    icoid: "150",
     time: "2024-04-10 17:33", //时间
     tem: "18", //温度
     condition: "阴", //晴雨状况

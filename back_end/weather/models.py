@@ -118,7 +118,11 @@ class WeatherInfo(models.Model):
     text = models.CharField(max_length=200, default="")
     precip = models.FloatField(default=0.0)
     wind360 = models.FloatField(default=0.0)
+<<<<<<< HEAD
     windScale = models.CharField(max_length=10, default="0")
+=======
+    windScale = models.CharField(max_length=10, default=0)
+>>>>>>> master
     windSpeed = models.FloatField(default=0.0)
     humidity = models.FloatField(default=0.0)
     pressure = models.FloatField(default=0.0)
