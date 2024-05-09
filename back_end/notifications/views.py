@@ -13,7 +13,8 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
-JSON_MODE=False
+JSON_MODE = False
+
 
 class NotificationView(APIView):
     def get(self, request, format=None):
@@ -27,7 +28,6 @@ class NotificationView(APIView):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
-
 
 
 class CitySubscriptionView(APIView):
@@ -57,6 +57,7 @@ class WeatherForecastView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
+
 if not JSON_MODE:
     def get_alarm_notice(request):
         locations = WeatherForecast.objects.all()
@@ -65,7 +66,7 @@ if not JSON_MODE:
             "notifications": []
         }
         # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
-        user=request.user
+        user = request.user
         cities = CitySubscription.objects.filter(user=user)
         for forecast in locations:
             for city in cities:
@@ -86,7 +87,6 @@ if not JSON_MODE:
                     break
         return JsonResponse(response_json, status=200)
 
-
     @csrf_exempt
     # @require_http_methods(['POST'])
     def subscribe(request):
@@ -100,7 +100,6 @@ if not JSON_MODE:
                 if not cities:
                     return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
 
-              
                 city_obj, created = CitySubscription.objects.update_or_create(
                     user=user,
                     city_name=cities,
@@ -117,7 +116,7 @@ if not JSON_MODE:
                 "tableData": []
             }
             # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
-            user= request.user
+            user = request.user
             cities = CitySubscription.objects.filter(user=user)
             for city in cities:
                 city_json = {
@@ -127,7 +126,6 @@ if not JSON_MODE:
                 response_json['tableData'].append(city_json)
             return JsonResponse(response_json, status=200)
 
-
     def get_brief(request):
         locations = WeatherForecast.objects.all()
         response_json = {
@@ -135,7 +133,7 @@ if not JSON_MODE:
             "notifications": []
         }
         # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
-        user= request.user
+        user = request.user
         cities = CitySubscription.objects.filter(user=user)
         for forecast in locations:
             # forecast = fetch_weather_catastrophic_forecast(location=locationId)
@@ -153,7 +151,6 @@ if not JSON_MODE:
                     break
         return JsonResponse(response_json, status=200)
 
-
     def get_alarm_level(request):
         locations = WeatherForecast.objects.all()
         response_json = {
@@ -169,7 +166,6 @@ if not JSON_MODE:
         for idx in range(1, 6):
             response_json['cnt'].append(count[idx])
         return JsonResponse(response_json, status=200)
-
 
     def get_recent(request):
         locations = WeatherForecast.objects.all()
@@ -196,7 +192,6 @@ if not JSON_MODE:
                 break
         return JsonResponse(response_json, status=200)
 
-
     def get_notification_data():
         notifications = []
 
@@ -221,7 +216,6 @@ else:
         else:
             return 5
 
-
     def get_alarm_notice(request):
         cities = fetch_catastrophic_forecast_cities_list()
         locations = cities['warningLocList']
@@ -230,7 +224,7 @@ else:
             "notifications": []
         }
         # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
-        user =request.user
+        user = request.user
         cities = CitySubscription.objects.filter(user=user)
         for locationId in locations:
             forecast = fetch_weather_catastrophic_forecast(location=locationId)
@@ -260,7 +254,7 @@ else:
             data = json.loads(request.body)
             cities = data.get('cities')
             # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
-            user=request.user
+            user = request.user
 
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
@@ -281,7 +275,6 @@ else:
         except Exception as e:
             return JsonResponse({'status': False, 'message': str(e)}, status=500)
 
-
     @require_http_methods(['GET'])
     def subscribe(request):
         response_json = {
@@ -289,7 +282,7 @@ else:
             "tableData": []
         }
         # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
-        user=request.user
+        user = request.user
         cities = CitySubscription.objects.filter(user=user)
         for city in cities:
             city_obj, created = CitySubscription.objects.update_or_create(
@@ -303,14 +296,13 @@ else:
 
             return JsonResponse({'status': True})
 
-
     @require_http_methods(['GET'])
     def subscribe(request):
         response_json = {
             "success": True,
             "tableData": []
         }
-        user =request.user
+        user = request.user
         cities = CitySubscription.objects.filter(user=user)
         locations = cities['warningLocList']
         for city in cities:
@@ -321,7 +313,8 @@ else:
             # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
             cities = CitySubscription.objects.filter(user=user)
             for locationId in locations:
-                forecast = fetch_weather_catastrophic_forecast(location=locationId)
+                forecast = fetch_weather_catastrophic_forecast(
+                    location=locationId)
                 for city in cities:
                     if forecast['sender'].contain(city.city_name):
                         forecast_json = {
@@ -334,7 +327,6 @@ else:
                         }
                         response_json['notifications'].append(forecast_json)
             return JsonResponse(response_json, status=200)
-
 
     def get_brief(request):
         # cities = fetch_catastrophic_forecast_cities_list()
@@ -362,7 +354,6 @@ else:
                     break
         return JsonResponse(response_json, status=200)
 
-
     def get_alarm_level(request):
         # cities = fetch_catastrophic_forecast_cities_list()
         # locations = cities['warningLocList']
@@ -380,7 +371,6 @@ else:
         for idx in range(1, 6):
             response_json['cnt'].append(count[idx])
         return JsonResponse(response_json, status=200)
-
 
     def get_recent(request):
         # cities = fetch_catastrophic_forecast_cities_list()
@@ -408,7 +398,6 @@ else:
             if idx == 3:
                 break
         return JsonResponse(response_json, status=200)
-
 
     def get_notification_data():
         notifications = []
