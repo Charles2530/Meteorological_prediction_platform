@@ -25,15 +25,15 @@
         <el-col :offset="2" :span="8">
           <div class="grid-content">
             <img
-              :src="getAssetsFile(proInfo.weather.condition + '.png')"
-              style="width: 90px; height: 80px"
+              :src="getAssetsFile(proInfo.weather.icoid + '.png')"
+              style="width: 100px; height: 90px"
             />
           </div>
         </el-col>
         <el-col :span="12">
-          <div class="grid-content">
-            <span style="font-size: 42px">{{ proInfo.weather.tem }}&nbsp;</span>
-            <span style="font-size: 20px">{{ proInfo.weather.condition }}</span>
+          <div class="grid-content" style="margin-top: 10px;">
+            <span style="font-size: 44px">{{ proInfo.weather.tem }}℃&nbsp;</span>
+            <span style="font-size: 22px">{{ proInfo.weather.condition }}</span>
           </div>
         </el-col>
       </el-row>
@@ -128,8 +128,9 @@ import { ref, watch} from 'vue';
 
 const proInfo = ref({
   weather: {
+    icoid: "317",
     time: "2024-04-10 17:33", //时间
-    tem: "11℃", //温度
+    tem: "18", //温度
     condition: "阴", //晴雨状况
     infos: "今晚多云。明天晴，比今天热很多，空气一般。", //详细天气状况
     wind: "2级", //风力等级
@@ -189,9 +190,6 @@ const getProInfo = async () => {
   get<ProInfo>("/api/getProInfo/", {proName: proName.value}
 ).then((res) => {
     proInfo.value = res.data;
-    // console.log("111", proInfo);
-    // console.log("time",proInfo.value.weather.time);
-    // console.log(res.data);
   });
 };
 </script>
