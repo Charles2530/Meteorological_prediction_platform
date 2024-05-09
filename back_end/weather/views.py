@@ -317,10 +317,11 @@ def getProInfo(request):
 #     assert request.method == 'GET'
 
 
-# @csrf_exempt
-# def getCityInfo(request: HttpRequest):
-#     assert request.method == 'GET'
+@csrf_exempt
+def getCityInfo(request: HttpRequest):
+    assert request.method == 'GET'
 
+<<<<<<< HEAD
 #     city = request.GET.get("city")
 #     cityId = City2CityId.objects.get(cityName=city)
 #     ### TODO use API to get weather and air
@@ -329,28 +330,48 @@ def getProInfo(request):
 #     # json to dict TODO fill load paras
 #     weather = json.load(...)
 #     air = json.load(...)
+=======
+    city = request.GET.get("city")
+    ### TODO to remove
+    city = "北京市"
+    cityId = City2CityId.objects.get(cityName=city).cityId
+    ### use API to get weather and air
+    # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
+    # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
+    weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
+        'key': '52c4d25aafb147c5bc6e4df6cc52afc6',
+        'location': cityId,
+    })
+    air = requests.get('https://devapi.qweather.com/v7/air/now', params={
+        'key': '52c4d25aafb147c5bc6e4df6cc52afc6',
+        'location': cityId,
+    })
+
+    weather = json.loads(weather.content.decode('utf-8'))
+    air = json.loads(air.content.decode('utf-8'))
+>>>>>>> master
 
 
-#     date_time = datetime.fromisoformat(weather["updateTime"])
-#     timezon = pytz.timezone('Asia/Shanghai')
-#     retList = {
-#         "status": True,
-#         "message": {
-#             "time": date_time.astimezone(timezon).strftime("%Y-%m-%d %H:%M"),
-#             "city": city,
-#             "temp": float(weather["now"]["temp"]),
-#             "text": weather["now"]["text"],
-#             "precip": float(weather["now"]["precip"]),
-#             "wind360": float(weather["now"]["wind360"]),
-#             "windScale": int(weather["now"]["windScale"]),
-#             "windSpeed": float(weather["now"]["windSpeed"]),
-#             "humidity": int(weather["now"]["humidity"]),
-#             "pressure": int(weather["now"]["pressure"]),
-#             "aqi": int(air["now"]["aqi"]),
-#             "category": air["now"]["category"],
-#         },
-#     }
-#     return JsonResponse(retList, status=200)
+    date_time = datetime.fromisoformat(weather["updateTime"])
+    timezon = pytz.timezone('Asia/Shanghai')
+    retList = {
+        "status": True,
+        "message": {
+            "time": date_time.astimezone(timezon).strftime("%Y-%m-%d %H:%M"),
+            "city": city,
+            "temp": float(weather["now"]["temp"]),
+            "text": weather["now"]["text"],
+            "precip": float(weather["now"]["precip"]),
+            "wind360": float(weather["now"]["wind360"]),
+            "windScale": int(weather["now"]["windScale"]),
+            "windSpeed": float(weather["now"]["windSpeed"]),
+            "humidity": int(weather["now"]["humidity"]),
+            "pressure": int(weather["now"]["pressure"]),
+            "aqi": int(air["now"]["aqi"]),
+            "category": air["now"]["category"],
+        },
+    }
+    return JsonResponse(retList, status=200)
 
 
 # path('manage/data/weather_add/', views.add_weather_data, name='add_weather'),
