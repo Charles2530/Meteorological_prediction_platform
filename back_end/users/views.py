@@ -127,9 +127,9 @@ def my_register(request):
     new_user = User.objects.create_user(
         username=username, email=email, password=password)
     # authenticate(username=username, password=password)
-    
+
     # settings.CURRENT_UNAME = new_user.username
- 
+
 
     # 准备返回的信息
     info = {
@@ -170,7 +170,7 @@ def user_list(request):
     except json.JSONDecodeError:
         # 返回400错误，请求格式不正确
         return JsonResponse({"error": "Invalid JSON format in request body."}, status=400)
-    
+
     # 获取用户数据
     users = User.objects.all()
 
@@ -455,7 +455,7 @@ def update_current_user_password(request):
     # user = User.objects.filter(username=request.user.username).first()
     user= request.user
 
-   
+
     # # 验证旧密码
     # if not user or not check_password(old_password, user.password):
     #     return JsonResponse({
@@ -584,3 +584,4 @@ def upload_avatar(request):
             "success": False,
             "reason": str(e)
         }, status=500)
+
