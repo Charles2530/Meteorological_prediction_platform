@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full font-semibold text-md flex-wrap text-white" style="font-family:'Courier New', Courier, monospace">
+  <div class="w-full font-semibold text-md flex-wrap text-white" >
     <div class="
         flex 
         flex-col 
