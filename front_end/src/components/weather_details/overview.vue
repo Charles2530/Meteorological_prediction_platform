@@ -1,7 +1,6 @@
 <template>
-    <el-container class="container rounded-lg">
-        <CurrentWeather class="md:basis-3/5 " :weather="weather" :city="city" :search="searchShow">
-            <!-- @searchShow="changeSearchShow" -->
+    <el-container class="rounded-lg" style="  background: linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195));">
+        <CurrentWeather class="md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
             <!-- <template v-slot:search>
               <div class="text-[#333333]">
                 <SearchLocation :show="searchShow" @searchShow="changeSearchShow" @search="locationBySearch" />
@@ -142,9 +141,9 @@ h2 {
 }
 
 /* demo */
-.container {
+/* .container {
     background: linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195));
-}
+} */
 
 .input {
     width: 300px;

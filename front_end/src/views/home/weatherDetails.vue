@@ -1,10 +1,12 @@
 <template>
-  <el-tabs
+  <!-- <el-tabs
     v-model="activeName"
     class="demo-tabs mx-40 rounded-2xl"
     @tab-click="handleClick"
     type="border-card"
-  >
+  > -->
+  <el-tabs v-model="activeName" style="margin-left: 1%;margin-right: 1%;" class="demo-tabs mx-40 rounded-2xl"
+    @tab-click="handleClick" type="border-card">
     <el-tab-pane label="天气速览" name="first">
       <overview />
     </el-tab-pane>
@@ -62,7 +64,7 @@ h2 {
 
 /*  */
 
-.demo-tabs > .el-tabs__content {
+.demo-tabs>.el-tabs__content {
   padding: 32px;
   color: #6b778c;
   font-size: 32px;

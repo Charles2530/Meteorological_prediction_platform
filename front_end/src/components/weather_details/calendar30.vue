@@ -29,7 +29,7 @@
       <el-aside class="bg-cyan-100" width="30%">
         <el-card shadow="always">
           <div class="grid-content">
-            <span style="font-size: 30px"> 2024-05-08</span>
+            <span style="font-size: 30px"> 2024-05-10</span>
           </div>
           <hr style="height: 2px;   background: linear-gradient(to right, #dee5f8, #f4e2e2);" />
           <div style="margin-top: 30px;">
@@ -42,7 +42,7 @@
             <el-col :span="12">
               <div class="grid-content">
                 <span style="font-size: 36px">{{ weatherTemp[0].min_temp }}~{{ weatherTemp[0].max_temp }}℃</span>
-                <span style="font-size: 20px">阵雨</span>
+                <span style="font-size: 20px">        阵雨</span>
                 <!-- <span style="font-size: 36px">{{ getWeather(0).min_temp }}~{{ getWeather(0).max_temp }}&nbsp;</span>
                 <span style="font-size: 20px">{{ getWeather(0).condition }}</span> -->
               </div>
@@ -59,7 +59,7 @@
             </el-col>
           </el-row>
         </div>
-          <div class="grid grid-cols-4 gap-4 h-full mt-6">
+          <div class="grid grid-cols-4 gap-4 h-full mt-6" style="font-size: 26px;">
             <template v-for="(item, index) in displayInfo" :key="index">
               <div v-if="item.data" class="flex flex-col text-center items-center gap-2">
                 <img :src="item.icon" :alt="item.name" v-if="item.icon" class="w-6 h-6">
@@ -538,15 +538,6 @@ export default {
 }
 
 /* from 首页 */
-.color2 {
-  /* background:radial-gradient(circle at center, #ff9966, #ff5e62); */
-  background-color: rgb(255, 255, 255, 0);
-  width: 90%;
-  margin: auto;
-  margin-top: 2%;
-  border-color: rgb(187, 168, 217, 0.7);
-}
-
 /* .grid-content {
   border-radius: 4px;
   min-height: 36px;
@@ -559,7 +550,7 @@ export default {
 .el-card {
   background-color: rgb(240, 240, 250);
   /* margin: 0px; */
-  margin-top: 0px;
+  margin-top: 30px;
   border-radius: 20px;
   font-family: 'Courier New', Courier, monospace
 }
