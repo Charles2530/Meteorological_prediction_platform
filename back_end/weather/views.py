@@ -253,15 +253,15 @@ def delete_weather_data(request):
 def search_weather_data(request):
     data = json.loads(request.body)
     data_type = data['type'] if data['type'] else 'weather'
-    from_time = data['time'][0] if data['time'][0] else None
-    to_time = data['time'][1] if data['time'][1] else None
+    from_time = data['time'][0] if len(data['time']) > 0 else None
+    to_time = data['time'][1] if len(data['time']) > 1 else None
     address = data['address'] if data['address'] else None
 
     if data_type == 'weather':
         weather_data = WeatherInfo.objects.filter(
             time__range=(from_time, to_time) if from_time and to_time else all,
             city__contains=address if address else all
-        )
+        ).all()
         weather_data_list = []
         for data in weather_data:
             weather_data_list.append({
