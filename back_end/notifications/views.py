@@ -65,6 +65,7 @@ if not JSON_MODE:
             "success": True,
             "notifications": []
         }
+        
         # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
         user = request.user
         cities = CitySubscription.objects.filter(user=user)
@@ -72,7 +73,7 @@ if not JSON_MODE:
             for city in cities:
                 if forecast['sender'].contain(city.city_name):
                     forecast_json = {
-                        "id": forecast.get('id'),
+                        "id": forecast['id'],
                         # TODO:change pic
                         # "img": "https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
                         "img": forecast['img'],
@@ -174,19 +175,21 @@ if not JSON_MODE:
             "success": True,
             "notifications": []
         }
-        for (forecast, idx) in enumerate(locations):
+        for (idx,forecast) in enumerate(locations):
             # forecast = fetch_weather_catastrophic_forecast(location=locationId)
             # forecast = forecast["warning"]
+            # return JsonResponse(forecast, status=400)
             forecast_json = {
-                "id": forecast["id"],
+                "id": forecast.id,
                 # TODO:change pic
-                "img": forecast["img"],
-                "title": forecast['title'],
-                "date": forecast['date'],
-                "city": forecast['city'],
-                "level": forecast['level'],
-                "content": forecast['content'],
-                "instruction": forecast['instruction'],
+                "img": forecast.img,
+                "title": forecast.title,
+                # "date": forecast.date,
+                "date": "2024-05-10",
+                "city": forecast.city,
+                "level": forecast.level,
+                "content": forecast.content,
+                "instruction": forecast.instruction,
             }
             response_json['notifications'].append(forecast_json)
             if idx == 3:
@@ -195,7 +198,6 @@ if not JSON_MODE:
 
     def get_notification_data():
         notifications = []
-
         for notification_data in notifications:
             city_name = notification_data['city']
             city_subscription = CitySubscription.objects.filter(
