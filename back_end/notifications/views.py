@@ -4,7 +4,7 @@ from django.utils import timezone
 import json
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-from .models import Notification,WeatherForecast,CitySubscription
+from .models import Notification, WeatherForecast, CitySubscription
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import NotificationSerializer
@@ -182,21 +182,25 @@ def get_recent(request):
             break
     return JsonResponse(response_json, status=200)
 
+
 def get_notification_data():
-    notifications = []  
+    notifications = []
 
     for notification_data in notifications:
         city_name = notification_data['city']
-        city_subscription = CitySubscription.objects.filter(city_name=city_name).first()
+        city_subscription = CitySubscription.objects.filter(
+            city_name=city_name).first()
         if city_subscription:
             notification_data['city'] = city_subscription
             Notification.objects.create(**notification_data)
 
+
 def get_weather_forecast_data():
-    forecasts = []  
+    forecasts = []
 
     for forecast_data in forecasts:
         WeatherForecast.objects.create(**forecast_data)
+
 
 def notification_view(request):
     get_notification_data()
@@ -204,6 +208,7 @@ def notification_view(request):
     notifications = Notification.objects.all()
     serializer = NotificationSerializer(notifications, many=True)
     return JsonResponse(serializer.data, safe=False)
+
 
 def weather_forecast_view(request):
     get_weather_forecast_data()
