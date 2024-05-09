@@ -10,8 +10,6 @@ class Notification(models.Model):
     time = models.DateTimeField()
     level = models.CharField(max_length=10, default="")
 
-    from django.db import models
-
 
 class CitySubscription(models.Model):
     user = models.ForeignKey(
@@ -26,3 +24,14 @@ class CitySubscription(models.Model):
     class Meta:
         verbose_name = "城市订阅"
         verbose_name_plural = "城市订阅"
+
+
+class WeatherForecast(models.Model):
+    id = models.CharField(max_length=255, primary_key=True)
+    img = models.URLField()
+    title = models.CharField(max_length=255)
+    # date = models.DateTimeField()
+    city = models.CharField(max_length=100)
+    level = models.IntegerField()
+    content = models.TextField()
+    instruction = models.TextField()

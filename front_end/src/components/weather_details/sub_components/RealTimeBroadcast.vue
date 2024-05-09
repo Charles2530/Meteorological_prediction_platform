@@ -141,7 +141,7 @@ onMounted(() => {
 .wind-speed,
 .time {
   font-size: 16px;
-  font-family: 'Courier New', Courier, monospace
+  /*font-family: 'Courier New', Courier, monospace*/
 }
 
 
