@@ -60,8 +60,8 @@ def my_login(request):
         login(request, user)
 
         # register current city
-        if not UserCity.objects.filter(username=username).exists():
-            user_city = UserCity(username=username, city='北京')
+        if not UserCity.objects.filter(user=user).exists():
+            user_city = UserCity(user=user, city='北京')
             user_city.save()
 
         info = {
