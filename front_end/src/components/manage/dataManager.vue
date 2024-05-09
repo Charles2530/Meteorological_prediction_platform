@@ -254,7 +254,7 @@
           :min="0"
           :max="100"
           :step="1"
-          :formatter="(value:number) => `${value}`"
+          :formatter="(value:number) => `${value}mm`"
           style="width: 10rem"
         ></el-input-number>
       </el-form-item>
@@ -421,16 +421,17 @@ function addWeather() {
   weatherData.push({ ...newWeatherData });
   addDialogVisible.value = false;
   console.log({ ...newWeatherData });
-  post<addWeatherResponse>("/api/manage/data/weather_add/", newWeatherData).then(
-    (res) => {
-      const response = res.data;
-      if (!response.status) {
-        ElMessage.error("添加失败！");
-      } else {
-        ElMessage.success(weatherInfo.dialogs.add);
-      }
+  post<addWeatherResponse>(
+    "/api/manage/data/weather_add/",
+    newWeatherData
+  ).then((res) => {
+    const response = res.data;
+    if (!response.status) {
+      ElMessage.error("添加失败！");
+    } else {
+      ElMessage.success(weatherInfo.dialogs.add);
     }
-  );
+  });
 }
 
 function resetAddForm() {
