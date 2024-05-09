@@ -69,6 +69,7 @@ def overview(request):
 def thirty_days_forecast(request):
     return HttpResponse("This is the 30 days forecast page!")
 
+pri_key = "7ddb2459227b4d6993afff0b4ba574ff"
 
 @require_http_methods(['GET'])
 def realtime(request):
@@ -245,20 +246,20 @@ def getProInfo(request):
     ## 运动指数，紫外线指数
     # harzard : 天气灾害预警 https://dev.qweather.com/docs/api/warning/weather-warning/
     weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
-        'key': '52c4d25aafb147c5bc6e4df6cc52afc6',
+        'key': pri_key,
         'location': cityId,
     })
     air = requests.get('https://devapi.qweather.com/v7/air/now', params={
-        'key': '52c4d25aafb147c5bc6e4df6cc52afc6',
+        'key': pri_key,
         'location': cityId,
     })
     indices = requests.get('https://devapi.qweather.com/v7/indices/1d', params={
-        'key': '52c4d25aafb147c5bc6e4df6cc52afc6',
+        'key': pri_key,
         'location': cityId,
         'type': "1,5",
     })
     hazard = requests.get('https://devapi.qweather.com/v7/warning/now', params={
-        'key': '52c4d25aafb147c5bc6e4df6cc52afc6',
+        'key': pri_key,
         'location': cityId,
     })
 

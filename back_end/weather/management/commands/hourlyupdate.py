@@ -1,17 +1,18 @@
 from django.core.management.base import BaseCommand
 from weather.models import HourlyWeather
-from datetime import datetime
-import request
+import json
+from datetime import datetime, timedelta
+import requests
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        weather = requests.get('https://api.qweather.com/v7/weather/72h', params={
-            'key': '52c4d25aafb147c5bc6e4df6cc52afc6',
+        weather = requests.get('https://devapi.qweather.com/v7/weather/72h', params={
+            'key': '7ddb2459227b4d6993afff0b4ba574ff',
             'location': "101010100", ## Beijing
         })
 
         weather = json.loads(weather.content.decode('utf-8'))
-
+        print(weather)
         for hourly in weather["hourly"]:
             date_time = datetime.fromisoformat(hourly["fxTime"])
             timezon = pytz.timezone('Asia/Shanghai')
