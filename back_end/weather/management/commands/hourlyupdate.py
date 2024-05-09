@@ -20,7 +20,7 @@ class Command(BaseCommand):
             date_time = date_time.astimezone(timezon)
 
             data = WeatherInfo(
-                fxTime = date_time,
+                time = date_time,
                 temp = hourly["temp"],
                 text = hourly["text"],
                 wind360 = hourly["wind360"],
@@ -30,14 +30,14 @@ class Command(BaseCommand):
                 humidity = hourly["humidity"],
                 precip = hourly["precip"],
                 pressure = hourly["pressure"],
-                cloud = hourly["cloud"],
+                # cloud = hourly["cloud"],
                 # dew = hourly["dew"],
             )
 
             data.save()
 
             data = WeatherInfo(
-                fxTime = date_time + timedelta(days = -1),
+                time = date_time + timedelta(days = -1),
                 temp = hourly["temp"],
                 text = hourly["text"],
                 wind360 = hourly["wind360"],
@@ -47,7 +47,7 @@ class Command(BaseCommand):
                 humidity = hourly["humidity"],
                 precip = hourly["precip"],
                 pressure = hourly["pressure"],
-                cloud = hourly["cloud"],
+                # cloud = hourly["cloud"],
                 # dew = hourly["dew"],
             )
 
