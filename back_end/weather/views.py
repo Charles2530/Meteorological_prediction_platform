@@ -184,6 +184,8 @@ def humid_city_change(request):
 def getProInfo(request):
     assert request.method == 'GET'
     proName = request.GET.get('proName')
+    if proName == '中国':
+        proName = '北京市'
     cityId = Pro2City.objects.get(proName=proName).cityId
     ### TODO get cityName to remove
     cityName = City2CityId.objects.get(cityId=cityId).cityName
