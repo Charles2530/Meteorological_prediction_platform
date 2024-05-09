@@ -3,6 +3,8 @@ import gzip
 import json
 from celery import shared_task
 from .models import Notification, WeatherForecast, CitySubscription
+import json
+import gzip
 
 
 @shared_task
@@ -61,3 +63,5 @@ def store_catastrophic_forecast_data():
             instruction="请有关单位和人员做好防范准备。"
         )
         weatherForecast.save()
+
+# store_catastrophic_forecast_data()
