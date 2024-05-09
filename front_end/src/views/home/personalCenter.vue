@@ -290,7 +290,7 @@ const confirmPassword = (formEl: FormInstance | undefined) => {
           const response = res.data;
           if (response.success) {
             operatePassword.value = false;
-            userInfo.logout();
+            //userInfo.logout();
           }
         }
       );
