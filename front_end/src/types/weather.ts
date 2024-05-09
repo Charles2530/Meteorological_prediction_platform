@@ -49,3 +49,36 @@ export interface CityWeatherData {
   aqi: number;
   category: string;
 }
+
+export interface ProInfo {
+  weather: {
+    time: string;
+    tem: string;
+    condition: string;
+    infos: string;
+    wind: string;
+    windDir: string;
+    hum: string;
+    ray: string;
+    air: string;
+    airAQI: string;
+    visibility: string;
+    rainfall: string;
+    pressure: string;
+  },
+  geography: string;
+  hazardTable: Array<{
+    place: string;
+    level: string;
+    type: string;
+  }>;
+}
+
+export interface Hazard {
+  place: string;
+  longitude: number;
+  latitude: number;
+  type: string;
+  time:string;
+  level: string;
+}
