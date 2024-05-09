@@ -215,6 +215,7 @@ def humid_city_change(request):
 #     pressure = models.FloatField(default=0.0)
 #     aqi = models.IntegerField(default=0)
 #     category = models.CharField(max_length=200, default="")
+@csrf_exempt
 def add_weather_data(request):
     response_json = {
         "status": True,
@@ -238,6 +239,7 @@ def add_weather_data(request):
     return JsonResponse(response_json, status=200)
 
 
+@csrf_exempt
 def delete_weather_data(request):
     response_json = {
         "status": True,
@@ -247,6 +249,7 @@ def delete_weather_data(request):
     return JsonResponse(response_json, status=200)
 
 
+@csrf_exempt
 def search_weather_data(request):
     data = json.loads(request.body)
     data_type = data['type'] if data['type'] else 'weather'
