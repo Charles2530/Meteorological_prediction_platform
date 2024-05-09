@@ -52,6 +52,7 @@ export interface CityWeatherData {
 
 export interface ProInfo {
   weather: {
+    icoid: string,
     time: string;
     tem: string;
     condition: string;
