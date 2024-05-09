@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Notification, WeatherForecast, CitySubscription
+from .models import Notification, CitySubscription, WeatherForecast
 
 
 class NotificationSerializer(serializers.ModelSerializer):
@@ -7,12 +7,13 @@ class NotificationSerializer(serializers.ModelSerializer):
         model = Notification
         fields = '__all__'
 
-class WeatherForecastSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = WeatherForecast
-        fields = '__all__'
-
 class CitySubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = CitySubscription
+        fields = '__all__'
+
+
+class WeatherForecastSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WeatherForecast
         fields = '__all__'
