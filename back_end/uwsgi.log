@@ -7306,3 +7306,1168 @@ spawned uWSGI worker 2 (pid: 1860676, cores: 2)
 Python auto-reloader enabled
 spawned uWSGI worker 3 (pid: 1860679, cores: 2)
 spawned uWSGI worker 4 (pid: 1860682, cores: 2)
+Method Not Allowed (POST): /api/subscribe/
+[pid: 1860682|app: 0|req: 1/1] 219.239.227.114 () {50 vars in 1202 bytes} [Thu May  9 04:51:58 2024] POST /api/subscribe/ => generated 0 bytes in 134 msecs (HTTP/1.1 405) 9 headers in 279 bytes (1 switches on core 0)
+Method Not Allowed (POST): /api/subscribe/
+[pid: 1860679|app: 0|req: 1/2] 219.239.227.114 () {50 vars in 1202 bytes} [Thu May  9 04:52:08 2024] POST /api/subscribe/ => generated 0 bytes in 126 msecs (HTTP/1.1 405) 9 headers in 279 bytes (1 switches on core 0)
+Bad Request: /api/get_info/
+[pid: 1860682|app: 0|req: 2/3] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 04:53:56 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+[pid: 1860682|app: 0|req: 3/4] 219.239.227.114 () {44 vars in 1092 bytes} [Thu May  9 04:53:57 2024] GET /api/alarm_notices/ => generated 38 bytes in 6 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1860682|app: 0|req: 4/5] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 04:53:57 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1860676|app: 0|req: 2/6] 219.239.227.114 () {44 vars in 1084 bytes} [Thu May  9 04:53:57 2024] GET /api/subscribe/ => generated 34 bytes in 123 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1860676|app: 0|req: 2/7] 219.239.227.114 () {44 vars in 1106 bytes} [Thu May  9 04:53:57 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 134 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1860675|app: 0|req: 1/8] 219.239.227.114 () {44 vars in 1096 bytes} [Thu May  9 04:53:57 2024] GET /api/get_alarm_level/ => generated 41 bytes in 133 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/urls.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 3 (pid: 1860679)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/urls.py has been modified
+Gracefully killing worker 2 (pid: 1860676)...
+Gracefully killing worker 4 (pid: 1860682)...
+Gracefully killing worker 1 (pid: 1860675)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 04:55:11 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x154b5c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x154b5c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1861272, cores: 2)
+spawned uWSGI worker 2 (pid: 1861273, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1861276, cores: 2)
+spawned uWSGI worker 4 (pid: 1861279, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1861279|app: 0|req: 1/1] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 04:55:38 2024] GET /api/get_info/ => generated 28 bytes in 129 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1861273|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 1096 bytes} [Thu May  9 04:55:38 2024] GET /api/get_alarm_level/ => generated 41 bytes in 123 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1861276|app: 0|req: 2/3] 219.239.227.114 () {44 vars in 1092 bytes} [Thu May  9 04:55:38 2024] GET /api/alarm_notices/ => generated 38 bytes in 130 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1861273|app: 0|req: 2/5] 219.239.227.114 () {44 vars in 1084 bytes} [Thu May  9 04:55:38 2024] GET /api/subscribe/ => generated 34 bytes in 132 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1861276|app: 0|req: 2/5] 219.239.227.114 () {44 vars in 1106 bytes} [Thu May  9 04:55:38 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 132 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1861279|app: 0|req: 2/6] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 04:55:38 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 5 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1861272)...
+Gracefully killing worker 2 (pid: 1861273)...
+Gracefully killing worker 3 (pid: 1861276)...
+Gracefully killing worker 4 (pid: 1861279)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 04:59:04 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0xf175c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0xf175c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1861775, cores: 2)
+spawned uWSGI worker 2 (pid: 1861776, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1861779, cores: 2)
+spawned uWSGI worker 4 (pid: 1861782, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1861782|app: 0|req: 1/1] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 04:59:13 2024] GET /api/get_info/ => generated 28 bytes in 127 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1861782|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 1092 bytes} [Thu May  9 04:59:14 2024] GET /api/alarm_notices/ => generated 38 bytes in 6 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1861782|app: 0|req: 3/3] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 04:59:14 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1861775|app: 0|req: 1/5] 219.239.227.114 () {44 vars in 1096 bytes} [Thu May  9 04:59:14 2024] GET /api/get_alarm_level/ => generated 41 bytes in 134 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1861776|app: 0|req: 2/5] 219.239.227.114 () {44 vars in 1084 bytes} [Thu May  9 04:59:14 2024] GET /api/subscribe/ => generated 34 bytes in 127 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1861776|app: 0|req: 2/6] 219.239.227.114 () {44 vars in 1106 bytes} [Thu May  9 04:59:14 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 137 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Internal Server Error: /api/subscribe/
+[pid: 1861782|app: 0|req: 4/7] 219.239.227.114 () {50 vars in 1202 bytes} [Thu May  9 04:59:18 2024] POST /api/subscribe/ => generated 102 bytes in 4 msecs (HTTP/1.1 500) 8 headers in 264 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 3 (pid: 1861779)...
+Gracefully killing worker 4 (pid: 1861782)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+Gracefully killing worker 1 (pid: 1861775)...
+Gracefully killing worker 2 (pid: 1861776)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 05:00:22 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x18a55c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x18a55c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1861992, cores: 2)
+spawned uWSGI worker 2 (pid: 1861993, cores: 2)
+spawned uWSGI worker 3 (pid: 1861994, cores: 2)
+spawned uWSGI worker 4 (pid: 1861997, cores: 2)
+Python auto-reloader enabled
+Bad Request: /api/get_info/
+[pid: 1861994|app: 0|req: 1/1] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 05:00:24 2024] GET /api/get_info/ => generated 28 bytes in 139 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1861994|app: 0|req: 3/2] 219.239.227.114 () {44 vars in 1106 bytes} [Thu May  9 05:00:25 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 10 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1861994|app: 0|req: 3/3] 219.239.227.114 () {44 vars in 1092 bytes} [Thu May  9 05:00:25 2024] GET /api/alarm_notices/ => generated 38 bytes in 13 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1861994|app: 0|req: 4/4] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 05:00:25 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1861993|app: 0|req: 2/5] 219.239.227.114 () {44 vars in 1096 bytes} [Thu May  9 05:00:25 2024] GET /api/get_alarm_level/ => generated 41 bytes in 152 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1861993|app: 0|req: 2/6] 219.239.227.114 () {44 vars in 1084 bytes} [Thu May  9 05:00:25 2024] GET /api/subscribe/ => generated 34 bytes in 160 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Internal Server Error: /api/subscribe/
+[pid: 1861993|app: 0|req: 3/7] 219.239.227.114 () {50 vars in 1202 bytes} [Thu May  9 05:00:28 2024] POST /api/subscribe/ => generated 98 bytes in 6 msecs (HTTP/1.1 500) 8 headers in 263 bytes (1 switches on core 1)
+Unauthorized: /api/login/
+[pid: 1861997|app: 0|req: 1/8] 219.239.227.114 () {50 vars in 1194 bytes} [Thu May  9 05:00:50 2024] POST /api/login/ => generated 48 bytes in 130 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 0)
+[pid: 1861994|app: 0|req: 5/9] 219.239.227.114 () {44 vars in 868 bytes} [Thu May  9 05:00:53 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1861997|app: 0|req: 2/10] 219.239.227.114 () {44 vars in 858 bytes} [Thu May  9 05:00:53 2024] GET /api/get_alarm_level/ => generated 41 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1861992|app: 0|req: 2/11] 219.239.227.114 () {44 vars in 846 bytes} [Thu May  9 05:00:53 2024] GET /api/subscribe/ => generated 34 bytes in 133 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1861992|app: 0|req: 2/12] 219.239.227.114 () {44 vars in 854 bytes} [Thu May  9 05:00:53 2024] GET /api/alarm_notices/ => generated 38 bytes in 132 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+Internal Server Error: /api/subscribe/
+[pid: 1861993|app: 0|req: 4/13] 219.239.227.114 () {50 vars in 964 bytes} [Thu May  9 05:00:55 2024] POST /api/subscribe/ => generated 98 bytes in 4 msecs (HTTP/1.1 500) 8 headers in 263 bytes (1 switches on core 0)
+Internal Server Error: /api/subscribe/
+[pid: 1861994|app: 0|req: 6/14] 219.239.227.114 () {50 vars in 964 bytes} [Thu May  9 05:01:02 2024] POST /api/subscribe/ => generated 98 bytes in 6 msecs (HTTP/1.1 500) 8 headers in 263 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1861992)...
+Gracefully killing worker 2 (pid: 1861993)...
+Gracefully killing worker 3 (pid: 1861994)...
+Gracefully killing worker 4 (pid: 1861997)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 05:01:51 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x1fda5c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x1fda5c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1862154, cores: 2)
+spawned uWSGI worker 2 (pid: 1862155, cores: 2)
+spawned uWSGI worker 3 (pid: 1862156, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1862159, cores: 2)
+Bad Request: /api/subscribe/
+[pid: 1862159|app: 0|req: 1/1] 219.239.227.114 () {50 vars in 964 bytes} [Thu May  9 05:01:58 2024] POST /api/subscribe/ => generated 33 bytes in 134 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+Unauthorized: /api/login/
+[pid: 1862159|app: 0|req: 2/2] 219.239.227.114 () {50 vars in 956 bytes} [Thu May  9 05:02:04 2024] POST /api/login/ => generated 48 bytes in 3 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 1)
+Unauthorized: /api/login/
+[pid: 1862159|app: 0|req: 3/3] 219.239.227.114 () {50 vars in 956 bytes} [Thu May  9 05:02:07 2024] POST /api/login/ => generated 48 bytes in 2 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 0)
+[pid: 1862159|app: 0|req: 4/4] 219.239.227.114 () {50 vars in 962 bytes} [Thu May  9 05:02:19 2024] POST /api/register/ => generated 377 bytes in 470 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 1)
+[pid: 1862159|app: 0|req: 5/5] 219.239.227.114 () {44 vars in 1106 bytes} [Thu May  9 05:02:22 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1862159|app: 0|req: 6/6] 219.239.227.114 () {44 vars in 1092 bytes} [Thu May  9 05:02:22 2024] GET /api/alarm_notices/ => generated 38 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1862155|app: 0|req: 1/7] 219.239.227.114 () {44 vars in 1096 bytes} [Thu May  9 05:02:22 2024] GET /api/get_alarm_level/ => generated 41 bytes in 129 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1862156|app: 0|req: 1/8] 219.239.227.114 () {44 vars in 1084 bytes} [Thu May  9 05:02:22 2024] GET /api/subscribe/ => generated 34 bytes in 130 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Bad Request: /api/subscribe/
+[pid: 1862155|app: 0|req: 2/9] 219.239.227.114 () {50 vars in 1202 bytes} [Thu May  9 05:02:25 2024] POST /api/subscribe/ => generated 33 bytes in 4 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1862154)...
+Gracefully killing worker 2 (pid: 1862155)...
+Gracefully killing worker 3 (pid: 1862156)...
+Gracefully killing worker 4 (pid: 1862159)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 05:04:30 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x14ed5c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x14ed5c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1862548, cores: 2)
+spawned uWSGI worker 2 (pid: 1862549, cores: 2)
+spawned uWSGI worker 3 (pid: 1862550, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 4 (pid: 1862553, cores: 2)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:205: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+[pid: 1862549|app: 0|req: 1/1] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:05:35 2024] POST /api/manage/user/list/ => generated 1353 bytes in 131 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 0)
+[pid: 1862549|app: 0|req: 2/2] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:08:23 2024] POST /api/manage/user/list/ => generated 1353 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 1)
+[pid: 1862549|app: 0|req: 3/3] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:08:27 2024] POST /api/manage/user/list/ => generated 1353 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 0)
+Bad Request: /api/get_info/
+[pid: 1862549|app: 0|req: 4/4] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 05:08:41 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:205: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+[pid: 1862550|app: 0|req: 1/5] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:08:42 2024] POST /api/manage/user/list/ => generated 1353 bytes in 129 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 0)
+[pid: 1862553|app: 0|req: 1/6] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 05:08:42 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 130 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Bad Request: /api/get_info/
+[pid: 1862550|app: 0|req: 2/7] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 05:09:54 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+[pid: 1862549|app: 0|req: 5/8] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:09:54 2024] POST /api/manage/user/list/ => generated 1353 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 0)
+[pid: 1862549|app: 0|req: 6/9] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 05:09:55 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 4 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+Bad Request: /api/get_info/
+[pid: 1862553|app: 0|req: 2/10] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 05:13:14 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:205: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+[pid: 1862548|app: 0|req: 1/11] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:13:15 2024] POST /api/manage/user/list/ => generated 1353 bytes in 169 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 0)
+[pid: 1862553|app: 0|req: 3/12] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 05:13:15 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Unauthorized: /api/login/
+[pid: 1862553|app: 0|req: 4/13] 219.239.227.114 () {50 vars in 1194 bytes} [Thu May  9 05:13:17 2024] POST /api/login/ => generated 48 bytes in 3 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 1)
+Unauthorized: /api/login/
+[pid: 1862553|app: 0|req: 5/14] 219.239.227.114 () {50 vars in 956 bytes} [Thu May  9 05:13:18 2024] POST /api/login/ => generated 48 bytes in 3 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 0)
+Unauthorized: /api/login/
+[pid: 1862553|app: 0|req: 6/15] 219.239.227.114 () {50 vars in 956 bytes} [Thu May  9 05:13:22 2024] POST /api/login/ => generated 48 bytes in 2 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 1)
+Unauthorized: /api/login/
+[pid: 1862549|app: 0|req: 7/16] 219.239.227.114 () {50 vars in 956 bytes} [Thu May  9 05:13:23 2024] POST /api/login/ => generated 48 bytes in 3 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 0)
+Unauthorized: /api/login/
+[pid: 1862548|app: 0|req: 2/17] 219.239.227.114 () {50 vars in 956 bytes} [Thu May  9 05:13:23 2024] POST /api/login/ => generated 48 bytes in 4 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 1)
+[pid: 1862549|app: 0|req: 8/18] 219.239.227.114 () {50 vars in 962 bytes} [Thu May  9 05:13:31 2024] POST /api/register/ => generated 375 bytes in 468 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 1)
+[pid: 1862549|app: 0|req: 9/19] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:13:34 2024] POST /api/manage/user/list/ => generated 1535 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 0)
+Bad Request: /api/get_info/
+[pid: 1862553|app: 0|req: 7/20] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 05:14:12 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1862549|app: 0|req: 10/21] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:14:12 2024] POST /api/manage/user/list/ => generated 1535 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 1)
+[pid: 1862549|app: 0|req: 11/22] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 05:14:12 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Unauthorized: /api/login/
+[pid: 1862549|app: 0|req: 12/23] 219.239.227.114 () {50 vars in 1194 bytes} [Thu May  9 05:14:26 2024] POST /api/login/ => generated 48 bytes in 2 msecs (HTTP/1.1 401) 8 headers in 254 bytes (1 switches on core 1)
+[pid: 1862553|app: 0|req: 8/24] 219.239.227.114 () {50 vars in 962 bytes} [Thu May  9 05:14:39 2024] POST /api/register/ => generated 378 bytes in 464 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 1)
+[pid: 1862549|app: 0|req: 13/25] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:14:42 2024] POST /api/manage/user/list/ => generated 1720 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 0)
+Bad Request: /api/get_info/
+[pid: 1862553|app: 0|req: 9/26] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 05:14:50 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1862550|app: 0|req: 3/27] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:14:51 2024] POST /api/manage/user/list/ => generated 1720 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 0)
+[pid: 1862550|app: 0|req: 4/28] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 05:14:51 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 4 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+Bad Request: /api/get_info/
+[pid: 1862549|app: 0|req: 14/29] 219.239.227.114 () {44 vars in 1082 bytes} [Thu May  9 05:17:03 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+[pid: 1862548|app: 0|req: 3/30] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:17:03 2024] POST /api/manage/user/list/ => generated 1720 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 0)
+[pid: 1862553|app: 0|req: 10/31] 219.239.227.114 () {44 vars in 1104 bytes} [Thu May  9 05:17:03 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1862549|app: 0|req: 15/32] 219.239.227.114 () {50 vars in 1200 bytes} [Thu May  9 05:17:16 2024] POST /api/register/ => generated 375 bytes in 459 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 0)
+[pid: 1862549|app: 0|req: 16/33] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:17:22 2024] POST /api/manage/user/list/ => generated 1903 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 1)
+/root/Meteorological_prediction_platform/back_end/./users/views.py:205: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'django.contrib.auth.models.User'> QuerySet.
+  paginator = Paginator(users, page_size)
+[pid: 1862553|app: 0|req: 11/34] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:17:25 2024] POST /api/manage/user/list/ => generated 1903 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 246 bytes (1 switches on core 0)
+[pid: 1862553|app: 0|req: 12/35] 219.239.227.114 () {44 vars in 1092 bytes} [Thu May  9 05:17:34 2024] GET /api/alarm_notices/ => generated 38 bytes in 2 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1862550|app: 0|req: 5/36] 219.239.227.114 () {44 vars in 1106 bytes} [Thu May  9 05:17:34 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1862548|app: 0|req: 4/37] 219.239.227.114 () {44 vars in 1084 bytes} [Thu May  9 05:17:34 2024] GET /api/subscribe/ => generated 34 bytes in 5 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1862550|app: 0|req: 6/38] 219.239.227.114 () {44 vars in 1096 bytes} [Thu May  9 05:17:34 2024] GET /api/get_alarm_level/ => generated 41 bytes in 1 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1862548)...
+Gracefully killing worker 3 (pid: 1862550)...
+Gracefully killing worker 4 (pid: 1862553)...
+Gracefully killing worker 2 (pid: 1862549)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 05:27:42 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x1edd5c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x1edd5c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1866243, cores: 2)
+spawned uWSGI worker 2 (pid: 1866244, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1866247, cores: 2)
+spawned uWSGI worker 4 (pid: 1866250, cores: 2)
+[pid: 1866250|app: 0|req: 1/1] 219.239.227.114 () {50 vars in 962 bytes} [Thu May  9 05:28:03 2024] POST /api/register/ => generated 375 bytes in 609 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 0)
+[pid: 1866250|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 1084 bytes} [Thu May  9 05:28:06 2024] GET /api/subscribe/ => generated 34 bytes in 4 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1866247|app: 0|req: 1/3] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:28:14 2024] POST /api/operate/password/ => generated 17 bytes in 140 msecs (HTTP/1.1 200) 8 headers in 252 bytes (1 switches on core 0)
+Internal Server Error: /api/operate/password/
+[pid: 1866247|app: 0|req: 2/4] 219.239.227.114 () {50 vars in 1216 bytes} [Thu May  9 05:28:25 2024] POST /api/operate/password/ => generated 77 bytes in 13 msecs (HTTP/1.1 500) 9 headers in 370 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1866243)...
+Gracefully killing worker 2 (pid: 1866244)...
+Gracefully killing worker 3 (pid: 1866247)...
+Gracefully killing worker 4 (pid: 1866250)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 05:28:59 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x11ae5c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x11ae5c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1866416, cores: 2)
+spawned uWSGI worker 2 (pid: 1866418, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1866422, cores: 2)
+spawned uWSGI worker 4 (pid: 1866423, cores: 2)
+Internal Server Error: /api/operate/password/
+[pid: 1866423|app: 0|req: 1/1] 219.239.227.114 () {50 vars in 1172 bytes} [Thu May  9 05:29:00 2024] POST /api/operate/password/ => generated 93 bytes in 254 msecs (HTTP/1.1 500) 8 headers in 271 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 4 (pid: 1866423)...
+Gracefully killing worker 1 (pid: 1866416)...
+Gracefully killing worker 2 (pid: 1866418)...
+Gracefully killing worker 3 (pid: 1866422)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 05:32:14 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x147d5c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x147d5c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1866936, cores: 2)
+spawned uWSGI worker 2 (pid: 1866938, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1866940, cores: 2)
+spawned uWSGI worker 4 (pid: 1866945, cores: 2)
+Bad Request: /api/get_info/
+[pid: 1866945|app: 0|req: 1/1] 219.239.227.114 () {44 vars in 1038 bytes} [Thu May  9 05:32:34 2024] GET /api/get_info/ => generated 28 bytes in 128 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+[pid: 1866945|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 1040 bytes} [Thu May  9 05:32:34 2024] GET /api/subscribe/ => generated 34 bytes in 5 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1866945|app: 0|req: 3/3] 219.239.227.114 () {44 vars in 1060 bytes} [Thu May  9 05:32:34 2024] GET /api/alarm_notices_brief/ => generated 38 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1866940|app: 0|req: 1/4] 219.239.227.114 () {50 vars in 1156 bytes} [Thu May  9 05:32:54 2024] POST /api/register/ => generated 376 bytes in 595 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 0)
+[pid: 1866940|app: 0|req: 2/5] 219.239.227.114 () {44 vars in 1040 bytes} [Thu May  9 05:32:58 2024] GET /api/subscribe/ => generated 34 bytes in 4 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+Internal Server Error: /api/operate/password/
+[pid: 1866945|app: 0|req: 4/6] 219.239.227.114 () {50 vars in 1172 bytes} [Thu May  9 05:33:06 2024] POST /api/operate/password/ => generated 93 bytes in 1 msecs (HTTP/1.1 500) 8 headers in 271 bytes (1 switches on core 1)
+[pid: 1866945|app: 0|req: 5/7] 219.239.227.114 () {50 vars in 912 bytes} [Thu May  9 05:33:44 2024] POST /api/login/ => generated 178 bytes in 519 msecs (HTTP/1.1 200) 10 headers in 534 bytes (1 switches on core 0)
+[pid: 1866940|app: 0|req: 3/8] 219.239.227.114 () {44 vars in 873 bytes} [Thu May  9 05:33:48 2024] GET /api/subscribe/ => generated 34 bytes in 3 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1866945|app: 0|req: 6/9] 219.239.227.114 () {50 vars in 1005 bytes} [Thu May  9 05:33:57 2024] POST /api/operate/password/ => generated 17 bytes in 10 msecs (HTTP/1.1 200) 8 headers in 252 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 3 (pid: 1866940)...
+Gracefully killing worker 1 (pid: 1866936)...
+Gracefully killing worker 4 (pid: 1866945)...
+Gracefully killing worker 2 (pid: 1866938)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 05:35:17 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x22cb5c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x22cb5c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1867363, cores: 2)
+spawned uWSGI worker 2 (pid: 1867364, cores: 2)
+spawned uWSGI worker 3 (pid: 1867365, cores: 2)
+spawned uWSGI worker 4 (pid: 1867366, cores: 2)
+Python auto-reloader enabled
+[pid: 1867365|app: 0|req: 2/1] 219.239.227.114 () {44 vars in 885 bytes} [Thu May  9 05:37:51 2024] GET /api/get_alarm_level/ => generated 41 bytes in 135 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+[pid: 1867365|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 895 bytes} [Thu May  9 05:37:51 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 143 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Internal Server Error: /api/alarm_notices/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2117, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 52, in get_alarm_notice
+    cities = CitySubscription.objects.filter(user=user)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1389, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/related_lookups.py", line 156, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2119, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f862692fac0>>.
+Internal Server Error: /api/subscribe/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2117, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 107, in subscribe
+    cities = CitySubscription.objects.filter(user=user)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1389, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/related_lookups.py", line 156, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2119, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f862692f9a0>>.
+[pid: 1867364|app: 0|req: 1/3] 219.239.227.114 () {44 vars in 881 bytes} [Thu May  9 05:37:51 2024] GET /api/alarm_notices/ => generated 117036 bytes in 346 msecs (HTTP/1.1 500) 8 headers in 350 bytes (1 switches on core 0)
+[pid: 1867363|app: 0|req: 1/4] 219.239.227.114 () {44 vars in 873 bytes} [Thu May  9 05:37:51 2024] GET /api/subscribe/ => generated 120538 bytes in 346 msecs (HTTP/1.1 500) 8 headers in 350 bytes (1 switches on core 0)
+Internal Server Error: /api/subscribe/
+[pid: 1867365|app: 0|req: 3/5] 219.239.227.114 () {50 vars in 947 bytes} [Thu May  9 05:37:53 2024] POST /api/subscribe/ => generated 157 bytes in 2 msecs (HTTP/1.1 500) 8 headers in 272 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1867363)...
+Gracefully killing worker 2 (pid: 1867364)...
+Gracefully killing worker 3 (pid: 1867365)...
+Gracefully killing worker 4 (pid: 1867366)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./notifications/views.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 05:39:46 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x1ce35c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x1ce35c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1867949, cores: 2)
+spawned uWSGI worker 2 (pid: 1867950, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1867953, cores: 2)
+spawned uWSGI worker 4 (pid: 1867956, cores: 2)
+Internal Server Error: /api/subscribe/
+[pid: 1867956|app: 0|req: 1/1] 219.239.227.114 () {50 vars in 947 bytes} [Thu May  9 05:39:50 2024] POST /api/subscribe/ => generated 157 bytes in 129 msecs (HTTP/1.1 500) 8 headers in 272 bytes (1 switches on core 0)
+Bad Request: /api/get_info/
+[pid: 1867956|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 827 bytes} [Thu May  9 05:40:03 2024] GET /api/get_info/ => generated 28 bytes in 1 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 1)
+[pid: 1867956|app: 0|req: 3/3] 219.239.227.114 () {44 vars in 851 bytes} [Thu May  9 05:40:03 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 4 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+[pid: 1867953|app: 0|req: 2/4] 219.239.227.114 () {44 vars in 841 bytes} [Thu May  9 05:40:03 2024] GET /api/get_alarm_level/ => generated 41 bytes in 142 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Internal Server Error: /api/alarm_notices_brief/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2117, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 143, in get_brief
+    cities = CitySubscription.objects.filter(user=user)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1389, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/related_lookups.py", line 156, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2119, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7fbba084a2c0>>.
+[pid: 1867953|app: 0|req: 2/5] 219.239.227.114 () {44 vars in 849 bytes} [Thu May  9 05:40:04 2024] GET /api/alarm_notices_brief/ => generated 116964 bytes in 42 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 1)
+Internal Server Error: /api/alarm_notices/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2117, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 52, in get_alarm_notice
+    cities = CitySubscription.objects.filter(user=user)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1389, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/related_lookups.py", line 156, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2119, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7fbba084e6e0>>.
+Internal Server Error: /api/subscribe/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2117, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 107, in subscribe
+    cities = CitySubscription.objects.filter(user=user)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1389, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/related_lookups.py", line 156, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2119, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7fbba084de40>>.
+[pid: 1867950|app: 0|req: 2/6] 219.239.227.114 () {44 vars in 837 bytes} [Thu May  9 05:40:03 2024] GET /api/alarm_notices/ => generated 116887 bytes in 192 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 1)
+[pid: 1867950|app: 0|req: 2/7] 219.239.227.114 () {44 vars in 829 bytes} [Thu May  9 05:40:03 2024] GET /api/subscribe/ => generated 120389 bytes in 192 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 0)
+Internal Server Error: /api/register/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./users/views.py", line 157, in my_register
+    authenticate(username,password)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/debug.py", line 75, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+TypeError: authenticate() takes from 0 to 1 positional arguments but 2 were given
+[pid: 1867956|app: 0|req: 4/8] 219.239.227.114 () {50 vars in 945 bytes} [Thu May  9 05:40:16 2024] POST /api/register/ => generated 70330 bytes in 481 msecs (HTTP/1.1 500) 8 headers in 282 bytes (1 switches on core 1)
+Bad Request: /api/register/
+[pid: 1867956|app: 0|req: 5/9] 219.239.227.114 () {50 vars in 945 bytes} [Thu May  9 05:40:18 2024] POST /api/register/ => generated 55 bytes in 2 msecs (HTTP/1.1 400) 8 headers in 253 bytes (1 switches on core 0)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 1867949)...
+Gracefully killing worker 3 (pid: 1867953)...
+Gracefully killing worker 2 (pid: 1867950)...
+Gracefully killing worker 4 (pid: 1867956)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./users/views.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 05:41:56 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x21645c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x21645c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1868282, cores: 2)
+spawned uWSGI worker 2 (pid: 1868283, cores: 2)
+spawned uWSGI worker 3 (pid: 1868284, cores: 2)
+spawned uWSGI worker 4 (pid: 1868287, cores: 2)
+Python auto-reloader enabled
+Bad Request: /api/get_info/
+[pid: 1868283|app: 0|req: 1/1] 219.239.227.114 () {44 vars in 827 bytes} [Thu May  9 05:41:58 2024] GET /api/get_info/ => generated 28 bytes in 127 msecs (HTTP/1.1 400) 7 headers in 221 bytes (1 switches on core 0)
+Internal Server Error: /api/alarm_notices_brief/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2117, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 143, in get_brief
+    cities = CitySubscription.objects.filter(user=user)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1389, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/related_lookups.py", line 156, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2119, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f22e9062140>>.
+[pid: 1868283|app: 0|req: 2/2] 219.239.227.114 () {44 vars in 849 bytes} [Thu May  9 05:41:58 2024] GET /api/alarm_notices_brief/ => generated 116964 bytes in 38 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 1)
+[pid: 1868284|app: 0|req: 1/3] 219.239.227.114 () {50 vars in 945 bytes} [Thu May  9 05:42:11 2024] POST /api/register/ => generated 375 bytes in 1051 msecs (HTTP/1.1 201) 8 headers in 250 bytes (1 switches on core 0)
+[pid: 1868284|app: 0|req: 3/4] 219.239.227.114 () {44 vars in 1062 bytes} [Thu May  9 05:42:14 2024] GET /api/alarm_resent_notices/ => generated 38 bytes in 13 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 1)
+Internal Server Error: /api/alarm_notices/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2117, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 52, in get_alarm_notice
+    cities = CitySubscription.objects.filter(user=user)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1389, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/related_lookups.py", line 156, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2119, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f22e90d35b0>>.
+[pid: 1868284|app: 0|req: 3/5] 219.239.227.114 () {44 vars in 1048 bytes} [Thu May  9 05:42:14 2024] GET /api/alarm_notices/ => generated 117114 bytes in 50 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 0)
+[pid: 1868282|app: 0|req: 1/6] 219.239.227.114 () {44 vars in 1052 bytes} [Thu May  9 05:42:14 2024] GET /api/get_alarm_level/ => generated 41 bytes in 174 msecs (HTTP/1.1 200) 7 headers in 212 bytes (1 switches on core 0)
+Internal Server Error: /api/subscribe/
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2117, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/root/Meteorological_prediction_platform/back_end/./notifications/views.py", line 107, in subscribe
+    cities = CitySubscription.objects.filter(user=user)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1389, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/related_lookups.py", line 156, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+  File "/root/anaconda3/envs/djangoenv/lib/python3.10/site-packages/django/db/models/fields/__init__.py", line 2119, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x7f22e906da50>>.
+[pid: 1868287|app: 0|req: 1/7] 219.239.227.114 () {44 vars in 1040 bytes} [Thu May  9 05:42:14 2024] GET /api/subscribe/ => generated 120616 bytes in 209 msecs (HTTP/1.1 500) 7 headers in 251 bytes (1 switches on core 0)
+Internal Server Error: /api/subscribe/
+[pid: 1868287|app: 0|req: 2/8] 219.239.227.114 () {50 vars in 1158 bytes} [Thu May  9 05:42:16 2024] POST /api/subscribe/ => generated 157 bytes in 2 msecs (HTTP/1.1 500) 8 headers in 272 bytes (1 switches on core 1)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./back_end/settings.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 2 (pid: 1868283)...
+Gracefully killing worker 1 (pid: 1868282)...
+Gracefully killing worker 3 (pid: 1868284)...
+Gracefully killing worker 4 (pid: 1868287)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 05:45:16 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x1df55c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x1df55c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1868861, cores: 2)
+spawned uWSGI worker 2 (pid: 1868864, cores: 2)
+Python auto-reloader enabled
+spawned uWSGI worker 3 (pid: 1868867, cores: 2)
+spawned uWSGI worker 4 (pid: 1868869, cores: 2)
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./back_end/settings.py has been modified
+...gracefully killing workers...
+Gracefully killing worker 4 (pid: 1868869)...
+Gracefully killing worker 1 (pid: 1868861)...
+Gracefully killing worker 2 (pid: 1868864)...
+Gracefully killing worker 3 (pid: 1868867)...
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./back_end/settings.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./back_end/settings.py has been modified
+[uwsgi-python-reloader] module/file /root/Meteorological_prediction_platform/back_end/./back_end/settings.py has been modified
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /root/Meteorological_prediction_platform/back_end
+closing all non-uwsgi socket fds > 2 (max_fd = 65535)...
+found fd 3 mapped to socket 0 (127.0.0.1:8000)
+running /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** Starting uWSGI 2.0.21 (64bit) on [Thu May  9 05:53:54 2024] ***
+compiled with version: 11.2.0 on 24 October 2023 19:51:36
+os: Linux-5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023
+nodename: buaa-se-06-0003
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /root/Meteorological_prediction_platform/back_end
+detected binary path: /root/anaconda3/envs/djangoenv/bin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/Meteorological_prediction_platform/back_end
+your processes number limit is 14422
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:8000 fd 3
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.10.12 (main, Jul  5 2023, 18:54:27) [GCC 11.2.0]
+Python main interpreter initialized at 0x20695c0
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 1031270 bytes (1007 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x20695c0 pid: 1856173 (default app)
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 1856173)
+spawned uWSGI worker 1 (pid: 1870146, cores: 2)
+spawned uWSGI worker 2 (pid: 1870147, cores: 2)
+spawned uWSGI worker 3 (pid: 1870148, cores: 2)
+spawned uWSGI worker 4 (pid: 1870149, cores: 2)
+Python auto-reloader enabled
