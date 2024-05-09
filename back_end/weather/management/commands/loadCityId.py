@@ -4,20 +4,10 @@ from weather.models import City2CityId, Pro2City, ProGeography
 from openpyxl import load_workbook
 
 class Command(BaseCommand):
-<<<<<<< HEAD
-<<<<<<< HEAD
     help = 'Store catastrophic forecast data into the database'
 
     def handle(self, *args, **kwargs):
-        try: 
-=======
-    def handle(self, *args, **kwargs):
         try:
->>>>>>> master
-=======
-    def handle(self, *args, **kwargs):
-        try:
->>>>>>> master
             f = open(r'/root/China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
         except FileNotFoundError:
             try:
