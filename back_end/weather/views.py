@@ -8,6 +8,8 @@ from .serializers import HourlyWeatherSerializer, DailyWeatherSerializer, Monthl
 import json
 from datetime import datetime
 import pytz
+import csv
+import requests
 
 
 # Create your views here.
@@ -54,6 +56,16 @@ class MonthlyWeatherView(APIView):
 
 
 def index(request):
+    ### TODO tochec and set path
+    with open('.....', 'w', newline='', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        for i, row in enumerate(reader):
+            if i < 2:
+                continue
+            cityId = row[0]
+            cityName = row[7]
+            #### TODO save to Model
+
     return HttpResponse("Welcome to the weather app!")
 
 
@@ -70,11 +82,35 @@ def realtime(request):
 
 
 def aqi_best(request):
-    return HttpResponse("This is the AQI best stations page!")
+    weatherInfo = WeatherInfo.objects.all()
+    sorted_weatherInfo = sorted(weatherInfo, key=lambda x: x.aqi, reverse=True)
+    response_json = {
+        "status": True,
+        "ranks": []
+    }
+    for i in range(min(10, len(sorted_weatherInfo))):
+        response_json["ranks"].append({
+            "city": sorted_weatherInfo[i].city,
+            "category": sorted_weatherInfo[i].category,
+            "aqi": sorted_weatherInfo[i].aqi
+        })
+    return JsonResponse(response_json, status=200)
 
 
 def aqi_worst(request):
-    return HttpResponse("This is the AQI worst stations page!")
+    weatherInfo = WeatherInfo.objects.all()
+    sorted_weatherInfo = sorted(weatherInfo, key=lambda x: x.aqi)
+    response_json = {
+        "status": True,
+        "ranks": []
+    }
+    for i in range(min(10, len(sorted_weatherInfo))):
+        response_json["ranks"].append({
+            "city": sorted_weatherInfo[i].city,
+            "category": sorted_weatherInfo[i].category,
+            "aqi": sorted_weatherInfo[i].aqi
+        })
+    return JsonResponse(response_json, status=200)
 
 
 def aqi_current_city_change(request):
@@ -82,81 +118,173 @@ def aqi_current_city_change(request):
 
 
 def aqi_target_city_change(request):
-    return HttpResponse("This is the AQI target city change page!")
+    forecast_month_data = DailyWeather.objects.all()
+    data = json.load(request.body)
+    city = data["city"]
+    forecast_month_data = forecast_month_data.filter(
+        city=city).order_by("fxDate")
+    response_json = {
+        "status": True,
+        "data": []
+    }
+    for i in range(min(30, len(forecast_month_data))):
+        response_json["data"].append({
+            "time": forecast_month_data[i].fxDate,
+            "aqi": forecast_month_data[i].humidity,
+        })
+
+    return JsonResponse(response_json, status=200)
 
 
 def temp_city_change(request):
-    return HttpResponse("This is the temp city change page!")
+    forecast_month_data = DailyWeather.objects.all()
+    data = json.load(request.body)
+    city = data["city"]
+    forecast_month_data = forecast_month_data.filter(
+        city=city).order_by("fxDate")
+    response_json = {
+        "status": True,
+        "data": []
+    }
+    for i in range(min(30, len(forecast_month_data))):
+        response_json["data"].append({
+            "time": forecast_month_data[i].fxDate,
+            "temp": forecast_month_data[i].tempMax,
+        })
+    return JsonResponse(response_json, status=200)
 
 
 def pressure_city_change(request):
-    return HttpResponse("This is the pressure city change page!")
+    forecast_month_data = DailyWeather.objects.all()
+    data = json.load(request.body)
+    city = data["city"]
+    forecast_month_data = forecast_month_data.filter(
+        city=city).order_by("fxDate")
+    response_json = {
+        "status": True,
+        "data": []
+    }
+    for i in range(min(30, len(forecast_month_data))):
+        response_json["data"].append({
+            "time": forecast_month_data[i].fxDate,
+            "pressure": forecast_month_data[i].pressure,
+        })
+    return JsonResponse(response_json, status=200)
 
 
 def humid_city_change(request):
-    return HttpResponse("This is the humid city change page!")
+    forecast_month_data = DailyWeather.objects.all()
+    data = json.load(request.body)
+    city = data["city"]
+    forecast_month_data = forecast_month_data.filter(
+        city=city).order_by("fxDate")
+    response_json = {
+        "status": True,
+        "data": []
+    }
+    for i in range(min(30, len(forecast_month_data))):
+        response_json["data"].append({
+            "time": forecast_month_data[i].fxDate,
+            "humid": forecast_month_data[i].humidity,
+        })
+    return JsonResponse(response_json, status=200)
 
 
-# @csrf_exempt
-# def getProInfo(request):
-#     assert request.method == 'GET'
-#     proName = request.GET.get('proName')
-#     cityId = Pro2City.objects.get(proName=proName).cityId
-#     ### TODO get cityName
-#     # cityName = getCityName(cityId)
-#     cityName = proName
+@csrf_exempt
+def getProInfo(request):
+    assert request.method == 'GET'
+    proName = request.GET.get('proName')
+    # cityId = Pro2City.objects.get(proName=proName).cityId
+    ### TODO get cityName to remove
+    # cityName = getCityName(cityId)
+    cityName = proName
 
-#     ### TODO use API to get weather and hazardTable
-#     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
-#     # air : 实时空气质量 https://dev.qweather.com/docs/resource/indices-info/
-#     # indices : 天气指数 https://dev.qweather.com/docs/resource/indices-info/
-#     ## 运动指数，紫外线指数
-#     # harzard : 天气灾害预警 https://dev.qweather.com/docs/api/warning/weather-warning/
-#     # json to dict TODO fill load paras
-#     weather = json.load(...)
-#     air = json.load(...)
-#     indices = json.load(...)
-#     hazard  = json.load(...)
-#     geography = ProGeography.objects.get(proName=proName).geographyInfo
+    ### TODO use API to get weather and hazardTable
+    # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
+    # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
+    # indices : 天气指数 https://dev.qweather.com/docs/resource/indices-info/
+    ## 运动指数，紫外线指数
+    # harzard : 天气灾害预警 https://dev.qweather.com/docs/api/warning/weather-warning/
+    # json to dict TODO fill load paras
 
+    # TODO to remove
+    cityId = "101010100"
+    cityName = '北京市'
+    proName = "北京"
 
-#     date_time = datetime.fromisoformat(weather["updateTime"])
-#     timezon = pytz.timezone('Asia/Shanghai')
-#     retList = {
-#         "weather": {
-#             "time": date_time.astimezone(timezon).strftime("%Y-%m-%d %H:%M"),
-#             "tem": float(weather["now"]["temp"]) ,
-#             "condition": weather["now"]["text"] ,
-#             "infos": "", # fill later
-#             "wind": int(weather["now"]["windScale"]) ,
-#             "windDir": weather["now"]["windDir"] ,
-#             "hum": int(weather["now"]["humidity"]) ,
-#             "ray": "" , # fill later
-#             "air": air["now"]["category"] ,
-#             "airAQI": int(air["now"]["aqi"]) ,
-#             "visibility": int(weather["now"]["vis"]) ,
-#             "rainfall": float(weather["now"]["precip"]) ,
-#             "pressure": int(weather["now"]["pressure"]) ,
-#         },
-#         "geography": geography,
-#         "hazardTable": [],
-#     }
+    # ### TODO use API to get weather and hazardTable
+    # # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
+    # # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
+    # # indices : 天气指数 https://dev.qweather.com/docs/resource/indices-info/
+    # ## 运动指数，紫外线指数
+    # # harzard : 天气灾害预警 https://dev.qweather.com/docs/api/warning/weather-warning/
+    # # json to dict TODO fill load paras
+    weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
+        'key': 'aa7975af7b564c60804b6b08fab2e2c5',
+        'location': cityId,
+    })
+    air = requests.get('https://devapi.qweather.com/v7/air/now', params={
+        'key': 'aa7975af7b564c60804b6b08fab2e2c5',
+        'location': cityId,
+    })
+    indices = requests.get('https://devapi.qweather.com/v7/indices/1d', params={
+        'key': 'aa7975af7b564c60804b6b08fab2e2c5',
+        'location': cityId,
+        'type': "1,5",
+    })
+    hazard = requests.get('https://devapi.qweather.com/v7/warning/now', params={
+        'key': 'aa7975af7b564c60804b6b08fab2e2c5',
+        'location': cityId,
+    })
 
-#     for daily in indices["daily"]:
-#         if daily.type == "1": # 运动指数
-#             retList["weather"]["infos"] = daily["text"]
-#         if daily.type == "5": # 紫外线
-#             retList["weather"]["ray"] = daily["category"]
+    print(type(air.content))
 
-#     for warning in hazard["warning"]:
-#         retList["hazardTable"].append({
-#             "place": cityName + ", " + proName ,
-#             "level": warning["severityColor"] ,
-#             "type": warning["typeName"],
-#         })
+    weather = json.loads(weather.content.decode('utf-8'))
+    air = json.loads(air.content.decode('utf-8'))
+    indices = json.loads(indices.content.decode('utf-8'))
+    hazard  = json.loads(hazard.content.decode('utf-8'))
+    # geography = ProGeography.objects.get(proName=proName).geographyInfo
+    geography = "geographyInf"
 
 
-#     return JsonResponse(retList, status=200)
+    date_time = datetime.fromisoformat(weather["updateTime"])
+    timezon = pytz.timezone('Asia/Shanghai')
+    date_time = date_time.astimezone(timezon).strftime("%Y-%m-%d %H:%M")
+    # print(date_time)
+    retList = {
+        "weather": {
+            "time": date_time,
+            "tem": float(weather["now"]["temp"]) ,
+            "condition": weather["now"]["text"] ,
+            "infos": "", # fill later
+            "wind": int(weather["now"]["windScale"]) ,
+            "windDir": weather["now"]["windDir"] ,
+            "hum": int(weather["now"]["humidity"]) ,
+            "ray": "" , # fill later
+            "air": air["now"]["category"] ,
+            "airAQI": int(air["now"]["aqi"]) ,
+            "visibility": int(weather["now"]["vis"]) ,
+            "rainfall": float(weather["now"]["precip"]) ,
+            "pressure": int(weather["now"]["pressure"]) ,
+        },
+        "geography": geography,
+        "hazardTable": [],
+    }
+
+
+    for daily in indices["daily"]:
+        if daily["type"] == "1": # 运动指数
+            retList["weather"]["infos"] = daily["text"]
+        if daily["type"] == "5": # 紫外线
+            retList["weather"]["ray"] = daily["category"]
+
+    for warning in hazard["warning"]:
+        retList["hazardTable"].append({
+            "place": cityName + ", " + proName ,
+            "level": warning["severityColor"] ,
+            "type": warning["typeName"],
+        })
+    return JsonResponse(retList, status=200)
 
 # @csrf_exempt
 # def getHazard(request: HttpRequest):
@@ -171,7 +299,7 @@ def humid_city_change(request):
 #     cityId = City2CityId.objects.get(cityName=city)
 #     ### TODO use API to get weather and air
 #     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
-#     # air : 实时空气质量 https://dev.qweather.com/docs/resource/indices-info/
+#     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
 #     # json to dict TODO fill load paras
 #     weather = json.load(...)
 #     air = json.load(...)
@@ -215,6 +343,7 @@ def humid_city_change(request):
 #     pressure = models.FloatField(default=0.0)
 #     aqi = models.IntegerField(default=0)
 #     category = models.CharField(max_length=200, default="")
+@csrf_exempt
 def add_weather_data(request):
     response_json = {
         "status": True,
@@ -238,6 +367,7 @@ def add_weather_data(request):
     return JsonResponse(response_json, status=200)
 
 
+@csrf_exempt
 def delete_weather_data(request):
     response_json = {
         "status": True,
@@ -247,18 +377,30 @@ def delete_weather_data(request):
     return JsonResponse(response_json, status=200)
 
 
+@csrf_exempt
 def search_weather_data(request):
     data = json.loads(request.body)
     data_type = data['type'] if data['type'] else 'weather'
-    from_time = data['time'][0] if data['time'][0] else None
-    to_time = data['time'][1] if data['time'][1] else None
+    from_time = data['time'][0] if len(data['time']) > 0 else None
+    to_time = data['time'][1] if len(data['time']) > 1 else None
     address = data['address'] if data['address'] else None
 
     if data_type == 'weather':
-        weather_data = WeatherInfo.objects.filter(
-            time__range=(from_time, to_time) if from_time and to_time else all,
-            city__contains=address if address else all
-        )
+        from django.db.models import Q
+
+        # 定义时间范围过滤条件
+        time_filter = Q(time__range=(from_time, to_time)
+                        ) if from_time and to_time else Q()
+
+        # 定义城市包含过滤条件
+        city_filter = Q(city__contains=address) if address else Q()
+
+        # 执行查询
+        weather_data = WeatherInfo.objects.filter(time_filter & city_filter)
+        # weather_data = WeatherInfo.objects.filter(
+        #     time__range=(from_time, to_time) if from_time and to_time else all,
+        #     city__contains=address if address else all
+        # )
         weather_data_list = []
         for data in weather_data:
             weather_data_list.append({
