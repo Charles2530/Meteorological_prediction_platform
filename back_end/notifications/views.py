@@ -7,7 +7,7 @@ from django.views.decorators.http import require_http_methods
 from .models import Notification, WeatherForecast, CitySubscription
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import NotificationSerializer
+from .serializers import NotificationSerializer, CitySubscriptionSerializer, WeatherForecastSerializer
 from .task import fetch_catastrophic_forecast_cities_list, fetch_weather_catastrophic_forecast
 from django.http import HttpResponse, JsonResponse
 # Create your views here.
@@ -21,6 +21,34 @@ class NotificationView(APIView):
 
     def post(self, request, format=None):
         serializer = NotificationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+class CitySubscriptionView(APIView):
+    def get(self, request, format=None):
+        city_subscriptions = CitySubscription.objects.all()
+        serializer = CitySubscriptionSerializer(city_subscriptions, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = CitySubscriptionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+class WeatherForecastView(APIView):
+    def get(self, request, format=None):
+        weather_forecast = WeatherForecast.objects.all()
+        serializer = WeatherForecastSerializer(weather_forecast, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = WeatherForecastSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
