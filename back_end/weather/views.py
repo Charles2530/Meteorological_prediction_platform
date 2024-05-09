@@ -441,7 +441,7 @@ def search_weather_data(request):
         weather_data_list = []
         for data in weather_data:
             weather_data_list.append({
-                'time': data.time,
+                'time': data.fxTime,
                 'city': data.city,
                 'temp': data.temp,
                 'text': data.text,

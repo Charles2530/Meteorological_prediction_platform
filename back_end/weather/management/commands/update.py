@@ -1,7 +1,6 @@
 # D:/weather/management/commands/fetch_api_data.py
 from django.core.management.base import BaseCommand
 from celery.schedules import crontab
-from weather.tasks import fetch_and_save_api_data
 
 
 class Command(BaseCommand):

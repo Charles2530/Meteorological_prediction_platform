@@ -111,7 +111,7 @@ class ProGeography(models.Model):
 # },
 
 class WeatherInfo(models.Model):
-    time = models.DateTimeField(default=datetime.now, primary_key=True)
+    fxTime = models.DateTimeField(default=datetime.now, primary_key=True)
     city = models.CharField(max_length=200, default="北京")
     temp = models.FloatField(default=0.0)
     text = models.CharField(max_length=200, default="")
@@ -125,7 +125,7 @@ class WeatherInfo(models.Model):
     category = models.CharField(max_length=200, default="")
 
     def __str__(self):
-        return "weather info for " + self.city + " " + self.time.strftime('%Y-%m-%d %H:%M:%S')
+        return "weather info for " + self.city + " " + self.fxTime.strftime('%Y-%m-%d %H:%M:%S')
 
     class Meta:
         unique_together = ('time', 'city')
