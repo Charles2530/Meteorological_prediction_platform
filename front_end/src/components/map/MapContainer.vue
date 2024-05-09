@@ -176,7 +176,6 @@ const emit = defineEmits(["getValue"])
 // 点击事件触发emit，去调用我们注册的自定义事件getValue,并传递value参数至父组件
 const transValue = () => {
   emit("getValue", dis_info.districtName);
-  getHazardInfo();
 }
 
 onMounted(() => {
@@ -340,9 +339,9 @@ function handlerMapClick() {
           // let cityId = parseInt(adcode.substr(0, 4) + '00')
           // let areaId = adcode
           if (dis_info.districtCode != "100000") {
-            dis_info.districtName = dis_info.districtName + "/中国";
             //向父组件传省份名
             transValue();
+            dis_info.districtName = dis_info.districtName + "/中国";
             drawBounds();
             map.setCenter(markersPosition, false, 300);
           } else {
