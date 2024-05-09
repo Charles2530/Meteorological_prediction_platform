@@ -187,7 +187,6 @@ def getProInfo(request):
     if proName == '中国':
         proName = '北京市'
     cityId = Pro2City.objects.get(proName=proName).cityId
-    ### TODO get cityName to remove
     cityName = City2CityId.objects.get(cityId=cityId).cityName
     # cityName = proName
     # cityId = "101010100"
@@ -235,6 +234,7 @@ def getProInfo(request):
             "time": date_time,
             "tem": float(weather["now"]["temp"]) ,
             "condition": weather["now"]["text"] ,
+            "icoid": weather["now"]["icon"],
             "infos": "", # fill later
             "wind": int(weather["now"]["windScale"]) ,
             "windDir": weather["now"]["windDir"] ,
