@@ -41,28 +41,30 @@ def getLevel(severity):
 
 
 def get_alarm_notice(request):
-    cities = fetch_catastrophic_forecast_cities_list()
-    locations = cities['warningLocList']
+    # cities = fetch_catastrophic_forecast_cities_list()
+    # locations = cities['warningLocList']
+    locations = WeatherForecast.objects.all()
     response_json = {
         "success": True,
         "notifications": []
     }
     user = User.objects.filter(username=settings.CURRENT_UNAME).first()
     cities = CitySubscription.objects.filter(user=user)
-    for locationId in locations:
-        forecast = fetch_weather_catastrophic_forecast(location=locationId)
+    for forecast in locations:
+        # forecast = fetch_weather_catastrophic_forecast(location=locationId)
         for city in cities:
             if forecast['sender'].contain(city.city_name):
                 forecast_json = {
                     "id": forecast['id'],
                     # TODO:change pic
-                    "img": "https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
+                    # "img": "https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
+                    "img": forecast['img'],
                     "title": forecast['title'],
-                    "date": forecast['startTime'],
+                    "date": forecast['date'],
                     "city": city,
-                    "level": getLevel(forecast['severity']),
-                    "content": forecast['text'],
-                    "instruction": "请有关单位和人员做好防范准备。"
+                    "level": forecast['level'],
+                    "content": forecast['content'],
+                    "instruction": forecast['instruction'],
                 }
                 response_json['notifications'].append(forecast_json)
                 break
@@ -114,33 +116,36 @@ def subscribe(request):
 
 
 def get_brief(request):
-    cities = fetch_catastrophic_forecast_cities_list()
-    locations = cities['warningLocList']
+    # cities = fetch_catastrophic_forecast_cities_list()
+    # locations = cities['warningLocList']
+    locations = WeatherForecast.objects.all()
     response_json = {
         "success": True,
         "notifications": []
     }
     user = User.objects.filter(username=settings.CURRENT_UNAME).first()
     cities = CitySubscription.objects.filter(user=user)
-    for locationId in locations:
-        forecast = fetch_weather_catastrophic_forecast(location=locationId)
+    for forecast in locations:
+        # forecast = fetch_weather_catastrophic_forecast(location=locationId)
         for city in cities:
             if forecast['sender'].contain(city.city_name):
                 forecast_json = {
                     "id": forecast['id'],
                     # TODO:change pic
-                    "img": "https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
-                    "title": forecast['title'],
-                    "date": forecast['startTime'],
-                    "city": forecast['sender'],
+                    "img": forecast['img'],
+                    "date": forecast['title'],
+                    "date": forecast['date'],
+                    "city": city,
                 }
                 response_json['notifications'].append(forecast_json)
+                break
     return JsonResponse(response_json, status=200)
 
 
 def get_alarm_level(request):
-    cities = fetch_catastrophic_forecast_cities_list()
-    locations = cities['warningLocList']
+    # cities = fetch_catastrophic_forecast_cities_list()
+    # locations = cities['warningLocList']
+    locations = WeatherForecast.objects.all()
     response_json = {
         "success": True,
         "cnt": []
@@ -148,34 +153,35 @@ def get_alarm_level(request):
     count = {}
     for idx in range(1, 6):
         count[idx] = 0
-    for locationId in locations:
-        forecast = fetch_weather_catastrophic_forecast(location=locationId)
-        count[getLevel(forecast['severity'])] += 1
+    for forecast in locations:
+        # forecast = fetch_weather_catastrophic_forecast(location=locationId)
+        count[forecast['level']] += 1
     for idx in range(1, 6):
         response_json['cnt'].append(count[idx])
     return JsonResponse(response_json, status=200)
 
 
 def get_recent(request):
-    cities = fetch_catastrophic_forecast_cities_list()
-    locations = cities['warningLocList']
+    # cities = fetch_catastrophic_forecast_cities_list()
+    # locations = cities['warningLocList']
+    locations = WeatherForecast.objects.all()
     response_json = {
         "success": True,
         "notifications": []
     }
-    for (locationId, idx) in enumerate(locations):
-        forecast = fetch_weather_catastrophic_forecast(location=locationId)
-        forecast = forecast["warning"]
+    for (forecast, idx) in enumerate(locations):
+        # forecast = fetch_weather_catastrophic_forecast(location=locationId)
+        # forecast = forecast["warning"]
         forecast_json = {
             "id": forecast["id"],
             # TODO:change pic
-            "img": "https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
+            "img": forecast["img"],
             "title": forecast['title'],
-            "date": forecast['startTime'],
-            "city": forecast['sender'],
-            "level": getLevel(forecast['severity']),
-            "content": forecast['text'],
-            "instruction": "请有关单位和人员做好防范准备。"
+            "date": forecast['date'],
+            "city": forecast['city'],
+            "level": forecast['level'],
+            "content": forecast['content'],
+            "instruction": forecast['instruction'],
         }
         response_json['notifications'].append(forecast_json)
         if idx == 3:
@@ -193,27 +199,3 @@ def get_notification_data():
         if city_subscription:
             notification_data['city'] = city_subscription
             Notification.objects.create(**notification_data)
-
-
-def get_weather_forecast_data():
-    forecasts = []
-
-    for forecast_data in forecasts:
-        WeatherForecast.objects.create(**forecast_data)
-
-
-def notification_view(request):
-    get_notification_data()
-
-    notifications = Notification.objects.all()
-    serializer = NotificationSerializer(notifications, many=True)
-    return JsonResponse(serializer.data, safe=False)
-
-
-def weather_forecast_view(request):
-    get_weather_forecast_data()
-
-    forecasts = WeatherForecast.objects.all()
-    serialized_data = []
-
-    return JsonResponse(serialized_data, safe=False)
