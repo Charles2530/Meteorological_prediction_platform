@@ -32,8 +32,11 @@ class Command(BaseCommand):
         workbook = load_workbook('/root/geography.xlsx')
         sheet = workbook.active
 
+        # print(ProGeography.objects.filter())
         for row in sheet.iter_rows(values_only=True):
             geo = ProGeography(proName=row[0], geographyInfo=row[1])
+            geo.save()
+            # print(ProGeography.objects.get(proName=row[0]).proName)
             # print(row)
             # print(row[0], row[1])
 
