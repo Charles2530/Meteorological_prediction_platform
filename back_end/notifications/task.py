@@ -1,6 +1,10 @@
 import requests
+import gzip
+import json
 from celery import shared_task
 from .models import Notification, WeatherForecast, CitySubscription
+import json
+import gzip
 
 
 @shared_task
@@ -11,7 +15,8 @@ def fetch_weather_catastrophic_forecast(location):
         'location': location,
     }
     response = requests.get(url, params=params)
-    data = response.json()
+    decompressed_data = gzip.decompress(response.content)
+    data = json.loads(decompressed_data.decode('utf-8'))
     return data
 
 
@@ -23,7 +28,8 @@ def fetch_catastrophic_forecast_cities_list():
         'range': 'cn',
     }
     response = requests.get(url, params=params)
-    data = response.json()
+    decompressed_data = gzip.decompress(response.content)
+    data = json.loads(decompressed_data.decode('utf-8'))
     return data
 
 
@@ -57,3 +63,5 @@ def store_catastrophic_forecast_data():
             instruction="请有关单位和人员做好防范准备。"
         )
         weatherForecast.save()
+
+# store_catastrophic_forecast_data()
