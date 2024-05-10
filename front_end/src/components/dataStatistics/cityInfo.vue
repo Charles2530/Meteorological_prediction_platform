@@ -16,13 +16,13 @@
               </p>
             </el-col>
             <el-col :span="6">
-              <p class="aqi text-xl text-center">AQI: {{ props.city.aqi }}</p>
+              <p class="aqi text-xl text-center">AQI: {{ props.city.norm }}</p>
             </el-col>
             <el-col :span="12">
               <p class="category text-xl text-center text-green-700">
                 空气质量:
                 <el-tag :type="rankType" class="mx-2">{{
-                  props.city.category
+                  props.city.level
                 }}</el-tag>
               </p>
             </el-col>
@@ -34,9 +34,9 @@
 </template>
 
 <script lang="ts" setup>
-import { AqiRankItem } from "@/types/weather";
+import { RankItem } from "@/types/weather";
 const props = defineProps<{
-  city: AqiRankItem;
+  city: RankItem;
   rank: number;
 }>();
 const rankClass = computed(() => {
@@ -52,12 +52,12 @@ const rankClass = computed(() => {
   }
 });
 const rankType = computed(() => {
-  switch (props.city.category) {
+  switch (props.city.level) {
     case "优":
       return "success";
     case "良":
       return "primary";
-    case "轻度污染":
+    case "较差":
       return "warning";
     default:
       return "danger";

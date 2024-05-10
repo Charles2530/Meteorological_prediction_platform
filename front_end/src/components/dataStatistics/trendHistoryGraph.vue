@@ -115,11 +115,10 @@ const renderChart = async (
     chartInstance_history = echarts.init(chartDom_history);
   }
   chartInstance_history.setOption({
-    // Adjusted to have only one visualMap for all series
     visualMap: {
       show: true,
       type: "continuous",
-      seriesIndex: 0, // This is now referring to the first (and only) series index that needs a visualMap
+      seriesIndex: 0,
       min: 0,
       max: 400,
     },
@@ -136,7 +135,7 @@ const renderChart = async (
       formatter: function (params: any) {
         let tooltipContent = "";
 
-        params.forEach(function (param: any, index) {
+        params.forEach(function (param: any) {
           switch (param.seriesName) {
             case "温度":
               tooltipContent += `${param.marker} ${param.seriesName}: ${param.value} °C<br/>`;
@@ -204,138 +203,6 @@ const renderChart = async (
       },
     ],
   });
-  // 绘制图表
-  //   chartInstance_history.setOption({
-  //     // Make gradient line here
-  //     visualMap: [
-  //       {
-  //         show: true,
-  //         type: "continuous",
-  //         seriesIndex: 0,
-  //         min: 0,
-  //         max: 400,
-  //       },
-  //       {
-  //         show: false,
-  //         type: "continuous",
-  //         seriesIndex: 1,
-  //         min: 0,
-  //         max: 400,
-  //       },
-  //       {
-  //         show: false,
-  //         type: "continuous",
-  //         seriesIndex: 2,
-  //         min: 0,
-  //         max: 400,
-  //       },
-  //       {
-  //         show: false,
-  //         type: "continuous",
-  //         seriesIndex: 3,
-  //         min: 0,
-  //         max: 400,
-  //       },
-  //     ],
-
-  //     title: [
-  //       {
-  //         top: "0%",
-  //         left: "center",
-  //         text: "城市温度变化趋势图",
-  //       },
-  //       {
-  //         top: "23%",
-  //         left: "center",
-  //         text: "城市湿度变化趋势图",
-  //       },
-  //       {
-  //         top: "48%",
-  //         left: "center",
-  //         text: "城市AQI变化趋势图",
-  //       },
-  //       {
-  //         top: "77%",
-  //         left: "center",
-  //         text: "城市气压变化趋势图",
-  //       },
-  //     ],
-  //     tooltip: {
-  //       trigger: "axis",
-  //     },
-  //     xAxis: [
-  //       {
-  //         data: tempData.map((item) => item.time),
-  //       },
-  //       {
-  //         data: humidData.map((item) => item.time),
-  //         gridIndex: 1,
-  //       },
-  //       {
-  //         data: aqiData.map((item) => item.time),
-  //         gridIndex: 2,
-  //       },
-  //       {
-  //         data: pressureData.map((item) => item.time),
-  //         gridIndex: 3,
-  //       },
-  //     ],
-  //     yAxis: [{}, { gridIndex: 1 }, { gridIndex: 2 }, { gridIndex: 3 }],
-  //     grid: [
-  //       {
-  //         // 温度图网格配置
-  //         top: "4%", // 从顶部开始
-  //         bottom: "10%", // 调整底部距离以留出空间给下一个图表
-  //         containLabel: true, // 确保标签不被裁剪
-  //       },
-  //       {
-  //         // 湿度图网格配置
-  //         top: "27%", // 从上一个图表底部开始
-  //         bottom: "53%", // 留出空间给下一个图表
-  //         containLabel: true,
-  //       },
-  //       {
-  //         // AQI图网格配置
-  //         top: "52%", // 从上一个图表底部开始
-  //         bottom: "28%", // 留出底部边距
-  //         containLabel: true,
-  //       },
-  //       {
-  //         // 气压图网格配置
-  //         top: "77%", // 从顶部开始，紧接在最后一个网格之下
-  //         bottom: "1%", // 留出顶部边距
-  //         containLabel: true,
-  //       },
-  //     ],
-  //     series: [
-  //       {
-  //         type: "line",
-  //         showSymbol: false,
-  //         data: tempData.map((item) => item.temp),
-  //       },
-  //       {
-  //         type: "line",
-  //         showSymbol: false,
-  //         data: humidData.map((item) => item.humid),
-  //         xAxisIndex: 1,
-  //         yAxisIndex: 1,
-  //       },
-  //       {
-  //         type: "line",
-  //         showSymbol: false,
-  //         data: aqiData.map((item) => item.aqi),
-  //         xAxisIndex: 2,
-  //         yAxisIndex: 2,
-  //       },
-  //       {
-  //         type: "line",
-  //         showSymbol: false,
-  //         data: pressureData.map((item) => item.pressure),
-  //         xAxisIndex: 3,
-  //         yAxisIndex: 3,
-  //       },
-  //     ],
-  //   });
 };
 
 onMounted(() => {

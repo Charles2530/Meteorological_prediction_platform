@@ -14,24 +14,15 @@
     <el-tab-pane label="空气质量" name="third">
       <AirQualityVM />
     </el-tab-pane>
-    <el-tab-pane label="数据统计" name="fourth">
-      <dataStatistics />
-    </el-tab-pane>
   </el-tabs>
 </template>
 
 <script lang="ts" setup>
-import type { TabsPaneContext } from "element-plus";
-/*抽屉页*/
 const activeName = ref("first");
-const handleClick = (tab: TabsPaneContext, event: Event) => {};
 
-/** 组件  **/
 import overview from "@/components/weather_details/overview.vue";
 import calendar30 from "@/components/weather_details/calendar30.vue";
-
 import AirQualityVM from "@/components/airQuality/AirQualityVM.vue";
-import dataStatistics from "@/components/dataStatistics/dataStatistics.vue";
 </script>
 
 <!-- !!!因为涉及到组件也要使用下面的css样式，所以不要scoped不然丑死 -->
