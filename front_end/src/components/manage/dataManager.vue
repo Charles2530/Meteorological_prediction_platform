@@ -166,13 +166,12 @@
             </template>
           </el-table-column>
         </el-table>
-        <!-- 添加分页 -->
         <el-pagination
           style="margin-left: 25px; margin-right: 5px; margin-top: 20px"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-sizes="[5, 10, 20, 50]"
+          :page-sizes="[5, 10, 15, 20, 50]"
           :page-size="pageSize"
           background
           layout="total, sizes, prev, pager, next, jumper"
@@ -182,7 +181,6 @@
     </el-main>
   </el-container>
 
-  <!-- Add Weather Dialog -->
   <el-dialog
     :title="weatherInfo.operation.addWeather"
     v-model="addDialogVisible"
@@ -504,7 +502,6 @@ const weatherInfo = {
   },
   invaild: "无效的请求！",
 };
-/* 分页功能 */
 const currentPage = ref(1);
 const pageSize = ref(10);
 const total = ref(0);
