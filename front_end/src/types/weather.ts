@@ -29,10 +29,10 @@ export interface GetSubscribeResponse {
   tableData: { city: string; status: string }[];
 }
 
-export interface AqiRankItem {
+export interface RankItem {
   city: string;
-  category: string;
-  aqi: number;
+  level: string;
+  norm: number;
 }
 
 export interface CityWeatherData {
@@ -52,7 +52,7 @@ export interface CityWeatherData {
 
 export interface ProInfo {
   weather: {
-    icoid: string,
+    icoid: string;
     time: string;
     tem: string;
     condition: string;
@@ -66,7 +66,7 @@ export interface ProInfo {
     visibility: string;
     rainfall: string;
     pressure: string;
-  },
+  };
   geography: string;
   hazardTable: Array<{
     place: string;
@@ -80,6 +80,6 @@ export interface Hazard {
   longitude: number;
   latitude: number;
   type: string;
-  time:string;
+  time: string;
   level: string;
 }

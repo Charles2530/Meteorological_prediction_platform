@@ -114,16 +114,48 @@ const renderChart = async (
     const chartDom_history = document.getElementById("chart_history");
     chartInstance_history = echarts.init(chartDom_history);
   }
+  const maxTemp = Math.max(...tempData.map((item) => item.temp));
+  const minTemp = Math.min(...tempData.map((item) => item.temp));
+  const maxHumid = Math.max(...humidData.map((item) => item.humid));
+  const minHumid = Math.min(...humidData.map((item) => item.humid));
+  const maxAqi = Math.max(...aqiData.map((item) => item.aqi));
+  const minAqi = Math.min(...aqiData.map((item) => item.aqi));
+  const maxPressure = Math.max(...pressureData.map((item) => item.pressure));
+  const minPressure = Math.min(...pressureData.map((item) => item.pressure));
+
+  // Calculate the ratio of max to min for each series
+  const tempRatio = maxTemp / minTemp;
+  const humidRatio = maxHumid / minHumid;
+  const aqiRatio = maxAqi / minAqi;
+  const pressureRatio = maxPressure / minPressure;
+  const maxRatio = Math.max(tempRatio, humidRatio, aqiRatio, pressureRatio);
+
+  // Scale the data points based on the ratio
+  const scaledTempData = tempData.map((item) => item.temp * tempRatio);
+  const scaledHumidData = humidData.map((item) => item.humid * humidRatio);
+  const scaledAqiData = aqiData.map((item) => item.aqi * aqiRatio);
+  const scaledPressureData = pressureData.map(
+    (item) => item.pressure * pressureRatio
+  );
+
+  // Update the yAxis to represent the ratio
+  const yAxis = {
+    type: "value",
+    axisLabel: {
+      formatter: function (value: any) {
+        return (value / maxRatio).toFixed(2) + "%";
+      },
+    },
+  };
+
   chartInstance_history.setOption({
-    // Adjusted to have only one visualMap for all series
     visualMap: {
       show: true,
       type: "continuous",
-      seriesIndex: 0, // This is now referring to the first (and only) series index that needs a visualMap
+      seriesIndex: 0,
       min: 0,
-      max: 400,
+      max: 1,
     },
-
     title: [
       {
         top: "0%",
@@ -136,19 +168,23 @@ const renderChart = async (
       formatter: function (params: any) {
         let tooltipContent = "";
 
-        params.forEach(function (param: any, index) {
+        params.forEach(function (param: any) {
           switch (param.seriesName) {
             case "温度":
-              tooltipContent += `${param.marker} ${param.seriesName}: ${param.value} °C<br/>`;
+              let temp = (param.value / tempRatio).toFixed(0);
+              tooltipContent += `${param.marker} ${param.seriesName}: ${temp} °C<br/>`;
               break;
             case "湿度":
-              tooltipContent += `${param.marker} ${param.seriesName}: ${param.value}%<br/>`;
+              let humid = (param.value / humidRatio).toFixed(0);
+              tooltipContent += `${param.marker} ${param.seriesName}: ${humid} %<br/>`;
               break;
             case "AQI":
-              tooltipContent += `${param.marker} ${param.seriesName}: ${param.value}<br/>`;
+              let aqi = (param.value / aqiRatio).toFixed(0);
+              tooltipContent += `${param.marker} ${param.seriesName}: ${aqi}<br/>`;
               break;
             case "气压":
-              tooltipContent += `${param.marker} ${param.seriesName}: ${param.value} hPa<br/>`;
+              let pressure = (param.value / pressureRatio).toFixed(2);
+              tooltipContent += `${param.marker} ${param.seriesName}: ${pressure} hPa<br/>`;
               break;
             default:
               break;
@@ -161,8 +197,7 @@ const renderChart = async (
     xAxis: {
       data: tempData.map((item) => item.time),
     },
-    yAxis: {},
-
+    yAxis: yAxis,
     grid: {
       top: "20%",
       bottom: "20%",
@@ -176,166 +211,33 @@ const renderChart = async (
       top: "top",
       data: ["温度", "湿度", "AQI", "气压"],
     },
-
     series: [
       {
         type: "line",
         showSymbol: false,
         name: "温度",
-        data: tempData.map((item) => item.temp),
+        data: scaledTempData,
       },
       {
         type: "line",
         showSymbol: false,
         name: "湿度",
-        data: humidData.map((item) => item.humid),
+        data: scaledHumidData,
       },
       {
         type: "line",
         showSymbol: false,
         name: "AQI",
-        data: aqiData.map((item) => item.aqi),
+        data: scaledAqiData,
       },
       {
         type: "line",
         showSymbol: false,
         name: "气压",
-        data: pressureData.map((item) => item.pressure),
+        data: scaledPressureData,
       },
     ],
   });
-  // 绘制图表
-  //   chartInstance_history.setOption({
-  //     // Make gradient line here
-  //     visualMap: [
-  //       {
-  //         show: true,
-  //         type: "continuous",
-  //         seriesIndex: 0,
-  //         min: 0,
-  //         max: 400,
-  //       },
-  //       {
-  //         show: false,
-  //         type: "continuous",
-  //         seriesIndex: 1,
-  //         min: 0,
-  //         max: 400,
-  //       },
-  //       {
-  //         show: false,
-  //         type: "continuous",
-  //         seriesIndex: 2,
-  //         min: 0,
-  //         max: 400,
-  //       },
-  //       {
-  //         show: false,
-  //         type: "continuous",
-  //         seriesIndex: 3,
-  //         min: 0,
-  //         max: 400,
-  //       },
-  //     ],
-
-  //     title: [
-  //       {
-  //         top: "0%",
-  //         left: "center",
-  //         text: "城市温度变化趋势图",
-  //       },
-  //       {
-  //         top: "23%",
-  //         left: "center",
-  //         text: "城市湿度变化趋势图",
-  //       },
-  //       {
-  //         top: "48%",
-  //         left: "center",
-  //         text: "城市AQI变化趋势图",
-  //       },
-  //       {
-  //         top: "77%",
-  //         left: "center",
-  //         text: "城市气压变化趋势图",
-  //       },
-  //     ],
-  //     tooltip: {
-  //       trigger: "axis",
-  //     },
-  //     xAxis: [
-  //       {
-  //         data: tempData.map((item) => item.time),
-  //       },
-  //       {
-  //         data: humidData.map((item) => item.time),
-  //         gridIndex: 1,
-  //       },
-  //       {
-  //         data: aqiData.map((item) => item.time),
-  //         gridIndex: 2,
-  //       },
-  //       {
-  //         data: pressureData.map((item) => item.time),
-  //         gridIndex: 3,
-  //       },
-  //     ],
-  //     yAxis: [{}, { gridIndex: 1 }, { gridIndex: 2 }, { gridIndex: 3 }],
-  //     grid: [
-  //       {
-  //         // 温度图网格配置
-  //         top: "4%", // 从顶部开始
-  //         bottom: "10%", // 调整底部距离以留出空间给下一个图表
-  //         containLabel: true, // 确保标签不被裁剪
-  //       },
-  //       {
-  //         // 湿度图网格配置
-  //         top: "27%", // 从上一个图表底部开始
-  //         bottom: "53%", // 留出空间给下一个图表
-  //         containLabel: true,
-  //       },
-  //       {
-  //         // AQI图网格配置
-  //         top: "52%", // 从上一个图表底部开始
-  //         bottom: "28%", // 留出底部边距
-  //         containLabel: true,
-  //       },
-  //       {
-  //         // 气压图网格配置
-  //         top: "77%", // 从顶部开始，紧接在最后一个网格之下
-  //         bottom: "1%", // 留出顶部边距
-  //         containLabel: true,
-  //       },
-  //     ],
-  //     series: [
-  //       {
-  //         type: "line",
-  //         showSymbol: false,
-  //         data: tempData.map((item) => item.temp),
-  //       },
-  //       {
-  //         type: "line",
-  //         showSymbol: false,
-  //         data: humidData.map((item) => item.humid),
-  //         xAxisIndex: 1,
-  //         yAxisIndex: 1,
-  //       },
-  //       {
-  //         type: "line",
-  //         showSymbol: false,
-  //         data: aqiData.map((item) => item.aqi),
-  //         xAxisIndex: 2,
-  //         yAxisIndex: 2,
-  //       },
-  //       {
-  //         type: "line",
-  //         showSymbol: false,
-  //         data: pressureData.map((item) => item.pressure),
-  //         xAxisIndex: 3,
-  //         yAxisIndex: 3,
-  //       },
-  //     ],
-  //   });
 };
 
 onMounted(() => {

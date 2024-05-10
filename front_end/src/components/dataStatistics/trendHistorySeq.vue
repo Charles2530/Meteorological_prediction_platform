@@ -115,7 +115,6 @@ const renderChart = async (
     chartInstance_history = echarts.init(chartDom_history);
   }
   chartInstance_history.setOption({
-    // Make gradient line here
     visualMap: [
       {
         show: true,
