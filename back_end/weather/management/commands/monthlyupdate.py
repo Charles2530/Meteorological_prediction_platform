@@ -10,7 +10,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         DailyWeather.objects.all().delete()
         weather = requests.get('https://devapi.qweather.com/v7/weather/30d', params={
-            'key': 'aa7975af7b564c60804b6b08fab2e2c5',
+            'key': 'feec92fecc5042f0b48e49c33529de89',
             'location': '101010100',
         })
 
