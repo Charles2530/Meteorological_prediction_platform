@@ -22,6 +22,7 @@ declare module 'vue' {
     DataStatisticsCityInfo: typeof import('./components/dataStatistics/cityInfo.vue')['default']
     DataStatisticsDataList: typeof import('./components/dataStatistics/dataList.vue')['default']
     DataStatisticsDataStatistics: typeof import('./components/dataStatistics/dataStatistics.vue')['default']
+    DataStatisticsNormRanking: typeof import('./components/dataStatistics/NormRanking.vue')['default']
     DataStatisticsQualityRanking: typeof import("./components/dataStatistics/QualityRanking.vue")["default"]
     DataStatisticsRanking: typeof import('./components/dataStatistics/Ranking.vue')['default']
     DataStatisticsTrendHistoryGraph: typeof import('./components/dataStatistics/trendHistoryGraph.vue')['default']

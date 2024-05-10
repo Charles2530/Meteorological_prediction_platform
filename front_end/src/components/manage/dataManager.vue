@@ -1,7 +1,7 @@
 <template>
   <el-container class="panel background-white rounded-lg">
     <el-main class="no-padding">
-      <div class="search-container mx-4">
+      <div class="search-container mx-2">
         <el-row>
           <el-col :span="16">
             <div class="p-2 space-y-4">
@@ -102,7 +102,7 @@
             label="城市"
             width="100"
             :formatter="(row: CityWeatherData) => {
-                return locations.find((location) => location.value === row.city)?.label||row.city;
+                return locations.find((location:any) => location.value === row.city)?.label||row.city;
                 }"
           ></el-table-column>
           <el-table-column
@@ -352,7 +352,6 @@ import { china_cities } from "@/stores/cities";
 import { weather, aqi_level } from "@/stores/weather";
 import throttle from "lodash/throttle";
 import { CityWeatherData } from "@/types/weather";
-/* 搜索 */
 const selectedDate = ref("");
 const pickerOptions: any = {
   firstDayOfWeek: 1,
@@ -398,7 +397,6 @@ const newWeatherData = reactive<CityWeatherData>({
 });
 
 function refreshWeather() {
-  // You can implement data fetching logic here
   handleSearch();
   ElMessage({
     message: weatherInfo.dialogs.refresh,
@@ -552,17 +550,6 @@ watch(pageSize, () => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影 */
 }
 
-/* Search Container */
-.search-container {
-  position: relative;
-  background-color: white; /* 背景颜色 */
-  z-index: 999; /* 确保在页面上方 */
-  padding: 20px; /* 添加一些内边距 */
-  border-radius: 8px; /* 圆角边框 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
-}
-
-/* Input inside Search Container */
 .search-container input {
   width: 100%; /* 宽度100% */
   padding: 10px; /* 内边距 */

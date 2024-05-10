@@ -4,7 +4,7 @@
       <el-main>
         <el-card>
           <el-row :gutter="20">
-            <el-col :span="16">
+            <el-col :span="18">
               <el-card>
                 <trendHistoryGraph />
               </el-card>
@@ -12,7 +12,7 @@
                 <dataList></dataList>
               </el-card>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="6">
               <el-card> <WeatherDataRankVM /> </el-card>
             </el-col>
           </el-row>
