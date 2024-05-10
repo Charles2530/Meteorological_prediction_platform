@@ -59,9 +59,9 @@
             </el-col>
           </el-row>
         </div>
-          <div class="grid grid-cols-4 gap-4 h-full mt-6" style="font-size: 26px;">
+          <div class="grid grid-cols-4 gap-4 h-full mt-6" style="    font-size: 26px;    ">
             <template v-for="(item, index) in displayInfo" :key="index">
-              <div v-if="item.data" class="flex flex-col text-center items-center gap-2">
+              <div v-if="item.data" class="flex flex-col text-center    items-center gap-2">
                 <img :src="item.icon" :alt="item.name" v-if="item.icon" class="w-6 h-6">
                 <span>{{ item.name }}</span>
                 <span>{{ item.data }}{{ item.unit }}</span>
