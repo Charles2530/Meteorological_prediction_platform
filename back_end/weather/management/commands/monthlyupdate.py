@@ -9,7 +9,7 @@ import random
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         DailyWeather.objects.all().delete()
-        weather = requests.get('https://devapi.qweather.com/v7/weather/30d', params={
+        weather = requests.get('https://devapi.qweather.com/v7/weather/7d', params={
             'key': 'feec92fecc5042f0b48e49c33529de89',
             'location': '101010100',
         })
@@ -17,7 +17,7 @@ class Command(BaseCommand):
         weather = json.loads(weather.content.decode('utf-8'))
         # print(weather)
         for daily in weather["daily"]:
-            date_time = datetime.fromisoformat(daily["fxTime"])
+            date_time = datetime.fromisoformat(daily["fxDate"])
             timezon = pytz.timezone('Asia/Shanghai')
             date_time = date_time.astimezone(timezon)
 
@@ -25,7 +25,7 @@ class Command(BaseCommand):
 
             data = DailyWeather(
                 # time = date_time,
-                time = timezon.localize(datetime.now()),
+                fxDate = timezon.localize(datetime.now()),
                 # time = datetime.now(),
                 city = '北京市',
                 tempMax = daily["tempMax"],
