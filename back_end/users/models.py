@@ -1,8 +1,21 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.db import models
 
 
-# Create your models here.
+class Profile(AbstractUser):
+    avatar = models.URLField(blank=True, null=True)
+    email = models.EmailField(max_length=100, blank=True, null=True)
+    city = models.CharField(max_length=100, default='北京市')
+    role = models.IntegerField(default=1)
+
+    def __str__(self):
+        return self.username
+
+    class Meta:
+        verbose_name = "用户画像"
+        verbose_name_plural = "用户画像"
+
+
 class UserCity(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="用户名")
     city = models.CharField(max_length=100)
