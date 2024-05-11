@@ -195,7 +195,7 @@ const renderChart = async (
     type: "value",
     axisLabel: {
       formatter: function (value: any) {
-        return value.toFixed(2) + "%";
+        return value.toFixed(4) * 100 + "%";
       },
     },
   };
@@ -247,7 +247,7 @@ const renderChart = async (
               tooltipContent += `${param.marker} ${param.seriesName}: ${pressure} hPa<br/>`;
               break;
             case "降水量":
-              let precip = (param.value * (maxPrecip - minPrecip)).toFixed(0);
+              let precip = (param.value * (maxPrecip - minPrecip)).toFixed(1);
               tooltipContent += `${param.marker} ${param.seriesName}: ${precip} mm<br/>`;
               break;
             case "风速":
