@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="24" class="info-section">
           <el-row :gutter="2">
-            <el-col :span="4">
+            <el-col :span="6">
               <p :class="rankClass">
                 <el-icon class="mr-2" size="large"><Position /> </el-icon>
                 <span class="text-base font-bold">
@@ -12,15 +12,16 @@
                 </span>
               </p>
             </el-col>
-            <el-col :span="12">
-              <p class="city text-lg text-center text-blue-300">
+            <el-col :span="8">
+              <p class="city text-sm text-center text-blue-300">
                 {{ props.city.city }}
               </p>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="10">
               <p class="text-center">
-                <el-tag :type="rankType" class="mx-2 text-lg" size="large"
-                  >{{ props.city.level }} {{ props.city.norm }}</el-tag
+                <el-tag :type="rankType" class="mx-2 text-lg" size="small"
+                  >{{ props.city.level }} {{ props.city.norm
+                  }}{{ props.unit }}</el-tag
                 >
               </p>
             </el-col>
@@ -36,6 +37,7 @@ import { RankItem } from "@/types/weather";
 const props = defineProps<{
   city: RankItem;
   rank: number;
+  unit: string;
 }>();
 const rankClass = computed(() => {
   switch (props.rank) {

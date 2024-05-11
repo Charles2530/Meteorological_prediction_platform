@@ -26,11 +26,15 @@ watch(selectedLocation, () => {
   fetchCityTempChange();
   fetchCityHumidChange();
   fetchCityPressureChange();
+  fetchCityPrecipChange();
+  fetchCityWinSpeedChange();
   renderChart(
     TempDataList.value,
     HumidDataList.value,
     AqiDataList.value,
-    PressureDataList.value
+    PressureDataList.value,
+    PrecipDataList.value,
+    WinSpeedDataList.value
   );
 });
 
@@ -52,6 +56,14 @@ interface pressureNode {
   time: string;
   pressure: number;
 }
+interface precipNode {
+  time: string;
+  precip: number;
+}
+interface winSpeedNode {
+  time: string;
+  winSpeed: number;
+}
 interface AqiChangeResponse {
   status: boolean;
   data: aqiNode[];
@@ -68,10 +80,20 @@ interface PressureChangeResponse {
   status: boolean;
   data: pressureNode[];
 }
+interface PrecipChangeResponse {
+  status: boolean;
+  data: precipNode[];
+}
+interface WinSpeedChangeResponse {
+  status: boolean;
+  data: winSpeedNode[];
+}
 const TempDataList = ref<tempNode[]>([]);
 const HumidDataList = ref<humidNode[]>([]);
 const AqiDataList = ref<aqiNode[]>([]);
 const PressureDataList = ref<pressureNode[]>([]);
+const PrecipDataList = ref<precipNode[]>([]);
+const WinSpeedDataList = ref<winSpeedNode[]>([]);
 const fetchCityTempChange = async () =>
   get<TempChangeResponse>("/api/weather/temp/city_change/", {
     city: selectedLocation.value,
@@ -103,12 +125,35 @@ const fetchCityPressureChange = async () =>
       ...res.data.data
     );
   });
+const fetchCityPrecipChange = async () =>
+  get<PrecipChangeResponse>("/api/weather/precip/city_change/", {
+    city: selectedLocation.value,
+  }).then((res) => {
+    PrecipDataList.value.splice(
+      0,
+      PrecipDataList.value.length,
+      ...res.data.data
+    );
+  });
+
+const fetchCityWinSpeedChange = async () =>
+  get<WinSpeedChangeResponse>("/api/weather/winSpeed/city_change/", {
+    city: selectedLocation.value,
+  }).then((res) => {
+    WinSpeedDataList.value.splice(
+      0,
+      WinSpeedDataList.value.length,
+      ...res.data.data
+    );
+  });
 
 const renderChart = async (
   tempData: tempNode[],
   humidData: humidNode[],
   aqiData: aqiNode[],
-  pressureData: pressureNode[]
+  pressureData: pressureNode[],
+  precipData: precipNode[],
+  winSpeedData: winSpeedNode[]
 ) => {
   if (!chartInstance_history) {
     const chartDom_history = document.getElementById("chart_history");
@@ -122,28 +167,35 @@ const renderChart = async (
   const minAqi = Math.min(...aqiData.map((item) => item.aqi));
   const maxPressure = Math.max(...pressureData.map((item) => item.pressure));
   const minPressure = Math.min(...pressureData.map((item) => item.pressure));
+  const maxPrecip = Math.max(...precipData.map((item) => item.precip));
+  const minPrecip = Math.min(...precipData.map((item) => item.precip));
+  const maxWinSpeed = Math.max(...winSpeedData.map((item) => item.winSpeed));
+  const minWinSpeed = Math.min(...winSpeedData.map((item) => item.winSpeed));
 
-  // Calculate the ratio of max to min for each series
-  const tempRatio = maxTemp / minTemp;
-  const humidRatio = maxHumid / minHumid;
-  const aqiRatio = maxAqi / minAqi;
-  const pressureRatio = maxPressure / minPressure;
-  const maxRatio = Math.max(tempRatio, humidRatio, aqiRatio, pressureRatio);
-
-  // Scale the data points based on the ratio
-  const scaledTempData = tempData.map((item) => item.temp * tempRatio);
-  const scaledHumidData = humidData.map((item) => item.humid * humidRatio);
-  const scaledAqiData = aqiData.map((item) => item.aqi * aqiRatio);
+  const scaledTempData = tempData.map(
+    (item) => (item.temp - minTemp) / (maxTemp - minTemp)
+  );
+  const scaledHumidData = humidData.map(
+    (item) => (item.humid - minHumid) / (maxHumid - minHumid)
+  );
+  const scaledAqiData = aqiData.map(
+    (item) => (item.aqi - minAqi) / (maxAqi - minAqi)
+  );
   const scaledPressureData = pressureData.map(
-    (item) => item.pressure * pressureRatio
+    (item) => (item.pressure - minPressure) / (maxPressure - minPressure)
+  );
+  const scaledPrecipData = precipData.map(
+    (item) => (item.precip - minPrecip) / (maxPrecip - minPrecip)
+  );
+  const scaledWinSpeedData = winSpeedData.map(
+    (item) => (item.winSpeed - minWinSpeed) / (maxWinSpeed - minWinSpeed)
   );
 
-  // Update the yAxis to represent the ratio
   const yAxis = {
     type: "value",
     axisLabel: {
       formatter: function (value: any) {
-        return (value / maxRatio).toFixed(2) + "%";
+        return value.toFixed(4) * 100 + "%";
       },
     },
   };
@@ -171,20 +223,39 @@ const renderChart = async (
         params.forEach(function (param: any) {
           switch (param.seriesName) {
             case "温度":
-              let temp = (param.value / tempRatio).toFixed(0);
+              let temp = (param.value * (maxTemp - minTemp) + minTemp).toFixed(
+                0
+              );
               tooltipContent += `${param.marker} ${param.seriesName}: ${temp} °C<br/>`;
               break;
             case "湿度":
-              let humid = (param.value / humidRatio).toFixed(0);
+              let humid = (
+                param.value * (maxHumid - minHumid) +
+                minHumid
+              ).toFixed(0);
               tooltipContent += `${param.marker} ${param.seriesName}: ${humid} %<br/>`;
               break;
             case "AQI":
-              let aqi = (param.value / aqiRatio).toFixed(0);
+              let aqi = (param.value * (maxAqi - minAqi) + minAqi).toFixed(0);
               tooltipContent += `${param.marker} ${param.seriesName}: ${aqi}<br/>`;
               break;
             case "气压":
-              let pressure = (param.value / pressureRatio).toFixed(2);
+              let pressure = (
+                param.value * (maxPressure - minPressure) +
+                minPressure
+              ).toFixed(2);
               tooltipContent += `${param.marker} ${param.seriesName}: ${pressure} hPa<br/>`;
+              break;
+            case "降水量":
+              let precip = (param.value * (maxPrecip - minPrecip)).toFixed(1);
+              tooltipContent += `${param.marker} ${param.seriesName}: ${precip} mm<br/>`;
+              break;
+            case "风速":
+              let winSpeed = (
+                param.value *
+                (maxWinSpeed - minWinSpeed)
+              ).toFixed(0);
+              tooltipContent += `${param.marker} ${param.seriesName}: ${winSpeed} m/s<br/>`;
               break;
             default:
               break;
@@ -199,8 +270,8 @@ const renderChart = async (
     },
     yAxis: yAxis,
     grid: {
-      top: "20%",
-      bottom: "20%",
+      top: "25%",
+      bottom: "5%",
       left: "10%",
       right: "10%",
       containLabel: true,
@@ -209,7 +280,7 @@ const renderChart = async (
       orient: "horizontal",
       left: "right",
       top: "top",
-      data: ["温度", "湿度", "AQI", "气压"],
+      data: ["温度", "湿度", "AQI", "气压", "降水量", "风速"],
     },
     series: [
       {
@@ -236,6 +307,18 @@ const renderChart = async (
         name: "气压",
         data: scaledPressureData,
       },
+      {
+        type: "line",
+        showSymbol: false,
+        name: "降水量",
+        data: scaledPrecipData,
+      },
+      {
+        type: "line",
+        showSymbol: false,
+        name: "风速",
+        data: scaledWinSpeedData,
+      },
     ],
   });
 };
@@ -245,12 +328,22 @@ onMounted(() => {
   fetchCityTempChange();
   fetchCityHumidChange();
   fetchCityPressureChange();
+  fetchCityPrecipChange();
+  fetchCityWinSpeedChange();
   renderChart(
     TempDataList.value,
     HumidDataList.value,
     AqiDataList.value,
-    PressureDataList.value
+    PressureDataList.value,
+    PrecipDataList.value,
+    WinSpeedDataList.value
   );
+
+  window.addEventListener("resize", () => {
+    if (chartInstance_history) {
+      chartInstance_history.resize();
+    }
+  });
 
   window.addEventListener("click", () => {
     if (chartInstance_history) {
@@ -258,18 +351,23 @@ onMounted(() => {
         TempDataList.value,
         HumidDataList.value,
         AqiDataList.value,
-        PressureDataList.value
+        PressureDataList.value,
+        PrecipDataList.value,
+        WinSpeedDataList.value
       );
       chartInstance_history.resize();
     }
   });
+
   window.addEventListener("resize", () => {
     if (chartInstance_history) {
       renderChart(
         TempDataList.value,
         HumidDataList.value,
         AqiDataList.value,
-        PressureDataList.value
+        PressureDataList.value,
+        PrecipDataList.value,
+        WinSpeedDataList.value
       );
       chartInstance_history.resize();
     }
