@@ -22,15 +22,9 @@ declare module 'vue' {
     DataStatisticsTrendHistoryGraph: typeof import('./components/dataStatistics/trendHistoryGraph.vue')['default']
     DataStatisticsTrendHistorySeq: typeof import('./components/dataStatistics/trendHistorySeq.vue')['default']
     DataStatisticsWeatherDataRankVM: typeof import('./components/dataStatistics/WeatherDataRankVM.vue')['default']
-<<<<<<< HEAD
-    ElAside: typeof import('element-plus/es')['ElAside']
     ElAutocomplete: typeof import('element-plus/es')['ElAutocomplete']
-=======
->>>>>>> 713800fc5611f93a207ee0edd899ece12bb8e98e
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElCard: typeof import('element-plus/es')['ElCard']
-    ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
@@ -43,9 +37,6 @@ declare module 'vue' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElRow: typeof import('element-plus/es')['ElRow']
-    ElTable: typeof import('element-plus/es')['ElTable']
-    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     Footer: typeof import('./components/footer/index.vue')['default']
     Manage: typeof import('./components/manage/index.vue')['default']
     ManageDataManager: typeof import('./components/manage/dataManager.vue')['default']
