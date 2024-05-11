@@ -76,16 +76,16 @@ const routes = [
         path: "user",
         component: UserManage,
         meta: {
-          //   permission: [UserRole.Administrator],
-          permission: [UserRole.Administrator, UserRole.User, UserRole.Visitor],
+          permission: [UserRole.Administrator],
+          //   permission: [UserRole.Administrator, UserRole.User, UserRole.Visitor],
         },
       },
       {
         path: "data",
         component: DataManage,
         meta: {
-          //   permission: [UserRole.Administrator],
-          permission: [UserRole.Administrator, UserRole.User, UserRole.Visitor],
+          permission: [UserRole.Administrator],
+          //   permission: [UserRole.Administrator, UserRole.User, UserRole.Visitor],
         },
       },
     ],
@@ -103,6 +103,18 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (
+    routes.some((item) =>
+      new RegExp("^" + item.path.split("/:")[0] + "(?:/.*)?$").test(to.path)
+    )
+  ) {
+    next();
+  } else {
+    next({ name: "404Page" });
+  }
 });
 
 export default router;
