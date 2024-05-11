@@ -22,7 +22,7 @@
         </el-col>
       </el-row>
       <el-row :gutter="20" style="height: 80px">
-        <el-col :offset="4" :span="6">
+        <el-col :offset="3" :span="6">
           <div class="grid-content">
             <img
               :src="getAssetsFileIcon(proInfo.weather.icoid + '.png')"
@@ -30,7 +30,7 @@
             />
           </div>
         </el-col>
-        <el-col :span="14">
+        <el-col :span="15">
           <div class="grid-content">
             <span style="font-size: 44px">{{ proInfo.weather.tem }}℃&nbsp;</span>
             <span style="font-size: 22px">{{ proInfo.weather.condition }}</span>

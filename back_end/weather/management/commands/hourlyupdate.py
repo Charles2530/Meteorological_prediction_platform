@@ -37,22 +37,22 @@ class Command(BaseCommand):
 
                 data = WeatherInfo(
                     # time = date_time,
-                    time = timezon.localize(datetime.now()),
+                    time=timezon.localize(datetime.now()),
                     # time = datetime.now(),
-                    city = current_city,
-                    temp = hourly["temp"],
-                    text = hourly["text"],
-                    wind360 = hourly["wind360"],
+                    city=current_city,
+                    temp=hourly["temp"],
+                    text=hourly["text"],
+                    wind360=hourly["wind360"],
                     # windDir = hourly["windDir"],
-                    windScale = hourly["windScale"],
-                    windSpeed = hourly["windSpeed"],
-                    humidity = hourly["humidity"],
-                    precip = hourly["precip"],
-                    pressure = hourly["pressure"],
+                    windScale=hourly["windScale"],
+                    windSpeed=hourly["windSpeed"],
+                    humidity=hourly["humidity"],
+                    precip=hourly["precip"],
+                    pressure=hourly["pressure"],
                     # cloud = hourly["cloud"],
                     # dew = hourly["dew"],
-                    aqi = temp_aqi,
-                    category = '优' if temp_aqi < 50 else '良'
+                    aqi=temp_aqi,
+                    category='优' if temp_aqi < 50 else '良'
                 )
 
                 data.save()
@@ -61,22 +61,22 @@ class Command(BaseCommand):
 
                 data = WeatherInfo(
                     # time = date_time + timedelta(days = -1),
-                    time = timezon.localize(datetime.now() + timedelta(days = -1)),
+                    time=timezon.localize(datetime.now() + timedelta(days=-1)),
                     # time = datetime.now() + timedelta(days = -1),
-                    city = current_city,
-                    temp = hourly["temp"],
-                    text = hourly["text"],
-                    wind360 = hourly["wind360"],
+                    city=current_city,
+                    temp=hourly["temp"],
+                    text=hourly["text"],
+                    wind360=hourly["wind360"],
                     # windDir = hourly["windDir"],
-                    windScale = hourly["windScale"],
-                    windSpeed = hourly["windSpeed"],
-                    humidity = hourly["humidity"],
-                    precip = hourly["precip"],
-                    pressure = hourly["pressure"],
+                    windScale=hourly["windScale"],
+                    windSpeed=hourly["windSpeed"],
+                    humidity=hourly["humidity"],
+                    precip=hourly["precip"],
+                    pressure=hourly["pressure"],
                     # cloud = hourly["cloud"],
                     # dew = hourly["dew"],
-                    aqi = temp_aqi,
-                    category = '优' if temp_aqi < 50 else '良'
+                    aqi=temp_aqi,
+                    category='优' if temp_aqi < 50 else '良'
                 )
 
                 data.save()
