@@ -1,7 +1,7 @@
 # weather/serializers.py
 
 from rest_framework import serializers
-from .models import HourlyWeather, DailyWeather, MonthlyWeather, WeatherInfo
+from .models import HourlyWeather, DailyWeather, MonthlyWeather, WeatherInfo, Pro2City, City2CityId
 
 
 class HourlyWeatherSerializer(serializers.ModelSerializer):
@@ -26,4 +26,16 @@ class MonthlyWeatherSerializer(serializers.ModelSerializer):
 class WeatherInfoSerializer(serializers.Serializer):
     class Meta:
         model = WeatherInfo
+        fields = '__all__'
+
+
+class Pro2CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pro2City
+        fields = '__all__'
+
+
+class City2CityIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City2CityId
         fields = '__all__'

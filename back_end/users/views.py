@@ -1,5 +1,4 @@
 # Django核心和框架相关的导入
-from calendar import c
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.hashers import check_password, make_password
@@ -25,49 +24,21 @@ from rest_framework_simplejwt.tokens import RefreshToken
 # Django HTTP相关的导入
 from django.http import HttpResponse, JsonResponse
 
+from .models import Profile
+
 # 其他Python标准库导入
 import json
 import os
 import re
 from datetime import datetime
 
-# 暂时性导入
-from django.conf import settings
+<<<<<<< HEAD
+=======
+from .models import UserCity
 
+>>>>>>> master
 
 # Create your views here.
-'''
-class RegisterView(APIView):
-    permission_classes = [AllowAny]
-
-    def post(self, request, *args, **kwargs):
-        serializer = RegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            # token = RefreshToken.for_user(user)
-            token = "token4display"
-            return Response({
-                'success': True,
-                'info': {
-                    'token': token,
-                    'userInfo': {
-                        'username': user.username,
-                        'avatar': '',  # 用实际的avatar替换
-                        'email': user.email,
-                        'role': 1  # 用实际的role替换
-                    }
-                },
-                'reason': '注册成功'
-            }, status=status.HTTP_201_CREATED)
-        else:
-            return Response({
-                'success': False,
-                'info': {},
-                'reason': '无效的输入'
-            }, status=status.HTTP_400_BAD_REQUEST)
-'''
-
-
 def index(request):
     return HttpResponse("User Homepage")
 
@@ -86,19 +57,25 @@ def my_login(request):
         }, status=400)
 
     # 验证用户名和密码
-    user = authenticate(username=username, password=password)
+    profile = authenticate(username=username, password=password)
     # user = User.objects.filter(username=username, password=password).first()
-    if user is not None:
+    if profile is not None:
         # 登录成功
         # settings.CURRENT_UNAME = user.username
-        login(request, user)
+        login(request, profile)
+
+        # register current city
+        # if not UserCity.objects.filter(user=user).exists():
+        #     user_city = UserCity(user=user, city='北京')
+        #     user_city.save()
+
         info = {
             "token": "aliqua commodo Lorem",
             "userInfo": {
                 "username": username,
                 "avatar": "http://dummyimage.com/88x31",
                 "role": 2,  # 这里根据实际情况设置用户的角色
-                "email": user.email
+                "email": profile.email
             }
         }
         return JsonResponse({
@@ -107,7 +84,6 @@ def my_login(request):
         })
     else:
         # 登录失败
-        # settings.CURRENT_UNAME = None
         return JsonResponse({
             "success": False,
             "reason": "login.error.auth"
@@ -121,6 +97,7 @@ def my_register(request):
     username = data.get('username')
     password = data.get('password')
     email = data.get('email')
+    role = data.get('role') # TODO check
 
     # 验证邮箱格式
     # try:
@@ -145,28 +122,27 @@ def my_register(request):
         }, status=400)
 
     # 检查用户名是否已存在
-    if User.objects.filter(username=username).exists():
+    if Profile.objects.filter(username=username).exists():
         return JsonResponse({
             "success": False,
             "reason": "register.error.samename"
         }, status=400)
 
     # 创建用户
-    new_user = User.objects.create_user(
-        username=username, email=email, password=password)
+    new_profile = Profile.objects.create_user(
+        username=username, password=password, email=email, role=role)
+    new_profile.save()
     # authenticate(username=username, password=password)
-
-    # settings.CURRENT_UNAME = new_user.username
 
 
     # 准备返回的信息
     info = {
-        "token": str(RefreshToken.for_user(new_user)),
+        "token": str(RefreshToken.for_user(new_profile)),
         "userInfo": {
-            "username": new_user.username,
-            "avatar": "",  # todo
-            "email": new_user.email,
-            "role": 2
+            "username": new_profile.username,
+            "avatar": new_profile.avatar,
+            "email": new_profile.email,
+            "role": new_profile.role
         }
     }
 
@@ -200,10 +176,10 @@ def user_list(request):
         return JsonResponse({"error": "Invalid JSON format in request body."}, status=400)
 
     # 获取用户数据
-    users = User.objects.all()
+    profiles = Profile.objects.all()
 
     # 分页处理
-    paginator = Paginator(users, page_size)
+    paginator = Paginator(profiles, page_size)
     # try:
     #     page_obj = paginator.page(page)
     # except PageNotAnInteger:
@@ -214,7 +190,7 @@ def user_list(request):
 
     # 构造响应数据
     response_json = {
-        "all": users.count(),
+        "all": profiles.count(),
         "now": page_obj.number,
         "page_total": paginator.num_pages,
         "page": page_obj.number,
@@ -222,15 +198,14 @@ def user_list(request):
     }
 
     # 遍历当前页的用户，构造userlist
-    for user in page_obj:
+    for profile in page_obj:
         user_data = {
-            "uid": user.id,
-            "username": user.username,
-            "email": user.email,
+            "uid": profile.id,
+            "username": profile.username,
+            "email": profile.email,
             "avatar": "https://charles2530.github.io/image/background/logo2.jpg",
-            "email": user.email,
-            "role": 2,
-            "last_login": user.last_login.strftime('%Y-%m-%d %H:%M:%S') if user.last_login != None else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            "role": profile.role,
+            "last_login": profile.last_login.strftime('%Y-%m-%d %H:%M:%S') if profile.last_login != None else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         }
         response_json['userlist'].append(user_data)
 
@@ -261,8 +236,8 @@ def delete_user(request):
     # 添加业务逻辑，例如根据uid获取用户信息等
     # 假设这里仅检查User模型中是否存在对应的uid
     try:
-        user = User.objects.get(id=uid)
-        user.delete()
+        profile = Profile.objects.get(id=uid)
+        profile.delete()
         # 如果用户存在，设置success为True
 
         response_data = {"success": True}
@@ -299,7 +274,7 @@ def user_authorization(request):
     try:
         # TODO:
         # user = User.objects.get(id=uid, role=role)
-        user = User.objects.get(id=uid)
+        profile = Profile.objects.get(id=uid)
         # 如果用户存在且角色匹配，设置success为True
         response_data = {"success": True}
         return JsonResponse(response_data, status=200)  # 返回200成功响应
@@ -340,13 +315,13 @@ def update_user_email(request):
 
         # 检查用户是否存在
         try:
-            user = User.objects.get(id=uid)
+            profile = Profile.objects.get(id=uid)
         except User.DoesNotExist:
             return JsonResponse({"success": False, "reason": request.POST}, status=400)
 
         # 更新用户邮箱
-        user.email = new_email
-        user.save()
+        profile.email = new_email
+        profile.save()
 
         # 操作成功，返回success为True
         return JsonResponse({"success": True}, status=200)
@@ -391,7 +366,7 @@ def update_user_password(request):
 
     # 检查用户是否存在
     try:
-        user_to_update = User.objects.get(id=uid)
+        profile_to_update = Profile.objects.get(id=uid)
     except User.DoesNotExist:
         return JsonResponse({"success": False, "reason": "manage.invaild"}, status=400)
 
@@ -401,8 +376,8 @@ def update_user_password(request):
 
     # 更新用户密码
     # user_to_update.password = make_password(password)
-    user_to_update.password = password
-    user_to_update.save()
+    profile_to_update.password = password
+    profile_to_update.save()
 
     # 操作成功，返回success为True
     return JsonResponse({"success": True}, status=200)
@@ -421,7 +396,7 @@ def delete_data(request):
 
     try:
         # 根据pid获取数据并删除
-        item = User.objects.get(pid=pid)
+        item = Profile.objects.get(pid=pid)
         item.delete()
         return JsonResponse({"success": True}, status=200)  # 如果删除成功，返回200成功
     except User.DoesNotExist:
@@ -482,7 +457,7 @@ def update_current_user_password(request):
 
     # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
     # user = User.objects.filter(username=request.user.username).first()
-    user= request.user
+    user = request.user
 
 
     # # 验证旧密码
@@ -544,7 +519,7 @@ def update_current_user_email(request):
 
     # 假设你已经验证了token并获取了用户对象
     # user = User.objects.filter(username=settings.CURRENT_UNAME).first() # 获取当前认证的用户对象
-    user=request.user
+    user = request.user
 
     # 更新用户的邮箱
     try:

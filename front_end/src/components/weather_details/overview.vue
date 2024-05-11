@@ -1,53 +1,58 @@
 <template>
-    <!-- <el-container class="rounded-lg" style="  background: linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195));">
-        <CurrentWeather class="md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
-        </CurrentWeather>
-        <CurrentWeatherRight class="md:basis-2/5" :weather="weather" />
-    </el-container> -->
-    <el-container class="">
-        <RealTimeBroadcast />
-    </el-container>
-    <!-- <template v-slot:search>
+  <el-container
+    class="container rounded-lg"
+    style="max-height: 85vh; overflow-y: auto"
+  >
+    <CurrentWeather
+      class="md:basis-3/5"
+      :weather="weather"
+      :city="city"
+      :search="searchShow"
+    >
+      <!-- @searchShow="changeSearchShow" -->
+      <!-- <template v-slot:search>
               <div class="text-[#333333]">
                 <SearchLocation :show="searchShow" @searchShow="changeSearchShow" @search="locationBySearch" />
               </div>
             </template> -->
+    </CurrentWeather>
+    <CurrentWeatherRight class="md:basis-2/5" :weather="weather" />
     <!-- @refresh="weatherInfo"  -->
+  </el-container>
+  <el-container class="">
+    <RealTimeBroadcast />
+  </el-container>
+
 </template>
 <script lang="ts" setup>
-
-
-
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from "vue";
 
 /** 组件  **/
-import SearchLocation from '@/components/weather_details/sub_components/SearchLocation.vue'
-import CurrentWeather from '@/components/weather_details/sub_components/CurrentWeather.vue';
-import CurrentWeatherRight from '@/components/weather_details/sub_components/CurrentWeatherRight.vue';
-import Forecast from '@/components/weather_details/sub_components/Forecast.vue'
-import RealTimeBroadcast from '@/components/weather_details/sub_components/RealTimeBroadcast.vue'
-const stateNavigator = ref(0) // 用于判断是否加载loading
-const cityList = ref([])
+import SearchLocation from "@/components/weather_details/sub_components/SearchLocation.vue";
+import CurrentWeather from "@/components/weather_details/sub_components/CurrentWeather.vue";
+import CurrentWeatherRight from "@/components/weather_details/sub_components/CurrentWeatherRight.vue";
+import Forecast from "@/components/weather_details/sub_components/Forecast.vue";
+import RealTimeBroadcast from "@/components/weather_details/sub_components/RealTimeBroadcast.vue";
+const stateNavigator = ref(0); // 用于判断是否加载loading
+const cityList = ref([]);
 const city = ref({
-    name: '北京市',
-    adm2: '海淀区'
+  name: "北京市",
+  adm2: "海淀区",
 });
-let weather = ref({})
-const air = ref({})
-const forecast = ref([])
-const preDayWeather = ref([])
-const ultraviolet = ref([])
-const searchShow = ref(false)
-
+let weather = ref({});
+const air = ref({});
+const forecast = ref([]);
+const preDayWeather = ref([]);
+const ultraviolet = ref([]);
+const searchShow = ref(false);
 
 // interface City {
 //     name: string;
 //     adm2: string;
 // }
 
-
 interface WeatherData41 {
-    weather: Weather41;
+  weather: Weather41;
 }
 interface Weather41 {
     /**
@@ -90,16 +95,14 @@ interface Weather41 {
 }
 //     searchShow: boolean
 
-
-
 import { post, get } from "@/api/index.ts";
 const get_his_overview = async () => {
-    get<WeatherData41>("/api/weather/overview/", city).then((res) => {
-        weather.value = res.data.weather;
-        console.log(weather.value);
-        // city.value = res.data.city;
-        // searchShow.value = res.data.searchShow
-    });
+  get<WeatherData41>("/api/weather/overview/", city).then((res) => {
+    weather.value = res.data.weather;
+    console.log(weather.value);
+    // city.value = res.data.city;
+    // searchShow.value = res.data.searchShow
+  });
 };
 
 // const getData = () => {
@@ -107,69 +110,69 @@ const get_his_overview = async () => {
 //     get
 // }
 onMounted(() => {
-    get_his_overview();
+  get_his_overview();
 });
-console.log("----------------------------------------------------------------")
+console.log("----------------------------------------------------------------");
 // console.log(weather.value);
-
 </script>
 <style scoped>
 .chart {
-    width: 95%;
-    height: 92%;
-    background: linear-gradient(to bottom, #ffffff, #ffffff);
-    margin: 0 auto;
-    /* display: flex; */
-    /* justify-content: center; */
+  width: 95%;
+  height: 92%;
+  background: linear-gradient(to bottom, #ffffff, #ffffff);
+  margin: 0 auto;
+  /* display: flex; */
+  /* justify-content: center; */
 }
 
 h2 {
-    text-align: center;
-    margin: 0;
-    font-size: 18px;
-    color: #000;
+  text-align: center;
+  margin: 0;
+  font-size: 18px;
+  color: #000;
 }
 
 /*  */
 
-
-.demo-tabs>.el-tabs__content {
-    padding: 32px;
-    color: #6b778c;
-    font-size: 32px;
-    font-weight: 600;
+.demo-tabs > .el-tabs__content {
+  padding: 32px;
+  color: #6b778c;
+  font-size: 32px;
+  font-weight: 600;
 }
 
 /* demo */
-/* .container {
-    background: linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195));
-} */
+
+.container {
+  background: linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195));
+}
+
 
 .input {
-    width: 300px;
-    margin-top: 20px;
+  width: 300px;
+  margin-top: 20px;
 }
 
 .today {
-    font-size: 20px;
-    color: white;
+  font-size: 20px;
+  color: white;
 }
 
 .temp {
-    font-size: 79px;
-    color: white;
+  font-size: 79px;
+  color: white;
 }
 
 .realInfo {
-    color: white;
+  color: white;
 }
 
 .future {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 .header {
-    color: white;
-    font-size: 27px;
+  color: white;
+  font-size: 27px;
 }
 </style>
