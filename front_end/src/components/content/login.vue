@@ -218,7 +218,10 @@ const submitLoginForm = (formEl: FormInstance | undefined) => {
               type: "success",
             });
           } else {
-            console.log("error:", res);
+            ElMessage({
+              message: response.reason ?? "登录失败",
+              type: "error",
+            });
           }
         },
         (error) => {
