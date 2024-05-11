@@ -4,6 +4,8 @@ from weather.models import City2CityId, Pro2City, ProGeography
 from openpyxl import load_workbook
 
 class Command(BaseCommand):
+    help = 'Store catastrophic forecast data into the database'
+
     def handle(self, *args, **kwargs):
         try:
             f = open(r'/root/China-City-List-latest.csv', 'r', newline='', encoding='utf-8')

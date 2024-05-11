@@ -13,7 +13,7 @@ class Notification(models.Model):
 
 class CitySubscription(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, verbose_name="订阅用户")
+        User, on_delete=models.CASCADE, verbose_name="订阅用户", default=None)
     city_name = models.CharField(max_length=100, verbose_name="城市名称")
     subscription_time = models.DateTimeField(
         auto_now_add=True, verbose_name="订阅时间")

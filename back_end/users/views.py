@@ -30,7 +30,7 @@ import os
 import re
 from datetime import datetime
 
-from users.models import UserCity
+from .models import UserCity
 
 
 # Create your views here.
@@ -60,9 +60,9 @@ def my_login(request):
         login(request, user)
 
         # register current city
-        if not UserCity.objects.filter(username=username).exists():
-            user_city = UserCity(username=username, city='北京')
-            user_city.save()
+        # if not UserCity.objects.filter(user=user).exists():
+        #     user_city = UserCity(user=user, city='北京')
+        #     user_city.save()
 
         info = {
             "token": "aliqua commodo Lorem",
@@ -453,7 +453,7 @@ def update_current_user_password(request):
 
     # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
     # user = User.objects.filter(username=request.user.username).first()
-    user= request.user
+    user = request.user
 
 
     # # 验证旧密码
@@ -515,7 +515,7 @@ def update_current_user_email(request):
 
     # 假设你已经验证了token并获取了用户对象
     # user = User.objects.filter(username=settings.CURRENT_UNAME).first() # 获取当前认证的用户对象
-    user=request.user
+    user = request.user
 
     # 更新用户的邮箱
     try:

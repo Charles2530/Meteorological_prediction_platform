@@ -7,19 +7,19 @@
         @change="handleDateChange"
       ></el-date-picker> -->
     <el-row :gutter="20" justify="center">
-      <el-col :span="2">
-        <div class="ep-bg-purple-dark" />
-        <!-- <el-card style="width:auto;" shadow="hover"> -->
-        <div class="day-content">
-          <div class="temperature">天气</div>
-          <div class="temperature">温度</div>
-          <div class="humidity">湿度</div>
-          <div class="wind-speed">风速</div>
-          <div class="wind-speed">风向</div>
-          <div class="time">时间</div>
-        </div>
-        <!-- </el-card> -->
-      </el-col>
+      <!-- <div style="margin: -10px;"> -->
+        <el-col :span="2">
+          <!-- <div class="ep-bg-purple-dark" /> -->
+          <div class="day-content" style="margin-top: 26px;">
+            <div class="temperature">天气</div>
+            <div class="temperature">温度</div>
+            <div class="humidity">湿度</div>
+            <div class="wind-speed">风速</div>
+            <div class="wind-speed">风向</div>
+            <div class="time">时间</div>
+          </div>
+        </el-col>
+      <!-- </div> -->
       <el-col :span="2" v-for="(day, index) in realTimeWeatherList" :key="index">
         <div class="ep-bg-purple-dark" />
         <el-card style="width:auto" shadow="hover">
@@ -70,7 +70,7 @@
 
 const city = ref({
   name: '北京市',
-  adm2: '昌平区'
+  adm2: '海淀区'
 });
 const realTimeWeatherList = ref<RealTimeWeather[]>([]);
 interface RealTimeWeather {
@@ -82,13 +82,13 @@ interface RealTimeWeather {
   windDirection: string
 }
 
-interface WeatherHisOverview {
+interface RealTimeWeatherData {
   realTimeWeatherList: RealTimeWeather[];
 }
 
 import { post, get } from "@/api/index.ts";
 const get_data = async () => {
-  get<WeatherHisOverview>("/api/weather/overview_realtime", {city:city.value.name + city.value.adm2}).then((res) => {
+  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: city.value.name + city.value.adm2 }).then((res) => {
     realTimeWeatherList.value = res.data.realTimeWeatherList;
   });
 };
