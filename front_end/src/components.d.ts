@@ -18,6 +18,7 @@ declare module 'vue' {
     AsideSideBar: typeof import('./components/aside/sideBar.vue')['default']
     ContentAvatar: typeof import('./components/content/avatar.vue')['default']
     ContentLogin: typeof import('./components/content/login.vue')['default']
+    copy: typeof import('./components/weather_details/sub_components/RealTimeBroadcast copy.vue')['default']
     DataStatisticsDataList: typeof import('./components/dataStatistics/dataList.vue')['default']
     DataStatisticsDataStatistics: typeof import('./components/dataStatistics/dataStatistics.vue')['default']
     DataStatisticsTrendHistoryGraph: typeof import('./components/dataStatistics/trendHistoryGraph.vue')['default']
@@ -89,6 +90,7 @@ declare module 'vue' {
     WeatherdetailsSubcomponentsNav: typeof import('./components/weather_details/sub_components/Nav.vue')['default']
     WeatherdetailsSubcomponentsQWeatherIcon: typeof import('./components/weather_details/sub_components/QWeatherIcon.vue')['default']
     WeatherdetailsSubcomponentsRealTimeBroadcast: typeof import('./components/weather_details/sub_components/RealTimeBroadcast.vue')['default']
+    WeatherdetailsSubcomponentsRealTimeBroadcast_old: typeof import('./components/weather_details/sub_components/RealTimeBroadcast_old.vue')['default']
     WeatherdetailsSubcomponentsSearchLocation: typeof import('./components/weather_details/sub_components/SearchLocation.vue')['default']
     WeatherdetailsSubcomponentsSvgIcon: typeof import('./components/weather_details/sub_components/SvgIcon.vue')['default']
   }

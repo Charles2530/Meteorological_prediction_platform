@@ -1,18 +1,18 @@
 <template>
-    <el-container class="rounded-lg" style="  background: linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195));">
+    <!-- <el-container class="rounded-lg" style="  background: linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195));">
         <CurrentWeather class="md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
-            <!-- <template v-slot:search>
+        </CurrentWeather>
+        <CurrentWeatherRight class="md:basis-2/5" :weather="weather" />
+    </el-container> -->
+    <el-container class="">
+        <RealTimeBroadcast />
+    </el-container>
+    <!-- <template v-slot:search>
               <div class="text-[#333333]">
                 <SearchLocation :show="searchShow" @searchShow="changeSearchShow" @search="locationBySearch" />
               </div>
             </template> -->
-        </CurrentWeather>
-        <CurrentWeatherRight class="md:basis-2/5" :weather="weather" />
-        <!-- @refresh="weatherInfo"  -->
-    </el-container>
-    <el-container class="">
-        <RealTimeBroadcast/>
-    </el-container>
+    <!-- @refresh="weatherInfo"  -->
 </template>
 <script lang="ts" setup>
 
@@ -49,7 +49,7 @@ const searchShow = ref(false)
 interface WeatherData41 {
     weather: Weather41;
 }
-interface Weather41{
+interface Weather41 {
     /**
      * 以百分之多少为单位
      */
