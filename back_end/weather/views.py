@@ -11,10 +11,13 @@ from datetime import datetime, timedelta
 import pytz
 import csv
 import requests
+import random
 
 pri_key = "d4c9c9bc145748e48405c44277be0745"
 
 # Create your views here.
+
+
 class HourlyWeatherView(APIView):
     def get(self, request, format=None):
         hourly_weather = HourlyWeather.objects.all()
@@ -64,7 +67,31 @@ def index(request):
 @require_http_methods(['GET'])
 def overview(request):
     # query daily weather data
-    return HttpResponse("This is the overview weather page!")
+    weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
+        'key': 'feec92fecc5042f0b48e49c33529de89',
+        'location': '101010100',
+    })
+
+    weather = json.loads(weather.content.decode('utf-8'))
+    data = weather['now']
+    response_json = {
+        "weather": {
+            "condition": data.get("text", "Unknown"),  # 天气状况
+            "temp": int(data.get("temp", 0)),  # 温度
+            "temp_feel": int(data.get("temp", 0)),  # 体感温度
+            "precip": float(data.get("precip", 0)),  # 降水量
+            "precip_probability": 10,
+            "aqi": 63,
+            "pressure": int(data.get("pressure", 0)),  # 气压
+            "ray": "中等",
+            "sunrise_time": "5:04",
+            "sunset_time": "19:19"
+        },
+        "search": True
+    }
+
+    # 返回转换后的JSON响应
+    return JsonResponse(response_json, status=200)
 
 
 def thirty_days_forecast(request):
@@ -77,12 +104,11 @@ def realtime(request):
     current_time = datetime.now()
     url = 'https://devapi.qweather.com/v7/weather/now'
     params = {
-        'key': 'f1aeb78d689f43bcafbba151a030019c',
-        'location': '101010100', #TODO change to current cityId
+        'key': 'feec92fecc5042f0b48e49c33529de89',
+        'location': '101010100',  # TODO change to current cityId
     }
     response = requests.get(url, params=params)
     data = json.loads(response.content.decode('utf-8'))
-
 
     realTimeWeatherList = []
     current_index = int(data["updateTime"][11:13])  # Get the current hour
@@ -104,7 +130,7 @@ def realtime(request):
 @require_http_methods(['GET'])
 def aqi_best(request):
     length = min(10, len(WeatherInfo.objects.all()))
-    top_weather_info = WeatherInfo.objects.all().order_by('-aqi')[:length]
+    top_weather_info = WeatherInfo.objects.all().order_by('aqi')[:length]
     response_json = {
         "status": True,
         "ranks": [
@@ -122,7 +148,7 @@ def aqi_best(request):
 @require_http_methods(['GET'])
 def aqi_worst(request):
     length = min(10, len(WeatherInfo.objects.all()))
-    lowest_weather_info = WeatherInfo.objects.all().order_by('aqi')[:length]
+    lowest_weather_info = WeatherInfo.objects.all().order_by('-aqi')[:length]
     response_json = {
         "status": True,
         "ranks": [
@@ -139,91 +165,89 @@ def aqi_worst(request):
 
 @require_http_methods(['GET'])
 def aqi_current_city_change(request):
-    forecast_month_data = forecast_month_data.filter(
-        city='北京市').order_by("fxDate")
+    length = min(30, len(DailyWeather.objects.all()))
+    all_info = DailyWeather.objects.filter(
+        city='北京市').order_by('-fxDate')[:length]
     response_json = {
         "status": True,
-        "data": []
+        "data": [
+            {
+                "time": info.fxDate,
+                "aqi": info.aqi,
+            }
+            for info in all_info
+        ]
     }
-    for i in range(min(30, len(forecast_month_data))):
-        response_json["data"].append({
-            "time": forecast_month_data[i].fxDate,
-            "aqi": forecast_month_data[i].humidity,
-        })
-
     return JsonResponse(response_json, status=200)
 
 
 def aqi_target_city_change(request):
-    forecast_month_data = DailyWeather.objects.all()
     data = json.load(request.body)
     city = data["city"]
-    forecast_month_data = forecast_month_data.filter(
-        city=city).order_by("fxDate")
+    length = min(30, len(DailyWeather.objects.all()))
+    all_info = DailyWeather.objects.filter(
+        city=city).order_by('-fxDate')[:length]
     response_json = {
         "status": True,
-        "data": []
+        "data": [
+            {
+                "time": info.fxDate,
+                "aqi": info.aqi,
+            }
+            for info in all_info
+        ]
     }
-    for i in range(min(30, len(forecast_month_data))):
-        response_json["data"].append({
-            "time": forecast_month_data[i].fxDate,
-            "aqi": forecast_month_data[i].humidity,
-        })
-
     return JsonResponse(response_json, status=200)
 
 
 def temp_city_change(request):
-    forecast_month_data = DailyWeather.objects.all()
-    data = json.load(request.body)
-    city = data["city"]
-    forecast_month_data = forecast_month_data.filter(
-        city=city).order_by("fxDate")
+    length = min(30, len(DailyWeather.objects.all()))
+    all_info = DailyWeather.objects.filter(
+        city='北京市').order_by('-fxDate')[:length]
     response_json = {
         "status": True,
-        "data": []
+        "data": [
+            {
+                "time": info.fxDate,
+                "temp": info.tempMax,
+            }
+            for info in all_info
+        ]
     }
-    for i in range(min(30, len(forecast_month_data))):
-        response_json["data"].append({
-            "time": forecast_month_data[i].fxDate,
-            "temp": forecast_month_data[i].tempMax,
-        })
     return JsonResponse(response_json, status=200)
 
 
 def pressure_city_change(request):
-    forecast_month_data = DailyWeather.objects.all()
-    data = json.load(request.body)
-    city = data["city"]
-    forecast_month_data = forecast_month_data.filter(
-        city=city).order_by("fxDate")
+    length = min(30, len(DailyWeather.objects.all()))
+    all_info = DailyWeather.objects.filter(
+        city='北京市').order_by('-fxDate')[:length]
     response_json = {
         "status": True,
-        "data": []
+        "data": [
+            {
+                "time": info.fxDate,
+                "pressure": info.pressure,
+            }
+            for info in all_info
+        ]
     }
-    for i in range(min(30, len(forecast_month_data))):
-        response_json["data"].append({
-            "time": forecast_month_data[i].fxDate,
-            "pressure": forecast_month_data[i].pressure,
-        })
     return JsonResponse(response_json, status=200)
 
 
 def humid_city_change(request):
-    forecast_month_data = DailyWeather.objects.all()
-    data = json.load(request.body)
-    city = data["city"]
-    forecast_month_data = forecast_month_data.filter(
-        city=city).order_by("fxDate")
+    length = min(30, len(DailyWeather.objects.all()))
+    all_info = DailyWeather.objects.filter(
+        city='北京市').order_by('-fxDate')[:length]
     response_json = {
         "status": True,
-        "data": []
+        "data": [
+            {
+                "time": info.fxDate,
+                "humid": info.humidity,
+            }
+            for info in all_info
+        ]
     }
-    for i in range(min(30, len(forecast_month_data))):
-        response_json["data"].append({
-            "time": forecast_month_data[i].fxDate,
-            "humid": forecast_month_data[i].humidity,
-        })
     return JsonResponse(response_json, status=200)
 
 
@@ -240,48 +264,45 @@ def getProInfo(request):
     # cityName = '北京市'
     # proName = "北京"
 
+    # retList = {
+    #     "weather": {
+    #         "time": "2024-04-10 17:33",
+    #         "tem": "11",
+    #         "condition": "阴",
+    #         "infos": "今晚多云。明天晴，比今天热很多，空气一般。",
+    #         "icoid": "151",
+    #         "wind": "2级",
+    #         "windDir": "西南风",
+    #         "hum": "70%",
+    #         "ray": "中等",
+    #         "air": "良",
+    #         "airAQI": "91",
+    #         "visibility": "9km",
+    #         "rainfall": "0.0mm",
+    #         "pressure": "1006hPa"
+    #     },
+    #     "geography": "河南省地势西高东低、北坦南凹，北、西、南三面有太行山、伏牛山、桐柏山、大别山四大山脉呈半环形分布， 中部和东部为辽阔的黄淮海冲积平原，西南部为南阳盆地。境内有黄河、淮河、卫河、汉水四大水系。大地构造跨华北板块和扬子板块，地层发育齐全，土壤分布大致以秦岭—淮河一线为界，此线以北为暖温带地带性土壤,此线以南地带性土壤为黄棕壤。",
+    #     "hazardTable": [
+    #         {
+    #         "place": "葫芦岛市，河南省",
+    #         "level": "蓝",
+    #         "type": "大风"
+    #         },
+    #         {
+    #         "place": "松原市，河南省",
+    #         "level": "黄",
+    #         "type": "森林火险"
+    #         }
+    #     ]
+    # }
+    # return JsonResponse(retList, status=200)
+    # TODO tochange
 
-    retList = {
-        "weather": {
-            "time": "2024-04-10 17:33",
-            "tem": "11",
-            "condition": "阴",
-            "infos": "今晚多云。明天晴，比今天热很多，空气一般。",
-            "icoid": "151",
-            "wind": "2级",
-            "windDir": "西南风",
-            "hum": "70%",
-            "ray": "中等",
-            "air": "良",
-            "airAQI": "91",
-            "visibility": "9km",
-            "rainfall": "0.0mm",
-            "pressure": "1006hPa"
-        },
-        "geography": "河南省地势西高东低、北坦南凹，北、西、南三面有太行山、伏牛山、桐柏山、大别山四大山脉呈半环形分布， 中部和东部为辽阔的黄淮海冲积平原，西南部为南阳盆地。境内有黄河、淮河、卫河、汉水四大水系。大地构造跨华北板块和扬子板块，地层发育齐全，土壤分布大致以秦岭—淮河一线为界，此线以北为暖温带地带性土壤,此线以南地带性土壤为黄棕壤。",
-        "hazardTable": [
-            {
-            "place": "葫芦岛市，河南省",
-            "level": "蓝",
-            "type": "大风"
-            },
-            {
-            "place": "松原市，河南省",
-            "level": "黄",
-            "type": "森林火险"
-            }
-        ]
-    }
-    return JsonResponse(retList, status=200)
-    ## TODO tochange
-
-
-
-    ### use API to get weather and hazardTable
+    # use API to get weather and hazardTable
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
     # indices : 天气指数 https://dev.qweather.com/docs/resource/indices-info/
-    ## 运动指数，紫外线指数
+    # 运动指数，紫外线指数
     # harzard : 天气灾害预警 https://dev.qweather.com/docs/api/warning/weather-warning/
     weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
         'key': pri_key,
@@ -304,10 +325,9 @@ def getProInfo(request):
     weather = json.loads(weather.content.decode('utf-8'))
     air = json.loads(air.content.decode('utf-8'))
     indices = json.loads(indices.content.decode('utf-8'))
-    hazard  = json.loads(hazard.content.decode('utf-8'))
+    hazard = json.loads(hazard.content.decode('utf-8'))
     geography = ProGeography.objects.get(proName=proName).geographyInfo
     # geography = "geographyInf"
-
 
     date_time = datetime.fromisoformat(weather["updateTime"])
     timezon = pytz.timezone('Asia/Shanghai')
@@ -316,35 +336,34 @@ def getProInfo(request):
     retList = {
         "weather": {
             "time": date_time,
-            "tem": float(weather["now"]["temp"]) ,
-            "condition": weather["now"]["text"] ,
+            "tem": float(weather["now"]["temp"]),
+            "condition": weather["now"]["text"],
             "icoid": weather["now"]["icon"],
-            "infos": "", # fill later
-            "wind": int(weather["now"]["windScale"]) ,
-            "windDir": weather["now"]["windDir"] ,
-            "hum": int(weather["now"]["humidity"]) ,
-            "ray": "" , # fill later
-            "air": air["now"]["category"] ,
-            "airAQI": int(air["now"]["aqi"]) ,
-            "visibility": int(weather["now"]["vis"]) ,
-            "rainfall": float(weather["now"]["precip"]) ,
-            "pressure": int(weather["now"]["pressure"]) ,
+            "infos": "",  # fill later
+            "wind": int(weather["now"]["windScale"]),
+            "windDir": weather["now"]["windDir"],
+            "hum": int(weather["now"]["humidity"]),
+            "ray": "",  # fill later
+            "air": air["now"]["category"],
+            "airAQI": int(air["now"]["aqi"]),
+            "visibility": int(weather["now"]["vis"]),
+            "rainfall": float(weather["now"]["precip"]),
+            "pressure": int(weather["now"]["pressure"]),
         },
         "geography": geography,
         "hazardTable": [],
     }
 
-
     for daily in indices["daily"]:
-        if daily["type"] == "1": # 运动指数
+        if daily["type"] == "1":  # 运动指数
             retList["weather"]["infos"] = daily["text"]
-        if daily["type"] == "5": # 紫外线
+        if daily["type"] == "5":  # 紫外线
             retList["weather"]["ray"] = daily["category"]
 
     for warning in hazard["warning"]:
         retList["hazardTable"].append({
-            "place": cityName + ", " + proName ,
-            "level": warning["severityColor"] ,
+            "place": cityName + ", " + proName,
+            "level": warning["severityColor"],
             "type": warning["typeName"],
         })
     return JsonResponse(retList, status=200)
@@ -359,10 +378,10 @@ def getCityInfo(request: HttpRequest):
     assert request.method == 'GET'
 
     city = request.GET.get("city")
-    ### TODO to remove
+    # TODO to remove
     city = "北京市"
     cityId = City2CityId.objects.get(cityName=city).cityId
-    ### use API to get weather and air
+    # use API to get weather and air
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
     weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
@@ -376,7 +395,6 @@ def getCityInfo(request: HttpRequest):
 
     weather = json.loads(weather.content.decode('utf-8'))
     air = json.loads(air.content.decode('utf-8'))
-
 
     date_time = datetime.fromisoformat(weather["updateTime"])
     timezon = pytz.timezone('Asia/Shanghai')
@@ -477,7 +495,7 @@ def search_weather_data(request):
         weather_data_list = []
         for data in weather_data:
             weather_data_list.append({
-                'time': data.fxTime,
+                'time': data.time,
                 'city': data.city,
                 'temp': data.temp,
                 'text': data.text,

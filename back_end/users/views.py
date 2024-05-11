@@ -32,6 +32,11 @@ import os
 import re
 from datetime import datetime
 
+<<<<<<< HEAD
+=======
+from .models import UserCity
+
+>>>>>>> master
 
 # Create your views here.
 def index(request):

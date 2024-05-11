@@ -20,7 +20,6 @@ const UserMenu = defineAsyncComponent(() => import("@c/topBar/userMenu.vue"));
   padding-right: 20px;
   border-bottom: 1px solid #4c4d4f;
   background-color: var(--bg-topBar-color);
-  //   background-color: aquamarine;
   transition: background-color 0.2s ease;
 }
 

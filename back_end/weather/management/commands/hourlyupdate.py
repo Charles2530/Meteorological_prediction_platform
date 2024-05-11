@@ -6,7 +6,6 @@ import requests
 import pytz
 import random
 
-
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         WeatherInfo.objects.all().delete()
@@ -23,7 +22,7 @@ class Command(BaseCommand):
         ]
         for location, current_city in zip(target_locations, target_cities):
             weather = requests.get('https://devapi.qweather.com/v7/weather/24h', params={
-                'key': '7ddb2459227b4d6993afff0b4ba574ff',
+                'key': 'feec92fecc5042f0b48e49c33529de89',
                 'location': location,
             })
 
@@ -82,5 +81,4 @@ class Command(BaseCommand):
 
                 data.save()
             # city_name = ''
-        self.stdout.write(self.style.SUCCESS(
-            'Successfully updated weather info.'))
+        self.stdout.write(self.style.SUCCESS('Successfully updated weather info.'))

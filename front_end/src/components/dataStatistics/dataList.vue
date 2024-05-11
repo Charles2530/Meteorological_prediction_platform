@@ -66,7 +66,6 @@
     <div v-else>
       <div style="margin: 0 auto">
         <el-divider></el-divider>
-        <!-- 居中显示 -->
         <div class="text-center mt-4">
           <h1 class="text-gray-500" style="font-size: 25px">天气数据</h1>
         </div>
@@ -88,7 +87,7 @@
           label="城市"
           width="100"
           :formatter="(row: CityWeatherData) => {
-                    return locations.find((location) => location.value === row.city)?.label||row.city;
+                    return locations.find((location:any) => location.value === row.city)?.label||row.city;
                     }"
         ></el-table-column>
         <el-table-column
@@ -146,7 +145,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="currentPage"
-        :page-sizes="[5, 10, 20, 50]"
+        :page-sizes="[5, 10, 15, 20, 50]"
         :page-size="pageSize"
         background
         layout="total, sizes, prev, pager, next, jumper"
@@ -189,7 +188,6 @@ const handleSearch = () => {
   });
 };
 const loading = ref(false);
-const addDialogVisible = ref(false);
 
 function refreshWeather() {
   // You can implement data fetching logic here
@@ -237,7 +235,7 @@ const weatherInfo = {
 };
 /* 分页功能 */
 const currentPage = ref(1);
-const pageSize = ref(10);
+const pageSize = ref(15);
 const total = ref(0);
 const handleSizeChange = (val: number) => {
   pageSize.value = val;
