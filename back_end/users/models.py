@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -17,7 +17,7 @@ class Profile(AbstractUser):
 
 
 class UserCity(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="用户名")
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name="用户名")
     city = models.CharField(max_length=100)
 
     def __str__(self):
