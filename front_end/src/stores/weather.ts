@@ -27,8 +27,10 @@ export const aqi_level = [
 ];
 
 export const weather_norms = [
-  { label: "湿度", value: "humid" },
   { label: "温度", value: "temp" },
-  { label: "气压", value: "pressure" },
+  { label: "降水量", value: "precip" },
+  { label: "湿度", value: "humid" },
   { label: "AQI", value: "aqi" },
+  { label: "气压", value: "pressure" },
+  { label: "风速", value: "winSpeed" },
 ];
