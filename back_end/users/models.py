@@ -11,9 +11,8 @@ class Profile(AbstractUser):
     def __str__(self):
         return self.username
 
-    class Meta:
-        verbose_name = "用户画像"
-        verbose_name_plural = "用户画像"
+    class Meta(AbstractUser.Meta):
+        swappable = 'AUTH_USER_MODEL'
 
 
 class UserCity(models.Model):

@@ -10,6 +10,7 @@ urlpatterns = [
 
     path('manage/user/list/', views.user_list, name='user_list'),
     path('manage/user/delete/', views.delete_user, name='delete_user'),
+    path('manage/user/set/', views.user_authorization, name='user_authorization'),
     path('manage/user/email/', views.update_user_email, name='change_email'),
     path('manage/user/password/', views.update_user_password, name='change_password'),
 

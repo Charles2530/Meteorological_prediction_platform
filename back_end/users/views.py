@@ -32,11 +32,6 @@ import os
 import re
 from datetime import datetime
 
-<<<<<<< HEAD
-=======
-from .models import UserCity
-
->>>>>>> master
 
 # Create your views here.
 def index(request):
@@ -97,7 +92,7 @@ def my_register(request):
     username = data.get('username')
     password = data.get('password')
     email = data.get('email')
-    role = data.get('role') # TODO check
+    # role = data.get('role') # TODO check
 
     # 验证邮箱格式
     # try:
@@ -130,7 +125,7 @@ def my_register(request):
 
     # 创建用户
     new_profile = Profile.objects.create_user(
-        username=username, password=password, email=email, role=role)
+        username=username, password=password, email=email) # TODO role
     new_profile.save()
     # authenticate(username=username, password=password)
 
@@ -155,6 +150,7 @@ def my_register(request):
 
 
 @csrf_exempt
+@login_required
 def user_list(request):
     # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")  # 【1】
@@ -214,6 +210,7 @@ def user_list(request):
 
 
 @csrf_exempt
+@login_required
 def delete_user(request):
     # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")
@@ -249,6 +246,7 @@ def delete_user(request):
 
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@login_required
 def user_authorization(request):
     # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")
@@ -272,9 +270,8 @@ def user_authorization(request):
     # 在这里添加你的业务逻辑，例如验证用户权限等
     # 假设我们只是简单地检查User模型中是否存在对应的uid和role
     try:
-        # TODO:
-        # user = User.objects.get(id=uid, role=role)
         profile = Profile.objects.get(id=uid)
+        profile.role = role
         # 如果用户存在且角色匹配，设置success为True
         response_data = {"success": True}
         return JsonResponse(response_data, status=200)  # 返回200成功响应
@@ -338,6 +335,7 @@ def update_user_email(request):
 
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@login_required
 def update_user_password(request):
     # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")
