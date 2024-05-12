@@ -88,59 +88,30 @@ const renderChart_humid_history = async (tempData: humidNode[]) => {
     series: [
       {
         name: "湿度",
-        type: "line",
-        smooth: true,
-        showAllSymbol: true,
-        symbol: "emptyCircle",
-        symbolSize: 15,
-        data: tempData.map((item) => item.humid),
-      },
-      {
         type: "bar",
-        barWidth: 10,
+        symbol: "circle",
+        symbolSize: function (val: any) {
+          return val / 5;
+        },
         itemStyle: {
-          borderRadius: 5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: "#14c8d4" },
-            { offset: 1, color: "#43eec6" },
-          ]),
+          normal: {
+            color: function (params: any) {
+              if (params.data > 80) {
+                return "#ff0000";
+              } else if (params.data > 60) {
+                return "#ff9900";
+              } else if (params.data > 40) {
+                return "#ffff00";
+              } else if (params.data > 20) {
+                return "#009900";
+              } else {
+                return "#003fef";
+              }
+            },
+          },
         },
         data: tempData.map((item) => item.humid),
-        tooltip: {
-          show: false,
-        },
-      },
-      {
-        type: "bar",
-        barGap: "-100%",
-        barWidth: 10,
-        itemStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: "rgba(20,200,212,0.5)" },
-            { offset: 0.2, color: "rgba(20,200,212,0.2)" },
-            { offset: 1, color: "rgba(20,200,212,0)" },
-          ]),
-        },
-        z: -12,
-        data: tempData.map((item) => item.humid),
-        tooltip: {
-          show: false,
-        },
-      },
-      {
-        type: "pictorialBar",
-        symbol: "rect",
-        itemStyle: {
-          color: "#0f375f",
-        },
-        symbolRepeat: true,
-        symbolSize: [12, 4],
-        symbolMargin: 1,
-        z: -10,
-        data: tempData.map((item) => item.humid),
-        tooltip: {
-          show: false,
-        },
+        position: "right",
       },
     ],
   };

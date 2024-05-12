@@ -102,6 +102,7 @@ const renderChart_winSpeed_history = async (tempData: winSpeedNode[]) => {
           width: 2,
           shadowColor: "rgba(51,152,213,0.4)",
           shadowBlur: 10,
+          type: "dashed",
         },
         animationEasing: "elasticOut",
         animationDelay: function (idx: any) {

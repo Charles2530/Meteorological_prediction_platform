@@ -78,6 +78,7 @@ const renderChart_pressure_history = async (tempData: pressureNode[]) => {
       },
     },
     yAxis: {
+      min: 980,
       splitLine: { show: false },
       axisLine: {
         lineStyle: {
@@ -90,24 +91,48 @@ const renderChart_pressure_history = async (tempData: pressureNode[]) => {
         name: "压力",
         type: "line",
         smooth: true,
-        showAllSymbol: true,
-        symbol: "emptyCircle",
-        symbolSize: 15,
+        symbol: "circle",
+        symbolSize: 5,
         data: tempData.map((item) => item.pressure),
+        itemStyle: {
+          normal: {
+            color: "#3398DB",
+          },
+        },
+        lineStyle: {
+          width: 2,
+          shadowColor: "rgba(51,152,213,0.4)",
+          shadowBlur: 5,
+        },
+        animationEasing: "elasticOut",
+        animationDelay: function (idx: any) {
+          return Math.random() * 200;
+        },
       },
       {
-        type: "bar",
-        barWidth: 10,
-        itemStyle: {
-          borderRadius: 5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: "#14c8d4" },
-            { offset: 1, color: "#43eec6" },
-          ]),
+        name: "压力数据点",
+        type: "scatter",
+        symbolSize: function (value: any, params: any) {
+          return Math.max(10, value / 100);
         },
-        data: tempData.map((item) => item.pressure),
+        data: tempData.map((item) => ({
+          value: item.pressure,
+          itemStyle: {
+            normal: {
+              color: "#f4e925",
+            },
+          },
+        })),
         tooltip: {
           show: false,
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowColor: "rgba(255, 255, 0, 0.5)",
+            borderWidth: 1,
+            borderColor: "rgba(255, 255, 0, 1)",
+          },
         },
       },
     ],
