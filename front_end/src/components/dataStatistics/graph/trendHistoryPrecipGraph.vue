@@ -64,7 +64,7 @@ const renderChart_precip_history = async (tempData: precipNode[]) => {
         let tooltipContent = "";
         params.forEach(function (param: any) {
           let winSpeed = param.value.toFixed(0);
-          tooltipContent += `${param.marker} ${param.seriesName}: ${winSpeed} %<br/>`;
+          tooltipContent += `${param.marker} ${param.seriesName}: ${winSpeed} mm<br/>`;
         });
         return tooltipContent;
       },
