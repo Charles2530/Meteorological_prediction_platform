@@ -14,6 +14,8 @@ const props = defineProps<{
 interface tempNode {
   time: string;
   temp: number;
+  maxTemp: number;
+  minTemp: number;
 }
 interface TempChangeResponse {
   status: boolean;
@@ -33,7 +35,7 @@ onMounted(() =>
   })
 );
 const fetchCityTempChange = async () =>
-  get<TempChangeResponse>("/api/weather/temp/city_change/", {
+  get<TempChangeResponse>("/api/weather/temp/city_change/details/", {
     city: props.city,
   }).then((res) => {
     TempDataList.value.splice(0, TempDataList.value.length, ...res.data.data);
@@ -87,60 +89,67 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
     },
     series: [
       {
-        name: "温度",
+        name: "平均温度",
         type: "line",
         smooth: true,
-        showAllSymbol: true,
-        symbol: "emptyCircle",
+        showSymbol: true,
         symbolSize: 15,
+        itemStyle: {
+          normal: {
+            color: "#f4e925",
+            lineStyle: {
+              width: 2,
+              type: "solid",
+            },
+          },
+        },
         data: tempData.map((item) => item.temp),
       },
       {
-        type: "bar",
-        barWidth: 10,
+        name: "最高温度",
+        type: "line",
+        color: "#ff6347",
+        smooth: true,
+        areaStyle: {
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: "#ff6347" },
+              { offset: 1, color: "#ffcccb" },
+            ]),
+          },
+        },
+        symbol: "triangle",
+        symbolSize: 10,
         itemStyle: {
-          borderRadius: 5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: "#14c8d4" },
-            { offset: 1, color: "#43eec6" },
-          ]),
+          normal: {
+            borderColor: "#ff6347",
+            borderWidth: 2,
+          },
         },
-        data: tempData.map((item) => item.temp),
-        tooltip: {
-          show: false,
-        },
+        data: tempData.map((item) => item.maxTemp),
       },
       {
-        type: "bar",
-        barGap: "-100%",
-        barWidth: 10,
+        name: "最低温度",
+        type: "line",
+        color: "#4682b4",
+        smooth: true,
+        areaStyle: {
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: "#4682b4" },
+              { offset: 1, color: "#b0e2ff" },
+            ]),
+          },
+        },
+        symbol: "square",
+        symbolSize: 10,
         itemStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: "rgba(20,200,212,0.5)" },
-            { offset: 0.2, color: "rgba(20,200,212,0.2)" },
-            { offset: 1, color: "rgba(20,200,212,0)" },
-          ]),
+          normal: {
+            borderColor: "#4682b4",
+            borderWidth: 2,
+          },
         },
-        z: -12,
-        data: tempData.map((item) => item.temp),
-        tooltip: {
-          show: false,
-        },
-      },
-      {
-        type: "pictorialBar",
-        symbol: "rect",
-        itemStyle: {
-          color: "#0f375f",
-        },
-        symbolRepeat: true,
-        symbolSize: [12, 4],
-        symbolMargin: 1,
-        z: -10,
-        data: tempData.map((item) => item.temp),
-        tooltip: {
-          show: false,
-        },
+        data: tempData.map((item) => item.minTemp),
       },
     ],
   };

@@ -87,61 +87,88 @@ const renderChart_aqi_history = async (tempData: aqiNode[]) => {
     },
     series: [
       {
-        name: "Aqi",
-        type: "line",
+        name: "AQI",
+        type: "scatter",
         smooth: true,
         showAllSymbol: true,
-        symbol: "emptyCircle",
-        symbolSize: 15,
-        data: tempData.map((item) => item.aqi),
-      },
-      {
-        type: "bar",
-        barWidth: 10,
+        symbol: "circle",
+        symbolSize: function (value: any) {
+          return value / 3;
+        },
         itemStyle: {
-          borderRadius: 5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: "#14c8d4" },
-            { offset: 1, color: "#43eec6" },
-          ]),
+          normal: {
+            color: function (color: any) {
+              console.log(color.data.value);
+              if (color.data.value > 60) {
+                return "#ff4500";
+              } else if (color.data.value > 30) {
+                return "#f5a623";
+              } else {
+                return "#1e90ff";
+              }
+            },
+            borderColor: "rgba(255,255,255,1)",
+            borderWidth: 3,
+          },
         },
-        data: tempData.map((item) => item.aqi),
         tooltip: {
-          show: false,
+          show: true,
+          formatter: function (params: any) {
+            return `${params.name}<br/>AQI指数: ${params.value}`;
+          },
         },
+        data: tempData.map((item) => ({
+          value: item.aqi,
+        })),
+        animationEasing: "bounceIn4",
       },
-      {
-        type: "bar",
-        barGap: "-100%",
-        barWidth: 10,
-        itemStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: "rgba(20,200,212,0.5)" },
-            { offset: 0.2, color: "rgba(20,200,212,0.2)" },
-            { offset: 1, color: "rgba(20,200,212,0)" },
-          ]),
-        },
-        z: -12,
-        data: tempData.map((item) => item.aqi),
-        tooltip: {
-          show: false,
-        },
-      },
-      {
-        type: "pictorialBar",
-        symbol: "rect",
-        itemStyle: {
-          color: "#0f375f",
-        },
-        symbolRepeat: true,
-        symbolSize: [12, 4],
-        symbolMargin: 1,
-        z: -10,
-        data: tempData.map((item) => item.aqi),
-        tooltip: {
-          show: false,
-        },
-      },
+      //   {
+      //     type: "bar",
+      //     barWidth: 10,
+      //     itemStyle: {
+      //       borderRadius: 5,
+      //       color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+      //         { offset: 0, color: "#14c8d4" },
+      //         { offset: 1, color: "#43eec6" },
+      //       ]),
+      //     },
+      //     data: tempData.map((item) => item.aqi),
+      //     tooltip: {
+      //       show: false,
+      //     },
+      //   },
+      //   {
+      //     type: "bar",
+      //     barGap: "-100%",
+      //     barWidth: 10,
+      //     itemStyle: {
+      //       color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+      //         { offset: 0, color: "rgba(20,200,212,0.5)" },
+      //         { offset: 0.2, color: "rgba(20,200,212,0.2)" },
+      //         { offset: 1, color: "rgba(20,200,212,0)" },
+      //       ]),
+      //     },
+      //     z: -12,
+      //     data: tempData.map((item) => item.aqi),
+      //     tooltip: {
+      //       show: false,
+      //     },
+      //   },
+      //   {
+      //     type: "pictorialBar",
+      //     symbol: "rect",
+      //     itemStyle: {
+      //       color: "#0f375f",
+      //     },
+      //     symbolRepeat: true,
+      //     symbolSize: [12, 4],
+      //     symbolMargin: 1,
+      //     z: -10,
+      //     data: tempData.map((item) => item.aqi),
+      //     tooltip: {
+      //       show: false,
+      //     },
+      //   },
     ],
   };
   chartInstance_aqi_history.setOption(option);
