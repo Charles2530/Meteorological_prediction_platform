@@ -98,7 +98,6 @@ const renderChart_aqi_history = async (tempData: aqiNode[]) => {
         itemStyle: {
           normal: {
             color: function (color: any) {
-              console.log(color.data.value);
               if (color.data.value > 60) {
                 return "#ff4500";
               } else if (color.data.value > 30) {

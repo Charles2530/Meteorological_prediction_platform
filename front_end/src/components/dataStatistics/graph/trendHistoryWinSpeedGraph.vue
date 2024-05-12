@@ -64,7 +64,7 @@ const renderChart_winSpeed_history = async (tempData: winSpeedNode[]) => {
         let tooltipContent = "";
         params.forEach(function (param: any) {
           let winSpeed = param.value.toFixed(0);
-          tooltipContent += `${param.marker} ${param.seriesName}: ${winSpeed} %<br/>`;
+          tooltipContent += `${param.marker} ${param.seriesName}: ${winSpeed} m/s<br/>`;
         });
         return tooltipContent;
       },
@@ -90,54 +90,55 @@ const renderChart_winSpeed_history = async (tempData: winSpeedNode[]) => {
         name: "风速",
         type: "line",
         smooth: true,
-        showAllSymbol: true,
-        symbol: "emptyCircle",
-        symbolSize: 15,
+        symbol: "circle",
+        symbolSize: 5,
         data: tempData.map((item) => item.winSpeed),
+        itemStyle: {
+          normal: {
+            color: "#3398DB",
+          },
+        },
+        lineStyle: {
+          width: 2,
+          shadowColor: "rgba(51,152,213,0.4)",
+          shadowBlur: 10,
+        },
+        animationEasing: "elasticOut",
+        animationDelay: function (idx: any) {
+          return Math.random() * 200;
+        },
       },
       {
         type: "bar",
         barWidth: 10,
         itemStyle: {
-          borderRadius: 5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: "#14c8d4" },
-            { offset: 1, color: "#43eec6" },
-          ]),
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: "#3398DB" },
+              { offset: 1, color: "#D7E9F7" },
+            ]),
+          },
         },
         data: tempData.map((item) => item.winSpeed),
+        z: -1,
         tooltip: {
           show: false,
         },
       },
       {
         type: "bar",
+        barWidth: 10,
         barGap: "-100%",
-        barWidth: 10,
         itemStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: "rgba(20,200,212,0.5)" },
-            { offset: 0.2, color: "rgba(20,200,212,0.2)" },
-            { offset: 1, color: "rgba(20,200,212,0)" },
-          ]),
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: "rgba(51,152,213,1)" },
+              { offset: 1, color: "rgba(51,152,213,0)" },
+            ]),
+          },
         },
-        z: -12,
         data: tempData.map((item) => item.winSpeed),
-        tooltip: {
-          show: false,
-        },
-      },
-      {
-        type: "pictorialBar",
-        symbol: "rect",
-        itemStyle: {
-          color: "#0f375f",
-        },
-        symbolRepeat: true,
-        symbolSize: [12, 4],
-        symbolMargin: 1,
-        z: -10,
-        data: tempData.map((item) => item.winSpeed),
+        z: -2,
         tooltip: {
           show: false,
         },

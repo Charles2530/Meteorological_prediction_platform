@@ -36,24 +36,24 @@
                 <el-row :gutter="2">
                   <el-col :span="12">
                     <el-card>
-                      <trendHIstoryPressureGraph :city="selectedLocation" />
-                    </el-card>
-                  </el-col>
-                  <el-col :span="12">
-                    <el-card>
-                      <trendHistoryHumidGraph :city="selectedLocation" />
-                    </el-card>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="2">
-                  <el-col :span="12">
-                    <el-card>
                       <trendHistoryWinSpeedGraph :city="selectedLocation" />
                     </el-card>
                   </el-col>
                   <el-col :span="12">
                     <el-card>
                       <trendHistoryPrecipGraph :city="selectedLocation" />
+                    </el-card>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="2">
+                  <el-col :span="12">
+                    <el-card>
+                      <trendHIstoryPressureGraph :city="selectedLocation" />
+                    </el-card>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-card>
+                      <trendHistoryHumidGraph :city="selectedLocation" />
                     </el-card>
                   </el-col>
                 </el-row>
