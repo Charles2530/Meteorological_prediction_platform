@@ -84,3 +84,32 @@ onMounted(() => {
   labels.value = loadAll();
 });
 </script>
+<style scoped>
+.flex {
+  align-items: center;
+}
+
+.sub-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px #000000;
+}
+
+.inline-input {
+  max-width: 50%;
+}
+
+.el-autocomplete {
+  border: 1px solid #bfcbd9;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  background-color: #f5f7fa;
+  color: #48576a;
+}
+
+.el-autocomplete:focus {
+  outline: none;
+  border-color: #409eff;
+}
+</style>
