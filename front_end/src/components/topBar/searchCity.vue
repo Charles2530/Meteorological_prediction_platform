@@ -30,7 +30,7 @@ interface CityInfoResponse {
 }
 const currentCity = ref("");
 const getPresentCity = async () => {
-  get<CityInfoResponse>("/api/getCityInfo/").then((res) => {
+  get<CityInfoResponse>("/api/current/getCityInfo/").then((res) => {
     currentCity.value = res.data.message.city;
   });
   if (!currentCity.value) {

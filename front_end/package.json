@@ -16,6 +16,7 @@
         "axios": "^1.6.7",
         "echarts": "^5.5.0",
         "element-plus": "^2.6.1",
+        "element-resize-detector": "^1.2.4",
         "js-md5": "^0.8.3",
         "pinia": "^2.1.7",
         "sass": "^1.72.0",
@@ -30,6 +31,7 @@
         "vue-router": "^4.3.0"
     },
     "devDependencies": {
+        "@types/element-resize-detector": "^1.1.6",
         "@typescript-eslint/eslint-plugin": "^7.3.1",
         "@typescript-eslint/parser": "^7.3.1",
         "@vitejs/plugin-vue": "^5.0.4",

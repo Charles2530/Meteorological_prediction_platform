@@ -59,7 +59,11 @@
                 </el-row>
               </el-card>
             </el-col>
-            <el-col :span="6"> </el-col>
+            <el-col :span="6">
+              <el-card>
+                <compareGraph />
+              </el-card>
+            </el-col>
           </el-row>
         </el-card>
       </el-main>
@@ -74,6 +78,7 @@ import trendHIstoryPressureGraph from "@/components/dataStatistics/graph/trendHI
 import trendHistoryHumidGraph from "@/components/dataStatistics/graph/trendHistoryHumidGraph.vue";
 import trendHistoryWinSpeedGraph from "@/components/dataStatistics/graph/trendHistoryWinSpeedGraph.vue";
 import trendHistoryPrecipGraph from "@/components/dataStatistics/graph/trendHistoryPrecipGraph.vue";
+import compareGraph from "@/components/dataStatistics/compareGraph.vue";
 import { china_cities } from "@/stores/cities";
 const selectedLocation = ref("");
 const locations = china_cities;
