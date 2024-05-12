@@ -3,6 +3,7 @@
     <Logo />
     <NavBar />
     <div class="flex-grow"></div>
+    <SearchCity />
     <UserMenu />
   </div>
 </template>
@@ -10,6 +11,9 @@
 const Logo = defineAsyncComponent(() => import("@c/topBar/logo.vue"));
 const NavBar = defineAsyncComponent(() => import("@c/topBar/navBar.vue"));
 const UserMenu = defineAsyncComponent(() => import("@c/topBar/userMenu.vue"));
+const SearchCity = defineAsyncComponent(
+  () => import("@c/topBar/searchCity.vue")
+);
 </script>
 
 <style scoped lang="scss">
