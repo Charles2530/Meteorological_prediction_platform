@@ -1,7 +1,7 @@
 <template>
   <div class="flex gap-4">
     <div class="sub-title my-2 text-sm text-white">
-      当前城市 {{ cityMessage.city }}
+      当前城市 {{ currentCity }}
     </div>
     <el-autocomplete
       v-model="state"
@@ -11,6 +11,7 @@
       @select="handleSelect"
       highlight-first-item
       :value-key="'label'"
+      @change="updateUserCity"
     />
   </div>
 </template>
@@ -18,7 +19,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import { china_cities } from "@/stores/cities";
-import { get } from "@/api/index.ts";
+import { post, get } from "@/api/index.ts";
 import { CityWeatherData } from "@/types/weather";
 onMounted(() => {
   getPresentCity();
@@ -27,30 +28,32 @@ interface CityInfoResponse {
   status: boolean;
   message: CityWeatherData;
 }
-const cityMessage = reactive<CityWeatherData>({} as CityWeatherData);
+const currentCity = ref("");
 const getPresentCity = async () => {
   get<CityInfoResponse>("/api/getCityInfo/").then((res) => {
-    cityMessage.city = res.data.message.city;
+    currentCity.value = res.data.message.city;
   });
+  if (!currentCity.value) {
+    currentCity.value = "北京市";
+  }
 };
-interface RestaurantItem {
-  value: string;
+interface LabelItem {
   label: string;
+  value: string;
 }
-
 const state = ref("");
 const city = ref("");
 
-const restaurants = ref<RestaurantItem[]>([]);
+const labels = ref<LabelItem[]>([]);
 const querySearch = (queryString: string, cb: any) => {
   const results = queryString
-    ? restaurants.value.filter(createFilter(queryString))
-    : restaurants.value;
+    ? labels.value.filter(createFilter(queryString))
+    : labels.value;
   cb(results);
 };
 
 const createFilter = (queryString: string) => {
-  return (restaurant: RestaurantItem) => {
+  return (restaurant: LabelItem) => {
     return (
       restaurant.label.toLowerCase().indexOf(queryString.toLowerCase()) === 0
     );
@@ -60,14 +63,24 @@ const loadAll = () => {
   return china_cities;
 };
 
-const handleSelect = (item: RestaurantItem) => {
+const handleSelect = (item: LabelItem) => {
   state.value = item.label;
   city.value = item.value;
-  console.log(state.value);
-  console.log(item);
 };
-
+interface CityInfoResponse {
+  success: boolean;
+  reason?: string;
+}
+const updateUserCity = async () => {
+  post<CityInfoResponse>("/api/operate/current_city", {
+    city: state.value,
+  }).then((res) => {
+    if (res.data.success) {
+      getPresentCity();
+    }
+  });
+};
 onMounted(() => {
-  restaurants.value = loadAll();
+  labels.value = loadAll();
 });
 </script>
