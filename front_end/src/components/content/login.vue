@@ -217,6 +217,7 @@ const submitLoginForm = (formEl: FormInstance | undefined) => {
               message: "登录成功",
               type: "success",
             });
+            console.log("login role", userInfo.role);
           } else {
             ElMessage({
               message: response.reason ?? "登录失败",
