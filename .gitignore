@@ -1,3 +1,4 @@
 back_end/uwsgi.log
+back_end/uwsgi.pid
 db.sqlite3
 */**/__pycache__
