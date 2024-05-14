@@ -179,7 +179,8 @@
             </el-select>
             <el-text>
               {{
-                (manage.pagination.total, [pagination.page, pagination.page_total])
+                (manage.pagination.total,
+                [pagination.page, pagination.page_total])
               }}
             </el-text>
             <el-pagination

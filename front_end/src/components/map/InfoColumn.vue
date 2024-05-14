@@ -14,7 +14,11 @@
           <div class="grid-content">
             <span
               class="font1"
-              style="border: 1px solid #ffffff; border-radius: 10px; float:right !important;"
+              style="
+                border: 1px solid #ffffff;
+                border-radius: 10px;
+                float: right !important;
+              "
               >&nbsp;&nbsp;AQI：{{ proInfo.weather.airAQI }}
               {{ proInfo.weather.air }}&nbsp;&nbsp;</span
             >
@@ -32,7 +36,9 @@
         </el-col>
         <el-col :span="15">
           <div class="grid-content">
-            <span style="font-size: 44px">{{ proInfo.weather.tem }}℃&nbsp;</span>
+            <span style="font-size: 44px"
+              >{{ proInfo.weather.tem }}℃&nbsp;</span
+            >
             <span style="font-size: 22px">{{ proInfo.weather.condition }}</span>
           </div>
         </el-col>
@@ -124,7 +130,7 @@
 import { getAssetsFileIcon } from "@/utils/pub-use";
 import { get } from "@/api/index";
 import { ProInfo } from "@/types/weather";
-import { ref, watch} from 'vue';
+import { ref, watch } from "vue";
 
 const proInfo = ref({
   weather: {
@@ -176,10 +182,13 @@ const props = defineProps<{
 const proName = ref("中国");
 
 // 监听 propName 的变化
-watch(() => props.proName, () => {
-  proName.value = props.proName;
-  getProInfo();
-});
+watch(
+  () => props.proName,
+  () => {
+    proName.value = props.proName;
+    getProInfo();
+  }
+);
 
 onMounted(() => {
   getProInfo();
@@ -187,8 +196,7 @@ onMounted(() => {
 
 const getProInfo = async () => {
   console.log(proName.value);
-  get<ProInfo>("/api/getProInfo/", {proName: proName.value}
-).then((res) => {
+  get<ProInfo>("/api/getProInfo/", { proName: proName.value }).then((res) => {
     proInfo.value = res.data;
   });
 };
@@ -240,7 +248,6 @@ const getProInfo = async () => {
   background-color: rgba(232, 232, 232, 0.03);
   color: rgb(219, 219, 219);
 }
-
 
 .info_container::-webkit-scrollbar {
   width: 10px;

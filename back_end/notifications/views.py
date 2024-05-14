@@ -64,9 +64,8 @@ def get_alarm_notice(request):
         "notifications": []
     }
     
-    # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
     user = request.user
-    cities = CitySubscription.objects.filter(user=user)
+    cities = CitySubscription.objects.filter(username=user.username)
     for forecast in locations:
         for city in cities:
             if city.city_name in forecast.city:
@@ -115,9 +114,8 @@ def subscribe(request):
             "success": True,
             "tableData": []
         }
-        # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
         user = request.user
-        cities = CitySubscription.objects.filter(user=user)
+        cities = CitySubscription.objects.filter(username=user.username)
         for city in cities:
             city_json = {
                 "city": city.city_name,
@@ -132,9 +130,8 @@ def get_brief(request):
         "success": True,
         "notifications": []
     }
-    # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
     user = request.user
-    cities = CitySubscription.objects.filter(user=user)
+    cities = CitySubscription.objects.filter(username=user.username)
     for forecast in locations:
         # forecast = fetch_weather_catastrophic_forecast(location=locationId)
         for city in cities:

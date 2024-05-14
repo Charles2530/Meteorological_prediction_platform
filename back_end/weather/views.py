@@ -135,7 +135,7 @@ def aqi_best(request):
         "status": True,
         "ranks": [
             {
-                "city": info.city,
+                "city": info.cityName,
                 "category": info.category,
                 "aqi": info.aqi
             }
@@ -153,7 +153,7 @@ def aqi_worst(request):
         "status": True,
         "ranks": [
             {
-                "city": info.city,
+                "city": info.cityName,
                 "category": info.category,
                 "aqi": info.aqi
             }
@@ -252,8 +252,9 @@ def humid_city_change(request):
 
 
 @csrf_exempt
+@require_http_methods(['GET'])
 def getProInfo(request):
-    assert request.method == 'GET'
+    # assert request.method == 'GET'
     proName = request.GET.get('proName')
     if proName == '中国':
         proName = '北京市'
@@ -368,15 +369,19 @@ def getProInfo(request):
         })
     return JsonResponse(retList, status=200)
 
-# @csrf_exempt
-# def getHazard(request: HttpRequest):
-#     assert request.method == 'GET'
+
+# TODO
+@csrf_exempt
+@require_http_methods(['GET'])
+def getHazard(request: HttpRequest):
+    # assert request.method == 'GET'
+    return JsonResponse({"status": True, "hazardTable": []}, status=200)
 
 
 @csrf_exempt
+@require_http_methods(['GET'])
 def getCityInfo(request: HttpRequest):
-    assert request.method == 'GET'
-
+    # assert request.method == 'GET'
     city = request.GET.get("city")
     # TODO to remove
     city = "北京市"
@@ -418,9 +423,6 @@ def getCityInfo(request: HttpRequest):
     return JsonResponse(retList, status=200)
 
 
-# path('manage/data/weather_add/', views.add_weather_data, name='add_weather'),
-# path('manage/data/delete/', views.delete_weather_data, name='delete_weather'),
-# path('manage/data/search/', views.search_weather_data, name='search_weather'),
 # class WeatherInfo(models.Model):
 #     time = models.DateTimeField(default=datetime.now, primary_key=True)
 #     city = models.CharField(max_length=200, default="北京", primary_key=True)
@@ -436,9 +438,6 @@ def getCityInfo(request: HttpRequest):
 #     category = models.CharField(max_length=200, default="")
 @csrf_exempt
 def add_weather_data(request):
-    response_json = {
-        "status": True,
-    }
     data = json.loads(request.body)
     weather_info = WeatherInfo(
         time=data['time'],
@@ -455,16 +454,21 @@ def add_weather_data(request):
         category=data['category'],
     )
     weather_info.save()
+
+    response_json = {
+        "status": True,
+    }
     return JsonResponse(response_json, status=200)
 
 
 @csrf_exempt
 def delete_weather_data(request):
+    data = json.loads(request.body)
+    WeatherInfo.objects.filter(time=data['time'], city=data['city']).delete()
+
     response_json = {
         "status": True,
     }
-    data = json.loads(request.body)
-    WeatherInfo.objects.filter(time=data['time'], city=data['city']).delete()
     return JsonResponse(response_json, status=200)
 
 
@@ -496,7 +500,7 @@ def search_weather_data(request):
         for data in weather_data:
             weather_data_list.append({
                 'time': data.time,
-                'city': data.city,
+                'city': data.cityName,
                 'temp': data.temp,
                 'text': data.text,
                 'precip': data.precip,

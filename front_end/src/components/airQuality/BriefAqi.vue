@@ -21,7 +21,7 @@ interface CityInfoResponse {
 }
 const cityMessage = reactive<CityWeatherData>({} as CityWeatherData);
 const getPresentCityAqi = async () => {
-  get<CityInfoResponse>("/api/getCityInfo/").then((res) => {
+  get<CityInfoResponse>("/api/current/getCityInfo/").then((res) => {
     cityMessage.aqi = res.data.message.aqi;
     cityMessage.city = res.data.message.city;
     cityMessage.category = res.data.message.category;

@@ -120,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Shanghai"
 
 USE_I18N = True
 
@@ -169,3 +169,7 @@ CELERY_BEAT_SCHEDULE = {
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+SESSION_COOKIE_AGE = 1209600  # 2周
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
