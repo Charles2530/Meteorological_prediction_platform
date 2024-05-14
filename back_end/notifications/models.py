@@ -14,16 +14,17 @@ class Notification(models.Model):
 
 
 class CitySubscription(models.Model):
-    profile = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, verbose_name="订阅用户", default=None)
+    username = models.CharField(max_length=100, verbose_name="用户名")
     city_name = models.CharField(max_length=100, verbose_name="城市名称")
-    subscription_time = models.DateTimeField(
-        auto_now_add=True, verbose_name="订阅时间")
+    primary_key = CompositeField([username, city_name], primary_key=True)
 
     def __str__(self):
         return f"{self.profile.username} - {self.city_name}"
 
     class Meta:
+        models.constraints = [
+            models.UniqueConstraint(fields=['username', 'city_name'], name='unique_city_subscription')
+        ]
         verbose_name = "城市订阅"
         verbose_name_plural = "城市订阅"
 

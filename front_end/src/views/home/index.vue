@@ -1,5 +1,8 @@
 <template>
-  <el-row>
+  <div style="height: 100%;">
+    <MapContainer  @getValue="getSonValue" />
+  </div>
+  <!-- <el-row>
       <el-col :span="17">
         <div style="height: 100%;">
           <MapContainer  @getValue="getSonValue" />
@@ -19,7 +22,7 @@
           </el-row>
         </div>
       </el-col>
-  </el-row>
+  </el-row> -->
 </template>
 
 
@@ -28,7 +31,7 @@ import MapContainer from "@c/map/MapContainer.vue";
 // const refMap = ref<MapContainerAPI | null>(null);
 
 // const Map = defineAsyncComponent(() => import("@c/map/MapContainer.vue"));
-const InfoColumn = defineAsyncComponent(() => import("@c/map/InfoColumn.vue"));
+// const InfoColumn = defineAsyncComponent(() => import("@c/map/InfoColumn.vue"));
 const sonProName = ref<string>("中国");
 const getSonValue = (value: string) => {
   sonProName.value = value;

@@ -217,8 +217,12 @@ const submitLoginForm = (formEl: FormInstance | undefined) => {
               message: "登录成功",
               type: "success",
             });
+            console.log("login role", userInfo.role);
           } else {
-            console.log("error:", res);
+            ElMessage({
+              message: response.reason ?? "登录失败",
+              type: "error",
+            });
           }
         },
         (error) => {

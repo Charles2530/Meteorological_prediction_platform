@@ -16,10 +16,8 @@ from django.views.decorators.http import require_http_methods
 # Django REST framework相关的导入
 from rest_framework import status, HTTP_HEADER_ENCODING
 from rest_framework.authtoken.models import Token
-from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny  # 允许所有用户访问
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import AccessToken
 
 # Django HTTP相关的导入
 from django.http import HttpResponse, JsonResponse
@@ -32,11 +30,6 @@ import os
 import re
 from datetime import datetime
 
-<<<<<<< HEAD
-=======
-from .models import UserCity
-
->>>>>>> master
 
 # Create your views here.
 def index(request):
@@ -61,20 +54,14 @@ def my_login(request):
     # user = User.objects.filter(username=username, password=password).first()
     if profile is not None:
         # 登录成功
-        # settings.CURRENT_UNAME = user.username
         login(request, profile)
-
-        # register current city
-        # if not UserCity.objects.filter(user=user).exists():
-        #     user_city = UserCity(user=user, city='北京')
-        #     user_city.save()
 
         info = {
             "token": "aliqua commodo Lorem",
             "userInfo": {
-                "username": username,
-                "avatar": "http://dummyimage.com/88x31",
-                "role": 2,  # 这里根据实际情况设置用户的角色
+                "username": profile.username,
+                "avatar": profile.avatar,
+                "role": profile.role,
                 "email": profile.email
             }
         }
@@ -100,13 +87,13 @@ def my_register(request):
     role = data.get('role') # TODO check
 
     # 验证邮箱格式
-    # try:
-    #     validate_email(email)
-    # except ValidationError:
-    #     return JsonResponse({
-    #         "success": False,
-    #         "reason": "register.error.email"
-    #     }, status=400)
+    try:
+        validate_email(email)
+    except ValidationError:
+        return JsonResponse({
+            "success": False,
+            "reason": "register.error.email"
+        }, status=400)
 
     # 验证用户名和密码格式
     if not username or not isinstance(username, str):
@@ -129,7 +116,7 @@ def my_register(request):
         }, status=400)
 
     # 创建用户
-    new_profile = Profile.objects.create_user(
+    new_profile = Profile.objects.create(
         username=username, password=password, email=email, role=role)
     new_profile.save()
     # authenticate(username=username, password=password)
@@ -137,7 +124,7 @@ def my_register(request):
 
     # 准备返回的信息
     info = {
-        "token": str(RefreshToken.for_user(new_profile)),
+        "token": str(AccessToken.for_user(new_profile)),
         "userInfo": {
             "username": new_profile.username,
             "avatar": new_profile.avatar,
@@ -155,6 +142,7 @@ def my_register(request):
 
 
 @csrf_exempt
+@login_required
 def user_list(request):
     # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")  # 【1】
@@ -214,6 +202,7 @@ def user_list(request):
 
 
 @csrf_exempt
+@login_required
 def delete_user(request):
     # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")
@@ -249,6 +238,7 @@ def delete_user(request):
 
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@login_required
 def user_authorization(request):
     # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")
@@ -275,6 +265,8 @@ def user_authorization(request):
         # TODO:
         # user = User.objects.get(id=uid, role=role)
         profile = Profile.objects.get(id=uid)
+        profile.role = role
+        profile.save()
         # 如果用户存在且角色匹配，设置success为True
         response_data = {"success": True}
         return JsonResponse(response_data, status=200)  # 返回200成功响应
@@ -338,6 +330,7 @@ def update_user_email(request):
 
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@login_required
 def update_user_password(request):
     # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")

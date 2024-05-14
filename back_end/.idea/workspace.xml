@@ -3,10 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="3c51231d-02c7-49f9-af96-f5cef1d6f197" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/back_end/China-City-List-latest.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weather/management/commands/loadCityId.py" beforeDir="false" afterPath="$PROJECT_DIR$/weather/management/commands/loadCityId.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../db.sqlite3" afterDir="false" />
+>>>>>>> master
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +94,10 @@
       <workItem from="1715239520201" duration="482000" />
       <workItem from="1715252989720" duration="994000" />
       <workItem from="1715254003918" duration="3689000" />
+<<<<<<< HEAD
+      <workItem from="1715425626066" duration="624000" />
+=======
+>>>>>>> master
     </task>
     <servers />
   </component>
