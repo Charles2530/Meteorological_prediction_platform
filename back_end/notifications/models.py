@@ -16,7 +16,6 @@ class Notification(models.Model):
 class CitySubscription(models.Model):
     username = models.CharField(max_length=100, verbose_name="用户名")
     city_name = models.CharField(max_length=100, verbose_name="城市名称")
-    primary_key = CompositeField([username, city_name], primary_key=True)
 
     def __str__(self):
         return f"{self.profile.username} - {self.city_name}"

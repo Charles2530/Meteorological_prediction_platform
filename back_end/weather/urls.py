@@ -19,7 +19,6 @@ urlpatterns = [
      path('weather/aqi/rank_worst/', views.aqi_worst, name='aqi-worst'),
      path('weather/aqi/aqi_change/', views.aqi_current_city_change, name='aqi-current-city-change'),
 
-<<<<<<< HEAD
      path('weather/humid/city_change/', views.humid_city_change, name='humid-city-change'),
      path('weather/aqi/city_change/', views.aqi_target_city_change,name='aqi-target-city-change'),
      path('weather/temp/city_change/', views.temp_city_change, name='temp-city-change'),
@@ -28,18 +27,4 @@ urlpatterns = [
      path('getProInfo/', views.getProInfo, name='get-pro-info'), # TODO
      # path('getHazard/', views.getHazard), #TODO
      path('getCityInfo/', views.getCityInfo), #TODO
-=======
-    path('weather/humid/city_change/',
-         views.humid_city_change, name='humid-city-change'),
-    path('weather/aqi/city_change/', views.aqi_target_city_change,
-         name='aqi-target-city-change'),
-    path('weather/temp/city_change/',
-         views.temp_city_change, name='temp-city-change'),
-    path('weather/pressure/city_change/',
-         views.pressure_city_change, name='pressure-city-change'),
-
-    path('getProInfo/', views.getProInfo, name='get-pro-info'),  # TODO
-    # path('getHazard/', views.getHazard), #TODO
-    path('current/getCityInfo/', views.getCityInfo),  # TODO
->>>>>>> master
 ]
