@@ -110,7 +110,7 @@ class ProGeography(models.Model):
 # },
 
 class WeatherInfo(models.Model):
-    # id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True, default=0)
     time = models.DateTimeField(default=datetime.now)
     cityName = models.CharField(max_length=40, default="北京市")
     temp = models.IntegerField(default=0)
@@ -128,7 +128,7 @@ class WeatherInfo(models.Model):
         return "weather info for " + self.cityName + " " + self.time.strftime('%Y-%m-%d %H:%M:%S')
 
     class Meta:
-        unique_together = ('time', 'city')
+        unique_together = ('time', 'cityName')
         constraints = [
-            models.UniqueConstraint(fields=['time', 'city'], name='unique_time_city')
+            models.UniqueConstraint(fields=['time', 'cityName'], name='unique_time_city')
         ]

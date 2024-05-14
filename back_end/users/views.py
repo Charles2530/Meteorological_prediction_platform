@@ -51,6 +51,7 @@ def my_login(request):
 
     # 验证用户名和密码
     profile = authenticate(username=username, password=password)
+
     if profile is not None:
         # 登录成功
         login(request, profile)
@@ -83,7 +84,7 @@ def my_register(request):
     username = data.get('username')
     password = data.get('password')
     email = data.get('email')
-    role = data.get('role') # TODO check
+    role = data.get('role') if data.get('role') else 2 # TODO check
 
     # 验证邮箱格式
     try:
@@ -290,7 +291,7 @@ def update_user_email(request):
         # 从请求体中获取uid、role和email
         data = json.loads(request.body)
         uid = data.get('uid')
-        role = data.get('role')
+        role = Profile.objects.get(username=request.user.username).get('role')
         new_email = data.get('email')
 
         # 验证邮箱格式
@@ -300,7 +301,7 @@ def update_user_email(request):
             return JsonResponse({"success": False, "reason": "manage.user.operate.email.format"}, status=400)
 
         # 检查管理员权限
-        if role != 1:  # 假设role为1代表管理员
+        if role != 2:  # 假设role为1代表管理员
             raise PermissionDenied(
                 "User does not have the permission to change email.")
 
@@ -324,7 +325,6 @@ def update_user_email(request):
         return JsonResponse({"success": False, "reason": str(e)}, status=403)
     except Exception as e:
         # 其他错误
-        # 你需要在你的urls.py文件中添加URL配置，以便将请求映射到这个视图函数
         return JsonResponse({"success": False, "reason": "other user"}, status=400)
 
 
@@ -341,7 +341,7 @@ def update_user_password(request):
     password = data.get('password')
 
     # 验证管理员权限
-    if role != 1:  # 假设role为1代表管理员
+    if role != 2:  # 假设role为1代表管理员
             raise PermissionDenied(
                 "User does not have the permission to change password.")
     # try:
