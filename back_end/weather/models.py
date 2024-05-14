@@ -111,6 +111,7 @@ class ProGeography(models.Model):
 
 class WeatherInfo(models.Model):
     # id = models.AutoField(primary_key=True)
+<<<<<<< HEAD
     time = models.DateTimeField(default=datetime.now)
     cityName = models.CharField(max_length=40, default="北京市")
     temp = models.IntegerField(default=0)
@@ -121,8 +122,21 @@ class WeatherInfo(models.Model):
     windSpeed = models.IntegerField(default=0)
     humidity = models.IntegerField(default=0)
     pressure = models.IntegerField(default=0)
+=======
+    time = models.DateTimeField(default=datetime.now, primary_key=True)
+    city = models.CharField(max_length=200, default="北京")
+    temp = models.FloatField(default=0.0)
+    text = models.CharField(max_length=200, default="")
+    precip = models.FloatField(default=0.0)
+    wind360 = models.FloatField(default=0.0)
+    windScale = models.CharField(max_length=10, default="0")
+    windSpeed = models.FloatField(default=0.0)
+    humidity = models.FloatField(default=0.0)
+    pressure = models.FloatField(default=0.0)
+>>>>>>> master
     aqi = models.IntegerField(default=0)
     category = models.CharField(max_length=5, default="")
+
 
 
 
