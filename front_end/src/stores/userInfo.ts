@@ -14,6 +14,7 @@ export const useUserInfo = defineStore("userInfo", {
   },
   actions: {
     login(info: UserInfo, token?: string) {
+      console.log("login success", info, token);
       this.$patch(info);
       if (token) Local.set("Bearer", { Bearer: `Bearer ${token}` });
     },
