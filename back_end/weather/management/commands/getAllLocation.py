@@ -17,7 +17,11 @@ class Command(BaseCommand):
 
         parser.add_argument(
             "--key",
-            default="feec92fecc5042f0b48e49c33529de89",
+            # default="feec92fecc5042f0b48e49c33529de89",
+            # default="d4c9c9bc145748e48405c44277be0745",
+            # default="52c4d25aafb147c5bc6e4df6cc52afc6",
+            # default="7ddb2459227b4d6993afff0b4ba574ff",
+            # default="f6b975aa8ad94602aefefceb2e8b3acd",
             help="Refresh All CityInfo even existed already",
         )
 
@@ -34,12 +38,16 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **kwargs):
+        # LocationToInfo.objects.all().delete()
+        # print("delte all")
+        # print(len(LocationToInfo.objects.all()))
+        # return
         if kwargs["U"]:
             print("refresh all")
 
         stride = kwargs["stride"]
-        for lon in range(3, 55, stride):
-            for lat in range(73, 136, stride):
+        for lon in range(73, 136, stride):
+            for lat in range(3, 55, stride):
 
                 location = "{:d},{:d}".format(lon, lat)
                 try:
@@ -66,7 +74,7 @@ class Command(BaseCommand):
                     break
 
 
-                print(Info)
+                print(location, ":", Info)
                 if Info["code"] != '200':
                     print("Warning:", location, "get failed!", Info["code"])
                     print("check code on: https://dev.qweather.com/docs/resource/status-code/")
@@ -74,7 +82,7 @@ class Command(BaseCommand):
                         locationInfo.save()
                     else:
                         self.stdout.write(self.style.ERROR('Quata ran out!'))
-                        break
+                        return
                     continue
 
                 Info = Info["now"]
@@ -92,8 +100,23 @@ class Command(BaseCommand):
                 locationInfo.pressure = Info["pressure"]
                 locationInfo.save()
 
+
         print("DONE", len(LocationToInfo.objects.all()))
+        for lat in range(54, 2, -1):
+            for lon in range(73, 136, 1):
+                location = "{:d},{:d}".format(lon, lat)
+                try:
+                    locationInfo = LocationToInfo.objects.get(location=location)
+                except Exception as e:
+                    print(location)
+                    print(e)
+                    self.stdout.write(self.style.ERROR('Incomplite!'))
+                    return
 
-
+                if locationInfo.obsTime == '':
+                    print('.', end='')
+                else:
+                    print('#', end='')
+            print("")
 
 
