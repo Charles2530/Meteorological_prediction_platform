@@ -17,7 +17,7 @@ class Command(BaseCommand):
 
         parser.add_argument(
             "--key",
-            default="d4c9c9bc145748e48405c44277be0745",
+            default="feec92fecc5042f0b48e49c33529de89",
             help="Refresh All CityInfo even existed already",
         )
 
@@ -70,7 +70,11 @@ class Command(BaseCommand):
                 if Info["code"] != '200':
                     print("Warning:", location, "get failed!", Info["code"])
                     print("check code on: https://dev.qweather.com/docs/resource/status-code/")
-                    locationInfo.save()
+                    if Info["code"] != '402':
+                        locationInfo.save()
+                    else:
+                        self.stdout.write(self.style.ERROR('Quata ran out!'))
+                        break
                     continue
 
                 Info = Info["now"]
