@@ -8,7 +8,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         try:
-            f = open(r'/root/China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
+            f = open(r'/root/Meteorological_prediction_platform/back_end/China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
         except FileNotFoundError:
             try:
                 f = open(r'D:\Programing\SoftwareEngineering\Meteorological_prediction_platform\back_end\China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
@@ -20,23 +20,22 @@ class Command(BaseCommand):
         for i, row in enumerate(reader):
             if i < 2:
                 continue
+            cityId = row[0]
+            cityName = row[9]
             if row[9].startswith(row[2]):
-                cityId = row[0]
-                cityName = row[9]
                 capital.setdefault(row[7], row[0])
-                try:
-                    Cityinfo = City2CityId.objects.get(cityId=cityId)
-                except:
-                    Cityinfo = City2CityId(cityId=cityId, cityName=cityName)
-                # try:
-                Cityinfo.cityName = cityName
-                Cityinfo.location = "{:.2f},{:.2f}".format(float(row[11]), float(row[12]))
-                Cityinfo.save()
-                if (i < 10)
-                    print(Cityinfo.cityName, Cityinfo.location, Cityinfo.cityId)
-                # except Exception as e:
-                    # 1
+            try:
+                Cityinfo = City2CityId.objects.get(cityId=cityId)
+                continue
+            except:
+                Cityinfo = City2CityId(cityId=cityId, cityName=cityName)
+            # try:
+            Cityinfo.cityName = cityName
+            Cityinfo.location = "{:.2f},{:.2f}".format(float(row[11]), float(row[12]))
+            Cityinfo.save()
 
+        print("City amount", len(City2CityId.objects.all()))
+        print("Capital amount", len(capital))
         for pro, city in capital.items():
             Proinfo = Pro2City(proName=pro, cityId=city)
             Proinfo.save()

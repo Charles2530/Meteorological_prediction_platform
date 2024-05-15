@@ -86,7 +86,7 @@ class Pro2City(models.Model):
 class City2CityId(models.Model):
     cityId = models.CharField(max_length=20, primary_key=True)
     cityName = models.CharField(max_length=40)
-    location = models.CharField(max_length=40)
+    location = models.CharField(max_length=40, default="non_location_info")
 
 
 # TODO pro_geography data
