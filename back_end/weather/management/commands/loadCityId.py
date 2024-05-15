@@ -6,6 +6,14 @@ from openpyxl import load_workbook
 class Command(BaseCommand):
     help = 'Store catastrophic forecast data into the database'
 
+    def add_arguments(self, parser):
+        # Named (optional) arguments
+        parser.add_argument(
+            "--U",
+            action="store_true",
+            help="Refresh All CityInfo even existed already",
+        )
+
     def handle(self, *args, **kwargs):
         try:
             f = open(r'/root/Meteorological_prediction_platform/back_end/China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
@@ -26,7 +34,8 @@ class Command(BaseCommand):
                 capital.setdefault(row[7], row[0])
             try:
                 Cityinfo = City2CityId.objects.get(cityId=cityId)
-                continue
+                if not kwargs["U"]:
+                    continue
             except:
                 Cityinfo = City2CityId(cityId=cityId, cityName=cityName)
             # try:
