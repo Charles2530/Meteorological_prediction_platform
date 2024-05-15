@@ -133,3 +133,20 @@ class WeatherInfo(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['time', 'cityName'], name='unique_time_city')
         ]
+
+
+class LocationToInfo(models.Model):
+    lon = models.IntegerField(default=0)
+    lat = models.IntegerField(default=0)
+    location = models.CharField(max_length=40, default="", primary_key=True)
+    obsTime = models.CharField(max_length=40, default="")
+    temp = models.CharField(max_length=40, default="")
+    icon = models.CharField(max_length=40, default="")
+    text = models.CharField(max_length=40, default="")
+    wind360 = models.CharField(max_length=40, default="")
+    windDir = models.CharField(max_length=40, default="")
+    windScale = models.CharField(max_length=40, default="")
+    windSpeed = models.CharField(max_length=40, default="")
+    humidity = models.CharField(max_length=40, default="")
+    precip = models.CharField(max_length=40, default="")
+    pressure = models.CharField(max_length=40, default="")

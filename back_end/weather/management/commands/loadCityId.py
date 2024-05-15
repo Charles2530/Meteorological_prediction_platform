@@ -37,7 +37,7 @@ class Command(BaseCommand):
                 if not kwargs["U"]:
                     continue
             except:
-                Cityinfo = City2CityId(cityId=cityId, cityName=cityName)
+                Cityinfo = City2CityId(cityId=cityId)
             # try:
             Cityinfo.cityName = cityName
             Cityinfo.location = "{:.2f},{:.2f}".format(float(row[11]), float(row[12]))
