@@ -27,7 +27,7 @@ class CitySubscription(models.Model):
 
 
 class WeatherForecast(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.CharField(primary_key=True, max_length=50)
     img = models.URLField()
     title = models.CharField(max_length=255)
     # date = models.DateTimeField()

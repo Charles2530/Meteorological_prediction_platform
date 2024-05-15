@@ -24,9 +24,16 @@ class Command(BaseCommand):
                 cityId = row[0]
                 cityName = row[9]
                 capital.setdefault(row[7], row[0])
-                Cityinfo = City2CityId(cityId=cityId, cityName=cityName)
+                try:
+                    Cityinfo = City2CityId.objects.get(cityId=cityId)
+                except:
+                    Cityinfo = City2CityId(cityId=cityId, cityName=cityName)
                 # try:
+                Cityinfo.cityName = cityName
+                Cityinfo.location = "{:.2f},{:.2f}".format(float(row[11]), float(row[12]))
                 Cityinfo.save()
+                if (i < 10)
+                    print(Cityinfo.cityName, Cityinfo.location, Cityinfo.cityId)
                 # except Exception as e:
                     # 1
 

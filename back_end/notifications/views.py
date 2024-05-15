@@ -4,6 +4,7 @@ from django.utils import timezone
 import json
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+from users.models import Profile
 from .models import Notification, WeatherForecast, CitySubscription
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -93,10 +94,10 @@ def subscribe(request):
         try:
             data = json.loads(request.body)
             cities = data.get('cities')
-            profile = request.user
+            user = request.user
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
-
+            profile = Profile.objects.filter(username=user.username)
             city_obj, created = CitySubscription.objects.update_or_create(
                 profile=profile,
                 cityName=cities,
@@ -113,8 +114,9 @@ def subscribe(request):
             "success": True,
             "tableData": []
         }
-        profile = request.user
-        cities = CitySubscription.objects.filter(profile=profile)
+        user = request.user
+        profile = Profile.objects.filter(username=user.username)
+        cities = CitySubscription.objects.filter(profile=user) # TODO
         for city in cities:
             city_json = {
                 "city": city.cityName,

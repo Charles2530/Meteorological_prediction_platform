@@ -2,7 +2,7 @@
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.hashers import check_password, make_password
-from django.contrib.auth.models import User, create_user
+from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
@@ -116,7 +116,7 @@ def my_register(request):
         }, status=400)
 
     # 创建用户
-    new_profile = create_user(username=username, password=password, email=email, role=role)
+    new_profile = Profile.objects.create_user(username=username, password=password, email=email, role=role)
     new_profile.save()
     # authenticate(username=username, password=password)
 
@@ -224,9 +224,12 @@ def delete_user(request):
     # 添加业务逻辑，例如根据uid获取用户信息等
     # 假设这里仅检查User模型中是否存在对应的uid
     try:
-        profile = Profile.objects.get(id=uid)
-        profile.delete()
-        # 如果用户存在，设置success为True
+        user = request.user
+        if uid != user.uid: # 不能删除当前用户
+            # TODO 需要设置一个额外的返回
+            profile = Profile.objects.get(id=uid)
+            profile.delete()
+            # 如果用户存在，设置success为True
 
         response_data = {"success": True}
         return JsonResponse(response_data, status=200)  # 返回200成功响应
@@ -520,6 +523,45 @@ def update_current_user_email(request):
         return JsonResponse({
             "success": False,
             "reason": str(e)
+        }, status=500)
+
+
+@csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@login_required
+@require_http_methods(["POST"])
+def update_current_user_avatar(request):
+    # 获取Authorization头中的token和请求体中的oldPassword和newPassword
+    auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+    data = json.loads(request.body)
+    file = data.get('file')
+
+    # 验证Authorization头
+    if not auth_header:
+        return JsonResponse({
+            "success": False,
+            "reason": "Authorization header is missing"
+        }, status=401)
+
+    user = request.user
+
+    # 更新用户头像
+    try:
+        user.avatar = file  # 使用Django内置的密码散列
+        user.save()
+        # 如果使用Django的session，更新session中的密码
+        # update_session_auth_hash(request, user)
+
+        # 返回成功响应
+        return JsonResponse({
+            "success": True,
+            "avatar": "http://dummyimage.com/100x100",
+            "reason": "elit"
+        })
+    except Exception as e:
+        # 处理其他可能的异常
+        return JsonResponse({
+            "success": False,
+            "reason": str(e),
         }, status=500)
 
 
