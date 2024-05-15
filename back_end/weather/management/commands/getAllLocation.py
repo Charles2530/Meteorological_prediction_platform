@@ -44,7 +44,7 @@ class Command(BaseCommand):
                 location = "{:d},{:d}".format(lon, lat)
                 try:
                     locationInfo = LocationToInfo.objects.get(location=location)
-                    if not kwargs["U"]:
+                    if not kwargs["U"] and locationInfo.obsTime != '':
                         continue
                 except:
                     locationInfo = LocationToInfo(location=location, lon=lon, lat=lat)
