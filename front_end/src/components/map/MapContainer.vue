@@ -22,13 +22,37 @@
       <br/>
       <br/>
       <div class="layerbtns">
-        <el-button :class="{ 'selected': buttonActive.a, 'unselected': !buttonActive.a }"  :active="buttonActive.A" @click="clicka">
+        <el-button :class="{ 'selected': buttonActive.a, 'unselected': !buttonActive.a }"  :active="buttonActive.a" @click="clicka">
+          <div class="btnDiv">
+            <div class="btnName">温度</div>
+            <div class="btnIcon1"></div>
+          </div>
+        </el-button>
+        <el-button :class="{ 'selected': buttonActive.b, 'unselected': !buttonActive.b }"  :active="buttonActive.b" @click="clickb">
+          <div class="btnDiv">
+            <div class="btnName">降水</div>
+            <div class="btnIcon1"></div>
+          </div>
+        </el-button>
+        <el-button :class="{ 'selected': buttonActive.f, 'unselected': !buttonActive.f }"  :active="buttonActive.f" @click="clickf">
+          <div class="btnDiv">
+            <div class="btnName">空气质量</div>
+            <div class="btnIcon2"></div>
+          </div>
+        </el-button>
+        <el-button :class="{ 'selected': buttonActive.e, 'unselected': !buttonActive.e }"  :active="buttonActive.e" @click="clicke">
+          <div class="btnDiv">
+            <div class="btnName">灾害</div>
+            <div class="btnIcon2"></div>
+          </div>
+        </el-button>
+        <el-button :class="{ 'selected': buttonActive.c, 'unselected': !buttonActive.c }"  :active="buttonActive.c" @click="clickc">
           <div class="btnDiv">
             <div class="btnName">风场</div>
             <div class="btnIcon1"></div>
           </div>
         </el-button>
-        <el-button :class="{ 'selected': buttonActive.b, 'unselected': !buttonActive.b }"  :active="buttonActive.A" @click="clickb">
+        <el-button :class="{ 'selected': buttonActive.d, 'unselected': !buttonActive.d }"  :active="buttonActive.d" @click="clickd">
           <div class="btnDiv">
             <div class="btnName">地震</div>
             <div class="btnIcon2"></div>
@@ -46,6 +70,7 @@ import AMapLoader from "@amap/amap-jsapi-loader";
 import { getAssetsFile } from '@/utils/pub-use'
 import AMapWind from "amap-wind";
 import { get } from "@/api/index";
+import { GeoJsonOri } from "@/types/weather";
 
 // 设置安全密钥
 (window as any)._AMapSecurityConfig = {
@@ -123,9 +148,14 @@ const buttonActive = reactive({
   C:false,
   a:false,
   b:false,
+  c:false,
+  d:false,
+  e:false,
+  f:false,
 });
 
 let map: {
+clearMap(): unknown;
 setCenter(markersPosition: any[], arg1: boolean, arg2: number): unknown;
 setFitView(polygons: any, arg1: boolean): unknown;
 setLimitBounds(bounds: any): unknown;
@@ -162,14 +192,40 @@ let AAMap: {
 declare let Loca:any
 
 let loca: {
+[x: string]: any;
 remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; 
 }=null;
 
+let heatmapTem: {
+remove(): unknown;
+setLoca(loca: { remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }): unknown;
+destroy(): unknown; setSource: any; addAnimate: any; queryFeature?: any; setStyle?: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; 
+} = null;
+
+let heatmapWater: {
+remove(): unknown;
+setLoca(loca: { remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }): unknown;
+destroy(): unknown; setSource: any; addAnimate: any; queryFeature?: any; setStyle?: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; 
+} = null;
+
 let windLayer: AMapWind = null;
+
+let scatter: { setLoca: (arg0: { [x: string]: any; remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }) => void; remove: () => void; setSource: (arg0: any, arg1: { unit: string; size: number[]; texture: string; borderWidth: number; }) => void; } = null;
+
+let breath: { setLoca: (arg0: { [x: string]: any; remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }) => void; remove: () => void; setSource: (arg0: any) => void; setStyle: (arg0: { unit: string; size: number[]; texture: string; animate: boolean; duration: number; }) => void; } = null;
 
 let wms: null = null;
 
 let sate: null = null;
+
+let layer: {
+remove(): unknown;
+queryFeature(arg0: any): unknown;
+show(): unknown;
+addAnimate(arg0: { key: string; value: number[]; easing: string; transform: number; random: boolean; delay: number; }): unknown;
+setStyle(arg0: { unit: string; icon: (index: any, feature: any) => any; iconSize: number[]; offset: number[]; rotation: number; }): unknown;
+setSource(geo: any): unknown; setLoca: (arg0: { [x: string]: any; remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }) => void; 
+}=null;
 
 let pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; } = null;
 
@@ -264,24 +320,7 @@ function initMap() {
           fill: "",
         },
       });
-      //地图搜索框
-      // var autoOptions = {
-      //   city: '全国', //city 限定城市，默认全国
-      //   input: 'tipinput',//绑定的输入框id
-      // };
-      // const autoComplete = new AMap.Autocomplete(autoOptions);
-      // const placeSearch = new AMap.PlaceSearch({
-      //   city: '全国',
-      //   map: map,
-      //   citylimit: true,
-      //   autoFitView: true
-      // });
-      // AMap.event.addListener(autoComplete, 'select', (e: { poi: { adcode: any; name: any; }; }) => {
-      //   //TODO 针对选中的poi实现自己的功能
-      //   placeSearch.setCity(e.poi.adcode);
-      //   placeSearch.search(e.poi.name);
-      // });
-      
+     
       
       map.addControl(new AMap.Scale({position: 'LB'}));
       map.addControl(new AMap.ToolBar({ liteStyle: true, position: 'LT'}));
@@ -290,9 +329,13 @@ function initMap() {
       map.add(disCountry);
       pos_info.searcher = new AMap.DistrictSearch(pos_info.opts);
       pos_info.geoCoder = new AMap.Geocoder();
+      InitAqi();
       handlerMapClick();
       // markPoints();
       InitEarthQuake();
+      InitHeatMapTem();
+      InitHeatMapWater();
+      InitHazard();
     })
     .catch((e) => {
       console.log(e);
@@ -493,8 +536,37 @@ function clickC() {
 }
 
 function clicka() {
+    
   buttonActive.a = !buttonActive.a;
   if (buttonActive.a) {
+    if(buttonActive.b) clickb();
+    else if(buttonActive.e) clicke();
+    else if(buttonActive.f) clickf();
+    clickB();
+    heatmapTem.setLoca(loca);
+  }
+  else {
+    heatmapTem.remove();
+  }
+}
+
+function clickb() {
+  buttonActive.b = !buttonActive.b;
+  if (buttonActive.b) {
+    if(buttonActive.a) clicka();
+    else if(buttonActive.e) clicke();
+    else if(buttonActive.f) clickf();
+    clickB();
+    heatmapWater.setLoca(loca);
+  }
+  else {
+    heatmapWater.remove();
+  }
+}
+
+function clickc() {
+  buttonActive.c = !buttonActive.c;
+  if (buttonActive.c) {
     showWind();
   }
   else {
@@ -502,13 +574,44 @@ function clicka() {
   }
 }
 
-function clickb() {
-  buttonActive.b = !buttonActive.b;
-  if (buttonActive.b) {
+function clickd() {
+  buttonActive.d = !buttonActive.d;
+  if (buttonActive.d) {
     loca.add(pl);
   }
   else {
     loca.remove(pl);
+  }
+}
+
+function clicke() {
+  buttonActive.e = !buttonActive.e;
+  if (buttonActive.e) {
+    if(buttonActive.a) clicka();
+    else if(buttonActive.b) clickb();
+    else if(buttonActive.f) clickf();
+    clickC();
+    scatter.setLoca(loca);
+    breath.setLoca(loca);
+    // loca.animate.start();
+  }
+  else {
+    scatter.remove();
+    breath.remove();
+  }
+}
+
+function clickf() {
+  buttonActive.f = !buttonActive.f;
+  if (buttonActive.f) {
+    if(buttonActive.a) clicka();
+    else if(buttonActive.b) clickb();
+    else if(buttonActive.e) clicke();
+    clickB();
+    layer.setLoca(loca);
+  }
+  else {
+    layer.remove();
   }
 }
 
@@ -611,7 +714,692 @@ function InitEarthQuake() {
   // dat.addLayer(pl, '点图层');
 }
 
-  
+// const getGeo = async () => {
+//   get<any>("/api/getHazard/").then((res) => {
+//     geo = res.data;
+//     // geo = res.data;
+//     // console.log("222", hazardMarkData);
+//   });
+// }
+
+function object2Geojson(data:Array<GeoJsonOri>) {
+    var features = new Array();
+    var featureCollection = { "type": "FeatureCollection" ,"features": features};
+ 
+	for (let i = 0; i < data.length; i++) {
+        var feature = { "type": "Feature" ,"properties": {}, "geometry": {},};
+        var geometry = { "type": "Point","coordinates":new Array()};
+        geometry.coordinates = [data[i].LON, data[i].LAT];
+        feature.properties = data[i];
+        feature.geometry = geometry;
+        features.push(feature);
+	}
+			
+	featureCollection.features = features;
+	return featureCollection;
+}
+
+
+//初始化气温热力图层
+function InitHeatMapTem() {
+    var heatmapTemData = new Loca.GeoJSONSource({
+          url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/traffic.json',
+      });
+
+    // get("/api/vis/getTem2").then((res) => {
+    //   var heatmapTemData = new Loca.GeoJSONSource({
+    //     data:object2Geojson(<Array<GeoJsonOri>>res.data),
+    //   });
+
+      heatmapTem = new Loca.HeatMapLayer({
+          // loca,
+          zIndex: 10,
+          opacity: 1,
+          visible: true,
+          zooms: [2, 22],
+      });
+
+      heatmapTem.setSource(heatmapTemData, {
+          radius: 200000,
+          unit: 'meter',
+          //difference: true,
+          //height: 500000,
+          //radius: 35,
+          //unit: 'px',
+          //height: 100,
+          gradient: {
+              0.1: '#2A85B8',
+              0.2: '#16B0A9',
+              0.3: '#29CF6F',
+              0.4: '#5CE182',
+              0.5: '#7DF675',
+              0.6: '#FFF100',
+              0.7: '#FAA53F',
+              1: '#D04343',
+          },
+          value: function (_index: any, feature: { properties: { avg: any; mom: string | any[]; }; }) {
+              return feature.properties.avg;
+            //   var value = feature.properties.mom.slice(0, -1);
+            //   return value + 10 * Math.random();
+          },
+          // min: -100,
+          // max: 100,
+        //   heightBezier: [0, .53, .37, .98],
+      });
+
+    //   loca.add(heatmapTem);
+    // heatmapTem.setLoca(loca);
+    
+    //   map.on('complete', function () {
+    //       heatmapTem.addAnimate({
+    //           key: 'radius',
+    //           value: [0, 1],
+    //           //   duration: 2000,
+    //           duration: 0,
+    //           easing: 'BackOut',
+    //           // 开启随机动画
+    //           //   transform: 1000,
+    //           transform: 0,
+    //           random: true,
+    //           //   delay: 1000,
+    //           delay: 0,
+    //       });
+    //   });
+	//   map.on('click', function (e) {
+    //       var feat = heatmapTem.queryFeature(e.pixel.toArray());
+    //       if(feat){
+    //         map.clearMap();
+    //         map.add(AAMap.Marker({
+	// 		  position:feat.lnglat,
+    //           anchor: 'bottom-center',
+    //           content: '<div style="margin-bottom: 15px; border:1px solid #fff; border-radius: 4px;color: #fff; width: 150px; text-align: center;">热力值: '+ feat.value.toFixed(2) +'</div>'
+    //         }));
+    //       }
+    //   });
+    //   var timerId = setTimeout(() => {
+    //     loca.add(heatmapTem);
+    //     clearTimeout(timerId); // 取消定时执行
+    //    }, 1000); // 延迟2秒后修改message
+    // });
+      
+}
+
+//初始化降水热力图层
+function InitHeatMapWater() {
+    var heatmapWaterData = new Loca.GeoJSONSource({
+          url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/traffic.json',
+      });
+
+    // get("/api/vis/getVisData").then((res) => {
+    //   var heatmapTemData = new Loca.GeoJSONSource({
+    //     data:object2Geojson(<Array<GeoJsonOri>>res.data),
+    //   });
+
+    heatmapWater = new Loca.HeatMapLayer({
+          // loca,
+          zIndex: 10,
+          opacity: 1,
+          visible: true,
+          zooms: [2, 22],
+      });
+
+      heatmapWater.setSource(heatmapWaterData, {
+          radius: 200000,
+          unit: 'meter',
+          height: 500000,
+          //radius: 35,
+          //unit: 'px',
+          //height: 100,
+          gradient: {
+              0.1: '#EAF3F7',
+              0.2: '#98D5EE',
+              0.3: '#59C7F6',
+              0.4: '#60B1F4',
+              0.5: '#4E92CE',
+              0.6: '#3185CF',
+              0.7: '#0A69BC',
+              1: '#083D99',
+          },
+          value: function (_index: any, feature: { properties: { avg: any; mom: string | any[]; }; }) {
+              return feature.properties.avg;
+            //   var value = feature.properties.mom.slice(0, -1);
+            //   return value + 10 * Math.random();
+          },
+          // min: -100,
+          // max: 100,
+          heightBezier: [0, .53, .37, .98],
+      });
+
+    //   loca.add(heatmapWater);
+    
+      map.on('complete', function () {
+        heatmapWater.addAnimate({
+              key: 'radius',
+              value: [0, 1],
+              //   duration: 2000,
+              duration: 0,
+              easing: 'BackOut',
+              // 开启随机动画
+              //   transform: 1000,
+              transform: 0,
+              random: true,
+              //   delay: 1000,
+              delay: 0,
+          });
+      });
+	//   map.on('click', function (e) {
+    //       var feat = heatmapWater.queryFeature(e.pixel.toArray());
+    //       if(feat){
+    //         map.clearMap();
+    //         map.add(AAMap.Marker({
+	// 		  position:feat.lnglat,
+    //           anchor: 'bottom-center',
+    //           content: '<div style="margin-bottom: 15px; border:1px solid #fff; border-radius: 4px;color: #fff; width: 150px; text-align: center;">热力值: '+ feat.value.toFixed(2) +'</div>'
+    //         }));
+    //       }
+    //   });
+    //   var timerId = setTimeout(() => {
+    //     loca.add(heatmapTem);
+    //     clearTimeout(timerId); // 取消定时执行
+    //    }, 1000); // 延迟2秒后修改message
+    // });
+      
+}
+
+//初始化灾害图层
+function InitHazard() {
+  var geo = new Loca.GeoJSONSource({
+          // data: [],
+          url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/china_traffic_event.json',
+      });
+      scatter = new Loca.ScatterLayer({
+          // loca,
+          zIndex: 10,
+          opacity: 1,
+          visible: true,
+          zooms: [2, 22],
+      });
+
+      scatter.setSource(geo, {
+          unit: 'px',
+          size: [20, 20],
+          texture: 'https://a.amap.com/Loca/static/loca-v2/demos/images/blue.png',
+          borderWidth: 0,
+      });
+      
+      // 呼吸
+      var top10 = {
+          type: 'FeatureCollection',
+          features: [
+              {
+                  "type": "Feature",
+                  "properties": {
+                      "cityName": "韶关市",
+                      "ratio": 0,
+                      "rank": 96
+                  },
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                          113.58052,
+                          24.760098
+                      ]
+                  }
+              },
+              {
+                  "type": "Feature",
+                  "properties": {
+                      "cityName": "乐山市",
+                      "ratio": 0,
+                      "rank": 97
+                  },
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                          103.75082,
+                          29.58099
+                      ]
+                  }
+              },
+              {
+                  "type": "Feature",
+                  "properties": {
+                      "cityName": "阜阳市",
+                      "ratio": 0,
+                      "rank": 98
+                  },
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                          115.82654,
+                          32.889915
+                      ]
+                  }
+              },
+              {
+                  "type": "Feature",
+                  "properties": {
+                      "cityName": "荆门市",
+                      "ratio": 0,
+                      "rank": 99
+                  },
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                          112.209816,
+                          30.997377
+                      ]
+                  }
+              },
+              {
+                  "type": "Feature",
+                  "properties": {
+                      "cityName": "哈尔滨市",
+                      "ratio": 0,
+                      "rank": 100
+                  },
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                          126.61314,
+                          45.746685
+                      ]
+                  }
+              },
+              {
+                  "type": "Feature",
+                  "properties": {
+                      "cityName": "达州市",
+                      "ratio": 0,
+                      "rank": 101
+                  },
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                          107.493,
+                          31.205515
+                      ]
+                  }
+              },
+              {
+                  "type": "Feature",
+                  "properties": {
+                      "cityName": "自贡市",
+                      "ratio": 0,
+                      "rank": 102
+                  },
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                          104.777824,
+                          29.34555
+                      ]
+                  }
+              },
+              {
+                  "type": "Feature",
+                  "properties": {
+                      "cityName": "陇南市",
+                      "ratio": 0,
+                      "rank": 103
+                  },
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                          104.93356,
+                          33.388184
+                      ]
+                  }
+              },
+              {
+                  "type": "Feature",
+                  "properties": {
+                      "cityName": "南充市",
+                      "ratio": 0,
+                      "rank": 104
+                  },
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                          106.1188,
+                          30.800997
+                      ]
+                  }
+              },
+              {
+                  "type": "Feature",
+                  "properties": {
+                      "cityName": "恩施土家族苗族自治州",
+                      "ratio": 0,
+                      "rank": 105
+                  },
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                          109.48512,
+                          30.298103
+                      ]
+                  }
+              }
+          ]
+      };
+      breath = new Loca.ScatterLayer({
+          zIndex: 121,
+      });
+      breath.setSource(new Loca.GeoJSONSource({
+          data: top10,
+      }));
+      breath.setStyle({
+          unit: 'px',
+          size: [50, 50],
+          texture: 'https://a.amap.com/Loca/static/loca-v2/demos/images/breath_red.png',
+          animate: true,
+          duration: 1000,
+      });
+      loca.animate.start();
+      
+}
+
+function getEventsCollection() {
+  var events = [{
+    "code": 110000,
+    "name": "北京市",
+    "events": [{
+            "lngLat": "68.731153,17.010458",
+            "id": 1868459870,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "70.506534,23.562138",
+            "id": 455154464,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "72,35.843587",
+            "id": 1818586214,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "74,30.690492",
+            "id": 2080537607,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "76,19.625207",
+            "id": 1467766644,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "78,28.761410",
+            "id": 1641308637,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "80,40.112516",
+            "id": 494542195,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "82,12.875484",
+            "id": 912864867,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "84,43.669228",
+            "id": 1140868111,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "86,49.137176",
+            "id": 711469688,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "88,16.182146",
+            "id": 2146205695,
+            "pic": false,
+            "source": 0,
+            "type": 2
+        },
+        {
+            "lngLat": "90,28.383838",
+            "id": 397940652,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "92,30.238499",
+            "id": 1608933362,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "94,22.746641",
+            "id": 1838050710,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "96,24.031905",
+            "id": 877409366,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "98,26.077546",
+            "id": 706554368,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "100,28.153173",
+            "id": 937506753,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "116.295653,30.234626",
+            "id": 1339641849,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "116.321472,20.407838",
+            "id": 858338057,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "116.628102,18.619864",
+            "id": 360256859,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "116.662064,16.215760",
+            "id": 1872457656,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "116.089321,14.588933",
+            "id": 1721525944,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "116.064639,12.929627",
+            "id": 1116947127,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "116.542658,32.759983",
+            "id": 1999402762,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "117.207314,34.204017",
+            "id": 521609022,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "116.741243,36.214172",
+            "id": 389420828,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "116.128031,38.820252",
+            "id": 1181173322,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "116.506077,39.963128",
+            "id": 476650577,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "116.558300,23.974173",
+            "id": 768552438,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "116.548344,39.693684",
+            "id": 720972485,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        {
+            "lngLat": "117.114306,40.148748",
+            "id": 1944744609,
+            "pic": false,
+            "source": 0,
+            "type": 3
+        },
+        ]}];
+    let _events = events[0].events;
+    var list = _events.map((e: { lngLat: string; }) => {
+        let ll = e.lngLat.split(',');
+        let arr = [parseFloat(ll[0]), parseFloat(ll[1])]
+        return {
+            "type": "Feature",
+            "properties": {
+                rawData: e
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": arr
+            }
+        }
+    })
+
+    var data = {
+        "type": "FeatureCollection",
+        "features": list,
+    };
+    return data;
+}
+
+function InitAqi() {
+  var data = getEventsCollection();
+  var geo = new Loca.GeoJSONSource({
+      data: data,
+  });
+
+  layer = new Loca.IconLayer({
+      zIndex: 15,
+      opacity: 1,
+  });
+
+  var trafficIcons = {
+      1: 'https://a.amap.com/Loca/static/loca-v2/demos/images/traffic-control.png',
+      2: 'https://a.amap.com/Loca/static/loca-v2/demos/images/jam.png',
+      3: 'https://a.amap.com/Loca/static/loca-v2/demos/images/construction.png',
+      4: 'https://a.amap.com/Loca/static/loca-v2/demos/images/close.png',
+      5: 'https://a.amap.com/Loca/static/loca-v2/demos/images/fog.png',
+      0: 'https://a.amap.com/Loca/static/loca-v2/demos/images/accident.png',
+  };
+  layer.setSource(geo);
+  layer.setStyle({
+      unit: 'px',
+      icon: (_index, feature) => {
+          let data = feature.properties.rawData;
+          let url = trafficIcons[data.type % Object.keys(trafficIcons).length];
+          return url;
+      },
+      iconSize: [40,40],
+      offset: [0, -40],
+      rotation: 0,
+  })
+                
+
+  // 拾取测试
+  map.on('click', (e) => {
+      const feat = layer.queryFeature(e.pixel.toArray());
+      // console.log('feat', feat);
+      if (feat) {
+          layer.setStyle({
+              unit: 'px',
+              icon: (_index, feature) => {
+                  let data = feature.properties.rawData;
+                  let url = trafficIcons[data.type % Object.keys(trafficIcons).length];
+                  return url;
+              },
+              iconSize: (_i, feature) => {
+                  if (feature === feat) {
+                      return [60, 60];
+                  }
+                  return [40, 40];
+              },
+          });
+      }
+  });
+}
 </script>
 
 <style scoped>

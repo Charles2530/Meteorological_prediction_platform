@@ -83,3 +83,17 @@ export interface Hazard {
   time: string;
   level: string;
 }
+
+export interface GeoJsonOri {
+    adcode:string;
+    LON: number;
+    LAT: number;
+    temp: number;
+    precip: number;
+    aqi: number;
+    pressure: number;
+    humidity: number;
+    windSpeed: number;
+    windScale: number;
+    wind360: number;
+}

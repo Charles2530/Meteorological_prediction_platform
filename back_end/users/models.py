@@ -1,11 +1,32 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
 
+class ProfileManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self.create_user(email, password, **extra_fields)
+
+
 class Profile(AbstractUser):
-    avatar = models.URLField(blank=True, null=True)
+    avatar = models.URLField(default="http://dummyimage.com/88x31")
     email = models.EmailField(max_length=100, blank=True, null=True)
-    city = models.CharField(max_length=100, default='北京市')
+    currentCityName = models.CharField(max_length=40, default='北京市')
     role = models.IntegerField(default=1)
 
     def __str__(self):
@@ -14,29 +35,3 @@ class Profile(AbstractUser):
     class Meta:
         verbose_name = "用户画像"
         verbose_name_plural = "用户画像"
-
-
-class UserCity(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name="用户名")
-    city = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"{self.username} - {self.city}"
-
-    class Meta:
-        verbose_name = "用户城市"
-        verbose_name_plural = "用户城市"
-
-
-
-# class User(models.Model):
-#     uid = models.AutoField(primary_key=True)
-#     username = models.CharField(max_length=100)
-#     avatar = models.URLField()
-#     email = models.EmailField(max_length=100, blank=True, null=True)
-#     password = models.CharField(max_length=100)
-#     role = models.IntegerField()
-#     last_login = models.DateTimeField()
-
-#     def __str__(self):
-#         return self.username
