@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandParser
 from weather.models import WeatherInfo
 import json
 from datetime import datetime, timedelta
@@ -7,8 +7,48 @@ import pytz
 import random
 
 class Command(BaseCommand):
+    help = 'Store daily weather into database'
+
+    def add_arguments(self, parser: CommandParser) -> None:
+        parser.add_argument(
+            '--D',
+            help='Delete all items in database',
+        )
+        
+        parser.add_argument(
+            '--U',
+            action="store_true",
+            help="Refresh All DailyWeather with in the specified month even existed already",
+        )
+
+        parser.add_argument(
+            "--key",
+            # default="feec92fecc5042f0b48e49c33529de89",
+            # default="d4c9c9bc145748e48405c44277be0745",
+            # default="52c4d25aafb147c5bc6e4df6cc52afc6",
+            # default="7ddb2459227b4d6993afff0b4ba574ff",
+            # default="f6b975aa8ad94602aefefceb2e8b3acd",
+            help="Specify the key of API",
+        )
+
+        parser.add_argument(
+            "--dev",
+            action="store_true",
+            help="Use devapi instead of api",
+        )
+
     def handle(self, *args, **kwargs):
-        WeatherInfo.objects.all().delete()
+        if kwargs['D']:
+            WeatherInfo.objects.all().delete()
+        
+        if kwargs["U"]:
+            print("Refresh all")
+        
+        if kwargs['dev']:
+            url = 'https://devapi.qweather.com/v7/weather/24h'
+        else:
+            url = 'https://api.qweather.com/v7/weather/24h'
+        
         target_locations = ['101010100',  # Beijing
                             '101020100',  # Shanghai
                             '101030100',  # Tianjin
@@ -21,8 +61,8 @@ class Command(BaseCommand):
             '重庆市'
         ]
         for location, current_city in zip(target_locations, target_cities):
-            weather = requests.get('https://devapi.qweather.com/v7/weather/24h', params={
-                'key': 'feec92fecc5042f0b48e49c33529de89',
+            weather = requests.get(url, params={
+                'key': kwargs['key'],
                 'location': location,
             })
 

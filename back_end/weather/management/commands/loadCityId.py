@@ -19,7 +19,7 @@ class Command(BaseCommand):
             f = open(r'/root/Meteorological_prediction_platform/back_end/China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
         except FileNotFoundError:
             try:
-                f = open(r'D:\Programing\SoftwareEngineering\Meteorological_prediction_platform\back_end\China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
+                f = open(r'D:\\Programing\\SoftwareEngineering\\Meteorological_prediction_platform\\back_end\\China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
             except FileNotFoundError:
                 pass
         reader = csv.reader(f)
