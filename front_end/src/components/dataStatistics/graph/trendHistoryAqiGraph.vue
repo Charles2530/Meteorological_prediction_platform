@@ -2,7 +2,7 @@
   <div
     id="chart_aqi_graph"
     ref="chart_aqi_graph"
-    style="height: 400px; min-width: 800px; padding: 10px; margin: 0 auto"
+    style="height: 400px; min-width: 400px; padding: 10px; margin: 0 auto"
   ></div>
 </template>
 <script lang="ts" setup>
@@ -62,6 +62,7 @@ const renderChart_aqi_history = async (tempData: aqiNode[]) => {
       },
       formatter: function (params: any) {
         let tooltipContent = "";
+        tooltipContent += `${params[0].axisValue}<br/>`;
         params.forEach(function (param: any) {
           let aqi = param.value.toFixed(0);
           tooltipContent += `${param.marker} ${param.seriesName}: ${aqi}<br/>`;

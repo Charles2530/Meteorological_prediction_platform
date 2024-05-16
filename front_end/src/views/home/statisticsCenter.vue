@@ -22,50 +22,50 @@
               </el-card>
               <el-card>
                 <el-row :gutter="2">
-                  <el-col :span="24">
+                  <el-col :span="12">
                     <el-card>
                       <trendHistoryTempGraph :city="selectedLocation" />
                     </el-card>
                   </el-col>
-                </el-row>
-                <el-row :gutter="2">
-                  <el-col :span="24">
+                  <!-- </el-row>
+                <el-row :gutter="2"> -->
+                  <el-col :span="12">
                     <el-card>
                       <trendHistoryAqiGraph :city="selectedLocation" />
                     </el-card>
                   </el-col>
                 </el-row>
                 <el-row :gutter="2">
-                  <!-- <el-col :span="12">
+                  <el-col :span="12">
                     <el-card>
-                      <trendHistoryWinSpeedGraph :city="selectedLocation" />
+                      <trendHistoryHumidGraph :city="selectedLocation" />
                     </el-card>
-                  </el-col> -->
-                  <el-col :span="24">
+                  </el-col>
+                  <el-col :span="12">
                     <el-card>
                       <trendHistoryPrecipGraph :city="selectedLocation" />
                     </el-card>
                   </el-col>
                 </el-row>
-                <el-row :gutter="2">
-                  <!-- <el-col :span="12">
+                <!-- <el-row :gutter="2">
+                  <el-col :span="12">
                     <el-card>
                       <trendHIstoryPressureGraph :city="selectedLocation" />
                     </el-card>
-                  </el-col> -->
-                  <el-col :span="24">
+                  </el-col>
+                  <el-col :span="12">
                     <el-card>
-                      <trendHistoryHumidGraph :city="selectedLocation" />
+                      <trendHistoryWinSpeedGraph :city="selectedLocation" />
                     </el-card>
                   </el-col>
-                </el-row>
+                </el-row> -->
               </el-card>
             </el-col>
             <el-col :span="6">
               <el-card>
                 <compareGraph />
               </el-card>
-              <el-card>
+              <el-card class="mt-2">
                 <WeatherDataRankVM />
               </el-card>
             </el-col>

@@ -215,6 +215,7 @@ const renderChart = async (
       trigger: "axis",
       formatter: function (params: any) {
         let tooltipContent = "";
+        tooltipContent += `${params[0].axisValue}<br/>`;
         params.forEach(function (param: any) {
           switch (param.seriesName) {
             case "温度":

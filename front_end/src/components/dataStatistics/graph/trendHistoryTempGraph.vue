@@ -2,7 +2,7 @@
   <div
     id="chart_temp_graph"
     ref="chart_temp_graph"
-    style="height: 400px; min-width: 800px; padding: 10px; margin: 0 auto"
+    style="height: 400px; min-width: 400px; padding: 10px; margin: 0 auto"
   ></div>
 </template>
 <script lang="ts" setup>
@@ -64,6 +64,7 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
       },
       formatter: function (params: any) {
         let tooltipContent = "";
+        tooltipContent += `${params[0].axisValue}<br/>`;
         params.forEach(function (param: any) {
           let temp = param.value.toFixed(0);
           tooltipContent += `${param.marker} ${param.seriesName}: ${temp} °C<br/>`;
