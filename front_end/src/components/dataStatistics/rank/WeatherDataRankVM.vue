@@ -37,7 +37,7 @@ import { View, Hide } from "@element-plus/icons-vue";
 import { get } from "@/api/index.ts";
 import { RankItem } from "@/types/weather";
 import { weather_norms } from "@/stores/weather";
-import NormRankings from "@c/dataStatistics/NormRanking.vue";
+import NormRankings from "@c/dataStatistics/rank/NormRanking.vue";
 onMounted(() => {
   getNormCityRankings();
 });

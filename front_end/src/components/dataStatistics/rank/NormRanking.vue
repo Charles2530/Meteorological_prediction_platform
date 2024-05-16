@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import CityInfo from "@c/dataStatistics/cityInfo.vue";
+import CityInfo from "@c/dataStatistics/rank/cityInfo.vue";
 import { RankItem } from "@/types/weather";
 const props = defineProps<{
   city_ranks: RankItem[];

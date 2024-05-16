@@ -2,7 +2,7 @@
   <div
     id="chart_precip_graph"
     ref="chart_precip_graph"
-    style="height: 400px; min-width: 400px; padding: 10px; margin: 0 auto"
+    style="height: 400px; min-width: 800px; padding: 10px; margin: 0 auto"
   ></div>
 </template>
 <script lang="ts" setup>

@@ -2,7 +2,7 @@
   <div
     id="chart_temp_graph"
     ref="chart_temp_graph"
-    style="height: 400px; min-width: 400px; padding: 10px; margin: 0 auto"
+    style="height: 400px; min-width: 800px; padding: 10px; margin: 0 auto"
   ></div>
 </template>
 <script lang="ts" setup>
@@ -110,7 +110,7 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
         type: "line",
         color: "#ff6347",
         smooth: true,
-        areaStyle: {
+        itemStyle: {
           normal: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               { offset: 0, color: "#ff6347" },
@@ -133,7 +133,7 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
         type: "line",
         color: "#4682b4",
         smooth: true,
-        areaStyle: {
+        itemStyle: {
           normal: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               { offset: 0, color: "#4682b4" },

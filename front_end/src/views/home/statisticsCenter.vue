@@ -22,36 +22,38 @@
               </el-card>
               <el-card>
                 <el-row :gutter="2">
-                  <el-col :span="12">
+                  <el-col :span="24">
                     <el-card>
                       <trendHistoryTempGraph :city="selectedLocation" />
                     </el-card>
                   </el-col>
-                  <el-col :span="12">
+                </el-row>
+                <el-row :gutter="2">
+                  <el-col :span="24">
                     <el-card>
                       <trendHistoryAqiGraph :city="selectedLocation" />
                     </el-card>
                   </el-col>
                 </el-row>
                 <el-row :gutter="2">
-                  <el-col :span="12">
+                  <!-- <el-col :span="12">
                     <el-card>
                       <trendHistoryWinSpeedGraph :city="selectedLocation" />
                     </el-card>
-                  </el-col>
-                  <el-col :span="12">
+                  </el-col> -->
+                  <el-col :span="24">
                     <el-card>
                       <trendHistoryPrecipGraph :city="selectedLocation" />
                     </el-card>
                   </el-col>
                 </el-row>
                 <el-row :gutter="2">
-                  <el-col :span="12">
+                  <!-- <el-col :span="12">
                     <el-card>
                       <trendHIstoryPressureGraph :city="selectedLocation" />
                     </el-card>
-                  </el-col>
-                  <el-col :span="12">
+                  </el-col> -->
+                  <el-col :span="24">
                     <el-card>
                       <trendHistoryHumidGraph :city="selectedLocation" />
                     </el-card>
@@ -62,6 +64,9 @@
             <el-col :span="6">
               <el-card>
                 <compareGraph />
+              </el-card>
+              <el-card>
+                <WeatherDataRankVM />
               </el-card>
             </el-col>
           </el-row>
@@ -79,6 +84,7 @@ import trendHistoryHumidGraph from "@/components/dataStatistics/graph/trendHisto
 import trendHistoryWinSpeedGraph from "@/components/dataStatistics/graph/trendHistoryWinSpeedGraph.vue";
 import trendHistoryPrecipGraph from "@/components/dataStatistics/graph/trendHistoryPrecipGraph.vue";
 import compareGraph from "@/components/dataStatistics/compareGraph.vue";
+import WeatherDataRankVM from "@c/dataStatistics/rank/WeatherDataRankVM.vue";
 import { china_cities } from "@/stores/cities";
 const selectedLocation = ref("");
 const locations = china_cities;

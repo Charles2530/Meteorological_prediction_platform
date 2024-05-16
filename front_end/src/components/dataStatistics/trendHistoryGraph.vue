@@ -3,7 +3,7 @@
     <div
       id="chart_history"
       ref="chart_history"
-      style="height: 200px; min-width: 400px; padding: 10px; margin: 0 auto"
+      style="height: 200px; min-width: 800px; padding: 10px; margin: 0 auto"
     ></div>
   </el-card>
 </template>
