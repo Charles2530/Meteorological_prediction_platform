@@ -370,7 +370,12 @@ const handleDelete = throttle((id: number) => {
     getUserList();
     if (response.success) {
       ElMessage.success(manage.user.operate.delete.success);
-    } else ElMessage.error(manage.invaild);
+    } else {
+      ElMessage({
+        message: response.reason,
+        type: "error",
+      });
+    }
   });
 }, 500);
 

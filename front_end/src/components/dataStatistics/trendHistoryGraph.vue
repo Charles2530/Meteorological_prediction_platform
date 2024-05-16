@@ -3,7 +3,7 @@
     <div
       id="chart_history"
       ref="chart_history"
-      style="height: 200px; min-width: 400px; padding: 10px; margin: 0 auto"
+      style="height: 200px; min-width: 800px; padding: 10px; margin: 0 auto"
     ></div>
   </el-card>
 </template>
@@ -215,6 +215,7 @@ const renderChart = async (
       trigger: "axis",
       formatter: function (params: any) {
         let tooltipContent = "";
+        tooltipContent += `${params[0].axisValue}<br/>`;
         params.forEach(function (param: any) {
           switch (param.seriesName) {
             case "温度":

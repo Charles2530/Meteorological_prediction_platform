@@ -62,6 +62,7 @@ const renderChart_winSpeed_history = async (tempData: winSpeedNode[]) => {
       },
       formatter: function (params: any) {
         let tooltipContent = "";
+        tooltipContent += `${params[0].axisValue}<br/>`;
         params.forEach(function (param: any) {
           let winSpeed = param.value.toFixed(0);
           tooltipContent += `${param.marker} ${param.seriesName}: ${winSpeed} m/s<br/>`;

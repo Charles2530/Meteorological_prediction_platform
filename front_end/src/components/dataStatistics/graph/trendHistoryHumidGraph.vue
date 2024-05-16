@@ -62,6 +62,7 @@ const renderChart_humid_history = async (tempData: humidNode[]) => {
       },
       formatter: function (params: any) {
         let tooltipContent = "";
+        tooltipContent += `${params[0].axisValue}<br/>`;
         params.forEach(function (param: any) {
           let temp = param.value.toFixed(0);
           tooltipContent += `${param.marker} ${param.seriesName}: ${temp} %<br/>`;

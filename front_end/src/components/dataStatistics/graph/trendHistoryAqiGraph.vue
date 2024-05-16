@@ -62,6 +62,7 @@ const renderChart_aqi_history = async (tempData: aqiNode[]) => {
       },
       formatter: function (params: any) {
         let tooltipContent = "";
+        tooltipContent += `${params[0].axisValue}<br/>`;
         params.forEach(function (param: any) {
           let aqi = param.value.toFixed(0);
           tooltipContent += `${param.marker} ${param.seriesName}: ${aqi}<br/>`;

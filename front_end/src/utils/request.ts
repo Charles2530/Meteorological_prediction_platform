@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from "axios";
-import { ElNotification } from "element-plus";
 import { Local } from "@/utils/storage";
 import pinia from "@/stores";
 import { useUserInfo } from "@/stores/userInfo";
@@ -11,11 +10,13 @@ const service: AxiosInstance = axios.create({
   timeout: 10000,
 });
 const getCsrfToken = () => {
-// 返回 CSRF 令牌
-// 例如，从浏览器 Cookie 中获取
-return document.cookie.replace(/(?:(?:^|.*;\s*)csrf\-token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+  // 返回 CSRF 令牌
+  // 例如，从浏览器 Cookie 中获取
+  return document.cookie.replace(
+    /(?:(?:^|.*;\s*)csrf\-token\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
 };
-
 
 service.interceptors.request.use(
   (config) => {
@@ -43,15 +44,14 @@ service.interceptors.response.use(
     // 401 请求要求用户的身份认证 清除token信息, 显示登录界面
     if (error.response.status === 401) {
       userInfo.logout();
-      ElNotification({
+      ElMessage({
         message: error.message,
         type: "error",
         duration: 3000,
       });
       loginConfig.setShowLoginPanel(true);
     } else {
-      ElNotification({
-        title: error.code,
+      ElMessage({
         message: error.message,
         type: "error",
         duration: 3000,

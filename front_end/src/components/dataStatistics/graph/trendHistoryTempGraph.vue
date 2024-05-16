@@ -64,6 +64,7 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
       },
       formatter: function (params: any) {
         let tooltipContent = "";
+        tooltipContent += `${params[0].axisValue}<br/>`;
         params.forEach(function (param: any) {
           let temp = param.value.toFixed(0);
           tooltipContent += `${param.marker} ${param.seriesName}: ${temp} °C<br/>`;
@@ -110,7 +111,7 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
         type: "line",
         color: "#ff6347",
         smooth: true,
-        areaStyle: {
+        itemStyle: {
           normal: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               { offset: 0, color: "#ff6347" },
@@ -133,7 +134,7 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
         type: "line",
         color: "#4682b4",
         smooth: true,
-        areaStyle: {
+        itemStyle: {
           normal: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               { offset: 0, color: "#4682b4" },

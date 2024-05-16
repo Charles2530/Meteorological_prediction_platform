@@ -104,7 +104,7 @@ const locations = china_cities;
 const getKeyList = function () {
   let keyList: string[] = [];
   keyList.push("温度");
-  keyList.push("降水量");
+  keyList.push("降水");
   keyList.push("风速");
   keyList.push("风级");
   keyList.push("风速");
