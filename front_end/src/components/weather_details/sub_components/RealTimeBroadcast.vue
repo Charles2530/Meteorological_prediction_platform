@@ -1,9 +1,9 @@
 <template>
-  <div class="common-layout">
+  <div class="common-layout" style="background:white;" >
     <el-container >
       <el-header>
         <div id="chart_temp_perhour" ref="chart_temp_perhour"
-          style="height: 250px;  width: 100%;  padding: 10px; margin: 0 auto"></div>
+          style="height: 200px;  width: 100%;  margin: 0 auto"></div>
       </el-header>
       <el-main>
         <div class="calendar-container">
@@ -22,6 +22,7 @@
             <!-- </div> -->
             <el-col :span="2" v-for="(day, index) in realTimeWeatherList" :key="index">
               <div class="ep-bg-purple-dark" />
+              <!-- <div style="height:70% !important"> -->
               <el-card style="width:auto" shadow="hover">
                 <div class="day-content">
                   <div class="temperature">{{ day.temperature }}℃</div>
@@ -52,6 +53,7 @@
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
 import { china_cities } from "@/stores/cities";
+import { SelectProps } from "element-plus/es/components/select/src/select.mjs";
 
 
 const city = ref({
@@ -74,7 +76,8 @@ interface RealTimeWeatherData {
 
 const get_data = async () => {
   get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: city.value.name + city.value.adm2 }).then((res) => {
-    realTimeWeatherList.value = res.data.realTimeWeatherList;
+    realTimeWeatherList.value.splice(0, realTimeWeatherList.value.length, ...res.data.realTimeWeatherList);
+    console.log("getdata")
     if (realTimeWeatherList.value.length > 11) {
       realTimeWeatherList.value = realTimeWeatherList.value.slice(0, 11);
     }
@@ -84,12 +87,11 @@ const get_data = async () => {
 
 const selectedLocation = ref("");
 const locations = china_cities;
-watch(selectedLocation, () => {
-  get_data();
+watch(selectedLocation, () => Promise.all([get_data()]).then(() => {
   renderChart(
     realTimeWeatherList.value,
   );
-});
+}));
 
 // 初始化 ECharts 实例
 let chartInstance_history: echarts.ECharts | null = null;
@@ -217,13 +219,39 @@ const renderChart = async (
     ],
   });
 };
+// onMounted(() => Promise.all([get_data()]).then(() => {
+//   // get_data();
+//   renderChart(
+//     realTimeWeatherList.value
+//   );
 
-onMounted(() => {
-  get_data();
-  renderChart(
-    realTimeWeatherList.value
-  );
-
+//   // window.addEventListener("click", () => {
+//   //   if (chartInstance_history) {
+//   //     renderChart(
+//   //       realTimeWeatherList.value
+//   //     );
+//   //     chartInstance_history.resize();
+//   //   }
+//   // });
+//   // window.addEventListener("resize", () => {
+//   //   if (chartInstance_history) {
+//   //     renderChart(
+//   //       realTimeWeatherList.value
+//   //     );
+//   //     chartInstance_history.resize();
+//   //   }
+//   // });
+// }));
+onMounted(()=>Promise.all([get_data()]).then(() => {
+  console.log(realTimeWeatherList.value);
+  setTimeout(() => {
+    renderChart(
+      realTimeWeatherList.value
+    );
+  }, 1000);
+  // renderChart(
+  //   realTimeWeatherList.value
+  // );
   window.addEventListener("click", () => {
     if (chartInstance_history) {
       renderChart(
@@ -240,13 +268,13 @@ onMounted(() => {
       chartInstance_history.resize();
     }
   });
-});
+}));
 </script>
 
 
 <style lang="scss" scoped>
 .calendar-container {
-  margin-top: 100px;
+  margin-top: 6cqh;
   padding: 20px;
 }
 

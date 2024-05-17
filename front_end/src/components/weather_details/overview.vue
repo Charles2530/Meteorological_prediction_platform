@@ -1,9 +1,9 @@
 <template>
-    <!-- <el-container class="rounded-lg" style="  background: linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195));">
+    <el-container class="rounded-lg" style="  background: linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195));">
         <CurrentWeather class="md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
         </CurrentWeather>
         <CurrentWeatherRight class="md:basis-2/5" :weather="weather" />
-    </el-container> -->
+    </el-container>
     <el-container class="">
         <RealTimeBroadcast />
     </el-container>

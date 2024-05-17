@@ -1,16 +1,14 @@
 <template>
   <div class="air-quality-indicator">
     <div class="location text-2xl">{{ cityMessage.city }}</div>
-    <div @mouseover="showHover = true" @mouseout="showHover = false" class="quality-circle">
+    <div class="quality-circle">
       <div class="quality-level text-gray-200">{{ cityMessage.aqi }}</div>
     </div>
-    <div class="quality-description text-slate-600 ml-2">
-      {{ cityMessage.category }}
-    </div>
 
-    <div class="hover_container" v-if="showHover">
-      <el-row>
-        <el-col :span="24" class="rounded-lg shadow-md border-2 p-2">
+    <el-tooltip effect="light">
+    <template #content>    
+       <el-row>
+        <el-col :span="24" class="rounded-lg shadow-md p-2" style="width: 40vh;">
           <el-row :gutter="2">
             <el-col :span="8">
               <p class="text-xl text-center font-bold" :style="colorClass(levelInfo.color)">
@@ -26,9 +24,39 @@
           </el-row>
           <!-- </div> -->
         </el-col>
-      </el-row>
+      </el-row> 
+    </template>
+    <el-button class="quality-description text-slate-600 ml-2" style="margin-top: 10px;border: none;"> {{ cityMessage.category }}</el-button>
+  </el-tooltip>
 
-    </div>
+
+  <!-- 下方显示提示信息 -->
+  <!-- <div @mouseover="showHover = true" @mouseout="showHover = false" class="quality-circle">
+      <div class="quality-level text-gray-200">{{ cityMessage.aqi }}</div>
+    </div> -->
+    <!-- <div class="quality-description text-slate-600 ml-2">
+      {{ cityMessage.category }}
+    </div> -->
+    <!-- <div class="hover_container" v-if="showHover">
+      <el-row>
+        <el-col :span="24" class="rounded-lg shadow-md border-2 p-2">
+          <el-row :gutter="2">
+            <el-col :span="8">
+              <p class="text-xl text-center font-bold" :style="colorClass(levelInfo.color)">
+                {{ levelInfo.name }}
+              </p>
+              <p class="text-center text-xl">
+                {{ levelInfo.range }}
+              </p>
+            </el-col>
+            <el-col :span="16">
+              <p class="text-center text-sm text-black">{{ levelInfo.description }}</p>
+            </el-col>
+          </el-row>
+        </el-col>
+      </el-row>
+    </div> -->
+
   </div>
 </template>
 <script lang="ts" setup>
@@ -41,7 +69,6 @@ interface CityInfoResponse {
   status: boolean;
   message: CityWeatherData;
 }
-const showHover = ref(false)
 const cityMessage = reactive<CityWeatherData>({} as CityWeatherData);
 const getPresentCityAqi = async () => {
   get<CityInfoResponse>("/api/getCityInfo/").then((res) => {
@@ -111,7 +138,7 @@ const levelInfo = computed(() => {
 </script>
 <style>
 .air-quality-indicator {
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
