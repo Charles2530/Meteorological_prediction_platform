@@ -49,9 +49,10 @@ const fetchCityAqiChange = async () =>
   });
 let chartInstance_winSpeed_history: echarts.ECharts | null = null;
 const renderChart_winSpeed_history = async (tempData: winSpeedNode[]) => {
-  chartInstance_winSpeed_history = echarts.init(
-    document.getElementById("chart_winSpeed_graph") as HTMLDivElement
-  );
+  if (chartInstance_winSpeed_history === null)
+    chartInstance_winSpeed_history = echarts.init(
+      document.getElementById("chart_winSpeed_graph") as HTMLDivElement
+    );
   let option = {
     backgroundColor: "#fefefe",
     title: [

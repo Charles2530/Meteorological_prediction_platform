@@ -45,13 +45,15 @@ const fetchCityAqiChange = async () =>
     city: props.city,
     periods: props.periods,
   }).then((res) => {
+    console.log(AqiDataList.value.length);
     AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
   });
 let chartInstance_precip_history: echarts.ECharts | null = null;
 const renderChart_precip_history = async (tempData: precipNode[]) => {
-  chartInstance_precip_history = echarts.init(
-    document.getElementById("chart_precip_graph") as HTMLDivElement
-  );
+  if (chartInstance_precip_history === null)
+    chartInstance_precip_history = echarts.init(
+      document.getElementById("chart_precip_graph") as HTMLDivElement
+    );
   let option = {
     backgroundColor: "#fefefe",
     title: [

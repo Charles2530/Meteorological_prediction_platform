@@ -51,9 +51,10 @@ const fetchCityTempChange = async () =>
   });
 let chartInstance_temp_history: echarts.ECharts | null = null;
 const renderChart_temp_history = async (tempData: tempNode[]) => {
-  chartInstance_temp_history = echarts.init(
-    document.getElementById("chart_temp_graph") as HTMLDivElement
-  );
+  if (chartInstance_temp_history === null)
+    chartInstance_temp_history = echarts.init(
+      document.getElementById("chart_temp_graph") as HTMLDivElement
+    );
   let option = {
     backgroundColor: "#fefefe",
     title: [

@@ -49,9 +49,10 @@ const fetchCityAqiChange = async () =>
   });
 let chartInstance_aqi_history: echarts.ECharts | null = null;
 const renderChart_aqi_history = async (tempData: aqiNode[]) => {
-  chartInstance_aqi_history = echarts.init(
-    document.getElementById("chart_aqi_graph") as HTMLDivElement
-  );
+  if (chartInstance_aqi_history === null)
+    chartInstance_aqi_history = echarts.init(
+      document.getElementById("chart_aqi_graph") as HTMLDivElement
+    );
   let option = {
     backgroundColor: "#fefefe",
     title: [

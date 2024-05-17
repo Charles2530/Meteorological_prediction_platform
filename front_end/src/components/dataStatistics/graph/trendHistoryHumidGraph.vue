@@ -49,9 +49,10 @@ const fetchCityAqiChange = async () =>
   });
 let chartInstance_humid_history: echarts.ECharts | null = null;
 const renderChart_humid_history = async (tempData: humidNode[]) => {
-  chartInstance_humid_history = echarts.init(
-    document.getElementById("chart_humid_graph") as HTMLDivElement
-  );
+  if (chartInstance_humid_history === null)
+    chartInstance_humid_history = echarts.init(
+      document.getElementById("chart_humid_graph") as HTMLDivElement
+    );
   let option = {
     backgroundColor: "#fefefe",
     title: [

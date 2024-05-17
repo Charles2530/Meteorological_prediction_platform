@@ -49,9 +49,10 @@ const fetchCityAqiChange = async () =>
   });
 let chartInstance_pressure_history: echarts.ECharts | null = null;
 const renderChart_pressure_history = async (tempData: pressureNode[]) => {
-  chartInstance_pressure_history = echarts.init(
-    document.getElementById("chart_pressure_graph") as HTMLDivElement
-  );
+  if (chartInstance_pressure_history === null)
+    chartInstance_pressure_history = echarts.init(
+      document.getElementById("chart_pressure_graph") as HTMLDivElement
+    );
   let option = {
     backgroundColor: "#fefefe",
     title: [
