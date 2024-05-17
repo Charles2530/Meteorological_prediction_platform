@@ -22,6 +22,7 @@
   <el-container class="">
     <RealTimeBroadcast />
   </el-container>
+
 </template>
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
@@ -54,43 +55,43 @@ interface WeatherData41 {
   weather: Weather41;
 }
 interface Weather41 {
-  /**
-   * 以百分之多少为单位
-   */
-  aqi: number;
-  condition: string;
-  /**
-   * 降水量：mm
-   */
-  precip: number;
-  /**
-   * 降水概率：%
-   */
-  precip_probability: number;
-  /**
-   * 大气压强：hPa
-   */
-  pressure: number;
-  /**
-   * 中等，很强，较弱等
-   */
-  ray: string;
-  /**
-   * 示例：18:00
-   */
-  sunrise_time?: string;
-  /**
-   * 示例：18:00
-   */
-  sunset_time?: string;
-  /**
-   * ℃
-   */
-  temp: number;
-  /**
-   * ℃
-   */
-  temp_feel: number;
+    /**
+     * 以百分之多少为单位
+     */
+    aqi: number;
+    condition: string;
+    /**
+     * 降水量：mm
+     */
+    precip: number;
+    /**
+     * 降水概率：%
+     */
+    precip_probability: number;
+    /**
+     * 大气压强：hPa
+     */
+    pressure: number;
+    /**
+     * 中等，很强，较弱等
+     */
+    ray: string;
+    /**
+     * 示例：18:00
+     */
+    sunrise_time?: string;
+    /**
+     * 示例：18:00
+     */
+    sunset_time?: string;
+    /**
+     * ℃
+     */
+    temp: number;
+    /**
+     * ℃
+     */
+    temp_feel: number;
 }
 //     searchShow: boolean
 
@@ -141,9 +142,11 @@ h2 {
 }
 
 /* demo */
+
 .container {
   background: linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195));
 }
+
 
 .input {
   width: 300px;

@@ -1,7 +1,7 @@
 <!-- <template>
   <el-tabs
     v-model="activeName"
-    class="demo-tabs mx-5 rounded-2xl"
+    class="demo-tabs mx-40 rounded-2xl"
     @tab-click="handleClick"
     type="border-card"
   >
@@ -16,38 +16,39 @@
     <el-tab-pane label="空气质量" name="third">
       <AirQualityVM />
     </el-tab-pane>
+    <el-tab-pane label="数据统计" name="fourth">
+      <dataStatistics />
+    </el-tab-pane>
   </el-tabs>
 
 </template> -->
 
 <template>
-  <div class="common-layout" style="margin-left: 1%;margin-right: 1%;max-height:100vh;overflow: auto;">
-    <el-container style="background: white">
-      <el-aside width="70%">
-        <el-container class="rounded-lg" style="background: rgb(54, 131, 195);height: 40vh;margin-top: 20px;">
-          <!-- <el-col :span="16"> -->
+  <div class="common-layout" style="margin-left: 1%;margin-right: 1%;">
+    <el-container style="background: rgb(54, 131, 195);">
+      <el-container style="height: 400px;margin-top: 60px;">
+        <el-aside width="60%">
+          <el-container class="rounded-lg" style="background: rgb(54, 131, 195);">
             <CurrentWeather class="md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
             </CurrentWeather>
-          <!-- </el-col> -->
-          <!-- <el-col :span="8"> -->
             <CurrentWeatherRight class="md:basis-2/5" :weather="weather" />
-          <!-- </el-col> -->
+          </el-container>
+        </el-aside>
+        <el-container >
+          <el-header>
+            <BriefAqi />
+          </el-header>
+          <el-main style="width: 800px;">
+            <CityRanking />
+          </el-main>
         </el-container>
-        <el-card style="min-height: 20vh;max-height: 50vh;">
-          <RealTimeBroadcast />
-        </el-card>
-      </el-aside>
 
-      <el-main style="width: 800px;">
-        <el-card >
-          <BriefAqi />
-        </el-card>
-        <el-card style="max-height:58vh;overflow: auto;">
-          <CityRanking />
-        </el-card>
-      </el-main>
+
+      </el-container >
+      <el-footer style="height: 20px;margin-top: 0px;">
+        <RealTimeBroadcast />
+      </el-footer>
     </el-container>
-
   </div>
 </template>
 
@@ -163,9 +164,14 @@ import CurrentWeatherRight from "@/components/weather_details/sub_components/Cur
 
 /*抽屉页*/
 const activeName = ref("first");
+const handleClick = (tab: TabsPaneContext, event: Event) => {
 
+};
+
+/** 组件  **/
 import overview from "@/components/weather_details/overview.vue";
 import calendar30 from "@/components/weather_details/calendar30.vue";
+
 import AirQualityVM from "@/components/airQuality/AirQualityVM.vue";
 import dataStatistics from "@/components/dataStatistics/dataStatistics.vue";
 </script> -->

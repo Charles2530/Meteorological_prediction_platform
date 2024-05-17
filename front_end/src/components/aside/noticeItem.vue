@@ -29,5 +29,12 @@ const props = defineProps<{
   padding: 10px;
   border-radius: 5px;
   background-color: #fafafa;
+
+
+  /* 
+   */
+   background-color: #fdaee9;
+  background-color: #eaec9a;
+  background-color: #edaf10;
 }
 </style>
