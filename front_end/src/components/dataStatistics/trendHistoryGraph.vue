@@ -36,6 +36,27 @@ watch(
       );
     })
 );
+watch(
+  () => props.periods,
+  () =>
+    Promise.all([
+      fetchCityAqiChange(),
+      fetchCityTempChange(),
+      fetchCityHumidChange(),
+      fetchCityPressureChange(),
+      fetchCityPrecipChange(),
+      fetchCityWinSpeedChange(),
+    ]).then(() => {
+      renderChart(
+        TempDataList.value,
+        HumidDataList.value,
+        AqiDataList.value,
+        PressureDataList.value,
+        PrecipDataList.value,
+        WinSpeedDataList.value
+      );
+    })
+);
 
 let chartInstance_history: echarts.ECharts | null = null;
 interface tempNode {
