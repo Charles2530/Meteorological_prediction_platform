@@ -49,7 +49,10 @@ const manage = {
   },
 };
 onMounted(() => {
-  if (!permission.includes(userInfo.role)) themeConfig.showLoginPanel = true;
+  console.log("manage", userInfo.role);
+  if (!permission.includes(userInfo.role)) {
+    themeConfig.showLoginPanel = true;
+  }
 });
 </script>
 

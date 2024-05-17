@@ -6,14 +6,88 @@
           <el-row :gutter="20">
             <el-col :span="18">
               <el-card>
-                <trendHistoryGraph />
+                <el-select
+                  v-model="selectedLocation"
+                  placeholder="请选择城市"
+                  clearable
+                >
+                  <el-option
+                    v-for="location in locations"
+                    :key="location.value"
+                    :label="location.label"
+                    :value="location.value"
+                  ></el-option>
+                </el-select>
+                <div class="slider-demo-block">
+                  <span class="demonstration">时间维度</span>
+                  <el-slider v-model="periods" />
+                </div>
+
+                <trendHistoryGraph
+                  :city="selectedLocation"
+                  :periods="periods"
+                />
               </el-card>
               <el-card>
-                <dataList></dataList>
+                <el-row :gutter="2">
+                  <el-col :span="12">
+                    <el-card>
+                      <trendHistoryTempGraph
+                        :city="selectedLocation"
+                        :periods="periods"
+                      />
+                    </el-card>
+                  </el-col>
+                  <!-- </el-row>
+                <el-row :gutter="2"> -->
+                  <el-col :span="12">
+                    <el-card>
+                      <trendHistoryAqiGraph
+                        :city="selectedLocation"
+                        :periods="periods"
+                      />
+                    </el-card>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="2">
+                  <el-col :span="12">
+                    <el-card>
+                      <trendHistoryHumidGraph
+                        :city="selectedLocation"
+                        :periods="periods"
+                      />
+                    </el-card>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-card>
+                      <trendHistoryPrecipGraph
+                        :city="selectedLocation"
+                        :periods="periods"
+                      />
+                    </el-card>
+                  </el-col>
+                </el-row>
+                <!-- <el-row :gutter="2">
+                  <el-col :span="12">
+                    <el-card>
+                      <trendHIstoryPressureGraph :city="selectedLocation" :periods="periods"/>
+                    </el-card>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-card>
+                      <trendHistoryWinSpeedGraph :city="selectedLocation" :periods="periods"/>
+                    </el-card>
+                  </el-col>
+                </el-row> -->
               </el-card>
             </el-col>
             <el-col :span="6">
-              <el-card> <WeatherDataRankVM /> </el-card>
+              <el-card>
+                <compareGraph />
+              </el-card>
+              <el-card class="mt-2">
+                <WeatherDataRankVM />
+              </el-card>
             </el-col>
           </el-row>
         </el-card>
@@ -22,7 +96,43 @@
   </div>
 </template>
 <script lang="ts" setup>
-import dataList from "@c/dataStatistics/dataList.vue";
+import trendHistoryTempGraph from "@/components/dataStatistics/graph/trendHistoryTempGraph.vue";
 import trendHistoryGraph from "@c/dataStatistics/trendHistoryGraph.vue";
-import WeatherDataRankVM from "@/components/dataStatistics/WeatherDataRankVM.vue";
+import trendHistoryAqiGraph from "@/components/dataStatistics/graph/trendHistoryAqiGraph.vue";
+import trendHIstoryPressureGraph from "@/components/dataStatistics/graph/trendHIstoryPressureGraph.vue";
+import trendHistoryHumidGraph from "@/components/dataStatistics/graph/trendHistoryHumidGraph.vue";
+import trendHistoryWinSpeedGraph from "@/components/dataStatistics/graph/trendHistoryWinSpeedGraph.vue";
+import trendHistoryPrecipGraph from "@/components/dataStatistics/graph/trendHistoryPrecipGraph.vue";
+import compareGraph from "@/components/dataStatistics/compareGraph.vue";
+import WeatherDataRankVM from "@c/dataStatistics/rank/WeatherDataRankVM.vue";
+import { china_cities } from "@/stores/cities";
+const selectedLocation = ref("");
+const periods = ref(30);
+const locations = china_cities;
 </script>
+
+<style scoped>
+.slider-demo-block {
+  /* max-width: 600px; */
+  display: flex;
+  align-items: center;
+}
+/* .slider-demo-block .el-slider {
+  margin-top: 0;
+  margin-left: 12px;
+} */
+.demonstration {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  line-height: 44px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0;
+  margin-left: 20px;
+}
+.slider-demo-block .demonstration + .el-slider {
+  flex: 0 0 90%;
+}
+</style>

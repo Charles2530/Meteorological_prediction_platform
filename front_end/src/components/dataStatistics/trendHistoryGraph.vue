@@ -1,44 +1,63 @@
 <template>
-  <el-select v-model="selectedLocation" placeholder="请选择城市" clearable>
-    <el-option
-      v-for="location in locations"
-      :key="location.value"
-      :label="location.label"
-      :value="location.value"
-    ></el-option>
-  </el-select>
   <el-card>
     <div
       id="chart_history"
       ref="chart_history"
-      style="height: 200px; min-width: 400px; padding: 10px; margin: 0 auto"
+      style="height: 200px; min-width: 800px; padding: 10px; margin: 0 auto"
     ></div>
   </el-card>
 </template>
 <script lang="ts" setup>
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
-import { china_cities } from "@/stores/cities";
-const selectedLocation = ref("");
-const locations = china_cities;
-watch(selectedLocation, () => {
-  fetchCityAqiChange();
-  fetchCityTempChange();
-  fetchCityHumidChange();
-  fetchCityPressureChange();
-  fetchCityPrecipChange();
-  fetchCityWinSpeedChange();
-  renderChart(
-    TempDataList.value,
-    HumidDataList.value,
-    AqiDataList.value,
-    PressureDataList.value,
-    PrecipDataList.value,
-    WinSpeedDataList.value
-  );
-});
+import throttle from "lodash/throttle";
+const props = defineProps<{
+  city: string;
+  periods: number;
+}>();
+watch(
+  () => props.city,
+  () =>
+    Promise.all([
+      fetchCityAqiChange(),
+      fetchCityTempChange(),
+      fetchCityHumidChange(),
+      fetchCityPressureChange(),
+      fetchCityPrecipChange(),
+      fetchCityWinSpeedChange(),
+    ]).then(() => {
+      renderChart(
+        TempDataList.value,
+        HumidDataList.value,
+        AqiDataList.value,
+        PressureDataList.value,
+        PrecipDataList.value,
+        WinSpeedDataList.value
+      );
+    })
+);
+watch(
+  () => props.periods,
+  () =>
+    Promise.all([
+      fetchCityAqiChange(),
+      fetchCityTempChange(),
+      fetchCityHumidChange(),
+      fetchCityPressureChange(),
+      fetchCityPrecipChange(),
+      fetchCityWinSpeedChange(),
+    ]).then(() => {
+      renderChart(
+        TempDataList.value,
+        HumidDataList.value,
+        AqiDataList.value,
+        PressureDataList.value,
+        PrecipDataList.value,
+        WinSpeedDataList.value
+      );
+    })
+);
 
-// 初始化 ECharts 实例
 let chartInstance_history: echarts.ECharts | null = null;
 interface tempNode {
   time: string;
@@ -94,58 +113,87 @@ const AqiDataList = ref<aqiNode[]>([]);
 const PressureDataList = ref<pressureNode[]>([]);
 const PrecipDataList = ref<precipNode[]>([]);
 const WinSpeedDataList = ref<winSpeedNode[]>([]);
-const fetchCityTempChange = async () =>
-  get<TempChangeResponse>("/api/weather/temp/city_change/", {
-    city: selectedLocation.value,
-  }).then((res) => {
-    TempDataList.value.splice(0, TempDataList.value.length, ...res.data.data);
-  });
+const fetchCityTempChange = throttle(
+  async () =>
+    get<TempChangeResponse>("/api/weather/temp/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      TempDataList.value.splice(0, TempDataList.value.length, ...res.data.data);
+    }),
+  1000
+);
 
-const fetchCityHumidChange = async () =>
-  get<HumidChangeResponse>("/api/weather/humid/city_change/", {
-    city: selectedLocation.value,
-  }).then((res) => {
-    HumidDataList.value.splice(0, HumidDataList.value.length, ...res.data.data);
-  });
+const fetchCityHumidChange = throttle(
+  async () =>
+    get<HumidChangeResponse>("/api/weather/humid/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      HumidDataList.value.splice(
+        0,
+        HumidDataList.value.length,
+        ...res.data.data
+      );
+    }),
+  1000
+);
 
-const fetchCityAqiChange = async () =>
-  get<AqiChangeResponse>("/api/weather/aqi/city_change/", {
-    city: selectedLocation.value,
-  }).then((res) => {
-    AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
-  });
+const fetchCityAqiChange = throttle(
+  async () =>
+    get<AqiChangeResponse>("/api/weather/aqi/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
+    }),
+  1000
+);
 
-const fetchCityPressureChange = async () =>
-  get<PressureChangeResponse>("/api/weather/pressure/city_change/", {
-    city: selectedLocation.value,
-  }).then((res) => {
-    PressureDataList.value.splice(
-      0,
-      PressureDataList.value.length,
-      ...res.data.data
-    );
-  });
-const fetchCityPrecipChange = async () =>
-  get<PrecipChangeResponse>("/api/weather/precip/city_change/", {
-    city: selectedLocation.value,
-  }).then((res) => {
-    PrecipDataList.value.splice(
-      0,
-      PrecipDataList.value.length,
-      ...res.data.data
-    );
-  });
+const fetchCityPressureChange = throttle(
+  async () =>
+    get<PressureChangeResponse>("/api/weather/pressure/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      PressureDataList.value.splice(
+        0,
+        PressureDataList.value.length,
+        ...res.data.data
+      );
+    }),
+  1000
+);
 
-const fetchCityWinSpeedChange = async () =>
-  get<WinSpeedChangeResponse>("/api/weather/winSpeed/city_change/", {
-    city: selectedLocation.value,
-  }).then((res) => {
-    WinSpeedDataList.value.splice(
-      0,
-      WinSpeedDataList.value.length,
-      ...res.data.data
-    );
-  });
+const fetchCityPrecipChange = throttle(
+  async () =>
+    get<PrecipChangeResponse>("/api/weather/precip/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      PrecipDataList.value.splice(
+        0,
+        PrecipDataList.value.length,
+        ...res.data.data
+      );
+    }),
+  1000
+);
+
+const fetchCityWinSpeedChange = throttle(
+  async () =>
+    get<WinSpeedChangeResponse>("/api/weather/winSpeed/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      WinSpeedDataList.value.splice(
+        0,
+        WinSpeedDataList.value.length,
+        ...res.data.data
+      );
+    }),
+  1000
+);
 
 const renderChart = async (
   tempData: tempNode[],
@@ -212,14 +260,14 @@ const renderChart = async (
       {
         top: "0%",
         left: "center",
-        text: "多指标变化趋势图",
+        text: "天气变化趋势总览",
       },
     ],
     tooltip: {
       trigger: "axis",
       formatter: function (params: any) {
         let tooltipContent = "";
-
+        tooltipContent += `${params[0].axisValue}<br/>`;
         params.forEach(function (param: any) {
           switch (param.seriesName) {
             case "温度":
@@ -323,54 +371,57 @@ const renderChart = async (
   });
 };
 
-onMounted(() => {
-  fetchCityAqiChange();
-  fetchCityTempChange();
-  fetchCityHumidChange();
-  fetchCityPressureChange();
-  fetchCityPrecipChange();
-  fetchCityWinSpeedChange();
-  renderChart(
-    TempDataList.value,
-    HumidDataList.value,
-    AqiDataList.value,
-    PressureDataList.value,
-    PrecipDataList.value,
-    WinSpeedDataList.value
-  );
+onMounted(() =>
+  Promise.all([
+    fetchCityAqiChange(),
+    fetchCityTempChange(),
+    fetchCityHumidChange(),
+    fetchCityPressureChange(),
+    fetchCityPrecipChange(),
+    fetchCityWinSpeedChange(),
+  ]).then(() => {
+    renderChart(
+      TempDataList.value,
+      HumidDataList.value,
+      AqiDataList.value,
+      PressureDataList.value,
+      PrecipDataList.value,
+      WinSpeedDataList.value
+    );
+  })
+);
 
-  window.addEventListener("resize", () => {
-    if (chartInstance_history) {
-      chartInstance_history.resize();
-    }
-  });
+window.addEventListener("resize", () => {
+  if (chartInstance_history) {
+    chartInstance_history.resize();
+  }
+});
 
-  window.addEventListener("click", () => {
-    if (chartInstance_history) {
-      renderChart(
-        TempDataList.value,
-        HumidDataList.value,
-        AqiDataList.value,
-        PressureDataList.value,
-        PrecipDataList.value,
-        WinSpeedDataList.value
-      );
-      chartInstance_history.resize();
-    }
-  });
+window.addEventListener("click", () => {
+  if (chartInstance_history) {
+    renderChart(
+      TempDataList.value,
+      HumidDataList.value,
+      AqiDataList.value,
+      PressureDataList.value,
+      PrecipDataList.value,
+      WinSpeedDataList.value
+    );
+    chartInstance_history.resize();
+  }
+});
 
-  window.addEventListener("resize", () => {
-    if (chartInstance_history) {
-      renderChart(
-        TempDataList.value,
-        HumidDataList.value,
-        AqiDataList.value,
-        PressureDataList.value,
-        PrecipDataList.value,
-        WinSpeedDataList.value
-      );
-      chartInstance_history.resize();
-    }
-  });
+window.addEventListener("resize", () => {
+  if (chartInstance_history) {
+    renderChart(
+      TempDataList.value,
+      HumidDataList.value,
+      AqiDataList.value,
+      PressureDataList.value,
+      PrecipDataList.value,
+      WinSpeedDataList.value
+    );
+    chartInstance_history.resize();
+  }
 });
 </script>

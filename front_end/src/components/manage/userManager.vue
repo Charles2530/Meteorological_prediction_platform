@@ -179,7 +179,8 @@
             </el-select>
             <el-text>
               {{
-                (manage.pagination.total, [pagination.page, pagination.page_total])
+                (manage.pagination.total,
+                [pagination.page, pagination.page_total])
               }}
             </el-text>
             <el-pagination
@@ -330,7 +331,6 @@ const getUserList = throttle(() => {
   request.page_size = pagination.page_size;
   post<QueryResponse>("/api/manage/user/list/", request).then((res) => {
     const data = res.data;
-    console.log(data.userlist);
     userlist.splice(0, userlist.length, ...data.userlist);
     pagination.all = data.all;
     pagination.total = data.now;
@@ -369,7 +369,12 @@ const handleDelete = throttle((id: number) => {
     getUserList();
     if (response.success) {
       ElMessage.success(manage.user.operate.delete.success);
-    } else ElMessage.error(manage.invaild);
+    } else {
+      ElMessage({
+        message: response.reason,
+        type: "error",
+      });
+    }
   });
 }, 500);
 

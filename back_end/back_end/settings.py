@@ -39,6 +39,9 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    # 'users.apps.UsersConfig',
+    # 'weather.apps.WeatherConfig',
+    # 'notifications.apps.NotificationsConfig',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -120,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Shanghai"
 
 USE_I18N = True
 
@@ -169,3 +172,7 @@ CELERY_BEAT_SCHEDULE = {
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+SESSION_COOKIE_AGE = 1209600  # 2周
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True

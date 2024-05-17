@@ -217,8 +217,12 @@ const submitLoginForm = (formEl: FormInstance | undefined) => {
               message: "登录成功",
               type: "success",
             });
+            console.log("login role", userInfo.role);
           } else {
-            console.log("error:", res);
+            ElMessage({
+              message: response.reason ?? "登录失败",
+              type: "error",
+            });
           }
         },
         (error) => {
@@ -309,6 +313,11 @@ const submitRegisterForm = (formEl: FormInstance | undefined) => {
             ElMessage({
               message: "注册成功",
               type: "success",
+            });
+          } else {
+            ElMessage({
+              message: response.reason ?? "注册失败",
+              type: "error",
             });
           }
         },

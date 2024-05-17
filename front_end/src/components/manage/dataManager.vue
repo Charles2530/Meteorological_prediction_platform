@@ -416,16 +416,21 @@ function addWeather() {
   }
   weatherData.push({ ...newWeatherData });
   addDialogVisible.value = false;
-  console.log({ ...newWeatherData });
   post<addWeatherResponse>(
     "/api/manage/data/weather_add/",
     newWeatherData
   ).then((res) => {
     const response = res.data;
     if (!response.status) {
-      ElMessage.error("添加失败！");
+      ElMessage({
+        message: weatherInfo.dialogs.add_false,
+        type: "error",
+      });
     } else {
-      ElMessage.success(weatherInfo.dialogs.add);
+      ElMessage({
+        message: weatherInfo.dialogs.add,
+        type: "success",
+      });
     }
   });
 }
@@ -498,6 +503,7 @@ const weatherInfo = {
     delete: "天气数据已成功删除。",
     edit: "编辑功能即将推出！",
     add: "天气数据已成功添加。",
+    add_false: "添加失败！",
     refresh: "天气数据已刷新。",
   },
   invaild: "无效的请求！",
