@@ -8,8 +8,10 @@
 <script lang="ts" setup>
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
+import throttle from "lodash/throttle";
 const props = defineProps<{
   city: string;
+  periods: number;
 }>();
 interface winSpeedNode {
   time: string;
@@ -27,22 +29,34 @@ watch(
       renderChart_winSpeed_history(AqiDataList.value);
     })
 );
+watch(
+  () => props.periods,
+  () =>
+    Promise.all([fetchCityAqiChange()]).then(() => {
+      renderChart_winSpeed_history(AqiDataList.value);
+    })
+);
 onMounted(() =>
   Promise.all([fetchCityAqiChange()]).then(() => {
     renderChart_winSpeed_history(AqiDataList.value);
   })
 );
-const fetchCityAqiChange = async () =>
-  get<WinSpeedChangeResponse>("/api/weather/winSpeed/city_change/", {
-    city: props.city,
-  }).then((res) => {
-    AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
-  });
+const fetchCityAqiChange = throttle(
+  async () =>
+    get<WinSpeedChangeResponse>("/api/weather/winSpeed/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
+    }),
+  1000
+);
 let chartInstance_winSpeed_history: echarts.ECharts | null = null;
 const renderChart_winSpeed_history = async (tempData: winSpeedNode[]) => {
-  chartInstance_winSpeed_history = echarts.init(
-    document.getElementById("chart_winSpeed_graph") as HTMLDivElement
-  );
+  if (chartInstance_winSpeed_history === null)
+    chartInstance_winSpeed_history = echarts.init(
+      document.getElementById("chart_winSpeed_graph") as HTMLDivElement
+    );
   let option = {
     backgroundColor: "#fefefe",
     title: [
