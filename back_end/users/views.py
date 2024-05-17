@@ -225,13 +225,17 @@ def delete_user(request):
     # 假设这里仅检查User模型中是否存在对应的uid
     try:
         user = request.user
-        if uid != user.uid: # 不能删除当前用户
-            # TODO 需要设置一个额外的返回
+        if uid == user.uid: # 删除当前用户，不允许
+            response_data = {
+                "success": False,
+                "reason": "Cannot delete current user"
+            }
+        else:
             profile = Profile.objects.get(id=uid)
             profile.delete()
             # 如果用户存在，设置success为True
+            response_data = {"success": True}
 
-        response_data = {"success": True}
         return JsonResponse(response_data, status=200)  # 返回200成功响应
     except User.DoesNotExist:
         # 如果用户不存在，设置success为False
@@ -548,8 +552,6 @@ def update_current_user_avatar(request):
     try:
         user.avatar = file  # 使用Django内置的密码散列
         user.save()
-        # 如果使用Django的session，更新session中的密码
-        # update_session_auth_hash(request, user)
 
         # 返回成功响应
         return JsonResponse({

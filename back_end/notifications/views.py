@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import NotificationSerializer, CitySubscriptionSerializer, WeatherForecastSerializer
 from .task import fetch_catastrophic_forecast_cities_list, fetch_weather_catastrophic_forecast
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
@@ -65,9 +65,9 @@ def get_alarm_notice(request):
         "notifications": []
     }
     
-    profile = request.user
-    # profile = Profile.objects.get(username=user.username)
-    cities = CitySubscription.objects.filter(profile=profile)
+    user = request.user
+    profile = Profile.objects.get(username=user.username)
+    cities = CitySubscription.objects.filter(profile__in=profile)
     for forecast in locations:
         for city in cities:
             if city.cityName in forecast.city:
@@ -95,6 +95,7 @@ def subscribe(request):
             data = json.loads(request.body)
             cities = data.get('cities')
             user = request.user
+            return JsonResponse({'status': True, 'username': user.username})
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
             profile = Profile.objects.filter(username=user.username)
@@ -116,7 +117,7 @@ def subscribe(request):
         }
         user = request.user
         profile = Profile.objects.filter(username=user.username)
-        cities = CitySubscription.objects.filter(profile=user) # TODO
+        cities = CitySubscription.objects.filter(profile__in=user) # TODO
         for city in cities:
             city_json = {
                 "city": city.cityName,
