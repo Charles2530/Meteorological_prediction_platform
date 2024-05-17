@@ -10,11 +10,11 @@
             <span style="font-size: 12px">{{ proInfo.weather.time }}更新</span>
           </div>
         </el-col>
-        <el-col :offset="3" :span="9">
+        <el-col :offset="0" :span="12">
           <div class="grid-content">
             <span
               class="font1"
-              style="border: 1px solid #ffffff; border-radius: 10px"
+              style="border: 1px solid #ffffff; border-radius: 10px; float:right !important;"
               >&nbsp;&nbsp;AQI：{{ proInfo.weather.airAQI }}
               {{ proInfo.weather.air }}&nbsp;&nbsp;</span
             >
@@ -22,18 +22,18 @@
         </el-col>
       </el-row>
       <el-row :gutter="20" style="height: 80px">
-        <el-col :offset="2" :span="8">
+        <el-col :offset="3" :span="6">
           <div class="grid-content">
             <img
-              :src="getAssetsFile(proInfo.weather.condition + '.png')"
-              style="width: 90px; height: 80px"
+              :src="getAssetsFileIcon(proInfo.weather.icoid + '.png')"
+              style="width: 60px; height: 60px"
             />
           </div>
         </el-col>
-        <el-col :span="12">
+        <el-col :span="15">
           <div class="grid-content">
-            <span style="font-size: 42px">{{ proInfo.weather.tem }}&nbsp;</span>
-            <span style="font-size: 20px">{{ proInfo.weather.condition }}</span>
+            <span style="font-size: 44px">{{ proInfo.weather.tem }}℃&nbsp;</span>
+            <span style="font-size: 22px">{{ proInfo.weather.condition }}</span>
           </div>
         </el-col>
       </el-row>
@@ -50,16 +50,16 @@
         </el-col>
       </el-row>
       <el-row :gutter="20">
-        <el-col :offset="2" :span="6">
+        <el-col :offset="1" :span="7">
           <div class="grid-content" style="text-align: center">
-            <span class="font1">{{ proInfo.weather.wind }}</span>
+            <span class="font1">{{ proInfo.weather.wind }}级</span>
             <br />
             <span class="font1">{{ proInfo.weather.windDir }}</span>
           </div>
         </el-col>
         <el-col :offset="1" :span="7" style="text-align: center">
           <div class="grid-content">
-            <span class="font1">{{ proInfo.weather.hum }}</span>
+            <span class="font1">{{ proInfo.weather.hum }}%</span>
             <br />
             <span class="font1">相对湿度</span>
           </div>
@@ -121,22 +121,23 @@
 </template>
 
 <script setup lang="ts">
-import { getAssetsFile } from "@/utils/pub-use";
+import { getAssetsFileIcon } from "@/utils/pub-use";
 import { get } from "@/api/index";
 import { ProInfo } from "@/types/weather";
 import { ref, watch} from 'vue';
 
 const proInfo = ref({
   weather: {
+    icoid: "150",
     time: "2024-04-10 17:33", //时间
-    tem: "11℃", //温度
+    tem: "18", //温度
     condition: "阴", //晴雨状况
     infos: "今晚多云。明天晴，比今天热很多，空气一般。", //详细天气状况
-    wind: "2级", //风力等级
-    windDir: "西南风", //风向
-    hum: "70%", //相对湿度
+    wind: "2", //风力等级
+    windDir: "无持续风向", //风向
+    hum: "70", //相对湿度
     ray: "中等", //紫外线
-    air: "良", //空气质量状况
+    air: "污染严重", //空气质量状况
     airAQI: "91", //空气质量指数
     visibility: "9km", //能见度
     rainfall: "0.0mm", //降水量
@@ -172,10 +173,11 @@ const props = defineProps<{
   proName: string;
 }>(); // 定义 props
 
-const proName = ref(props.proName); // 将 props 中的 propName 赋值给 ref
+const proName = ref("中国");
 
 // 监听 propName 的变化
 watch(() => props.proName, () => {
+  proName.value = props.proName;
   getProInfo();
 });
 
@@ -184,13 +186,10 @@ onMounted(() => {
 });
 
 const getProInfo = async () => {
-  console.log(proName);
+  console.log(proName.value);
   get<ProInfo>("/api/getProInfo/", {proName: proName.value}
 ).then((res) => {
     proInfo.value = res.data;
-    // console.log("111", proInfo);
-    // console.log("time",proInfo.value.weather.time);
-    // console.log(res.data);
   });
 };
 </script>

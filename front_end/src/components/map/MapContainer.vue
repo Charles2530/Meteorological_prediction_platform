@@ -1,6 +1,7 @@
 <template>
   <div id="mapContainer">
     <div class="input-card" style="position: relative; z-index: 100; top:30%; width: 100px;">
+      <!-- <input id='tipinput' type="text"> -->
       <div class="layerbtns">
         <el-button :class="{ 'selected': buttonActive.A, 'unselected': !buttonActive.A }"  :active="buttonActive.A" @click="clickA">
           <div class="btnDiv">
@@ -52,10 +53,16 @@ import { get } from "@/api/index";
 };
 
 //高亮区域信息
-const dis_info = reactive({
-  districtCode: "100000",
-  districtName: "中国",
-  district: null,
+const pos_info = reactive({
+  lng: 0,               //所在经度
+  lat: 0,               //所在纬度
+  adcode: "100000",     //所在行政区划编码
+  provinceCode:"",      //所在省编码
+  provinceName: "中国", //所在省名称
+  cityName: "",         //所在市名称
+  districtName:"",      //所在县名称
+  name:"",              //拼接名称
+  searcher: null,       
   geoCoder: null,
   polygons: <any>[],
   //行政区划查询
@@ -175,12 +182,11 @@ const emit = defineEmits(["getValue"])
  
 // 点击事件触发emit，去调用我们注册的自定义事件getValue,并传递value参数至父组件
 const transValue = () => {
-  emit("getValue", dis_info.districtName);
-  getHazardInfo();
+  emit("getValue", pos_info.provinceName);
 }
 
 onMounted(() => {
-  getHazardInfo();
+  // getHazardInfo();
   initMap();
 });
 
@@ -205,6 +211,8 @@ function initMap() {
       "AMap.MapType",
       "AMap.DistrictSearch",
       "AMap.Geocoder",
+      'AMap.PlaceSearch',
+      'AMap.Autocomplete',
     ],
   })
     .then((AMap) => {
@@ -221,7 +229,7 @@ function initMap() {
         // features: ['bg', 'road', 'building', 'point'],
         // layers: [new AMap.TileLayer(), new AMap.TileLayer.Satellite()],
       });
-      map.setLimitBounds(new AMap.Bounds([50,60],[150,0]));
+      // map.setLimitBounds(new AMap.Bounds([50,60],[150,0]));
       loca = new Loca.Container({
         map: map
       });
@@ -256,16 +264,34 @@ function initMap() {
           fill: "",
         },
       });
+      //地图搜索框
+      // var autoOptions = {
+      //   city: '全国', //city 限定城市，默认全国
+      //   input: 'tipinput',//绑定的输入框id
+      // };
+      // const autoComplete = new AMap.Autocomplete(autoOptions);
+      // const placeSearch = new AMap.PlaceSearch({
+      //   city: '全国',
+      //   map: map,
+      //   citylimit: true,
+      //   autoFitView: true
+      // });
+      // AMap.event.addListener(autoComplete, 'select', (e: { poi: { adcode: any; name: any; }; }) => {
+      //   //TODO 针对选中的poi实现自己的功能
+      //   placeSearch.setCity(e.poi.adcode);
+      //   placeSearch.search(e.poi.name);
+      // });
+      
       
       map.addControl(new AMap.Scale({position: 'LB'}));
       map.addControl(new AMap.ToolBar({ liteStyle: true, position: 'LT'}));
       map.add(wms);
       // map.add(sate);
       map.add(disCountry);
-      dis_info.district = new AMap.DistrictSearch(dis_info.opts);
-      dis_info.geoCoder = new AMap.Geocoder();
+      pos_info.searcher = new AMap.DistrictSearch(pos_info.opts);
+      pos_info.geoCoder = new AMap.Geocoder();
       handlerMapClick();
-      markPoints();
+      // markPoints();
       InitEarthQuake();
     })
     .catch((e) => {
@@ -277,19 +303,19 @@ function initMap() {
 function drawBounds() {
   var step = 15;
   //行政区查询
-  dis_info.district.search(
-    dis_info.districtCode,
+  pos_info.searcher.search(
+    pos_info.provinceCode,
     function (_status: any, result: { districtList: { boundaries: any }[] }) {
-      map.remove(dis_info.polygons); //清除上次结果
-      dis_info.polygons = [];
+      map.remove(pos_info.polygons); //清除上次结果
+      pos_info.polygons = [];
       var bounds = result.districtList[0].boundaries;
       if (bounds) {
         var bounds2 = new Array();
-        if (dis_info.districtCode != '710000' && dis_info.districtCode != '460000') {
+        if (pos_info.provinceCode != '710000' && pos_info.provinceCode != '460000') {
           bounds2.push(bounds.pop());
           bounds = bounds2;
         }
-        if(dis_info.districtCode == '150000') {
+        if(pos_info.provinceCode == '150000') {
           step=3;
         }
         else {
@@ -309,11 +335,11 @@ function drawBounds() {
             strokeColor: "#0091ea",
           });
           map.add(polygon);
-          dis_info.polygons.push(polygon);
+          pos_info.polygons.push(polygon);
         }
       }
 
-      map.add(dis_info.polygons);
+      map.add(pos_info.polygons);
       map.setZoom(5);
     }
   );
@@ -324,40 +350,73 @@ function handlerMapClick() {
   map.on("click", (e: { lnglat: { lng: any; lat: any } }) => {
     // 点击坐标
     const markersPosition = [e.lnglat.lng, e.lnglat.lat];
-    // console.log(markersPosition);
+    pos_info.lng = markersPosition[0];
+    pos_info.lat = markersPosition[1];
     // 根据坐标获取位置信息
-    dis_info.geoCoder.getAddress(
+    pos_info.geoCoder.getAddress(
       markersPosition,
       (status: string, result: { regeocode: { addressComponent: any } }) => {
-        if (status === "complete" && result.regeocode) {
-          // this.address = result.regeocode.formattedAddress
-          // console.log('点击位置信息：', result.regeocode)
-          // // id
+        if (status === "complete" && result.regeocode) { //判断是否为中国境内
           let addressComponent = result.regeocode.addressComponent;
           //   let reg = /.+?(省|市|自治区|自治州|县|区)/g
-          dis_info.districtName = addressComponent.province;
-          dis_info.districtCode = addressComponent.adcode.substr(0, 2) + "0000";
+          pos_info.adcode = addressComponent.adcode;
+          pos_info.provinceName = addressComponent.province;
+          pos_info.cityName = addressComponent.city;
+          pos_info.districtName = addressComponent.district;
+          pos_info.provinceCode = addressComponent.adcode.substr(0, 2) + "0000";
+          if(pos_info.cityName != "") {
+            if(pos_info.districtName != "") {
+              pos_info.name = '当前位置：' + pos_info.districtName + "/" + pos_info.cityName + "/" + pos_info.provinceName;
+            } else {
+              pos_info.name = '当前位置：' + pos_info.cityName + "/" + pos_info.provinceName;
+            }
+          } else {
+            pos_info.name = '当前位置：'+ pos_info.provinceName;
+          }
+          // console.log(pos_info.name);
+          // console.log('经度：', pos_info.lng, ',经度：', pos_info.lat)
           // let cityId = parseInt(adcode.substr(0, 4) + '00')
           // let areaId = adcode
-          if (dis_info.districtCode != "100000") {
-            dis_info.districtName = dis_info.districtName + "/中国";
+          if (pos_info.provinceCode != "100000") {  //国内各省，高亮区域并跟随中心
             //向父组件传省份名
             transValue();
-            drawBounds();
-            map.setCenter(markersPosition, false, 300);
-          } else {
-            dis_info.districtName = "中国";
+            // pos_info.provinceName = pos_info.provinceName + "/中国";
+            // drawBounds();
+            // map.setCenter(markersPosition, false, 300);
+            //显示标记弹出框
+            let content = [
+              `<div style='\'padding:0px' 0px = '' 4px; \'=''><b>${pos_info.name}</b>`,
+              `经度：${pos_info.lng}`,
+              `纬度：${pos_info.lat}`
+              // `<img src=${item.img} alt="" style="width: 100px;height: 100px">`
+            ];
+            // 创建 infoWindow 实例	
+            let infoWindow = new AAMap.InfoWindow({
+              content: content.join("<br>")  //传入 dom 对象，或者 html 字符串
+            });
+            // 打开信息窗体
+            let dd = map.getCenter()
+            // dd.pos = [e.pos[0], e.pos[1]]
+            dd.lat = pos_info.lat
+            dd.lng = pos_info.lng
+            infoWindow.open(map, dd);
+          } else {                                  //刚刚好是中国，取消高亮并重设中心
+            pos_info.provinceName = "中国";
             //向父组件传省份名
             transValue();
-            map.remove(dis_info.polygons); //清除结果
+            map.remove(pos_info.polygons); //清除结果
             map.setCenter([105, 36], false, 30);
             map.setZoom(4.8);
           }
-        } else {
-          dis_info.districtName = "中国";
+        } else {  //非中国境内，设为中国
+          pos_info.adcode = "100000";
+          pos_info.provinceName = "中国";
+          pos_info.cityName = "";
+          pos_info.districtName = "";
+          pos_info.provinceCode = "100000";
           //向父组件传省份名
           transValue();
-          map.remove(dis_info.polygons); //清除结果
+          map.remove(pos_info.polygons); //清除结果
           map.setCenter([105, 36], false, 30);
           map.setZoom(4.8);
         }

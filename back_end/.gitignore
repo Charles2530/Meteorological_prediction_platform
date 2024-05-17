@@ -1,0 +1,5 @@
+.idea/
+!.vscode/settings.json
+*/**/__pycache__/
+db.sqlite3
+uwsgi.log

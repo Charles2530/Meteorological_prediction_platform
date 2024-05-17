@@ -1,7 +1,7 @@
 <!-- <template>
   <el-tabs
     v-model="activeName"
-    class="demo-tabs mx-40 rounded-2xl"
+    class="demo-tabs mx-5 rounded-2xl"
     @tab-click="handleClick"
     type="border-card"
   >
@@ -15,9 +15,6 @@
     </el-tab-pane>
     <el-tab-pane label="空气质量" name="third">
       <AirQualityVM />
-    </el-tab-pane>
-    <el-tab-pane label="数据统计" name="fourth">
-      <dataStatistics />
     </el-tab-pane>
   </el-tabs>
 
@@ -166,14 +163,9 @@ import CurrentWeatherRight from "@/components/weather_details/sub_components/Cur
 
 /*抽屉页*/
 const activeName = ref("first");
-const handleClick = (tab: TabsPaneContext, event: Event) => {
 
-};
-
-/** 组件  **/
 import overview from "@/components/weather_details/overview.vue";
 import calendar30 from "@/components/weather_details/calendar30.vue";
-
 import AirQualityVM from "@/components/airQuality/AirQualityVM.vue";
 import dataStatistics from "@/components/dataStatistics/dataStatistics.vue";
 </script> -->
