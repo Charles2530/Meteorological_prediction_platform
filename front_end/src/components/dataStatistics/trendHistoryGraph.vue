@@ -12,6 +12,7 @@ import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
 const props = defineProps<{
   city: string;
+  periods: number;
 }>();
 watch(
   () => props.city,
@@ -93,6 +94,7 @@ const WinSpeedDataList = ref<winSpeedNode[]>([]);
 const fetchCityTempChange = async () =>
   get<TempChangeResponse>("/api/weather/temp/city_change/", {
     city: props.city,
+    periods: props.periods,
   }).then((res) => {
     TempDataList.value.splice(0, TempDataList.value.length, ...res.data.data);
   });
@@ -100,6 +102,7 @@ const fetchCityTempChange = async () =>
 const fetchCityHumidChange = async () =>
   get<HumidChangeResponse>("/api/weather/humid/city_change/", {
     city: props.city,
+    periods: props.periods,
   }).then((res) => {
     HumidDataList.value.splice(0, HumidDataList.value.length, ...res.data.data);
   });
@@ -107,6 +110,7 @@ const fetchCityHumidChange = async () =>
 const fetchCityAqiChange = async () =>
   get<AqiChangeResponse>("/api/weather/aqi/city_change/", {
     city: props.city,
+    periods: props.periods,
   }).then((res) => {
     AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
   });
@@ -114,6 +118,7 @@ const fetchCityAqiChange = async () =>
 const fetchCityPressureChange = async () =>
   get<PressureChangeResponse>("/api/weather/pressure/city_change/", {
     city: props.city,
+    periods: props.periods,
   }).then((res) => {
     PressureDataList.value.splice(
       0,
@@ -121,9 +126,11 @@ const fetchCityPressureChange = async () =>
       ...res.data.data
     );
   });
+
 const fetchCityPrecipChange = async () =>
   get<PrecipChangeResponse>("/api/weather/precip/city_change/", {
     city: props.city,
+    periods: props.periods,
   }).then((res) => {
     PrecipDataList.value.splice(
       0,
@@ -135,6 +142,7 @@ const fetchCityPrecipChange = async () =>
 const fetchCityWinSpeedChange = async () =>
   get<WinSpeedChangeResponse>("/api/weather/winSpeed/city_change/", {
     city: props.city,
+    periods: props.periods,
   }).then((res) => {
     WinSpeedDataList.value.splice(
       0,

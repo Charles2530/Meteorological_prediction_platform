@@ -10,6 +10,7 @@ import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
 const props = defineProps<{
   city: string;
+  periods: number;
 }>();
 interface tempNode {
   time: string;
@@ -29,6 +30,13 @@ watch(
       renderChart_temp_history(TempDataList.value);
     })
 );
+watch(
+  () => props.periods,
+  () =>
+    Promise.all([fetchCityTempChange()]).then(() => {
+      renderChart_temp_history(TempDataList.value);
+    })
+);
 onMounted(() =>
   Promise.all([fetchCityTempChange()]).then(() => {
     renderChart_temp_history(TempDataList.value);
@@ -37,6 +45,7 @@ onMounted(() =>
 const fetchCityTempChange = async () =>
   get<TempChangeResponse>("/api/weather/temp/city_change/details/", {
     city: props.city,
+    periods: props.periods,
   }).then((res) => {
     TempDataList.value.splice(0, TempDataList.value.length, ...res.data.data);
   });
@@ -121,12 +130,12 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
         },
         symbol: "triangle",
         symbolSize: 10,
-        itemStyle: {
-          normal: {
-            borderColor: "#ff6347",
-            borderWidth: 2,
-          },
-        },
+        // itemStyle: {
+        //   normal: {
+        //     borderColor: "#ff6347",
+        //     borderWidth: 2,
+        //   },
+        // },
         data: tempData.map((item) => item.maxTemp),
       },
       {
@@ -144,12 +153,12 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
         },
         symbol: "square",
         symbolSize: 10,
-        itemStyle: {
-          normal: {
-            borderColor: "#4682b4",
-            borderWidth: 2,
-          },
-        },
+        // itemStyle: {
+        //   normal: {
+        //     borderColor: "#4682b4",
+        //     borderWidth: 2,
+        //   },
+        // },
         data: tempData.map((item) => item.minTemp),
       },
     ],

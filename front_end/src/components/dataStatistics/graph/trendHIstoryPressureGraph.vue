@@ -10,6 +10,7 @@ import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
 const props = defineProps<{
   city: string;
+  periods: number;
 }>();
 interface pressureNode {
   time: string;
@@ -27,6 +28,13 @@ watch(
       renderChart_pressure_history(AqiDataList.value);
     })
 );
+watch(
+  () => props.periods,
+  () =>
+    Promise.all([fetchCityAqiChange()]).then(() => {
+      renderChart_pressure_history(AqiDataList.value);
+    })
+);
 onMounted(() =>
   Promise.all([fetchCityAqiChange()]).then(() => {
     renderChart_pressure_history(AqiDataList.value);
@@ -35,6 +43,7 @@ onMounted(() =>
 const fetchCityAqiChange = async () =>
   get<PressureChangeResponse>("/api/weather/pressure/city_change/", {
     city: props.city,
+    periods: props.periods,
   }).then((res) => {
     AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
   });

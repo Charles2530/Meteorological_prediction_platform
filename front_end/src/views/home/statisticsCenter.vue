@@ -18,44 +18,64 @@
                     :value="location.value"
                   ></el-option>
                 </el-select>
-                <trendHistoryGraph :city="selectedLocation" />
+                <div class="slider-demo-block">
+                  <span class="demonstration">时间维度</span>
+                  <el-slider v-model="periods" />
+                </div>
+
+                <trendHistoryGraph
+                  :city="selectedLocation"
+                  :periods="periods"
+                />
               </el-card>
               <el-card>
                 <el-row :gutter="2">
                   <el-col :span="12">
                     <el-card>
-                      <trendHistoryTempGraph :city="selectedLocation" />
+                      <trendHistoryTempGraph
+                        :city="selectedLocation"
+                        :periods="periods"
+                      />
                     </el-card>
                   </el-col>
                   <!-- </el-row>
                 <el-row :gutter="2"> -->
                   <el-col :span="12">
                     <el-card>
-                      <trendHistoryAqiGraph :city="selectedLocation" />
+                      <trendHistoryAqiGraph
+                        :city="selectedLocation"
+                        :periods="periods"
+                      />
                     </el-card>
                   </el-col>
                 </el-row>
                 <el-row :gutter="2">
                   <el-col :span="12">
                     <el-card>
-                      <trendHistoryHumidGraph :city="selectedLocation" />
+                      <trendHistoryHumidGraph
+                        :city="selectedLocation"
+                        :periods="periods"
+                      />
                     </el-card>
                   </el-col>
                   <el-col :span="12">
                     <el-card>
-                      <trendHistoryPrecipGraph :city="selectedLocation" />
+                      <trendHistoryPrecipGraph
+                        :city="selectedLocation"
+                        :periods="periods"
+                      />
                     </el-card>
                   </el-col>
                 </el-row>
                 <!-- <el-row :gutter="2">
                   <el-col :span="12">
                     <el-card>
-                      <trendHIstoryPressureGraph :city="selectedLocation" />
+                      <trendHIstoryPressureGraph :city="selectedLocation" :periods="periods"/>
                     </el-card>
                   </el-col>
                   <el-col :span="12">
                     <el-card>
-                      <trendHistoryWinSpeedGraph :city="selectedLocation" />
+                      <trendHistoryWinSpeedGraph :city="selectedLocation" :periods="periods"/>
                     </el-card>
                   </el-col>
                 </el-row> -->
@@ -87,5 +107,32 @@ import compareGraph from "@/components/dataStatistics/compareGraph.vue";
 import WeatherDataRankVM from "@c/dataStatistics/rank/WeatherDataRankVM.vue";
 import { china_cities } from "@/stores/cities";
 const selectedLocation = ref("");
+const periods = ref(30);
 const locations = china_cities;
 </script>
+
+<style scoped>
+.slider-demo-block {
+  /* max-width: 600px; */
+  display: flex;
+  align-items: center;
+}
+/* .slider-demo-block .el-slider {
+  margin-top: 0;
+  margin-left: 12px;
+} */
+.demonstration {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  line-height: 44px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0;
+  margin-left: 20px;
+}
+.slider-demo-block .demonstration + .el-slider {
+  flex: 0 0 90%;
+}
+</style>
