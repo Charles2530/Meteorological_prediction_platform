@@ -10,6 +10,7 @@
 <script lang="ts" setup>
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
+import throttle from "lodash/throttle";
 const props = defineProps<{
   city: string;
   periods: number;
@@ -91,65 +92,87 @@ const AqiDataList = ref<aqiNode[]>([]);
 const PressureDataList = ref<pressureNode[]>([]);
 const PrecipDataList = ref<precipNode[]>([]);
 const WinSpeedDataList = ref<winSpeedNode[]>([]);
-const fetchCityTempChange = async () =>
-  get<TempChangeResponse>("/api/weather/temp/city_change/", {
-    city: props.city,
-    periods: props.periods,
-  }).then((res) => {
-    TempDataList.value.splice(0, TempDataList.value.length, ...res.data.data);
-  });
+const fetchCityTempChange = throttle(
+  async () =>
+    get<TempChangeResponse>("/api/weather/temp/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      TempDataList.value.splice(0, TempDataList.value.length, ...res.data.data);
+    }),
+  1000
+);
 
-const fetchCityHumidChange = async () =>
-  get<HumidChangeResponse>("/api/weather/humid/city_change/", {
-    city: props.city,
-    periods: props.periods,
-  }).then((res) => {
-    HumidDataList.value.splice(0, HumidDataList.value.length, ...res.data.data);
-  });
+const fetchCityHumidChange = throttle(
+  async () =>
+    get<HumidChangeResponse>("/api/weather/humid/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      HumidDataList.value.splice(
+        0,
+        HumidDataList.value.length,
+        ...res.data.data
+      );
+    }),
+  1000
+);
 
-const fetchCityAqiChange = async () =>
-  get<AqiChangeResponse>("/api/weather/aqi/city_change/", {
-    city: props.city,
-    periods: props.periods,
-  }).then((res) => {
-    AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
-  });
+const fetchCityAqiChange = throttle(
+  async () =>
+    get<AqiChangeResponse>("/api/weather/aqi/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
+    }),
+  1000
+);
 
-const fetchCityPressureChange = async () =>
-  get<PressureChangeResponse>("/api/weather/pressure/city_change/", {
-    city: props.city,
-    periods: props.periods,
-  }).then((res) => {
-    PressureDataList.value.splice(
-      0,
-      PressureDataList.value.length,
-      ...res.data.data
-    );
-  });
+const fetchCityPressureChange = throttle(
+  async () =>
+    get<PressureChangeResponse>("/api/weather/pressure/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      PressureDataList.value.splice(
+        0,
+        PressureDataList.value.length,
+        ...res.data.data
+      );
+    }),
+  1000
+);
 
-const fetchCityPrecipChange = async () =>
-  get<PrecipChangeResponse>("/api/weather/precip/city_change/", {
-    city: props.city,
-    periods: props.periods,
-  }).then((res) => {
-    PrecipDataList.value.splice(
-      0,
-      PrecipDataList.value.length,
-      ...res.data.data
-    );
-  });
+const fetchCityPrecipChange = throttle(
+  async () =>
+    get<PrecipChangeResponse>("/api/weather/precip/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      PrecipDataList.value.splice(
+        0,
+        PrecipDataList.value.length,
+        ...res.data.data
+      );
+    }),
+  1000
+);
 
-const fetchCityWinSpeedChange = async () =>
-  get<WinSpeedChangeResponse>("/api/weather/winSpeed/city_change/", {
-    city: props.city,
-    periods: props.periods,
-  }).then((res) => {
-    WinSpeedDataList.value.splice(
-      0,
-      WinSpeedDataList.value.length,
-      ...res.data.data
-    );
-  });
+const fetchCityWinSpeedChange = throttle(
+  async () =>
+    get<WinSpeedChangeResponse>("/api/weather/winSpeed/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      WinSpeedDataList.value.splice(
+        0,
+        WinSpeedDataList.value.length,
+        ...res.data.data
+      );
+    }),
+  1000
+);
 
 const renderChart = async (
   tempData: tempNode[],

@@ -416,7 +416,6 @@ function addWeather() {
   }
   weatherData.push({ ...newWeatherData });
   addDialogVisible.value = false;
-  console.log({ ...newWeatherData });
   post<addWeatherResponse>(
     "/api/manage/data/weather_add/",
     newWeatherData

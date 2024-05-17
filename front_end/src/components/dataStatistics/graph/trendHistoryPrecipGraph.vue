@@ -8,6 +8,7 @@
 <script lang="ts" setup>
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
+import throttle from "lodash/throttle";
 const props = defineProps<{
   city: string;
   periods: number;
@@ -40,14 +41,16 @@ onMounted(() =>
     renderChart_precip_history(AqiDataList.value);
   })
 );
-const fetchCityAqiChange = async () =>
-  get<PrecipChangeResponse>("/api/weather/precip/city_change/", {
-    city: props.city,
-    periods: props.periods,
-  }).then((res) => {
-    console.log(AqiDataList.value.length);
-    AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
-  });
+const fetchCityAqiChange = throttle(
+  async () =>
+    get<PrecipChangeResponse>("/api/weather/precip/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
+    }),
+  1000
+);
 let chartInstance_precip_history: echarts.ECharts | null = null;
 const renderChart_precip_history = async (tempData: precipNode[]) => {
   if (chartInstance_precip_history === null)

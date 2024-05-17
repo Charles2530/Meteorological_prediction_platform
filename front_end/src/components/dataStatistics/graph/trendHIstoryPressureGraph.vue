@@ -8,6 +8,7 @@
 <script lang="ts" setup>
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
+import throttle from "lodash/throttle";
 const props = defineProps<{
   city: string;
   periods: number;
@@ -40,13 +41,16 @@ onMounted(() =>
     renderChart_pressure_history(AqiDataList.value);
   })
 );
-const fetchCityAqiChange = async () =>
-  get<PressureChangeResponse>("/api/weather/pressure/city_change/", {
-    city: props.city,
-    periods: props.periods,
-  }).then((res) => {
-    AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
-  });
+const fetchCityAqiChange = throttle(
+  async () =>
+    get<PressureChangeResponse>("/api/weather/pressure/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
+    }),
+  1000
+);
 let chartInstance_pressure_history: echarts.ECharts | null = null;
 const renderChart_pressure_history = async (tempData: pressureNode[]) => {
   if (chartInstance_pressure_history === null)
