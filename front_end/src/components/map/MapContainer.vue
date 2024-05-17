@@ -22,40 +22,34 @@
       <br/>
       <br/>
       <div class="layerbtns">
-        <el-button :class="{ 'selected': buttonActive.a, 'unselected': !buttonActive.a }"  :active="buttonActive.a" @click="clicka">
+        <el-button width="600px" :class="{ 'selected': buttonActive.a, 'unselected': !buttonActive.a }"  :active="buttonActive.a" @click="clicka">
           <div class="btnDiv">
-            <div class="btnName">温度</div>
-            <div class="btnIcon1"></div>
+            <div class="btnName">气温</div>
+            <div class="btnIcona"></div>
           </div>
         </el-button>
         <el-button :class="{ 'selected': buttonActive.b, 'unselected': !buttonActive.b }"  :active="buttonActive.b" @click="clickb">
           <div class="btnDiv">
             <div class="btnName">降水</div>
-            <div class="btnIcon1"></div>
+            <div class="btnIconb"></div>
           </div>
         </el-button>
-        <el-button :class="{ 'selected': buttonActive.f, 'unselected': !buttonActive.f }"  :active="buttonActive.f" @click="clickf">
+        <el-button width="200px" :class="{ 'selected': buttonActive.f, 'unselected': !buttonActive.f }"  :active="buttonActive.f" @click="clickf">
           <div class="btnDiv">
             <div class="btnName">空气质量</div>
-            <div class="btnIcon2"></div>
+            <div class="btnIconf"></div>
           </div>
         </el-button>
         <el-button :class="{ 'selected': buttonActive.e, 'unselected': !buttonActive.e }"  :active="buttonActive.e" @click="clicke">
           <div class="btnDiv">
             <div class="btnName">灾害</div>
-            <div class="btnIcon2"></div>
+            <div class="btnIcone"></div>
           </div>
         </el-button>
         <el-button :class="{ 'selected': buttonActive.c, 'unselected': !buttonActive.c }"  :active="buttonActive.c" @click="clickc">
           <div class="btnDiv">
             <div class="btnName">风场</div>
-            <div class="btnIcon1"></div>
-          </div>
-        </el-button>
-        <el-button :class="{ 'selected': buttonActive.d, 'unselected': !buttonActive.d }"  :active="buttonActive.d" @click="clickd">
-          <div class="btnDiv">
-            <div class="btnName">地震</div>
-            <div class="btnIcon2"></div>
+            <div class="btnIcond"></div>
           </div>
         </el-button>
       </div>
@@ -1415,7 +1409,6 @@ function InitAqi() {
   justify-items: end;
   align-items: start;
   font-size: 6px;
-  width:100px;
 }
 
 .btnDiv {
@@ -1431,7 +1424,6 @@ function InitAqi() {
   border-radius: 30px;
   background-color: rgba(45,45,45,0.2);
   display: flex;
-  width: 90px;
   margin: 0.3em 0 0.3em 0.4em;
   position: relative;
 }
@@ -1442,7 +1434,6 @@ function InitAqi() {
   border-radius: 30px;
   background-color: rgba(45,45,45,0.2);
   display: flex;
-  width: 90px;
   margin: 0.3em 0 0.3em 0.4em;
   position: relative;
 }
@@ -1453,7 +1444,7 @@ function InitAqi() {
   border-radius: 30px;
   background-color: rgba(45,45,45,0.1);
   display: flex;
-  width: 90px;
+  width: 105px;
   margin: 0.3em 0 0.3em 0.4em;
   position: relative;
 }
@@ -1466,40 +1457,69 @@ function InitAqi() {
   /* background-color: rgba(8, 122, 0, 0.5); */
   background:linear-gradient(to right top, rgba(26, 79, 158, 0.5),rgb(243, 179, 179, 0.5));
   display: flex;
-  width: 90px;
+  width: 105px;
   margin: 0.3em 0 0.3em 0.4em;
   position: relative;
 }
 
-.btnIcon1 {
+.btnIcona {
   width: 2.4em;
   height: 2.4em;
   border-radius: 3em;
   box-shadow: 0 0 4px 0 black;
-  background-image: url("../../assets/img/wind.png");
+  background-image: url("../../assets/img/tem.png");
   background-size: 100% 100%;/*按比例缩放*/
-  z-index: 1;
-  text-align: center;
   position: absolute;
   right:0;
 }
 
-.btnIcon2 {
+.btnIconb {
+  width: 2.4em;
+  height: 2.4em;
+  border-radius: 3em;
+  box-shadow: 0 0 4px 0 black;
+  background-image: url("../../assets/img/water.png");
+  background-size: 100% 100%;/*按比例缩放*/
+  position: absolute;
+  right:0;
+}
+
+.btnIconf {
+  width: 2.4em;
+  height: 2.4em;
+  border-radius: 3em;
+  box-shadow: 0 0 4px 0 black;
+  background-image: url("../../assets/img/AQI.png");
+  background-size: 100% 100%;/*按比例缩放*/
+  position: absolute;
+  right:0;
+}
+
+.btnIcone {
   width: 2.4em;
   height: 2.4em;
   border-radius: 3em;
   box-shadow: 0 0 4px 0 black;
   background-image: url("../../assets/img/earthquake.png");
   background-size: 100% 100%;/*按比例缩放*/
-  z-index: 1;
-  text-align: center;
+  position: absolute;
+  right:0;
+}
+
+.btnIcond {
+  width: 2.4em;
+  height: 2.4em;
+  border-radius: 3em;
+  box-shadow: 0 0 4px 0 black;
+  background-image: url("../../assets/img/wind.png");
+  background-size: 100% 100%;/*按比例缩放*/
   position: absolute;
   right:0;
 }
 
 .btnName {
   position: absolute;
-  left: 15%;
+  left: 10%;
   color: black;
   font-weight: 600;
 }
@@ -1510,5 +1530,4 @@ function InitAqi() {
   color: black;
   font-weight: 600;
 }
-
 </style>
