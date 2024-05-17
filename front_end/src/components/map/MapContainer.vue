@@ -65,6 +65,7 @@ import { getAssetsFile } from '@/utils/pub-use'
 import AMapWind from "amap-wind";
 import { get } from "@/api/index";
 import { GeoJsonOri } from "@/types/weather";
+import { getAssetsFileAQI } from "@/utils/pub-use";
 
 // 设置安全密钥
 (window as any)._AMapSecurityConfig = {
@@ -92,50 +93,6 @@ const pos_info = reactive({
   },
 });
 
-//灾害标记信息
-let hazardMarkData = reactive([
-  {
-    place: '甘肃省 兰州市',
-    longitude: 114.344706,
-    latitude: 38.051262,
-    type: "地震",
-    time:'4月23日5:00',
-    level:'蓝',
-  },
-  {
-    place: '甘肃省 兰州市',
-    longitude: 103.343524,
-    latitude: 37.049604,
-    type: "大风",
-    time:'4月24日晚',
-    level:'红',
-  },
-  {
-    place: '甘肃省 兰州市',
-    longitude: 93.343524,
-    latitude: 33.049604,
-    type: "大风",
-    time:'4月24日晚',
-    level:'蓝',
-  },
-  {
-    place: '甘肃省 兰州市',
-    longitude: 110.343524,
-    latitude: 29.049604,
-    type: "大风",
-    time:'4月24日晚',
-    level:'红',
-  },
-  {
-    place: '甘肃省 兰州市',
-    longitude: 87.343524,
-    latitude: 35.049604,
-    type: "大风",
-    time:'4月24日晚',
-    level:'红',
-  }
-]);
-
 const buttonActive = reactive({
   A:false,
   B:true,
@@ -147,6 +104,8 @@ const buttonActive = reactive({
   e:false,
   f:false,
 });
+
+declare let Loca:any
 
 let map: {
 clearMap(): unknown;
@@ -183,23 +142,13 @@ let AAMap: {
   }) => any;
 } = null;
 
-declare let Loca:any
-
-let loca: {
-[x: string]: any;
-remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; 
+let loca: {[x: string]: any;remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; 
 }=null;
 
-let heatmapTem: {
-remove(): unknown;
-setLoca(loca: { remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }): unknown;
-destroy(): unknown; setSource: any; addAnimate: any; queryFeature?: any; setStyle?: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; 
+let heatmapTem: {remove(): unknown;setLoca(loca: { remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }): unknown;destroy(): unknown; setSource: any; addAnimate: any; queryFeature?: any; setStyle?: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; 
 } = null;
 
-let heatmapWater: {
-remove(): unknown;
-setLoca(loca: { remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }): unknown;
-destroy(): unknown; setSource: any; addAnimate: any; queryFeature?: any; setStyle?: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; 
+let heatmapWater: {remove(): unknown;setLoca(loca: { remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }): unknown;destroy(): unknown; setSource: any; addAnimate: any; queryFeature?: any; setStyle?: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; 
 } = null;
 
 let windLayer: AMapWind = null;
@@ -212,20 +161,11 @@ let wms: null = null;
 
 let sate: null = null;
 
-let layer: {
-remove(): unknown;
-queryFeature(arg0: any): unknown;
-show(): unknown;
-addAnimate(arg0: { key: string; value: number[]; easing: string; transform: number; random: boolean; delay: number; }): unknown;
-setStyle(arg0: { unit: string; icon: (index: any, feature: any) => any; iconSize: number[]; offset: number[]; rotation: number; }): unknown;
-setSource(geo: any): unknown; setLoca: (arg0: { [x: string]: any; remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }) => void; 
-}=null;
+let aqiLayer: {
+remove(): unknown;setSource: (arg0: any, arg1: {icon: { type: string; image: (_index: any, feature: { properties: { avg: any; mom: string | any[]; }; }) => string; size: number[]; anchor: string; }; text: {content: (_index: any, feature: { properties: { avg: any; mom: string | any[]; }; }) => string; style: { fontSize: number; fontWeight: string; fillColor: (_index: any, feature: { properties: { avg: any; mom: string | any[]; }; }) => string; strokeColor: string; strokeWidth: number; }; direction: string;}; extData: (_index: any, feat: { properties: any; }) => any;}) => void; setLoca: (arg0: { [x: string]: any; remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }) => void; on: (arg0: string, arg1: () => void) => void; getLabelsLayer: () => { (): any; new(): any; getAllOverlays: { (): any; new(): any; }; };
+} = null;
 
 let pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; } = null;
-
-// let dat: {
-// removeLayer(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; addLayer: (arg0: any, arg1: string) => void; 
-// } = null;
 
 // 使用defineEmits注册一个自定义事件
 const emit = defineEmits(["getValue"])
@@ -234,6 +174,11 @@ const emit = defineEmits(["getValue"])
 const transValue = () => {
   emit("getValue", pos_info.provinceName);
 }
+
+var geo = new Loca.GeoJSONSource({
+    url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/traffic.json',
+  });
+
 
 onMounted(() => {
   // getHazardInfo();
@@ -602,10 +547,10 @@ function clickf() {
     else if(buttonActive.b) clickb();
     else if(buttonActive.e) clicke();
     clickB();
-    layer.setLoca(loca);
+    aqiLayer.setLoca(loca);
   }
   else {
-    layer.remove();
+    aqiLayer.remove();
   }
 }
 
@@ -1339,57 +1284,66 @@ function getEventsCollection() {
     return data;
 }
 
-function InitAqi() {
-  var data = getEventsCollection();
-  var geo = new Loca.GeoJSONSource({
-      data: data,
+function InitAqi() { 
+  aqiLayer =  new Loca.LabelsLayer({
+    zindex:100,
   });
 
-  layer = new Loca.IconLayer({
-      zIndex: 15,
-      opacity: 1,
-  });
+  var colors=["#000000","#84c77e","#c0dd83","#f8ed84","#f3956e","#e65d5b"]
 
-  var trafficIcons = {
-      1: 'https://a.amap.com/Loca/static/loca-v2/demos/images/traffic-control.png',
-      2: 'https://a.amap.com/Loca/static/loca-v2/demos/images/jam.png',
-      3: 'https://a.amap.com/Loca/static/loca-v2/demos/images/construction.png',
-      4: 'https://a.amap.com/Loca/static/loca-v2/demos/images/close.png',
-      5: 'https://a.amap.com/Loca/static/loca-v2/demos/images/fog.png',
-      0: 'https://a.amap.com/Loca/static/loca-v2/demos/images/accident.png',
-  };
-  layer.setSource(geo);
-  layer.setStyle({
-      unit: 'px',
-      icon: (_index, feature) => {
-          let data = feature.properties.rawData;
-          let url = trafficIcons[data.type % Object.keys(trafficIcons).length];
-          return url;
-      },
-      iconSize: [40,40],
-      offset: [0, -40],
-      rotation: 0,
-  })
-                
+  aqiLayer.setSource(geo, {
+            icon: {
+                type: 'image',
+                image: function (_index: any, feature: { properties: { avg: any; mom: string | any[]; }; }) {
+                  var type:number = Math.floor(feature.properties.avg) % 5 + 1;
 
-  // 拾取测试
-  map.on('click', (e) => {
-      const feat = layer.queryFeature(e.pixel.toArray());
-      // console.log('feat', feat);
-      if (feat) {
-          layer.setStyle({
-              unit: 'px',
-              icon: (_index, feature) => {
-                  let data = feature.properties.rawData;
-                  let url = trafficIcons[data.type % Object.keys(trafficIcons).length];
-                  return url;
-              },
-              iconSize: (_i, feature) => {
-                  if (feature === feat) {
-                      return [60, 60];
-                  }
-                  return [40, 40];
-              },
+                    return getAssetsFileAQI(type + ".png");
+                    },
+                size: [30, 30],
+                anchor: 'center',
+            },
+            text: {
+                // 每项配置都可使用回调函数来动态配置
+                content: function (_index: any, feature: { properties: { avg: any; mom: string | any[]; }; }) {
+                    return "AQI:" + feature.properties.avg.toString();
+                    },
+                style: {
+                    fontSize: 14,
+                    fontWeight: 'normal',
+                    fillColor: function (_index: any, feature: { properties: { avg: any; mom: string | any[]; }; }) {
+                      var type:number = Math.floor(feature.properties.avg) % 5 + 1;
+                        return colors[type];
+                    },
+                    strokeColor: '#000',
+                    strokeWidth: 1,
+                },
+                direction: 'bottom',
+            },
+            extData: (_index: any, feat: { properties: any; }) => {
+                return feat.properties;
+            },
+        });
+  aqiLayer.on('complete', () => {
+      var normalMarker = new AAMap.Marker({
+          offset: [0, -30],
+          zindex:120,
+          size:[150,30]
+      });
+      var labelMarkers = aqiLayer.getLabelsLayer().getAllOverlays();
+      for (let marker of labelMarkers) {
+          marker.on('mouseover', (e: { data: { data: { position: any; }; }; }) => {
+              var position = e.data.data && e.data.data.position;
+
+              if (position) {
+                  normalMarker.setContent(
+                      '<div  style="background-color: aliceblue !important;">呼和浩特市<br/>空气质量：' + '严重污染' + '</div>',
+                  );
+                  normalMarker.setPosition(position);
+                  map.add(normalMarker);
+              }
+          });
+          marker.on('mouseout', () => {
+              map.remove(normalMarker);
           });
       }
   });
