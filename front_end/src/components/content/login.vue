@@ -314,6 +314,11 @@ const submitRegisterForm = (formEl: FormInstance | undefined) => {
               message: "注册成功",
               type: "success",
             });
+          } else {
+            ElMessage({
+              message: response.reason ?? "注册失败",
+              type: "error",
+            });
           }
         },
         (error) => {

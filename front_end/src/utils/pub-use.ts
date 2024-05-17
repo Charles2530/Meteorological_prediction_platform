@@ -10,19 +10,13 @@ export const getAssetsFileAQI = (url: string) => {
 export const getAssetsFile = (url: string) => {
   return new URL(`../assets/img/${url}`, import.meta.url).href;
 };
-// //echarts图片大小自适应
-// import * as echarts from "echarts";
-// import elementResizeDetectorMaker from "element-resize-detector";
-// export const drawLine = (id: any, option: any) => {
-//   const erd = elementResizeDetectorMaker();
-//   let myChart = echarts.getInstanceByDom(document.getElementById(id));
-//   if (myChart == null) {
-//     myChart = echarts.init(document.getElementById(id));
-//   }
-//   myChart.setOption(option);
-//   setTimeout(function () {
-//     erd.listenTo(document.getElementById(id), (element: any) => {
-//       myChart.resize();
-//     });
-//   }, 200);
-// };
+//防抖函数
+export const debounce = (func: Function, wait: number) => {
+  let timer: any;
+  return function (this: any, ...args: any[]) {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, wait);
+  };
+};

@@ -8,8 +8,10 @@
 <script lang="ts" setup>
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
+import throttle from "lodash/throttle";
 const props = defineProps<{
   city: string;
+  periods: number;
 }>();
 interface humidNode {
   time: string;
@@ -27,22 +29,34 @@ watch(
       renderChart_humid_history(AqiDataList.value);
     })
 );
+watch(
+  () => props.periods,
+  () =>
+    Promise.all([fetchCityAqiChange()]).then(() => {
+      renderChart_humid_history(AqiDataList.value);
+    })
+);
 onMounted(() =>
   Promise.all([fetchCityAqiChange()]).then(() => {
     renderChart_humid_history(AqiDataList.value);
   })
 );
-const fetchCityAqiChange = async () =>
-  get<HumidChangeResponse>("/api/weather/humid/city_change/", {
-    city: props.city,
-  }).then((res) => {
-    AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
-  });
+const fetchCityAqiChange = throttle(
+  async () =>
+    get<HumidChangeResponse>("/api/weather/humid/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
+    }),
+  1000
+);
 let chartInstance_humid_history: echarts.ECharts | null = null;
 const renderChart_humid_history = async (tempData: humidNode[]) => {
-  chartInstance_humid_history = echarts.init(
-    document.getElementById("chart_humid_graph") as HTMLDivElement
-  );
+  if (chartInstance_humid_history === null)
+    chartInstance_humid_history = echarts.init(
+      document.getElementById("chart_humid_graph") as HTMLDivElement
+    );
   let option = {
     backgroundColor: "#fefefe",
     title: [
@@ -62,6 +76,7 @@ const renderChart_humid_history = async (tempData: humidNode[]) => {
       },
       formatter: function (params: any) {
         let tooltipContent = "";
+        tooltipContent += `${params[0].axisValue}<br/>`;
         params.forEach(function (param: any) {
           let temp = param.value.toFixed(0);
           tooltipContent += `${param.marker} ${param.seriesName}: ${temp} %<br/>`;
@@ -94,20 +109,18 @@ const renderChart_humid_history = async (tempData: humidNode[]) => {
           return val / 5;
         },
         itemStyle: {
-          normal: {
-            color: function (params: any) {
-              if (params.data > 80) {
-                return "#ff0000";
-              } else if (params.data > 60) {
-                return "#ff9900";
-              } else if (params.data > 40) {
-                return "#ffff00";
-              } else if (params.data > 20) {
-                return "#009900";
-              } else {
-                return "#003fef";
-              }
-            },
+          color: function (params: any) {
+            if (params.data > 80) {
+              return "#ff0000";
+            } else if (params.data > 60) {
+              return "#ff9900";
+            } else if (params.data > 40) {
+              return "#ffff00";
+            } else if (params.data > 20) {
+              return "#009900";
+            } else {
+              return "#003fef";
+            }
           },
         },
         data: tempData.map((item) => item.humid),

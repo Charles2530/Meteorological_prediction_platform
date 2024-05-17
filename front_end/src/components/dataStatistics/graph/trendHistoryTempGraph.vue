@@ -8,8 +8,10 @@
 <script lang="ts" setup>
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
+import throttle from "lodash/throttle";
 const props = defineProps<{
   city: string;
+  periods: number;
 }>();
 interface tempNode {
   time: string;
@@ -29,22 +31,34 @@ watch(
       renderChart_temp_history(TempDataList.value);
     })
 );
+watch(
+  () => props.periods,
+  () =>
+    Promise.all([fetchCityTempChange()]).then(() => {
+      renderChart_temp_history(TempDataList.value);
+    })
+);
 onMounted(() =>
   Promise.all([fetchCityTempChange()]).then(() => {
     renderChart_temp_history(TempDataList.value);
   })
 );
-const fetchCityTempChange = async () =>
-  get<TempChangeResponse>("/api/weather/temp/city_change/details/", {
-    city: props.city,
-  }).then((res) => {
-    TempDataList.value.splice(0, TempDataList.value.length, ...res.data.data);
-  });
+const fetchCityTempChange = throttle(
+  async () =>
+    get<TempChangeResponse>("/api/weather/temp/city_change/details/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      TempDataList.value.splice(0, TempDataList.value.length, ...res.data.data);
+    }),
+  1000
+);
 let chartInstance_temp_history: echarts.ECharts | null = null;
 const renderChart_temp_history = async (tempData: tempNode[]) => {
-  chartInstance_temp_history = echarts.init(
-    document.getElementById("chart_temp_graph") as HTMLDivElement
-  );
+  if (chartInstance_temp_history === null)
+    chartInstance_temp_history = echarts.init(
+      document.getElementById("chart_temp_graph") as HTMLDivElement
+    );
   let option = {
     backgroundColor: "#fefefe",
     title: [
@@ -64,6 +78,7 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
       },
       formatter: function (params: any) {
         let tooltipContent = "";
+        tooltipContent += `${params[0].axisValue}<br/>`;
         params.forEach(function (param: any) {
           let temp = param.value.toFixed(0);
           tooltipContent += `${param.marker} ${param.seriesName}: ${temp} °C<br/>`;
@@ -95,12 +110,10 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
         showSymbol: true,
         symbolSize: 15,
         itemStyle: {
-          normal: {
-            color: "#f4e925",
-            lineStyle: {
-              width: 2,
-              type: "solid",
-            },
+          color: "#f4e925",
+          lineStyle: {
+            width: 2,
+            type: "solid",
           },
         },
         data: tempData.map((item) => item.temp),
@@ -110,22 +123,14 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
         type: "line",
         color: "#ff6347",
         smooth: true,
-        areaStyle: {
-          normal: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: "#ff6347" },
-              { offset: 1, color: "#ffcccb" },
-            ]),
-          },
+        itemStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: "#ff6347" },
+            { offset: 1, color: "#ffcccb" },
+          ]),
         },
         symbol: "triangle",
         symbolSize: 10,
-        itemStyle: {
-          normal: {
-            borderColor: "#ff6347",
-            borderWidth: 2,
-          },
-        },
         data: tempData.map((item) => item.maxTemp),
       },
       {
@@ -133,22 +138,14 @@ const renderChart_temp_history = async (tempData: tempNode[]) => {
         type: "line",
         color: "#4682b4",
         smooth: true,
-        areaStyle: {
-          normal: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: "#4682b4" },
-              { offset: 1, color: "#b0e2ff" },
-            ]),
-          },
+        itemStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: "#4682b4" },
+            { offset: 1, color: "#b0e2ff" },
+          ]),
         },
         symbol: "square",
         symbolSize: 10,
-        itemStyle: {
-          normal: {
-            borderColor: "#4682b4",
-            borderWidth: 2,
-          },
-        },
         data: tempData.map((item) => item.minTemp),
       },
     ],

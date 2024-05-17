@@ -4,12 +4,13 @@ from django.utils import timezone
 import json
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+from users.models import Profile
 from .models import Notification, WeatherForecast, CitySubscription
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import NotificationSerializer, CitySubscriptionSerializer, WeatherForecastSerializer
 from .task import fetch_catastrophic_forecast_cities_list, fetch_weather_catastrophic_forecast
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
@@ -65,12 +66,13 @@ def get_alarm_notice(request):
     }
     
     user = request.user
-    cities = CitySubscription.objects.filter(username=user.username)
+    profile = Profile.objects.get(username=user.username)
+    cities = CitySubscription.objects.filter(profile__in=profile)
     for forecast in locations:
         for city in cities:
-            if city.city_name in forecast.city:
+            if city.cityName in forecast.city:
                 forecast_json = {
-                    "id": forecast.id,
+                    # "id": forecast.id,
                     # TODO:change pic
                     # "img": "https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
                     "img": forecast.img,
@@ -92,15 +94,14 @@ def subscribe(request):
         try:
             data = json.loads(request.body)
             cities = data.get('cities')
-            # user = User.objects.filter(username=settings.CURRENT_UNAME).first()
             user = request.user
-            # return JsonResponse({'status': settings.CURRENT_UNAME, 'message': user}, status=400)
+            return JsonResponse({'status': True, 'username': user.username})
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
-
+            profile = Profile.objects.filter(username=user.username)
             city_obj, created = CitySubscription.objects.update_or_create(
-                user=user,
-                city_name=cities,
+                profile=profile,
+                cityName=cities,
             )
             city_obj.save()
 
@@ -115,10 +116,11 @@ def subscribe(request):
             "tableData": []
         }
         user = request.user
-        cities = CitySubscription.objects.filter(username=user.username)
+        profile = Profile.objects.filter(username=user.username)
+        cities = CitySubscription.objects.filter(profile__in=user) # TODO
         for city in cities:
             city_json = {
-                "city": city.city_name,
+                "city": city.cityName,
                 "status": "已订阅",
             }
             response_json['tableData'].append(city_json)
@@ -135,9 +137,9 @@ def get_brief(request):
     for forecast in locations:
         # forecast = fetch_weather_catastrophic_forecast(location=locationId)
         for city in cities:
-            if city.city_name in forecast.city:
+            if city.cityName in forecast.city:
                 forecast_json = {
-                    "id": forecast.id,
+                    # "id": forecast.id,
                     # TODO:change pic
                     "img": forecast.img,
                     "date": forecast.title,
@@ -175,7 +177,7 @@ def get_recent(request):
         # forecast = forecast["warning"]
         # return JsonResponse(forecast, status=400)
         forecast_json = {
-            "id": forecast.id,
+            # "id": forecast.id,
             # TODO:change pic
             "img": forecast.img,
             "title": forecast.title,

@@ -26,8 +26,8 @@ class DailyWeather(models.Model):
     id = models.AutoField(primary_key=True)
     city = models.CharField(max_length=50, default="北京市")
     fxDate = models.DateField(default=datetime.now)
-    # sunrise = models.DateTimeField(default=datetime.now)
-    # sunset = models.DateTimeField(default=datetime.now)
+    sunrise = models.DateTimeField(default=datetime.now)
+    sunset = models.DateTimeField(default=datetime.now)
     # moonrise = models.DateTimeField(default=datetime.now)
     # moonset = models.DateTimeField(default=datetime.now)
     # moonPhase = models.CharField(max_length=10, default="")
@@ -86,6 +86,7 @@ class Pro2City(models.Model):
 class City2CityId(models.Model):
     cityId = models.CharField(max_length=20, primary_key=True)
     cityName = models.CharField(max_length=40)
+    location = models.CharField(max_length=40, default="non_location_info")
 
 
 # TODO pro_geography data
@@ -132,3 +133,20 @@ class WeatherInfo(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['time', 'cityName'], name='unique_time_city')
         ]
+
+
+class LocationToInfo(models.Model):
+    lon = models.FloatField(default=0.0)
+    lat = models.FloatField(default=0.0)
+    location = models.CharField(max_length=40, default="", primary_key=True)
+    obsTime = models.CharField(max_length=40, default="")
+    temp = models.CharField(max_length=40, default="")
+    icon = models.CharField(max_length=40, default="")
+    text = models.CharField(max_length=40, default="")
+    wind360 = models.CharField(max_length=40, default="")
+    windDir = models.CharField(max_length=40, default="")
+    windScale = models.CharField(max_length=40, default="")
+    windSpeed = models.CharField(max_length=40, default="")
+    humidity = models.CharField(max_length=40, default="")
+    precip = models.CharField(max_length=40, default="")
+    pressure = models.CharField(max_length=40, default="")

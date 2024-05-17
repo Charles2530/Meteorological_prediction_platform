@@ -8,8 +8,10 @@
 <script lang="ts" setup>
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
+import throttle from "lodash/throttle";
 const props = defineProps<{
   city: string;
+  periods: number;
 }>();
 interface pressureNode {
   time: string;
@@ -27,22 +29,34 @@ watch(
       renderChart_pressure_history(AqiDataList.value);
     })
 );
+watch(
+  () => props.periods,
+  () =>
+    Promise.all([fetchCityAqiChange()]).then(() => {
+      renderChart_pressure_history(AqiDataList.value);
+    })
+);
 onMounted(() =>
   Promise.all([fetchCityAqiChange()]).then(() => {
     renderChart_pressure_history(AqiDataList.value);
   })
 );
-const fetchCityAqiChange = async () =>
-  get<PressureChangeResponse>("/api/weather/pressure/city_change/", {
-    city: props.city,
-  }).then((res) => {
-    AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
-  });
+const fetchCityAqiChange = throttle(
+  async () =>
+    get<PressureChangeResponse>("/api/weather/pressure/city_change/", {
+      city: props.city,
+      periods: props.periods,
+    }).then((res) => {
+      AqiDataList.value.splice(0, AqiDataList.value.length, ...res.data.data);
+    }),
+  1000
+);
 let chartInstance_pressure_history: echarts.ECharts | null = null;
 const renderChart_pressure_history = async (tempData: pressureNode[]) => {
-  chartInstance_pressure_history = echarts.init(
-    document.getElementById("chart_pressure_graph") as HTMLDivElement
-  );
+  if (chartInstance_pressure_history === null)
+    chartInstance_pressure_history = echarts.init(
+      document.getElementById("chart_pressure_graph") as HTMLDivElement
+    );
   let option = {
     backgroundColor: "#fefefe",
     title: [
@@ -62,6 +76,7 @@ const renderChart_pressure_history = async (tempData: pressureNode[]) => {
       },
       formatter: function (params: any) {
         let tooltipContent = "";
+        tooltipContent += `${params[0].axisValue}<br/>`;
         params.forEach(function (param: any) {
           let temp = param.value.toFixed(0);
           tooltipContent += `${param.marker} ${param.seriesName}: ${temp} hPa<br/>`;

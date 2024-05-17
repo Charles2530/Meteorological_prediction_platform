@@ -73,7 +73,7 @@ def my_login(request):
         # 登录失败
         return JsonResponse({
             "success": False,
-            "reason": "login.error.auth"
+            "reason": "login.error.auth, username=" + username + ", password=" + password
         }, status=401)
 
 
@@ -116,8 +116,7 @@ def my_register(request):
         }, status=400)
 
     # 创建用户
-    new_profile = Profile.objects.create(
-        username=username, password=password, email=email, role=role)
+    new_profile = Profile.objects.create_user(username=username, password=password, email=email, role=role)
     new_profile.save()
     # authenticate(username=username, password=password)
 
@@ -225,11 +224,18 @@ def delete_user(request):
     # 添加业务逻辑，例如根据uid获取用户信息等
     # 假设这里仅检查User模型中是否存在对应的uid
     try:
-        profile = Profile.objects.get(id=uid)
-        profile.delete()
-        # 如果用户存在，设置success为True
+        user = request.user
+        if uid == user.uid: # 删除当前用户，不允许
+            response_data = {
+                "success": False,
+                "reason": "Cannot delete current user"
+            }
+        else:
+            profile = Profile.objects.get(id=uid)
+            profile.delete()
+            # 如果用户存在，设置success为True
+            response_data = {"success": True}
 
-        response_data = {"success": True}
         return JsonResponse(response_data, status=200)  # 返回200成功响应
     except User.DoesNotExist:
         # 如果用户不存在，设置success为False
@@ -263,7 +269,6 @@ def user_authorization(request):
     # 假设我们只是简单地检查User模型中是否存在对应的uid和role
     try:
         # TODO:
-        # user = User.objects.get(id=uid, role=role)
         profile = Profile.objects.get(id=uid)
         profile.role = role
         profile.save()
@@ -369,10 +374,7 @@ def update_user_password(request):
     if not password or len(password) < 8:  # 假设密码至少8位
         return JsonResponse({"success": False, "reason": "manage.user.operate.password.format"}, status=400)
 
-    # 更新用户密码
-    # user_to_update.password = make_password(password)
-    profile_to_update.password = password
-    profile_to_update.save()
+    profile_to_update.set_password(password)
 
     # 操作成功，返回success为True
     return JsonResponse({"success": True}, status=200)
@@ -400,7 +402,9 @@ def delete_data(request):
         # 其他错误
         return JsonResponse({"success": False}, status=500)  # 返回500服务器错误
 
+
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@login_required
 def user_info(request):
     auth_header = request.META.get('HTTP_AUTHORIZATION','')
     if not auth_header:
@@ -418,10 +422,6 @@ def user_info(request):
     except Token.DoesNotExist:
         return JsonResponse({'reason': 'Token not valid or expired.'}, status=401)
 
-    # 验证邮箱格式
-    if not re.match(r"[^@]+@[^@]+\.[^@]+", user.email):
-        return JsonResponse({'reason': 'manage.user.operate.email.format'}, status=400)
-
     # 准备返回的用户信息
     user_info = {
         "username": user.username,
@@ -435,6 +435,7 @@ def user_info(request):
 
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@login_required
 @require_http_methods(["POST"])
 def update_current_user_password(request):
     # 获取Authorization头中的token和请求体中的oldPassword和newPassword
@@ -486,6 +487,7 @@ def update_current_user_password(request):
 
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@login_required
 @require_http_methods(["POST"])
 def update_current_user_email(request):
     # 获取Authorization头中的token和请求体中的邮箱
@@ -528,6 +530,43 @@ def update_current_user_email(request):
         }, status=500)
 
 
+@csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@login_required
+@require_http_methods(["POST"])
+def update_current_user_avatar(request):
+    # 获取Authorization头中的token和请求体中的oldPassword和newPassword
+    auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+    data = json.loads(request.body)
+    file = data.get('file')
+
+    # 验证Authorization头
+    if not auth_header:
+        return JsonResponse({
+            "success": False,
+            "reason": "Authorization header is missing"
+        }, status=401)
+
+    user = request.user
+
+    # 更新用户头像
+    try:
+        user.avatar = file  # 使用Django内置的密码散列
+        user.save()
+
+        # 返回成功响应
+        return JsonResponse({
+            "success": True,
+            "avatar": "http://dummyimage.com/100x100",
+            "reason": "elit"
+        })
+    except Exception as e:
+        # 处理其他可能的异常
+        return JsonResponse({
+            "success": False,
+            "reason": str(e),
+        }, status=500)
+
+
 @deconstructible
 class OverwriteStorage(object):
     def __call__(self, name):
@@ -536,6 +575,8 @@ class OverwriteStorage(object):
         return os.path.join(name)
 
 
+@csrf_exempt
+@login_required
 def upload_avatar(request):
     # 验证请求中是否包含文件
     if 'file' not in request.FILES:

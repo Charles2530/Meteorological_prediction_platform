@@ -49,8 +49,6 @@ const location1 = ref("");
 const location2 = ref("");
 const getNewCompare = async () =>
   Promise.all([getPresentCity1(), getPresentCity2()]).then(() => {
-    console.log(cityMessage1.value);
-    console.log(cityMessage2.value);
     renderChart(getValueList1(), getValueList2());
   });
 interface CityInfoResponse {
@@ -64,7 +62,6 @@ const getPresentCity1 = async () => {
   get<CityInfoResponse>("/api/getCityInfo/", {
     city: location1.value,
   }).then((res) => {
-    console.log(res.data.message);
     cityMessage1.value.time = res.data.message.time;
     cityMessage1.value.city = res.data.message.city;
     cityMessage1.value.temp = res.data.message.temp;
@@ -77,14 +74,12 @@ const getPresentCity1 = async () => {
     cityMessage1.value.pressure = res.data.message.pressure;
     cityMessage1.value.aqi = res.data.message.aqi;
     cityMessage1.value.category = res.data.message.category;
-    console.log("city1", cityMessage1.value);
   });
 };
 const getPresentCity2 = async () => {
   get<CityInfoResponse>("/api/getCityInfo/", {
     city: location2.value,
   }).then((res) => {
-    console.log(res.data.message);
     cityMessage2.value.time = res.data.message.time;
     cityMessage2.value.city = res.data.message.city;
     cityMessage2.value.temp = res.data.message.temp;
@@ -97,25 +92,22 @@ const getPresentCity2 = async () => {
     cityMessage2.value.pressure = res.data.message.pressure;
     cityMessage2.value.aqi = res.data.message.aqi;
     cityMessage2.value.category = res.data.message.category;
-    console.log("city2", cityMessage2.value);
   });
 };
 const locations = china_cities;
 const getKeyList = function () {
   let keyList: string[] = [];
   keyList.push("温度");
-  keyList.push("降水量");
+  keyList.push("降水");
   keyList.push("风速");
   keyList.push("风级");
   keyList.push("风速");
   keyList.push("湿度");
   keyList.push("气压");
   keyList.push("AQI");
-  console.log(keyList);
   return keyList;
 };
 const getValueList1 = function () {
-  console.log("get", cityMessage2);
   let valueList: any[] = [];
   let temp_json = {
     name: "温度",
@@ -165,11 +157,9 @@ const getValueList1 = function () {
   valueList.push(humidity_json);
   valueList.push(pressure_json);
   valueList.push(aqi_json);
-  console.log(valueList);
   return valueList;
 };
 const getValueList2 = function () {
-  console.log("get", cityMessage2);
   let valueList: any[] = [];
   let temp_json = {
     name: "温度",
@@ -219,12 +209,10 @@ const getValueList2 = function () {
   valueList.push(humidity_json);
   valueList.push(pressure_json);
   valueList.push(aqi_json);
-  console.log(valueList);
   return valueList;
 };
 onMounted(() =>
   Promise.all([getPresentCity1(), getPresentCity2()]).then(() => {
-    console.log(cityMessage1, cityMessage2);
     renderChart(getValueList1(), getValueList2());
   })
 );
@@ -251,7 +239,6 @@ const renderChart = async (data1: number[], data2: number[]) => {
       itemGap: 40,
       orient: "horizontal",
       icon: "circle",
-      data: ["城市A", "城市B"],
     },
     grid: [
       {

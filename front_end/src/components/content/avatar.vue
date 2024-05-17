@@ -30,10 +30,18 @@ const allowTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
 
 const beforeAvatarUpload: UploadProps["beforeUpload"] = (rawFile) => {
   if (!allowTypes.includes(rawFile.type)) {
-    ElMessage.error("头像格式限制: jpeg, jpg, png, gif");
+    ElMessage({
+      message: "头像格式限制: jpeg, jpg, png, gif",
+      type: "error",
+    });
+    // ElMessage.error("头像格式限制: jpeg, jpg, png, gif");
     return false;
   } else if (rawFile.size / 1024 / 1024 > 2) {
-    ElMessage.error("头像大小限制: 2M");
+    ElMessage({
+      message: "头像大小限制: 2M",
+      type: "error",
+    });
+    // ElMessage.error("头像大小限制: 2M");
     return false;
   }
   return true;
