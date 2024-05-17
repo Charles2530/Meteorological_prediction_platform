@@ -175,9 +175,7 @@ const transValue = () => {
   emit("getValue", pos_info.provinceName);
 }
 
-var geo = new Loca.GeoJSONSource({
-    url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/traffic.json',
-  });
+var geo = {};
 
 
 onMounted(() => {
@@ -258,6 +256,10 @@ function initMap() {
           "city-stroke": "rgba(255,255,255,0.5)", //中国特有字段
           fill: "",
         },
+      });
+
+      geo = new Loca.GeoJSONSource({
+        url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/traffic.json',
       });
      
       
