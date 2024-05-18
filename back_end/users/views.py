@@ -116,9 +116,10 @@ def my_register(request):
         }, status=400)
 
     # 创建用户
+    # new_profile = Profile.objects.create_user(username=username, password=password, email=email, role=role)
     new_profile = Profile.objects.create_user(username=username, password=password, email=email, role=role)
     new_profile.save()
-    # authenticate(username=username, password=password)
+    authenticate(username=username, password=password)
 
 
     # 准备返回的信息

@@ -95,7 +95,8 @@ def subscribe(request):
             data = json.loads(request.body)
             cities = data.get('cities')
             user = request.user
-            return JsonResponse({'status': True, 'username': user.username})
+            profile = Profile.objects.get(username=user.username)
+            return JsonResponse({'status': True, 'username': profile.username})
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
             profile = Profile.objects.filter(username=user.username)
