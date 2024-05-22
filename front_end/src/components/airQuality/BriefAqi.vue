@@ -155,12 +155,12 @@ const levels = [
 ];
 
 const qualityData = [
-  { pollutionType: 'SO2', qualityValue: 10 },
+  { pollutionType: 'PM10', qualityValue: 10 },
   { pollutionType: 'PM2.5', qualityValue: 20 },
+  { pollutionType: 'NO2', qualityValue: 10 },
   { pollutionType: 'SO2', qualityValue: 10 },
-  { pollutionType: 'SO2', qualityValue: 10 },
-  { pollutionType: 'SO2', qualityValue: 10 },
-  { pollutionType: 'SO2', qualityValue: 10 },
+  { pollutionType: 'O3', qualityValue: 10 },
+  { pollutionType: 'CO', qualityValue: 10 },
 
   // 其他污染类型及相应质量数值
 ]

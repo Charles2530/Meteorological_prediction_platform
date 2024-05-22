@@ -3,7 +3,7 @@
     <el-card style="width: 100%;">
       <div class="text-2xl">实况排行</div>
       <hr />
-      <el-tabs stretch v-model="activeName" class="" @tab-click="handleClick">
+      <el-tabs stretch v-model="activeName" class=" " @tab-click="handleClick">
         <el-tab-pane label="最高气温" name="first">
           <el-table :data="highestTempRankings" style="width: 100%">
             <el-table-column prop="no" label="排名" height="auto" width="70"/>
@@ -38,7 +38,7 @@
               <template #header>
                 <el-row>
                   <!-- <el-col :span="12"> -->
-                  空气质量&nbsp;&nbsp;
+                  空气质量&nbsp;
                   <!-- </el-col> -->
                   <!-- <span></span> -->
                   <!-- <el-col :span="12"> -->
