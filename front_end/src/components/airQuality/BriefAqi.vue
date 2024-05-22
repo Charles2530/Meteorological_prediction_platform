@@ -1,37 +1,71 @@
-<template>
+tion<template>
   <div class="air-quality-indicator">
-    <div class="location text-2xl">{{ cityMessage.city }}</div>
-    <div class="quality-circle">
-      <div class="quality-level text-gray-200">{{ cityMessage.aqi }}</div>
+    <div class="location text-2xl">
+      空气质量
     </div>
-
-    <el-tooltip effect="light">
-    <template #content>    
-       <el-row>
-        <el-col :span="24" class="rounded-lg shadow-md p-2" style="width: 40vh;">
-          <el-row :gutter="2">
-            <el-col :span="8">
-              <p class="text-xl text-center font-bold" :style="colorClass(levelInfo.color)">
-                {{ levelInfo.name }}
-              </p>
-              <p class="text-center text-xl">
-                {{ levelInfo.range }}
-              </p>
+    <!-- <div class="quality-circle">
+      <div class="quality-level text-gray-200">{{ cityMessage.aqi }}</div>
+    </div> -->
+    <!-- <el-card style="width: 100%;"> -->
+    <el-row style="width: 100%;">
+      <el-col :span="15">
+        <div id="chart_brief_aqi_bar" ref="chart_brief_aqi_bar" style="height: 250px;  width: 100%;  margin: 0 auto">
+        </div>
+      </el-col>
+      <el-col :span="9">
+        <div style="margin-top: 40%;">
+          <el-row v-for="(item, index) in qualityData" :key="index" >
+            <el-col :span="15">
+              <div>
+                {{ item.pollutionType }}
+              </div>
             </el-col>
-            <el-col :span="16">
-              <p class="text-center text-sm text-black">{{ levelInfo.description }}</p>
+            <el-col :span="7">
+              <div>{{ item.qualityValue }}</div>
             </el-col>
           </el-row>
-          <!-- </div> -->
+        </div>
+      </el-col>
+    </el-row>
+
+    <el-tooltip effect="light">
+      <template #content>
+        <el-row>
+          <el-col :span="24" class="rounded-lg shadow-md p-2" style="width: 40vh;">
+            <el-row :gutter="2">
+              <el-col :span="8">
+                <p class="text-xl text-center font-bold" :style="colorClass(levelInfo.color)">
+                  {{ levelInfo.name }}
+                </p>
+                <p class="text-center text-xl">
+                  {{ levelInfo.range }}
+                </p>
+              </el-col>
+              <el-col :span="16">
+                <p class="text-center text-sm text-black">{{ levelInfo.description }}</p>
+              </el-col>
+            </el-row>
+            <!-- </div> -->
+          </el-col>
+        </el-row>
+      </template>
+      <!-- <el-row>
+        <el-col :span="9"> -->
+      <el-button class="quality-description text-slate-600" style="border: none;">
+        {{ cityMessage.category }}
+      </el-button>
+      <!-- </el-col> -->
+      <!-- <el-col :span="15">
+          helo
         </el-col>
-      </el-row> 
-    </template>
-    <el-button class="quality-description text-slate-600 ml-2" style="margin-top: 10px;border: none;"> {{ cityMessage.category }}</el-button>
-  </el-tooltip>
+      </el-row> -->
+    </el-tooltip>
+    <!-- </el-card> -->
 
 
-  <!-- 下方显示提示信息 -->
-  <!-- <div @mouseover="showHover = true" @mouseout="showHover = false" class="quality-circle">
+
+    <!-- 下方显示提示信息 -->
+    <!-- <div @mouseover="showHover = true" @mouseout="showHover = false" class="quality-circle">
       <div class="quality-level text-gray-200">{{ cityMessage.aqi }}</div>
     </div> -->
     <!-- <div class="quality-description text-slate-600 ml-2">
@@ -62,9 +96,7 @@
 <script lang="ts" setup>
 import { get } from "@/api/index.ts";
 import { CityWeatherData } from "@/types/weather";
-onMounted(() => {
-  getPresentCityAqi();
-});
+
 interface CityInfoResponse {
   status: boolean;
   message: CityWeatherData;
@@ -121,6 +153,19 @@ const levels = [
       "健康人群运动耐受力降低，有明显强烈症状，提前采取措施保护健康。",
   },
 ];
+
+const qualityData = [
+  { pollutionType: 'SO2', qualityValue: 10 },
+  { pollutionType: 'PM2.5', qualityValue: 20 },
+  { pollutionType: 'SO2', qualityValue: 10 },
+  { pollutionType: 'SO2', qualityValue: 10 },
+  { pollutionType: 'SO2', qualityValue: 10 },
+  { pollutionType: 'SO2', qualityValue: 10 },
+
+  // 其他污染类型及相应质量数值
+]
+
+
 const colorClass = (color: string) => {
   return {
     color: color,
@@ -135,6 +180,256 @@ const levelInfo = computed(() => {
   return null; // 如果未找到匹配的等级，返回 null 或者其他适当的值
 });
 
+
+
+const selectedLocation = ref({})
+// echarts
+import * as echarts from "echarts";
+watch(selectedLocation, () => Promise.all([getPresentCityAqi()]).then(() => {
+  renderChart(
+    // realTimeWeatherList.value,
+  );
+}));
+// 初始化 ECharts 实例
+let chartInstance_history: echarts.ECharts | null = null;
+const renderChart = async (
+  // tempData: RealTimeWeather[]
+) => {
+  if (!chartInstance_history) {
+    const chartDom_history = document.getElementById("chart_brief_aqi_bar");
+    chartInstance_history = echarts.init(chartDom_history);
+  }
+  chartInstance_history.setOption({
+    series: [
+      {
+        type: 'gauge',
+        startAngle: -120,
+        endAngle: -60,
+        center: ['40%', '46%'],
+        radius: '60%',
+        min: 0,
+        max: 350,
+        splitNumber: 7,
+        axisLine: {
+          lineStyle: {
+            width: 17,
+            color: [
+              [1 / 7, 'green'],
+              [2 / 7, 'blue'],
+              [3 / 7, 'orange'],
+              [4 / 7, 'red'],
+              [6 / 7, 'purple'],
+              [1, 'brown']
+            ]
+            // color: [
+            //   [0.125, 'green'],
+            //   [0.25, 'blue'],
+            //   [0.375, 'orange'],
+            //   [0.5, 'red'],
+            //   [0.75, 'purple'],
+            //   [1, 'brown']
+            // ]
+          }
+        },
+        pointer: {
+          icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+          length: '60%',
+          width: 7,
+          offsetCenter: [0, '-0%'],
+          itemStyle: {
+            color: 'gray',
+          }
+        },
+        axisTick: {
+          length: 1,
+          lineStyle: {
+            color: 'auto',
+            width: 1
+          }
+        },
+        splitLine: {
+          length: 3,
+          lineStyle: {
+            color: 'auto',
+            width: 4
+          }
+        },
+        axisLabel: {
+          color: '#464646',
+          fontSize: 17,
+          distance: -45,
+          // rotate: 'tangential',
+          formatter: function (value) {
+            if (value === 0) {
+              return '0';
+            } else if (value === 350) {
+              return '350';
+            }
+
+            // if (value === 25) {
+            //   return '优';
+            // } else if (value === 75) {
+            //   return '良';
+            // } else if (value === 125) {
+            //   return '轻度污染';
+            // } else if (value === 175) {
+            //   return '中度污染';
+            // } else if (value === 250) {
+            //   return '重度污染';
+            // } else if (value === 350) {
+            //   return '严重污染';
+            // } 
+            return '';
+          }
+        },
+        title: {
+          offsetCenter: [0, '-10%'],
+          fontSize: 20
+        },
+        detail: {
+          fontSize: 30,
+          offsetCenter: [0, '-25%'],
+          valueAnimation: true,
+          formatter: function (value: number) {
+            return Math.round(value) + '';
+          },
+          color: 'inherit'
+        },
+        data: [
+          {
+            value: cityMessage.aqi,
+            name: ''
+          }
+        ]
+      }
+    ]
+  });
+};
+
+// onMounted(() => {
+//   getPresentCityAqi();
+// });
+onMounted(() => Promise.all([getPresentCityAqi()]).then(() => {
+  setTimeout(() => {
+    renderChart(
+      // realTimeWeatherList.value
+    );
+  }, 1000);
+  // renderChart(
+  //   realTimeWeatherList.value
+  // );
+  window.addEventListener("click", () => {
+    if (chartInstance_history) {
+      renderChart(
+        // realTimeWeatherList.value
+      );
+      chartInstance_history.resize();
+    }
+  });
+  window.addEventListener("resize", () => {
+    if (chartInstance_history) {
+      renderChart(
+        // realTimeWeatherList.value
+      );
+      chartInstance_history.resize();
+    }
+  });
+}));
+
+
+// option = {
+//   series: [
+//     {
+//       type: 'gauge',
+//       startAngle: -150,
+//       endAngle: -30,
+//       center: ['50%', '75%'],
+//       radius: '90%',
+//       min: 0,
+//       max: 400,
+//       splitNumber: 16,
+//       axisLine: {
+//         lineStyle: {
+//           width: 30,
+//           color: [
+//             [0.125, 'green'],
+//             [0.25, 'blue'],
+//             [0.375, 'orange'],
+//             [0.5, 'red'],
+//             [0.75, 'purple'],
+//             [1, 'brown']          
+//           ]
+//         }
+//       },
+//       pointer: {
+//         icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+//         length: '60%',
+//         width: 20,
+//         offsetCenter: [0, '-0%'],
+//         itemStyle: {
+//           color: 'auto',
+//         }
+//       },
+//       axisTick: {
+//         length: 3,
+//         lineStyle: {
+//           color: 'auto',
+//           width: 2
+//         }
+//       },
+//       splitLine: {
+//         length: 10,
+//         lineStyle: {
+//           color: 'auto',
+//           width: 5
+//         }
+//       },
+//       axisLabel: {
+//         color: '#464646',
+//         fontSize: 20,
+//         distance: -60,
+//         rotate: 'tangential',
+//          formatter: function (value) {
+//           if (value === 25) {
+//             return '优';
+//           } else if (value === 75) {
+//             return '良';
+//           } else if (value === 125) {
+//             return '轻度污染';
+//           } else if (value === 175) {
+//             return '中度污染';
+//           } else if (value === 250) {
+//             return '重度污染';
+//           } else if (value === 350) {
+//             return '严重污染';
+//           } 
+//           return '';
+//         }
+//       },
+//       title: {
+//         offsetCenter: [0, '-10%'],
+//         fontSize: 20
+//       },
+//       detail: {
+//         fontSize: 30,
+//         offsetCenter: [0, '-35%'],
+//         valueAnimation: true,
+//         formatter: function (value: number) {
+//           return Math.round(value) + '';
+//         },
+//         color: 'inherit'
+//       },
+//       data: [
+//         {
+//           value: 50,
+//           name: ''
+//         }
+//       ]
+//     }
+//   ]
+// };
+
+
 </script>
 <style>
 .air-quality-indicator {
@@ -145,7 +440,7 @@ const levelInfo = computed(() => {
 }
 
 .location {
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .quality-circle {
@@ -174,5 +469,19 @@ const levelInfo = computed(() => {
   font-size: 30px;
   font-weight: bold;
   z-index: 1;
+}
+
+
+.air-quality-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.air-quality-card {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 10px;
 }
 </style>
