@@ -2,16 +2,20 @@
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.core.paginator import Paginator
 from django.core.validators import validate_email
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from django.views.generic import DetailView
 
 # Django REST framework相关的导入
 from rest_framework import status, HTTP_HEADER_ENCODING
@@ -27,13 +31,27 @@ from .models import Profile
 # 其他Python标准库导入
 import json
 import os
-import re
 from datetime import datetime
+
+
+class UserProfileView(LoginRequiredMixin, DetailView):
+    model = Profile
+
+    def get_object(self, queryset=None) -> Model:
+        return self.request.user
 
 
 # Create your views here.
 def index(request):
     return HttpResponse("User Homepage")
+
+
+def validate_user_input(username, password, email, role):
+    if not username or not isinstance(username, str):
+        raise ValidationError("Invalid username format")
+    if not password or not isinstance(password, str):
+        raise ValidationError("Invalid password format")
+    # 其他验证逻辑...
 
 
 @csrf_exempt
@@ -42,39 +60,31 @@ def my_login(request):
     username = data.get('username')
     password = data.get('password')
 
-    # 验证用户名格式
-    if not username or not isinstance(username, str):
-        return JsonResponse({
-            "success": False,
-            "reason": "login.error.format"
-        }, status=400)
-
-    # 验证用户名和密码
-    profile = authenticate(username=username, password=password)
-
-    if profile is not None:
-        # 登录成功
-        login(request, profile)
-
-        info = {
-            "token": "aliqua commodo Lorem",
-            "userInfo": {
-                "username": profile.username,
-                "avatar": profile.avatar,
-                "role": profile.role,
-                "email": profile.email
+    try:
+        validate_user_input(username, password, None, None)
+        profile = authenticate(username=username, password=password)
+        if profile is not None:
+            login(request, profile)
+            info = {
+                "token": "aliqua commodo Lorem",
+                "userInfo": {
+                    "username": profile.username,
+                    "avatar": profile.avatar,
+                    "role": profile.role,
+                    "email": profile.email
+                }
             }
-        }
-        return JsonResponse({
-            "success": True,
-            "info": info
-        })
-    else:
-        # 登录失败
-        return JsonResponse({
+            return JsonResponse({
+                "success": True,
+                "info": info
+            })
+        else:
+            return JsonResponse({
             "success": False,
             "reason": "login.error.auth, username=" + username + ", password=" + password
         }, status=401)
+    except ValidationError as e:
+        return JsonResponse({"success": False, "reason": str(e)}, status=400)
 
 
 @csrf_exempt
@@ -94,7 +104,6 @@ def my_register(request):
             "success": False,
             "reason": "register.error.email"
         }, status=400)
-
     # 验证用户名和密码格式
     if not username or not isinstance(username, str):
         return JsonResponse({

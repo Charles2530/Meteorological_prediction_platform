@@ -2,7 +2,7 @@
 from django.db import models
 from datetime import datetime
 
-from users.models import Profile
+from customuser.models import Profile
 
 
 class Notification(models.Model):
