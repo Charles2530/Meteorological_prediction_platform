@@ -3,14 +3,15 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 import json
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
-from users.models import Profile
+from customuser.models import Profile
 from .models import Notification, WeatherForecast, CitySubscription
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import NotificationSerializer, CitySubscriptionSerializer, WeatherForecastSerializer
 from .task import fetch_catastrophic_forecast_cities_list, fetch_weather_catastrophic_forecast
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
@@ -65,9 +66,9 @@ def get_alarm_notice(request):
         "notifications": []
     }
     
-    profile = request.user
-    # profile = Profile.objects.get(username=user.username)
-    cities = CitySubscription.objects.filter(profile=profile)
+    user = request.user
+    profile = Profile.objects.get(username=user.username)
+    cities = CitySubscription.objects.filter(profile__in=profile)
     for forecast in locations:
         for city in cities:
             if city.cityName in forecast.city:
@@ -88,16 +89,16 @@ def get_alarm_notice(request):
     return JsonResponse(response_json, status=200)
 
 @csrf_exempt
-# @require_http_methods(['POST'])
+@require_http_methods(['GET', 'POST'])
+@login_required
 def subscribe(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
             cities = data.get('cities')
-            user = request.user
+            profile = request.user
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
-            profile = Profile.objects.filter(username=user.username)
             city_obj, created = CitySubscription.objects.update_or_create(
                 profile=profile,
                 cityName=cities,
@@ -114,9 +115,7 @@ def subscribe(request):
             "success": True,
             "tableData": []
         }
-        user = request.user
-        profile = Profile.objects.filter(username=user.username)
-        cities = CitySubscription.objects.filter(profile=user) # TODO
+        cities = CitySubscription.objects.filter(profile=request.user).values('cityName')
         for city in cities:
             city_json = {
                 "city": city.cityName,

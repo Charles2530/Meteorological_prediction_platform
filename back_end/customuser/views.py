@@ -2,16 +2,20 @@
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.core.paginator import Paginator
 from django.core.validators import validate_email
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from django.views.generic import DetailView
 
 # Django REST framework相关的导入
 from rest_framework import status, HTTP_HEADER_ENCODING
@@ -27,13 +31,27 @@ from .models import Profile
 # 其他Python标准库导入
 import json
 import os
-import re
 from datetime import datetime
+
+
+class UserProfileView(LoginRequiredMixin, DetailView):
+    model = Profile
+
+    def get_object(self, queryset=None) -> Model:
+        return self.request.user
 
 
 # Create your views here.
 def index(request):
     return HttpResponse("User Homepage")
+
+
+def validate_user_input(username, password, email, role):
+    if not username or not isinstance(username, str):
+        raise ValidationError("Invalid username format")
+    if not password or not isinstance(password, str):
+        raise ValidationError("Invalid password format")
+    # 其他验证逻辑...
 
 
 @csrf_exempt
@@ -42,39 +60,31 @@ def my_login(request):
     username = data.get('username')
     password = data.get('password')
 
-    # 验证用户名格式
-    if not username or not isinstance(username, str):
-        return JsonResponse({
-            "success": False,
-            "reason": "login.error.format"
-        }, status=400)
-
-    # 验证用户名和密码
-    profile = authenticate(username=username, password=password)
-
-    if profile is not None:
-        # 登录成功
-        login(request, profile)
-
-        info = {
-            "token": "aliqua commodo Lorem",
-            "userInfo": {
-                "username": profile.username,
-                "avatar": profile.avatar,
-                "role": profile.role,
-                "email": profile.email
+    try:
+        validate_user_input(username, password, None, None)
+        profile = authenticate(username=username, password=password)
+        if profile is not None:
+            login(request, profile)
+            info = {
+                "token": "aliqua commodo Lorem",
+                "userInfo": {
+                    "username": profile.username,
+                    "avatar": profile.avatar,
+                    "role": profile.role,
+                    "email": profile.email
+                }
             }
-        }
-        return JsonResponse({
-            "success": True,
-            "info": info
-        })
-    else:
-        # 登录失败
-        return JsonResponse({
+            return JsonResponse({
+                "success": True,
+                "info": info
+            })
+        else:
+            return JsonResponse({
             "success": False,
             "reason": "login.error.auth, username=" + username + ", password=" + password
         }, status=401)
+    except ValidationError as e:
+        return JsonResponse({"success": False, "reason": str(e)}, status=400)
 
 
 @csrf_exempt
@@ -94,7 +104,6 @@ def my_register(request):
             "success": False,
             "reason": "register.error.email"
         }, status=400)
-
     # 验证用户名和密码格式
     if not username or not isinstance(username, str):
         return JsonResponse({
@@ -116,9 +125,10 @@ def my_register(request):
         }, status=400)
 
     # 创建用户
+    # new_profile = Profile.objects.create_user(username=username, password=password, email=email, role=role)
     new_profile = Profile.objects.create_user(username=username, password=password, email=email, role=role)
     new_profile.save()
-    # authenticate(username=username, password=password)
+    authenticate(username=username, password=password)
 
 
     # 准备返回的信息
@@ -225,13 +235,17 @@ def delete_user(request):
     # 假设这里仅检查User模型中是否存在对应的uid
     try:
         user = request.user
-        if uid != user.uid: # 不能删除当前用户
-            # TODO 需要设置一个额外的返回
+        if uid == user.uid: # 删除当前用户，不允许
+            response_data = {
+                "success": False,
+                "reason": "Cannot delete current user"
+            }
+        else:
             profile = Profile.objects.get(id=uid)
             profile.delete()
             # 如果用户存在，设置success为True
+            response_data = {"success": True}
 
-        response_data = {"success": True}
         return JsonResponse(response_data, status=200)  # 返回200成功响应
     except User.DoesNotExist:
         # 如果用户不存在，设置success为False
@@ -548,8 +562,6 @@ def update_current_user_avatar(request):
     try:
         user.avatar = file  # 使用Django内置的密码散列
         user.save()
-        # 如果使用Django的session，更新session中的密码
-        # update_session_auth_hash(request, user)
 
         # 返回成功响应
         return JsonResponse({

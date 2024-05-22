@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto" style="max-height: 85vh; overflow-y: auto">
     <el-row :gutter="20">
-      <el-col :span="16"> <AirQualityAirQualityRankVM /> </el-col>
+      <el-col :span="16"> <CityRanking/> </el-col>
       <el-col :span="8">
         <el-card>
           <BriefAqi />
@@ -26,6 +26,7 @@
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
 import BriefAqi from "./BriefAqi.vue";
+import CityRanking from "@/components/weather_details/sub_components/CityRanking.vue";
 
 // 初始化 ECharts 实例
 let chartInstance: echarts.ECharts | null = null;

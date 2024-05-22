@@ -26,8 +26,8 @@ class DailyWeather(models.Model):
     id = models.AutoField(primary_key=True)
     city = models.CharField(max_length=50, default="北京市")
     fxDate = models.DateField(default=datetime.now)
-    # sunrise = models.DateTimeField(default=datetime.now)
-    # sunset = models.DateTimeField(default=datetime.now)
+    sunrise = models.CharField(max_length=40, default='')
+    sunset = models.CharField(max_length=40, default='')
     # moonrise = models.DateTimeField(default=datetime.now)
     # moonset = models.DateTimeField(default=datetime.now)
     # moonPhase = models.CharField(max_length=10, default="")
@@ -136,13 +136,13 @@ class WeatherInfo(models.Model):
 
 
 class LocationToInfo(models.Model):
-    lon = models.IntegerField(default=0)
-    lat = models.IntegerField(default=0)
+    lon = models.FloatField(default=0.0)
+    lat = models.FloatField(default=0.0)
     location = models.CharField(max_length=40, default="", primary_key=True)
     obsTime = models.CharField(max_length=40, default="")
     temp = models.CharField(max_length=40, default="")
     icon = models.CharField(max_length=40, default="")
-    text = models.CharField(max_length=40, default="")
+    text = models.IntegerField()
     wind360 = models.CharField(max_length=40, default="")
     windDir = models.CharField(max_length=40, default="")
     windScale = models.CharField(max_length=40, default="")
