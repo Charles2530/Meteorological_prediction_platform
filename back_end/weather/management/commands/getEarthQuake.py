@@ -8,11 +8,11 @@ from bs4 import BeautifulSoup
 class Command(BaseCommand):
     def add_arguments(self, parser):
         # Named (optional) arguments
-        parser.add_argument(
-            "--U",
-            action="store_true",
-            help="Refresh All CityInfo even existed already",
-        )
+        # parser.add_argument(
+            # "--U",
+            # action="store_true",
+            # help="Refresh All CityInfo even existed already",
+        # )
 
     def handle(self, *args, **kwargs):
         url = 'https://news.ceic.ac.cn/index.html'
