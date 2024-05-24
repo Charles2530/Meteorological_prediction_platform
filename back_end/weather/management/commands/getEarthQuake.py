@@ -13,6 +13,7 @@ class Command(BaseCommand):
             # action="store_true",
             # help="Refresh All CityInfo even existed already",
         # )
+        1
 
     def handle(self, *args, **kwargs):
         url = 'https://news.ceic.ac.cn/index.html'
@@ -35,4 +36,6 @@ class Command(BaseCommand):
             info = EarthQuakeInfo(level=level, time=time, lat=lat, lon=lon, depth=depth)
             info.save()
 
-        print(EarthQuakeInfo.objects.all())
+        # print(EarthQuakeInfo.objects.all()[0])
+        # tmp = EarthQuakeInfo.objects.all()[0]
+        # print(tmp.level, tmp.time, tmp.lat)
