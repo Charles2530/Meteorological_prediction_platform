@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 import csv
-from weather.models import EarthQuakeInfo
+from weather.models import EarthQuakeInfo, LocationToInfo
 from openpyxl import load_workbook
 import requests
 from bs4 import BeautifulSoup
@@ -15,6 +15,8 @@ class Command(BaseCommand):
         # )
         1
 
+    # EarthQuakeInfo.objects.all().delete()
+    # exit()
     def handle(self, *args, **kwargs):
         url = 'https://news.ceic.ac.cn/index.html'
 
@@ -24,6 +26,9 @@ class Command(BaseCommand):
         soup = BeautifulSoup(response.text, 'html.parser')
 
         ls = soup.find_all('td', {'align': 'center'})
+
+        # print(LocationToInfo.objects.all())
+
         for idx, it in enumerate(ls):
             if 'style' not in ls[idx].attrs or ls[idx]['style'] != 'padding-left: 20px':
                 continue
@@ -32,10 +37,9 @@ class Command(BaseCommand):
             lat = ls[idx + 2].text
             lon = ls[idx + 3].text
             depth = ls[idx + 4].text
-
-            info = EarthQuakeInfo(level=level, time=time, lat=lat, lon=lon, depth=depth)
+            key = time + ' ' + lat + ' ' + lon
+            # print(int(float(lat)), int(float(lon)))
+            info = EarthQuakeInfo(level=level, time=time, lat=lat, lon=lon, depth=depth, key=key)
             info.save()
 
-        # print(EarthQuakeInfo.objects.all()[0])
-        # tmp = EarthQuakeInfo.objects.all()[0]
-        # print(tmp.level, tmp.time, tmp.lat)
+        print(len(EarthQuakeInfo.objects.all()))

@@ -169,3 +169,5 @@ class EarthQuakeInfo(models.Model):
     lat = models.CharField(max_length=40, default="")
     lon = models.CharField(max_length=40, default="")
     depth = models.CharField(max_length=40, default="")
+    key = models.CharField(max_length=80, default="", primary_key=True)
+    location = models.CharField(max_length=40, default="")
