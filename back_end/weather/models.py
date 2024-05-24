@@ -162,3 +162,10 @@ class LocationToInfo(models.Model):
     humidity = models.CharField(max_length=40, default="")
     precip = models.CharField(max_length=40, default="")
     pressure = models.CharField(max_length=40, default="")
+
+class EarthQuakeInfo(models.Model):
+    level = models.CharField(max_length=40, default="")
+    time = models.CharField(max_length=40, default="")
+    lat = models.CharField(max_length=40, default="")
+    lon = models.CharField(max_length=40, default="")
+    depth = models.CharField(max_length=40, default="")
