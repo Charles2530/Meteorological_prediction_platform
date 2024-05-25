@@ -5,7 +5,7 @@
     <el-header class="no-padding">
       <TopBar />
     </el-header>
-    <el-main class="no-padding-main">
+    <el-main class="main-page">
       <router-view v-slot="{ Component }">
         <component :is="Component" />
       </router-view>
@@ -20,7 +20,6 @@
 <script setup lang="ts">
 const TopBar = defineAsyncComponent(() => import("@c/topBar/index.vue"));
 const Login = defineAsyncComponent(() => import("@c/content/login.vue"));
-const contentHeight = ref("calc(100vh - 60px)");
 const NavBar = defineAsyncComponent(() => import("@c/topBar/navBar.vue"));
 </script>
 
@@ -29,6 +28,12 @@ const NavBar = defineAsyncComponent(() => import("@c/topBar/navBar.vue"));
   display: flex;
   flex-direction: column;
   height: 100vh;
+}
+.main-page {
+  box-sizing: border-box;
+  height: calc(100vh - 92px);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .no-padding {
   padding: 0px;

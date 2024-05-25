@@ -11,6 +11,8 @@
     "dependencies": {
         "@amap/amap-jsapi-loader": "^1.0.1",
         "@element-plus/icons-vue": "^2.3.1",
+        "@nutui/icons-vue": "^0.1.1",
+        "@nutui/nutui": "^4.3.9",
         "@types/node": "^20.11.27",
         "amap-wind": "^1.2.4",
         "amfe-flexible": "^2.2.1",
@@ -26,6 +28,7 @@
         "unplugin-auto-import": "^0.17.5",
         "unplugin-icons": "^0.18.5",
         "unplugin-vue-components": "^0.26.0",
+        "vant": "^4.9.0",
         "vite-plugin-inspect": "^0.8.3",
         "vue": "^3.4.21",
         "vue-echarts": "^6.6.9",
