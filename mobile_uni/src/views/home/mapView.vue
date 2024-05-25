@@ -1,5 +1,5 @@
 <template>
   <div>
-    <h1>灾害订阅</h1>
+    <h1>地图</h1>
   </div>
 </template>
