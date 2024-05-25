@@ -3,7 +3,8 @@
     <div class="card-warp">
       <el-card class="box-card">
         <el-row>
-          <el-col :span="16">
+          <el-col :span="24">
+            <Avatar ref="uploadRef" />
             <el-descriptions :column="1">
               <el-descriptions-item>
                 <template #label>
@@ -65,23 +66,43 @@
               </el-descriptions-item>
             </el-descriptions>
           </el-col>
-          <el-col :span="8">
-            <!-- <el-avatar :size="100" :src="userInfo.avatar" /> -->
-            <Avatar ref="uploadRef" />
-          </el-col>
         </el-row>
         <el-divider />
-        <div>
-          <el-button type="primary" text bg @click="operateEmail = true">
+        <div class="button-container">
+          <el-button
+            type="primary"
+            text
+            sm
+            class="button-item"
+            @click="operateEmail = true"
+          >
             <el-icon class="ml-1 mr-3"><Message /></el-icon>更新邮箱
           </el-button>
-          <el-button type="primary" text bg @click="operateAvatar">
+          <el-button
+            type="primary"
+            text
+            sm
+            class="button-item"
+            @click="operateAvatar"
+          >
             <el-icon class="ml-1 mr-3"><User /></el-icon>更新头像
           </el-button>
-          <el-button type="danger" text bg @click="operatePassword = true">
+          <el-button
+            type="danger"
+            text
+            sm
+            class="button-item"
+            @click="operatePassword = true"
+          >
             <el-icon class="ml-1 mr-3"><Key /></el-icon>更新密码
           </el-button>
-          <el-button type="danger" text bg @click="userInfo.logout">
+          <el-button
+            type="danger"
+            text
+            sm
+            class="button-item"
+            @click="userInfo.logout"
+          >
             <el-icon class="ml-1 mr-3"><House /></el-icon>退出登录
           </el-button>
         </div>
@@ -318,5 +339,22 @@ const operateAvatar = () => {
 .box-card {
   width: 600px;
   text-align: center;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-item {
+  margin: 5px 0;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .button-item {
+    width: 90%;
+  }
 }
 </style>
