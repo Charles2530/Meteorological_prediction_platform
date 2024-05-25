@@ -25,7 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-hv3m*3m&*$-331tf!fx3-lwyems)z2=@c4-t9eot@!$z5(+u%#"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "114.116.201.133",
@@ -99,7 +100,8 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'customuser.Profile'
+# AUTH_USER_MODEL = 'customuser.Profile'
+CUSTOM_USER = False
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

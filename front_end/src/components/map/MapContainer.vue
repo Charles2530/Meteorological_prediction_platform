@@ -1,7 +1,6 @@
 <template>
   <div id="mapContainer">
-    <div class="input-card" style="position: relative; z-index: 100; top:30%; width: 100px;">
-      <!-- <input id='tipinput' type="text"> -->
+    <div class="input-card" style="position: relative; z-index: 100; top:25%; width: 100px;">
       <div class="layerbtns">
         <el-button :class="{ 'selected': buttonActive.A, 'unselected': !buttonActive.A }"  :active="buttonActive.A" @click="clickA">
           <div class="btnDiv">
@@ -22,6 +21,12 @@
       <br/>
       <br/>
       <div class="layerbtns">
+        <el-button :class="{ 'selected': buttonActive.d, 'unselected': !buttonActive.d }"  :active="buttonActive.d" @click="clickd">
+          <div class="btnDiv">
+            <div class="btnName">地理环境</div>
+            <div class="btnIcond"></div>
+          </div>
+        </el-button>
         <el-button width="600px" :class="{ 'selected': buttonActive.a, 'unselected': !buttonActive.a }"  :active="buttonActive.a" @click="clicka">
           <div class="btnDiv">
             <div class="btnName">气温</div>
@@ -49,7 +54,7 @@
         <el-button :class="{ 'selected': buttonActive.c, 'unselected': !buttonActive.c }"  :active="buttonActive.c" @click="clickc">
           <div class="btnDiv">
             <div class="btnName">风场</div>
-            <div class="btnIcond"></div>
+            <div class="btnIconc"></div>
           </div>
         </el-button>
       </div>
@@ -404,8 +409,8 @@ async function handlerMapClick() {
   map.on("click", (e: { lnglat: { lng: any; lat: any } }) => {
     // 点击坐标
     const markersPosition = [e.lnglat.lng, e.lnglat.lat];
-    pos_info.lng = markersPosition[0];
-    pos_info.lat = markersPosition[1];
+    pos_info.lng = markersPosition[0].toFixed(2);
+    pos_info.lat = markersPosition[1].toFixed(2);
     // 根据坐标获取位置信息
     pos_info.geoCoder.getAddress(
       markersPosition,
@@ -419,9 +424,9 @@ async function handlerMapClick() {
           pos_info.provinceCode = addressComponent.adcode.substr(0, 2) + "0000";
           if(pos_info.cityName != "") {
             if(pos_info.districtName != "") {
-              pos_info.name = '当前位置：' + pos_info.districtName + "/" + pos_info.cityName + "/" + pos_info.provinceName;
+              pos_info.name = '当前位置：' + pos_info.provinceName + "/" + pos_info.cityName + "/" + pos_info.districtName;
             } else {
-              pos_info.name = '当前位置：' + pos_info.cityName + "/" + pos_info.provinceName;
+              pos_info.name = '当前位置：' + pos_info.provinceCode + "/" + pos_info.cityName;
             }
           } else {
             pos_info.name = '当前位置：'+ pos_info.provinceName;
@@ -429,49 +434,7 @@ async function handlerMapClick() {
           // let cityId = parseInt(adcode.substr(0, 4) + '00')
           // let areaId = adcode
           if (pos_info.provinceCode != "100000") {  //国内各省，高亮区域并跟随中心
-            //标记弹出框基本信息
-            let content = [
-              `<div><b>${pos_info.name}</b>`,
-              `经度：${pos_info.lng}`,
-              `纬度：${pos_info.lat}`,
-            ];
-            if(buttonActive.B && !buttonActive.a && !buttonActive.b && !buttonActive.f && !buttonActive.c && !buttonActive.e) {  //地形图层
-              drawBounds(); 
-              await getProInfo();
-              content.push(`${pos_info.provinceName}地理概况：${pos_info.geoInfo}`);           
-                // 创建 infoWindow 实例	
-                // infoWindow.setContent(content.join('<br>'));
-                // let content2 = `<div class="a"><b>${pos_info.name}</b><br>经度：${pos_info.lng} <br> 纬度：${pos_info.lat} <br></div>`;
-                // infoWindow.setContent(content2);
-                // // 打开信息窗体
-                // let dd = map.getCenter()
-                // dd.lat = pos_info.lat
-                // dd.lng = pos_info.lng
-                // infoWindow.open(map, dd);
-            }
-            else {
-              await getPointInfo();
-                if(buttonActive.a) {
-                  content.push(`气温：${pos_info.weatherInfo.temp}℃`); 
-                }    
-                else if(buttonActive.b) {
-                  content.push(`降水：${pos_info.weatherInfo.precip}mm`); 
-                }    
-                else if(buttonActive.f) {
-                  content.push(`AQI：${pos_info.weatherInfo.aqi}`); 
-                }  
-                else if(buttonActive.c) {
-                  const wind = getWind(pos_info.lng, pos_info.lat);
-                  // content.push(`风场：u${wind.u},v${wind.v},speed${wind.speed}，angle${wind.angle}，direction${wind.direction}`); 
-                }     
-            }
-            content.push("</div>");
-            infoWindow.setContent(content.join('<br>'));
-            // 打开信息窗体
-            let dd = map.getCenter()
-            dd.lat = pos_info.lat
-            dd.lng = pos_info.lng
-            infoWindow.open(map, dd);
+            await showInfoWindow();
           } else {                                  //刚刚好是中国，取消高亮并重设中心
             pos_info.provinceName = "中国";
             map.remove(pos_info.polygons); //清除结果
@@ -493,12 +456,72 @@ async function handlerMapClick() {
   });
 }
 
-function clickA() {
-  if(infoWindow.getIsOpen()) infoWindow.close();
-  if(buttonActive.B) {
-    disProvince && disProvince.setMap(null);
-    draw_adcode = "100000";
+async function showInfoWindow() {
+  let content = [
+    `<div><span style="font-size: 13px;">${pos_info.lat}°N ${pos_info.lng}°E</span>`,
+  ];
+  
+  if(buttonActive.d) {  //地形图层
+    drawBounds(); 
+    await getProInfo();
+    content.push(
+      `<span style="font-size: 18px;"><b>${pos_info.name}</b></span>`,
+      `<span style="font-size: 14px;">${pos_info.provinceName}地理概况：${pos_info.geoInfo}</span>`,
+    );
+    content.push("</div>");
+    infoWindow.setContent(content.join('<br>'));
+    // 打开信息窗体
+    let dd = map.getCenter()
+    dd.lat = pos_info.lat
+    dd.lng = pos_info.lng
+    infoWindow.open(map, dd);
   }
+  else if(buttonActive.a || buttonActive.b|| buttonActive.f) {
+    await getPointInfo();
+    if(buttonActive.a) {
+      content.push(
+        `<span style="font-size: 24px;"><b>${pos_info.weatherInfo.temp}℃</b></span>`,
+        `<span style="font-size: 13px;">气温</span>`,
+      );
+    }    
+    else if(buttonActive.b) {
+      content.push(
+        `<span style="font-size: 24px;"><b>${pos_info.weatherInfo.precip}mm</b></span>`,
+        `<span style="font-size: 13px;">降水量</span>`,
+      );
+    }    
+    else if(buttonActive.f) {
+      content.push(
+        `<span style="font-size: 24px;"><b>${pos_info.weatherInfo.aqi}</b></span>`,
+        `<span style="font-size: 13px;">AQI</span>`,
+      );
+    }  
+    // else if(buttonActive.c) {
+      // const wind = getWind(pos_info.lng, pos_info.lat);
+      // content.push(`风场：u${wind.u},v${wind.v},speed${wind.speed}，angle${wind.angle}，direction${wind.direction}`); 
+    // }   
+    content.push("</div>");
+    infoWindow.setContent(content.join('<br>'));
+    // 打开信息窗体
+    let dd = map.getCenter()
+    dd.lat = pos_info.lat
+    dd.lng = pos_info.lng
+    infoWindow.open(map, dd);  
+  }
+}
+
+
+function clickA() {
+  // if(infoWindow.getIsOpen()) showInfoWindow();
+  // if(buttonActive.B) {
+  //   disProvince && disProvince.setMap(null);
+  //   draw_adcode = "100000";
+  // }
+  // buttonActive.A = true;
+  // buttonActive.B = false;
+  // buttonActive.C = false;
+  // map.remove(wms);
+  // map.remove(sate);
   buttonActive.A = true;
   buttonActive.B = false;
   buttonActive.C = false;
@@ -507,7 +530,6 @@ function clickA() {
 }
 
 function clickB() {
-  if(infoWindow.getIsOpen()) infoWindow.close();
   buttonActive.A = false;
   buttonActive.B = true;
   buttonActive.C = false;
@@ -516,11 +538,6 @@ function clickB() {
 }
 
 function clickC() {
-  if(infoWindow.getIsOpen()) infoWindow.close();
-  if(buttonActive.B) {
-    disProvince && disProvince.setMap(null);
-    draw_adcode = "100000";
-  }
   buttonActive.A = false;
   buttonActive.B = false;
   buttonActive.C = true;
@@ -529,17 +546,14 @@ function clickC() {
 }
 
 function clicka() {
-  if(infoWindow.getIsOpen()) infoWindow.close();
   buttonActive.a = !buttonActive.a;
   if (buttonActive.a) {
-    if(buttonActive.B) {
-      disProvince && disProvince.setMap(null);
-      draw_adcode = "100000";
-    };
     if(buttonActive.b) clickb();
     else if(buttonActive.c) clickc();
+    else if(buttonActive.d) clickd();
     else if(buttonActive.e) clicke();
     else if(buttonActive.f) clickf();
+    if(infoWindow.getIsOpen()) showInfoWindow();
     heatmapTem.setLoca(loca);
   }
   else {
@@ -548,17 +562,14 @@ function clicka() {
 }
 
 function clickb() {
-  if(infoWindow.getIsOpen()) infoWindow.close();
   buttonActive.b = !buttonActive.b;
   if (buttonActive.b) {
-    if(buttonActive.B) {
-      disProvince && disProvince.setMap(null);
-      draw_adcode = "100000";
-    }
     if(buttonActive.a) clicka();
     else if(buttonActive.c) clickc();
+    else if(buttonActive.d) clickd();
     else if(buttonActive.e) clicke();
     else if(buttonActive.f) clickf();
+    if(infoWindow.getIsOpen()) showInfoWindow();
     heatmapWater.setLoca(loca);
   }
   else {
@@ -567,17 +578,14 @@ function clickb() {
 }
 
 function clickc() {
-  if(infoWindow.getIsOpen()) infoWindow.close();
   buttonActive.c = !buttonActive.c;
   if (buttonActive.c) {
-    if(buttonActive.B) {
-      disProvince && disProvince.setMap(null);
-      draw_adcode = "100000";
-    }
-    if(buttonActive.a) clicka();
-    else if(buttonActive.b) clickb();
+    if(buttonActive.b) clickb();
+    else if(buttonActive.a) clicka();
+    else if(buttonActive.d) clickd();
     else if(buttonActive.e) clicke();
     else if(buttonActive.f) clickf();
+    if(infoWindow.getIsOpen()) infoWindow.close();
     showWind();
   }
   else {
@@ -585,18 +593,31 @@ function clickc() {
   }
 }
 
+function clickd() {
+  buttonActive.d = !buttonActive.d;
+  if (buttonActive.d) {
+    if(buttonActive.b) clickb();
+    else if(buttonActive.c) clickc();
+    else if(buttonActive.a) clicka();
+    else if(buttonActive.e) clicke();
+    else if(buttonActive.f) clickf();
+    if(infoWindow.getIsOpen()) showInfoWindow();
+  }
+  else {
+    disProvince && disProvince.setMap(null);
+    draw_adcode = "100000";
+  }
+}
+
 function clicke() {
-  if(infoWindow.getIsOpen()) infoWindow.close();
   buttonActive.e = !buttonActive.e;
   if (buttonActive.e) {
-    if(buttonActive.B) {
-      disProvince && disProvince.setMap(null);
-      draw_adcode = "100000";
-    }
-    if(buttonActive.a) clicka();
-    else if(buttonActive.b) clickb();
+    if(buttonActive.b) clickb();
     else if(buttonActive.c) clickc();
+    else if(buttonActive.d) clickd();
+    else if(buttonActive.a) clicka();
     else if(buttonActive.f) clickf();
+    if(infoWindow.getIsOpen()) infoWindow.close();
     scatter.setLoca(loca);
     breath.setLoca(loca);
     // loca.animate.start();
@@ -608,17 +629,14 @@ function clicke() {
 }
 
 function clickf() {
-  if(infoWindow.getIsOpen()) infoWindow.close();
   buttonActive.f = !buttonActive.f;
   if (buttonActive.f) {
-    if(buttonActive.B) {
-      disProvince && disProvince.setMap(null);
-      draw_adcode = "100000";
-    }
-    if(buttonActive.a) clicka();
-    else if(buttonActive.b) clickb();
+    if(buttonActive.b) clickb();
     else if(buttonActive.c) clickc();
+    else if(buttonActive.d) clickd();
     else if(buttonActive.e) clicke();
+    else if(buttonActive.a) clicka();
+    if(infoWindow.getIsOpen()) showInfoWindow();
     InitAqi();
     aqiLayer.setLoca(loca);
     // loca.add(aqiLayer);
@@ -971,31 +989,31 @@ function InitHazard() {
       loca.animate.start();
 
       // 拾取测试
-      map.on('mousemove', (e) => {
-        const feat = scatter.queryFeature(e.pixel.toArray());
-        if (feat) {
-          if(cur_feat==null || feat != cur_feat) {
-            if(feat != cur_feat) {
-              hazardMarker && hazardMarker.remove();
-              cur_feat = feat;
-            }
-            hazardMarker = new AAMap.Marker({
-              offset: [0, -50],
-              zindex:10,
-              size:[250,30]
-            });
-            hazardMarker.setContent(
-              '<div  style="background:linear-gradient(to right top, rgba(26, 79, 158, 0.9),rgb(243, 179, 179, 0.9)) !important;">' + '地点:' + feat.properties.place + '<br/>灾害类型:' + feat.type + '<br/>等级:' + feat.level + '</div>',
-            );
-            hazardMarker.setPosition(feat.coordinates);
-            map.add(hazardMarker);
-          }
-        }
-        else {
-          cur_feat = null;
-          hazardMarker && hazardMarker.remove();
-        }
-      });
+      // map.on('mousemove', (e) => {
+      //   const feat = scatter.queryFeature(e.pixel.toArray());
+      //   if (feat) {
+      //     if(cur_feat==null || feat != cur_feat) {
+      //       if(feat != cur_feat) {
+      //         hazardMarker && hazardMarker.remove();
+      //         cur_feat = feat;
+      //       }
+      //       hazardMarker = new AAMap.Marker({
+      //         offset: [0, -50],
+      //         zindex:10,
+      //         size:[250,30]
+      //       });
+      //       hazardMarker.setContent(
+      //         '<div  style="background:linear-gradient(to right top, rgba(26, 79, 158, 0.9),rgb(243, 179, 179, 0.9)) !important;">' + '地点:' + feat.properties.place + '<br/>灾害类型:' + feat.type + '<br/>等级:' + feat.level + '</div>',
+      //       );
+      //       hazardMarker.setPosition(feat.coordinates);
+      //       map.add(hazardMarker);
+      //     }
+      //   }
+      //   else {
+      //     cur_feat = null;
+      //     hazardMarker && hazardMarker.remove();
+      //   }
+      // });
 }
 
 //初始化空气质量图层
@@ -1038,29 +1056,29 @@ function InitAqi() {
                       return {type:type, adcode:feature.properties.adcode};
                     },
         });
-  aqiLayer.on('complete', () => {
-    var aqiMarker = new AAMap.Marker({
-          offset: [0, -35],
-          zindex:120,
-          size:[250,30]
-      });
-      var labelMarkers = aqiLayer.getLabelsLayer().getAllOverlays();
-      for (let marker of labelMarkers) {
-          marker.on('mouseover', (e: { data: { data: { position: any; }; }; }) => {
-              var position = e.data.data && e.data.data.position;
-              if (position) {
-                  aqiMarker.setContent(
-                      `<div  style="background:linear-gradient(to right top, rgba(26, 79, 158, 0.9),rgb(243, 179, 179, 0.9)) !important;">地点:${marker.getExtData().adcode}<br/>空气质量：${ranks[marker.getExtData().type]}</div>`,
-                  );
-                  aqiMarker.setPosition(position);
-                  map.add(aqiMarker);
-              }
-          });
-          marker.on('mouseout', () => {
-              map.remove(aqiMarker);
-          });
-      }
-  });
+  // aqiLayer.on('complete', () => {
+  //   var aqiMarker = new AAMap.Marker({
+  //         offset: [0, -35],
+  //         zindex:120,
+  //         size:[250,30]
+  //     });
+  //     var labelMarkers = aqiLayer.getLabelsLayer().getAllOverlays();
+  //     for (let marker of labelMarkers) {
+  //         marker.on('mouseover', (e: { data: { data: { position: any; }; }; }) => {
+  //             var position = e.data.data && e.data.data.position;
+  //             if (position) {
+  //                 aqiMarker.setContent(
+  //                     `<div  style="background:linear-gradient(to right top, rgba(26, 79, 158, 0.9),rgb(243, 179, 179, 0.9)) !important;">地点:${marker.getExtData().adcode}<br/>空气质量：${ranks[marker.getExtData().type]}</div>`,
+  //                 );
+  //                 aqiMarker.setPosition(position);
+  //                 map.add(aqiMarker);
+  //             }
+  //         });
+  //         marker.on('mouseout', () => {
+  //             map.remove(aqiMarker);
+  //         });
+  //     }
+  // });
 }
 </script>
 
@@ -1152,6 +1170,17 @@ function InitAqi() {
   right:0;
 }
 
+.btnIcond {
+  width: 2.4em;
+  height: 2.4em;
+  border-radius: 3em;
+  box-shadow: 0 0 4px 0 black;
+  background-image: url("../../assets/img/geo.png");
+  background-size: 100% 100%;/*按比例缩放*/
+  position: absolute;
+  right:0;
+}
+
 .btnIconf {
   width: 2.4em;
   height: 2.4em;
@@ -1174,7 +1203,7 @@ function InitAqi() {
   right:0;
 }
 
-.btnIcond {
+.btnIconc {
   width: 2.4em;
   height: 2.4em;
   border-radius: 3em;
@@ -1199,14 +1228,22 @@ function InitAqi() {
   font-weight: 600;
 }
 
-:deep(.amap-info-content) {
-    background:linear-gradient(to right top, rgba(26, 79, 158, 0.9),rgb(243, 179, 179, 0.9));
-    border: 1px solid #b9b9b9;
+
+:deep(.amap-info-outer) {
+    /* background:linear-gradient(to right top, rgba(26, 79, 158, 0.9),rgb(243, 179, 179, 0.9));
+    border: 1px solid #b9b9b9; */
+    border-radius: 10px;
+    /* box-shadow: 0 3px 14px rgba(0,0,0,0.4); */
+    padding: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    min-width: 180px;
 }
-:deep(.amap-info-sharp) {
+
+/* :deep(.amap-info-sharp) {
     border: 1px solid rgb(243, 179, 179, 0.6);
 }
 :deep(.amap-info-close) {
   color: rgb(61, 61, 61);
-}
+} */
 </style>
