@@ -5,7 +5,7 @@ import json
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
-from customuser.models import Profile
+# from customuser.models import Profile
 from .models import Notification, WeatherForecast, CitySubscription
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -67,8 +67,8 @@ def get_alarm_notice(request):
     }
     
     user = request.user
-    profile = Profile.objects.get(username=user.username)
-    cities = CitySubscription.objects.filter(profile__in=profile)
+    # profile = Profile.objects.get(username=user.username)
+    cities = CitySubscription.objects.filter(profile__in=user)
     for forecast in locations:
         for city in cities:
             if city.cityName in forecast.city:
