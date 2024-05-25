@@ -15,13 +15,17 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **kwargs):
+        # try:
+        #     f = open(r'/root/Meteorological_prediction_platform/back_end/China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
+        # except FileNotFoundError:
+        #     try:
+        #         f = open(r'D:\\Programing\\SoftwareEngineering\\Meteorological_prediction_platform\\back_end\\China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
+        #     except FileNotFoundError:
+        #         pass
         try:
             f = open(r'/root/Meteorological_prediction_platform/back_end/China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
         except FileNotFoundError:
-            try:
-                f = open(r'D:\\Programing\\SoftwareEngineering\\Meteorological_prediction_platform\\back_end\\China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
-            except FileNotFoundError:
-                pass
+            pass
         reader = csv.reader(f)
         cnt = 0
         capital = dict()

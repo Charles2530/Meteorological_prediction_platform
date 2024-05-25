@@ -1,7 +1,5 @@
 from django.urls import path
 from . import views
-# from django_cron import cron
-# from .views import RegisterView
 
 
 urlpatterns = [
