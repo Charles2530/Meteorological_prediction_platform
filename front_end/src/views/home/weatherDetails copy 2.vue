@@ -67,7 +67,7 @@ import { ref, onMounted } from 'vue';
 import RealTimeBroadcast from "@/components/weather_details/sub_components/RealTimeBroadcast.vue";
 import CurrentWeather from "@/components/weather_details/sub_components/CurrentWeather.vue";
 import CurrentWeatherRight from "@/components/weather_details/sub_components/CurrentWeatherRight.vue";
-import BriefAqi from '@/components/airQuality/BriefAqi.vue';
+import BriefAqi from '@/components/weather_details/sub_components/BriefAqi.vue';
 import CityRanking from '@/components/weather_details/sub_components/CityRanking.vue';
 const cityList = ref([])
 const city = ref({

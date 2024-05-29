@@ -88,7 +88,7 @@ interface RealTimeWeatherData {
 
 import { post, get } from "@/api/index.ts";
 const get_data = async () => {
-  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: city.value.name + city.value.adm2 }).then((res) => {
+  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: city}).then((res) => {
     realTimeWeatherList.value = res.data.realTimeWeatherList;
     if (realTimeWeatherList.value.length > 11) {
     realTimeWeatherList.value = realTimeWeatherList.value.slice(0, 11);
