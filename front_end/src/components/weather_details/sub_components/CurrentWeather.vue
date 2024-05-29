@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full font-semibold text-md flex-wrap text-white" >
+  <div class="w-full font-semibold text-md flex-wrap text-white">
     <div class="
         flex 
         flex-col 
@@ -12,7 +12,7 @@
         max-md:shadow-[0_10px_30px_-12px_rgba(7,89,133,0.45)]
       ">
       <!-- pc端的地区和时间 -->
-      <div class="flex flex-col max-md:hidden flex-1">
+      <div class="flex flex-col max-md:hidden" style="font-size: 20px;">
         <div class="flex">
           <div class="mr-10 flex items-center gap-2">
             <span>{{ `${city.adm2} ${city.name}` }}</span>
@@ -27,18 +27,22 @@
       <!-- pc端及移动端的天气图标及温度 -->
       <div class="
         flex
-        flex-1
         max-md:justify-between
         relative
-      ">
-        <div class="max-md:relative opacity-10">
-          <QWeatherIcon class="max-md:absolute " :icon="props.weather.icon" :size="300" :fill="true" />
+      " style="margin-top: 110px;">
+        <div class="max-md:relative opacity-30">
+          <!-- <QWeatherIcon class="max-md:absolute " :icon="props.weather.icon" :size="300" :fill="true" /> -->
+          <el-icon size="150" color="yellow">
+            <Sunny />
+          </el-icon>
         </div>
-        <div class="flex flex-col md:ml-10 ">
-          <span class="text-7xl bg-clip-text text-transparent bg-gradient-to-br from-white from-40% ...">{{
+        <div class="flex flex-col md:ml-10 " style="font-size: 30px;">
+
+          <span class="text-7xl bg-clip-text text-transparent bg-gradient-to-br from-white from-40% ..." style="margin-bottom: 20px;">{{
             `${weather.temp}°C` }}</span>
-          <span class="max-md:hidden">{{ weather.condition }}</span>
+          <span class="max-md:hidden">&nbsp;&nbsp;&nbsp;&nbsp;{{ weather.condition }}</span>
         </div>
+
       </div>
       <!-- 移动端的地区、状态、温度 -->
       <!-- <div class="md:hidden flex flex-col mt-3">
@@ -71,7 +75,7 @@ const props = defineProps({
   city: { type: Object },
   search: { type: Boolean }
 })
-let formattedDate= getDateToday()
+let formattedDate = getDateToday()
 // const emit = defineEmits(['searchShow'])
 
 const searchForPC = () => {

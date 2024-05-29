@@ -248,7 +248,7 @@ function object2Geojson2(data:Array<Hazard>) {
 }
 
 function getMapGeo() {
-  get("/api/vis/getVisData").then((res) => {
+  get("/api/vis/getVisData/").then((res) => {
     geo = new Loca.GeoJSONSource({
       data:object2Geojson(<Array<MapGeo>>res.data),
     });
@@ -259,7 +259,7 @@ function getMapGeo() {
 }
 
 async function getPointInfo() {
-  await get<Point>("/api/vis/getPointInfo", { LON: pos_info.lng, LAT: pos_info.lat}).then((res) => {
+  await get<Point>("/api/vis/getPointInfo/", { LON: pos_info.lng, LAT: pos_info.lat}).then((res) => {
     pos_info.weatherInfo = res.data;
   });
 }
@@ -456,7 +456,7 @@ async function handlerMapClick() {
 
 async function showInfoWindow() {
   let content = [
-    `<div style="line-height: 0.5em;"><span style="font-size: 0.6em;">${pos_info.lat}°N ${pos_info.lng}°E</span>`,
+    `<div style="line-height: 0.5em;font-size:16px"><span style="font-size: 0.6em;">${pos_info.lat}°N ${pos_info.lng}°E</span>`,
   ];
   
   if(buttonActive.d) {  //地形图层
