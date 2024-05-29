@@ -35,6 +35,8 @@ declare module 'vue' {
     ElTag: typeof import('element-plus/es')['ElTag']
     ElText: typeof import('element-plus/es')['ElText']
     ElUpload: typeof import('element-plus/es')['ElUpload']
+    MapInfoColumn: typeof import('./components/map/InfoColumn.vue')['default']
+    MapMapContainer: typeof import('./components/map/MapContainer.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TopBar: typeof import('./components/topBar/index.vue')['default']
