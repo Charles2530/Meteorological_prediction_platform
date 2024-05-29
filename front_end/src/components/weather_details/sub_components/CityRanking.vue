@@ -3,10 +3,10 @@
     <el-card style="width: 100%;">
       <div class="text-2xl">实况排行</div>
       <hr />
-      <el-tabs stretch v-model="activeName" class="" @tab-click="handleClick">
+      <el-tabs stretch v-model="activeName" class=" " @tab-click="handleClick">
         <el-tab-pane label="最高气温" name="first">
           <el-table :data="highestTempRankings" style="width: 100%">
-            <el-table-column prop="no" label="排名" height="auto" />
+            <el-table-column prop="no" label="排名" height="auto" width="70"/>
             <el-table-column prop="city" label="城市" />
             <el-table-column prop="province" label="所在省份" />
             <el-table-column prop="item" label="最高气温" />
@@ -14,26 +14,39 @@
         </el-tab-pane>
         <el-tab-pane label="最低气温" name="second">
           <el-table :data="lowestTempRankings" style="width: 100%">
-            <el-table-column prop="no" label="排名" height="auto" />
+            <el-table-column prop="no" label="排名" height="auto" width="70"/>
             <el-table-column prop="city" label="城市" />
             <el-table-column prop="province" label="所在省份" />
-            <el-table-column prop="item" label="最高气温" />
+            <el-table-column prop="item" label="最低气温" />
           </el-table>
         </el-tab-pane>
         <el-tab-pane label="24小时降水量" name="third">
           <el-table :data="precipRankings" style="width: 100%">
-            <el-table-column prop="no" label="排名" height="auto" />
+            <el-table-column prop="no" label="排名" height="auto"  width="70"/>
             <el-table-column prop="city" label="城市" />
             <el-table-column prop="province" label="所在省份" />
-            <el-table-column prop="item" label="最高气温" />
+            <el-table-column prop="item" label="24小时降水量" />
           </el-table>
         </el-tab-pane>
         <el-tab-pane label="空气质量" name="fourth">
-          <el-table :data="bestCityAqiRankings" style="width: 100%">
-            <el-table-column prop="no" label="排名" height="auto" />
+          <el-table :data="cityAqiRankings" style="width: 100%">
+            <el-table-column prop="no" label="排名" height="auto" width="70"/>
             <el-table-column prop="city" label="城市" />
             <el-table-column prop="province" label="所在省份" />
-            <el-table-column prop="item" label="最高气温" />
+            <!-- <el-table-column prop="item" label="空气质量" /> -->
+            <el-table-column prop="item" label="空气质量">
+              <template #header>
+                <el-row>
+                  <!-- <el-col :span="12"> -->
+                  空气质量&nbsp;
+                  <!-- </el-col> -->
+                  <!-- <span></span> -->
+                  <!-- <el-col :span="12"> -->
+                  <el-button size="small" type="" :icon="cityAqiIcon" @click="changeAqiOrder()" style="padding: 5px;" />
+                  <!-- </el-col> -->
+                </el-row>
+              </template>
+            </el-table-column>
           </el-table>
         </el-tab-pane>
       </el-tabs>
@@ -69,6 +82,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import type { RateInstance, TabsPaneContext } from 'element-plus'
+import { CaretTop, CaretBottom } from '@element-plus/icons-vue'
+
 
 const activeName = ref('first')
 
@@ -86,6 +101,8 @@ import { get } from "@/api/index.ts";
 import QualityRanking from "./QualityRanking.vue";
 onMounted(() => {
   getCityRankings();
+  cityAqiRankings.value = bestCityAqiRankings;
+
 });
 interface CityRankItem {
   city: string;
@@ -107,6 +124,16 @@ const lowestTempRankings = reactive<CityRankItem[]>([]);
 const precipRankings = reactive<CityRankItem[]>([]);
 const bestCityAqiRankings = reactive<CityRankItem[]>([]);
 const worstCityAqiRankings = reactive<CityRankItem[]>([]);
+const showBestAqi = ref(true);
+const cityAqiRankings = computed(() => {
+  return showBestAqi.value ? bestCityAqiRankings : worstCityAqiRankings;
+});
+const cityAqiIcon = computed(() => {
+  return showBestAqi.value ? 'CaretTop' : 'CaretBottom';
+});
+// const cityAqiButton = computed(() => {
+//   return showBestAqi.value ? '最好' : '最差';
+// });
 const getCityRankings = async () => {
   get<GetCityResponse>("/api/weather/city_rank/").then((res) => {
     bestCityAqiRankings.splice(
@@ -133,6 +160,11 @@ const getCityRankings = async () => {
   });
 };
 
+const changeAqiOrder = () => {
+  showBestAqi.value = !showBestAqi.value;
+}
+
+bestCityAqiRankings
 
 // 排行榜部分
 const Match = ref(true);

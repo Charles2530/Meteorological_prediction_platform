@@ -4,10 +4,10 @@
       <el-card class="box-card">
         <el-row>
           <el-col :span="16">
-            <el-descriptions :column="1">
+            <el-descriptions :column="1" border>
               <el-descriptions-item>
                 <template #label>
-                  <el-text>
+                  <el-text type="primary">
                     <el-icon><User /></el-icon>
                     用户名
                   </el-text>
@@ -18,7 +18,7 @@
               </el-descriptions-item>
               <el-descriptions-item>
                 <template #label>
-                  <el-text>
+                  <el-text type="primary">
                     <el-icon><Message /></el-icon>
                     邮箱
                   </el-text>
@@ -29,7 +29,7 @@
               </el-descriptions-item>
               <el-descriptions-item>
                 <template #label>
-                  <el-text>
+                  <el-text type="primary">
                     <el-icon><Key /></el-icon>
                     身份
                   </el-text>
@@ -47,7 +47,7 @@
               <!-- 订阅城市 -->
               <el-descriptions-item>
                 <template #label>
-                  <el-text>
+                  <el-text type="primary">
                     <el-icon><Location /></el-icon>
                     订阅城市
                   </el-text>

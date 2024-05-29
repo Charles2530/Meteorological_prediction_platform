@@ -51,7 +51,7 @@
                 </el-row>
                 <el-row :gutter="2">
                   <el-col :span="12">
-                    <el-card>
+                    <el-card class="mt-3">
                       <trendHistoryHumidGraph
                         :city="selectedLocation"
                         :periods="periods"
@@ -59,7 +59,7 @@
                     </el-card>
                   </el-col>
                   <el-col :span="12">
-                    <el-card>
+                    <el-card class="mt-3">
                       <trendHistoryPrecipGraph
                         :city="selectedLocation"
                         :periods="periods"
@@ -85,6 +85,9 @@
               <el-card>
                 <compareGraph />
               </el-card>
+              <el-card>
+                <aiTemperGraph />
+              </el-card>
               <el-card class="mt-2">
                 <WeatherDataRankVM />
               </el-card>
@@ -106,6 +109,7 @@ import trendHistoryPrecipGraph from "@/components/dataStatistics/graph/trendHist
 import compareGraph from "@/components/dataStatistics/compareGraph.vue";
 import WeatherDataRankVM from "@c/dataStatistics/rank/WeatherDataRankVM.vue";
 import { china_cities } from "@/stores/cities";
+import aiTemperGraph from "@c/dataStatistics/graph/aiTemperGraph.vue";
 const selectedLocation = ref("");
 const periods = ref(30);
 const locations = china_cities;
