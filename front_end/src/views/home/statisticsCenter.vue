@@ -51,7 +51,7 @@
                 </el-row>
                 <el-row :gutter="2">
                   <el-col :span="12">
-                    <el-card>
+                    <el-card class="mt-3">
                       <trendHistoryHumidGraph
                         :city="selectedLocation"
                         :periods="periods"
@@ -59,7 +59,7 @@
                     </el-card>
                   </el-col>
                   <el-col :span="12">
-                    <el-card>
+                    <el-card class="mt-3">
                       <trendHistoryPrecipGraph
                         :city="selectedLocation"
                         :periods="periods"
