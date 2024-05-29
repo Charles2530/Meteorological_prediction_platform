@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 
 import pytz
 import requests
+from customuser.models import UserCurrentCity
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -21,8 +22,6 @@ pri_key = "d4c9c9bc145748e48405c44277be0745"
 
 
 # Create your views here.
-
-
 class HourlyWeatherView(APIView):
     def get(self, request, format=None):
         hourly_weather = HourlyWeather.objects.all()
@@ -99,10 +98,6 @@ def overview(request):
     return JsonResponse(response_json, status=200)
 
 
-def thirty_days_forecast(request):
-    return HttpResponse("This is the 30 days forecast page!")
-
-
 @require_http_methods(['GET'])
 def realtime(request):
     # query realtime weather data
@@ -145,8 +140,8 @@ def subscribed_cities_summary(request):
 @require_http_methods(['GET'])
 def aqi_detail(request):
     city_dict = request.get('city')
-    name = city.get('name')
-    adm2 = city.get('adm2')
+    name = city_dict.get('name')
+    adm2 = city_dict.get('adm2')
     aqi_info = RealtimeAirQuality.objects.get(cityName='北京市')  # TODO
     response_json = {
         "aqi": aqi_info.aqi,
@@ -295,6 +290,28 @@ def temp_city_change(request):
             {
                 "time": info.fxDate,
                 "temp": info.tempMax,
+            }
+            for info in all_info
+        ]
+    }
+    return JsonResponse(response_json, status=200)
+
+
+def temp_city_change_detail(request):
+    data = json.load(request.body)
+    city = data["city"]
+    period = data['periods']
+    length = min(period, len(DailyWeather.objects.all()))
+    all_info = DailyWeather.objects.filter(
+        city=city).order_by('-fxDate')[:length]
+    response_json = {
+        "status": True,
+        "data": [
+            {
+                "time": info.fxDate,
+                "temp": str((float(info.tempMax) + float(info.tempMin)) / 2),
+                "maxTemp": info.tempMax,
+                "minTemp": info.tempMin
             }
             for info in all_info
         ]
@@ -480,22 +497,92 @@ def getProInfo(request):
     return JsonResponse(retList, status=200)
 
 
-# TODO
 @csrf_exempt
 @require_http_methods(['GET'])
-def getHazard(request: HttpRequest):
-    # assert request.method == 'GET'
-    return JsonResponse({"status": True, "hazardTable": []}, status=200)
+def get_hazard(request: HttpRequest):
+    all_info = DailyWeather.objects.all()
+    response_json = {
+        {
+            "place": info.cityName,
+            "longitude": info.location.split(',')[0].trim(),
+            "latitude": info.location.split(',')[1].trim(),
+            "type": info.typeName,
+            "time": '',  # TODO fix date str time
+            "winSpeed": info.winSpeed,
+        }
+        for info in all_info
+    }
+    return JsonResponse(response_json, status=200)
 
 
 @csrf_exempt
 @require_http_methods(['GET'])
-def getCityInfo(request: HttpRequest):
-    # assert request.method == 'GET'
+def get_top_hazard(request: HttpRequest):
+    all_info = DailyWeather.objects.filter(severity='Severe' or 'Extreme').order_by('-time')
+    response_json = {
+        {
+            "place": info.cityName,
+            "longitude": info.location.split(',')[0].trim(),
+            "latitude": info.location.split(',')[1].trim(),
+            "type": info.typeName,
+            "time": '',  # TODO fix date strtime
+            "winSpeed": info.winSpeed,
+        }
+        for info in all_info
+    }
+    return JsonResponse(response_json, status=200)
+
+
+@csrf_exempt
+@require_http_methods(['GET'])
+def get_city_info(request: HttpRequest):
     city = request.GET.get("city")
     # TODO to remove
-    city = "北京市"
-    cityId = City2CityId.objects.get(cityName=city).cityId
+    cityId = City2CityId.objects.get(cityName='北京市').cityId
+    # use API to get weather and air
+    # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
+    # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
+    weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
+        'key': pri_key,
+        'location': cityId,
+    })
+    air = requests.get('https://devapi.qweather.com/v7/air/now', params={
+        'key': pri_key,
+        'location': cityId,
+    })
+
+    weather = json.loads(weather.content.decode('utf-8'))
+    air = json.loads(air.content.decode('utf-8'))
+
+    date_time = datetime.fromisoformat(weather["updateTime"])
+    timezon = pytz.timezone('Asia/Shanghai')
+    retList = {
+        "status": True,
+        "message": {
+            "time": date_time.astimezone(timezon).strftime("%Y-%m-%d %H:%M"),
+            "city": city,
+            "temp": float(weather["now"]["temp"]),
+            "text": weather["now"]["text"],
+            "precip": float(weather["now"]["precip"]),
+            "wind360": float(weather["now"]["wind360"]),
+            "windScale": int(weather["now"]["windScale"]),
+            "windSpeed": float(weather["now"]["windSpeed"]),
+            "humidity": int(weather["now"]["humidity"]),
+            "pressure": int(weather["now"]["pressure"]),
+            "aqi": int(air["now"]["aqi"]),
+            "category": air["now"]["category"],
+        },
+    }
+    return JsonResponse(retList, status=200)
+
+
+@csrf_exempt
+@require_http_methods(['GET'])
+def get_current_city_info(request: HttpRequest):
+    user = request.user
+    city_name = UserCurrentCity.objects.get(user=user)
+    # TODO to remove
+    cityId = City2CityId.objects.get(cityName=city_name).cityId
     # use API to get weather and air
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
@@ -637,7 +724,7 @@ def search_weather_data(request):
 
 
 @csrf_exempt
-def getVisData(request):
+def get_vis_data(request):
     # 步骤1: 查询所有城市信息
     cities = City2CityId.objects.all()
 
@@ -678,7 +765,7 @@ def getVisData(request):
 
 
 @csrf_exempt
-def getPointData(request):
+def get_point_data(request):
     # 准备最终的输出列表
     output = []
 

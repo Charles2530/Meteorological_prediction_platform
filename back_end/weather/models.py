@@ -173,3 +173,13 @@ class EarthQuakeInfo(models.Model):
     depth = models.CharField(max_length=40, default="")
     key = models.CharField(max_length=80, default="", primary_key=True)
     location = models.CharField(max_length=40, default="")
+
+
+class HazardInfo(models.Model):
+    location = models.CharField(max_length=40, default='', primary_key=True)
+    cityName = models.CharField(max_length=20, default='')
+    typeName = models.CharField(max_length=15)
+    time = models.DateTimeField()  # update by pubTime
+    severity = models.CharField(max_length=15)
+    severityColor = models.CharField(max_length=15)
+

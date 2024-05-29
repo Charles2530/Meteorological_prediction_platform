@@ -10,10 +10,10 @@ urlpatterns = [
     path('manage/data/search/', views.search_weather_data, name='search_weather'),
 
     path('weather/overview/', views.overview, name='overview'),
-    path('weather/30days/', views.thirty_days_forecast, name='30days-forecast'),
     path('weather/overview_realtime/', views.realtime, name='realtime'),
+    path('weather/aqi/', views.aqi_detail, name='aqi_detail'),
 
-    path('weather/aqi/rank/', views.rank, name='rank'),
+    path('weather/rank/', views.rank, name='rank'),
     path('weather/aqi/aqi_change/', views.aqi_current_city_change,
          name='aqi-current-city-change'),
 
@@ -33,6 +33,11 @@ urlpatterns = [
          views.temp_city_change_detail, name='temp-city-change-detail'),
 
     path('getProInfo/', views.getProInfo, name='get-pro-info'),  # TODO
-    # path('getHazard/', views.getHazard), #TODO
-    path('current/getCityInfo/', views.getCityInfo),  # TODO
+    path('operate/current_city/', views.update_current_city, name='update-current-city'),
+    path('getHazard/', views.get_hazard, name='get-hazard'),
+    path('current/getCityInfo/', views.get_current_city_info),  # TODO
+    path('getCityInfo/', views.get_city_info, name='get-city-info'),
+    path('getHazardTop/', views.get_top_hazard, name='get-top-hazard'),
+    path('vis/getVisData/', views.get_vis_data, name='get-vis-data'),
+    path('vis/getPointInfo/', views.get_point_info, name='get-point-info'),
 ]
