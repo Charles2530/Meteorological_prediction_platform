@@ -4,7 +4,7 @@
       <el-card class="box-card">
         <el-row>
           <el-col :span="16">
-            <el-descriptions :column="1">
+            <el-descriptions :column="1" border>
               <el-descriptions-item>
                 <template #label>
                   <el-text>
