@@ -2,6 +2,18 @@ from django.db import models
 from datetime import datetime
 
 # Create your models here.
+class RealtimeAirQuality(models.Model):
+    aqi      = models.IntegerField()
+    level    = models.IntegerField()
+    category = models.CharField(max_length=10)
+    pm10     = models.CharField(max_length=10)
+    pm2p5    = models.CharField(max_length=10)
+    no2      = models.CharField(max_length=10)
+    so2      = models.CharField(max_length=10)
+    co       = models.CharField(max_length=10)
+    o3       = models.CharField(max_length=10)
+
+
 class HourlyWeather(models.Model):
     fxTime = models.DateTimeField(default=datetime.now)
     temp = models.FloatField(default=0.0)
@@ -150,3 +162,12 @@ class LocationToInfo(models.Model):
     humidity = models.CharField(max_length=40, default="")
     precip = models.CharField(max_length=40, default="")
     pressure = models.CharField(max_length=40, default="")
+
+class EarthQuakeInfo(models.Model):
+    level = models.CharField(max_length=40, default="")
+    time = models.CharField(max_length=40, default="")
+    lat = models.CharField(max_length=40, default="")
+    lon = models.CharField(max_length=40, default="")
+    depth = models.CharField(max_length=40, default="")
+    key = models.CharField(max_length=80, default="", primary_key=True)
+    location = models.CharField(max_length=40, default="")
