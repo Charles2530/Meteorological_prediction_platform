@@ -249,7 +249,7 @@ function object2Geojson2(data:Array<Hazard>) {
 }
 
 function getMapGeo() {
-  get("/api/vis/getVisData").then((res) => {
+  get("/api/vis/getVisData/").then((res) => {
     geo = new Loca.GeoJSONSource({
       data:object2Geojson(<Array<MapGeo>>res.data),
     });
@@ -260,7 +260,7 @@ function getMapGeo() {
 }
 
 async function getPointInfo() {
-  await get<Point>("/api/vis/getPointInfo", { LON: pos_info.lng, LAT: pos_info.lat}).then((res) => {
+  await get<Point>("/api/vis/getPointInfo/", { LON: pos_info.lng, LAT: pos_info.lat}).then((res) => {
     pos_info.weatherInfo = res.data;
   });
 }
