@@ -1,10 +1,11 @@
 tion<template>
+  <!-- {{ city }} -->
   <div class="air-quality-indicator">
     <div class="location text-2xl">
       空气质量
     </div>
     <!-- <div class="quality-circle">
-      <div class="quality-level text-gray-200">{{ cityMessage.aqi }}</div>
+      <div class="quality-level text-gray-200">{{ aqi_ }}</div>
     </div> -->
     <!-- <el-card style="width: 100%;"> -->
     <el-row style="width: 100%;">
@@ -13,15 +14,15 @@ tion<template>
         </div>
       </el-col>
       <el-col :span="9">
-        <div style="margin-top: 40%;">
-          <el-row v-for="(item, index) in qualityData" :key="index" >
+        <div style="margin-top: 30%;">
+          <el-row v-for="(value, key) in pollutionList" >
             <el-col :span="15">
               <div>
-                {{ item.pollutionType }}
+                {{ key }}
               </div>
             </el-col>
             <el-col :span="7">
-              <div>{{ item.qualityValue }}</div>
+              <div>{{ value }}</div>
             </el-col>
           </el-row>
         </div>
@@ -52,7 +53,7 @@ tion<template>
       <!-- <el-row>
         <el-col :span="9"> -->
       <el-button class="quality-description text-slate-600" style="border: none;">
-        {{ cityMessage.category }}
+        {{ category_ }}
       </el-button>
       <!-- </el-col> -->
       <!-- <el-col :span="15">
@@ -66,10 +67,10 @@ tion<template>
 
     <!-- 下方显示提示信息 -->
     <!-- <div @mouseover="showHover = true" @mouseout="showHover = false" class="quality-circle">
-      <div class="quality-level text-gray-200">{{ cityMessage.aqi }}</div>
+      <div class="quality-level text-gray-200">{{ aqi }}</div>
     </div> -->
     <!-- <div class="quality-description text-slate-600 ml-2">
-      {{ cityMessage.category }}
+      {{ category.value }}
     </div> -->
     <!-- <div class="hover_container" v-if="showHover">
       <el-row>
@@ -95,20 +96,55 @@ tion<template>
 </template>
 <script lang="ts" setup>
 import { get } from "@/api/index.ts";
-import { CityWeatherData } from "@/types/weather";
 
-interface CityInfoResponse {
-  status: boolean;
-  message: CityWeatherData;
+const props = defineProps({
+  city: { type: Object }
+})
+
+
+// interface AqiData {
+//   aqi: number;
+//   category: string;
+//   pollutionList: PollutionList[];
+// }
+// interface PollutionList {
+//   type: string;
+//   value: number;
+// }
+const aqi_ = ref(0);
+const category_ = ref("优");
+const pollutionList = ref({});
+//   [
+//   { type: 'PM10', value: 10 },
+//   { type: 'PM2.5', value: 20 },
+//   { type: 'NO2', value: 10 },
+//   { type: 'SO2', value: 10 },
+//   { type: 'O3', value: 10 },
+//   { type: 'CO', value: 10 },
+// ]
+/**
+ * Request
+ */
+interface AqiData {
+  aqi: number;
+  category: string;
+  CO: number;
+  NO2: number;
+  O3: number;
+  PM10: number;
+  "PM2.5": number;
+  SO2: number;
 }
-const cityMessage = reactive<CityWeatherData>({} as CityWeatherData);
 const getPresentCityAqi = async () => {
-  get<CityInfoResponse>("/api/current/getCityInfo/").then((res) => {
-    cityMessage.aqi = res.data.message.aqi;
-    cityMessage.city = res.data.message.city;
-    cityMessage.category = res.data.message.category;
+  get<AqiData>("/api/weather/aqi/", { city: props.city }).then((res) => {
+    aqi_.value = res.data.aqi;
+    category_.value = res.data.category;
+    const { aqi,category, ...rest } = res.data;
+    pollutionList.value = rest;
   });
 };
+
+
 
 // 
 const levels = [
@@ -120,7 +156,7 @@ const levels = [
   },
   {
     name: "良",
-    color: "blue",
+    color: "yellow",
     range: "51-100",
     description:
       "空气质量可接受，但某些污染物可能对极少数异常敏感人群健康有较弱影响。",
@@ -154,17 +190,6 @@ const levels = [
   },
 ];
 
-const qualityData = [
-  { pollutionType: 'PM10', qualityValue: 10 },
-  { pollutionType: 'PM2.5', qualityValue: 20 },
-  { pollutionType: 'NO2', qualityValue: 10 },
-  { pollutionType: 'SO2', qualityValue: 10 },
-  { pollutionType: 'O3', qualityValue: 10 },
-  { pollutionType: 'CO', qualityValue: 10 },
-
-  // 其他污染类型及相应质量数值
-]
-
 
 const colorClass = (color: string) => {
   return {
@@ -173,19 +198,16 @@ const colorClass = (color: string) => {
 };
 const levelInfo = computed(() => {
   for (const level of levels) {
-    if (level.name === cityMessage.category) {
+    if (level.name === category.value) {
       return level;
     }
   }
   return null; // 如果未找到匹配的等级，返回 null 或者其他适当的值
 });
 
-
-
-const selectedLocation = ref({})
 // echarts
 import * as echarts from "echarts";
-watch(selectedLocation, () => Promise.all([getPresentCityAqi()]).then(() => {
+watch(() => props.city, () => Promise.all([getPresentCityAqi()]).then(() => {
   renderChart(
     // realTimeWeatherList.value,
   );
@@ -215,7 +237,7 @@ const renderChart = async (
             width: 17,
             color: [
               [1 / 7, 'green'],
-              [2 / 7, 'blue'],
+              [2 / 7, 'yellow'],
               [3 / 7, 'orange'],
               [4 / 7, 'red'],
               [6 / 7, 'purple'],
@@ -223,7 +245,7 @@ const renderChart = async (
             ]
             // color: [
             //   [0.125, 'green'],
-            //   [0.25, 'blue'],
+            //   [0.25, 'yellow'],
             //   [0.375, 'orange'],
             //   [0.5, 'red'],
             //   [0.75, 'purple'],
@@ -293,11 +315,12 @@ const renderChart = async (
           formatter: function (value: number) {
             return Math.round(value) + '';
           },
-          color: 'inherit'
+          // color: 'inherit'
+          color: 'black'
         },
         data: [
           {
-            value: cityMessage.aqi,
+            value: aqi_.value,
             name: ''
           }
         ]
@@ -353,7 +376,7 @@ onMounted(() => Promise.all([getPresentCityAqi()]).then(() => {
 //           width: 30,
 //           color: [
 //             [0.125, 'green'],
-//             [0.25, 'blue'],
+//             [0.25, 'yellow'],
 //             [0.375, 'orange'],
 //             [0.5, 'red'],
 //             [0.75, 'purple'],

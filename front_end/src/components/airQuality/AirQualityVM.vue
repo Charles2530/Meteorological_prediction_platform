@@ -25,7 +25,7 @@
 <script lang="ts" setup>
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
-import BriefAqi from "./BriefAqi.vue";
+import BriefAqi from "../weather_details/sub_components/BriefAqi.vue";
 import CityRanking from "@/components/weather_details/sub_components/CityRanking.vue";
 
 // 初始化 ECharts 实例

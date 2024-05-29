@@ -34,11 +34,13 @@
         <div class="max-md:relative opacity-10">
           <QWeatherIcon class="max-md:absolute " :icon="props.weather.icon" :size="300" :fill="true" />
         </div>
-        <div class="flex flex-col md:ml-10 ">
+        <div class="mt-0 flex flex-col md:ml-10 ">
+          <el-icon size="150" color="yellow"><Sunny /></el-icon>
           <span class="text-7xl bg-clip-text text-transparent bg-gradient-to-br from-white from-40% ...">{{
             `${weather.temp}°C` }}</span>
           <span class="max-md:hidden">{{ weather.condition }}</span>
         </div>
+        
       </div>
       <!-- 移动端的地区、状态、温度 -->
       <!-- <div class="md:hidden flex flex-col mt-3">

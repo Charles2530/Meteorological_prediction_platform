@@ -37,13 +37,13 @@
           <!-- </el-col> -->
         </el-container>
         <el-card style="min-height: 20vh;max-height: 50vh;">
-          <RealTimeBroadcast />
+          <RealTimeBroadcast :city="city"/>
         </el-card>
       </el-aside>
 
       <el-main style="width: 800px;">
         <el-card>
-          <BriefAqi />
+          <BriefAqi :city="city"/>
         </el-card>
         <el-card style="max-height:58vh;overflow: auto;">
           <CityRanking />
@@ -54,20 +54,35 @@
 
 
 
-  <el-drawer v-model="drawer" direction="ltr">
+  <el-drawer v-model="drawer" direction="ltr" @close="handleDrawerClose">
     <template #header="{ close, titleId, titleClass }">
       <div :id="titleId" :class="titleClass" style="font-size: 20px;color:black; text-align: center;  ">关心的城市</div>
       <el-button type="info" @click="dialogVisible = true" :icon="Plus" />
     </template>
     <div>
-      <el-card v-for="city in cityList" :key="city.id"
-        :style="{ background: 'linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195))', marginBottom: '10px', borderRadius: '10px', color: 'white' }"
-        @click="selectCity(city.name)">
+      <el-card :style="{
+        background: 'linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195))', marginBottom: '10px',
+        borderRadius:
+          '10px', color: 'white'
+      }" @click="selectCity(currentCity.city,-1)">
         <div style="display: flex; align-items: center;">
-          <span>{{ city.adm2 }}&nbsp;&nbsp;</span>
-          <span>{{ city.name }}</span>
-          <span style="flex: 1; text-align: center;">{{ city.temperature }}°C</span>
-          <el-button @click="removeCity(city.id)" type="info" size="small" :icon="Delete" />
+          <span>{{ currentCity.city.adm2 }}&nbsp;&nbsp;</span>
+          <span>{{ currentCity.city.name }}</span>
+          <span style="flex: 1; text-align: center;">{{ currentCity.temp }}°C</span>
+          <el-button @click="" type="" size="small" :icon="House" style="background: pink;" />
+        </div>
+      </el-card>
+      <el-card v-for="(cityItem, index) in careCitiesList" :key="index"
+        :style="{
+          background: 'linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195))', marginBottom: '10px', borderRadius: '10px', color: 'white'
+        }"
+        @click="selectCity(cityItem.city,index)" 
+        :class="{ 'selected-card': index === selectedCityIndex }">
+        <div style="display: flex; align-items: center;">
+          <span>{{ cityItem.city.adm2 }}&nbsp;&nbsp;</span>
+          <span>{{ cityItem.city.name }}</span>
+          <span style="flex: 1; text-align: center;">{{ cityItem.temp }}°C</span>
+          <el-button @click="removeCity(index)" type="info" size="small" :icon="Delete" />
         </div>
       </el-card>
     </div>
@@ -100,7 +115,7 @@
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">
+        <el-button type="primary" @click="handleConfirm">
           确定
         </el-button>
       </div>
@@ -114,29 +129,110 @@
 
 
 <script lang="ts" setup>
+import { post, get } from "@/api/index.ts";
+import SearchLocation from "@/components/weather_details/sub_components/SearchLocation.vue";
+import RealTimeBroadcast from "@/components/weather_details/sub_components/RealTimeBroadcast.vue";
+import CurrentWeather from "@/components/weather_details/sub_components/CurrentWeather.vue";
+import CurrentWeatherRight from "@/components/weather_details/sub_components/CurrentWeatherRight.vue";
+import BriefAqi from '@/components/weather_details/sub_components/BriefAqi.vue';
+import CityRanking from '@/components/weather_details/sub_components/CityRanking.vue';
+import { Switch } from '@element-plus/icons-vue'
+// const careCitiesList = ref([])
+const city = ref<City>({
+  name: '市',
+  adm2: '区'
+});
+const currentCity = ref<careCity>()
+const careCitiesList = ref<careCity[]>([])
+const weather = ref({})
+const searchShow = ref(false)
+
+// interface接口
+interface City {
+  name: string;
+  adm2: string;
+}
+interface WeatherData41 {
+  weather: Weather41;
+}
+interface Weather41 {
+  aqi: number;
+  condition: string;
+  precip: number;
+  precip_probability: number;
+  pressure: number;
+  ray: string;
+  sunrise_time?: string;
+  sunset_time?: string;
+  temp: number;
+  temp_feel: number;
+}
+interface careCitiesData {
+  success: boolean;
+  currentCity: careCity;
+  careCitiesList: careCity[];
+}
+interface careCity {
+  city: City;
+  cond_icon: string;
+  temp: number;
+}
+
+const get_care_cities = async () => {
+  get<careCitiesData>("/api/weather/care_cities/summary/").then((res) => {
+    // if (res.data.success) {
+    currentCity.value = res.data.currentCity;
+    careCitiesList.value = res.data.careCitiesList;
+    city.value = res.data.currentCity.city;
+    console.log(careCitiesList.value);
+    console.log(city.value);
+    // }
+    // else 调用/api/current_city/接口
+  });
+};
+const get_overview_data = async () => {
+  get<WeatherData41>("/api/weather/overview/", { city: city }).then((res) => {
+    weather.value = res.data.weather;
+    console.log(weather.value);
+  });
+};
+onMounted(() => {
+  get_care_cities();
+  get_overview_data();
+});
 // 抽屉
-import { Delete, Plus } from "@element-plus/icons-vue";
+import { Delete, House, Plus } from "@element-plus/icons-vue";
+const drawer = ref(false)
 const drawerVisible = ref(false);
-const cityList = ref<City[]>([
-  { id: 1, adm2: '海淀区', name: '北京', temperature: 25 },
-  { id: 2, adm2: '黄浦区', name: '上海', temperature: 28 },
-  { id: 3, adm2: '天河区', name: '广州', temperature: 30 },
-]);
-const selectedCity = ref('');
+
+// const selectedCity = ref('');
 
 const closeDrawer = () => {
   drawerVisible.value = false;
 };
 
-const removeCity = (id: number) => {
-  cityList.value = cityList.value.filter((city) => city.id !== id);
-  // POST request
-};
+// const removeCity = (index: number) => {
+//   careCitiesList.value = careCitiesList.value.filter((city) => city.id !== id);
 
-const selectCity = (name: string) => {
-  selectedCity.value = name;
+// };
+const removeCity = (index: number) => {
+  if (index >= 0 && index < careCitiesList.value.length) {
+    careCitiesList.value.splice(index, 1);
+    // POST request
+  }
 };
-
+const selectedCityIndex = ref(null);
+const selectCity = (selectedCity: City,index:number) => {
+  city.value = selectedCity;
+  selectedCityIndex.value = index;
+};
+const handleDrawerClose = () => {
+  // 调用刷新函数
+  refreshData();
+};
+const refreshData = () => {
+  get_overview_data();
+};
 
 // 对话框
 
@@ -146,15 +242,14 @@ import { Search } from '@element-plus/icons-vue'
 
 const dialogVisible = ref(false)
 
-const handleClose = (done: () => void) => {
-  ElMessageBox.confirm('Are you sure to close this dialog?')
-    .then(() => {
-      done()
-    })
-    .catch(() => {
-      // catch error
-    })
-}
+const handleConfirm = () => {
+  // 将选择的城市添加到列表中
+  if (selectedCity.value) {
+    cityList.value.push(selectedCity.value);
+  }
+  // 关闭对话框
+  dialogVisible.value = false;
+};
 
 import { ref, onMounted } from 'vue';
 
@@ -162,28 +257,28 @@ import { ref, onMounted } from 'vue';
 
 import { china_cities } from "@/stores/cities";
 import { CityWeatherData } from "@/types/weather";
-onMounted(() => {
-  getPresentCity();
-});
+// onMounted(() => {
+//   getPresentCity();
+// });
 interface CityInfoResponse {
   status: boolean;
   message: CityWeatherData;
 }
-const currentCity = ref("");
-const getPresentCity = async () => {
-  get<CityInfoResponse>("/api/current/getCityInfo/").then((res) => {
-    currentCity.value = res.data.message.city;
-  });
-  if (!currentCity.value) {
-    currentCity.value = "北京市";
-  }
-};
+// const currentCity = ref("");
+// const getPresentCity = async () => {
+//   get<CityInfoResponse>("/api/current/getCityInfo/").then((res) => {
+//     currentCity.value = res.data.message.city;
+//   });
+//   if (!currentCity.value) {
+//     currentCity.value = "北京市";
+//   }
+// };
 interface LabelItem {
   label: string;
   value: string;
 }
 const state = ref("");
-// const city = ref("");
+const tempSelectedCity = ref("");
 
 const labels = ref<LabelItem[]>([]);
 const querySearch = (queryString: string, cb: any) => {
@@ -204,10 +299,11 @@ const loadAll = () => {
   return china_cities;
 };
 
-// const handleSelect = (item: LabelItem) => {
-//   state.value = item.label;
-//   city.value = item.value;
-// };
+const handleSelect = (item: LabelItem) => {
+  state.value = item.label;
+  tempSelectedCity.value = item.value;
+};
+
 interface CityInfoResponse {
   success: boolean;
   reason?: string;
@@ -225,68 +321,13 @@ onMounted(() => {
   labels.value = loadAll();
 });
 
-/** 组件  **/
-import SearchLocation from "@/components/weather_details/sub_components/SearchLocation.vue";
-import RealTimeBroadcast from "@/components/weather_details/sub_components/RealTimeBroadcast.vue";
-import CurrentWeather from "@/components/weather_details/sub_components/CurrentWeather.vue";
-import CurrentWeatherRight from "@/components/weather_details/sub_components/CurrentWeatherRight.vue";
-import BriefAqi from '@/components/airQuality/BriefAqi.vue';
-import CityRanking from '@/components/weather_details/sub_components/CityRanking.vue';
-import { Switch } from '@element-plus/icons-vue'
-// const cityList = ref([])
-const city = ref({
-  name: '北京市',
-  adm2: '海淀区'
-});
-let weather = ref({})
-const air = ref({})
-const forecast = ref([])
-const preDayWeather = ref([])
-const ultraviolet = ref([])
-const searchShow = ref(false)
 
-const drawer = ref(false)
-
-// interface City {
-//     name: string;
-//     adm2: string;
-// }
-
-
-interface WeatherData41 {
-  weather: Weather41;
-}
-interface Weather41 {
-  aqi: number;
-  condition: string;
-  precip: number;
-  precip_probability: number;
-  pressure: number;
-  ray: string;
-  sunrise_time?: string;
-  sunset_time?: string;
-  temp: number;
-  temp_feel: number;
-}
-//     searchShow: boolean
-
-
-
-import { post, get } from "@/api/index.ts";
-const get_his_overview = async () => {
-  get<WeatherData41>("/api/weather/overview/", city).then((res) => {
-    weather.value = res.data.weather;
-    console.log(weather.value);
-    // city.value = res.data.city;
-    // searchShow.value = res.data.searchShow
-  });
-};
-
-
-onMounted(() => {
-  get_his_overview();
-});
-console.log("----------------------------------------------------------------")
+// const careCitiesList = ref<City[]>([
+//   { id: 1, adm2: '海淀区', name: '北京', temperature: 25 },
+//   { id: 2, adm2: '黄浦区', name: '上海', temperature: 28 },
+//   { id: 3, adm2: '天河区', name: '广州', temperature: 30 },
+// ]);
+// console.log("----------------------------------------------------------------")
 // console.log(weather.value);
 
 </script>
@@ -308,6 +349,12 @@ import dataStatistics from "@/components/dataStatistics/dataStatistics.vue";
 
 <!-- !!!因为涉及到组件也要使用下面的css样式，所以不要scoped不然丑 -->
 <style>
+.selected-card {
+  /* border: 2px solid rgb(183, 255, 0); 修改为你想要的边框颜色 */
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
 .chart {
   width: 95%;
   height: 92%;

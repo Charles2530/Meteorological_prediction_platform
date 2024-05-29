@@ -1,9 +1,10 @@
 <template>
-  <div class="common-layout" style="background:white;" >
-    <el-container >
+  <div class="common-layout" style="background:white;">
+    <!-- {{ city }} -->
+    <el-container>
       <el-header>
-        <div id="chart_temp_perhour" ref="chart_temp_perhour"
-          style="height: 200px;  width: 100%;  margin: 0 auto"></div>
+        <div id="chart_temp_perhour" ref="chart_temp_perhour" style="height: 200px;  width: 100%;  margin: 0 auto">
+        </div>
       </el-header>
       <el-main>
         <div class="calendar-container">
@@ -24,15 +25,25 @@
               <div class="ep-bg-purple-dark" />
               <!-- <div style="height:70% !important"> -->
               <el-card style="width:auto" shadow="hover">
-                <div class="day-content">
-                  <div class="temperature">{{ day.temperature }}℃</div>
-                  <div class="weather-icon">
-                    <div class="temperature">{{ day.condition }}</div>
+                <div class="day-content" style="font-size: 20px;">
+                  <div class="">{{ day.temperature }}℃</div>
+                  <div class="">
+                    <!-- <div class="temperature">{{ day.condition }}</div> -->
+                    <el-icon class="perhour-icon" size="30px" color="#409EFF">
+                      <Drizzling />
+                    </el-icon>
                   </div>
-                  <div class="humidity">{{ day.humidity }}%</div>
-                  <div class="wind-speed">{{ day.windSpeed }}m/s</div>
-                  <div class="wind-speed">{{ day.windDirection }}</div>
-                  <div class="time" style="font-size: 0.6cm;">{{ day.time }}</div>
+                  <!-- <div class="humidity">{{ day.humidity }}%</div> -->
+                  <el-icon class="perhour-icon" size="30px" color="#409EFF">
+                    <WindPower />
+                  </el-icon>
+                  <!-- <div class="wind-speed">{{ day.windSpeed }}m/s</div> -->
+                  <!-- <div class="wind-speed">{{ day.windDirection }}</div> -->
+                  <el-icon class="perhour-icon" size="30px" color="#409EFF"
+                    :style="{ transform: `rotate(${angle}deg)` }">
+                    <Position />
+                  </el-icon>
+                  <div class="">{{ day.time }}</div>
                 </div>
               </el-card>
             </el-col>
@@ -50,16 +61,33 @@
 
 
 <script lang="ts" setup>
+const angle = ref(80); // angle 变量的值可以是动态变化的
+
+
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
 import { china_cities } from "@/stores/cities";
 import { SelectProps } from "element-plus/es/components/select/src/select.mjs";
 
 
-const city = ref({
-  name: '北京市',
-  adm2: '海淀区'
-});
+const props = defineProps({
+  city: { type: Object }
+})
+// // 定义子组件的方法
+// const refresh = () => {
+//   get_data();
+//   renderChart(
+//     realTimeWeatherList.value
+//   );
+// };
+// // 暴露方法
+// defineExpose({ refresh });
+
+
+// const city = ref({
+//   name: '北京市',
+//   adm2: '海淀区'
+// });
 const realTimeWeatherList = ref<RealTimeWeather[]>([]);
 interface RealTimeWeather {
   time: string,
@@ -75,7 +103,7 @@ interface RealTimeWeatherData {
 }
 
 const get_data = async () => {
-  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: city.value.name + city.value.adm2 }).then((res) => {
+  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: props.city }).then((res) => {
     realTimeWeatherList.value.splice(0, realTimeWeatherList.value.length, ...res.data.realTimeWeatherList);
     console.log("getdata")
     if (realTimeWeatherList.value.length > 11) {
@@ -84,10 +112,7 @@ const get_data = async () => {
   });
 };
 
-
-const selectedLocation = ref("");
-const locations = china_cities;
-watch(selectedLocation, () => Promise.all([get_data()]).then(() => {
+watch(() => props.city, () => Promise.all([get_data()]).then(() => {
   renderChart(
     realTimeWeatherList.value,
   );
@@ -242,7 +267,7 @@ const renderChart = async (
 //   //   }
 //   // });
 // }));
-onMounted(()=>Promise.all([get_data()]).then(() => {
+onMounted(() => Promise.all([get_data()]).then(() => {
   console.log(realTimeWeatherList.value);
   setTimeout(() => {
     renderChart(
@@ -273,6 +298,11 @@ onMounted(()=>Promise.all([get_data()]).then(() => {
 
 
 <style lang="scss" scoped>
+.perhour-icon {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .calendar-container {
   margin-top: 7vh;
   padding: 20px;
@@ -326,6 +356,6 @@ onMounted(()=>Promise.all([get_data()]).then(() => {
 .el-card:hover {
   margin-top: -10px;
   margin: -1px;
-  color:black;
+  color: black;
 }
 </style>
