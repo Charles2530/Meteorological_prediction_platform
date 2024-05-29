@@ -218,7 +218,17 @@ const closeDrawer = () => {
 const removeCity = (index: number) => {
   if (index >= 0 && index < careCitiesList.value.length) {
     careCitiesList.value.splice(index, 1);
-    // POST request
+    // POST reques
+  //   const request: DeleteForm = {
+  //   time: weatherData[index].time,
+  //   city: weatherData[index].city,
+  // };
+  //   post<DeleteResponse>("/api/weather/care_cities/del/", request).then((res) => {
+  //   const response = res.data;
+  //   if (response.success) {
+  //     ElMessage.success("已删除");
+  //   } else ElMessage.error("无效的请求");
+  // });
   }
 };
 const selectedCityIndex = ref(null);

@@ -1,4 +1,4 @@
-tion<template>
+<template>
   <!-- {{ city }} -->
   <div class="air-quality-indicator">
     <div class="location text-2xl">
@@ -15,7 +15,7 @@ tion<template>
       </el-col>
       <el-col :span="9">
         <div style="margin-top: 30%;">
-          <el-row v-for="(value, key) in pollutionList" >
+          <el-row v-for="(value, key) in pollutionList">
             <el-col :span="15">
               <div>
                 {{ key }}
@@ -139,7 +139,7 @@ const getPresentCityAqi = async () => {
   get<AqiData>("/api/weather/aqi/", { city: props.city }).then((res) => {
     aqi_.value = res.data.aqi;
     category_.value = res.data.category;
-    const { aqi,category, ...rest } = res.data;
+    const { aqi, category, ...rest } = res.data;
     pollutionList.value = rest;
   });
 };
