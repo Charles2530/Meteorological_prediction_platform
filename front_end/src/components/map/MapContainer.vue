@@ -77,6 +77,7 @@ import { getAssetsFileAQI } from "@/utils/pub-use";
 };
 
 const pos_info = reactive({
+  pixel: null,          //所在网格
   lng: 0,               //所在经度
   lat: 0,               //所在纬度
   adcode: "100000",     //所在行政区划编码
@@ -183,7 +184,7 @@ on(arg0: string, arg1: () => void): unknown;
 setLoca: (arg0: {[x: string]: any; remove(pl: {setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: {key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number // 设置安全密钥
 ; yoyo: boolean; repeat: number;}) => void;}): unknown; add: (arg0: any) => void;}) => void; remove: () => void; setSource: (arg0: null, arg1: {
 icon: {type: string; image: (_index: any, feature : {properties: {aqi: any; mom: string| any[];};}) => string; size: number[]; anchor: string;
-}; text: {content: (_index: any, feature: {properties : {aqi: any; mom: string |any[];};}) => string; style: { fontSize: number; fontWeight: string; fillColor: (_index: any, feature: { properties: { aqi: any; mom: string | any[]; }; }) => string; strokeColor: string; strokeWidth: number; }; direction: string;}; extData: (_index: any, feat: {properties: any;}) => any;}) => void;
+}; extData: (_index: any, feat: {properties: any;}) => any;}) => void;
 } = null;
 
 let infoWindow: {
@@ -203,18 +204,14 @@ var geo: null = null;
 var hazardGeo: null = null;
 var hazardTopGeo: null = null;
 
-let windData: { data: any[]; }[]=null;
+// let windData: { data: any[]; }[]=null;
 
 var disProvince: { destroy: () => void; setMap: (arg0: { clearMap(): unknown; setCenter(markersPosition: any[], arg1: boolean, arg2: number): unknown; setFitView(polygons: any, arg1: boolean): unknown; setLimitBounds(bounds: any): unknown; getCenter: any; addControl: (arg0: any) => void; add: (arg0: any) => void; remove: (arg0: any) => void; on: (arg0: string, arg1: (e: { data: any; target: any; pixel: any; type: any; lnglat: { lng: any; lat: any; }; }) => void) => void; setZoom: (arg0: number) => void; }) => void; } = null;
  
 var draw_adcode = "100000";
 
 var ranks=["error","优","良好","轻度污染","中度污染","重度污染"]
-var colors=["#000000","#84c77e","#c0dd83","#f8ed84","#f3956e","#e65d5b"]
-var cur_feat: null = null;
-
-var hazardMarker: { setContent: (arg0: string) => void; setPosition: (arg0: any) => void; remove: () => any; } = null;
-
+// var colors=["#000000","#84c77e","#c0dd83","#f8ed84","#f3956e","#e65d5b"]
 onMounted(() => {
   initMap();
 });
@@ -257,7 +254,8 @@ function getMapGeo() {
       data:object2Geojson(<Array<MapGeo>>res.data),
     });
     InitHeatMapTem();
-      InitHeatMapWater();
+    InitHeatMapWater();
+    InitAqi();
   });
 }
 
@@ -406,9 +404,10 @@ function drawBounds() {
 
 //点击区域触发事件
 async function handlerMapClick() {
-  map.on("click", (e: { lnglat: { lng: any; lat: any } }) => {
+  map.on("click", (e: {pixel: any; lnglat: { lng: any; lat: any } }) => {
     // 点击坐标
     const markersPosition = [e.lnglat.lng, e.lnglat.lat];
+    pos_info.pixel = e.pixel.toArray();
     pos_info.lng = markersPosition[0].toFixed(2);
     pos_info.lat = markersPosition[1].toFixed(2);
     // 根据坐标获取位置信息
@@ -476,6 +475,23 @@ async function showInfoWindow() {
     dd.lng = pos_info.lng
     infoWindow.open(map, dd);
   }
+  else if(buttonActive.e) {
+    infoWindow && infoWindow.close();
+    var feat = scatter.queryFeature(pos_info.pixel);
+        if (feat) {
+          content.push(
+            `<span style="font-size: 24px;"><b>${feat.properties.type} ${feat.properties.level}</b></span>`,
+            `<span style="font-size: 13px;">${feat.properties.place}</span>`,
+          );
+          content.push("</div>");
+          infoWindow.setContent(content.join('<br>'));
+          // 打开信息窗体
+          let dd = map.getCenter()
+          dd.lat = pos_info.lat
+          dd.lng = pos_info.lng
+          infoWindow.open(map, dd);
+        }
+  }
   else if(buttonActive.a || buttonActive.b|| buttonActive.f) {
     await getPointInfo();
     if(buttonActive.a) {
@@ -489,11 +505,13 @@ async function showInfoWindow() {
         `<span style="font-size: 24px;"><b>${pos_info.weatherInfo.precip}mm</b></span>`,
         `<span style="font-size: 13px;">降水量</span>`,
       );
-    }    
+    }   
     else if(buttonActive.f) {
+      var type= Math.floor(pos_info.weatherInfo.aqi / 50) + 1;
+      if(type>5) type=5;
       content.push(
         `<span style="font-size: 24px;"><b>${pos_info.weatherInfo.aqi}</b></span>`,
-        `<span style="font-size: 13px;">AQI</span>`,
+        `<span style="font-size: 13px;">AQI  空气质量：${ranks[type]}</span>`,
       );
     }  
     // else if(buttonActive.c) {
@@ -617,9 +635,9 @@ function clicke() {
     else if(buttonActive.d) clickd();
     else if(buttonActive.a) clicka();
     else if(buttonActive.f) clickf();
-    if(infoWindow.getIsOpen()) infoWindow.close();
     scatter.setLoca(loca);
     breath.setLoca(loca);
+    if(infoWindow.getIsOpen()) showInfoWindow();
     // loca.animate.start();
   }
   else {
@@ -636,10 +654,8 @@ function clickf() {
     else if(buttonActive.d) clickd();
     else if(buttonActive.e) clicke();
     else if(buttonActive.a) clicka();
-    if(infoWindow.getIsOpen()) showInfoWindow();
-    InitAqi();
     aqiLayer.setLoca(loca);
-    // loca.add(aqiLayer);
+    if(infoWindow.getIsOpen()) showInfoWindow();
   }
   else {
     aqiLayer.remove();
@@ -653,7 +669,7 @@ function showWind() {
   fetch('https://sakitam.oss-cn-beijing.aliyuncs.com/codepen/wind-layer/json/wind.json')
     .then(res => res.json())
     .then(res => {
-      windData = res;
+      // windData = res;
       windLayer = new WindLayer(res, {
         windOptions: {
           // colorScale: scale,
@@ -689,28 +705,28 @@ function showWind() {
   });
 }
 
-function getWind(longitude: number, latitude: number) {
-  // const jIndex = Math.floor(90.5 - latitude);
-  // // const jIndex = Math.floor(latitude + 90.5);
-  // // const iIndex = Math.floor(180.5 - longitude);
-  // const iIndex = Math.floor(longitude + 180.5);
-  // const index = jIndex * 360 + iIndex;
-  const ii = Math.floor(longitude + 180.5); // calculate longitude index in wrapped range [0, 360)
-      // const j = Math.floor(90.5 - latitude); // calculate latitude index in direction +90 to -90
-      const j = Math.floor(90.5 + latitude); // calculate latitude index in direction +90 to -90
-    const index = j * 360 + ii;
-  const uSpeed = windData[0].data[index];
-  const vSpeed = windData[1].data[index];
-  const speed = Math.sqrt(uSpeed ** 2 + vSpeed ** 2);
-  var angle = Math.atan2(uSpeed, vSpeed) * (180 / Math.PI);
-  // 转换为正角度
-  angle = angle >= 0 ? angle : 360 + angle;
-  // const directions = ['北', '东北', '东', '东南', '南', '西南', '西', '西北'];
-  const directions = ['东','东北', '北' ,'西北','西', '西南', '南', '东南'];
-  const i = (Math.round((angle % 360) / 45))%8;
-  const direction = directions[i];
-  return {u:uSpeed, v:vSpeed, speed:speed, angle: angle, direction: direction};
-}
+// function getWind(longitude: number, latitude: number) {
+//   // const jIndex = Math.floor(90.5 - latitude);
+//   // // const jIndex = Math.floor(latitude + 90.5);
+//   // // const iIndex = Math.floor(180.5 - longitude);
+//   // const iIndex = Math.floor(longitude + 180.5);
+//   // const index = jIndex * 360 + iIndex;
+//   const ii = Math.floor(longitude + 180.5); // calculate longitude index in wrapped range [0, 360)
+//       // const j = Math.floor(90.5 - latitude); // calculate latitude index in direction +90 to -90
+//       const j = Math.floor(90.5 + latitude); // calculate latitude index in direction +90 to -90
+//     const index = j * 360 + ii;
+//   const uSpeed = windData[0].data[index];
+//   const vSpeed = windData[1].data[index];
+//   const speed = Math.sqrt(uSpeed ** 2 + vSpeed ** 2);
+//   var angle = Math.atan2(uSpeed, vSpeed) * (180 / Math.PI);
+//   // 转换为正角度
+//   angle = angle >= 0 ? angle : 360 + angle;
+//   // const directions = ['北', '东北', '东', '东南', '南', '西南', '西', '西北'];
+//   const directions = ['东','东北', '北' ,'西北','西', '西南', '南', '东南'];
+//   const i = (Math.round((angle % 360) / 45))%8;
+//   const direction = directions[i];
+//   return {u:uSpeed, v:vSpeed, speed:speed, angle: angle, direction: direction};
+// }
 
 //初始化气温热力图层
 function InitHeatMapTem() {
@@ -799,227 +815,42 @@ function InitHeatMapWater() {
 
 //初始化灾害图层
 function InitHazard() {
-  // var geo = new Loca.GeoJSONSource({
-  //         // data: [],
-  //         url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/china_traffic_event.json',
-  //     });
+  scatter = new Loca.ScatterLayer({
+      // loca,
+      zIndex: 15,
+      opacity: 1,
+      visible: true,
+      zooms: [2, 22],
+  });
 
-     scatter = new Loca.ScatterLayer({
-          // loca,
-          zIndex: 15,
-          opacity: 1,
-          visible: true,
-          zooms: [2, 22],
-      });
+  scatter.setSource(hazardGeo, {
+      unit: 'px',
+      size: [20, 20],
+      texture: 'https://a.amap.com/Loca/static/loca-v2/demos/images/blue.png',
+      borderWidth: 0,
+  });
 
-      scatter.setSource(hazardGeo, {
-          unit: 'px',
-          size: [20, 20],
-          texture: 'https://a.amap.com/Loca/static/loca-v2/demos/images/blue.png',
-          borderWidth: 0,
-      });
-
-      // 呼吸
-      // var top10 = {
-      //     type: 'FeatureCollection',
-      //     features: [
-      //         {
-      //             "type": "Feature",
-      //             "properties": {
-      //                 "cityName": "韶关市",
-      //                 "ratio": 0,
-      //                 "rank": 96
-      //             },
-      //             "geometry": {
-      //                 "type": "Point",
-      //                 "coordinates": [
-      //                     113.58052,
-      //                     24.760098
-      //                 ]
-      //             }
-      //         },
-      //         {
-      //             "type": "Feature",
-      //             "properties": {
-      //                 "cityName": "乐山市",
-      //                 "ratio": 0,
-      //                 "rank": 97
-      //             },
-      //             "geometry": {
-      //                 "type": "Point",
-      //                 "coordinates": [
-      //                     103.75082,
-      //                     29.58099
-      //                 ]
-      //             }
-      //         },
-      //         {
-      //             "type": "Feature",
-      //             "properties": {
-      //                 "cityName": "阜阳市",
-      //                 "ratio": 0,
-      //                 "rank": 98
-      //             },
-      //             "geometry": {
-      //                 "type": "Point",
-      //                 "coordinates": [
-      //                     115.82654,
-      //                     32.889915
-      //                 ]
-      //             }
-      //         },
-      //         {
-      //             "type": "Feature",
-      //             "properties": {
-      //                 "cityName": "荆门市",
-      //                 "ratio": 0,
-      //                 "rank": 99
-      //             },
-      //             "geometry": {
-      //                 "type": "Point",
-      //                 "coordinates": [
-      //                     112.209816,
-      //                     30.997377
-      //                 ]
-      //             }
-      //         },
-      //         {
-      //             "type": "Feature",
-      //             "properties": {
-      //                 "cityName": "哈尔滨市",
-      //                 "ratio": 0,
-      //                 "rank": 100
-      //             },
-      //             "geometry": {
-      //                 "type": "Point",
-      //                 "coordinates": [
-      //                     126.61314,
-      //                     45.746685
-      //                 ]
-      //             }
-      //         },
-      //         {
-      //             "type": "Feature",
-      //             "properties": {
-      //                 "cityName": "达州市",
-      //                 "ratio": 0,
-      //                 "rank": 101
-      //             },
-      //             "geometry": {
-      //                 "type": "Point",
-      //                 "coordinates": [
-      //                     107.493,
-      //                     31.205515
-      //                 ]
-      //             }
-      //         },
-      //         {
-      //             "type": "Feature",
-      //             "properties": {
-      //                 "cityName": "自贡市",
-      //                 "ratio": 0,
-      //                 "rank": 102
-      //             },
-      //             "geometry": {
-      //                 "type": "Point",
-      //                 "coordinates": [
-      //                     104.777824,
-      //                     29.34555
-      //                 ]
-      //             }
-      //         },
-      //         {
-      //             "type": "Feature",
-      //             "properties": {
-      //                 "cityName": "陇南市",
-      //                 "ratio": 0,
-      //                 "rank": 103
-      //             },
-      //             "geometry": {
-      //                 "type": "Point",
-      //                 "coordinates": [
-      //                     104.93356,
-      //                     33.388184
-      //                 ]
-      //             }
-      //         },
-      //         {
-      //             "type": "Feature",
-      //             "properties": {
-      //                 "cityName": "南充市",
-      //                 "ratio": 0,
-      //                 "rank": 104
-      //             },
-      //             "geometry": {
-      //                 "type": "Point",
-      //                 "coordinates": [
-      //                     106.1188,
-      //                     30.800997
-      //                 ]
-      //             }
-      //         },
-      //         {
-      //             "type": "Feature",
-      //             "properties": {
-      //                 "cityName": "恩施土家族苗族自治州",
-      //                 "ratio": 0,
-      //                 "rank": 105
-      //             },
-      //             "geometry": {
-      //                 "type": "Point",
-      //                 "coordinates": [
-      //                     109.48512,
-      //                     30.298103
-      //                 ]
-      //             }
-      //         }
-      //     ]
-      // };
-      breath = new Loca.ScatterLayer({
-          zIndex: 15,
-      });
-      breath.setSource(hazardTopGeo);
-      breath.setStyle({
-          unit: 'px',
-          size: [50, 50],
-          texture: 'https://a.amap.com/Loca/static/loca-v2/demos/images/breath_red.png',
-          animate: true,
-          duration: 1000,
-      });
-      loca.animate.start();
-
-      // 拾取测试
-      // map.on('mousemove', (e) => {
-      //   const feat = scatter.queryFeature(e.pixel.toArray());
-      //   if (feat) {
-      //     if(cur_feat==null || feat != cur_feat) {
-      //       if(feat != cur_feat) {
-      //         hazardMarker && hazardMarker.remove();
-      //         cur_feat = feat;
-      //       }
-      //       hazardMarker = new AAMap.Marker({
-      //         offset: [0, -50],
-      //         zindex:10,
-      //         size:[250,30]
-      //       });
-      //       hazardMarker.setContent(
-      //         '<div  style="background:linear-gradient(to right top, rgba(26, 79, 158, 0.9),rgb(243, 179, 179, 0.9)) !important;">' + '地点:' + feat.properties.place + '<br/>灾害类型:' + feat.type + '<br/>等级:' + feat.level + '</div>',
-      //       );
-      //       hazardMarker.setPosition(feat.coordinates);
-      //       map.add(hazardMarker);
-      //     }
-      //   }
-      //   else {
-      //     cur_feat = null;
-      //     hazardMarker && hazardMarker.remove();
-      //   }
-      // });
+  breath = new Loca.ScatterLayer({
+      zIndex: 15,
+  });
+  breath.setSource(hazardTopGeo);
+  breath.setStyle({
+      unit: 'px',
+      size: [50, 50],
+      texture: 'https://a.amap.com/Loca/static/loca-v2/demos/images/breath_red.png',
+      animate: true,
+      duration: 1000,
+  });
+  loca.animate.start();
 }
 
 //初始化空气质量图层
 function InitAqi() { 
   aqiLayer =  new Loca.LabelsLayer({
     zindex:100,
+    fitView: true,
+    eventSupport: false,  // 图层事件支持，LabelsLayer 默认开启
+    collision: false  // 是否开启文字自动避让
   });
   aqiLayer.setSource(geo, {
             icon: {
@@ -1027,58 +858,38 @@ function InitAqi() {
                 image: function (_index: any, feature: { properties: { aqi: any; mom: string | any[]; }; }) {
                   var type:number = Math.floor(feature.properties.aqi / 50) + 1;
                   if(type>5) type=5;
+                  console.log("aaa",type)
                   return getAssetsFileAQI(type + ".png");
                 },
                 size: [30, 30],
                 anchor: 'center',
             },
-            text: {
-                // 每项配置都可使用回调函数来动态配置
-                content: function (_index: any, feature: { properties: { aqi: any; mom: string | any[]; }; }) {
-                    return "AQI:" + feature.properties.aqi.toString();
-                    },
-                style: {
-                    fontSize: 14,
-                    fontWeight: 'normal',
-                    fillColor: function (_index: any, feature: { properties: { aqi: any; mom: string | any[]; }; }) {
-                      var type:number = Math.floor(feature.properties.aqi / 50) + 1;
-                      if(type>5) type=5;
-                      return colors[type];
-                    },
-                    strokeColor: '#000',
-                    strokeWidth: 1,
-                },
-                direction: 'bottom',
-            },
+            // text: {
+            //     // 每项配置都可使用回调函数来动态配置
+            //     content: function (_index: any, feature: { properties: { aqi: any; mom: string | any[]; }; }) {
+            //         return "AQI:" + feature.properties.aqi.toString();
+            //         },
+            //     style: {
+            //         fontSize: 14,
+            //         fontWeight: 'normal',
+            //         fillColor: function (_index: any, feature: { properties: { aqi: any; mom: string | any[]; }; }) {
+            //           var type:number = Math.floor(feature.properties.aqi / 50) + 1;
+            //           if(type>5) type=5;
+            //           return colors[type];
+            //         },
+            //         strokeColor: '#000',
+            //         strokeWidth: 1,
+            //     },
+            //     direction: 'bottom',
+            // },
             extData: function (_index: any, feature: { properties: {adcode: any; aqi: any; mom: string | any[]; }; }) {
                       var type:number = Math.floor(feature.properties.aqi / 50) + 1;
                       if(type>5) type=5;
                       return {type:type, adcode:feature.properties.adcode};
                     },
+                    
         });
-  // aqiLayer.on('complete', () => {
-  //   var aqiMarker = new AAMap.Marker({
-  //         offset: [0, -35],
-  //         zindex:120,
-  //         size:[250,30]
-  //     });
-  //     var labelMarkers = aqiLayer.getLabelsLayer().getAllOverlays();
-  //     for (let marker of labelMarkers) {
-  //         marker.on('mouseover', (e: { data: { data: { position: any; }; }; }) => {
-  //             var position = e.data.data && e.data.data.position;
-  //             if (position) {
-  //                 aqiMarker.setContent(
-  //                     `<div  style="background:linear-gradient(to right top, rgba(26, 79, 158, 0.9),rgb(243, 179, 179, 0.9)) !important;">地点:${marker.getExtData().adcode}<br/>空气质量：${ranks[marker.getExtData().type]}</div>`,
-  //                 );
-  //                 aqiMarker.setPosition(position);
-  //                 map.add(aqiMarker);
-  //             }
-  //         });
-  //         marker.on('mouseout', () => {
-  //             map.remove(aqiMarker);
-  //         });
-  //     }
-  // });
+
 }
 </script>
 
