@@ -5,10 +5,10 @@
         <el-row>
           <el-col :span="24">
             <Avatar ref="uploadRef" />
-            <el-descriptions :column="1">
+            <el-descriptions :column="1" border>
               <el-descriptions-item>
                 <template #label>
-                  <el-text>
+                  <el-text type="primary">
                     <el-icon><User /></el-icon>
                     用户名
                   </el-text>
@@ -19,18 +19,18 @@
               </el-descriptions-item>
               <el-descriptions-item>
                 <template #label>
-                  <el-text>
+                  <el-text type="primary">
                     <el-icon><Message /></el-icon>
                     邮箱
                   </el-text>
                 </template>
-                <el-text>
+                <el-text class="w-150px" truncated>
                   {{ userInfo.email }}
                 </el-text>
               </el-descriptions-item>
               <el-descriptions-item>
                 <template #label>
-                  <el-text>
+                  <el-text type="primary">
                     <el-icon><Key /></el-icon>
                     身份
                   </el-text>
@@ -48,21 +48,23 @@
               <!-- 订阅城市 -->
               <el-descriptions-item>
                 <template #label>
-                  <el-text>
+                  <el-text type="primary">
                     <el-icon><Location /></el-icon>
                     订阅城市
                   </el-text>
                 </template>
-                <el-text>
-                  <el-tag
-                    v-for="city in bookingCities"
-                    :key="city.city"
-                    type="success"
-                    class="mr-1"
-                  >
-                    {{ city.city }}
-                  </el-tag>
-                </el-text>
+                <div>
+                  <el-text>
+                    <el-tag
+                      v-for="city in bookingCities"
+                      :key="city.city"
+                      type="success"
+                      class="mr-1"
+                    >
+                      {{ city.city }}
+                    </el-tag>
+                  </el-text>
+                </div>
               </el-descriptions-item>
             </el-descriptions>
           </el-col>

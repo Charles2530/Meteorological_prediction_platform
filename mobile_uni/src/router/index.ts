@@ -1,11 +1,11 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { UserRole } from "@/types/user";
-// 网站首页
+// 速览首页
 const Home = () => import("@/views/home/index.vue");
-// 历史记录
-const History = () => import("@/views/home/weatherDetails.vue");
-// 灾害订阅
-const Alarm = () => import("@/views/home/alarmView.vue");
+// 地图页面
+const Map = () => import("@/views/home/mapView.vue");
+// 天气数据
+const Weather = () => import("@/views/home/weatherView.vue");
 // 用户页面
 const User = () => import("@/views/home/personalCenter.vue");
 // 404页面
@@ -32,17 +32,17 @@ const routes = [
         },
       },
       {
-        path: "/history",
-        name: "History",
-        component: History,
+        path: "/map",
+        name: "Map",
+        component: Map,
         meta: {
           permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
         },
       },
       {
-        path: "/alarm",
-        name: "Alarm",
-        component: Alarm,
+        path: "/weather",
+        name: "Weather",
+        component: Weather,
         meta: {
           permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
         },

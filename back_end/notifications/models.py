@@ -15,12 +15,12 @@ class Notification(models.Model):
 
 
 class CitySubscription(models.Model):
-    customuser = models.ForeignKey(
+    user = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name="订阅用户", default=None)
     cityName = models.CharField(max_length=40, verbose_name="城市名称")
 
     def __str__(self):
-        return f"{self.profile.username} - {self.cityName}"
+        return f"{self.user.username} - {self.cityName}"
 
     class Meta:
         verbose_name = "城市订阅"

@@ -1,22 +1,23 @@
-from django.conf import settings
-from django.contrib.auth.models import User
-from django.utils import timezone
 import json
-from django.shortcuts import render
+
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.shortcuts import render
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 # from customuser.models import Profile
 from .models import Notification, WeatherForecast, CitySubscription
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from .serializers import NotificationSerializer, CitySubscriptionSerializer, WeatherForecastSerializer
 from .task import fetch_catastrophic_forecast_cities_list, fetch_weather_catastrophic_forecast
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+
+
 # Create your views here.
-
-
-
 class NotificationView(APIView):
     def get(self, request, format=None):
         notifications = Notification.objects.all()
@@ -65,7 +66,7 @@ def get_alarm_notice(request):
         "success": True,
         "notifications": []
     }
-    
+
     user = request.user
     # profile = Profile.objects.get(username=user.username)
     cities = CitySubscription.objects.filter(profile__in=user)
@@ -87,6 +88,7 @@ def get_alarm_notice(request):
                 response_json['notifications'].append(forecast_json)
                 break
     return JsonResponse(response_json, status=200)
+
 
 @csrf_exempt
 @require_http_methods(['GET', 'POST'])
@@ -124,6 +126,7 @@ def subscribe(request):
             response_json['tableData'].append(city_json)
         return JsonResponse(response_json, status=200)
 
+
 def get_brief(request):
     locations = WeatherForecast.objects.all()
     response_json = {
@@ -148,6 +151,7 @@ def get_brief(request):
                 break
     return JsonResponse(response_json, status=200)
 
+
 def get_alarm_level(request):
     locations = WeatherForecast.objects.all()
     response_json = {
@@ -164,13 +168,14 @@ def get_alarm_level(request):
         response_json['cnt'].append(count[idx])
     return JsonResponse(response_json, status=200)
 
+
 def get_recent(request):
     locations = WeatherForecast.objects.all()
     response_json = {
         "success": True,
         "notifications": []
     }
-    for (idx,forecast) in enumerate(locations):
+    for (idx, forecast) in enumerate(locations):
         # forecast = fetch_weather_catastrophic_forecast(location=locationId)
         # forecast = forecast["warning"]
         # return JsonResponse(forecast, status=400)
@@ -190,6 +195,7 @@ def get_recent(request):
         if idx == 3:
             break
     return JsonResponse(response_json, status=200)
+
 
 def get_notification_data():
     notifications = []
