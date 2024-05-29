@@ -1,0 +1,3293 @@
+commit e020d8fb0a6f636adaf6ec27e9a6efa271f4084a
+Author: Charles2530 <2569337619@qq.com>
+Date:   Sat May 25 18:37:34 2024 +0800
+
+    完成移动端网络部署
+
+commit d1152f3d50b2194218fa299265439ed8bb87e562
+Merge: 2262aab a584428
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Sat May 25 16:20:15 2024 +0800
+
+    Merge pull request #134 from Charles2530/lgb06
+    
+    Lgb06
+
+commit a5844282ade41aea1d726774aff694b19c77f0df
+Merge: 65795fc 2262aab
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Sat May 25 16:19:48 2024 +0800
+
+    Merge branch 'master' into lgb06
+
+commit 65795fc5d03153e714b0dfe993136a803697e0c3
+Merge: ae42803 e19e4ca
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Sat May 25 16:15:06 2024 +0800
+
+    merge 5.22
+
+commit 2262aab3b16ac3709136cad5b8ccde68de162737
+Merge: 1b71051 2081692
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Sat May 25 14:21:37 2024 +0800
+
+    Merge pull request #133 from Charles2530/charles
+    
+    Charles
+
+commit 208169229ce13fcf1f2d5e226a17a4e25884974c
+Author: charles2530 <2569337619@qq.com>
+Date:   Sat May 25 14:17:28 2024 +0800
+
+    完成手机端首页位置绑定及用户页面移植
+
+commit 38ceda6c84aed6c0ee4a8d8b21bf9c0f8f4f08d1
+Merge: 49641bf 1f182d4
+Author: charles2530 <2569337619@qq.com>
+Date:   Sat May 25 13:35:50 2024 +0800
+
+    Merge branch 'charles' of github.com:Charles2530/Meteorological_prediction_platform into charles
+
+commit 49641bfd73ed77759307e7d2959ee75a9fdd6c11
+Author: charles2530 <2569337619@qq.com>
+Date:   Sat May 25 13:35:43 2024 +0800
+
+    update readme
+
+commit 1b7105113adb69b8aada0d92e8e4afc3a52f3cba
+Merge: 80da84c 8330bc4
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Sat May 25 13:34:20 2024 +0800
+
+    Merge pull request #132 from Charles2530/jt
+    
+    mod infoWindow
+
+commit 80da84c76ca6e388d123c819e0e2d0d43e6c41a7
+Merge: 6180665 1f182d4
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Sat May 25 13:27:00 2024 +0800
+
+    Merge pull request #131 from Charles2530/charles
+    
+    Charles
+
+commit 1f182d4e707de9bf111ed591ad5d82f042616134
+Merge: 2b12b80 6180665
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Sat May 25 13:26:51 2024 +0800
+
+    Merge branch 'master' into charles
+
+commit 8330bc40522d826548419847e19b9533baa96553
+Merge: 96e0930 6180665
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Sat May 25 13:26:27 2024 +0800
+
+    aaa
+
+commit 2b12b80048df1849b0f753b20cf9224b8adcff0a
+Author: charles2530 <2569337619@qq.com>
+Date:   Sat May 25 13:24:52 2024 +0800
+
+    完成手机端布局
+
+commit 96e0930ae4f57669ff55fcb5f43149a186a7bdc6
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Sat May 25 13:23:38 2024 +0800
+
+    mod infoWindow
+
+commit 6180665f651e5df5bbdae62189269ef47d304e25
+Author: Charles2530 <2569337619@qq.com>
+Date:   Sat May 25 00:05:48 2024 +0800
+
+    earthquake
+
+commit d7b3564b230b322b907928357cf6e1e11deb4ec8
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 24 23:49:43 2024 +0800
+
+    up
+
+commit b3dcfaaebdacf28d82b4fe74a6e8d395d66886f0
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 24 23:48:05 2024 +0800
+
+    up
+
+commit 0e76ef611da18028580cf2750bdd0a7d2cebd731
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 24 23:46:21 2024 +0800
+
+    earthquake info
+
+commit 21af85cf53f9cdf80a0959d68614b7dec22920f8
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 24 23:32:41 2024 +0800
+
+    sync
+
+commit ae428034116f7e007fbb6baf02a9bd80b39e2a45
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Wed May 22 22:13:08 2024 +0800
+
+    1
+
+commit 697d3943251c2e47555179759180daf0ad922431
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Wed May 22 21:40:59 2024 +0800
+
+    5.22 brief aqi change
+
+commit 63907d99b5d74b6738645eaeb403c722f8a30033
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed May 22 18:30:21 2024 +0800
+
+    update components
+
+commit d5e3fde75c6196e0d57b47ea37bf1739a8adb3ff
+Merge: be04921 e19e4ca
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Wed May 22 18:02:58 2024 +0800
+
+    Merge pull request #128 from Charles2530/master
+    
+    merge main
+
+commit e19e4caf4f9833447113aec4d03a4c4a55d5d0d8
+Author: Charles2530 <2569337619@qq.com>
+Date:   Wed May 22 10:09:03 2024 +0800
+
+    chores(rename): rename users to customuser to avoid errorsck your startup logs for errors
+
+commit 5dd63ceec666990fc08a0afe319c0999585a2a57
+Author: Charles2530 <2569337619@qq.com>
+Date:   Wed May 22 10:07:24 2024 +0800
+
+    chores(rename): rename users to customuser to avoid error
+
+commit f4b7e9226b839913d1263c90e85d3531cea4fbbb
+Merge: fb08d90 f1d2211
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Mon May 20 21:15:46 2024 +0800
+
+    Merge pull request #127 from Charles2530/jt
+    
+    add layer info
+
+commit f1d221141ae0f9e35ed1aa2a20fd6e6e83ccabe1
+Merge: 5a2f2ed a4fa3f6
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Mon May 20 21:06:38 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit 5a2f2edaf53a0802e442c3af31a5de2348207a77
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Mon May 20 21:06:30 2024 +0800
+
+    aaa
+
+commit a4fa3f634ab241236e68f150433542ca5ca3a992
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Mon May 20 21:06:13 2024 +0800
+
+    aaa
+
+commit 1d0f947dd86cfcf1bdefc2cda6779c8314b395fc
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Mon May 20 21:05:08 2024 +0800
+
+    add layer info
+
+commit fb08d90b81ee9250a2cde79a77cb3e69a75c0287
+Author: Charles2530 <2569337619@qq.com>
+Date:   Sat May 18 20:32:31 2024 +0800
+
+    update
+
+commit 76a214fc8d4e6382b566578888f3e9c583e0dfcf
+Merge: 2de5490 716e139
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Fri May 17 21:49:13 2024 +0800
+
+    Merge pull request #126 from Charles2530/lgb06
+    
+    Lgb06
+
+commit 716e1398c41e48ba807e970466d7fdcae24a922f
+Merge: 3eeca85 2de5490
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Fri May 17 21:49:03 2024 +0800
+
+    Merge branch 'master' into lgb06
+
+commit 3eeca85c01cdf6f49161cc75bfcdd4a2f7ec30b5
+Merge: d82c6d9 97ec469
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Fri May 17 21:42:59 2024 +0800
+
+    merge 5.17 page_1
+
+commit d82c6d9d5be46fc5198ea096c4194c88a344e555
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Fri May 17 21:16:34 2024 +0800
+
+    5.17 page_1
+
+commit 2de5490285dce7f5443097d8be810c8644f485e4
+Merge: c279e30 07d0c5a
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Fri May 17 20:15:46 2024 +0800
+
+    Merge pull request #125 from Charles2530/jt
+    
+    debug geo
+
+commit 07d0c5a3a0ca6447083a5cfed0b1dcfbd381251b
+Merge: b0df306 c279e30
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Fri May 17 20:14:27 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit b0df306a30a2b76bcd7c2f5abc16bb74c34a1427
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Fri May 17 20:13:46 2024 +0800
+
+    debug geo
+
+commit c279e308247bd54b714d46e9769def054acdc2d8
+Merge: df9fa96 6b95fab
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Fri May 17 19:24:29 2024 +0800
+
+    Merge pull request #124 from Charles2530/jt
+    
+    add AQI layer
+
+commit 6b95fabbbb6a4f393af8ce69524422a99c8c0bef
+Merge: 3eb2141 1f6a8bd
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Fri May 17 19:22:29 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit 1f6a8bda3e11dd2d3beb154af06acce3c73e3430
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Fri May 17 19:22:20 2024 +0800
+
+    aaa
+
+commit 3eb2141ed32afb5ca3b3ee20b753dded4d22869d
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Fri May 17 19:21:43 2024 +0800
+
+    add AQILAYER
+
+commit df9fa965abf280a40e0a45f975527e12121f4333
+Merge: acec101 e3c47d1
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Fri May 17 19:05:34 2024 +0800
+
+    Merge pull request #123 from Charles2530/jt
+    
+    add icons
+
+commit e3c47d1476b13528170111c76ee54ba8f3b64dbe
+Merge: 5225d05 acec101
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Fri May 17 19:05:14 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit 5225d05c3885da6c213b584fde09c606133eff59
+Merge: 7103b5e 4eadbbf
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Fri May 17 19:00:59 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit 7103b5e50679151164befba19b687e9553293e8e
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Fri May 17 19:00:56 2024 +0800
+
+    aaa
+
+commit 4eadbbf5254e69bd618c63768de838fd022785e5
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Fri May 17 18:57:59 2024 +0800
+
+    aaa
+
+commit f3e4948e1074dfb31e6089dbbec59d48de8958fe
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Fri May 17 18:56:56 2024 +0800
+
+    add icons
+
+commit acec1014372b8b5cc6e1a21a0d8e4b864bceed4f
+Merge: 180a0dc be04921
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri May 17 16:52:00 2024 +0800
+
+    完成节流设置
+    
+    完成节流设置
+
+commit be04921fd5d0db8f90f316db047f6834d778b86f
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri May 17 16:49:41 2024 +0800
+
+    部分图表debug
+
+commit e7a5c957f0360bf1cd1117c08e7d7106f82bae7d
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri May 17 16:45:38 2024 +0800
+
+    完成节流
+
+commit 55c894257c71a6326bbb4ec45314491d85b11359
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri May 17 16:43:48 2024 +0800
+
+    添加节流函数，减少接口调用次数
+
+commit c897a896fa8443ed11b297ec4a8dec260958549b
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri May 17 16:21:17 2024 +0800
+
+    增加防抖函数
+
+commit d47a7313e02511f1b1d8be788762bc60de1021a4
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri May 17 13:02:11 2024 +0800
+
+    渲染debug
+
+commit fbe7c06f7cb6f482e33d35a1bed3fc1ae2a039ca
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri May 17 12:56:36 2024 +0800
+
+    完成时间维度控制
+
+commit 180a0dc866a98f5816d83599d17ae8ed109ddf0a
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 17 10:05:02 2024 +0800
+
+    update
+
+commit b67384a691baa149ab683c83b0df2015a88c3837
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 16 14:51:33 2024 +0800
+
+    feat(command): add args support for weather commands
+
+commit 6e820e674acf03110391a0738ff561f17dbaf295
+Merge: 4e7e25b 3332d06
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 16 13:38:58 2024 +0800
+
+    Merge pull request #121 from Charles2530/master
+    
+    Merge pull request #120 from Charles2530/charles
+
+commit 3332d06bf2c575f708d7b1450c56276b1fbca01d
+Merge: 81e7ebe 4e7e25b
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 16 13:38:22 2024 +0800
+
+    Merge pull request #120 from Charles2530/charles
+    
+    Charles
+
+commit 4e7e25bd6e3c0e24c2f7a7aa56d09a1465912f39
+Merge: e3d3e6d 81e7ebe
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 16 13:38:14 2024 +0800
+
+    Merge branch 'master' into charles
+
+commit e3d3e6d1390d2819701fbe5d421874cb663cfa75
+Author: charles2530 <2569337619@qq.com>
+Date:   Thu May 16 13:33:35 2024 +0800
+
+    完成错误信息输出
+
+commit 18bba279047fb948f0b6448ac0a35a062cdfd649
+Author: charles2530 <2569337619@qq.com>
+Date:   Thu May 16 13:22:09 2024 +0800
+
+    完成图例丰富，优化用户体验，修改数据分析页面架构
+
+commit 8d6e3edcce8d6674c3452c6b3a9f71786ca782f9
+Author: charles2530 <2569337619@qq.com>
+Date:   Thu May 16 12:54:27 2024 +0800
+
+    完成页面设置修改
+
+commit 81e7ebe7c9edfca06d902e9e6dcd51a1ac6389b2
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 16 03:54:45 2024 +0800
+
+    locationInfo
+
+commit 9597ecc3c01d5817ac9de6a49ec98112278a0fde
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 16 03:20:56 2024 +0800
+
+    locationInfo
+
+commit deb7f93c582e55553119c78f073050798e0ee961
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 16 03:18:40 2024 +0800
+
+    locationInfo
+
+commit 2f720af8c1a45dbaa31269bb1829cfec43ed5692
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 16 03:08:21 2024 +0800
+
+    locationInfo
+
+commit cbac36f6468563d8991eed13e1e5ac97a92c616f
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 16 02:21:09 2024 +0800
+
+    .
+
+commit 13baa96839e3839d26d4b880d9f77b6923de69dc
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 16 02:14:54 2024 +0800
+
+    city lat lon info
+
+commit d7825f967f609d7521aaee7764abe7fb80b4b17b
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 16 02:03:08 2024 +0800
+
+    location infos
+
+commit 514d1445f3618c28673db1ef7425d2c159cffa6d
+Author: Charles2530 <2569337619@qq.com>
+Date:   Wed May 15 19:03:29 2024 +0800
+
+    update
+
+commit f1eabe0fc62f6d21d2cb84b14cdadb1e95b9fec8
+Merge: d5cbf5b eb1c93f
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Wed May 15 17:08:38 2024 +0800
+
+    Merge pull request #119 from Charles2530/jt
+    
+    add heatmap
+
+commit eb1c93faa49fcaa418ccecf0a82952f894e50014
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Wed May 15 17:06:34 2024 +0800
+
+    add heatmap
+
+commit 7c954ee56e11b80e5ea341e6b48197b8b7162252
+Merge: 42dea84 f74bbdb
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Tue May 14 22:11:46 2024 +0800
+
+    bbb
+
+commit 42dea8416938e360e5c35da00b3b4a728a0f18e5
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Tue May 14 22:08:11 2024 +0800
+
+    add component
+
+commit f74bbdb6c1ca6c89a989f12a8ef01c508e637137
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Tue May 14 22:07:36 2024 +0800
+
+    add component
+
+commit 537744868d8dce5cfcd9e06d40447c41144a0726
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Tue May 14 22:04:29 2024 +0800
+
+    aaa
+
+commit d5cbf5bf342e503ef6e1b65c324515a451ca8186
+Author: Charles2530 <2569337619@qq.com>
+Date:   Tue May 14 13:12:40 2024 +0800
+
+    update backend
+
+commit fb92995db5d679db9c0a4b81c89eff4be3e8b435
+Merge: a7f8417 73a4ce7
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Tue May 14 13:12:03 2024 +0800
+
+    Merge pull request #118 from Charles2530/charles
+    
+    Charles
+
+commit 73a4ce7e9097ae300e937c7982036602ceb13c3b
+Author: charles2530 <2569337619@qq.com>
+Date:   Tue May 14 13:11:08 2024 +0800
+
+    test admin
+
+commit 8d4e5189cc6bf0673ca6afdb88c21e27aa9d56fb
+Author: charles2530 <2569337619@qq.com>
+Date:   Tue May 14 13:06:33 2024 +0800
+
+    测试token
+
+commit a7f84172581fa233e52f13df4a4e7a90e19dba2d
+Author: Charles2530 <2569337619@qq.com>
+Date:   Tue May 14 11:33:25 2024 +0800
+
+    feat(user)
+
+commit 76a58f2011b8ff22bf4ad61465cca4917c4f0c7d
+Author: Charles2530 <2569337619@qq.com>
+Date:   Tue May 14 10:24:06 2024 +0800
+
+    chores: delete .idea
+
+commit 28e89798a674de75c20992d1c574a63dc176c8f2
+Author: Charles2530 <2569337619@qq.com>
+Date:   Mon May 13 16:22:29 2024 +0800
+
+    update
+
+commit 91ca5b54815f6a143a77e5800c0f8c838eebfbdf
+Author: Charles2530 <2569337619@qq.com>
+Date:   Mon May 13 16:21:32 2024 +0800
+
+    push
+
+commit 45df5bb1cf060bb10161c80798633a0a5c4232d8
+Merge: 8e6e706 a23f3b8
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Mon May 13 16:20:34 2024 +0800
+
+    Merge pull request #116 from Charles2530/charles
+    
+    完成动态显示debug
+
+commit a23f3b8dc507472f90358545e641a13ce9769940
+Author: charles2530 <2569337619@qq.com>
+Date:   Mon May 13 16:18:54 2024 +0800
+
+    完成动态显示debug
+
+commit 8e6e706085ed4823cdc03c8a0976cde7b2f62ede
+Author: Charles2530 <2569337619@qq.com>
+Date:   Mon May 13 12:40:25 2024 +0800
+
+    update
+
+commit 17e590a4f1e93b5551b144379682fd9d4b0543c8
+Author: Charles2530 <2569337619@qq.com>
+Date:   Sun May 12 23:42:22 2024 +0800
+
+    update
+
+commit b102516ed7aa4b466c47a9cbcd1028ca89a0f5de
+Author: Charles2530 <2569337619@qq.com>
+Date:   Sat May 11 19:31:45 2024 +0800
+
+    push
+
+commit c42eee5d2a82fa545cfe55ec815ce4211c948ea0
+Merge: e5d1f0c ff80776
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Sun May 12 22:48:01 2024 +0800
+
+    Merge pull request #115 from Charles2530/charles
+    
+    完成数据分析所有图表绘制并完成vs功能
+
+commit ff807762d780ba35adb08fc42f664d082ef0c2c7
+Author: charles2530 <2569337619@qq.com>
+Date:   Sun May 12 22:46:58 2024 +0800
+
+    完成图表设计
+
+commit 269a2fb7f0c9cf163ff02306e38633676ac938f2
+Author: charles2530 <2569337619@qq.com>
+Date:   Sun May 12 19:58:20 2024 +0800
+
+    完成页面设计
+
+commit 6f3d686965a1977b9285fcacdb38d88defeae722
+Author: charles2530 <2569337619@qq.com>
+Date:   Sun May 12 19:53:40 2024 +0800
+
+    完善图表
+
+commit efdaa588aeb61413d113e8793480cb5029a5fe87
+Author: charles2530 <2569337619@qq.com>
+Date:   Sun May 12 19:28:31 2024 +0800
+
+    echarts
+
+commit 03d95dd31d11e6fec1352c852bea32cb797e086f
+Author: charles2530 <2569337619@qq.com>
+Date:   Sun May 12 19:26:45 2024 +0800
+
+    图表
+
+commit 3d9c568370b80d7fb9f177613f5f226e8b26fbe8
+Author: charles2530 <2569337619@qq.com>
+Date:   Sun May 12 18:57:16 2024 +0800
+
+    更新图表
+
+commit afa6d540a99076f38f0fa285ad7dfc747291a37d
+Author: charles2530 <2569337619@qq.com>
+Date:   Sun May 12 18:24:36 2024 +0800
+
+    完成气温图和aqi图
+
+commit 9cff951d1c655e6658d5f3f22b5b72243f9aca31
+Author: charles2530 <2569337619@qq.com>
+Date:   Sun May 12 17:58:19 2024 +0800
+
+    完成图表初始化
+
+commit 0a95b40bf4391f8f9a43b6eab5ac90f1a058d6d9
+Author: charles2530 <2569337619@qq.com>
+Date:   Sat May 11 23:54:15 2024 +0800
+
+    update
+
+commit 4c21e26bd78d3e5973f94d2f960d0d848dd40c3e
+Merge: fad5e58 713800f
+Author: charles2530 <2569337619@qq.com>
+Date:   Sat May 11 23:51:47 2024 +0800
+
+    Merge branch 'charles' of github.com:Charles2530/Meteorological_prediction_platform into charles
+
+commit fad5e58b4fa46d6ff2b699c0738a8bc8b878f1a4
+Author: charles2530 <2569337619@qq.com>
+Date:   Sat May 11 23:50:43 2024 +0800
+
+    完成更新城市功能
+
+commit 713800fc5611f93a207ee0edd899ece12bb8e98e
+Merge: 73f693c e5d1f0c
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Sat May 11 23:07:02 2024 +0800
+
+    Merge pull request #114 from Charles2530/master
+    
+    merge main
+
+commit e5d1f0c7bc9bce7cc2cea691b1b49a03900e4631
+Merge: fed7988 73f693c
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Sat May 11 23:02:55 2024 +0800
+
+    Merge pull request #113 from Charles2530/charles
+    
+    打开管理员界面模式
+
+commit 73f693c0d37bfb0e72a56cb69b03d64b4c20601f
+Author: charles2530 <2569337619@qq.com>
+Date:   Sat May 11 23:02:15 2024 +0800
+
+    打开管理员界面模式
+
+commit 97ec469913a0dbac5383f85d1dc5279e6a08ecc4
+Merge: d000622 fed7988
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Sat May 11 21:35:21 2024 +0800
+
+    Merge pull request #112 from Charles2530/master
+    
+    from master 5.11 21:00
+
+commit fed798861a3bf8909b96c2ccdeb9e4214a77f237
+Merge: 2e1c7c0 11da003
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Sat May 11 20:57:28 2024 +0800
+
+    Merge pull request #111 from Charles2530/jt
+    
+    add click window
+
+commit d000622e22783e97931331dfbd8e701328dbc0b4
+Merge: caa1d6b 2e1c7c0
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Sat May 11 20:57:08 2024 +0800
+
+    Merge branch 'master' into lgb06
+
+commit 11da0033d5c238b5c1683e76f72042e110f0bd31
+Merge: 0de5d7e 2e1c7c0
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Sat May 11 20:53:56 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit 0de5d7ea1c19e58d096487879a8d7b0af2abdf8f
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Sat May 11 20:52:53 2024 +0800
+
+    add click window
+
+commit caa1d6bf8d8f63b07cbf03ddb2af2e3a93107f4b
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Sat May 11 20:50:09 2024 +0800
+
+    贝塔-1-组件
+
+commit 2e1c7c0bb65e61b9d15aacda8fac4fc73f5e73cc
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Sat May 11 19:17:17 2024 +0800
+
+    feat(auth): change default user to Profile and add custom fields (#109)
+
+commit df408539747a2311c01ce2e65e5feace4094aab8
+Merge: db538ce c80bc06
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Sat May 11 17:01:21 2024 +0800
+
+    bbb
+
+commit db538ce8330c4b8e23668cc521c1bcc747290c78
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Sat May 11 16:58:37 2024 +0800
+
+    aaa
+
+commit c80bc065b1c3fa57bb07ae3fe6de907e21a0071b
+Merge: c985f96 300f6e0
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Sat May 11 09:40:52 2024 +0800
+
+    Merge pull request #108 from Charles2530/charles
+    
+    Charles
+
+commit 300f6e0260d71b65d5f43ff506b06f448eed4d0e
+Author: charles2530 <2569337619@qq.com>
+Date:   Sat May 11 09:39:47 2024 +0800
+
+    debug 数据分析
+
+commit 48c5cede361cc69b65830f77f9eef6e3091aefa6
+Author: charles2530 <2569337619@qq.com>
+Date:   Sat May 11 09:18:23 2024 +0800
+
+    完成维度加单位及列表归一化
+
+commit 42ca7acdd9505ebfac1e38bc082563aac200464a
+Merge: 2c91fd0 c985f96
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Sat May 11 08:31:55 2024 +0800
+
+    Merge pull request #107 from Charles2530/master
+    
+    merge main
+
+commit c985f96f25acce1bcdfb01b204888b452cdfd02f
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 10 22:38:18 2024 +0800
+
+    update
+
+commit 020713b57bd6cd9b66e746a1a177c2543e1416dd
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 10 22:37:24 2024 +0800
+
+    update sqlite
+
+commit c28ced6d4f2d50431f9d1954c793c42d6493ea78
+Merge: 120cf15 2c91fd0
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri May 10 20:49:14 2024 +0800
+
+    Merge pull request #106 from Charles2530/charles
+    
+    完成数据设计页面设计
+
+commit 2c91fd07498ee7618cd3bf0b250c252afcf25088
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri May 10 20:39:55 2024 +0800
+
+    页面美化
+
+commit 32d38ba49434c3a313fbc1a6301b271fb8493273
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri May 10 19:41:31 2024 +0800
+
+    完成排行榜美化
+
+commit db2e49592378a440e6c3dc58fb9df64850efde1b
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri May 10 19:06:03 2024 +0800
+
+    完成数据分析页面
+
+commit 6462b658571de3b7ec444a3f90186b209f301cc5
+Merge: 222fedf 120cf15
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri May 10 16:46:46 2024 +0800
+
+    Merge pull request #105 from Charles2530/master
+    
+    merge main
+
+commit 43be369a4a6fd1aab7e9febd3272fbac03f6ff9b
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Fri May 10 09:32:11 2024 +0800
+
+    a
+
+commit 120cf15be93afc16a8ffc910d864dc796d633cd7
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 10 07:48:54 2024 +0800
+
+    完成更新
+
+commit 0be185fe35147bc2dec3b9034b4f42220bcce101
+Merge: cda9e72 222fedf
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri May 10 07:45:31 2024 +0800
+
+    Merge pull request #104 from Charles2530/charles
+    
+    Charles
+
+commit 222fedf6d2cfb2e3a65d8998a89b2e7b6f778238
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri May 10 07:45:06 2024 +0800
+
+    main
+
+commit 49ce1393806b27542bc95a462716a957fdedac14
+Merge: 1e5efcd cda9e72
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri May 10 07:40:43 2024 +0800
+
+    Merge pull request #103 from Charles2530/master
+    
+    merge main
+
+commit cda9e72994ff5131a8e6806d4af7a41f88bbeda9
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 10 07:39:25 2024 +0800
+
+    commit
+
+commit 11fc49fc522a468b58461770f3a94e9901bceeef
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 10 07:32:29 2024 +0800
+
+    完成数据查询debug
+
+commit 560e11fb37c9fca0e2f8dbc4a261fc18ae5e761d
+Merge: 531babd 66c8cb0
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri May 10 07:22:18 2024 +0800
+
+    Merge pull request #93 from Charles2530/lgb06
+    
+    Lgb06
+
+commit 531babd8a97ea5022ae716e43f991b2cd67b243b
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 10 06:22:53 2024 +0800
+
+    feat(chart)
+
+commit 95b0ed3d2676eec0557c290c74fb72d55b1739ca
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 10 05:26:51 2024 +0800
+
+    feat(aqi): fix aqi best and worst
+
+commit 68dbe93e42659a22bbea5edfeaffb003e8561b54
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 10 05:25:10 2024 +0800
+
+    feat(aqi): fix aqi best and worst
+
+commit c00f8ba45c80e303248dee630c1e93736e8564cc
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 10 04:33:16 2024 +0800
+
+    fix(user): fix users.model import
+
+commit 3c5cb380972053a7442ab3e2f05cbe5335a325a7
+Merge: fed3205 66c8cb0
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Fri May 10 01:50:57 2024 +0800
+
+    Merge branch 'lgb06' of github.com:Charles2530/Meteorological_prediction_platform into lgb06
+
+commit fed3205260eba315cd056547dc8566ec344f3eaf
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Fri May 10 01:50:01 2024 +0800
+
+    lgb06-alpha-modified
+
+commit 10fa595c43994364c82a780d404e975046eb26ba
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 10 00:24:35 2024 +0800
+
+    完成debug
+
+commit 60a043e41a8bb119898a784b5b18692514d114b7
+Author: Charles2530 <2569337619@qq.com>
+Date:   Fri May 10 00:10:03 2024 +0800
+
+    t
+
+commit 64decbe5f439d7ba3dda550830ac612b62dc0dce
+Merge: 966cfd9 9d397b6
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Fri May 10 00:08:12 2024 +0800
+
+    Merge pull request #102 from Charles2530/jt
+    
+    icon path
+
+commit 9d397b6717e043ce04d148105e97953cd2a7e4f8
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Fri May 10 00:04:25 2024 +0800
+
+    icon path
+
+commit 966cfd9f615db047401573a3fbe3f6f03d741a48
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Fri May 10 00:01:42 2024 +0800
+
+    fix(format): align weather info with fetch runner (#101)
+
+commit 3e13560284b1438622355da9a4f98ae940871b25
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 23:57:32 2024 +0800
+
+    t
+
+commit f88c60292e21f51140803190a426ad6d5c4d04e0
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 23:52:24 2024 +0800
+
+    t
+
+commit 4900f4ba6730d9ff39d26e2fdcc8a6a69d500fb4
+Merge: 168a397 c93913b
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Thu May 9 23:44:28 2024 +0800
+
+    Merge pull request #99 from Charles2530/jt
+    
+    debug imgsrc
+
+commit 168a397d4197e9255b6c4067c9d89d924b2b254a
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 23:09:18 2024 +0800
+
+    t
+
+commit 4f4132499e092b38814455a0c67cb9728ad78a69
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Thu May 9 23:06:32 2024 +0800
+
+    fix(auth): fix the bug of usercity when login (#100)
+
+commit 3cef061314dc3e6e732b83c5bd67e194cd1d0f2a
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 23:04:36 2024 +0800
+
+    t
+
+commit 1e081ff1b7a4f258ac9f04f7c1740092745d4506
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 23:05:47 2024 +0800
+
+    db
+
+commit c93913b98fc6d495ebc42fecc4af19b95f269c1a
+Merge: efb07e4 8f30509
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Thu May 9 22:59:03 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit 77c5842517fc25774ff34b2c6a82dd2bfbb2afdd
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Thu May 9 22:58:25 2024 +0800
+
+    feat(user): add city subscription (#98)
+
+commit efb07e473cbb37d34269647838e53abc503c4e05
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Thu May 9 22:57:57 2024 +0800
+
+    debug imgsrc
+
+commit 8f305096a9ca9b0c3516d553e11ec5c38805b2e1
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 22:50:22 2024 +0800
+
+    t
+
+commit 328085a2781a57823ccc172e3c59899e1f8a5c3b
+Merge: b067def 96c60e8
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Thu May 9 22:48:55 2024 +0800
+
+    Merge pull request #97 from Charles2530/jt
+    
+    mod icon
+
+commit b067def9dfaae1e045f9031256ac5f3fbc831887
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 22:47:03 2024 +0800
+
+    t
+
+commit 96c60e862a8bf435d0c2f5a0bcf30e36e031e717
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Thu May 9 22:43:30 2024 +0800
+
+    mod icon
+
+commit 36fb0b8bd621256c60fc6b68e871eccd8af3e78e
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 22:43:02 2024 +0800
+
+    t
+
+commit b23cef20b5863cc6b45c824c639bc7015cb130a3
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 22:25:22 2024 +0800
+
+    add png icons
+
+commit 15dfbe048f5e3b804c6fd238f9214dd1cb46cad1
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 22:14:26 2024 +0800
+
+    t
+
+commit 1fc3f2358d8f6fc8b7f590576cd3cbbed49ed2eb
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 21:58:12 2024 +0800
+
+    3
+
+commit 1cb8032d4f2ce6c82fb1344166334e4a3fa9c756
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 21:56:35 2024 +0800
+
+    c
+
+commit 9e4e6d62fb62078cce7f948c690bafbb23c6ecd7
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 21:57:12 2024 +0800
+
+    t
+
+commit 73f326bfdbc9389b1657fa0dc8328b6d20308339
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Thu May 9 21:38:22 2024 +0800
+
+    feat (user2city): add user-city relation in users app and register in admin
+    
+    * feat(user2city): add user-city relation in users app
+    
+    * feat(user2city): add user-city relation in users app
+    
+    * feat(admin): register models in admin
+    
+    * feat(admin): register models in admin
+    
+    * feat
+    
+    * feat
+    
+    ---------
+    
+    Co-authored-by: 李昊哲 <21373212@buaa.edu.cn>
+
+commit b8b53a8cd6c4f0e81738c2e322e1ddc9a208a63a
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 21:33:09 2024 +0800
+
+    getcityinfo
+
+commit 98af90ed4ef69e456f45f465385fedbad7c89f34
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 21:21:45 2024 +0800
+
+    geo
+
+commit 265f8e957b212a709dd79bfc7758f37c51d9e12a
+Merge: 055a2ef 37dce20
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Thu May 9 21:20:42 2024 +0800
+
+    Merge pull request #95 from Charles2530/jt
+    
+    add icon
+
+commit 37dce209e26b6e07e5b0178c3117e9c0ce89a0de
+Merge: b2c0b29 055a2ef
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Thu May 9 21:17:11 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit b2c0b2948f54b6901297ae5a97d35f2a05504bbe
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Thu May 9 21:16:02 2024 +0800
+
+    add icon
+
+commit 055a2efa7808ded8097bbe39b9cdd4a5a103a94a
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 21:15:21 2024 +0800
+
+    geo
+
+commit 5e5ed1ea9eaf26d45701f5995e8c96de8ceb30de
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 21:04:25 2024 +0800
+
+    migrate
+
+commit 3f07eaa7f019ea0d706ec19334e8e7db6cde4c4a
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 21:01:25 2024 +0800
+
+    geoinfo
+
+commit 41d7291834105ae65a76efc4c303b5715c526d56
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 20:33:25 2024 +0800
+
+    1
+
+commit acf21f89ed400548b2239b55855121d75e1196fb
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 20:32:47 2024 +0800
+
+    1
+
+commit 4bba10aea17505701eac3c3dcf822c49243a2c52
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 20:18:40 2024 +0800
+
+    check
+
+commit a55edb7b79a130f9c5acee40806fdf530bea0e81
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 20:05:19 2024 +0800
+
+    data
+
+commit b1cc481876fd36c832aa5d99f05106122799cda9
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 20:03:45 2024 +0800
+
+    loadCityinfo
+
+commit baff43b8cb708f36d85a0fc4a81380ad9a4a596f
+Merge: 1fb1a82 5ebaa66
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Thu May 9 19:57:47 2024 +0800
+
+    Merge branch 'master' of github.com:Charles2530/Meteorological_prediction_platform
+
+commit 1fb1a821a867c0355049bb72aab712a361a26308
+Merge: ec44f40 f22a977
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Thu May 9 19:54:12 2024 +0800
+
+    Merge remote-tracking branch 'origin/master' into back2
+
+commit ec44f4035b4e4fc271d4e996012c6d5853c78bde
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Thu May 9 19:51:25 2024 +0800
+
+    getProInfo
+
+commit 5ebaa665438e9e8c4f21b4cbb4ca1527756f10cc
+Merge: f22a977 914798f
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Thu May 9 18:30:24 2024 +0800
+
+    Merge pull request #94 from Charles2530/jt
+    
+    debug inter
+
+commit 914798f1b7eb09c0084167cd5aba568b10fe1e8e
+Merge: 0533d81 0fdd226
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Thu May 9 18:29:04 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit 0fdd226705010cba814d138c292c4e1083c56daf
+Merge: c6d35da f22a977
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Thu May 9 18:28:45 2024 +0800
+
+    Merge branch 'master' of https://github.com/Charles2530/Meteorological_prediction_platform
+
+commit 0533d81238c379a83639e3b0eb3451fc03149dcd
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Thu May 9 18:28:14 2024 +0800
+
+    debug inter
+
+commit 66c8cb04766027e1291095e0995c6abeb4722c18
+Merge: 7e6c6c2 f22a977
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Thu May 9 18:13:18 2024 +0800
+
+    Merge branch 'master' into lgb06
+
+commit 7e6c6c209441fab656b970078624bf1f7ad186d3
+Merge: b76a1ae 7ec0f23
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Thu May 9 18:04:39 2024 +0800
+
+    Merge remote-tracking branch 'origin/master' into lgb06
+    111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+
+commit b76a1aeb0a11c4d91a3dcb036beea27158ce6a1f
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Thu May 9 18:04:21 2024 +0800
+
+    lgb_alpha
+
+commit f22a977beac0b6ea89fcaaf502dccc55870d8e00
+Merge: e224a25 91d443c
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Thu May 9 17:50:22 2024 +0800
+
+    Merge branch 'back2'
+
+commit 91d443c2a03aaf576117dc66d1c3aa6bf28a80a3
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Thu May 9 17:49:14 2024 +0800
+
+    getProInfo
+
+commit e224a25884f778632564abff255137849e64ac97
+Merge: e33ffea 1e5efcd
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 17:42:03 2024 +0800
+
+    Merge pull request #92 from Charles2530/charles
+    
+    完成曲线接口
+
+commit 1e5efcd8843e98c428d976ad321c546360401373
+Author: charles2530 <2569337619@qq.com>
+Date:   Thu May 9 17:40:29 2024 +0800
+
+    update interface
+
+commit e33ffea8f9ce1f079bbed53215f2687d4e2bab15
+Merge: dd8c60d 22968b9
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 17:38:50 2024 +0800
+
+    Merge pull request #91 from Charles2530/back2
+    
+    Back2
+
+commit 22968b985859ff07fb2d9d7c59d6629c9f752e9f
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Thu May 9 17:37:37 2024 +0800
+
+    getProInfo
+
+commit dd8c60dd08ff9303bfc767bc25d504ffaad9dc6d
+Merge: 7f01966 6e645a0
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Thu May 9 17:08:01 2024 +0800
+
+    Merge pull request #90 from Charles2530/lee
+    
+    feat(crawler): store_catastrophic_forecast_data
+
+commit 6e645a0972c7298f6b08e840697dd21d806f43a5
+Merge: 88d606a 7f01966
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 17:06:39 2024 +0800
+
+    feat(crawler): store_catastrophic_forecast_data
+
+commit ff4a9e0876c44ea416a2cd5b37353f870c381957
+Merge: 1d24576 7f01966
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 17:06:15 2024 +0800
+
+    Merge pull request #89 from Charles2530/master
+    
+    merge main
+
+commit 88d606aa5fdaefba8c8a834aee9736f04afb6b08
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 17:04:10 2024 +0800
+
+    feat(crawler): store_catastrophic_forecast_data
+
+commit 7f019667a07bef2544541a6dbde4b1eaef157585
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 17:03:31 2024 +0800
+
+    update
+
+commit d800042bec6cc01038428a5aea6f928343ebd912
+Merge: 561ddfe 1d24576
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 16:44:13 2024 +0800
+
+    Merge pull request #88 from Charles2530/charles
+    
+    merge main
+
+commit 1d24576b720ea2a103b998f7ae9154779ae5e00e
+Author: charles2530 <2569337619@qq.com>
+Date:   Thu May 9 16:42:39 2024 +0800
+
+    debug
+
+commit c94d1924206fdddd46c48021f82a07d3fc4f43f8
+Merge: b2050ef 561ddfe
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 16:36:11 2024 +0800
+
+    Merge pull request #87 from Charles2530/master
+    
+    merge main
+
+commit 561ddfecdc13f55fb273869fc9dcbd7f85690d8b
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 16:35:03 2024 +0800
+
+    main
+
+commit 5e340b676e8a7569625ea8fa0458dde2fee7f106
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 16:10:30 2024 +0800
+
+    update
+
+commit a2ba2e3d95a488cbefa5d5a14ae4a5cf86872cc8
+Merge: 6d6644f b659177
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Thu May 9 16:09:39 2024 +0800
+
+    Merge pull request #86 from Charles2530/jt
+    
+    完成首页接口、debug
+
+commit e70baa1aeb7bb4126520ec531ae8faf48f9a1203
+Merge: 2ccd377 6d6644f
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Thu May 9 16:00:32 2024 +0800
+
+    Merge remote-tracking branch 'origin/master' into back2
+
+commit 2ccd3772665252297ec0a0800a9e6c58db7b8f0e
+Merge: 040bbb9 652858b
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Thu May 9 15:59:58 2024 +0800
+
+    Merge remote-tracking branch 'origin/master' into back2
+
+commit c6d35dac66895e1bfe547da716726cf65648927f
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Thu May 9 15:57:42 2024 +0800
+
+    debug hp
+
+commit 6d6644f05630ac8f782e12c9032db8af6a625c48
+Merge: 5e6e4b7 b2050ef
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 15:57:26 2024 +0800
+
+    Merge pull request #85 from Charles2530/charles
+    
+    csrf
+
+commit b2050efa2725508effc60605a34d640bef095ae6
+Author: charles2530 <2569337619@qq.com>
+Date:   Thu May 9 15:56:20 2024 +0800
+
+    csrf
+
+commit b6591774b4c7373de8345ae2babb6c7b4fd293d2
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Thu May 9 15:54:52 2024 +0800
+
+    debug hp
+
+commit 5e6e4b77cc0b968751df0c92f109759b5f59b4ac
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 15:53:46 2024 +0800
+
+    update
+
+commit 652858b1afe82f17db0ffcb2a9468ccf518a4c24
+Merge: 47f0fe7 f794704
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 15:38:04 2024 +0800
+
+    Merge pull request #84 from Charles2530/charles
+    
+    完成后端数据管理接口
+
+commit f7947047c5033be133c9e739d8bf527fdefb6d45
+Author: charles2530 <2569337619@qq.com>
+Date:   Thu May 9 15:36:29 2024 +0800
+
+    完成数据管理接口
+
+commit 591d395a311a85040a11532d1422e080b61b2329
+Merge: 949beef 47f0fe7
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 14:43:25 2024 +0800
+
+    Merge pull request #83 from Charles2530/master
+    
+    merge main
+
+commit 47f0fe7c7b52b200869843f0b5c45c7c9913ac54
+Merge: 3c0276d 5eba407
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Thu May 9 14:37:52 2024 +0800
+
+    Merge pull request #82 from Charles2530/lee
+    
+    chores(cache): remove cache
+
+commit 5eba40730ed3d715d78bc7de8ef3e487158d89e0
+Merge: a699fd0 3c0276d
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 14:36:22 2024 +0800
+
+    notifications/views.py
+
+commit a699fd0bec8344ff3c385d9ac592f93d4cfac843
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 14:30:37 2024 +0800
+
+    chores(cache): remove cache
+
+commit 3c0276daa2c09ff7010c88d74d1f4623630df9a4
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 14:13:09 2024 +0800
+
+    commit
+
+commit 4716591d2aa7e609b61f3f1999dd77a480356439
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 13:54:04 2024 +0800
+
+    update
+
+commit 4e0d32531f214f57b88bde08b42964fee864e700
+Merge: 7361803 38be045
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Thu May 9 13:51:17 2024 +0800
+
+    Merge pull request #81 from Charles2530/lee
+    
+    feat(command): add store command
+
+commit 38be04526a00d12c26b18be3c914777b7bb61291
+Merge: 71897d8 689fc11
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 13:50:20 2024 +0800
+
+    Merge branch 'master' into lee
+
+commit 689fc11276bb4c4c89cf3146d5d0371f17d3c74d
+Merge: 9ec66ea 7361803
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 13:45:27 2024 +0800
+
+    feat(command): add store command
+
+commit 9ec66eaf67ca0eaa63b6e7a93f3ddf1b0d00ab3a
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 13:39:52 2024 +0800
+
+    feat(command): add store command
+
+commit 73618036e8e109a06ae04543c200d86b173b0d58
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 12:51:17 2024 +0800
+
+    完成双mode设置
+
+commit 71897d8af748725239912bc00f94d65d2c7e8d02
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 12:36:05 2024 +0800
+
+    feat(task): add task
+
+commit af66f2777327642984c2c4fe66f3fbd004aa0d05
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 12:31:59 2024 +0800
+
+    chores(framework): add framework of AIPView and Serializer
+
+commit 93d6dee027da4e4a63f221f106a6c2242192cf30
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 12:26:04 2024 +0800
+
+    all
+
+commit a555b4b3540e35ee788620af51197a9de0b52993
+Merge: 965d8ff 908e33f
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 12:21:43 2024 +0800
+
+    feat(url): add weather url
+
+commit 908e33f0b258dd2b48e62080a8082cf54f41494b
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 12:16:27 2024 +0800
+
+    stack
+
+commit ca380e9749796f47a51e0b4ec753c921d04ce5ca
+Merge: 3601bbf 949beef
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 12:15:42 2024 +0800
+
+    Merge pull request #80 from Charles2530/charles
+    
+    create table view
+
+commit 949beef7428a1eea740b358c057720b5bdf47807
+Author: charles2530 <2569337619@qq.com>
+Date:   Thu May 9 12:14:41 2024 +0800
+
+    create table view
+
+commit 3601bbf3c1fbd466002003c59625e4558ca57d2e
+Merge: e6f119d d57b05b
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 11:44:59 2024 +0800
+
+    Merge pull request #79 from Charles2530/charles
+    
+    Charles
+
+commit d57b05b0d8eb3d0d4282de99b2ad483287c34bd2
+Author: charles2530 <2569337619@qq.com>
+Date:   Thu May 9 11:44:29 2024 +0800
+
+    update
+
+commit 027ec7b6ab4a7e44ea535a98c17966f3f2885e58
+Merge: 7cbbc11 e6f119d
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 11:08:13 2024 +0800
+
+    Merge pull request #78 from Charles2530/master
+    
+    merge main
+
+commit e6f119de673fb3f827d2ffbc479f09db61aa7c82
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 11:07:27 2024 +0800
+
+    all
+
+commit 09ea968bcba209b4c32a2da25b53390a0a7a588b
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 07:48:25 2024 +0800
+
+    modify
+
+commit 557021654c4aa0c7d2b478d183bb982e6c40a0ea
+Merge: be33b76 7cbbc11
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 07:38:09 2024 +0800
+
+    Merge pull request #77 from Charles2530/charles
+    
+    完成灾害订阅后端接口
+
+commit 7cbbc112f25a323bcf229288d6e502ba58774379
+Author: charles2530 <2569337619@qq.com>
+Date:   Thu May 9 07:36:18 2024 +0800
+
+    完成灾害订阅后端接口开发
+
+commit 965d8ff9af5c687011cf1017aec49c4bfaf9796d
+Merge: 9439f92 be33b76
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 06:09:06 2024 +0800
+
+    Merge branch 'master' into lee
+
+commit 9439f92c1e6d0816c45d75942d37d4e8d077c32a
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 06:08:47 2024 +0800
+
+    feat(weather): add urls to test
+
+commit de596c025fbbf6912fd7c1f12840b680d5a6cff3
+Merge: b2b22b4 be33b76
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 05:57:50 2024 +0800
+
+    Merge pull request #76 from Charles2530/master
+    
+    merge main
+
+commit be33b76563c99a92f35013351a8b4e6d45cb1881
+Merge: 5c1c828 1ba5548
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Thu May 9 05:52:32 2024 +0800
+
+    Merge pull request #75 from Charles2530/lee
+    
+    feat(notification): add framework
+
+commit 1ba5548f241ea90024b2bc01d62f59b67faee816
+Merge: 0328fd9 5c1c828
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 05:50:43 2024 +0800
+
+    feat(notification): add framework
+
+commit b2b22b4bbb9b45bef990e4420bd2b146e51d6962
+Merge: 43752bd 5c1c828
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu May 9 05:25:57 2024 +0800
+
+    Merge pull request #64 from Charles2530/master
+    
+    merge main
+
+commit 5c1c828eb80d9ee98ea620e03a57790a0a8c9ce2
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 05:00:08 2024 +0800
+
+    4-58
+
+commit 7ce728fc6a2033c7fbbd14c3e32110ef35896e86
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 04:19:10 2024 +0800
+
+    4-19
+
+commit 0328fd9d4d25cedc7833080c63d3b7c6a9868821
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 03:10:09 2024 +0800
+
+    chores(comment): commented out unused
+
+commit 08bfd05ab7a3e0089b8ba4b590c4734658407fbc
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 02:56:02 2024 +0800
+
+    gitignore
+
+commit bb026ba7a78fd7408ef289ee9eb6d3b2869041fe
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 02:40:43 2024 +0800
+
+    change axios
+
+commit cc5133ac9886de036c862122ebe7f22d0db9a59b
+Merge: befa8ec 9242921
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Thu May 9 02:52:49 2024 +0800
+
+    Merge pull request #74 from Charles2530/lee
+    
+    fix(auth): add change current
+
+commit 9242921f1b18e114229e4495e7aad10a0e69ee74
+Merge: 2f845b0 befa8ec
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 02:52:01 2024 +0800
+
+    Merge branch 'master' into lee
+
+commit befa8ecffb90824291380e24a1eafcadb04068a7
+Merge: 48241da 378d845
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Thu May 9 02:41:17 2024 +0800
+
+    Merge pull request #73 from Charles2530/jt
+    
+    主页丰富图层
+
+commit 2f845b080d57874b489ef8a0b71ff46912a871a9
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 02:37:51 2024 +0800
+
+    fix(auth): add change current
+
+commit 378d8450fdbf07e4b9514d16b30060dc987871e8
+Merge: be19e1c 18b0d12
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Thu May 9 02:37:28 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit 48241da98023b199053de5de296bb4064e592258
+Merge: 18b0d12 5dbef9d
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Thu May 9 02:34:35 2024 +0800
+
+    Merge pull request #72 from Charles2530/lee
+    
+    fix(auth): add change current
+
+commit 5dbef9d29a29b6d4240c4e148fb71d02e8ad3548
+Merge: 5ef03d8 18b0d12
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 02:33:13 2024 +0800
+
+    fix(auth): add change current
+
+commit be19e1cd10d71bbe1ffdd9a62b849830811f5f80
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Thu May 9 02:30:02 2024 +0800
+
+    addLayer
+
+commit 5ef03d8b3578da7d0476156e858c85006d7b5969
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 02:08:43 2024 +0800
+
+    6
+
+commit 040bbb9101fe658b1a34c9c19cb58e1720929535
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Thu May 9 02:06:03 2024 +0800
+
+    load local file demo
+
+commit 18b0d128796c49073ca523aab272c86e474fa720
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 02:05:15 2024 +0800
+
+    all
+
+commit 01880cd37180624f7b2080c022d653476b4bba70
+Merge: 0efd23f 7ec0f23
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 02:00:51 2024 +0800
+
+    Merge branch 'master' into lee
+
+commit 10784cc395d456f6dd3fcb9dbcd7670b2529ce29
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 02:00:25 2024 +0800
+
+    modify id
+
+commit 7ec0f230c693094b3d2e6bc5592c30cbcb5440da
+Merge: cf8119b 7b9ea6d
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Thu May 9 01:59:43 2024 +0800
+
+    Merge pull request #71 from Charles2530/lgb06
+    
+    Lgb06
+
+commit 0efd23f670d59f08656f6cf5eda4c815a92405fd
+Merge: 4362b97 cf8119b
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 01:59:05 2024 +0800
+
+    Merge branch 'master' into lee
+
+commit 7b9ea6dcb14b5b8e69581231d07ea46a03228035
+Merge: 2c38034 cf8119b
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Thu May 9 01:58:48 2024 +0800
+
+    Merge branch 'master' into lgb06
+
+commit 4362b977a1a30ae14ba73b0b384e06b157dae13e
+Merge: 40b5e60 51731c6
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 01:58:11 2024 +0800
+
+    chores(draft): add draft of weather.views
+
+commit 2c3803476cf5573ce62f6ce7d4bb524af3651f07
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Thu May 9 01:52:32 2024 +0800
+
+    2tab beautify-1
+
+commit 51731c66ddb611f3462bdbd29a775a5fe496224f
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Thu May 9 01:40:52 2024 +0800
+
+    getProInfo
+
+commit cf8119b9f3e044f1a915f26bb108404e40ce09b1
+Merge: 751b5cb 40b5e60
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Thu May 9 01:40:10 2024 +0800
+
+    Merge pull request #70 from Charles2530/lee
+    
+    fix(manage): append slash in urls
+
+commit 40b5e60c09a5b800c29a49d53cd832f828e81b6b
+Merge: 359fe0b 751b5cb
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 01:39:06 2024 +0800
+
+    Merge branch 'master' into lee
+
+commit 359fe0b381eea581e642208c91df31001ee73a89
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 01:38:03 2024 +0800
+
+    fix(manage): append slash in urls
+
+commit c68bc7afdb990d5f72cb82cffb8ff75838a5bacb
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 01:37:40 2024 +0800
+
+    fix(manage): append slash in urls
+
+commit 751b5cbb2a4355dacd1d62e4daf37d953abea82e
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 01:37:03 2024 +0800
+
+    update
+
+commit 8ca690f1ce4b37f3a19f69b126e43c4ca9dd1d55
+Merge: e401fe2 84187ec
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Thu May 9 01:21:40 2024 +0800
+
+    Merge pull request #69 from Charles2530/lee
+    
+    fix(auth): add all users as admin
+
+commit 84187ec4ec752dc4aed6ea852a11abe3cd67bb38
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 01:20:43 2024 +0800
+
+    fix(auth): add all users as admin
+
+commit b6f0a8b3edf3eaf974f479d36b46b3391e4ce9f2
+Merge: d5652ae e401fe2
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 01:08:54 2024 +0800
+
+    chores(pycache)
+
+commit d5652aef1c490dd7fe49be18303c941b8cd1eda9
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 01:03:34 2024 +0800
+
+    fix(auth): set role=2 when creating a user
+
+commit e401fe2dd0338ca0e3e6c4c5a34f57687b9f33ae
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu May 9 01:02:26 2024 +0800
+
+    get_if
+
+commit 0bbcf7251f05abc55146f9c9f78ea1903e21ecbd
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Thu May 9 00:29:01 2024 +0800
+
+    chores(settings): add celery
+
+commit 8003cadafb5282738b6b1e912770c24cc65ae67b
+Merge: 4588887 6b22f3b
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Thu May 9 00:27:54 2024 +0800
+
+    Merge remote-tracking branch 'origin/lee' into back2
+
+commit 4588887334429e56ce9827d6d3147253972066f8
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Thu May 9 00:26:01 2024 +0800
+
+    getCityInfo
+
+commit e9f59181a41a73ba915053b927b8bf525e52a2e7
+Author: 王宇龙 <21373312@buaa.edu.cn>
+Date:   Wed May 8 22:53:31 2024 +0800
+
+    get Pro Info
+
+commit fc1befb5ded9dc7ecef07f21e0f33f0d29f3ea17
+Author: Charles2530 <2569337619@qq.com>
+Date:   Wed May 8 22:20:47 2024 +0800
+
+    getInfo
+
+commit 49a7ce09950af015f46bbdb4fc18af1bde4abb2e
+Merge: fcf6621 6b22f3b
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Wed May 8 22:14:41 2024 +0800
+
+    Merge pull request #68 from Charles2530/lee
+    
+    fix(auth): fix _ leading function names
+
+commit 6b22f3b304c1888f42795e5f8a5eca14a395dcf0
+Merge: 1585a40 fcf6621
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Wed May 8 22:13:07 2024 +0800
+
+    Merge branch 'master' into lee
+
+commit 1585a40fb829b8bad70f985b01b8f1d3624c8d98
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Wed May 8 22:10:45 2024 +0800
+
+    fix(auth): fix _ leading function names
+
+commit fcf6621cdcd2c5a24491dfc8e280e5b3473dddde
+Merge: c3dad73 ce3a920
+Author: ReActor <81018862+RRReActor@users.noreply.github.com>
+Date:   Wed May 8 22:06:53 2024 +0800
+
+    Merge pull request #67 from Charles2530/waysome
+    
+    add weatherIcon samples
+
+commit ce3a9209cdfa0e86ddb4df7b7099872068df5656
+Author: Waysome <crrreactor@gmail.com>
+Date:   Wed May 8 22:06:09 2024 +0800
+
+    add weatherIcon samples
+
+commit c3dad73fbdda50112cd1971d379aedcf22c0b35c
+Merge: 48f9a95 206c172
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Wed May 8 21:44:47 2024 +0800
+
+    Merge pull request #66 from Charles2530/lee
+    
+    fix(auth): add @csrf_exempt in login
+
+commit 48f9a95190aa9abe644d0d36fb28009ba4914906
+Author: Charles2530 <2569337619@qq.com>
+Date:   Wed May 8 21:43:46 2024 +0800
+
+    master
+
+commit 206c1721aa78a4bee1a121a7f013b90d87863f45
+Merge: fe3fe14 b68a887
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Wed May 8 21:37:00 2024 +0800
+
+    Merge branch 'master' into lee
+
+commit fe3fe147d02b924351838fe6a52901784db8c75a
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Wed May 8 21:36:26 2024 +0800
+
+    fix(auth): add @csrf_exempt in login
+
+commit b68a8875e7e445ba72b89a98c56ba6f606c2d16b
+Merge: 1f88731 0182b3b
+Author: ReActor <81018862+RRReActor@users.noreply.github.com>
+Date:   Wed May 8 20:59:25 2024 +0800
+
+    Merge pull request #65 from Charles2530/waysome
+    
+    add WeahterIcon
+
+commit 0182b3b2e07580c319b07acbf4bdbf115a91ede5
+Author: Waysome <crrreactor@gmail.com>
+Date:   Wed May 8 20:57:58 2024 +0800
+
+    add WeahterIcon
+
+commit 1f88731273553f31e732699c6e32b7d6571cd0ba
+Author: Charles2530 <2569337619@qq.com>
+Date:   Wed May 8 20:06:22 2024 +0800
+
+    改进接口
+
+commit c71d1f31be5324be6068b4baeb9c764341c4b179
+Author: Charles2530 <2569337619@qq.com>
+Date:   Wed May 8 18:45:07 2024 +0800
+
+    打通前后端
+
+commit caf0fbec0207de8ba082e9e8f1e64bad7a3e7f80
+Author: Charles2530 <2569337619@qq.com>
+Date:   Wed May 8 17:12:29 2024 +0800
+
+    完成基本配置
+
+commit 9f8d48cfdac38f9464a50f6445ef48980e6ed2e7
+Author: Charles2530 <2569337619@qq.com>
+Date:   Wed May 8 08:44:38 2024 +0800
+
+    change
+
+commit 11a7615c650f183818d1d2b361af96fc1b3dcfc7
+Merge: 145486e 43752bd
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Wed May 8 08:23:53 2024 +0800
+
+    Merge pull request #63 from Charles2530/charles
+    
+    Charles
+
+commit 43752bdafce0c55d6529bc9048a978bebe0f17fc
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed May 8 08:23:16 2024 +0800
+
+    修改图标
+
+commit 57076dbd15ba15d8958af0a85fcbb4c1ca9c6a3e
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed May 8 08:18:54 2024 +0800
+
+    配置build
+
+commit 145486edeea41391e6d886165a418b0cce296b6d
+Merge: a47e4d3 74f1b8a
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Wed May 8 08:08:54 2024 +0800
+
+    Merge pull request #62 from Charles2530/charles
+    
+    nginx跨域前端
+
+commit 74f1b8a983fd972fa430727c357220ea0d1e0593
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed May 8 08:07:32 2024 +0800
+
+    nginx跨域前端
+
+commit a47e4d3b2a00b0141eb7ad0a94358688bb4da302
+Merge: 08e9979 d64ebbd
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Wed May 8 07:49:15 2024 +0800
+
+    Merge pull request #61 from Charles2530/lee
+    
+    fix(conf): fix port 8080 of uwsgi.ini
+
+commit d64ebbd61647b1987624b98c806259f48cdea3ab
+Merge: e212154 08e9979
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Wed May 8 07:47:53 2024 +0800
+
+    Merge branch 'master' into lee
+
+commit e212154631b6c481b9bacc6b6f29711fa0f44e5c
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Wed May 8 07:47:04 2024 +0800
+
+    fix(conf): fix port 8080 of uwsgi.ini
+
+commit 04d7be3d0e4b19fb80d0a8a06d69f0c865e9f269
+Merge: af96be2 08e9979
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Tue May 7 23:21:20 2024 +0800
+
+    Merge remote-tracking branch 'origin/master' into lgb06
+    merge
+
+commit af96be217f89310f09907ff225d056bf03b5e7ca
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Tue May 7 23:21:17 2024 +0800
+
+    -
+
+commit 08e9979503a44ca013069de9f10804e625dbf8f6
+Merge: 5b5feb6 c639c18
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Tue May 7 19:24:56 2024 +0800
+
+    Merge pull request #60 from Charles2530/charles
+    
+    Charles
+
+commit c639c18ccc9722b4068f3dd418869cc7b3250605
+Author: charles2530 <2569337619@qq.com>
+Date:   Tue May 7 19:24:22 2024 +0800
+
+    ljb06 debug
+
+commit 47b47d7ccfa87d805195b280fa864f30e6106ad4
+Author: charles2530 <2569337619@qq.com>
+Date:   Tue May 7 18:58:00 2024 +0800
+
+    清理代码
+
+commit 9670c80fc968a6ada56fa319f5431fe3f05f6a8b
+Merge: 8306d14 5b5feb6
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Tue May 7 18:52:14 2024 +0800
+
+    Merge pull request #59 from Charles2530/master
+    
+    merge  main
+
+commit 5b5feb6685fc70ec62c6a303e9c6e42d4bae7cb6
+Merge: 4d3c5d5 a07dd58
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Tue May 7 16:51:54 2024 +0800
+
+    Merge pull request #58 from Charles2530/lgb06
+    
+    4tab pre
+
+commit a07dd58da74580d5928d364ef249733000d4135f
+Merge: d031da7 4d3c5d5
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Tue May 7 16:47:46 2024 +0800
+
+    Merge branch 'master' into lgb06
+
+commit d031da7d1e08a21ed7ca1cce96dcee812b1c9f48
+Merge: 4b59b21 8c03f38
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Tue May 7 16:40:49 2024 +0800
+
+    4tab pre
+
+commit 4b59b21f903e71055fcee18a5df69e0b6725f521
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Tue May 7 16:24:32 2024 +0800
+
+    -
+
+commit 4d3c5d5de71466caaadd400d01636b0603180c06
+Merge: 8c03f38 f990bfa
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Tue May 7 16:16:47 2024 +0800
+
+    Merge pull request #57 from Charles2530/jt
+    
+    加入风场
+
+commit 604fd5ea043dd523a0102fa0fb4b9e4714cb95b5
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Tue May 7 16:08:37 2024 +0800
+
+    2tab pre
+
+commit f990bfa73d63742fd45c3da2bb4cacee5c63778d
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Tue May 7 16:04:08 2024 +0800
+
+    add windlayer
+
+commit dca0ab42330725dae623751d1aee1e9868cd5978
+Merge: 90b42e8 8c03f38
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Tue May 7 16:02:27 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit 90b42e8016142ce80eb08dd56eb7035a86580bc3
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Tue May 7 16:00:09 2024 +0800
+
+    windlayer
+
+commit 8c03f38933fbaa196c9b79db2e6f30cda8b2f18c
+Merge: c3e234d 8306d14
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Tue May 7 15:19:57 2024 +0800
+
+    Merge pull request #55 from Charles2530/charles
+    
+    Charles
+
+commit 8306d1494aacedd7f8d50f689b0bdf27aa2b7270
+Author: charles2530 <2569337619@qq.com>
+Date:   Tue May 7 15:13:35 2024 +0800
+
+    完成数据分析页面和预警页面功能补充
+
+commit 4469a148d38f1bbb39a3b398b9a2de025ab2b168
+Author: charles2530 <2569337619@qq.com>
+Date:   Tue May 7 12:30:05 2024 +0800
+
+    完成数据分析页面初始化
+
+commit c3e234d278e4b745eb4b943e60388938573b88be
+Merge: aa82d9f fc92abd
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Tue May 7 11:19:16 2024 +0800
+
+    Merge pull request #54 from Charles2530/charles
+    
+    Charles
+
+commit fc92abd22dd4f830630efb3a5d779bd0822a6d4e
+Author: charles2530 <2569337619@qq.com>
+Date:   Tue May 7 11:18:07 2024 +0800
+
+    完成空气质量页面
+
+commit c4a4688c69b1d805a5bd332e5c03f70c0f9056b2
+Author: charles2530 <2569337619@qq.com>
+Date:   Tue May 7 09:32:05 2024 +0800
+
+    完成排行榜开发
+
+commit aa82d9fb7dd8a515198313074db09dbd106de18f
+Merge: 96182b3 6894bb6
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Tue May 7 08:04:03 2024 +0800
+
+    Merge pull request #53 from Charles2530/lee
+    
+    fix(host): add uwsgi.ini
+
+commit 6894bb6d8e3f53ecf51c21c9bca53e06897fb6dd
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Tue May 7 08:03:06 2024 +0800
+
+    fix(host): add uwsgi.ini
+
+commit 96182b33de694b0df4347890d5851264c20aba64
+Merge: 5fff8f6 ee2a1f9
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Tue May 7 07:53:33 2024 +0800
+
+    Merge pull request #52 from Charles2530/lee
+    
+    fix(cron): temperarily remove files concerning cron in settings
+
+commit ee2a1f9b827de7129ca1c579b886f0d498bb0031
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Tue May 7 07:52:42 2024 +0800
+
+    fix(cron): temperarily remove files concerning cron in settings
+
+commit 5fff8f6dae6f1c3ce46624148e620dfe7ce835e5
+Merge: bfd6485 5e911ef
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Tue May 7 07:49:51 2024 +0800
+
+    Merge pull request #51 from Charles2530/lee
+    
+    Lee
+
+commit 5e911efc8e9957223c9ddb4f52ff0a53ed95bf39
+Merge: 75cd18b bfd6485
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Tue May 7 07:49:11 2024 +0800
+
+    Merge branch 'master' into lee
+
+commit 75cd18bdd8f4fcceb44a4c32fe107372568ba1c6
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Tue May 7 07:48:24 2024 +0800
+
+    fix(cron): temperarily remove files concerning cron
+
+commit 6ad811177e4a2cd521aa1f64417c6df7e258acc5
+Merge: 86e316c bfd6485
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Mon May 6 23:50:18 2024 +0800
+
+    Merge pull request #50 from Charles2530/master
+    
+    merge main
+
+commit bfd6485c8cd0cfd51a20d67402881c524f9460c7
+Merge: b9b4558 86e316c
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Mon May 6 23:47:55 2024 +0800
+
+    Merge pull request #49 from Charles2530/charles
+    
+    配置远程环境
+
+commit 86e316c787e3d22f80ebe3081d7f04d33fe0699e
+Author: charles2530 <2569337619@qq.com>
+Date:   Mon May 6 23:46:42 2024 +0800
+
+    配置远程环境
+
+commit b9b4558dc16caa1d9e20a54ec3b2dacee57aada9
+Merge: 3d403c5 723c834
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Mon May 6 23:45:08 2024 +0800
+
+    Merge pull request #48 from Charles2530/charles
+    
+    Charles
+
+commit 723c834227dc465bc05fcd057ccf41259a481293
+Author: charles2530 <2569337619@qq.com>
+Date:   Mon May 6 22:56:38 2024 +0800
+
+    跨域测试
+
+commit 3d403c5d86a5e3ecfcb34f41feb852f5f7effefb
+Merge: 35b8c40 6a287a9
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Mon May 6 22:34:44 2024 +0800
+
+    Merge pull request #47 from Charles2530/lee
+    
+    Lee
+
+commit 6a287a9b5d9209a6d81291f6f5e6f42fe035e0d9
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Mon May 6 22:33:45 2024 +0800
+
+    fix(host): add remote host into ALLOWED_HOSTS
+
+commit 04d727a8cb165280ebe711f22691c1f222310a35
+Author: charles2530 <2569337619@qq.com>
+Date:   Mon May 6 21:38:13 2024 +0800
+
+    添加边框
+
+commit f2d10d1a7791e7a20d0a4507f7731b68ecbc0dd3
+Merge: 24b81f8 35b8c40
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Mon May 6 21:16:43 2024 +0800
+
+    m
+
+commit 24b81f8890186170f93caed0002d5537c1fd1fc7
+Merge: 23a6c53 123641b
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Mon May 6 21:09:34 2024 +0800
+
+    m
+
+commit 8bcd9234f3c37422b1d68c2c3c3c22faccf00a64
+Author: charles2530 <2569337619@qq.com>
+Date:   Mon May 6 20:55:13 2024 +0800
+
+    修改首页
+
+commit 23a6c5309425c4d7b792d6f572667987a8ed9883
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Mon May 6 20:51:45 2024 +0800
+
+    svg
+
+commit f4fb4d1041011c6f32986966ba08d3bcce0541a2
+Merge: 1125cf9 35b8c40
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Mon May 6 20:47:14 2024 +0800
+
+    Merge branch 'master' into lee
+
+commit 1125cf93e02f787d76f10f0ff201afd1449dcf71
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Mon May 6 20:44:43 2024 +0800
+
+    feat(user): add api concerning user
+
+commit 1d4d56e34bb0cdd1e8507102cff0a636c529eabc
+Author: charles2530 <2569337619@qq.com>
+Date:   Mon May 6 19:38:34 2024 +0800
+
+    remove fade
+
+commit 35b8c40ee32f22f27f91d74d54a5ada07fc673bf
+Merge: 9696378 717f209
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Mon May 6 09:04:50 2024 +0800
+
+    Merge pull request #46 from Charles2530/charles
+    
+    美化UI
+
+commit 717f2094f314cb1daebfa8ac23efad82f863d479
+Author: charles2530 <2569337619@qq.com>
+Date:   Mon May 6 09:02:37 2024 +0800
+
+    美化UI
+
+commit 99f2c790baf28f84754974489bc493895da6f9cc
+Author: charles2530 <2569337619@qq.com>
+Date:   Mon May 6 08:43:22 2024 +0800
+
+    完成页码debug及页面美化，溢出footer调整等
+
+commit f3bf19b02db8f2892f15512ccd418d867cfad20b
+Merge: a9f9f8a 9696378
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Mon May 6 08:26:41 2024 +0800
+
+    Merge pull request #45 from Charles2530/master
+    
+    merge main
+
+commit 96963789dc6b8e23db8c8f515fa70597763318a6
+Merge: 7be0bc9 a9f9f8a
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Mon May 6 07:44:54 2024 +0800
+
+    Merge pull request #44 from Charles2530/charles
+    
+    去除底部footer
+
+commit a9f9f8a23317d83c187564edbbddea99e7fc854c
+Author: charles2530 <2569337619@qq.com>
+Date:   Mon May 6 07:44:24 2024 +0800
+
+    去除底部footer
+
+commit 7be0bc95623565495d4b0ffb20758efae77258ef
+Merge: 00b83fb b206162
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Sun May 5 17:17:27 2024 +0800
+
+    Merge pull request #43 from Charles2530/jt
+    
+    mod infocolumn color
+
+commit b206162667574b95c4918436af830eb369326439
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Sun May 5 16:45:34 2024 +0800
+
+    mod infocolumn color
+
+commit 00b83fbe39dfce9a247faf7f149dfafcae23ffc5
+Merge: 54a3ef2 8ad8593
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Sun May 5 09:09:04 2024 +0800
+
+    Merge pull request #42 from Charles2530/server
+    
+    Server
+
+commit 8ad85937ca8886c8a5d12fb5ae759289f1e60dd0
+Author: Charles2530 <2569337619@qq.com>
+Date:   Sun May 5 09:06:09 2024 +0800
+
+    fetch
+
+commit 54a3ef2403ede2c3e354d5a10ae3aefa30d9f39d
+Merge: 9d30c19 59e45f3
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Sun May 5 08:50:23 2024 +0800
+
+    Merge pull request #41 from Charles2530/charles
+    
+    完善表单，完成所有部分功能测试
+
+commit 59e45f30d7c4661bed370f2e4716f1653d6a55cd
+Author: charles2530 <2569337619@qq.com>
+Date:   Sun May 5 08:49:19 2024 +0800
+
+    完善表单，完成所有部分功能测试
+
+commit 9d30c19f0d78e2649045ffb5a2cc1aa9415d7889
+Merge: ff2708f bb53208
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Apr 26 23:37:51 2024 +0800
+
+    version 1.0.0 release
+    
+    version 1.0.0
+
+commit bb532084be9b26040bbab2dc4d6d8d3f8f654115
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri Apr 26 23:36:04 2024 +0800
+
+    完成优化操作
+
+commit ff2708f261b83feb4c59007a5a7590b198169f6d
+Merge: 63fcd3e 418700f
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Apr 26 22:21:59 2024 +0800
+
+    Merge pull request #39 from Charles2530/charles
+    
+    完成数据管理数据表
+
+commit 418700f2192db14d68a972a52c0ee7e8fdf9d2cc
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri Apr 26 22:20:22 2024 +0800
+
+    完成数据管理数据表
+
+commit 63fcd3e2a4a40b3682ebc19584ce713077f589fa
+Merge: 7fb0205 9256c54
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Apr 26 16:11:06 2024 +0800
+
+    Merge pull request #38 from Charles2530/charles
+    
+    完成灾害订阅、后台管理页面美化工作及功能测试
+
+commit 9256c54583ca26cd2951b43ef47eec4a7f5987b6
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri Apr 26 15:24:16 2024 +0800
+
+    完成取消订阅功能
+
+commit 5d2babd2b22bd41399ce3cc672cdae0b27abb283
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri Apr 26 14:36:15 2024 +0800
+
+    完成进一步灾害订阅页面优化结构
+
+commit 7fb0205d628d7ff7289dea658c2acfe9b3412cbd
+Merge: 2f90aec 569a96d
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Apr 26 14:24:46 2024 +0800
+
+    Merge pull request #37 from Charles2530/charles
+    
+    配置跨域
+
+commit 569a96ddd265e2cacf74ca3976ce37ec0e6ee3da
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri Apr 26 14:24:10 2024 +0800
+
+    配置跨域
+
+commit 2f90aec9ea98bf08259175a9e3583e90b1eb1a4a
+Merge: 437e530 4bdbe50
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Apr 26 12:30:52 2024 +0800
+
+    Merge pull request #36 from Charles2530/charles
+    
+    完成了一大堆美化
+
+commit 4bdbe505457de2ef227ff79c6505e170fe4b1a47
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri Apr 26 12:28:30 2024 +0800
+
+    完成订阅城市功能
+
+commit 65ded754a2de06dc874c26c1208a96d2f431bf87
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri Apr 26 12:10:37 2024 +0800
+
+    完成logo制作
+
+commit f838c9cd8ad2c49c279cc3c95f72fc602905bbbe
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri Apr 26 11:02:12 2024 +0800
+
+    订阅城市改为下拉菜单
+
+commit 700d8b6b5a3fbf28c467b96a31f6b469c9b39ca0
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri Apr 26 10:51:38 2024 +0800
+
+    完成用户管理页面美化
+
+commit f89c089999dcb3a02cf85dfd38e6c679a1c7bba2
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri Apr 26 10:29:46 2024 +0800
+
+    美化echarts图表
+
+commit 1ec3ffec8cd3673e34a86c8addc07bd515812940
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri Apr 26 10:24:11 2024 +0800
+
+    完成订阅预警信息的公告栏美化
+
+commit 65005098039f22efab7a905b3717ecc68e7b0803
+Author: charles2530 <2569337619@qq.com>
+Date:   Fri Apr 26 09:53:41 2024 +0800
+
+    debug 登出部分
+
+commit 013a1bb2b5ec46c2a15c5e0569725dcd17f3c602
+Merge: dbc4d0f 437e530
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Apr 26 09:16:14 2024 +0800
+
+    Merge pull request #35 from Charles2530/master
+    
+    merge main
+
+commit 437e530d3863f65373fb44e90d0c33ba3aaf09e4
+Merge: d628787 123641b
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Apr 26 09:10:56 2024 +0800
+
+    Merge pull request #32 from Charles2530/lgb06
+    
+    Lgb06
+
+commit 123641b370f929a15fa25f1993220b7041eb0298
+Merge: c92643e d628787
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Apr 26 09:10:48 2024 +0800
+
+    Merge branch 'master' into lgb06
+
+commit dbc4d0f103796dc80e5515c369055713dd950a96
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed Apr 24 22:04:41 2024 +0800
+
+    photo
+
+commit d628787b9e931878b77d222f90ef6bc7bb792bad
+Merge: 2adb28a 322b4a9
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Wed Apr 24 21:58:05 2024 +0800
+
+    Merge pull request #34 from Charles2530/jt
+    
+    HazardMarker
+
+commit 2adb28abfbc5a6cbf1e2bb259df54fedce0c37aa
+Merge: e9d3edb 951de5e
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Wed Apr 24 21:52:18 2024 +0800
+
+    Merge pull request #33 from Charles2530/charles
+    
+    Charles
+
+commit 951de5e1f7f4020c7945ee5ab248e37b08a60b46
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed Apr 24 21:35:13 2024 +0800
+
+    一个很丑的导航栏
+
+commit c92643ebff76da075693588ac082cbf79661f55a
+Merge: 7712f4d e9d3edb
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Wed Apr 24 21:18:01 2024 +0800
+
+    Merge branch 'master' into lgb06
+
+commit 7712f4de50621975815caf540d36ca34b2f6cafa
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Wed Apr 24 21:12:06 2024 +0800
+
+    4.24
+
+commit d9ecc8f2d25959b419eaba501b70f5d8759b2290
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed Apr 24 21:09:55 2024 +0800
+
+    完成城市去重和公告样式
+
+commit 322b4a97d1956a26d3a4169f56a584f1f3e559e0
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Wed Apr 24 21:01:38 2024 +0800
+
+    mark hazard
+
+commit cfcd7f32638a9f3bb66bd65e73549f61b4d38c92
+Merge: a7307de e9d3edb
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Wed Apr 24 19:48:58 2024 +0800
+
+    Merge pull request #31 from Charles2530/master
+    
+    merge main
+
+commit e9d3edbc3ec643828d52f0d189a1e821f0b97fe8
+Merge: 2ada11b 0c6bc51
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Wed Apr 24 19:38:01 2024 +0800
+
+    Merge pull request #30 from Charles2530/charles
+    
+    页面美化（去除爱心）
+
+commit 0c6bc513c24c03ed77366872c1f4889bc01e4ed2
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed Apr 24 19:19:15 2024 +0800
+
+    去除爱心效果
+
+commit aebade52ab689f6ead967997f86ed14972898914
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed Apr 24 18:55:59 2024 +0800
+
+    美化UI
+
+commit 7e388ad09a372e59d67cc0cc4cc4b7577e3657eb
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed Apr 24 18:44:51 2024 +0800
+
+    完成搜索日期显示debug
+
+commit 9e3e775bd557ea4edfa6c2047d871b7134d07cde
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed Apr 24 18:19:38 2024 +0800
+
+    完成部分显示UI问题debug
+
+commit 0db210880e6b9716a4c876d71039909a656b06c4
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed Apr 24 18:15:57 2024 +0800
+
+    完成密码加密会显示的bug
+
+commit 2ada11b7b3714b681a0ac6dbc2e7c18a79bd62a6
+Merge: c14199c 693d92b
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Wed Apr 24 08:01:19 2024 +0800
+
+    Merge pull request #29 from Charles2530/charles
+    
+    完成密码加密功能
+
+commit 693d92bf2c1a8bee1e208ae966284ccc9dfe7d17
+Author: charles2530 <2569337619@qq.com>
+Date:   Wed Apr 24 07:58:51 2024 +0800
+
+    完成密码加密功能
+
+commit 025dd92bca4d5ea0d4d1080df48f1e07a6f143e5
+Merge: df7f603 c14199c
+Author: 李嘉鹏 <115880837+lgb06@users.noreply.github.com>
+Date:   Tue Apr 23 21:40:32 2024 +0800
+
+    Merge pull request #28 from Charles2530/master
+    
+    a
+
+commit 3fd5e5fb1173b6456f03f475ef8a9a6edaac15f5
+Merge: 79b9263 c14199c
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Mon Apr 22 21:32:11 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit c14199c8260baf9ce9b58bff720787904fb62a22
+Merge: c4eaa36 4a7e564
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Apr 19 12:46:10 2024 +0800
+
+    Merge pull request #27 from Charles2530/charles
+    
+    完成灾害订阅基本功能,添加渲染图表
+
+commit 4a7e56449778c1d9bf5c01cb1e6dfae715324f04
+Author: charles <2569337619@qq.com>
+Date:   Fri Apr 19 12:43:21 2024 +0800
+
+    完成灾害订阅基本功能
+
+commit c4eaa368d98e2e62fb820343d4f671246a0a0713
+Merge: 8992eff f2e8e96
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Apr 19 10:39:41 2024 +0800
+
+    Merge pull request #26 from Charles2530/charles
+    
+    完成公告栏跳转到对应预警信息
+
+commit f2e8e969e480b0a7dbd61e9a3e7e0c013106c888
+Author: charles <2569337619@qq.com>
+Date:   Fri Apr 19 10:37:37 2024 +0800
+
+    完成公告栏预警通知公告及链接自动跳转到预警页面相应条目位置
+
+commit 40d8e84a3d8d3a918fdd50556bc50d8dccf3f7db
+Author: charles <2569337619@qq.com>
+Date:   Thu Apr 18 07:34:25 2024 +0800
+
+    同步代码
+
+commit 3eecdffdcd8d523f51509bd7a33a9b9d1f600835
+Merge: 83743b9 8992eff
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu Apr 18 07:29:05 2024 +0800
+
+    Merge pull request #25 from Charles2530/master
+    
+    merge main
+
+commit 8992eff18a77c39bd05ac28ad9cff93eefa0ead6
+Merge: 538c02f 83743b9
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu Apr 18 07:28:36 2024 +0800
+
+    Merge pull request #24 from Charles2530/charles
+    
+    Charles
+
+commit 79b9263c5a870b09cd63a853e067e0e6241c70f0
+Merge: 4ebea66 538c02f
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Wed Apr 17 23:26:58 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit 4ebea66e41b9ab05fd16735be6b53bed86c459bb
+Merge: 74d192e 46a4d71
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Wed Apr 17 23:26:41 2024 +0800
+
+    Merge branch 'jt' of https://github.com/Charles2530/Meteorological_prediction_platform into jt
+
+commit 74d192e149cd9b437f0d9ed896297c7a41f230e6
+Merge: edb3058 f669c5c
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Wed Apr 17 23:18:12 2024 +0800
+
+    resolve conflict map
+
+commit 538c02fe432ca6ffbea6bef624227ffa024ccfa0
+Merge: f669c5c 46a4d71
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Wed Apr 17 23:07:37 2024 +0800
+
+    Merge pull request #23 from Charles2530/jt
+    
+    homepage add color
+
+commit 46a4d7151c1131b1c834d7ff4dc8ccc83f403fe8
+Merge: edb3058 f669c5c
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Wed Apr 17 23:07:24 2024 +0800
+
+    Merge branch 'master' into jt
+
+commit edb3058de6949b85d3fb09583c415a5b7c4cbff6
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Wed Apr 17 22:55:39 2024 +0800
+
+    homepage add color
+
+commit df7f60364dc420d166bc17f267f4cb850a008486
+Author: lgb06 <21373216@buaa.edu.cn>
+Date:   Wed Apr 17 22:47:32 2024 +0800
+
+    try
+
+commit f669c5cba29377004de2df1ec7722f4b94bf648b
+Merge: 3062caf 3982303
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Wed Apr 17 22:14:12 2024 +0800
+
+    Merge pull request #22 from Charles2530/lee
+    
+    docs(readme): update backend in readme.md and fix typo
+
+commit 398230357e880be925a351d77ccadd77524811f5
+Merge: e858dad 3062caf
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Wed Apr 17 22:14:01 2024 +0800
+
+    Merge branch 'master' into lee
+
+commit e858dad7cb1913d605acd552d9464d30d26920a5
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Wed Apr 17 22:06:13 2024 +0800
+
+    chores(sync): sync pycache
+
+commit 7161ea650d12a76538ce745a30a20d7585589b76
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Wed Apr 17 22:02:57 2024 +0800
+
+    docs(readme): update backend in readme.md and fix typo
+
+commit 83743b9ae66f360e68f99f0adc56a68d3bd779eb
+Author: charles <2569337619@qq.com>
+Date:   Wed Apr 17 18:35:34 2024 +0800
+
+    更新展示版本
+
+commit 096787f294cc4b63cecacfda43619d770a8556e7
+Author: charles <2569337619@qq.com>
+Date:   Wed Apr 17 18:29:57 2024 +0800
+
+    展示使用版本
+
+commit a7307de74fb7c922b060d94f71e99d0355efc780
+Merge: e8a5636 3062caf
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Wed Apr 17 18:16:58 2024 +0800
+
+    Merge pull request #21 from Charles2530/master
+    
+    merge master
+
+commit 3062cafef46f5dcc0124653e139c4b296d7679bd
+Merge: 0e79c44 280c68f
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Apr 12 21:45:21 2024 +0800
+
+    Merge pull request #20 from Charles2530/charles
+    
+    灾害订阅页面完成及接口文档在apifox完成编写
+
+commit 280c68fa70feb63098f2a2e351cb158d4da89af8
+Author: charles <2569337619@qq.com>
+Date:   Fri Apr 12 21:41:42 2024 +0800
+
+    完成灾害订阅页面及相关的api接口
+
+commit 5be4fd2a832dabb41e6ab18ea3cb3d96d4c286c4
+Merge: 41d8250 0e79c44
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu Apr 11 09:00:24 2024 +0800
+
+    Merge pull request #19 from Charles2530/master
+    
+    配置服务器
+
+commit 0e79c44146faedc15b18a06b783029c068308945
+Merge: d10174b e8a5636
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu Apr 11 08:30:45 2024 +0800
+
+    Merge pull request #18 from Charles2530/server
+    
+    配置服务器
+
+commit e8a5636e6509bcdeb0c41ab5e72d32c958ebb788
+Author: Charles2530 <2569337619@qq.com>
+Date:   Thu Apr 11 08:29:54 2024 +0800
+
+    配置服务器
+
+commit 41d825069ce0eecedc71e5b23e15a1168d17f4d0
+Merge: 47a73e6 d10174b
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu Apr 11 07:44:33 2024 +0800
+
+    Merge pull request #17 from Charles2530/master
+    
+    merge main
+
+commit d10174b6b14e0426fec55d2b8a0b2a88c98e9967
+Merge: 9389b75 cb3befd
+Author: tingcuteee <127753276+tingcuteee@users.noreply.github.com>
+Date:   Wed Apr 10 23:29:33 2024 +0800
+
+    Merge pull request #16 from Charles2530/jt
+    
+    主页地图展示
+
+commit cb3befd58f4f3325f1d756b0b23c367220d9ba8e
+Author: 靳婷 <21371466@buaa.edu.cn>
+Date:   Wed Apr 10 23:13:36 2024 +0800
+
+    增加主页â
+
+commit 9389b755fae00da28b11a90ced6d2d739e06de48
+Merge: 8f36e3c 5e51932
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Tue Apr 9 14:22:02 2024 +0800
+
+    Merge pull request #15 from Charles2530/lee
+    
+    doc: add backend and fix typo
+
+commit 8f36e3c8ca47d18290ccf8774350d55c014dcd01
+Merge: 70e1594 d21622e
+Author: StrivingLee <108967300+StrivingLee@users.noreply.github.com>
+Date:   Tue Apr 9 13:27:00 2024 +0800
+
+    Merge pull request #14 from Charles2530/lee
+    
+    feat(framework): complete basic framework
+
+commit 5e51932f2a9e70a198db005123728af2515f6545
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Tue Apr 9 12:49:25 2024 +0800
+
+    doc: add backend and fix typo
+
+commit d21622e27a1b7e429a9b9d477549d0d3d26c4547
+Author: 李昊哲 <21373212@buaa.edu.cn>
+Date:   Tue Apr 9 12:41:57 2024 +0800
+
+    feat(framework): complete basic framework
+
+commit 70e15946a2774cb7c2bf89f54aa4cebf2cc07bca
+Merge: 46b0ec1 47a73e6
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Sat Apr 6 08:37:14 2024 +0800
+
+    Merge pull request #13 from Charles2530/charles
+    
+    修改top-background和NavigationView
+
+commit 47a73e61e522d3b87d60d4939f328580ed3d2fb0
+Author: charles <2569337619@qq.com>
+Date:   Sat Apr 6 08:36:36 2024 +0800
+
+    修改top-background和NavigationView
+
+commit 46b0ec143bab1b9cf215b6e7a3cf3fbf9344e8ec
+Merge: 52d9499 057dfe3
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Apr 5 21:23:24 2024 +0800
+
+    Merge pull request #12 from Charles2530/charles
+    
+    完成搜索UI及接口
+
+commit 057dfe3f6411c67182593f4477e534854ebddf07
+Author: charles <2569337619@qq.com>
+Date:   Fri Apr 5 21:21:18 2024 +0800
+
+    搜索
+
+commit 6ba9f14ff9f079f952a055b3dc6b6b62010500d8
+Author: charles <2569337619@qq.com>
+Date:   Fri Apr 5 21:20:18 2024 +0800
+
+    完成搜索接口调用
+
+commit 56556fc91f0e521544b39c7139fafce204956a30
+Author: charles <2569337619@qq.com>
+Date:   Fri Apr 5 21:17:05 2024 +0800
+
+    搜索功能
+
+commit 7640c02570fbcc34fba6133a15ef920e529cddae
+Author: charles <2569337619@qq.com>
+Date:   Fri Apr 5 18:28:02 2024 +0800
+
+    修改导航栏
+
+commit 52d9499d3c14c22613adb7401ded4007b448389f
+Merge: 8e0f6fb 4d284f5
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Mar 29 11:53:40 2024 +0800
+
+    Merge pull request #11 from Charles2530/charles
+    
+    更新README
+
+commit 4d284f59ac670e0c40f6f924bd682b604674a6e0
+Author: charles <2569337619@qq.com>
+Date:   Fri Mar 29 11:50:15 2024 +0800
+
+    更新README
+
+commit 8e0f6fb6b7ab926b5678dcabbc089e2fdd171a38
+Merge: b9741de fe80fe8
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu Mar 28 11:29:31 2024 +0800
+
+    Merge pull request #10 from Charles2530/charles
+    
+    规范权限设置及数据结构
+
+commit fe80fe8214aed4729c07706ffbfbd802ff6757bc
+Author: charles <2569337619@qq.com>
+Date:   Thu Mar 28 11:27:42 2024 +0800
+
+    规范权限设置及数据结构
+
+commit b9741de7517703cf2e8ede3b8021fbe70aa58d38
+Merge: d2aade0 3c481be
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu Mar 28 09:33:48 2024 +0800
+
+    Merge pull request #9 from Charles2530/charles
+    
+    完成公告栏样式编写及接口测试，完成数据管理页面基本UI
+
+commit 3c481be6c99d2521a822a5f972eea606c3f7c000
+Author: charles <2569337619@qq.com>
+Date:   Thu Mar 28 09:33:01 2024 +0800
+
+    完成公告栏样式编写及接口测试，完成数据管理页面基本UI
+
+commit d2aade0e358591d31a3d7eb0725dfd14dc9c23d7
+Merge: 36e4d19 55bf469
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Wed Mar 27 22:42:16 2024 +0800
+
+    Merge pull request #8 from Charles2530/charles
+    
+    更改主界面宽度
+
+commit 55bf469d86ea524a5dcbcee8b94255f8864ff8b1
+Author: charles <2569337619@qq.com>
+Date:   Wed Mar 27 22:40:47 2024 +0800
+
+    更改主界面
+
+commit 36e4d1946a5a0adeca04280c26dfaacf913fc937
+Merge: e95b7f6 e429b2f
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Wed Mar 27 22:39:01 2024 +0800
+
+    Merge pull request #7 from Charles2530/charles
+    
+    完成用户管理页面，导航栏，路由配置及公告栏初始化
+
+commit e429b2f1ac715139fb91179f5b34260189568d98
+Author: charles <2569337619@qq.com>
+Date:   Wed Mar 27 22:32:28 2024 +0800
+
+    完成用户管理界面及公告栏基本设置，完善所有路由路径
+
+commit e6cdf310e9fd9e6c2a609532dd5030aff169550b
+Author: charles <2569337619@qq.com>
+Date:   Wed Mar 27 20:32:39 2024 +0800
+
+    更改个人中心排版
+
+commit e95b7f6ab018af0ff79ec800f921a03501358673
+Merge: c5bcb62 4490cc0
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Mon Mar 25 14:48:07 2024 +0800
+
+    Merge pull request #6 from Charles2530/charles
+    
+    完成个人中心及头像
+
+commit 4490cc0ed848c8ad41427f0dc75b92b4092d4b41
+Author: charles <2569337619@qq.com>
+Date:   Mon Mar 25 14:46:36 2024 +0800
+
+    完成个人中心及头像
+
+commit c5bcb62ffeb2681ba763fba35a7a1cca3f6c7cf1
+Merge: 2438434 f22e752
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Mar 22 12:39:03 2024 +0800
+
+    Merge pull request #5 from Charles2530/charles
+    
+    Charles
+
+commit f22e7525bee8c2a556b8a1af359378152e9ba343
+Author: charles <2569337619@qq.com>
+Date:   Fri Mar 22 12:35:52 2024 +0800
+
+    完成初步页面架构
+
+commit 6274cafd583785982ca0504ec5f85ee106531a27
+Author: charles <2569337619@qq.com>
+Date:   Fri Mar 22 12:27:44 2024 +0800
+
+    完成边导航栏
+
+commit aa1dc7dacd365e2d12b3e27e7d227c251374cc77
+Author: charles <2569337619@qq.com>
+Date:   Fri Mar 22 11:00:42 2024 +0800
+
+    完成apifox接口测试
+
+commit 6ffe0db61a5bc6f7b0effa9aeed1265662367e4e
+Author: charles <2569337619@qq.com>
+Date:   Fri Mar 22 10:32:40 2024 +0800
+
+    完成用户登录功能
+
+commit 4df1288df685f1bb33e0e9b2225fcb0b9219816b
+Author: charles <2569337619@qq.com>
+Date:   Fri Mar 22 09:27:40 2024 +0800
+
+    初始化完成导航栏
+
+commit 109fffe1acdbea8f2f2e60a4a675bc6a5f8bf674
+Author: charles <2569337619@qq.com>
+Date:   Fri Mar 22 08:44:41 2024 +0800
+
+    首页架构
+
+commit 6ab966f3d6ed081d080910307b89dfab9e0b4f6f
+Author: charles <2569337619@qq.com>
+Date:   Fri Mar 22 08:19:31 2024 +0800
+
+    完成组件自动导入设置（可见auto-import)
+
+commit 243843408a734159bdce9a91ba5088d3a4489f47
+Merge: ca72bae c64a3bf
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Thu Mar 21 19:46:49 2024 +0800
+
+    Merge pull request #4 from Charles2530/charles
+    
+    添加Echarts和China.json
+
+commit c64a3bfff487de0a80444663e1cfe9a80c000f2e
+Author: charles <2569337619@qq.com>
+Date:   Thu Mar 21 19:46:00 2024 +0800
+
+    添加Echarts和China.json
+
+commit ca72baed840abb937a751ee3a9dfa4844571b1a8
+Merge: d00c65b d945099
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Mon Mar 18 09:02:15 2024 +0800
+
+    Merge pull request #3 from Charles2530/charles
+    
+    initial-backend
+
+commit d945099e8ccda725c26220dac029c52afb079bc0
+Author: charles <2569337619@qq.com>
+Date:   Mon Mar 18 09:01:20 2024 +0800
+
+    initial-backend
+
+commit d00c65bf213e4cd42cb2807bdb58f3398e5267fc
+Merge: 575ba66 2aeb46b
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Mon Mar 18 08:59:11 2024 +0800
+
+    Merge pull request #2 from Charles2530/charles
+    
+    Charles
+
+commit 2aeb46bc2bff336bc3c67dadf77169d4ab79c4fc
+Author: charles <2569337619@qq.com>
+Date:   Mon Mar 18 08:58:01 2024 +0800
+
+    update README
+
+commit edc8262da12dba8a4ae4f7e7e383ebd9928d9063
+Author: charles <2569337619@qq.com>
+Date:   Mon Mar 18 08:53:41 2024 +0800
+
+    安装部分第三方包并进行了api封装及缓存配置
+
+commit 575ba66805215b104ff7df911856296448a6e914
+Merge: a5374d6 2e9b4c4
+Author: Du jinyang <109007871+Charles2530@users.noreply.github.com>
+Date:   Fri Mar 15 10:21:17 2024 +0800
+
+    Merge pull request #1 from Charles2530/charles
+    
+    Charles
+
+commit 2e9b4c49022a083c51f21dab892ad52585cade57
+Author: charles <2569337619@qq.com>
+Date:   Fri Mar 15 10:20:03 2024 +0800
+
+    完成tailwind css 配置及基本环境变量
+
+commit ae954f009b8d06c88f19630f1159531b55a178bf
+Author: charles <2569337619@qq.com>
+Date:   Fri Mar 15 09:16:15 2024 +0800
+
+    初始化项目基本架构
+
+commit a5374d61c9ffc48d4b9b49b10046543a03fdade9
+Author: charles <2569337619@qq.com>
+Date:   Thu Mar 14 20:31:21 2024 +0800
+
+    initial
