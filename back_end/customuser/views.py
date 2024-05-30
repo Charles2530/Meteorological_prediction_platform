@@ -1,4 +1,7 @@
-# Django核心和框架相关的导入
+import json
+import os
+from datetime import datetime
+from django.conf import settings
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.hashers import check_password, make_password
@@ -11,29 +14,16 @@ from django.core.paginator import Paginator
 from django.core.validators import validate_email
 from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
+from django.http import HttpResponse, JsonResponse
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.views.generic import DetailView
-
-from django.conf import settings
-
-# Django REST framework相关的导入
 from rest_framework import status, HTTP_HEADER_ENCODING
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import AllowAny  # 允许所有用户访问
+from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import AccessToken
-
-# Django HTTP相关的导入
-from django.http import HttpResponse, JsonResponse
-
-# from .models import Profile
-
-# 其他Python标准库导入
-import json
-import os
-from datetime import datetime
 
 
 # Create your views here.
@@ -50,98 +40,90 @@ def validate_user_input(username, password, email, role):
 
 
 @csrf_exempt
+@require_http_methods(["POST"])
 def my_login(request):
-    data = json.loads(request.body)
-    username = data.get('username')
-    password = data.get('password')
-
     try:
-        validate_user_input(username, password, None, None)
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+
+        if not username or not password:
+            return JsonResponse({"success": False, "reason": "Username and password required"}, status=400)
+
+        validate_user_input(username, password, None, None)  # 需要定义这个函数
+
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
             info = {
-                "token": "aliqua commodo Lorem",
+                "token": str(AccessToken.for_user(user)),
                 "userInfo": {
                     "username": user.username,
                     "avatar": 'http://dummyimage.com/88x31',
-                    "role": 2 if user.is_staff else 2,
+                    "role": 2 if user.is_staff else 1,
                     "email": user.email
                 }
             }
-            return JsonResponse({
-                "success": True,
-                "info": info
-            })
+            return JsonResponse({"success": True, "info": info})
         else:
-            return JsonResponse({
-            "success": False,
-            "reason": "login.error.auth, username=" + username + ", password=" + password
-        }, status=401)
+            return JsonResponse({"success": False, "reason": "Authentication failed"}, status=401)
+
     except ValidationError as e:
         return JsonResponse({"success": False, "reason": str(e)}, status=400)
+    except json.JSONDecodeError:
+        return JsonResponse({"success": False, "reason": "Invalid JSON"}, status=400)
+    except Exception as e:
+        return JsonResponse({"success": False, "reason": str(e)}, status=500)
 
 
 @csrf_exempt
 @require_http_methods(["POST"])
 def my_register(request):
-    data = json.loads(request.body)
-    username = data.get('username')
-    password = data.get('password')
-    email = data.get('email')
-    role = data.get('role') if data.get('role') else 2 # TODO check
-
-    # 验证邮箱格式
     try:
-        validate_email(email)
-    except ValidationError:
-        return JsonResponse({
-            "success": False,
-            "reason": "register.error.email"
-        }, status=400)
-    # 验证用户名和密码格式
-    if not username or not isinstance(username, str):
-        return JsonResponse({
-            "success": False,
-            "reason": "register.error.format"
-        }, status=400)
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+        email = data.get('email')
+        role = data.get('role', 2)  # 默认值为2，如果role字段不存在
 
-    if not password or not isinstance(password, str):
-        return JsonResponse({
-            "success": False,
-            "reason": "register.error.format"
-        }, status=400)
+        if not username or not isinstance(username, str):
+            return JsonResponse({"success": False, "reason": "Invalid username format"}, status=400)
 
-    # 检查用户名是否已存在
-    if User.objects.filter(username=username).exists():
-        return JsonResponse({
-            "success": False,
-            "reason": "register.error.samename"
-        }, status=400)
+        if not password or not isinstance(password, str):
+            return JsonResponse({"success": False, "reason": "Invalid password format"}, status=400)
 
-    # 创建用户
-    user = User.objects.create_user(username=username, password=password, email=email)
-    user.save()
-    authenticate(username=username, password=password)
+        try:
+            validate_email(email)
+        except ValidationError:
+            return JsonResponse({"success": False, "reason": "Invalid email format"}, status=400)
 
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({"success": False, "reason": "Username already exists"}, status=400)
 
-    # 准备返回的信息
-    info = {
-        "token": str(AccessToken.for_user(user)),
-        "userInfo": {
-            "username": user.username,
-            "avatar": user.avatar,
-            "email": user.email,
-            "role": 'http://dummyimage.com/88x31'
+        if role == 2:
+            user = User.objects.create_superuser(username=username, password=password, email=email)
+        else:
+            user = User.objects.create_user(username=username, password=password, email=email)
+        user.save()
+        authenticate(username=username, password=password)
+        login(request, user)
+
+        info = {
+            "token": str(AccessToken.for_user(user)),
+            "userInfo": {
+                "username": user.username,
+                "avatar": 'http://dummyimage.com/88x31',
+                "email": user.email,
+                "role": role
+            }
         }
-    }
 
-    # 返回JSON响应
-    return JsonResponse({
-        "success": True,
-        "info": info,
-        "reason": ""  # 当成功时，reason字段可以为空字符串
-    }, status=201)
+        return JsonResponse({"success": True, "info": info}, status=201)
+
+    except json.JSONDecodeError:
+        return JsonResponse({"success": False, "reason": "Invalid JSON"}, status=400)
+    except Exception as e:
+        return JsonResponse({"success": False, "reason": str(e)}, status=500)
 
 
 @csrf_exempt
@@ -196,7 +178,8 @@ def user_list(request):
             "email": profile.email,
             "avatar": 'http://dummyimage.com/88x31',
             "role": 1 if profile.is_staff == 2 else 2,
-            "last_login": profile.last_login.strftime('%Y-%m-%d %H:%M:%S') if profile.last_login != None else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            "last_login": profile.last_login.strftime(
+                '%Y-%m-%d %H:%M:%S') if profile.last_login is not None else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         }
         response_json['userlist'].append(user_data)
 
@@ -229,7 +212,7 @@ def delete_user(request):
     # 假设这里仅检查User模型中是否存在对应的uid
     try:
         user = request.user
-        if uid == user.uid: # 删除当前用户，不允许
+        if uid == user.uid:  # 删除当前用户，不允许
             response_data = {
                 "success": False,
                 "reason": "Cannot delete current user"
@@ -354,8 +337,8 @@ def update_user_password(request):
 
     # 验证管理员权限
     if role != 2:  # 假设role为1代表管理员
-            raise PermissionDenied(
-                "User does not have the permission to change password.")
+        raise PermissionDenied(
+            "User does not have the permission to change password.")
     # try:
     #     # 假设我们通过某种方式验证管理员的Authorization
     #     # 例如，使用Django的authenticate函数，或者自定义的验证逻辑
@@ -367,15 +350,15 @@ def update_user_password(request):
     #     if not admin_user.is_staff:  # 假设is_staff属性表示管理员
     #         raise PermissionDenied
     # except User.DoesNotExist:
-    #     return JsonResponse({"success": False, "reason": "manage.invaild"}, status=400)
+    #     return JsonResponse({"success": False, "reason": "manage.invalid"}, status=400)
     # except PermissionDenied:
-    #     return JsonResponse({"success": False, "reason": "You do not have permission to perform this action."}, status=403)
+    #     return JsonResponse({"success": False, "reason": "permission.denied"}, status=403)
 
     # 检查用户是否存在
     try:
         target_user = User.objects.get(id=uid)
     except User.DoesNotExist:
-        return JsonResponse({"success": False, "reason": "manage.invaild"}, status=400)
+        return JsonResponse({"success": False, "reason": "manage.invalid"}, status=400)
 
     # 验证密码格式
     if not password or len(password) < 8:  # 假设密码至少8位
@@ -414,7 +397,7 @@ def delete_data(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def user_info(request):
-    auth_header = request.META.get('HTTP_AUTHORIZATION','')
+    auth_header = request.META.get('HTTP_AUTHORIZATION', '')
     if not auth_header:
         return JsonResponse({'reason': 'manage.invalid'}, status=400)
 
@@ -431,14 +414,14 @@ def user_info(request):
         return JsonResponse({'reason': 'Token not valid or expired.'}, status=401)
 
     # 准备返回的用户信息
-    user_info = {
+    user_list_json = {
         "username": user.username,
         "avatar": user.profile.avatar.url if user.profile and user.profile.avatar else "",
         "role": user.role,
         "email": user.email
     }
 
-    return JsonResponse(user_info)
+    return JsonResponse(user_list_json)
 
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图

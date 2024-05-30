@@ -1,5 +1,5 @@
-# from django.contrib.auth.models import AbstractUser, UserManager
-# from django.db import models
+from django.contrib.auth.models import User
+from django.db import models
 
 
 # class ProfileManager(UserManager):
@@ -37,3 +37,14 @@
 #     class Meta:
 #         verbose_name = "用户画像"
 #         verbose_name_plural = "用户画像"
+class UserCurrentCity(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name="当前用户", default=None)
+    cityName = models.CharField(max_length=40, verbose_name="当前城市名称")
+
+    def __str__(self):
+        return f"{self.user.username} - {self.cityName}"
+
+    class Meta:
+        verbose_name = "用户当前城市"
+        verbose_name_plural = "用户当前城市"

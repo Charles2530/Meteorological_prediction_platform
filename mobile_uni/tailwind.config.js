@@ -8,6 +8,9 @@ export default {
         "top-background": "url('/src/assets/img/top-background-dark.png')",
       },
       margin: {},
+      fontSize: {
+        base: "16px",
+      },
     },
   },
   plugins: [],

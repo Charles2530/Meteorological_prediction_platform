@@ -10,7 +10,7 @@
     :on-success="handleAvatarSuccess"
   >
     <div style="margin: 0 auto">
-      <el-avatar :size="150" :src="userInfo.avatar" />
+      <el-avatar :size="150" :src="userInfo.avatar" shape="square" />
     </div>
   </el-upload>
 </template>
