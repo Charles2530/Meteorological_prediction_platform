@@ -100,8 +100,8 @@ DATABASES = {
     }
 }
 
-# AUTH_USER_MODEL = 'customuser.Profile'
-CUSTOM_USER = False
+AUTH_USER_MODEL = 'customuser.Profile'
+CUSTOM_USER = True
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -215,3 +215,5 @@ AUTHENTICATION_BACKENDS = [
 SESSION_COOKIE_AGE = 1209600  # 2周
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
+
+# LOGIN_URL = 'login/'  # cas login url

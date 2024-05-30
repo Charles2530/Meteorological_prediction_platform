@@ -20,6 +20,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.views.generic import DetailView
+from .models import Profile
 from rest_framework import status, HTTP_HEADER_ENCODING
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
@@ -59,8 +60,9 @@ def my_login(request):
                 "token": str(AccessToken.for_user(user)),
                 "userInfo": {
                     "username": user.username,
-                    "avatar": 'http://dummyimage.com/88x31',
-                    "role": 2 if user.is_staff else 1,
+                    "avatar": user.avatar,
+                    # "role": 2 if user.is_staff else 1,
+                    "role": user.role,  # TODO
                     "email": user.email
                 }
             }
@@ -84,7 +86,7 @@ def my_register(request):
         username = data.get('username')
         password = data.get('password')
         email = data.get('email')
-        role = data.get('role', 2)  # 默认值为2，如果role字段不存在
+        role = data.get('role', 1)
 
         if not username or not isinstance(username, str):
             return JsonResponse({"success": False, "reason": "Invalid username format"}, status=400)
@@ -97,13 +99,13 @@ def my_register(request):
         except ValidationError:
             return JsonResponse({"success": False, "reason": "Invalid email format"}, status=400)
 
-        if User.objects.filter(username=username).exists():
+        if Profile.objects.filter(username=username).exists():
             return JsonResponse({"success": False, "reason": "Username already exists"}, status=400)
 
         if role == 2:
-            user = User.objects.create_superuser(username=username, password=password, email=email)
+            user = Profile.objects.create_superuser(username=username, password=password, email=email)
         else:
-            user = User.objects.create_user(username=username, password=password, email=email)
+            user = Profile.objects.create_user(username=username, password=password, email=email)
         user.save()
         authenticate(username=username, password=password)
         login(request, user)
@@ -112,7 +114,7 @@ def my_register(request):
             "token": str(AccessToken.for_user(user)),
             "userInfo": {
                 "username": user.username,
-                "avatar": 'http://dummyimage.com/88x31',
+                "avatar": user.avatar,
                 "email": user.email,
                 "role": role
             }
@@ -149,10 +151,10 @@ def user_list(request):
         return JsonResponse({"error": "Invalid JSON format in request body."}, status=400)
 
     # 获取用户数据
-    customUsers = User.objects.all()
+    profiles = Profile.objects.all()
 
     # 分页处理
-    paginator = Paginator(customUsers, page_size)
+    paginator = Paginator(profiles, page_size)
     # try:
     #     page_obj = paginator.page(page)
     # except PageNotAnInteger:
@@ -163,7 +165,7 @@ def user_list(request):
 
     # 构造响应数据
     response_json = {
-        "all": customUsers.count(),
+        "all": profiles.count(),
         "now": page_obj.number,
         "page_total": paginator.num_pages,
         "page": page_obj.number,
@@ -176,15 +178,14 @@ def user_list(request):
             "uid": profile.id,
             "username": profile.username,
             "email": profile.email,
-            "avatar": 'http://dummyimage.com/88x31',
+            "avatar": profile.avatar,
             "role": 1 if profile.is_staff == 2 else 2,
             "last_login": profile.last_login.strftime(
                 '%Y-%m-%d %H:%M:%S') if profile.last_login is not None else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         }
         response_json['userlist'].append(user_data)
 
-    # 返回JSON格式的响应
-    return JsonResponse(response_json)
+    return JsonResponse(response_json, status=200)
 
 
 @csrf_exempt
@@ -218,7 +219,7 @@ def delete_user(request):
                 "reason": "Cannot delete current user"
             }
         else:
-            target_user = User.objects.get(id=uid)
+            target_user = Profile.objects.get(id=uid)
             target_user.delete()
             # 如果用户存在，设置success为True
             response_data = {"success": True}
@@ -256,15 +257,16 @@ def user_authorization(request):
     # 在这里添加你的业务逻辑，例如验证用户权限等
     # 假设我们只是简单地检查User模型中是否存在对应的uid和role
     try:
-        # TODO:
-        # profile = Profile.objects.get(id=uid)
-        # profile.role = role
-        # profile.save()
-        # 如果用户存在且角色匹配，设置success为True
+        # TODO: backend authorization
+        profile = Profile.objects.get(id=uid)
+        if role == 1:
+            profile.is_staff = False
+        elif role == 2:
+            profile.is_staff = True
+        profile.save()
         response_data = {"success": True}
-        return JsonResponse(response_data, status=200)  # 返回200成功响应
+        return JsonResponse(response_data, status=200)
     except User.DoesNotExist:
-        # 如果用户不存在，返回404未找到
         response_data = {"success": False, "error": "User not found."}
         return JsonResponse(response_data, status=404)  # 返回404未找到
     except:
@@ -277,16 +279,14 @@ def user_authorization(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def update_user_email(request):
-    # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")
     if not authorization:
         return JsonResponse({"success": False, "reason": "Authorization header is required."}, status=401)
 
     try:
-        # 从请求体中获取uid、role和email
         data = json.loads(request.body)
+        profile = request.user
         uid = data.get('uid')
-        # role = Profile.objects.get(username=request.user.username).get('role') # TODO
         new_email = data.get('email')
 
         # 验证邮箱格式
@@ -295,28 +295,22 @@ def update_user_email(request):
         except ValidationError:
             return JsonResponse({"success": False, "reason": "manage.user.operate.email.format"}, status=400)
 
-        # 检查管理员权限
-        # TODO
-        # if role != 2:  # 假设role为1代表管理员
-        #     raise PermissionDenied(
-        #         "User does not have the permission to change email.")
+        if not profile.is_staff:
+            raise PermissionDenied(
+                "User does not have the permission to change email.")
 
-        # 检查用户是否存在
         try:
-            user = User.objects.get(id=uid)
+            user = Profile.objects.get(id=uid)
         except User.DoesNotExist:
             return JsonResponse({"success": False, "reason": request.POST}, status=400)
 
-        # 更新用户邮箱
         user.set_email(new_email)
 
-        # 操作成功，返回success为True
         return JsonResponse({"success": True}, status=200)
 
     except json.JSONDecodeError:
         return JsonResponse({"success": False, "reason": "Invalid JSON format in request body."}, status=400)
     except PermissionDenied as e:
-        # 权限不足
         return JsonResponse({"success": False, "reason": str(e)}, status=403)
     except Exception as e:
         # 其他错误
@@ -325,18 +319,16 @@ def update_user_email(request):
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
 @login_required
+@user_passes_test(lambda u: u.is_staff)
 def update_user_password(request):
-    # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")
 
-    # 从请求体中获取uid、role、password
     data = json.loads(request.body)
+    profile = request.user
     uid = data.get('uid')
-    role = data.get('role')
     password = data.get('password')
 
-    # 验证管理员权限
-    if role != 2:  # 假设role为1代表管理员
+    if not profile.is_staff:
         raise PermissionDenied(
             "User does not have the permission to change password.")
     # try:
@@ -356,7 +348,7 @@ def update_user_password(request):
 
     # 检查用户是否存在
     try:
-        target_user = User.objects.get(id=uid)
+        target_user = Profile.objects.get(id=uid)
     except User.DoesNotExist:
         return JsonResponse({"success": False, "reason": "manage.invalid"}, status=400)
 
@@ -371,29 +363,25 @@ def update_user_password(request):
 
 
 @csrf_exempt
-@login_required  # 确保用户已登录
-@user_passes_test(lambda u: u.is_staff)  # 确保用户是管理员
+@login_required
+@user_passes_test(lambda u: u.is_staff)
 def delete_data(request):
-    # 从请求头中获取pid
     pid = request.META.get("HTTP_PID")
 
     if not pid:
-        # 如果缺少pid参数，返回400错误
         return JsonResponse({"success": False}, status=400)
 
     try:
-        # 根据pid获取数据并删除
-        item = User.objects.get(pid=pid)
+        item = Profile.objects.get(id=pid)
         item.delete()
         return JsonResponse({"success": True}, status=200)  # 如果删除成功，返回200成功
     except User.DoesNotExist:
         return JsonResponse({"success": False}, status=404)  # 如果数据不存在，返回404错误
     except Exception as e:
-        # 其他错误
         return JsonResponse({"success": False}, status=500)  # 返回500服务器错误
 
 
-@csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@csrf_exempt
 @login_required
 @user_passes_test(lambda u: u.is_staff)
 def user_info(request):
@@ -424,11 +412,10 @@ def user_info(request):
     return JsonResponse(user_list_json)
 
 
-@csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@csrf_exempt
 @login_required
 @require_http_methods(["POST"])
 def update_current_user_password(request):
-    # 获取Authorization头中的token和请求体中的oldPassword和newPassword
     auth_header = request.META.get('HTTP_AUTHORIZATION', '')
     data = json.loads(request.body)
     old_password = data.get('oldPassword')
@@ -476,23 +463,20 @@ def update_current_user_password(request):
         }, status=500)
 
 
-@csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@csrf_exempt
 @login_required
 @require_http_methods(["POST"])
 def update_current_user_email(request):
-    # 获取Authorization头中的token和请求体中的邮箱
     auth_header = request.META.get('HTTP_AUTHORIZATION', '')
     data = json.loads(request.body)
     email = data.get('email')
 
-    # 验证Authorization头
     if not auth_header:
         return JsonResponse({
             "success": False,
             "reason": "Authorization header is missing"
         }, status=401)
 
-    # 验证邮箱格式
     try:
         validate_email(email)
     except ValidationError:
@@ -501,10 +485,8 @@ def update_current_user_email(request):
             "reason": "manage.user.operate.email.format"
         }, status=400)
 
-    # 假设你已经验证了token并获取了用户对象
     user = request.user
 
-    # 更新用户的邮箱
     try:
         user.set_email(email)
         return JsonResponse({
@@ -512,23 +494,20 @@ def update_current_user_email(request):
             "reason": ""  # 成功时reason字段可以为空字符串
         })
     except Exception as e:
-        # 处理其他可能的异常
         return JsonResponse({
             "success": False,
             "reason": str(e)
         }, status=500)
 
 
-@csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@csrf_exempt
 @login_required
 @require_http_methods(["POST"])
 def update_current_user_avatar(request):
-    # 获取Authorization头中的token和请求体中的oldPassword和newPassword
     auth_header = request.META.get('HTTP_AUTHORIZATION', '')
     data = json.loads(request.body)
     file = data.get('file')
 
-    # 验证Authorization头
     if not auth_header:
         return JsonResponse({
             "success": False,
@@ -537,12 +516,10 @@ def update_current_user_avatar(request):
 
     user = request.user
 
-    # 更新用户头像
     try:
-        user.avatar = file  # 使用Django内置的密码散列
+        user.avatar = file
         user.save()
 
-        # 返回成功响应
         return JsonResponse({
             "success": True,
             "avatar": "http://dummyimage.com/100x100",

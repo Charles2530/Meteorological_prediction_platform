@@ -120,8 +120,12 @@ import compareGraph from "@/components/dataStatistics/compareGraph.vue";
 import WeatherDataRankVM from "@c/dataStatistics/rank/WeatherDataRankVM.vue";
 import { china_cities } from "@/stores/cities";
 import aiTemperGraph from "@c/dataStatistics/graph/aiTemperGraph.vue";
+<<<<<<< HEAD
 const selectedLocation = ref("");
 const city = ref("");
+=======
+const selectedLocation = ref("北京市");
+>>>>>>> 4dcf01e (fix(backend))
 const periods = ref(30);
 const locations = china_cities;
 interface LabelItem {
