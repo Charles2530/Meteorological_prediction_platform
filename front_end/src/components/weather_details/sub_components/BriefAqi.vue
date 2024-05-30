@@ -490,7 +490,8 @@ onMounted(() => Promise.all([getPresentCityAqi()]).then(() => {
 }
 
 .quality-description {
-  font-size: 30px;
+  /* font-size: 30px; */
+  font-size: 25px;
   font-weight: bold;
   z-index: 1;
 }

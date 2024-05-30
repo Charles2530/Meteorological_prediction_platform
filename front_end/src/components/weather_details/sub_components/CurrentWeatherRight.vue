@@ -12,7 +12,7 @@
         h-full
       ">
       <div class="flex justify-between">
-        <span>天气详情</span>
+        <!-- <span>天气详情</span> -->
         <!-- <button @click="refresh"><img class="w-6 h-6" src="@/assets/refresh.png" alt="refresh"></button> -->
       </div>
       <div class="grid grid-cols-3 gap-4 h-full mt-6">
