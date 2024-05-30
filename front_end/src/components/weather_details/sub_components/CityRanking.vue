@@ -1,7 +1,7 @@
 <template>
   <div class="common-layout rounded-lg" style="background-color: white;">
-    <el-card style="width: 100%;">
-      <div class="text-2xl">实况排行</div>
+    <!-- <el-card style="width: 100%;"> -->
+      <div class="text-2xl" style="margin-bottom: 20px;"><el-icon ><Histogram /></el-icon>&nbsp;&nbsp;实况排行</div>
       <hr />
       <el-tabs stretch v-model="activeName" class=" " @tab-click="handleClick">
         <el-tab-pane label="最高气温" name="first">
@@ -50,7 +50,7 @@
           </el-table>
         </el-tab-pane>
       </el-tabs>
-    </el-card>
+    <!-- </el-card> -->
   </div>
 </template>
 
@@ -82,7 +82,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import type { RateInstance, TabsPaneContext } from 'element-plus'
-import { CaretTop, CaretBottom } from '@element-plus/icons-vue'
+import { CaretTop, CaretBottom,Histogram } from '@element-plus/icons-vue'
 
 
 const activeName = ref('first')

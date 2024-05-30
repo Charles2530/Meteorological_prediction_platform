@@ -39,5 +39,5 @@ urlpatterns = [
     path('getCityInfo/', views.get_city_info, name='get-city-info'),
     path('getHazardTop/', views.get_top_hazard, name='get-top-hazard'),
     path('vis/getVisData/', views.get_vis_data, name='get-vis-data'),
-    path('vis/getPointInfo/', views.get_point_info, name='get-point-info'),
+    path('vis/getPointInfo/', views.get_point_data, name='get-point-info'),
 ]

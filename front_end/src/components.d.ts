@@ -9,7 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     AirQualityAirQualityVM: typeof import('./components/airQuality/AirQualityVM.vue')['default']
     AirQualityAqiInstruction: typeof import('./components/airQuality/AqiInstruction.vue')['default']
-    AirQualityBriefAqi: typeof import('./components/airQuality/BriefAqi.vue')['default']
     Aside: typeof import('./components/aside/index.vue')['default']
     AsideNoticeItem: typeof import('./components/aside/noticeItem.vue')['default']
     AsideSideBar: typeof import('./components/aside/sideBar.vue')['default']
@@ -84,6 +83,7 @@ declare module 'vue' {
     WeatherdetailsCalendar30: typeof import('./components/weather_details/calendar30.vue')['default']
     WeatherdetailsOverview: typeof import('./components/weather_details/overview.vue')['default']
     WeatherdetailsStatistics: typeof import('./components/weather_details/statistics.vue')['default']
+    WeatherdetailsSubcomponentsBriefAqi: typeof import('./components/weather_details/sub_components/BriefAqi.vue')['default']
     WeatherdetailsSubcomponentsCityRanking: typeof import('./components/weather_details/sub_components/CityRanking.vue')['default']
     WeatherdetailsSubcomponentsCurrentWeather: typeof import('./components/weather_details/sub_components/CurrentWeather.vue')['default']
     WeatherdetailsSubcomponentsCurrentWeatherRight: typeof import('./components/weather_details/sub_components/CurrentWeatherRight.vue')['default']

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full text-[#333333] font-semibold text-md flex-wrap"
+  <div class="w-full text-[#333333] font-semibold text-md flex-wrap" style="font-size: 20px;"
     >
     <div class="
         flex 
@@ -18,7 +18,7 @@
       <div class="grid grid-cols-3 gap-4 h-full mt-6">
         <template v-for="(item, index) in dispalyInfo" :key="index">
           <div v-if="item.data" class="flex flex-col text-center items-center gap-2">
-            <img :src="item.icon" :alt="item.name" v-if="item.icon" class="w-6 h-6">
+            <img :src="item.icon" :alt="item.name" v-if="item.icon" class="w-10 h-10">
             <span>{{ item.name }}</span>
             <span>{{ item.data }}{{ item.unit }}</span>
           </div>
@@ -64,10 +64,10 @@ const dispalyInfo = computed(() => {
       unit: 'hPa'
     },
     {
-      name: '空气质量',
+      name: '相对湿度',
       icon: '../src/assets/img/weather_his/wind.png',
       data: props.weather.aqi,
-      unit: 'AQI'
+      unit: '%'
     },
     {
       name: '紫外线',

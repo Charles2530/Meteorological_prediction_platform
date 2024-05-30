@@ -497,6 +497,11 @@ def getProInfo(request):
     return JsonResponse(retList, status=200)
 
 
+@require_http_methods(['POST'])
+def update_current_city(request):
+    pass
+
+
 @csrf_exempt
 @require_http_methods(['GET'])
 def get_hazard(request: HttpRequest):
@@ -580,7 +585,8 @@ def get_city_info(request: HttpRequest):
 @require_http_methods(['GET'])
 def get_current_city_info(request: HttpRequest):
     user = request.user
-    city_name = UserCurrentCity.objects.get(user=user)
+    # city_name = UserCurrentCity.objects.get(user=user)
+    city_name = '北京市'
     # TODO to remove
     cityId = City2CityId.objects.get(cityName=city_name).cityId
     # use API to get weather and air
