@@ -19,6 +19,7 @@
         "element-resize-detector": "^1.2.4",
         "js-md5": "^0.8.3",
         "pinia": "^2.1.7",
+        "qweather-icons": "^1.6.0",
         "sass": "^1.72.0",
         "scss": "^0.2.4",
         "svg-sprite-loader": "^2.0.3",

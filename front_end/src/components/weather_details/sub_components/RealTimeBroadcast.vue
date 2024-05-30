@@ -1,9 +1,10 @@
 <template>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
   <div class="common-layout" style="background:white;">
     <!-- {{ city }} -->
     <el-container>
       <el-header>
-        <div id="chart_temp_perhour" ref="chart_temp_perhour" style="height: 200px;  width: 100%;  margin: 0 auto">
+        <div id="chart_temp_perhour" ref="chart_temp_perhour" style="height: 100px;  width: 100%;  margin: 0 auto">
         </div>
       </el-header>
       <el-main>
@@ -25,26 +26,20 @@
               <div class="ep-bg-purple-dark" />
               <!-- <div style="height:70% !important"> -->
               <el-card style="width:auto" shadow="hover">
-                <div class="day-content" style="font-size: 20px;">
-                  <div class="">{{ day.temperature }}℃</div>
-                  <div class="">
-                    <!-- <div class="temperature">{{ day.condition }}</div> -->
-                    <el-icon class="perhour-icon" size="30px" color="#409EFF">
-                      <Drizzling />
-                    </el-icon>
+                  <div style="font-size: 20px;">{{ day.temperature }}℃</div>
+                  <div class="perhour-icon">
+                    <!-- {{day.condition_icon  }} -->
+                    <!-- <i class="qi-${day.condition_icon}" style="font-size: 40px;"></i> -->
+                    <i :class="'qi-' + day.condition_icon" style="font-size: 40px;"></i>
+                    <div class="tips-text">{{ day.condition }}</div>
                   </div>
-                  <!-- <div class="humidity">{{ day.humidity }}%</div> -->
-                  <el-icon class="perhour-icon" size="30px" color="#409EFF">
-                    <WindPower />
-                  </el-icon>
-                  <!-- <div class="wind-speed">{{ day.windSpeed }}m/s</div> -->
-                  <!-- <div class="wind-speed">{{ day.windDirection }}</div> -->
-                  <el-icon class="perhour-icon" size="30px" color="#409EFF"
-                    :style="{ transform: `rotate(${angle}deg)` }">
-                    <Position />
-                  </el-icon>
-                  <div class="">{{ day.time }}</div>
-                </div>
+                  <div class="perhour-icon">
+                    <el-icon size="30px" style="margin-bottom: 10px;" :style="{ transform: `rotate(${calculateAngle(day.wind360)}deg)` }">
+                      <Position />
+                    </el-icon>
+                    <div class="tips-text">{{ day.windScale }}级风</div>
+                  </div>
+                  <div style="font-size: 20px;">{{ day.time }}</div>
               </el-card>
             </el-col>
           </el-row>
@@ -61,9 +56,6 @@
 
 
 <script lang="ts" setup>
-const angle = ref(80); // angle 变量的值可以是动态变化的
-
-
 import * as echarts from "echarts";
 import { get } from "@/api/index.ts";
 import { china_cities } from "@/stores/cities";
@@ -89,13 +81,16 @@ const props = defineProps({
 //   adm2: '海淀区'
 // });
 const realTimeWeatherList = ref<RealTimeWeather[]>([]);
+const calculateAngle = (wind360: number) => wind360 + 135;
 interface RealTimeWeather {
   time: string,
   condition: string,
+  condition_icon:number,
   temperature: number,
   humidity: number,
-  windSpeed: number,
-  windDirection: string
+  windScale: number,
+  windDirection: string,
+  wind360: number
 }
 
 interface RealTimeWeatherData {
@@ -105,7 +100,7 @@ interface RealTimeWeatherData {
 const get_data = async () => {
   get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: props.city }).then((res) => {
     realTimeWeatherList.value.splice(0, realTimeWeatherList.value.length, ...res.data.realTimeWeatherList);
-    console.log("getdata")
+    // console.log("getdata")
     if (realTimeWeatherList.value.length > 11) {
       realTimeWeatherList.value = realTimeWeatherList.value.slice(0, 11);
     }
@@ -236,10 +231,14 @@ const renderChart = async (
         data: tempData.map((item) => item.temperature),
         markPoint: {
           data: [
-            { type: 'max', name: '最大值' },
-            { type: 'min', name: '最小值' }
+            // { type: 'max', name: '最大值' },
+            // { type: 'min', name: '最小值' }
+            { type: 'max', name: '最大值', symbol: 'circle', symbolSize: 30, itemStyle: { color: 'red' } },
+            { type: 'min', name: '最小值', symbol: 'circle', symbolSize: 30, itemStyle: { color: 'blue' } }
           ]
-        }
+
+        },
+        smooth: true // 这里设置平滑曲线
       }
     ],
   });
@@ -299,13 +298,13 @@ onMounted(() => Promise.all([get_data()]).then(() => {
 
 <style lang="scss" scoped>
 .perhour-icon {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .calendar-container {
-  margin-top: 7vh;
-  padding: 20px;
+  margin-top: 0vh;
+  padding: 0px;
 }
 
 .calendar-grid {
@@ -336,26 +335,28 @@ onMounted(() => Promise.all([get_data()]).then(() => {
   margin-top: 10px;
 }
 
-.temperature,
-.humidity,
-.wind-speed,
-.time {
-  font-size: 16px;
-  font-family: 'Courier New', Courier, monospace
+.tips-text {
+  font-size: 15px;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center; /* 水平居中 */
 }
 
 
 .el-card {
   // background-color: rgb(188, 243, 243);
+  background-color: transparent;
+  /* 设置背景色为透明 */
   margin: 0px;
   border-radius: 20px;
-  border-color: #fcfcfc;
-  color: #5d617a;
+  border-color: transparent;
+  // color: #5d617a;
+  color: black;
 }
 
 .el-card:hover {
   margin-top: -10px;
   margin: -1px;
-  color: black;
+  color: #409EFF;
 }
 </style>
