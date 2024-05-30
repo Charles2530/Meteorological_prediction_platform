@@ -10,7 +10,7 @@
     <!-- <el-card style="width: 100%;"> -->
     <el-row style="width: 100%;">
       <el-col :span="15">
-        <div id="chart_brief_aqi_bar" ref="chart_brief_aqi_bar" style="height: 250px;  width: 100%;  margin: 0 auto">
+        <div id="chart_brief_aqi_bar" ref="chart_brief_aqi_bar" style="height: 220px;  width: 100%;  margin: 0 auto">
         </div>
       </el-col>
       <el-col :span="9">
@@ -96,6 +96,7 @@
 </template>
 <script lang="ts" setup>
 import { get } from "@/api/index.ts";
+// import 'qweather-icons/dist/qweather-icons.css';
 
 const props = defineProps({
   city: { type: Object }
@@ -198,7 +199,7 @@ const colorClass = (color: string) => {
 };
 const levelInfo = computed(() => {
   for (const level of levels) {
-    if (level.name === category.value) {
+    if (level.name === category_.value) {
       return level;
     }
   }
@@ -228,7 +229,7 @@ const renderChart = async (
         startAngle: -120,
         endAngle: -60,
         center: ['40%', '46%'],
-        radius: '60%',
+        radius: '80%',
         min: 0,
         max: 350,
         splitNumber: 7,

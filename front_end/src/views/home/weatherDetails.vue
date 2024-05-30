@@ -24,28 +24,28 @@
   <div class="common-layout" style="margin-left: 1%;margin-right: 1%;max-height:100vh;overflow: auto;">
     <el-container style="background: white">
       <el-aside width="70%">
-        <el-button size="small" type="" :icon="Switch" style="margin-left: 16px" @click="drawer = true">
+        <el-button size="small" type="" :icon="Switch" style="" @click="drawer = true">
           切换城市
         </el-button>
-        <el-container class="rounded-lg" style="background: rgb(54, 131, 195);height: 40vh;margin-top: 0px;">
+        <el-container class="rounded-lg" style="background: rgb(54, 131, 195);height: 43vh;margin-top: 0px;">
           <!-- <el-col :span="16"> -->
           <CurrentWeather class="md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
           </CurrentWeather>
           <!-- </el-col> -->
           <!-- <el-col :span="8"> -->
-          <CurrentWeatherRight class="md:basis-2/5" :weather="weather" />
+          <CurrentWeatherRight class="md:basis-4/5" :weather="weather" />
           <!-- </el-col> -->
         </el-container>
-        <el-card style="min-height: 20vh;max-height: 50vh;">
-          <RealTimeBroadcast :city="city"/>
+        <el-card style="min-height: 20vh;max-height: 44vh;">
+          <RealTimeBroadcast :city="city" />
         </el-card>
       </el-aside>
 
       <el-main style="width: 800px;">
         <el-card>
-          <BriefAqi :city="city"/>
+          <BriefAqi :city="city" />
         </el-card>
-        <el-card style="max-height:58vh;overflow: auto;">
+        <el-card style="max-height:49.2vh;overflow: auto;">
           <CityRanking />
         </el-card>
       </el-main>
@@ -64,7 +64,7 @@
         background: 'linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195))', marginBottom: '10px',
         borderRadius:
           '10px', color: 'white'
-      }" @click="selectCity(currentCity.city,-1)">
+      }" @click="selectCity(currentCity.city, -1)">
         <div style="display: flex; align-items: center;">
           <span>{{ currentCity.city.adm2 }}&nbsp;&nbsp;</span>
           <span>{{ currentCity.city.name }}</span>
@@ -72,12 +72,9 @@
           <el-button @click="" type="" size="small" :icon="House" style="background: pink;" />
         </div>
       </el-card>
-      <el-card v-for="(cityItem, index) in careCitiesList" :key="index"
-        :style="{
-          background: 'linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195))', marginBottom: '10px', borderRadius: '10px', color: 'white'
-        }"
-        @click="selectCity(cityItem.city,index)" 
-        :class="{ 'selected-card': index === selectedCityIndex }">
+      <el-card v-for="(cityItem, index) in careCitiesList" :key="index" :style="{
+        background: 'linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195))', marginBottom: '10px', borderRadius: '10px', color: 'white'
+      }" @click="selectCity(cityItem.city, index)" :class="{ 'selected-card': index === selectedCityIndex }">
         <div style="display: flex; align-items: center;">
           <span>{{ cityItem.city.adm2 }}&nbsp;&nbsp;</span>
           <span>{{ cityItem.city.name }}</span>
@@ -108,8 +105,7 @@
       </el-col>
       <el-col :span="21">
         <el-autocomplete style="width: 100%;" v-model="state" :fetch-suggestions="querySearch" clearable
-          class="inline-input w-100" @select="handleSelect" highlight-first-item :value-key="'label'"
-          @change="updateUserCity" />
+          class="inline-input w-100" @select="handleSelect" highlight-first-item :value-key="'label'" />
       </el-col>
     </el-row>
     <template #footer>
@@ -142,8 +138,8 @@ const city = ref<City>({
   name: '市',
   adm2: '区'
 });
-const currentCity = ref<careCity>()
-const careCitiesList = ref<careCity[]>([])
+const currentCity = ref<CareCity>()
+const careCitiesList = ref<CareCity[]>([])
 const weather = ref({})
 const searchShow = ref(false)
 
@@ -157,7 +153,9 @@ interface WeatherData41 {
 }
 interface Weather41 {
   aqi: number;
+  humidity: number;
   condition: string;
+  condition_icon: number;
   precip: number;
   precip_probability: number;
   pressure: number;
@@ -169,10 +167,10 @@ interface Weather41 {
 }
 interface careCitiesData {
   success: boolean;
-  currentCity: careCity;
-  careCitiesList: careCity[];
+  currentCity: CareCity;
+  careCitiesList: CareCity[];
 }
-interface careCity {
+interface CareCity {
   city: City;
   cond_icon: string;
   temp: number;
@@ -184,14 +182,16 @@ const get_care_cities = async () => {
     currentCity.value = res.data.currentCity;
     careCitiesList.value = res.data.careCitiesList;
     city.value = res.data.currentCity.city;
-    console.log(careCitiesList.value);
-    console.log(city.value);
+    // 清楚选中标记，默认指向当前城市
+    selectedCityIndex.value = -1;
+    // console.log(careCitiesList.value);
+    // console.log(city.value);
     // }
     // else 调用/api/current_city/接口
   });
 };
 const get_overview_data = async () => {
-  get<WeatherData41>("/api/weather/overview/", { city: city }).then((res) => {
+  get<WeatherData41>("/api/weather/overview/", { city: city.value }).then((res) => {
     weather.value = res.data.weather;
     console.log(weather.value);
   });
@@ -205,8 +205,6 @@ import { Delete, House, Plus } from "@element-plus/icons-vue";
 const drawer = ref(false)
 const drawerVisible = ref(false);
 
-// const selectedCity = ref('');
-
 const closeDrawer = () => {
   drawerVisible.value = false;
 };
@@ -215,24 +213,28 @@ const closeDrawer = () => {
 //   careCitiesList.value = careCitiesList.value.filter((city) => city.id !== id);
 
 // };
+
 const removeCity = (index: number) => {
   if (index >= 0 && index < careCitiesList.value.length) {
+    // POST request
+    interface DeleteResponse {
+      success: boolean;
+      reason?: string;
+    }
+    const request: City = careCitiesList.value[index].city;
+    post<DeleteResponse>("/api/weather/care_cities/del/", request).then((res) => {
+      const response = res.data;
+      if (response.success) {
+        ElMessage.success("已删除");
+      } else ElMessage.error("无效的请求");
+    });
+    //
     careCitiesList.value.splice(index, 1);
-    // POST reques
-  //   const request: DeleteForm = {
-  //   time: weatherData[index].time,
-  //   city: weatherData[index].city,
-  // };
-  //   post<DeleteResponse>("/api/weather/care_cities/del/", request).then((res) => {
-  //   const response = res.data;
-  //   if (response.success) {
-  //     ElMessage.success("已删除");
-  //   } else ElMessage.error("无效的请求");
-  // });
+
   }
 };
 const selectedCityIndex = ref(null);
-const selectCity = (selectedCity: City,index:number) => {
+const selectCity = (selectedCity: City, index: number) => {
   city.value = selectedCity;
   selectedCityIndex.value = index;
 };
@@ -250,16 +252,52 @@ import { ElMessageBox } from 'element-plus'
 import { Search } from '@element-plus/icons-vue'
 // import searchCity from "@/components/topBar/searchCity.vue"
 
+const tempSelectedCity = ref<City>({
+  name: "",
+  adm2: ""
+});
 const dialogVisible = ref(false)
 
+// const temp0 = ref(0);
+// const get_overview_data_1 = async () => {
+//   get<WeatherData41>("/api/weather/overview/", { city: tempSelectedCity.value }).then((res) => {
+//     temp0.value = res.data.weather.temp;
+//   });
+// };
 const handleConfirm = () => {
   // 将选择的城市添加到列表中
-  if (selectedCity.value) {
-    cityList.value.push(selectedCity.value);
+  if (tempSelectedCity.value) {
+    // POST request
+    interface AddResponse {
+      success: boolean;
+      reason?: string;
+    }
+    const request: City = tempSelectedCity.value;
+    post<AddResponse>("/api/weather/care_cities/add/", request).then((res) => {
+      const response = res.data;
+      if (response.success) {
+        ElMessage.success("已添加");
+      } else ElMessage.error("无效的请求");
+    });
+    // 刷新重新调用接口
+    get_care_cities();
   }
   // 关闭对话框
   dialogVisible.value = false;
 };
+// const temp0 = ref(0);
+// get<WeatherData41>("/api/weather/overview/", { city: tempSelectedCity.value }).then((res) => {
+//   temp0.value = res.data.weather.temp;
+// });
+// get_overview_data_1();
+// const cityTemp = tempSelectedCity.value;
+// const tempTemp = temp0.value
+// let selectedCareCity: CareCity = {
+//   city: cityTemp,
+//   cond_icon: "",
+//   temp: tempTemp
+// }
+// careCitiesList.value.push(selectedCareCity);
 
 import { ref, onMounted } from 'vue';
 
@@ -288,7 +326,6 @@ interface LabelItem {
   value: string;
 }
 const state = ref("");
-const tempSelectedCity = ref("");
 
 const labels = ref<LabelItem[]>([]);
 const querySearch = (queryString: string, cb: any) => {
@@ -311,22 +348,18 @@ const loadAll = () => {
 
 const handleSelect = (item: LabelItem) => {
   state.value = item.label;
-  tempSelectedCity.value = item.value;
+  console.log("tempSelectedCity");
+  console.log(tempSelectedCity.value);
+  tempSelectedCity.value.name = item.label;
+  tempSelectedCity.value.adm2 = item.label;
+
 };
 
 interface CityInfoResponse {
   success: boolean;
   reason?: string;
 }
-const updateUserCity = async () => {
-  post<CityInfoResponse>("/api/operate/current_city", {
-    city: state.value,
-  }).then((res) => {
-    if (res.data.success) {
-      getPresentCity();
-    }
-  });
-};
+
 onMounted(() => {
   labels.value = loadAll();
 });

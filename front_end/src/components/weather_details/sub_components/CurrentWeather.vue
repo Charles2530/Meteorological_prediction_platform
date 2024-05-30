@@ -1,4 +1,5 @@
 <template>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
   <div class="w-full font-semibold text-md flex-wrap text-white">
     <div class="
         flex 
@@ -32,14 +33,16 @@
       " style="margin-top: 110px;">
         <div class="max-md:relative opacity-30">
           <!-- <QWeatherIcon class="max-md:absolute " :icon="props.weather.icon" :size="300" :fill="true" /> -->
-          <el-icon size="150" color="yellow">
+          <!-- <el-icon size="150" color="yellow">
             <Sunny />
-          </el-icon>
+          </el-icon> -->
+          <i :class="'qi-' + weather.condition_icon" style="font-size: 150px;"></i>
         </div>
         <div class="flex flex-col md:ml-10 " style="font-size: 30px;">
 
-          <span class="text-7xl bg-clip-text text-transparent bg-gradient-to-br from-white from-40% ..." style="margin-bottom: 20px;">{{
-            `${weather.temp}°C` }}</span>
+          <span class="text-7xl bg-clip-text text-transparent bg-gradient-to-br from-white from-40% ..."
+            style="margin-bottom: 20px;">{{
+              `${weather.temp}°C` }}</span>
           <span class="max-md:hidden">&nbsp;&nbsp;&nbsp;&nbsp;{{ weather.condition }}</span>
         </div>
 

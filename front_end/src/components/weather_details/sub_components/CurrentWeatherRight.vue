@@ -18,7 +18,7 @@
       <div class="grid grid-cols-3 gap-4 h-full mt-6">
         <template v-for="(item, index) in dispalyInfo" :key="index">
           <div v-if="item.data" class="flex flex-col text-center items-center gap-2">
-            <img :src="item.icon" :alt="item.name" v-if="item.icon" class="w-10 h-10">
+            <img :src="item.icon" :alt="item.name" v-if="item.icon" class="w-12 h-12">
             <span>{{ item.name }}</span>
             <span>{{ item.data }}{{ item.unit }}</span>
           </div>
@@ -58,16 +58,16 @@ const dispalyInfo = computed(() => {
       unit: 'mm'
     },
     {
+      name: '相对湿度',
+      icon: '../src/assets/img/weather_his/drop.png',
+      data: props.weather.humidity,
+      unit: '%'
+    },
+    {
       name: '大气压强',
       icon: '../src/assets/img/weather_his/thermometer.png',
       data: props.weather.pressure,
       unit: 'hPa'
-    },
-    {
-      name: '相对湿度',
-      icon: '../src/assets/img/weather_his/wind.png',
-      data: props.weather.aqi,
-      unit: '%'
     },
     {
       name: '紫外线',
