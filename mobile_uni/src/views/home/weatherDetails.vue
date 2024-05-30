@@ -21,62 +21,91 @@
 </template> -->
 
 <template>
-  <div class="common-layout margin-container">
-    <el-container class="max-md-bg-gradient">
-      <el-button class="switch-button background-transparent" size="small" type="" :icon="Switch" @click="drawer = true">
-        切换城市
-      </el-button>
-      <el-container class="rounded-container bg-style" style="margin-top: 0px;">
-        <!-- <el-col :span="16"> -->
-        <CurrentWeather class="weather-left md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
-        </CurrentWeather>
-        <!-- </el-col> -->
-        <!-- <el-col :span="8"> -->
-        <!-- <CurrentWeatherRight class="weather-right md:basis-3/5" :weather="weather" /> -->
-        <!-- </el-col> -->
-      </el-container>
-      <el-footer>
-        <el-card class="card-style max-md-bg-gradient" >
+  <div class="common-layout" style="margin-left: 1%;margin-right: 1%;max-height:100vh;overflow: auto;border-radius: 5px;">
+    <el-container style="background: white">
+      <el-aside width="70%">
+        <el-button size="small" type="" :icon="Switch" style="" @click="drawer = true">
+          切换城市
+        </el-button>
+        <el-container class="rounded-lg" style="background: rgb(54, 131, 195);height: 44.5vh;margin-top: 0px;">
+          <!-- <el-col :span="16"> -->
+          <CurrentWeather class="md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
+          </CurrentWeather>
+          <!-- </el-col> -->
+          <!-- <el-col :span="8"> -->
+          <CurrentWeatherRight class="md:basis-3/5" :weather="weather" />
+          <!-- </el-col> -->
+        </el-container>
+        <el-card style="min-height: 20vh;max-height: 44vh;margin-bottom:15px;">
           <RealTimeBroadcast :city="city" />
         </el-card>
-      </el-footer>
+      </el-aside>
+
+      <el-main style="width: 800px;">
+        <el-card>
+          <BriefAqi :city="city" />
+        </el-card>
+        <el-card style="max-height:52vh;overflow: auto;">
+          <CityRanking />
+        </el-card>
+      </el-main>
     </el-container>
   </div>
 
-  <el-drawer v-model="drawer" direction="utd" @close="handleDrawerClose" style="width: 100%;">
+
+
+  <el-drawer v-model="drawer" direction="ltr" @close="handleDrawerClose">
     <template #header="{ close, titleId, titleClass }">
-      <div :id="titleId" :class="titleClass" class="drawer-header">关心的城市</div>
-      <el-button class="add-button" type="info" @click="dialogVisible = true" :icon="Plus" />
+      <div :id="titleId" :class="titleClass" style="font-size: 20px;color:black; text-align: center;  ">关心的城市</div>
+      <el-button type="info" @click="dialogVisible = true" :icon="Plus" />
     </template>
     <div>
-      <el-card class="drawer-card" @click="selectCity(currentCity.city, -1)">
-        <div class="drawer-card-content">
+      <el-card :style="{
+        background: 'linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195))', marginBottom: '10px',
+        borderRadius:
+          '10px', color: 'white'
+      }" @click="selectCity(currentCity.city, -1)">
+        <div style="display: flex; align-items: center;">
           <span>{{ currentCity.city.adm2 }}&nbsp;&nbsp;</span>
           <span>{{ currentCity.city.name }}</span>
-          <span class="temperature">{{ currentCity.temp }}°C</span>
-          <el-button @click="" type="" size="small" :icon="House" class="pink-button" />
+          <span style="flex: 1; text-align: center;">{{ currentCity.temp }}°C</span>
+          <el-button @click="" type="" size="small" :icon="House" style="background: pink;" />
         </div>
       </el-card>
-      <el-card v-for="(cityItem, index) in careCitiesList" :key="index" class="drawer-card"
-        @click="selectCity(cityItem.city, index)" :class="{ 'selected-card': index === selectedCityIndex }">
-        <div class="drawer-card-content">
+      <el-card v-for="(cityItem, index) in careCitiesList" :key="index" :style="{
+        background: 'linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195))', marginBottom: '10px', borderRadius: '10px', color: 'white'
+      }" @click="selectCity(cityItem.city, index)" :class="{ 'selected-card': index === selectedCityIndex }">
+        <div style="display: flex; align-items: center;">
           <span>{{ cityItem.city.adm2 }}&nbsp;&nbsp;</span>
           <span>{{ cityItem.city.name }}</span>
-          <span class="temperature">{{ cityItem.temp }}°C</span>
+          <span style="flex: 1; text-align: center;">{{ cityItem.temp }}°C</span>
           <el-button @click="removeCity(index)" type="info" size="small" :icon="Delete" />
         </div>
       </el-card>
     </div>
   </el-drawer>
 
-  <el-dialog v-model="dialogVisible" title="添加关心城市" width="350">
+  <el-dialog v-model="dialogVisible" title="添加关心城市" width="500">
+    <!-- <span>This is a message</span> -->
+    <!-- <div class="flex justify-center">
+      <el-card style="width: 80%;">
+        <el-icon style=" display: flex; align-items: center;justify-items: center">
+          <Search />
+        </el-icon>
+        <el-autocomplete style="width: 80%;" v-model="state" :fetch-suggestions="querySearch" clearable
+          class="inline-input w-100" @select="handleSelect" highlight-first-item :value-key="'label'"
+          @change="updateUserCity" />
+      </el-card>
+    </div> -->
     <el-row>
       <el-col :span="1">
-        <el-icon class="search-icon" />
+        <el-icon style=" margin-top: 10px;">
+          <Search />
+        </el-icon>
       </el-col>
       <el-col :span="21">
-        <el-autocomplete v-model="state" :fetch-suggestions="querySearch" clearable class="autocomplete-input"
-          @select="handleSelect" highlight-first-item :value-key="'label'" />
+        <el-autocomplete style="width: 100%;" v-model="state" :fetch-suggestions="querySearch" clearable
+          class="inline-input w-100" @select="handleSelect" highlight-first-item :value-key="'label'" />
       </el-col>
     </el-row>
     <template #footer>
@@ -89,6 +118,7 @@
     </template>
   </el-dialog>
 </template>
+
 
 
 
@@ -360,99 +390,12 @@ import AirQualityVM from "@/components/airQuality/AirQualityVM.vue";
 import dataStatistics from "@/components/dataStatistics/dataStatistics.vue";
 </script> -->
 
-
-<style scoped>
-.background-transparent{
-  background: transparent;
-  border-color: transparent;
-}
-
-.max-md-bg-gradient {
-  background-image: linear-gradient(to right, #67E1D2, #54A8FF);
-  box-shadow: 0 10px 30px -12px rgba(7, 89, 133, 0.45);
-}
-
-.el-footer{
-  padding: 0px;
-}
-
-.card-style {
-  /* min-height: 20vh;
-  max-height: 44vh;
-  margin-bottom: 15px; */
-  min-height: 20vh;
-  max-height: 1144vh;
-  margin-bottom: 15px;
-  overflow: auto;
-  /* max-width: 100%; */
-  border-color: transparent;
-}
-
-/* style="min-height: 20vh;max-height: 44vh;margin-bottom:15px;" */
-
-.margin-container {
-  /* margin-left: 1%;
-  margin-right: 1%; */
-  /* max-height: 100vh; */
-  /* overflow: auto; */
-  border-radius: 5px;
-}
-
-.container-style {
-  background: white;
-}
-
-.bg-style {
-  background: rgb(54, 131, 195);
-  height: 44.5vh;
-}
-
-.weather-left,
-.weather-right {
-  flex: 1;
-}
-
-.drawer-header {
-  font-size: 20px;
-  color: black;
-  text-align: center;
-}
-
-.add-button {
-  margin-top: 10px;
-}
-
-.drawer-card {
-  background: linear-gradient(rgb(13, 104, 188), rgb(54, 131, 195));
-  margin-bottom: 10px;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-}
-
-.drawer-card-content {
-  font-size: small;
-  display: flex;
-  align-items: center;
-}
-
-.temperature {
-  flex: 1;
-  text-align: center;
-}
-
-.pink-button {
-  background: pink;
-}
-
-.search-icon {
-  margin-top: 10px;
-}
-
+<!-- !!!因为涉及到组件也要使用下面的css样式，所以不要scoped不然丑 -->
+<style>
 .selected-card {
-   border: 2px solid rgb(183, 255, 0);/* 修改为你想要的边框颜色 */
-  margin-left: -10px;
-  margin-right: -10px;
+  /* border: 2px solid rgb(183, 255, 0); 修改为你想要的边框颜色 */
+  margin-left: -20px;
+  margin-right: -20px;
 }
 
 .chart {
