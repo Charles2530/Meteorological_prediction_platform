@@ -113,7 +113,7 @@ import { post, get } from "@/api/index.ts";
 const get_data = async () => {
   get<WeatherData>(
     "/api/weather/30days",
-    { city: city},
+    { city: city.value},
     { month: month.value }
   ).then((res) => {
     weatherList.value = res.data.weatherList;
