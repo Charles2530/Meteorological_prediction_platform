@@ -4,12 +4,12 @@
     <!-- {{ city }} -->
     <el-container>
       <el-header>
-        <div id="chart_temp_perhour" ref="chart_temp_perhour" style="height: 100px;  width: 100%;  margin: 0 auto">
+        <div id="chart_temp_perhour" ref="chart_temp_perhour" style="height: 80px;  width: 100%;  margin: 0 auto">
         </div>
       </el-header>
       <el-main>
         <div class="calendar-container">
-          <el-row :gutter="20" justify="center">
+          <el-row :gutter="0" justify="center">
             <!-- <div style="margin: -10px;"> -->
             <!-- <el-col :span="2">
               <div class="day-content" style="margin-top: 26px;">
@@ -26,20 +26,21 @@
               <div class="ep-bg-purple-dark" />
               <!-- <div style="height:70% !important"> -->
               <el-card style="width:auto" shadow="hover">
-                  <div style="font-size: 20px;">{{ day.temperature }}℃</div>
-                  <div class="perhour-icon">
-                    <!-- {{day.condition_icon  }} -->
-                    <!-- <i class="qi-${day.condition_icon}" style="font-size: 40px;"></i> -->
-                    <i :class="'qi-' + day.condition_icon" style="font-size: 40px;"></i>
-                    <div class="tips-text">{{ day.condition }}</div>
-                  </div>
-                  <div class="perhour-icon">
-                    <el-icon size="30px" style="margin-bottom: 10px;" :style="{ transform: `rotate(${calculateAngle(day.wind360)}deg)` }">
-                      <Position />
-                    </el-icon>
-                    <div class="tips-text">{{ day.windScale }}级风</div>
-                  </div>
-                  <div style="font-size: 20px;">{{ day.time }}</div>
+                <div class="info-text">{{ day.temperature }}℃</div>
+                <div class="icon-couple">
+                  <!-- {{day.condition_icon  }} -->
+                  <!-- <i class="qi-${day.condition_icon}" style="font-size: 25px;"></i> -->
+                  <i class="perhour-icon"  :class="'qi-' + day.condition_icon" ></i>
+                  <div class="tips-text">{{ day.condition }}</div>
+                </div>
+                <div class="icon-couple">
+                  <el-icon size="25px" class="perhour-icon" 
+                    :style="{ transform: `rotate(${calculateAngle(day.wind360)}deg)` }">
+                    <Position />
+                  </el-icon>
+                  <div class="tips-text">{{ day.windScale }}级风</div>
+                </div>
+                <div class="info-text">{{ day.time }}</div>
               </el-card>
             </el-col>
           </el-row>
@@ -85,7 +86,7 @@ const calculateAngle = (wind360: number) => wind360 + 135;
 interface RealTimeWeather {
   time: string,
   condition: string,
-  condition_icon:number,
+  condition_icon: number,
   temperature: number,
   humidity: number,
   windScale: number,
@@ -144,9 +145,11 @@ const renderChart = async (
       show: true,
       type: "continuous",
       seriesIndex: 0, // This is now referring to the first (and only) series index that needs a visualMap
-      min: -10,
-      max: 30,
-      color: ['red', 'blue',] // 使用内置的蓝到红的渐变色
+      min: 10,
+      max: 40,
+      color: ['red', 'blue',] ,// 使用内置的蓝到红的渐变色
+      itemHeight: 60, // 调整图例的高度
+      itemWidth: 12
     },
 
     title: [
@@ -233,8 +236,8 @@ const renderChart = async (
           data: [
             // { type: 'max', name: '最大值' },
             // { type: 'min', name: '最小值' }
-            { type: 'max', name: '最大值', symbol: 'circle', symbolSize: 30, itemStyle: { color: 'red' } },
-            { type: 'min', name: '最小值', symbol: 'circle', symbolSize: 30, itemStyle: { color: 'blue' } }
+            { type: 'max', name: '最大值', symbol: 'circle', symbolSize: 25, itemStyle: { color: 'red' } },
+            { type: 'min', name: '最小值', symbol: 'circle', symbolSize: 25, itemStyle: { color: 'blue' } }
           ]
 
         },
@@ -297,13 +300,8 @@ onMounted(() => Promise.all([get_data()]).then(() => {
 
 
 <style lang="scss" scoped>
-.perhour-icon {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
 .calendar-container {
-  margin-top: 0vh;
+  margin-top: -2vh;
   padding: 0px;
 }
 
@@ -320,7 +318,7 @@ onMounted(() => Promise.all([get_data()]).then(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
+  padding: 0px;
 }
 
 .weather-icon img {
@@ -335,13 +333,32 @@ onMounted(() => Promise.all([get_data()]).then(() => {
   margin-top: 10px;
 }
 
-.tips-text {
-  font-size: 15px;
-  font-family: 'Courier New', Courier, monospace;
+.icon-couple {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.perhour-icon {
+  font-size: 25px;
+  margin-bottom: 10px;
   display: flex;
-  justify-content: center; /* 水平居中 */
+  justify-content: center;
+  /* 水平居中 */
 }
 
+.tips-text {
+  font-size: 14px;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  /* 水平居中 */
+}
+
+.info-text {
+  font-size: 25x;
+  display: flex;
+  justify-content: center;
+  /* 水平居中 */
+}
 
 .el-card {
   // background-color: rgb(188, 243, 243);

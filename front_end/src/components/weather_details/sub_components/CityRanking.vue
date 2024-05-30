@@ -1,61 +1,61 @@
 <template>
   <div class="rounded-lg" style="background-color: white;">
     <!-- <el-card style="width: 100%;"> -->
-    <div class="text-2xl" style="margin-bottom: 20px;"><el-icon>
+    <div class="text-xl" style="margin-bottom: 10px;"><el-icon>
         <Histogram />
       </el-icon>&nbsp;&nbsp;实况排行</div>
     <hr />
-    <el-tabs stretch v-model="activeName" class=" " @tab-click="handleClick">
-      <el-tab-pane label="最高气温" name="first">
-        <el-table :data="highestTempRankings" style="width: 100%" :header-cell-style="{ 'text-align': 'center' }"
-          :cell-style="{ 'text-align': 'center' }">
-          <el-table-column prop="no" label="排名" height="auto" width="70" />
-          <el-table-column prop="city" label="城市" />
-          <el-table-column prop="province" label="所在省份" />
-          <el-table-column prop="item" label="最高气温" />
-        </el-table>
-      </el-tab-pane>
-      <el-tab-pane label="最低气温" name="second">
-        <el-table :data="lowestTempRankings" style="width: 100%" :header-cell-style="{ 'text-align': 'center' }"
-          :cell-style="{ 'text-align': 'center' }">
-          <el-table-column prop="no" label="排名" height="auto" width="70" />
-          <el-table-column prop="city" label="城市" />
-          <el-table-column prop="province" label="所在省份" />
-          <el-table-column prop="item" label="最低气温" />
-        </el-table>
-      </el-tab-pane>
-      <el-tab-pane label="24小时降水量" name="third">
-        <el-table :data="precipRankings" style="width: 100%" :header-cell-style="{ 'text-align': 'center' }"
-          :cell-style="{ 'text-align': 'center' }">
-          <el-table-column prop="no" label="排名" height="auto" width="70" />
-          <el-table-column prop="city" label="城市" />
-          <el-table-column prop="province" label="所在省份" />
-          <el-table-column prop="item" label="24小时降水量" />
-        </el-table>
-      </el-tab-pane>
-      <el-tab-pane label="空气质量" name="fourth">
-        <el-table :data="cityAqiRankings" style="width: 100%" :header-cell-style="{ 'text-align': 'center' }"
-          :cell-style="{ 'text-align': 'center' }">
-          <el-table-column prop="no" label="排名" height="auto" width="70" />
-          <el-table-column prop="city" label="城市" />
-          <el-table-column prop="province" label="所在省份" />
-          <!-- <el-table-column prop="item" label="空气质量" /> -->
-          <el-table-column prop="item" label="空气质量">
-            <template #header>
-              <el-row>
-                <!-- <el-col :span="12"> -->
-                空气质量&nbsp;
-                <!-- </el-col> -->
-                <!-- <span></span> -->
-                <!-- <el-col :span="12"> -->
-                <el-button size="small" type="" :icon="cityAqiIcon" @click="changeAqiOrder()" style="padding: 5px;" />
-                <!-- </el-col> -->
-              </el-row>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-tab-pane>
-    </el-tabs>
+      <el-tabs stretch v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="最高气温" name="first">
+          <el-table :data="highestTempRankings" height="290" style="width: 100%;margin-top: -12px;" :header-cell-style="{ 'text-align': 'center' }"
+            :cell-style="{ 'text-align': 'center' }">
+            <el-table-column prop="no" label="排名" height="auto" width="70" />
+            <el-table-column prop="city" label="城市" />
+            <el-table-column prop="province" label="所在省份" />
+            <el-table-column prop="item" label="最高气温" />
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="最低气温" name="second">
+          <el-table :data="lowestTempRankings"  height="290" style="width: 100%;margin-top: -12px;"  :header-cell-style="{ 'text-align': 'center' }"
+            :cell-style="{ 'text-align': 'center' }">
+            <el-table-column prop="no" label="排名" height="auto" width="70" />
+            <el-table-column prop="city" label="城市" />
+            <el-table-column prop="province" label="所在省份" />
+            <el-table-column prop="item" label="最低气温" />
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="24小时降水量" name="third">
+          <el-table :data="precipRankings"  height="290" style="width: 100%;margin-top: -12px;"  :header-cell-style="{ 'text-align': 'center' }"
+            :cell-style="{ 'text-align': 'center' }">
+            <el-table-column prop="no" label="排名" height="auto" width="70" />
+            <el-table-column prop="city" label="城市" />
+            <el-table-column prop="province" label="所在省份" />
+            <el-table-column prop="item" label="降水量" />
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="空气质量" name="fourth">
+          <el-table :data="cityAqiRankings"  height="290" style="width: 100%;margin-top: -12px;"  :header-cell-style="{ 'text-align': 'center' }"
+            :cell-style="{ 'text-align': 'center' }">
+            <el-table-column prop="no" label="排名" height="auto" width="70" />
+            <el-table-column prop="city" label="城市" />
+            <el-table-column prop="province" label="所在省份" />
+            <!-- <el-table-column prop="item" label="空气质量" /> -->
+            <el-table-column prop="item" label="空气质量">
+              <template #header>
+                <el-row>
+                  <!-- <el-col :span="12"> -->
+                  空气质量
+                  <!-- </el-col> -->
+                  <!-- <span></span> -->
+                  <!-- <el-col :span="12"> -->
+                  <el-button size="small" type="" :icon="cityAqiIcon" @click="changeAqiOrder()" style="padding: 0px;" />
+                  <!-- </el-col> -->
+                </el-row>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-tab-pane>
+      </el-tabs>
     <!-- </el-card> -->
   </div>
 </template>
@@ -175,3 +175,7 @@ bestCityAqiRankings
 // 排行榜部分
 const Match = ref(true);
 </script>
+
+
+<style scoped>
+</style>

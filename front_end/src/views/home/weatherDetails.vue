@@ -24,10 +24,10 @@
   <div class="common-layout" style="margin-left: 1%;margin-right: 1%;max-height:100vh;overflow: auto;border-radius: 5px;">
     <el-container style="background: white">
       <el-aside width="70%">
-        <el-button size="small" type="" :icon="Switch" style="" @click="drawer = true">
+        <el-button size="small" type="" :icon="Switch" style="font-size: xx-small;background-color: transparent;" @click="drawer = true">
           切换城市
         </el-button>
-        <el-container class="rounded-lg" style="background: rgb(54, 131, 195);height: 44.5vh;margin-top: 0px;">
+        <el-container class="rounded-lg" style="background: rgb(54, 131, 195);height: 43vh;margin-top: 0px;">
           <!-- <el-col :span="16"> -->
           <CurrentWeather class="md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
           </CurrentWeather>
@@ -36,7 +36,7 @@
           <CurrentWeatherRight class="md:basis-3/5" :weather="weather" />
           <!-- </el-col> -->
         </el-container>
-        <el-card style="min-height: 20vh;max-height: 44vh;margin-bottom:15px;">
+        <el-card style="min-height: 20vh;max-height: 43vh;margin-bottom:15px;">
           <RealTimeBroadcast :city="city" />
         </el-card>
       </el-aside>
@@ -45,7 +45,7 @@
         <el-card>
           <BriefAqi :city="city" />
         </el-card>
-        <el-card style="max-height:52vh;overflow: auto;">
+        <el-card style="height:53vh;overflow: hidden;">
           <CityRanking />
         </el-card>
       </el-main>

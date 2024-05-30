@@ -1,7 +1,7 @@
 <template>
   <!-- {{ city }} -->
   <div class="air-quality-indicator">
-    <div class="location text-2xl">
+    <div class="location text-xl">
       空气质量
     </div>
     <!-- <div class="quality-circle">
@@ -10,11 +10,11 @@
     <!-- <el-card style="width: 100%;"> -->
     <el-row style="width: 100%;">
       <el-col :span="15">
-        <div id="chart_brief_aqi_bar" ref="chart_brief_aqi_bar" style="height: 220px;  width: 100%;  margin: 0 auto">
+        <div id="chart_brief_aqi_bar" ref="chart_brief_aqi_bar" style="height: 150px;  width: 100%;  margin: 0 auto">
         </div>
       </el-col>
       <el-col :span="9">
-        <div style="margin-top: 30%;">
+        <div style="margin-top: 20%;font-size:13px;">
           <el-row v-for="(value, key) in pollutionList">
             <el-col :span="15">
               <div>
@@ -32,18 +32,18 @@
     <el-tooltip effect="light">
       <template #content>
         <el-row>
-          <el-col :span="24" class="rounded-lg shadow-md p-2" style="width: 40vh;">
+          <el-col :span="24" class="rounded-lg shadow-md p-2" style="width: 300px;">
             <el-row :gutter="2">
               <el-col :span="8">
-                <p class="text-xl text-center font-bold" :style="colorClass(levelInfo.color)">
+                <p class="text-lg text-center font-bold" :style="colorClass(levelInfo.color)">
                   {{ levelInfo.name }}
                 </p>
-                <p class="text-center text-xl">
+                <p class="text-center text-base">
                   {{ levelInfo.range }}
                 </p>
               </el-col>
               <el-col :span="16">
-                <p class="text-center text-sm text-black">{{ levelInfo.description }}</p>
+                <p class="text-center text-xs text-black">{{ levelInfo.description }}</p>
               </el-col>
             </el-row>
             <!-- </div> -->
@@ -229,13 +229,13 @@ const renderChart = async (
         startAngle: -120,
         endAngle: -60,
         center: ['40%', '46%'],
-        radius: '80%',
+        radius: '85%',
         min: 0,
         max: 350,
         splitNumber: 7,
         axisLine: {
           lineStyle: {
-            width: 17,
+            width: 11,
             color: [
               [1 / 7, 'green'],
               [2 / 7, 'yellow'],
@@ -279,7 +279,7 @@ const renderChart = async (
         },
         axisLabel: {
           color: '#464646',
-          fontSize: 17,
+          fontSize: 14,
           distance: -45,
           // rotate: 'tangential',
           formatter: function (value) {
@@ -310,7 +310,7 @@ const renderChart = async (
           fontSize: 20
         },
         detail: {
-          fontSize: 30,
+          fontSize: 26,
           offsetCenter: [0, '-25%'],
           valueAnimation: true,
           formatter: function (value: number) {
@@ -457,30 +457,10 @@ onMounted(() => Promise.all([getPresentCityAqi()]).then(() => {
 </script>
 <style>
 .air-quality-indicator {
-  padding: 10px;
+  padding: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.location {
-  /* margin-bottom: 10px; */
-}
-
-.quality-circle {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-image: linear-gradient(to right,
-      #0019d4,
-      #4c72af,
-      #07daff,
-      #22ff6c,
-      #51ff21f6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
 }
 
 .quality-level {
@@ -490,8 +470,7 @@ onMounted(() => Promise.all([getPresentCityAqi()]).then(() => {
 }
 
 .quality-description {
-  /* font-size: 30px; */
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
   z-index: 1;
 }
@@ -508,5 +487,8 @@ onMounted(() => Promise.all([getPresentCityAqi()]).then(() => {
   border: none;
   box-shadow: none;
   margin-bottom: 10px;
+}
+.special-font {
+  font-family: 'Courier New', Courier, monospace;
 }
 </style>

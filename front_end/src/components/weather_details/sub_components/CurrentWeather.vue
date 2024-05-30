@@ -15,11 +15,11 @@
       <!-- pc端的地区和时间 -->
       <div class="flex flex-col max-md:hidden" style="font-size: 20px;">
         <div class="flex">
-          <div class="mr-10 flex items-center gap-2">
+          <div class="mr-10 flex items-center gap-2 special-font">
             <span>{{ `${city.adm2} ${city.name}` }}</span>
             <!-- <button @click="searchForPC"><img class="h-3 w-auto transform" :class="`${search ? 'rotate-90' : '-rotate-90'}`" src="@/assets/change.png" alt=""></button> -->
           </div>
-          <div>{{ ` ${formattedDate}` }}</div>
+          <div class="special-font">{{ ` ${formattedDate}` }}</div>
         </div>
         <div class="text-[#333333]">
           <!-- <slot name="search"></slot> -->
@@ -30,20 +30,20 @@
         flex
         max-md:justify-between
         relative
-      " style="margin-top: 110px;">
+        special-font" style="margin-top: 110px;">
         <div class="max-md:relative opacity-30">
           <!-- <QWeatherIcon class="max-md:absolute " :icon="props.weather.icon" :size="300" :fill="true" /> -->
           <!-- <el-icon size="150" color="yellow">
             <Sunny />
           </el-icon> -->
-          <i :class="'qi-' + weather.condition_icon" style="font-size: 150px;"></i>
+          <i :class="'qi-' + weather.condition_icon" style="font-size: 100px;"></i>
         </div>
-        <div class="flex flex-col md:ml-10 " style="font-size: 30px;">
+        <div class="flex flex-col md:ml-10 ">
 
-          <span class="text-7xl bg-clip-text text-transparent bg-gradient-to-br from-white from-40% ..."
+          <span class="text-5xl bg-clip-text text-transparent bg-gradient-to-br from-white from-40% ..."
             style="margin-bottom: 20px;">{{
               `${weather.temp}°C` }}</span>
-          <span class="max-md:hidden">&nbsp;&nbsp;&nbsp;&nbsp;{{ weather.condition }}</span>
+          <span class="text-3xl max-md:hidden">&nbsp;{{ weather.condition }}</span>
         </div>
 
       </div>
@@ -91,4 +91,8 @@ const searchForPC = () => {
 // const { dayOfWeek, formattedDate } = translateTime(props.weather.obsTime)
 </script>
 
-<style scoped></style>
+<style scoped>
+.special-font {
+  font-family: 'Courier New', Courier, monospace;
+}
+</style>
