@@ -35,19 +35,13 @@ declare module 'vue' {
     ElButton: typeof import('element-plus/es')['ElButton']
     ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
     ElCard: typeof import('element-plus/es')['ElCard']
-    ElCarousel: typeof import('element-plus/es')['ElCarousel']
-    ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
-<<<<<<< HEAD
-    ElDialog: typeof import('element-plus/es')['ElDialog']
-=======
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
     ElDescriptions: typeof import('element-plus/es')['ElDescriptions']
     ElDescriptionsItem: typeof import('element-plus/es')['ElDescriptionsItem']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElDivider: typeof import('element-plus/es')['ElDivider']
->>>>>>> 4dcf01e (fix(backend))
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
@@ -57,18 +51,13 @@ declare module 'vue' {
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
-<<<<<<< HEAD
-    ElMain: typeof import('element-plus/es')['ElMain']
-    ElMenu: typeof import('element-plus/es')['ElMenu']
-    ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElOption: typeof import('element-plus/es')['ElOption']
-=======
->>>>>>> 4dcf01e (fix(backend))
     ElInputNumber: typeof import('element-plus/es')['ElInputNumber']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElOption: typeof import('element-plus/es')['ElOption']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSlider: typeof import('element-plus/es')['ElSlider']

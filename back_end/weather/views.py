@@ -16,7 +16,7 @@ from rest_framework.views import APIView
 
 from .models import HourlyWeather, DailyWeather, MonthlyWeather, WeatherInfo
 from .models import Pro2City, ProGeography, City2CityId, LocationToInfo
-from .models import RealtimeAirQuality
+from .models import RealtimeAirQuality, RealtimeWeather
 from .serializers import HourlyWeatherSerializer, DailyWeatherSerializer, MonthlyWeatherSerializer
 
 pri_key = "d4c9c9bc145748e48405c44277be0745"
@@ -79,18 +79,22 @@ def overview(request):
 
     weather = json.loads(weather.content.decode('utf-8'))
     data = weather['now']
+    realtime_weather = RealtimeWeather.objects.get(cityName='北京市')  #TODO
+    daily_weather = DailyWeather.objects.get(city='北京市', fxDate=datetime.now())
+    realtime_air_quality = RealtimeAirQuality.objects.get(cityName='北京市')  #TODO
     response_json = {
         "weather": {
-            "condition": realtime.text,
-            "temp": realtime.temp,
-            "temp_feel": realtime.feelsLike,
-            "precip": realtime.precip,
+            "condition": realtime_weather.text,
+            "condition_icon": realtime_weather.icon,
+            "temp": realtime_weather.temp,
+            "temp_feel": realtime_weather.feelsLike,
+            "precip": realtime_weather.precip,
             "precip_probability": 10,
-            "aqi": 63,
-            "pressure": int(data.get("pressure", 0)),  # 气压
+            "aqi": realtime_air_quality.aqi,
+            "pressure": realtime_weather.pressure,
             "ray": "中等",
-            "sunrise_time": "5:04",  # daily
-            "sunset_time": "19:19"  # daily
+            "sunrise_time": daily_weather.sunrise,  # daily
+            "sunset_time": daily_weather.sunset  # daily
         },
         "search": True
     }

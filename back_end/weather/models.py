@@ -3,6 +3,21 @@ from datetime import datetime
 
 
 # Create your models here.
+class RealtimeWeather(models.Model):
+    cityName = models.CharField(max_length=40, default='北京市', primary_key=True)
+    temp = models.IntegerField()
+    feelsLike = models.IntegerField()
+    icon = models.CharField(max_length=20)
+    text = models.CharField(max_length=20)
+    wind360 = models.IntegerField()
+    windDir = models.CharField(max_length=20)
+    windScale = models.CharField(max_length=20)
+    windSpeed = models.IntegerField()
+    humidity = models.IntegerField()
+    precip = models.FloatField()
+    pressure = models.IntegerField()
+
+
 class RealtimeAirQuality(models.Model):
     cityName = models.CharField(max_length=40, default='北京市', primary_key=True)
     aqi      = models.IntegerField()
@@ -126,6 +141,7 @@ class ProGeography(models.Model):
 # },
 
 class WeatherInfo(models.Model):
+    # hourly
     id = models.AutoField(primary_key=True, default=0)
     time = models.DateTimeField(default=datetime.now)
     cityName = models.CharField(max_length=40, default="北京市")
