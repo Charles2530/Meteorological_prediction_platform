@@ -31,6 +31,7 @@ npm install
 
 ```shell
 cd back_end
+pip install -r pip_env.txt
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
