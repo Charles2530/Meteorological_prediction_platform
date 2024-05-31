@@ -359,7 +359,15 @@ interface CityInfoResponse {
   success: boolean;
   reason?: string;
 }
-
+const updateUserCity = async () => {
+  post<CityInfoResponse>("/api/operate/current_city/", {
+    city: state.value,
+  }).then((res) => {
+    if (res.data.success) {
+      getPresentCity();
+    }
+  });
+};
 onMounted(() => {
   labels.value = loadAll();
 });

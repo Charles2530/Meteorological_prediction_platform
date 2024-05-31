@@ -6,6 +6,7 @@ import requests
 import pytz
 import random
 
+
 class Command(BaseCommand):
     help = 'Store daily weather into database'
 
@@ -43,12 +44,12 @@ class Command(BaseCommand):
 
         if kwargs["U"]:
             print("Refresh all")
-        
+
         if kwargs['dev']:
             url = 'https://devapi.qweather.com/v7/weather/7d'
         else:
             url = 'https://api.qweather.com/v7/weather/7d'
-        
+
         weather = requests.get(url, params={
             'key': kwargs['key'],
             'location': '101010100',
@@ -61,23 +62,24 @@ class Command(BaseCommand):
             timezon = pytz.timezone('Asia/Shanghai')
             date_time = date_time.astimezone(timezon)
 
-            temp_aqi = random.randint(10, 150) # TODO
+            temp_aqi = random.randint(10, 150)  # TODO
 
             data = DailyWeather(
                 # time = date_time,
-                fxDate = timezon.localize(datetime.now()),
+                fxDate=timezon.localize(datetime.now()),
                 # time = datetime.now(),
-                city = '北京市',
-                sunrise = daily["sunrise"],
-                sunset = daily["sunset"],
-                tempMax = daily["tempMax"],
-                tempMin = daily["tempMin"],
-                humidity = daily["humidity"],
-                precip = daily["precip"],
-                pressure = daily["pressure"],
-                cloud = daily["cloud"],
+                city='北京市',
+                sunrise=daily["sunrise"],
+                sunset=daily["sunset"],
+                tempMax=daily["tempMax"],
+                tempMin=daily["tempMin"],
+                humidity=daily["humidity"],
+                windSpeedDay=daily["windSpeedDay"],
+                precip=daily["precip"],
+                pressure=daily["pressure"],
+                cloud=daily["cloud"],
                 # dew = hourly["dew"],
-                aqi = temp_aqi,
+                aqi=temp_aqi,
                 # category = '优' if temp_aqi < 50 else '良'
             )
 

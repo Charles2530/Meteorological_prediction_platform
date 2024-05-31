@@ -105,16 +105,16 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  if (
-    routes.some((item) =>
-      new RegExp("^" + item.path.split("/:")[0] + "(?:/.*)?$").test(to.path)
-    )
-  ) {
-    next();
-  } else {
-    next({ name: "404Page" });
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (
+//     routes.some((item) =>
+//       new RegExp("^" + item.path.split("/:")[0] + "(?:/.*)?$").test(to.path)
+//     )
+//   ) {
+//     next();
+//   } else {
+//     next({ name: "404Page" });
+//   }
+// });
 
 export default router;

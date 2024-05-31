@@ -71,14 +71,24 @@
           <div class="clearfix">
             <span>城市列表</span>
           </div>
-          <el-select v-model="cities" placeholder="选择订阅城市">
+          <!-- <el-select v-model="cities" placeholder="选择订阅城市">
             <el-option
               v-for="location in locations"
               :key="location.label"
               :label="location.label"
               :value="location.label"
             ></el-option>
-          </el-select>
+          </el-select> -->
+          <el-autocomplete
+            v-model="cities"
+            placeholder="选择订阅城市"
+            :fetch-suggestions="querySearch"
+            clearable
+            class="inline-input w-50"
+            @select="handleSelect"
+            highlight-first-item
+            :value-key="'label'"
+          />
           <el-table :data="tableData" style="width: 100%">
             <el-table-column
               prop="city"
@@ -138,6 +148,31 @@ import noticeItem from "@c/notice/noticeItem.vue";
 import { post, get } from "@/api/index.ts";
 import noticeLevelList from "@/components/notice/noticeLevelList.vue";
 import { china_cities } from "@/stores/cities";
+interface LabelItem {
+  label: string;
+  value: string;
+}
+const labels = ref<LabelItem[]>([]);
+const querySearch = (queryString: string, cb: any) => {
+  const results = queryString
+    ? labels.value.filter(createFilter(queryString))
+    : labels.value;
+  cb(results);
+};
+const handleSelect = (item: LabelItem) => {
+  cities.value = item.label;
+  city.value = item.value;
+};
+const createFilter = (queryString: string) => {
+  return (restaurant: LabelItem) => {
+    return (
+      restaurant.label.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+    );
+  };
+};
+const loadAll = () => {
+  return china_cities;
+};
 const locations = china_cities;
 const undo_subscribe_dialog = ref(false);
 const form = reactive({
@@ -198,6 +233,7 @@ const fetchNotifications = async () => {
   });
 };
 onMounted(() => {
+  labels.value = loadAll();
   fetchNotifications();
   getSubscribeStatus();
   routerToNoticeId();
@@ -264,6 +300,7 @@ const subscribe = () => {
 };
 // search part
 const search = ref("");
+const city = ref("");
 const isSearching = computed(() => search.value !== "");
 const searchNotice = function () {
   if (search.value === "") {

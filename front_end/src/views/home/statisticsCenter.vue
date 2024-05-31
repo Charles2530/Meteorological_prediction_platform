@@ -6,7 +6,7 @@
           <el-row :gutter="20">
             <el-col :span="18">
               <el-card>
-                <el-select
+                <!-- <el-select
                   v-model="selectedLocation"
                   placeholder="请选择城市"
                   clearable
@@ -17,7 +17,17 @@
                     :label="location.label"
                     :value="location.value"
                   ></el-option>
-                </el-select>
+                </el-select> -->
+                <el-autocomplete
+                  v-model="selectedLocation"
+                  placeholder="请选择城市"
+                  :fetch-suggestions="querySearch"
+                  clearable
+                  class="inline-input w-50"
+                  @select="handleSelect"
+                  highlight-first-item
+                  :value-key="'label'"
+                />
                 <div class="slider-demo-block">
                   <span class="demonstration">时间维度</span>
                   <el-slider v-model="periods" />
@@ -110,9 +120,38 @@ import compareGraph from "@/components/dataStatistics/compareGraph.vue";
 import WeatherDataRankVM from "@c/dataStatistics/rank/WeatherDataRankVM.vue";
 import { china_cities } from "@/stores/cities";
 import aiTemperGraph from "@c/dataStatistics/graph/aiTemperGraph.vue";
-const selectedLocation = ref("");
+const city = ref("");
+const selectedLocation = ref("北京市");
 const periods = ref(30);
 const locations = china_cities;
+interface LabelItem {
+  label: string;
+  value: string;
+}
+const labels = ref<LabelItem[]>([]);
+const querySearch = (queryString: string, cb: any) => {
+  const results = queryString
+    ? labels.value.filter(createFilter(queryString))
+    : labels.value;
+  cb(results);
+};
+const handleSelect = (item: LabelItem) => {
+  selectedLocation.value = item.label;
+  city.value = item.value;
+};
+const loadAll = () => {
+  return china_cities;
+};
+const createFilter = (queryString: string) => {
+  return (restaurant: LabelItem) => {
+    return (
+      restaurant.label.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+    );
+  };
+};
+onMounted(() => {
+  labels.value = loadAll();
+});
 </script>
 
 <style scoped>
