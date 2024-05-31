@@ -45,9 +45,9 @@ class Command(BaseCommand):
             print("Refresh all")
         
         if kwargs['dev']:
-            url = 'https://devapi.qweather.com/v7/weather/24h'
+            url = 'https://devapi.qweather.com/v7/weather/168h'
         else:
-            url = 'https://api.qweather.com/v7/weather/24h'
+            url = 'https://api.qweather.com/v7/weather/168h'
         
         target_locations = ['101010100',  # Beijing
                             '101020100',  # Shanghai

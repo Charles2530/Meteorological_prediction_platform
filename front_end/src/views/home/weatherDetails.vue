@@ -248,7 +248,6 @@ const refreshData = () => {
 
 // 对话框
 
-import { ElMessageBox } from 'element-plus'
 import { Search } from '@element-plus/icons-vue'
 // import searchCity from "@/components/topBar/searchCity.vue"
 
@@ -300,18 +299,10 @@ const handleConfirm = () => {
 // careCitiesList.value.push(selectedCareCity);
 
 import { ref, onMounted } from 'vue';
-
-
-
 import { china_cities } from "@/stores/cities";
-import { CityWeatherData } from "@/types/weather";
 // onMounted(() => {
 //   getPresentCity();
 // });
-interface CityInfoResponse {
-  status: boolean;
-  message: CityWeatherData;
-}
 // const currentCity = ref("");
 // const getPresentCity = async () => {
 //   get<CityInfoResponse>("/api/current/getCityInfo/").then((res) => {
@@ -352,22 +343,8 @@ const handleSelect = (item: LabelItem) => {
   console.log(tempSelectedCity.value);
   tempSelectedCity.value.name = item.label;
   tempSelectedCity.value.adm2 = item.label;
-
 };
 
-interface CityInfoResponse {
-  success: boolean;
-  reason?: string;
-}
-const updateUserCity = async () => {
-  post<CityInfoResponse>("/api/operate/current_city/", {
-    city: state.value,
-  }).then((res) => {
-    if (res.data.success) {
-      getPresentCity();
-    }
-  });
-};
 onMounted(() => {
   labels.value = loadAll();
 });

@@ -172,7 +172,7 @@ class LocationToInfo(models.Model):
     location = models.CharField(max_length=40, default="", primary_key=True)
     obsTime = models.CharField(max_length=40, default="2021-12-16T10:00+00:00")
     aqi = models.IntegerField(default=0)
-    temp = models.CharField(max_length=40, default="-1")
+    temp = models.CharField(max_length=40, default="21")
     text = models.IntegerField(default=0)
     wind360 = models.CharField(max_length=40, default="287")
     windDir = models.CharField(max_length=40, default="西北风")
