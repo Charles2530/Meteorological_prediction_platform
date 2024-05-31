@@ -130,6 +130,7 @@ def my_register(request):
 
 @csrf_exempt
 @login_required
+@user_passes_test(lambda u: u.is_staff or u.is_superuser)
 def user_list(request):
     # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")
@@ -190,6 +191,7 @@ def user_list(request):
 
 @csrf_exempt
 @login_required
+@user_passes_test(lambda u: u.is_staff or u.is_superuser)
 def delete_user(request):
     # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")
@@ -233,7 +235,7 @@ def delete_user(request):
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
 @login_required
-@user_passes_test(lambda u: u.is_staff)
+@user_passes_test(lambda u: u.is_staff or u.is_superuser)
 def user_authorization(request):
     # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")
@@ -277,7 +279,7 @@ def user_authorization(request):
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
 @login_required
-@user_passes_test(lambda u: u.is_staff)
+@user_passes_test(lambda u: u.is_staff or u.is_superuser)
 def update_user_email(request):
     authorization = request.META.get("HTTP_AUTHORIZATION")
     if not authorization:
@@ -319,7 +321,7 @@ def update_user_email(request):
 
 @csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
 @login_required
-@user_passes_test(lambda u: u.is_staff)
+@user_passes_test(lambda u: u.is_staff or u.is_superuser)
 def update_user_password(request):
     authorization = request.META.get("HTTP_AUTHORIZATION")
 
@@ -364,7 +366,7 @@ def update_user_password(request):
 
 @csrf_exempt
 @login_required
-@user_passes_test(lambda u: u.is_staff)
+@user_passes_test(lambda u: u.is_staff or u.is_superuser)
 def delete_data(request):
     pid = request.META.get("HTTP_PID")
 
@@ -383,7 +385,7 @@ def delete_data(request):
 
 @csrf_exempt
 @login_required
-@user_passes_test(lambda u: u.is_staff)
+@user_passes_test(lambda u: u.is_staff or u.is_superuser)
 def user_info(request):
     auth_header = request.META.get('HTTP_AUTHORIZATION', '')
     if not auth_header:

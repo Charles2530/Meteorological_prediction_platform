@@ -14,6 +14,7 @@ from rest_framework import generics, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .models import HazardInfo
 from .models import HourlyWeather, DailyWeather, MonthlyWeather, WeatherInfo
 from .models import Pro2City, ProGeography, City2CityId, LocationToInfo
 from .models import RealtimeAirQuality, RealtimeWeather
@@ -519,37 +520,37 @@ def update_current_city(request):
 
 @require_http_methods(['GET'])
 def get_hazard(request: HttpRequest):
-    all_info = DailyWeather.objects.all()
+    all_info = HazardInfo.objects.all()
     response_json = [
         {
-            "place": info.cityName,
-            "longitude": info.location.split(',')[0].trim(),
-            "latitude": info.location.split(',')[1].trim(),
+            "place": info.city,
+            "longitude": City2CityId.objects.filter(cityName=info.city).first().location.split(',')[0].strip(),
+            "latitude": City2CityId.objects.filter(cityName=info.city).first().location.split(',')[1].strip(),
             "type": info.typeName,
             "time": '',  # TODO fix date str time
-            "winSpeed": info.winSpeed,
+            "level": info.level,
         }
         for info in all_info
     ]
-    return JsonResponse(response_json, status=200)
+    return JsonResponse({"data": response_json}, status=200)
 
 
 @csrf_exempt
 @require_http_methods(['GET'])
 def get_top_hazard(request: HttpRequest):
-    all_info = DailyWeather.objects.filter(severity='Severe' or 'Extreme').order_by('-time')
-    response_json = {
+    all_info = HazardInfo.objects.filter(severity='Severe' or 'Extreme').order_by('-time')
+    response_json = [
         {
-            "place": info.cityName,
-            "longitude": info.location.split(',')[0].trim(),
-            "latitude": info.location.split(',')[1].trim(),
+            "place": info.city,
+            "longitude": City2CityId.objects.filter(cityName=info.city).first().location.split(',')[0].strip(),
+            "latitude": City2CityId.objects.filter(cityName=info.city).first().location.split(',')[1].strip(),
             "type": info.typeName,
             "time": '',  # TODO fix date strtime
             "winSpeed": info.winSpeed,
         }
         for info in all_info
-    }
-    return JsonResponse(response_json, status=200)
+    ]
+    return JsonResponse({'data': response_json}, status=200)
 
 
 @csrf_exempt
@@ -751,29 +752,35 @@ def search_weather_data(request):
 def get_vis_data(request):
     cities = City2CityId.objects.all()
 
+    ret_data = []
     for city in cities:
         # 解析location字段获取经纬度
-        location_info = city.location.split(',')
-        lon = float(location_info[0])  # 假设location的第一个值是经度
-        lat = float(location_info[1])  # 假设location的第二个值是纬度
+        lat, lon = map(float, city.location.split(','))
 
-        location_info = LocationToInfo.objects.get(location=city.location)
+        # print(r"{:.2f},{:.2f}".format(round(lat), round(lon)))
+
+        location_info = LocationToInfo.objects.get(
+            location=r"{:.2f},{:.2f}".format(round(lon), round(lat))
+        )
 
         weather_data = {
             "adcode": city.cityId,  # 假设adcode是cityId
             "LON": lon,
             "LAT": lat,
-            "temp": location_info.temp,
-            "precip": location_info.precip,
-            "aqi": location_info.aqi,
-            "pressure": location_info.pressure,
+            "temp": float(location_info.temp),
+            "precip":float( location_info.precip),
+            "aqi":float( location_info.aqi),
+            "pressure": float(location_info.pressure),
             "humidity": location_info.humidity,
             "windSpeed": location_info.windSpeed,
             "windScale": location_info.windScale,
             "wind360": location_info.wind360
         }
+        ret_data.append(weather_data)
 
-    return JsonResponse(weather_data, status=200)
+
+    ## TODO to restore
+    return JsonResponse({"data": ret_data}, status=200)
 
 
 @csrf_exempt
