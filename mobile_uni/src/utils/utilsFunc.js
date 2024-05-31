@@ -90,11 +90,23 @@ export const findMostFrequentItem = (arr) => {
     return mostFrequentItem
 }
 
+// export const getDateToday = () => {
+//     // 获取当前时间
+//     const currentDate = new Date();
+//     // 将时间格式化为英文形式
+//     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+//     const formattedDate = currentDate.toLocaleDateString('en-US', options);
+//     return formattedDate;
+// }
+
 export const getDateToday = () => {
     // 获取当前时间
     const currentDate = new Date();
-    // 将时间格式化为英文形式
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = currentDate.toLocaleDateString('en-US', options);
-    return formattedDate;
-}
+    // 分别获取年、月、日
+    const year = currentDate.getFullYear(); // 获取年份的后两位
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // 月份从 0 开始，需要加 1
+    const day = currentDate.getDate().toString().padStart(2, '0');
+  
+    // 拼接成 yy-mm-dd 格式
+    return `${year}-${month}-${day}`;
+  };

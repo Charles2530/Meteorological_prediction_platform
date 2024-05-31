@@ -15,10 +15,10 @@
         <!-- <span>天气详情</span> -->
         <!-- <button @click="refresh"><img class="w-6 h-6" src="@/assets/refresh.png" alt="refresh"></button> -->
       </div>
-      <div class="grid grid-cols-3 gap-4 h-full mt-6" style="font-size: large; font-family: 'Courier New', Courier, monospace;">
+      <div class="grid grid-cols-3 gap-4 h-full mt-6">
         <template v-for="(item, index) in dispalyInfo" :key="index">
           <div v-if="item.data" class="flex flex-col text-center items-center gap-2">
-            <img :src="item.icon" :alt="item.name" v-if="item.icon" class="w-9 h-9">
+            <img :src="item.icon" :alt="item.name" v-if="item.icon" class="w-12 h-12">
             <span>{{ item.name }}</span>
             <span>{{ item.data }}{{ item.unit }}</span>
           </div>
