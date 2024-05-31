@@ -11,7 +11,7 @@ from django.views.decorators.http import require_http_methods
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-# from customuser.models import Profile
+from customuser.models import Profile
 from .models import Notification, WeatherForecast, CitySubscription
 from .serializers import NotificationSerializer, CitySubscriptionSerializer, WeatherForecastSerializer
 from .task import fetch_catastrophic_forecast_cities_list, fetch_weather_catastrophic_forecast
@@ -60,6 +60,7 @@ class WeatherForecastView(APIView):
         return Response(serializer.errors, status=400)
 
 
+@login_required
 def get_alarm_notice(request):
     locations = WeatherForecast.objects.all()
     response_json = {
@@ -68,8 +69,8 @@ def get_alarm_notice(request):
     }
 
     user = request.user
-    # profile = Profile.objects.get(username=user.username)
-    cities = CitySubscription.objects.filter(profile__in=user)
+
+    cities = CitySubscription.objects.filter(user=user)
     for forecast in locations:
         for city in cities:
             if city.cityName in forecast.city:
@@ -96,16 +97,24 @@ def get_alarm_notice(request):
 def subscribe(request):
     if request.method == 'POST':
         try:
-            data = json.loads(request.body)
-            cities = data.get('cities')
+            cities = request.POST.get('cities')
             profile = request.user
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
-            city_obj, created = CitySubscription.objects.update_or_create(
-                profile=profile,
-                cityName=cities,
-            )
-            city_obj.save()
+            print('-----', profile.username, cities, '-----')
+            # city_obj, created = CitySubscription.objects.update_or_create(
+            #     user=profile,
+            #     cityName=cities,
+            # )
+            # city_obj.save()
+            if CitySubscription.objects.filter(user=profile, cityName=cities).exists():
+                CitySubscription.objects.filter(user=profile, cityName=cities).delete()
+            else:
+                city_subscription = CitySubscription(
+                    user=profile,
+                    cityName=cities
+                )
+                city_subscription.save()
 
             return JsonResponse({'status': True})
         except json.JSONDecodeError:
@@ -117,16 +126,18 @@ def subscribe(request):
             "success": True,
             "tableData": []
         }
-        cities = CitySubscription.objects.filter(profile=request.user).values('cityName')
+        cities = CitySubscription.objects.filter(user=request.user).values('cityName')
+        print('-----', cities, '-----')
         for city in cities:
             city_json = {
-                "city": city.cityName,
+                "city": city,
                 "status": "已订阅",
             }
             response_json['tableData'].append(city_json)
         return JsonResponse(response_json, status=200)
 
 
+@login_required
 def get_brief(request):
     locations = WeatherForecast.objects.all()
     response_json = {
@@ -152,6 +163,7 @@ def get_brief(request):
     return JsonResponse(response_json, status=200)
 
 
+@login_required
 def get_alarm_level(request):
     locations = WeatherForecast.objects.all()
     response_json = {
@@ -169,6 +181,7 @@ def get_alarm_level(request):
     return JsonResponse(response_json, status=200)
 
 
+@login_required
 def get_recent(request):
     locations = WeatherForecast.objects.all()
     response_json = {
@@ -197,6 +210,7 @@ def get_recent(request):
     return JsonResponse(response_json, status=200)
 
 
+@login_required
 def get_notification_data():
     notifications = []
     for notification_data in notifications:

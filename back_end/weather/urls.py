@@ -11,7 +11,11 @@ urlpatterns = [
 
     path('weather/overview/', views.overview, name='overview'),
     path('weather/overview_realtime/', views.realtime, name='realtime'),
-    path('weather/aqi/', views.aqi_detail, name='aqi_detail'),
+    path('weather/city_rank/', views.city_rank, name='city-rank'),
+    path('weather/care_cities/add/', views.add_care_city, name='add-care-city'),
+    path('weather/care_cities/del/', views.delete_care_city, name='delete-care-city'),
+    path('weather/care_cities/summary/', views.subscribed_cities_summary, name='summary-care-city'),
+    path('weather/aqi/', views.aqi_detail, name='aqi-detail'),
 
     path('weather/rank/', views.rank, name='rank'),
     path('weather/aqi/aqi_change/', views.aqi_current_city_change,

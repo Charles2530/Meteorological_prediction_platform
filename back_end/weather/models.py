@@ -3,6 +3,21 @@ from datetime import datetime
 
 
 # Create your models here.
+class RealtimeWeather(models.Model):
+    cityName = models.CharField(max_length=40, default='北京市', primary_key=True)
+    temp = models.IntegerField()
+    feelsLike = models.IntegerField()
+    icon = models.CharField(max_length=20)
+    text = models.CharField(max_length=20)
+    wind360 = models.IntegerField()
+    windDir = models.CharField(max_length=20)
+    windScale = models.CharField(max_length=20)
+    windSpeed = models.IntegerField()
+    humidity = models.IntegerField()
+    precip = models.FloatField()
+    pressure = models.IntegerField()
+
+
 class RealtimeAirQuality(models.Model):
     cityName = models.CharField(max_length=40, default='北京市', primary_key=True)
     aqi      = models.IntegerField()
@@ -46,8 +61,8 @@ class DailyWeather(models.Model):
     # moonset = models.DateTimeField(default=datetime.now)
     # moonPhase = models.CharField(max_length=10, default="")
     # moonPhaseIcon = models.CharField(max_length=10, default="")
-    tempMax = models.FloatField(default=0.0)
-    tempMin = models.FloatField(default=0.0)
+    tempMax = models.IntegerField(default=0)
+    tempMin = models.IntegerField(default=0)
     # iconDay = models.CharField(max_length=10, default="")
     # textDay = models.CharField(max_length=50, default="")
     # iconNight = models.CharField(max_length=10, default="")
@@ -55,7 +70,7 @@ class DailyWeather(models.Model):
     # wind360Day = models.FloatField(default=0.0)
     # windDirDay = models.CharField(max_length=20, default="")
     # windScaleDay = models.CharField(max_length=10, default="")
-    # windSpeedDay = models.FloatField(default=0.0)
+    windSpeedDay = models.CharField(max_length=10, default="")
     # wind360Night = models.FloatField(default=0.0)
     # windDirNight = models.CharField(max_length=20, default="")
     # windScaleNight = models.CharField(max_length=10, default="")
@@ -100,6 +115,7 @@ class Pro2City(models.Model):
 class City2CityId(models.Model):
     cityId = models.CharField(max_length=20, primary_key=True)
     cityName = models.CharField(max_length=40)
+    areaName = models.CharField(max_length=40, default="")
     location = models.CharField(max_length=40, default="non_location_info")
 
 
@@ -125,6 +141,7 @@ class ProGeography(models.Model):
 # },
 
 class WeatherInfo(models.Model):
+    # hourly
     id = models.AutoField(primary_key=True, default=0)
     time = models.DateTimeField(default=datetime.now)
     cityName = models.CharField(max_length=40, default="北京市")
@@ -153,17 +170,17 @@ class LocationToInfo(models.Model):
     lon = models.FloatField(default=0.0)
     lat = models.FloatField(default=0.0)
     location = models.CharField(max_length=40, default="", primary_key=True)
-    obsTime = models.CharField(max_length=40, default="")
+    obsTime = models.CharField(max_length=40, default="2021-12-16T10:00+00:00")
     aqi = models.IntegerField(default=0)
-    temp = models.CharField(max_length=40, default="")
+    temp = models.CharField(max_length=40, default="-1")
     text = models.IntegerField(default=0)
-    wind360 = models.CharField(max_length=40, default="")
-    windDir = models.CharField(max_length=40, default="")
-    windScale = models.CharField(max_length=40, default="")
-    windSpeed = models.CharField(max_length=40, default="")
-    humidity = models.CharField(max_length=40, default="")
-    precip = models.CharField(max_length=40, default="")
-    pressure = models.CharField(max_length=40, default="")
+    wind360 = models.CharField(max_length=40, default="287")
+    windDir = models.CharField(max_length=40, default="西北风")
+    windScale = models.CharField(max_length=40, default="2")
+    windSpeed = models.CharField(max_length=40, default="10")
+    humidity = models.CharField(max_length=40, default="27")
+    precip = models.CharField(max_length=40, default="0.0")
+    pressure = models.CharField(max_length=40, default="1021")
 
 
 class EarthQuakeInfo(models.Model):
