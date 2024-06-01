@@ -17,18 +17,26 @@ class RealtimeWeather(models.Model):
     precip = models.FloatField()
     pressure = models.IntegerField()
 
+    class Meta:
+        verbose_name = "实时天气"
+        verbose_name_plural = "实时天气"
+
 
 class RealtimeAirQuality(models.Model):
     cityName = models.CharField(max_length=40, default='北京市', primary_key=True)
-    aqi      = models.IntegerField()
-    level    = models.IntegerField()
+    aqi = models.IntegerField()
+    level = models.IntegerField()
     category = models.CharField(max_length=10)
-    pm10     = models.CharField(max_length=10)
-    pm2p5    = models.CharField(max_length=10)
-    no2      = models.CharField(max_length=10)
-    so2      = models.CharField(max_length=10)
-    co       = models.CharField(max_length=10)
-    o3       = models.CharField(max_length=10)
+    pm10 = models.CharField(max_length=10)
+    pm2p5 = models.CharField(max_length=10)
+    no2 = models.CharField(max_length=10)
+    so2 = models.CharField(max_length=10)
+    co = models.CharField(max_length=10)
+    o3 = models.CharField(max_length=10)
+
+    class Meta:
+        verbose_name = "实时空气质量"
+        verbose_name_plural = "实时空气质量"
 
 
 class HourlyWeather(models.Model):
@@ -49,6 +57,10 @@ class HourlyWeather(models.Model):
 
     def __str__(self):
         return "hourly weather for " + self.fxTime.strftime('%Y-%m-%d %H:%M:%S')
+
+    class Meta:
+        verbose_name = "每小时天气（废弃）"
+        verbose_name_plural = "每小时天气（废弃）"
 
 
 class DailyWeather(models.Model):
@@ -86,6 +98,10 @@ class DailyWeather(models.Model):
     def __str__(self):
         return "daily weather for " + str(self.fxDate) + " at location"
 
+    class Meta:
+        verbose_name = "每日天气"
+        verbose_name_plural = "每日天气"
+
 
 class MonthlyWeather(models.Model):
     month_time = models.DateTimeField(default=datetime.now)
@@ -102,12 +118,22 @@ class MonthlyWeather(models.Model):
     def __str__(self):
         return "monthly weather for " + self.month_time.strftime('%Y-%m-%d %H:%M:%S') + " " + self.location
 
+    class Meta:
+        verbose_name = "每月天气"
+        verbose_name_plural = "每月天气"
+
+
 # TODO pro2city data
 
 
 class Pro2City(models.Model):
     proName = models.CharField(max_length=20, primary_key=True)
     cityId = models.CharField(max_length=20)
+
+    class Meta:
+        verbose_name = "省份省会"
+        verbose_name_plural = "省份省会"
+
 
 # TODO pro2city data
 
@@ -118,11 +144,19 @@ class City2CityId(models.Model):
     areaName = models.CharField(max_length=40, default="")
     location = models.CharField(max_length=40, default="non_location_info")
 
+    class Meta:
+        verbose_name = "城市"
+        verbose_name_plural = "城市"
+
 
 # TODO pro_geography data
 class ProGeography(models.Model):
     proName = models.CharField(primary_key=True, max_length=20)
     geographyInfo = models.TextField(max_length=2000)
+
+    class Meta:
+        verbose_name = "城市地理信息"
+        verbose_name_plural = "城市地理信息"
 
 
 # {
@@ -165,6 +199,9 @@ class WeatherInfo(models.Model):
             models.UniqueConstraint(fields=['time', 'cityName'], name='unique_time_city')
         ]
 
+        verbose_name = "每小时天气"
+        verbose_name_plural = "每小时天气"
+
 
 class LocationToInfo(models.Model):
     lon = models.FloatField(default=0.0)
@@ -182,6 +219,10 @@ class LocationToInfo(models.Model):
     precip = models.CharField(max_length=40, default="0.0")
     pressure = models.CharField(max_length=40, default="1021")
 
+    class Meta:
+        verbose_name = "格点天气"
+        verbose_name_plural = "格点天气"
+
 
 class EarthQuakeInfo(models.Model):
     level = models.CharField(max_length=40, default="")
@@ -192,6 +233,10 @@ class EarthQuakeInfo(models.Model):
     key = models.CharField(max_length=80, default="", primary_key=True)
     location = models.CharField(max_length=40, default="")
 
+    class Meta:
+        verbose_name = "地震信息"
+        verbose_name_plural = "地震信息"
+
 
 class HazardInfo(models.Model):
     location = models.CharField(max_length=40, default='', primary_key=True)
@@ -201,3 +246,6 @@ class HazardInfo(models.Model):
     severity = models.CharField(max_length=15)
     severityColor = models.CharField(max_length=15)
 
+    class Meta:
+        verbose_name = "灾害信息"
+        verbose_name_plural = "灾害信息"

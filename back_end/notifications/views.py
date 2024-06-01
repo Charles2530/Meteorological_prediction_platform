@@ -19,12 +19,14 @@ from .task import fetch_catastrophic_forecast_cities_list, fetch_weather_catastr
 
 # Create your views here.
 class NotificationView(APIView):
-    def get(self, request, format=None):
+    @staticmethod
+    def get(request, format=None):
         notifications = Notification.objects.all()
         serializer = NotificationSerializer(notifications, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
+    @staticmethod
+    def post(request, format=None):
         serializer = NotificationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -33,12 +35,14 @@ class NotificationView(APIView):
 
 
 class CitySubscriptionView(APIView):
-    def get(self, request, format=None):
+    @staticmethod
+    def get(request, format=None):
         city_subscriptions = CitySubscription.objects.all()
         serializer = CitySubscriptionSerializer(city_subscriptions, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
+    @staticmethod
+    def post(request, format=None):
         serializer = CitySubscriptionSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -47,12 +51,14 @@ class CitySubscriptionView(APIView):
 
 
 class WeatherForecastView(APIView):
-    def get(self, request, format=None):
+    @staticmethod
+    def get(request, format=None):
         weather_forecast = WeatherForecast.objects.all()
         serializer = WeatherForecastSerializer(weather_forecast, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
+    @staticmethod
+    def post(request, format=None):
         serializer = WeatherForecastSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

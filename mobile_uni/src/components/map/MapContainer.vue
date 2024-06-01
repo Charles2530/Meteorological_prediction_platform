@@ -294,11 +294,11 @@ async function getProInfo() {
 function getHazardGeo()  {
   get("/api/getHazard/").then((res) => {
     hazardGeo = new Loca.GeoJSONSource({
-      data:object2Geojson2(<Array<Hazard>>res.data),
+      data:object2Geojson2(<Array<Hazard>>res.data.data),
     });
       get("/api/getHazardTop/").then((res) => {
         hazardTopGeo = new Loca.GeoJSONSource({
-          data:object2Geojson2(<Array<Hazard>>res.data),
+          data:object2Geojson2(<Array<Hazard>>res.data.data),
         });
         InitHazard();
       });
