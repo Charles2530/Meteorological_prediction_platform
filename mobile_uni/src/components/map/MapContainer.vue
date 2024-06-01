@@ -105,7 +105,7 @@ const buttonActive = reactive({
   a:false,
   b:false,
   c:false,
-  d:false,
+  d:true,
   e:false,
   f:false,
 });
@@ -199,6 +199,7 @@ lng: any // 设置安全密钥
 } = null;
 
 var geo: null = null;
+var aqiGeo: null = null;
 
 var hazardGeo: null = null;
 var hazardTopGeo: null = null;
@@ -247,10 +248,30 @@ function object2Geojson2(data:Array<Hazard>) {
 	return featureCollection;
 }
 
-function getMapGeo() {
-  get("/api/vis/getVisData/").then((res) => {
+function object2Geojson3(data: Array<MapGeo>) {
+  var features = new Array();
+  var featureCollection = { "type": "FeatureCollection", "features": features };
+
+  for (let i = 0; i < data.length; i+=17) {
+    var feature = { "type": "Feature", "properties": {}, "geometry": {}, };
+    var geometry = { "type": "Point", "coordinates": new Array() };
+    geometry.coordinates = [data[i].LON, data[i].LAT];
+    feature.properties = data[i];
+    feature.geometry = geometry;
+    features.push(feature);
+  }
+  featureCollection.features = features;
+  return featureCollection;
+}
+
+async function getMapGeo() {
+  await get("/api/vis/getVisData/").then((res) => {
+    
     geo = new Loca.GeoJSONSource({
-      data:object2Geojson(<Array<MapGeo>>res.data),
+      data: object2Geojson(<Array<MapGeo>>res.data.data),
+    });
+    aqiGeo = new Loca.GeoJSONSource({
+      data: object2Geojson3(<Array<MapGeo>>res.data.data),
     });
     InitHeatMapTem();
     InitHeatMapWater();
@@ -743,7 +764,7 @@ function InitHeatMapTem() {
       });
 
       heatmapTem.setSource(geo, {
-          radius: 200000,
+          radius: 80000,
           unit: 'meter',
           gradient: {
               0.1: '#2A85B8',
@@ -775,7 +796,7 @@ function InitHeatMapWater() {
       });
 
       heatmapWater.setSource(geo, {
-          radius: 200000,
+          radius: 70000,
           unit: 'meter',
           height: 500000,
 
@@ -797,21 +818,6 @@ function InitHeatMapWater() {
 
     //   loca.add(heatmapWater);
     
-      map.on('complete', function () {
-        heatmapWater.addAnimate({
-              key: 'radius',
-              value: [0, 1],
-              //   duration: 2000,
-              duration: 0,
-              easing: 'BackOut',
-              // 开启随机动画
-              //   transform: 1000,
-              transform: 0,
-              random: true,
-              //   delay: 1000,
-              delay: 0,
-          });
-      });
 }
 
 //初始化灾害图层
@@ -848,12 +854,12 @@ function InitHazard() {
 //初始化空气质量图层
 function InitAqi() { 
   aqiLayer =  new Loca.LabelsLayer({
-    zindex:0,
+    zindex:100,
     fitView: true,
     eventSupport: false,  // 图层事件支持，LabelsLayer 默认开启
     collision: false  // 是否开启文字自动避让
   });
-  aqiLayer.setSource(geo, {
+  aqiLayer.setSource(aqiGeo, {
             icon: {
                 type: 'image',
                 image: function (_index: any, feature: { properties: { aqi: any; mom: string | any[]; }; }) {

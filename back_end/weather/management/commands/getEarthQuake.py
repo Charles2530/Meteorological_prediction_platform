@@ -25,22 +25,28 @@ class Command(BaseCommand):
 
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        ls = soup.find_all('td', {'align': 'center'})
-
-        # print(LocationToInfo.objects.all())
-        EarthQuakeInfo.objects.all().delete()
-
-        for idx, it in enumerate(ls):
-            if 'style' not in ls[idx].attrs or ls[idx]['style'] != 'padding-left: 20px':
+        ls = soup.find_all('tr')
+        for it in ls:
+            if it.children is None:
                 continue
-            level = ls[idx].text
-            time = ls[idx + 1].text
-            lat = ls[idx + 2].text
-            lon = ls[idx + 3].text
-            depth = ls[idx + 4].text
+                # and it.children[0].name == 'td':
+                # print(it.children[0].name)
+            clist = [j for j in it.children]
+            if len(clist) != 6 or clist[0].name != 'td':
+                continue
+
+
+            level = clist[0].text
+            time = clist[1].text
+            lat = clist[2].text
+            lon = clist[3].text
+            depth = clist[4].text
+            location = clist[5].text
             key = time + ' ' + lat + ' ' + lon
-            # print(int(float(lat)), int(float(lon)))
-            info = EarthQuakeInfo(level=level, time=time, lat=lat, lon=lon, depth=depth, key=key)
+            info = EarthQuakeInfo(
+                level=level, time=time, lat=lat, lon=lon,
+                depth=depth, location=location, key=key
+            )
             info.save()
 
         print(len(EarthQuakeInfo.objects.all()))

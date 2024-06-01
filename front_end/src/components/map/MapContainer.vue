@@ -313,12 +313,14 @@ async function getProInfo() {
 
 function getHazardGeo() {
   get("/api/getHazard/").then((res) => {
+    // console.log("aaa",res)
     hazardGeo = new Loca.GeoJSONSource({
-      data: object2Geojson2(<Array<Hazard>>res.data),
+      data: object2Geojson2(<Array<Hazard>>res.data.data),
     });
     get("/api/getHazardTop/").then((res) => {
+      console.log("aaa",res)
       hazardTopGeo = new Loca.GeoJSONSource({
-        data: object2Geojson2(<Array<Hazard>>res.data),
+        data: object2Geojson2(<Array<Hazard>>res.data.data),
       });
       InitHazard();
     });
@@ -817,7 +819,7 @@ function InitHeatMapWater() {
   });
 
   heatmapWater.setSource(geo, {
-    radius: 80000,
+    radius: 70000,
     unit: 'meter',
     height: 500000,
 
@@ -839,21 +841,6 @@ function InitHeatMapWater() {
 
   //   loca.add(heatmapWater);
 
-  map.on('complete', function () {
-    heatmapWater.addAnimate({
-      key: 'radius',
-      value: [0, 1],
-      //   duration: 2000,
-      duration: 0,
-      easing: 'BackOut',
-      // 开启随机动画
-      //   transform: 1000,
-      transform: 0,
-      random: true,
-      //   delay: 1000,
-      delay: 0,
-    });
-  });
 }
 
 //初始化灾害图层

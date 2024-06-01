@@ -14,7 +14,7 @@ from rest_framework import generics, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import HazardInfo
+from .models import HazardInfo, EarthQuakeInfo
 from .models import HourlyWeather, DailyWeather, MonthlyWeather, WeatherInfo
 from .models import Pro2City, ProGeography, City2CityId, LocationToInfo
 from .models import RealtimeAirQuality, RealtimeWeather
@@ -532,6 +532,17 @@ def get_hazard(request: HttpRequest):
         }
         for info in all_info
     ]
+
+    eq_info = EarthQuakeInfo.objects.all()
+    response_json.extend([{
+        "place": info.location,
+        "longitude": info.lon,
+        "latitude": info.lat,
+        "type": "地震",
+        "time": info.time,  # TODO fix date str time
+        "level": info.level,
+    } for info in eq_info])
+
     return JsonResponse({"data": response_json}, status=200)
 
 
@@ -550,6 +561,18 @@ def get_top_hazard(request: HttpRequest):
         }
         for info in all_info
     ]
+
+
+    eq_info = EarthQuakeInfo.objects.all()
+    response_json.extend([{
+        "place": info.location,
+        "longitude": info.lon,
+        "latitude": info.lat,
+        "type": "地震",
+        "time": info.time,  # TODO fix date str time
+        "level": info.level,
+    } for info in eq_info])
+
     return JsonResponse({'data': response_json}, status=200)
 
 
