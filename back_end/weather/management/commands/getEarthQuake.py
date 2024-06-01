@@ -13,6 +13,11 @@ class Command(BaseCommand):
             # action="store_true",
             # help="Refresh All CityInfo even existed already",
         # )
+        parser.add_argument(
+            "--filter",
+            action="store_true",
+            help="Refresh All CityInfo even existed already",
+        ) # no impl
         1
 
     # EarthQuakeInfo.objects.all().delete()
@@ -35,7 +40,9 @@ class Command(BaseCommand):
             if len(clist) != 6 or clist[0].name != 'td':
                 continue
 
+            # if kwargs["filter"]:
 
+                # continue
             level = clist[0].text
             time = clist[1].text
             lat = clist[2].text
