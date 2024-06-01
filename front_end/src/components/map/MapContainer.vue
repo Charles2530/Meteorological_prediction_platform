@@ -114,7 +114,7 @@ const buttonActive = reactive({
   a: false,
   b: false,
   c: false,
-  d: false,
+  d: true,
   e: false,
   f: false,
 });
@@ -219,6 +219,7 @@ let infoWindow: {
 } = null;
 
 var geo: null = null;
+var aqiGeo: null = null;
 
 var hazardGeo: null = null;
 var hazardTopGeo: null = null;
@@ -267,14 +268,31 @@ function object2Geojson2(data: Array<Hazard>) {
   return featureCollection;
 }
 
+function object2Geojson3(data: Array<MapGeo>) {
+  var features = new Array();
+  var featureCollection = { "type": "FeatureCollection", "features": features };
+
+  for (let i = 0; i < data.length; i+=17) {
+    var feature = { "type": "Feature", "properties": {}, "geometry": {}, };
+    var geometry = { "type": "Point", "coordinates": new Array() };
+    geometry.coordinates = [data[i].LON, data[i].LAT];
+    feature.properties = data[i];
+    feature.geometry = geometry;
+    features.push(feature);
+  }
+  featureCollection.features = features;
+  return featureCollection;
+}
+
 async function getMapGeo() {
   await get("/api/vis/getVisData/").then((res) => {
     
     geo = new Loca.GeoJSONSource({
       data: object2Geojson(<Array<MapGeo>>res.data.data),
     });
-    console.log("###")
-    console.log(geo)
+    aqiGeo = new Loca.GeoJSONSource({
+      data: object2Geojson3(<Array<MapGeo>>res.data.data),
+    });
     InitHeatMapTem();
     InitHeatMapWater();
     InitAqi();
@@ -877,7 +895,7 @@ function InitAqi() {
     eventSupport: false,  // 图层事件支持，LabelsLayer 默认开启
     collision: false  // 是否开启文字自动避让
   });
-  aqiLayer.setSource(geo, {
+  aqiLayer.setSource(aqiGeo, {
     icon: {
       type: 'image',
       image: function (_index: any, feature: { properties: { aqi: any; mom: string | any[]; }; }) {

@@ -28,6 +28,7 @@ class Command(BaseCommand):
         ls = soup.find_all('td', {'align': 'center'})
 
         # print(LocationToInfo.objects.all())
+        EarthQuakeInfo.objects.all().delete()
 
         for idx, it in enumerate(ls):
             if 'style' not in ls[idx].attrs or ls[idx]['style'] != 'padding-left: 20px':
