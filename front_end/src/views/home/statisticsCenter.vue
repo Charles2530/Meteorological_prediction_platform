@@ -24,7 +24,6 @@
                   :fetch-suggestions="querySearch"
                   clearable
                   class="inline-input w-50"
-                  @select="handleSelect"
                   highlight-first-item
                   :value-key="'label'"
                 />

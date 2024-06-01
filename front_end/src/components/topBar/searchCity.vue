@@ -8,7 +8,7 @@
       :fetch-suggestions="querySearch"
       clearable
       class="inline-input w-50"
-      @select="handleSelect"
+      @select="updateUserCity"
       highlight-first-item
       :value-key="'label'"
       @change="updateUserCity"

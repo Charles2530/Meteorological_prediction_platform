@@ -105,7 +105,7 @@
       </el-col>
       <el-col :span="21">
         <el-autocomplete style="width: 100%;" v-model="state" :fetch-suggestions="querySearch" clearable
-          class="inline-input w-100" @select="handleSelect" highlight-first-item :value-key="'label'" />
+          class="inline-input w-100" highlight-first-item :value-key="'label'" />
       </el-col>
     </el-row>
     <template #footer>
