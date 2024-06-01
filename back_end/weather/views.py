@@ -6,31 +6,71 @@ from datetime import datetime, timedelta
 import pytz
 import requests
 from customuser.models import UserCurrentCity
+from notifications.models import CitySubscription
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import HazardInfo
+from .models import RealtimeWeather, RealtimeAirQuality
 from .models import HourlyWeather, DailyWeather, MonthlyWeather, WeatherInfo
 from .models import Pro2City, ProGeography, City2CityId, LocationToInfo
-from .models import RealtimeAirQuality, RealtimeWeather
-from .serializers import HourlyWeatherSerializer, DailyWeatherSerializer, MonthlyWeatherSerializer
+from .models import HazardInfo, EarthQuakeInfo
+from .serializers import RealtimeWeatherSerializer, RealtimeAirQualitySerializer
+from .serializers import HourlyWeatherSerializer, DailyWeatherSerializer, MonthlyWeatherSerializer, \
+    WeatherInfoSerializer
+from .serializers import Pro2CitySerializer, ProGeographySerializer, City2CityIdSerializer, LocationToInfoSerializer
+from .serializers import HazardInfoSerializer, EarthQuakeInfoSerializer
 
 pri_key = "d4c9c9bc145748e48405c44277be0745"
 
 
 # Create your views here.
+class RealtimeWeatherView(APIView):
+    @staticmethod
+    def get(request, format=None):
+        realtime_weather = RealtimeWeather.objects.all()
+        serializer = HourlyWeatherSerializer(realtime_weather, many=True)
+        return Response(serializer.data)
+
+    @staticmethod
+    def post(request, format=None):
+        serializer = RealtimeWeatherSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+class RealtimeAirQualityView(APIView):
+    @staticmethod
+    def get(request, format=None):
+        realtime_air_quality = RealtimeAirQuality.objects.all()
+        serializer = RealtimeAirQualitySerializer(realtime_air_quality, many=True)
+        return Response(serializer.data)
+
+    @staticmethod
+    def post(request, format=None):
+        serializer = RealtimeAirQualitySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
 class HourlyWeatherView(APIView):
-    def get(self, request, format=None):
+    @staticmethod
+    def get(request, format=None):
         hourly_weather = HourlyWeather.objects.all()
         serializer = HourlyWeatherSerializer(hourly_weather, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
+    @staticmethod
+    def post(request, format=None):
         serializer = HourlyWeatherSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -39,12 +79,14 @@ class HourlyWeatherView(APIView):
 
 
 class DailyWeatherView(APIView):
-    def get(self, request, format=None):
+    @staticmethod
+    def get(request, format=None):
         daily_weather = DailyWeather.objects.all()
         serializer = DailyWeatherSerializer(daily_weather, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
+    @staticmethod
+    def post(request, format=None):
         serializer = DailyWeatherSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -53,13 +95,127 @@ class DailyWeatherView(APIView):
 
 
 class MonthlyWeatherView(APIView):
-    def get(self, request, format=None):
+    @staticmethod
+    def get(request, format=None):
         monthly_weather = MonthlyWeather.objects.all()
         serializer = MonthlyWeatherSerializer(monthly_weather, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
+    @staticmethod
+    def post(request, format=None):
         serializer = MonthlyWeatherSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+class WeatherInfoView(APIView):
+    @staticmethod
+    def get(request, format=None):
+        weather_info = WeatherInfo.objects.all()
+        serializer = WeatherInfoSerializer(weather_info, many=True)
+        return Response(serializer.data)
+
+    @staticmethod
+    def post(request, format=None):
+        serializer = WeatherInfoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+class Pro2CityView(APIView):
+    @staticmethod
+    def get(request, format=None):
+        pro2city_info = Pro2City.objects.all()
+        serializer = Pro2CitySerializer(pro2city_info, many=True)
+        return Response(serializer.data)
+
+    @staticmethod
+    def post(request, format=None):
+        serializer = Pro2CitySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+class ProGeographyView(APIView):
+    @staticmethod
+    def get(request, format=None):
+        pro_geography_info = ProGeography.objects.all()
+        serializer = ProGeographySerializer(pro_geography_info, many=True)
+        return Response(serializer.data)
+
+    @staticmethod
+    def post(request, format=None):
+        serializer = ProGeographySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+class City2CityIdView(APIView):
+    @staticmethod
+    def get(request, format=None):
+        city2cityid_info = City2CityId.objects.all()
+        serializer = City2CityIdSerializer(city2cityid_info, many=True)
+        return Response(serializer.data)
+
+    @staticmethod
+    def post(request, format=None):
+        serializer = City2CityIdSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+class LocationToInfoView(APIView):
+    @staticmethod
+    def get(request, format=None):
+        location_to_info = LocationToInfo.objects.all()
+        serializer = LocationToInfoSerializer(location_to_info, many=True)
+        return Response(serializer.data)
+
+    @staticmethod
+    def post(request, format=None):
+        serializer = LocationToInfoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+class HazardInfoView(APIView):
+    @staticmethod
+    def get(request, format=None):
+        hazard_info = HazardInfo.objects.all()
+        serializer = HazardInfoSerializer(hazard_info, many=True)
+        return Response(serializer.data)
+
+    @staticmethod
+    def post(request, format=None):
+        serializer = HazardInfoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+class EarthQuakeInfoView(APIView):
+    @staticmethod
+    def get(request, format=None):
+        earthquake_info = EarthQuakeInfo.objects.all()
+        serializer = EarthQuakeInfoSerializer(earthquake_info, many=True)
+        return Response(serializer.data)
+
+    @staticmethod
+    def post(request, format=None):
+        serializer = EarthQuakeInfoSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
@@ -73,16 +229,10 @@ def index(request):
 @require_http_methods(['GET'])
 def overview(request):
     # query daily weather data
-    weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
-        'key': 'feec92fecc5042f0b48e49c33529de89',
-        'location': '101010100',
-    })
 
-    weather = json.loads(weather.content.decode('utf-8'))
-    data = weather['now']
-    realtime_weather = RealtimeWeather.objects.get(cityName='北京市')  #TODO
+    realtime_weather = RealtimeWeather.objects.get(cityName='北京市')  # TODO change city
     daily_weather = DailyWeather.objects.get(city='北京市', fxDate=datetime.now())
-    realtime_air_quality = RealtimeAirQuality.objects.get(cityName='北京市')  #TODO
+    realtime_air_quality = RealtimeAirQuality.objects.get(cityName='北京市')  # TODO
     response_json = {
         "weather": {
             "condition": realtime_weather.text,
@@ -90,45 +240,38 @@ def overview(request):
             "temp": realtime_weather.temp,
             "temp_feel": realtime_weather.feelsLike,
             "precip": realtime_weather.precip,
-            "precip_probability": 10,
+            "precip_probability": 10,  # TODO change with real data
             "aqi": realtime_air_quality.aqi,
             "pressure": realtime_weather.pressure,
-            "ray": "中等",
+            "ray": "中等",  # TODO change with real data
             "sunrise_time": daily_weather.sunrise,  # daily
             "sunset_time": daily_weather.sunset  # daily
         },
         "search": True
     }
 
-    # 返回转换后的JSON响应
     return JsonResponse(response_json, status=200)
 
 
-# TODO replace with database operations
 @require_http_methods(['GET'])
 def realtime(request):
     # query realtime weather data
-    current_time = datetime.now()
-    url = 'https://devapi.qweather.com/v7/weather/now'
-    params = {
-        'key': 'feec92fecc5042f0b48e49c33529de89',
-        'location': '101010100',  # TODO change to current cityId
-    }
-    response = requests.get(url, params=params)
-    data = json.loads(response.content.decode('utf-8'))
 
     realTimeWeatherList = []
-    current_index = int(data["updateTime"][11:13])  # Get the current hour
-    for i in range(current_index - 5, current_index + 6):
-        hour_index = i if i >= 0 else 24 + i  # Handle negative values
-        hourly_data = data.get("hourly").get(hour_index)
+    now_dt = datetime.now()
+    rounded_dt = datetime.now().replace(minute=0, second=0, microsecond=0)
+    rounded_dt += timedelta(days=1)  # use tomorrow data for query
+    for i in range(-5, 6):
+        real_dt = now_dt + timedelta(hours=i)
+        query_dt = rounded_dt + timedelta(hours=i)
+        hourly_weather = WeatherInfo.objects.get(time=query_dt)
         realTimeWeatherList.append({
-            "time": hourly_data["fxTime"][11:16],  # Extract hour and minute
-            "condition": hourly_data["text"],
-            "temperature": int(hourly_data["temp"]),
-            "humidity": int(hourly_data["humidity"]),
-            "windSpeed": int(hourly_data["windSpeed"]),
-            "windDirection": hourly_data["windDir"]
+            "time": real_dt.strftime('%I:%M'),
+            "condition": hourly_weather["text"],
+            "temperature": int(hourly_weather["temp"]),
+            "humidity": int(hourly_weather["humidity"]),
+            "windSpeed": int(hourly_weather["windSpeed"]),
+            "windDirection": hourly_weather["windDir"]
         })
 
     return JsonResponse({"realTimeWeatherList": realTimeWeatherList})
@@ -136,7 +279,8 @@ def realtime(request):
 
 @require_http_methods(['GET'])
 def city_rank(request):
-    pass
+    city_list_max_temp = {}
+    return JsonResponse({'city_list_max_temp': city_list_max_temp}, status=200)
 
 
 @require_http_methods(['POST'])
@@ -150,8 +294,31 @@ def delete_care_city(request):
 
 
 @require_http_methods(['GET'])
+@login_required
 def subscribed_cities_summary(request):
-    return JsonResponse()
+    profile = request.user
+    subscriptions = CitySubscription.objects.filter(user=profile)
+    json_response = {
+        'success': True,
+        'currentCity': {
+            'name': profile.currentCityName,
+            'adm2': ''  # TODO adm2
+        },
+        'temp': RealtimeWeather.objects.get(cityName=profile.currentCityName).temp,
+        'cond_icon': RealtimeWeather.objects.get(cityName=profile.currentCityName).icon,
+        'careCitiesList': [
+            {
+                'city': {
+                    'name': subscription.cityName,
+                    'adm2': ''  # TODO adm2
+                },
+                'temp': RealtimeWeather.objects.get(cityName=subscription.cityName).temp,
+                'cond_icon': RealtimeWeather.objects.get(cityName=subscription.cityName).icon,
+            }
+            for subscription in subscriptions
+        ]
+    }
+    return JsonResponse(json_response)
 
 
 @require_http_methods(['GET'])
@@ -513,9 +680,24 @@ def getProInfo(request):
     return JsonResponse(retList, status=200)
 
 
+@csrf_exempt
+@login_required
 @require_http_methods(['POST'])
 def update_current_city(request):
-    pass
+    profile = request.user
+    city = request.POST.get('city')
+    if city:
+        profile.currentCityName = city
+        profile.save()
+        return JsonResponse({
+            "success": True,
+            "reason": ""
+        })
+    else:
+        return JsonResponse({
+            "success": False,
+            "reason": "city doesn't exist"
+        })
 
 
 @require_http_methods(['GET'])
@@ -532,6 +714,17 @@ def get_hazard(request: HttpRequest):
         }
         for info in all_info
     ]
+
+    eq_info = EarthQuakeInfo.objects.all()
+    response_json.extend([{
+        "place": info.location,
+        "longitude": info.lon,
+        "latitude": info.lat,
+        "type": "地震",
+        "time": info.time,  # TODO fix date str time
+        "level": info.level,
+    } for info in eq_info])
+
     return JsonResponse({"data": response_json}, status=200)
 
 
@@ -550,6 +743,17 @@ def get_top_hazard(request: HttpRequest):
         }
         for info in all_info
     ]
+
+    eq_info = EarthQuakeInfo.objects.all()
+    response_json.extend([{
+        "place": info.location,
+        "longitude": info.lon,
+        "latitude": info.lat,
+        "type": "地震",
+        "time": info.time,  # TODO fix date str time
+        "level": info.level,
+    } for info in eq_info])
+
     return JsonResponse({'data': response_json}, status=200)
 
 
@@ -768,8 +972,8 @@ def get_vis_data(request):
             "LON": lon,
             "LAT": lat,
             "temp": float(location_info.temp),
-            "precip":float( location_info.precip),
-            "aqi":float( location_info.aqi),
+            "precip": float(location_info.precip),
+            "aqi": float(location_info.aqi),
             "pressure": float(location_info.pressure),
             "humidity": location_info.humidity,
             "windSpeed": location_info.windSpeed,
@@ -777,7 +981,6 @@ def get_vis_data(request):
             "wind360": location_info.wind360
         }
         ret_data.append(weather_data)
-
 
     ## TODO to restore
     return JsonResponse({"data": ret_data}, status=200)

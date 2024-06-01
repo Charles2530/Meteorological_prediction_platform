@@ -28,6 +28,7 @@ class Command(BaseCommand):
             # default="52c4d25aafb147c5bc6e4df6cc52afc6",
             # default="7ddb2459227b4d6993afff0b4ba574ff",
             # default="f6b975aa8ad94602aefefceb2e8b3acd",
+            default="5d9c4aa6301d42c0bd5fd461ee34d88e", # real key
             help="Specify the key of API",
         )
 
