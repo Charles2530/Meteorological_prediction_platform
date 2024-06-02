@@ -44,6 +44,8 @@ class Command(BaseCommand):
                 Cityinfo = City2CityId(cityId=cityId)
             # try:
             Cityinfo.cityName = cityName
+            Cityinfo.areaName = row[2]
+            # print(row[2])
             Cityinfo.location = "{:.2f},{:.2f}".format(float(row[11]), float(row[12]))
             Cityinfo.save()
 

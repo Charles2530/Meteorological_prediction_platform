@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import pytz
 import requests
 from customuser.models import UserCurrentCity
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -13,9 +14,9 @@ from rest_framework import generics, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import RealtimeAirQuality, HourlyWeather, DailyWeather, MonthlyWeather, Pro2City, ProGeography, \
-    City2CityId, WeatherInfo, \
-    LocationToInfo
+from .models import HourlyWeather, DailyWeather, MonthlyWeather, WeatherInfo
+from .models import Pro2City, ProGeography, City2CityId, LocationToInfo
+from .models import RealtimeAirQuality, RealtimeWeather
 from .serializers import HourlyWeatherSerializer, DailyWeatherSerializer, MonthlyWeatherSerializer
 
 pri_key = "d4c9c9bc145748e48405c44277be0745"
@@ -78,18 +79,22 @@ def overview(request):
 
     weather = json.loads(weather.content.decode('utf-8'))
     data = weather['now']
+    realtime_weather = RealtimeWeather.objects.get(cityName='北京市')  #TODO
+    daily_weather = DailyWeather.objects.get(city='北京市', fxDate=datetime.now())
+    realtime_air_quality = RealtimeAirQuality.objects.get(cityName='北京市')  #TODO
     response_json = {
         "weather": {
-            "condition": data.get("text", "Unknown"),  # 天气状况
-            "temp": int(data.get("temp", 0)),  # 温度
-            "temp_feel": int(data.get("temp", 0)),  # 体感温度
-            "precip": float(data.get("precip", 0)),  # 降水量
+            "condition": realtime_weather.text,
+            "condition_icon": realtime_weather.icon,
+            "temp": realtime_weather.temp,
+            "temp_feel": realtime_weather.feelsLike,
+            "precip": realtime_weather.precip,
             "precip_probability": 10,
-            "aqi": 63,
-            "pressure": int(data.get("pressure", 0)),  # 气压
+            "aqi": realtime_air_quality.aqi,
+            "pressure": realtime_weather.pressure,
             "ray": "中等",
-            "sunrise_time": "5:04",
-            "sunset_time": "19:19"
+            "sunrise_time": daily_weather.sunrise,  # daily
+            "sunset_time": daily_weather.sunset  # daily
         },
         "search": True
     }
@@ -98,6 +103,7 @@ def overview(request):
     return JsonResponse(response_json, status=200)
 
 
+# TODO replace with database operations
 @require_http_methods(['GET'])
 def realtime(request):
     # query realtime weather data
@@ -114,7 +120,7 @@ def realtime(request):
     current_index = int(data["updateTime"][11:13])  # Get the current hour
     for i in range(current_index - 5, current_index + 6):
         hour_index = i if i >= 0 else 24 + i  # Handle negative values
-        hourly_data = data["hourly"][hour_index]
+        hourly_data = data.get("hourly").get(hour_index)
         realTimeWeatherList.append({
             "time": hourly_data["fxTime"][11:16],  # Extract hour and minute
             "condition": hourly_data["text"],
@@ -129,7 +135,17 @@ def realtime(request):
 
 @require_http_methods(['GET'])
 def city_rank(request):
-    return JsonResponse()
+    pass
+
+
+@require_http_methods(['POST'])
+def add_care_city(request):
+    pass
+
+
+@require_http_methods(['POST'])
+def delete_care_city(request):
+    pass
 
 
 @require_http_methods(['GET'])
@@ -139,9 +155,9 @@ def subscribed_cities_summary(request):
 
 @require_http_methods(['GET'])
 def aqi_detail(request):
-    city_dict = request.get('city')
-    name = city_dict.get('name')
-    adm2 = city_dict.get('adm2')
+    name = request.GET.get('city[name]')
+    adm2 = request.GET.get('city[adm2]')
+
     aqi_info = RealtimeAirQuality.objects.get(cityName='北京市')  # TODO
     response_json = {
         "aqi": aqi_info.aqi,
@@ -178,11 +194,13 @@ def aqi_detail(request):
 
 @require_http_methods(['GET'])
 def rank(request):
-    length = min(10, len(WeatherInfo.objects.all()))
-    norm = request.get('norm')
-    ascending = request.get('order_type')
+    length = min(10, len(WeatherInfo.objects.all())) + 1
+    norm = request.GET.get('norm')
+    if norm == 'humid':
+        norm = 'humidity'
+    ascending = request.GET.get('order_type')
     if ascending:
-        top_weather_info = WeatherInfo.objects.all().order_by('-' + 'norm')[:length]
+        top_weather_info = WeatherInfo.objects.all().order_by('-' + norm)[:length]
     else:
         top_weather_info = WeatherInfo.objects.all().order_by(norm)[:length]
     response_json = {
@@ -191,7 +209,7 @@ def rank(request):
             {
                 "city": info.cityName,
                 "level": 'todo',  # TODO 划分等级
-                "norm": info.norm
+                "norm": getattr(info, norm)
             }
             for info in top_weather_info
         ]
@@ -201,7 +219,7 @@ def rank(request):
 
 @require_http_methods(['GET'])
 def aqi_current_city_change(request):
-    length = min(30, len(DailyWeather.objects.all()))
+    length = min(30, len(DailyWeather.objects.all())) + 1
     all_info = DailyWeather.objects.filter(
         city='北京市').order_by('-fxDate')[:length]
     response_json = {
@@ -217,11 +235,11 @@ def aqi_current_city_change(request):
     return JsonResponse(response_json, status=200)
 
 
+@require_http_methods(['GET'])
 def target_city_change(request, norm):
-    data = json.load(request.body)
-    city = data["city"]
-    period = data['periods']
-    length = min(period, len(DailyWeather.objects.all()))
+    city = request.GET.get('city')
+    period = int(request.GET.get('periods'))
+    length = min(period, len(DailyWeather.objects.all())) + 1
     all_info = DailyWeather.objects.filter(
         city=city).order_by('-fxDate')[:length]
     response_json = {
@@ -237,11 +255,11 @@ def target_city_change(request, norm):
     return JsonResponse(response_json, status=200)
 
 
+@require_http_methods(['GET'])
 def aqi_target_city_change(request):
-    data = json.load(request.body)
-    city = data["city"]
-    period = data['periods']
-    length = min(period, len(DailyWeather.objects.all()))
+    city = request.GET.get('city')
+    period = int(request.GET.get('periods'))
+    length = min(period, len(DailyWeather.objects.all())) + 1
     all_info = DailyWeather.objects.filter(
         city=city).order_by('-fxDate')[:length]
     response_json = {
@@ -257,11 +275,11 @@ def aqi_target_city_change(request):
     return JsonResponse(response_json, status=200)
 
 
+@require_http_methods(['GET'])
 def humid_city_change(request):
-    data = json.load(request.body)
-    city = data["city"]
-    period = data['periods']
-    length = min(period, len(DailyWeather.objects.all()))
+    city = request.GET.get('city')
+    period = int(request.GET.get('periods'))
+    length = min(period, len(DailyWeather.objects.all())) + 1
     all_info = DailyWeather.objects.filter(
         city=city).order_by('-fxDate')[:length]
     response_json = {
@@ -278,10 +296,9 @@ def humid_city_change(request):
 
 
 def temp_city_change(request):
-    data = json.load(request.body)
-    city = data["city"]
-    period = data['periods']
-    length = min(period, len(DailyWeather.objects.all()))
+    city = request.GET.get('city')
+    period = int(request.GET.get('periods'))
+    length = min(period, len(DailyWeather.objects.all())) + 1
     all_info = DailyWeather.objects.filter(
         city=city).order_by('-fxDate')[:length]
     response_json = {
@@ -298,10 +315,9 @@ def temp_city_change(request):
 
 
 def temp_city_change_detail(request):
-    data = json.load(request.body)
-    city = data["city"]
-    period = data['periods']
-    length = min(period, len(DailyWeather.objects.all()))
+    city = request.GET.get('city')
+    period = int(request.GET.get('periods'))
+    length = min(period, len(DailyWeather.objects.all())) + 1
     all_info = DailyWeather.objects.filter(
         city=city).order_by('-fxDate')[:length]
     response_json = {
@@ -319,11 +335,11 @@ def temp_city_change_detail(request):
     return JsonResponse(response_json, status=200)
 
 
+@require_http_methods(['GET'])
 def pressure_city_change(request):
-    data = json.load(request.body)
-    city = data["city"]
-    period = data['periods']
-    length = min(period, len(DailyWeather.objects.all()))
+    city = request.GET.get('city')
+    period = int(request.GET.get('periods'))
+    length = min(period, len(DailyWeather.objects.all())) + 1
     all_info = DailyWeather.objects.filter(
         city=city).order_by('-fxDate')[:length]
     response_json = {
@@ -339,11 +355,11 @@ def pressure_city_change(request):
     return JsonResponse(response_json, status=200)
 
 
+@require_http_methods(['GET'])
 def precip_city_change(request):
-    data = json.load(request.body)
-    city = data["city"]
-    period = data['periods']
-    length = min(period, len(DailyWeather.objects.all()))
+    city = request.GET.get('city')
+    period = int(request.GET.get('periods'))
+    length = min(period, len(DailyWeather.objects.all())) + 1
     all_info = DailyWeather.objects.filter(
         city=city).order_by('-fxDate')[:length]
     response_json = {
@@ -359,11 +375,11 @@ def precip_city_change(request):
     return JsonResponse(response_json, status=200)
 
 
+@require_http_methods(['GET'])
 def winspeed_city_change(request):
-    data = json.load(request.body)
-    city = data["city"]
-    period = data['periods']
-    length = min(period, len(DailyWeather.objects.all()))
+    city = request.GET.get('city')
+    period = int(request.GET.get('periods'))
+    length = min(period, len(DailyWeather.objects.all())) + 1
     all_info = DailyWeather.objects.filter(
         city=city).order_by('-fxDate')[:length]
     response_json = {
@@ -371,7 +387,7 @@ def winspeed_city_change(request):
         "data": [
             {
                 "time": info.fxDate,
-                "winSpeed": info.winSpeed,
+                "winSpeed": info.windSpeedDay,
             }
             for info in all_info
         ]
@@ -379,7 +395,6 @@ def winspeed_city_change(request):
     return JsonResponse(response_json, status=200)
 
 
-@csrf_exempt
 @require_http_methods(['GET'])
 def getProInfo(request):
     proName = request.GET.get('proName')
@@ -502,11 +517,10 @@ def update_current_city(request):
     pass
 
 
-@csrf_exempt
 @require_http_methods(['GET'])
 def get_hazard(request: HttpRequest):
     all_info = DailyWeather.objects.all()
-    response_json = {
+    response_json = [
         {
             "place": info.cityName,
             "longitude": info.location.split(',')[0].trim(),
@@ -516,7 +530,7 @@ def get_hazard(request: HttpRequest):
             "winSpeed": info.winSpeed,
         }
         for info in all_info
-    }
+    ]
     return JsonResponse(response_json, status=200)
 
 
@@ -543,7 +557,7 @@ def get_top_hazard(request: HttpRequest):
 def get_city_info(request: HttpRequest):
     city = request.GET.get("city")
     # TODO to remove
-    cityId = City2CityId.objects.get(cityName='北京市').cityId
+    cityId = City2CityId.objects.filter(cityName='北京市').first().cityId
     # use API to get weather and air
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
@@ -582,13 +596,14 @@ def get_city_info(request: HttpRequest):
 
 
 @csrf_exempt
+@login_required
 @require_http_methods(['GET'])
 def get_current_city_info(request: HttpRequest):
     user = request.user
-    # city_name = UserCurrentCity.objects.get(user=user)
-    city_name = '北京市'
+    city_name = UserCurrentCity.objects.get(user=user)
+    # city_name = '北京市'
     # TODO to remove
-    cityId = City2CityId.objects.get(cityName=city_name).cityId
+    cityId = City2CityId.objects.filter(cityName=city_name)[0].cityId
     # use API to get weather and air
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
@@ -610,7 +625,7 @@ def get_current_city_info(request: HttpRequest):
         "status": True,
         "message": {
             "time": date_time.astimezone(timezon).strftime("%Y-%m-%d %H:%M"),
-            "city": city,
+            "city": city_name,
             "temp": float(weather["now"]["temp"]),
             "text": weather["now"]["text"],
             "precip": float(weather["now"]["precip"]),
@@ -640,6 +655,7 @@ def get_current_city_info(request: HttpRequest):
 #     aqi = models.IntegerField(default=0)
 #     category = models.CharField(max_length=200, default="")
 @csrf_exempt
+@login_required
 def add_weather_data(request):
     data = json.loads(request.body)
     weather_info = WeatherInfo(
@@ -665,6 +681,7 @@ def add_weather_data(request):
 
 
 @csrf_exempt
+@login_required
 def delete_weather_data(request):
     data = json.loads(request.body)
     WeatherInfo.objects.filter(time=data['time'], city=data['city']).delete()
@@ -676,6 +693,7 @@ def delete_weather_data(request):
 
 
 @csrf_exempt
+@login_required
 def search_weather_data(request):
     data = json.loads(request.body)
     data_type = data['type'] if data['type'] else 'weather'
@@ -731,23 +749,16 @@ def search_weather_data(request):
 
 @csrf_exempt
 def get_vis_data(request):
-    # 步骤1: 查询所有城市信息
     cities = City2CityId.objects.all()
 
-    # 准备最终的输出列表
-    output = []
-
-    # 步骤2和3: 遍历城市，获取经纬度并查询天气数据
     for city in cities:
         # 解析location字段获取经纬度
         location_info = city.location.split(',')
         lon = float(location_info[0])  # 假设location的第一个值是经度
         lat = float(location_info[1])  # 假设location的第二个值是纬度
 
-        # 使用经纬度查询LocationToInfo表
         location_info = LocationToInfo.objects.get(location=city.location)
 
-        # 步骤4: 格式化输出
         weather_data = {
             "adcode": city.cityId,  # 假设adcode是cityId
             "LON": lon,
@@ -761,29 +772,23 @@ def get_vis_data(request):
             "windScale": location_info.windScale,
             "wind360": location_info.wind360
         }
-        output.append(weather_data)
 
-    output_json = {
-        weather_data: output
-    }
-
-    return JsonResponse(output_json, status=200)
+    return JsonResponse(weather_data, status=200)
 
 
 @csrf_exempt
 def get_point_data(request):
-    # 准备最终的输出列表
-    output = []
+    lon = request.GET.get("LON")
+    lat = request.GET.get("LAT")
 
-    # 步骤2和3: 遍历城市，获取经纬度并查询天气数据
-    lon = request.get('LON')
-    lat = request.get('LAT')
-    location = str(lon) + ", " + str(lat)
+    lon = int(float(lon))
+    lat = int(float(lat))
 
-    # 使用经纬度查询LocationToInfo表
+    location = str(lon) + ".00," + str(lat) + ".00"
+    print(location)
+
     location_info = LocationToInfo.objects.get(location=location)
 
-    # 步骤4: 格式化输出
     weather_data = {
         "LON": lon,
         "LAT": lat,
@@ -796,10 +801,5 @@ def get_point_data(request):
         "windScale": location_info.windScale,
         "wind360": location_info.wind360
     }
-    output.append(weather_data)
 
-    output_json = {
-        weather_data: output
-    }
-
-    return JsonResponse(output_json, status=200)
+    return JsonResponse(weather_data, status=200)
