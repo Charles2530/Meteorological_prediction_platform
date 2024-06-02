@@ -114,7 +114,16 @@ const props = defineProps({
 // }
 const aqi_ = ref(0);
 const category_ = ref("优");
-const pollutionList = ref({});
+const pollutionList = ref<PollutionData>({
+    "PM10": 95,
+    "PM2.5": 73,
+    "NO2": 70,
+    "SO2": 43,
+    "O3": 86,
+    "CO": 45
+});
+
+
 //   [
 //   { type: 'PM10', value: 10 },
 //   { type: 'PM2.5', value: 20 },
@@ -126,6 +135,14 @@ const pollutionList = ref({});
 /**
  * Request
  */
+ interface PollutionData {
+  CO: number;
+  NO2: number;
+  O3: number;
+  PM10: number;
+  "PM2.5": number;
+  SO2: number;
+}
 interface AqiData {
   aqi: number;
   category: string;
