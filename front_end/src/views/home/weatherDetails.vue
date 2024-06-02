@@ -221,8 +221,7 @@ const removeCity = (index: number) => {
       success: boolean;
       reason?: string;
     }
-    const request: City = careCitiesList.value[index].city;
-    post<DeleteResponse>("/api/weather/care_cities/del/", request).then((res) => {
+    post<DeleteResponse>("/api/weather/care_cities/del/", {city: careCitiesList.value[index].city}).then((res) => {
       const response = res.data;
       if (response.success) {
         ElMessage.success("已删除");
@@ -271,8 +270,7 @@ const handleConfirm = () => {
       success: boolean;
       reason?: string;
     }
-    const request: City = tempSelectedCity.value;
-    post<AddResponse>("/api/weather/care_cities/add/", request).then((res) => {
+    post<AddResponse>("/api/weather/care_cities/add/", {  city: tempSelectedCity.value  }).then((res) => {
       const response = res.data;
       if (response.success) {
         ElMessage.success("已添加");
