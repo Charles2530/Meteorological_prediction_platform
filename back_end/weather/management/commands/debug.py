@@ -44,13 +44,14 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **kwargs):
-        tmp = City2CityId.objects.all()
-        print(tmp)
+        tmp = LocationToInfo.objects.all()
+        # print(tmp)
         # exit()
         # tt = City2CityId.objects.filter(cityName='北京市')
 #
-        for it in tmp:
-            print(it.location, it.cityId, it.cityName, it.areaName)
+
+            # print(it.location, it.cityId, it.cityName, it.areaName)
+            print(it.location, it.lon)
 
         # location_info = LocationToInfo.objects.get(location='95, 35')
         # print(tmp)

@@ -24,12 +24,14 @@ npm install
 
 ## 后端使用指南
 
-后端使用 Django5 作为基本框架。
+后端使用 Django5 作为基本框架，集成 rest_framework 和 rest_framework_simplejwt 的 Token 验证机制，使用 corsheaders 完成跨域。
+
 
 - 启动命令：
 
 ```shell
 cd back_end
+pip install -r pip_env.txt
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
