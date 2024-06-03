@@ -1,4 +1,3 @@
-# from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
 
@@ -12,6 +11,10 @@ class Notification(models.Model):
     time = models.DateTimeField()
     level = models.CharField(max_length=10, default="")
 
+    class Meta:
+        verbose_name = "灾害订阅"
+        verbose_name_plural = "灾害订阅"
+
 
 class CitySubscription(models.Model):
     user = models.ForeignKey(
@@ -22,21 +25,8 @@ class CitySubscription(models.Model):
         return f"{self.user.username} - {self.cityName}"
 
     class Meta:
-        verbose_name = "城市订阅"
-        verbose_name_plural = "城市订阅"
-
-
-# class CitySubscription(models.Model):
-#     profile = models.ForeignKey(
-#         Profile, on_delete=models.CASCADE, verbose_name="订阅用户", default=None)
-#     cityName = models.CharField(max_length=40, verbose_name="城市名称")
-
-#     def __str__(self):
-#         return f"{self.profile.username} - {self.cityName}"
-
-#     class Meta:
-#         verbose_name = "城市订阅"
-#         verbose_name_plural = "城市订阅"
+        verbose_name = "用户订阅城市表"
+        verbose_name_plural = "用户订阅城市表"
 
 
 class WeatherForecast(models.Model):
@@ -48,3 +38,7 @@ class WeatherForecast(models.Model):
     level = models.IntegerField()
     content = models.TextField()
     instruction = models.TextField()
+
+    class Meta:
+        verbose_name = "天气预报"
+        verbose_name_plural = "天气预报"
