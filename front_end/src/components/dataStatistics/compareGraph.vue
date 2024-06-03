@@ -1,35 +1,29 @@
 <template>
   <el-row :gutter="2">
     <el-col :span="8">
-      <el-select
+      <el-autocomplete
         v-model="location1"
         placeholder="请选择城市1"
+        :fetch-suggestions="querySearch"
         clearable
-        @change="getNewCompare"
-      >
-        <el-option
-          v-for="location in locations"
-          :key="location.value"
-          :label="location.label"
-          :value="location.value"
-        ></el-option>
-      </el-select>
+        class="inline-input w-50"
+        highlight-first-item
+        :value-key="'label'"
+        @select="getNewCompare"
+      />
     </el-col>
     <el-col :span="8"></el-col>
     <el-col :span="8">
-      <el-select
+      <el-autocomplete
         v-model="location2"
         placeholder="请选择城市2"
+        :fetch-suggestions="querySearch"
         clearable
-        @change="getNewCompare"
-      >
-        <el-option
-          v-for="location in locations"
-          :key="location.value"
-          :label="location.label"
-          :value="location.value"
-        ></el-option>
-      </el-select>
+        class="inline-input w-50"
+        highlight-first-item
+        :value-key="'label'"
+        @select="getNewCompare"
+      />
     </el-col>
   </el-row>
   <el-row :gutter="2">
@@ -47,6 +41,29 @@ import { china_cities } from "@/stores/cities";
 import { CityWeatherData } from "@/types/weather";
 const location1 = ref("");
 const location2 = ref("");
+
+interface LabelItem {
+  label: string;
+  value: string;
+}
+const labels = ref<LabelItem[]>([]);
+const querySearch = (queryString: string, cb: any) => {
+  const results = queryString
+    ? labels.value.filter(createFilter(queryString))
+    : labels.value;
+  cb(results);
+};
+const createFilter = (queryString: string) => {
+  return (restaurant: LabelItem) => {
+    return (
+      restaurant.label.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+    );
+  };
+};
+const loadAll = () => {
+  return china_cities;
+};
+
 const getNewCompare = async () =>
   Promise.all([getPresentCity1(), getPresentCity2()]).then(() => {
     renderChart(getValueList1(), getValueList2());
@@ -213,6 +230,7 @@ const getValueList2 = function () {
 };
 onMounted(() =>
   Promise.all([getPresentCity1(), getPresentCity2()]).then(() => {
+    labels.value = loadAll();
     renderChart(getValueList1(), getValueList2());
   })
 );
@@ -438,6 +456,13 @@ const renderChart = async (data1: number[], data2: number[]) => {
   };
   chartInstance_compare.setOption(option);
 };
+addEventListener(
+  "resize",
+  function () {
+    chartInstance_compare.resize();
+  },
+  false
+);
 </script>
 <style lang="scss" scoped>
 #chart_compare {

@@ -36,6 +36,10 @@ watch(
       renderChart_winSpeed_history(AqiDataList.value);
     })
 );
+addEventListener("resize", () => {
+  if (chartInstance_winSpeed_history !== null)
+    chartInstance_winSpeed_history.resize();
+});
 onMounted(() =>
   Promise.all([fetchCityAqiChange()]).then(() => {
     renderChart_winSpeed_history(AqiDataList.value);
