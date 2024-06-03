@@ -326,36 +326,16 @@ def aqi_detail(request):
     name = request.GET.get('city[name]')
     adm2 = request.GET.get('city[adm2]')
 
-    aqi_info = RealtimeAirQuality.objects.get(cityName='北京市')  # TODO
+    aqi_info = RealtimeAirQuality.objects.get(cityName='北京市')  # TODO change city
     response_json = {
-        "aqi": aqi_info.aqi,
+        "aqi": float(aqi_info.aqi),
         "category": aqi_info.category,
-        "pollutionList": [
-            {
-                "type": "pm10",
-                "value": aqi_info.pm10,
-            },
-            {
-                "type": "pm2p5",
-                "value": aqi_info.pm2p5,
-            },
-            {
-                "type": "no2",
-                "value": aqi_info.no2,
-            },
-            {
-                "type": "so2",
-                "value": aqi_info.so2,
-            },
-            {
-                "type": "co",
-                "value": aqi_info.co,
-            },
-            {
-                "type": "o3",
-                "value": aqi_info.o3,
-            }
-        ]
+        "pm10": float(aqi_info.pm10),
+        "pm2.5": float(aqi_info.pm2p5),
+        "no2": float(aqi_info.no2),
+        "so2": float(aqi_info.so2),
+        "co": float(aqi_info.co),
+        "o3": float(aqi_info.o3),
     }
     return JsonResponse(response_json)
 
@@ -662,7 +642,11 @@ def getProInfo(request):
             "pressure": int(weather["now"]["pressure"]),
         },
         "geography": geography,
-        "hazardTable": [],
+        "hazardTable": [
+            {
+
+            }
+        ],
     }
 
     for daily in indices["daily"]:
@@ -705,12 +689,12 @@ def get_hazard(request: HttpRequest):
     all_info = HazardInfo.objects.all()
     response_json = [
         {
-            "place": info.city,
-            "longitude": City2CityId.objects.filter(cityName=info.city).first().location.split(',')[0].strip(),
-            "latitude": City2CityId.objects.filter(cityName=info.city).first().location.split(',')[1].strip(),
+            "place": info.cityName,
+            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
+            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
             "type": info.typeName,
             "time": '',  # TODO fix date str time
-            "level": info.level,
+            "level": info.severity,
         }
         for info in all_info
     ]
@@ -734,12 +718,12 @@ def get_top_hazard(request: HttpRequest):
     all_info = HazardInfo.objects.filter(severity='Severe' or 'Extreme').order_by('-time')
     response_json = [
         {
-            "place": info.city,
-            "longitude": City2CityId.objects.filter(cityName=info.city).first().location.split(',')[0].strip(),
-            "latitude": City2CityId.objects.filter(cityName=info.city).first().location.split(',')[1].strip(),
+            "place": info.cityName,
+            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
+            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
             "type": info.typeName,
-            "time": '',  # TODO fix date strtime
-            "winSpeed": info.winSpeed,
+            "time": '',  # TODO fix date str time
+            "level": info.severity,
         }
         for info in all_info
     ]

@@ -1,4 +1,4 @@
-export const china_cities = [
+[
   { label: "北京市 北京", value: "北京市 北京" },
   { label: "北京市 海淀", value: "北京市 海淀" },
   { label: "北京市 朝阳", value: "北京市 朝阳" },
