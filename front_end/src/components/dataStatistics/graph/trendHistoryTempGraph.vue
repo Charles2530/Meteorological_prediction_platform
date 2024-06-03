@@ -38,6 +38,9 @@ watch(
       renderChart_temp_history(TempDataList.value);
     })
 );
+addEventListener("resize", () => {
+  if (chartInstance_temp_history !== null) chartInstance_temp_history.resize();
+});
 onMounted(() =>
   Promise.all([fetchCityTempChange()]).then(() => {
     renderChart_temp_history(TempDataList.value);

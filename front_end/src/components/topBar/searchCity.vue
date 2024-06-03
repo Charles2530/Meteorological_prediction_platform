@@ -43,7 +43,7 @@ interface LabelItem {
 }
 const state = ref("");
 const city = ref("");
-watch(state,()=>updateUserCity);
+watch(state, () => updateUserCity);
 
 const labels = ref<LabelItem[]>([]);
 const querySearch = (queryString: string, cb: any) => {

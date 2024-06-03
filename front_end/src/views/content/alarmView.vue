@@ -71,14 +71,6 @@
           <div class="clearfix">
             <span>城市列表</span>
           </div>
-          <!-- <el-select v-model="cities" placeholder="选择订阅城市">
-            <el-option
-              v-for="location in locations"
-              :key="location.label"
-              :label="location.label"
-              :value="location.label"
-            ></el-option>
-          </el-select> -->
           <el-autocomplete
             v-model="cities"
             placeholder="选择订阅城市"
@@ -157,10 +149,6 @@ const querySearch = (queryString: string, cb: any) => {
     ? labels.value.filter(createFilter(queryString))
     : labels.value;
   cb(results);
-};
-const handleSelect = (item: LabelItem) => {
-  cities.value = item.label;
-  city.value = item.value;
 };
 const createFilter = (queryString: string) => {
   return (restaurant: LabelItem) => {
