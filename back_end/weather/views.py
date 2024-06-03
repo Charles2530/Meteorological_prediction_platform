@@ -690,8 +690,8 @@ def get_hazard(request: HttpRequest):
     response_json = [
         {
             "place": info.cityName,
-            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
-            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
+            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
+            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
             "type": info.typeName,
             "time": '',  # TODO fix date str time
             "level": info.severity,
@@ -729,15 +729,16 @@ def get_top_hazard(request: HttpRequest):
     ]
 
     eq_info = EarthQuakeInfo.objects.all()
-    response_json.extend([{
-        "place": info.location,
-        "longitude": info.lon,
-        "latitude": info.lat,
-        "type": "地震",
-        "time": info.time,  # TODO fix date str time
-        "level": info.level,
-    } if float(str(info.level)) > 3.5
-    for info in eq_info])
+    for info in eq_info:
+        if float(str(infor.level)) > 3.5:
+            response_json.append({
+                "place": info.location,
+                "longitude": info.lon,
+                "latitude": info.lat,
+                "type": "地震",
+                "time": info.time,  # TODO fix date str time
+                "level": info.level,
+            })
 
     return JsonResponse({'data': response_json}, status=200)
 
