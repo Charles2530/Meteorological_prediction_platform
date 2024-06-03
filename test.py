@@ -1,32 +1,39 @@
 
 from bs4 import BeautifulSoup
-import requests
+import csv
+from openpyxl import load_workbook
 
-url = 'https://news.ceic.ac.cn/index.html'
+        # try:
+        #     f = open(r'/root/Meteorological_prediction_platform/back_end/China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
+        # except FileNotFoundError:
+        #     try:
+        #         f = open(r'D:\\Programing\\SoftwareEngineering\\Meteorological_prediction_platform\\back_end\\China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
+        #     except FileNotFoundError:
+        #         pass
 
-response = requests.get(url)
-response.encoding = 'utf-8'
+f = open(r'/root/Meteorological_prediction_platform/back_end/China-City-List-latest.csv', 'r', newline='', encoding='utf-8')
 
-soup = BeautifulSoup(response.text, 'html.parser')
+reader = csv.reader(f)
+cnt = 0
 
-ls = soup.find_all('tr')
-for it in ls:
-    if it.children is None:
+res = []
+
+for i, row in enumerate(reader):
+    if i < 2:
         continue
-        # and it.children[0].name == 'td':
-        # print(it.children[0].name)
-    clist = [j for j in it.children]
-    if len(clist) != 6 or clist[0].name != 'td':
-        continue
+    # cityId = row[0]
+    # cityName = row[9]
 
+    city_n_area = row[9] + ' ' + row[2]
+    res.append({
+        "label": city_n_area,
+        "value": city_n_area,
+    })
 
-    level = clist[0].text
-    time = clist[1].text
-    lat = clist[2].text
-    lon = clist[3].text
-    depth = clist[4].text
-    location = clist[5].text
-    key = time + ' ' + lat + ' ' + lon
-
-    print(level, time, lat, lon, depth, location, key)
+    # try:
+    # Cityinfo.cityName = cityName
+    # Cityinfo.areaName = row[2]
+    # print(row[2])
+    # Cityinfo.location = "{:.2f},{:.2f}".format(float(row[11]), float(row[12]))
+    # Cityinfo.save()
 
