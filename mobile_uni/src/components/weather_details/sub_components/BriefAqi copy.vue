@@ -1,17 +1,52 @@
 <template>
   <!-- {{ city }} -->
   <div class="air-quality-indicator">
-    <div style="font-size:xx-small">
+    <div class="location quality-description"> 
       空气质量
     </div>
-    <el-row style="width: 100%;">
-      <el-col :span="15">
+    <!-- <div class="quality-circle">
+      <div class="quality-level text-gray-200">{{ aqi_ }}</div>
+    </div> -->
+    <!-- <el-card style="width: 100%;"> -->
         <div id="chart_brief_aqi_bar" ref="chart_brief_aqi_bar" style="height: 220px;  width: 100%;  margin: 0 auto">
         </div>
-      </el-col>
-      <el-col :span="9">
-        <div style="margin-top: 30%;font-size:xx-small">
-          <el-row v-for="(value, key) in pollutionList">
+        
+
+    <el-tooltip effect="light">
+      <template #content>
+        <el-row>
+          <el-col :span="24" class="rounded-lg shadow-md p-2" style="width: 40vh;">
+            <el-row :gutter="2">
+              <el-col :span="8">
+                <p class="text-xs text-center font-bold" :style="colorClass(levelInfo.color)">
+                  {{ levelInfo.name }}
+                </p>
+                <p class="text-xs text-center">
+                  {{ levelInfo.range }}
+                </p>
+              </el-col>
+              <el-col :span="16">
+                <p class="text-center text-xs text-black">{{ levelInfo.description }}</p>
+              </el-col>
+            </el-row>
+            <!-- </div> -->
+          </el-col>
+        </el-row>
+      </template>
+      <!-- <el-row>
+        <el-col :span="9"> -->
+      <el-button class="quality-description text-slate-600" style="border: none;">
+        {{ category_ }}
+      </el-button>
+      <!-- </el-col> -->
+      <!-- <el-col :span="15">
+          helo
+        </el-col>
+      </el-row> -->
+    </el-tooltip>
+
+    <div style="margin-top: 10%;font-size: 20px">
+          <el-row :gutter="30" v-for="(value, key) in pollutionList">
             <el-col :span="15">
               <div>
                 {{ key }}
@@ -22,34 +57,9 @@
             </el-col>
           </el-row>
         </div>
-      </el-col>
-    </el-row>
 
-    <!-- <el-tooltip effect="light">
-      <template #content>
-        <el-row style="background-color: transparent">
-          <el-col :span="24" class="rounded-lg shadow-md p-2" style="width: 40vh;background-color: transparent">
-            <el-row :gutter="2">
-              <el-col :span="8">
-                <p class="text-xl text-center font-bold" :style="colorClass(levelInfo.color)">
-                  {{ levelInfo.name }}
-                </p>
-                <p class="text-center text-xl">
-                  {{ levelInfo.range }}
-                </p>
-              </el-col>
-              <el-col :span="16">
-                <p class="text-center text-sm text-black">{{ levelInfo.description }}</p>
-              </el-col>
-            </el-row>
-          </el-col>
-        </el-row>
-      </template> -->
-    <div class="quality-description text-slate-600" style="border: none;">
-      {{ category_ }}
-    </div>
+    <!-- </el-card> -->
 
-    <!-- </el-tooltip> -->
 
 
     <!-- 下方显示提示信息 -->
@@ -215,14 +225,14 @@ const renderChart = async (
         type: 'gauge',
         startAngle: -120,
         endAngle: -60,
-        center: ['40%', '46%'],
+        center: ['50%', '50%'],
         radius: '80%',
         min: 0,
         max: 350,
         splitNumber: 7,
         axisLine: {
           lineStyle: {
-            width: 10,
+            width: 17,
             color: [
               [1 / 7, 'green'],
               [2 / 7, 'yellow'],
@@ -443,17 +453,8 @@ onMounted(() => Promise.all([getPresentCityAqi()]).then(() => {
 
 </script>
 <style>
-.el-tooltip {
-
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0px;
-  margin: 0px;
-}
-
 .air-quality-indicator {
-  padding: 0px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -490,7 +491,6 @@ onMounted(() => Promise.all([getPresentCityAqi()]).then(() => {
   font-size: 25px;
   font-weight: bold;
   z-index: 1;
-  background-color: transparent;
 }
 
 
