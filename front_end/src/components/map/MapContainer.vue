@@ -78,6 +78,7 @@ import AMapWind from "amap-wind";
 import { get } from "@/api/index.ts";
 import { MapGeo, Point, Hazard, ProInfo } from "@/types/weather";
 import { getAssetsFileAQI } from "@/utils/pub-use";
+import { Interface } from "readline";
 
 // 设置安全密钥
 (window as any)._AMapSecurityConfig = {
@@ -284,11 +285,15 @@ function object2Geojson3(data: Array<MapGeo>) {
   return featureCollection;
 }
 
+interface MapGeoRes{
+  data: Array<MapGeo>;
+}
+
 async function getMapGeo() {
-  await get("/api/vis/getVisData/").then((res) => {
+  await get<MapGeoRes>("/api/vis/getVisData/").then((res) => {
     
     geo = new Loca.GeoJSONSource({
-      data: object2Geojson(<Array<MapGeo>>res.data.data),
+      data: object2Geojson(res.data.data),
     });
     aqiGeo = new Loca.GeoJSONSource({
       data: object2Geojson3(<Array<MapGeo>>res.data.data),
@@ -313,12 +318,10 @@ async function getProInfo() {
 
 function getHazardGeo() {
   get("/api/getHazard/").then((res) => {
-    // console.log("aaa",res)
     hazardGeo = new Loca.GeoJSONSource({
       data: object2Geojson2(<Array<Hazard>>res.data.data),
     });
     get("/api/getHazardTop/").then((res) => {
-      console.log("aaa",res)
       hazardTopGeo = new Loca.GeoJSONSource({
         data: object2Geojson2(<Array<Hazard>>res.data.data),
       });

@@ -690,8 +690,8 @@ def get_hazard(request: HttpRequest):
     response_json = [
         {
             "place": info.cityName,
-            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
-            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
+            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
+            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
             "type": info.typeName,
             "time": '',  # TODO fix date str time
             "level": info.severity,
@@ -736,7 +736,8 @@ def get_top_hazard(request: HttpRequest):
         "type": "地震",
         "time": info.time,  # TODO fix date str time
         "level": info.level,
-    } for info in eq_info])
+    } if float(str(info.level)) > 3.5
+    for info in eq_info])
 
     return JsonResponse({'data': response_json}, status=200)
 
