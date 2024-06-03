@@ -21,9 +21,9 @@
 </template> -->
 
 <template>
- <!-- <div style="color: white;"> {{mapRainyWeather(weather.condition)}}</div> -->
-    <!-- bg-mobile-sunny bg-mobile-rainy  bg-mobile-night bg-mobile-cloudy bg-mobile-overcast-->
-  <div  :class="mapRainyWeather(weather.condition)" class="bg-cover bg-no-repeat" style="height: 138vh;overflow: auto">
+  <!-- <div style="color: white;"> {{mapRainyWeather(weather.condition)}}</div> -->
+  <!-- bg-mobile-sunny bg-mobile-rainy  bg-mobile-night bg-mobile-cloudy bg-mobile-overcast-->
+  <div :class="mapRainyWeather(weather.condition)" class="bg-cover bg-no-repeat" style="height: 138vh;overflow: auto">
     <el-container class="background-transparent">
       <el-button class="switch-button background-transparent" size="small" type="" :icon="Switch"
         @click="drawer = true">
@@ -39,7 +39,8 @@
         <!-- </el-col> -->
       </el-header>
       <el-main style="padding: 0;">
-        <el-card class="scroll" style="border-color: transparent;background-color: rgba(255, 255, 255, 0);border-radius: 10px;">
+        <el-card class="scroll"
+          style="border-color: transparent;background-color: rgba(255, 255, 255, 0);border-radius: 10px;">
           <RealTimeBroadcast :city="city" />
         </el-card>
       </el-main>
@@ -207,8 +208,11 @@ const weatherMap: WeatherMap = {
 };
 // 根据 *雨* 的通配映射到 bg-mobile-rainy
 function mapRainyWeather(chineseWeather: string): string {
+  const currentTime = new Date().getHours();
   if (chineseWeather.includes('雨')) {
     return 'bg-mobile-rainy';
+  } else if (currentTime >= 20 || currentTime < 5) { // 如果当前时间为晚上（20:00-06:00），返回对应的夜晚背景
+    return 'bg-mobile-night';
   } else {
     return weatherMap[chineseWeather] || 'bg-mobile-sunny'; // 如果没有对应的映射，返回 'Unknown'
   }
@@ -238,11 +242,11 @@ const removeCity = (index: number) => {
     const request: City = careCitiesList.value[index].city;
     post<DeleteResponse>("/api/weather/care_cities/del/", request).then((res) => {
       const response = res.data;
-    //   if (response.success) {
-    //     ElMessage.success("已删除");
-    //   } else ElMessage.error("无效的请求");
+      //   if (response.success) {
+      //     ElMessage.success("已删除");
+      //   } else ElMessage.error("无效的请求");
     });
-    
+
     careCitiesList.value.splice(index, 1);
 
   }
