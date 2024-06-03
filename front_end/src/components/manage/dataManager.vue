@@ -9,7 +9,6 @@
                 <el-col :span="6">
                   <el-select v-model="selectType" placeholder="请选择数据类型">
                     <el-option label="天气数据" value="weather"></el-option>
-                    <el-option label="地质灾害" value="disaster"></el-option>
                   </el-select>
                 </el-col>
                 <el-col :span="12">

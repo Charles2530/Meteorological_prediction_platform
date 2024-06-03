@@ -8,7 +8,7 @@
       :fetch-suggestions="querySearch"
       clearable
       class="inline-input w-50"
-      @select="handleSelect"
+      @select="updateUserCity"
       highlight-first-item
       :value-key="'label'"
       @change="updateUserCity"
@@ -43,7 +43,7 @@ interface LabelItem {
 }
 const state = ref("");
 const city = ref("");
-watch(state,()=>updateUserCity);
+watch(state, () => updateUserCity);
 
 const labels = ref<LabelItem[]>([]);
 const querySearch = (queryString: string, cb: any) => {
