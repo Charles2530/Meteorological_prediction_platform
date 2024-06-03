@@ -3,6 +3,7 @@ from weather.models import LocationToInfo
 import requests
 import json
 import time
+import random
 
 class Command(BaseCommand):
     help = 'Store catastrophic forecast data into the database'
@@ -27,6 +28,7 @@ class Command(BaseCommand):
             # default="52c4d25aafb147c5bc6e4df6cc52afc6",
             # default="7ddb2459227b4d6993afff0b4ba574ff",
             # default="f6b975aa8ad94602aefefceb2e8b3acd",
+            default="5d9c4aa6301d42c0bd5fd461ee34d88e", # real key
             help="Specify the key of API",
         )
 
@@ -76,16 +78,18 @@ class Command(BaseCommand):
                     # print(location)
                     locationInfo = LocationToInfo(location=location, lon=lon, lat=lat)
                     # locationInfo.obsTime = Info["obsTime"]
-                    # locationInfo.temp = Info["temp"]
+                    locationInfo.temp = str(random.randint(0, 25))
+                    locationInfo.aqi = str(random.randint(0, 100))
                     # locationInfo.icon = Info["icon"]
                     # locationInfo.text =  Info["text"]
-                    # locationInfo.wind360 = Info["wind360"]
-                    # locationInfo.windDir = Info["windDir"]
-                    # locationInfo.windScale = Info["windScale"]
-                    # locationInfo.windSpeed = Info["windSpeed"]
-                    # locationInfo.humidity = Info["humidity"]
-                    # locationInfo.precip = Info["precip"]
-                    # locationInfo.pressure = Info["pressure"]
+                    locationInfo.wind360 = str(random.randint(0, 359))
+                    di = ["西南风", "东北风"]
+                    locationInfo.windDir = di[random.randint(0, 1)]
+                    locationInfo.windScale = str(random.randint(1, 10))
+                    locationInfo.windSpeed = str(random.randint(1, 10))
+                    locationInfo.humidity = str(random.randint(1, 30))
+                    locationInfo.precip = str(random.randint(1, 30))
+                    locationInfo.pressure = str(random.randint(1, 100))
                     locationInfo.save()
                 else:
                     try:

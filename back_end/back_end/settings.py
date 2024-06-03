@@ -69,6 +69,13 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
+CORS_ORIGIN_WHITELIST = [
+    'http://114.116.201.133:3306',
+    'http://114.116.201.133:8000',
+    'http://114.116.201.133:8080',
+    'http://114.116.201.133:8888'
+]
+
 ROOT_URLCONF = "back_end.urls"
 
 TEMPLATES = [
@@ -216,4 +223,4 @@ SESSION_COOKIE_AGE = 1209600  # 2周
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
 
-# LOGIN_URL = 'login/'  # cas login url
+# LOGIN_URL = 'api/login/'  # cas login url
