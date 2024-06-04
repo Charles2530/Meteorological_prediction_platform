@@ -6,7 +6,7 @@
         placeholder="请选择城市1"
         :fetch-suggestions="querySearch"
         clearable
-        class="inline-input w-50"
+        class="inline-input w-60"
         highlight-first-item
         :value-key="'label'"
         @select="getNewCompare"
@@ -309,7 +309,7 @@ const renderChart = async (data1: number[], data2: number[]) => {
       },
       {
         gridIndex: 2,
-        show: true,
+        show: false,
         type: "value",
         inverse: false,
         axisLine: {
