@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
-import videoPath from "@/assets/media/test.mp4";
+import videoPath from "@/assets/media/weather_forecast.mp4";
 
 const videoSrc = videoPath;
 const videoPlayer = ref<HTMLVideoElement | null>(null);

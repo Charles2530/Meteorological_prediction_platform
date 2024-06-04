@@ -12,6 +12,12 @@ onMounted(() => {
   console.log(chartRef.value);
   initChart();
 });
+addEventListener("resize", () => {
+  if (chartRef.value) {
+    chartRef.value.style.width = "100%";
+    chartRef.value.style.height = "300px";
+  }
+});
 const props = defineProps<{
   cnt: Array<number>; // [8, 126, 334, 323, 0]
 }>();
