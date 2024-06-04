@@ -311,9 +311,9 @@ def subscribed_cities_summary(request):
     print('-----', 'current_adm2', current_adm2, '-----')
     json_response = {
         'success': True,
-        'currentCity': {
+        'city': {
             'name': current_city_name,
-            'adm2': current_adm2  # TODO adm2
+            'adm2': current_adm2,  # TODO adm2
         },
         'temp': RealtimeWeather.objects.get(cityName=current_city_name).temp,
         'cond_icon': RealtimeWeather.objects.get(cityName=current_city_name).icon,
@@ -321,7 +321,7 @@ def subscribed_cities_summary(request):
             {
                 'city': {
                     'name': subscription.cityName.split()[0],
-                    'adm2': ''  # TODO adm2
+                    'adm2': '',  # TODO adm2
                 },
                 'temp': RealtimeWeather.objects.get(cityName=subscription.cityName.split()[0]).temp,
                 'cond_icon': RealtimeWeather.objects.get(cityName=subscription.cityName.split()[0]).icon,
