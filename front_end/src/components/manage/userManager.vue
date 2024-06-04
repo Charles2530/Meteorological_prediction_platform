@@ -476,7 +476,8 @@ const confirmPassword = throttle((formEl: FormInstance | undefined) => {
     if (valid) {
       const encodePasswordForm = {
         uid: passwordForm.uid,
-        password: md5(passwordForm.password),
+        // password: md5(passwordForm.password),
+        password: passwordForm.password,
       };
       post<Response>("/api/manage/user/password/", encodePasswordForm).then(
         (res) => {

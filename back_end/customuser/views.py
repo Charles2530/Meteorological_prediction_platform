@@ -106,13 +106,14 @@ def my_register(request):
             user = User.objects.create_user(username=username, password=password, email=email)
         user.save()
         user_current_city = UserCurrentCity(
-            user = user,
-            cityName = '北京市'  # TODO city change
+            user=user,
+            cityName='北京市',
+            adm2='北京市'
         )
         user_current_city.save()
         user_avatar = UserAvatar(
-            user = user,
-            avatar = "http://dummyimage.com/88x31"
+            user=user,
+            avatar="http://dummyimage.com/88x31"
         )
         user_avatar.save()
         # authenticate(username=username, password=password)
@@ -182,7 +183,7 @@ def user_list(request):
         "userlist": []
     }
 
-    system_admin = ['ziwei'] # exclude django admin
+    system_admin = ['ziwei']  # exclude django admin
 
     # 遍历当前页的用户，构造userlist
     for user in page_obj:
@@ -259,7 +260,7 @@ def user_authorization(request):
     # 从请求体中获取uid和role
     try:
         data = json.loads(request.body)
-        uid = data.get('id')
+        uid = data.get('uid')
         role = data.get('role')
     except json.JSONDecodeError:
         # 返回400错误，请求格式不正确
@@ -276,8 +277,10 @@ def user_authorization(request):
         user = User.objects.get(id=uid)
         if role == 1:
             user.is_staff = False
+            user.is_superuser = False
         elif role == 2:
             user.is_staff = True
+            user.is_superuser = True
         user.save()
         response_data = {"success": True}
         return JsonResponse(response_data, status=200)
@@ -606,3 +609,29 @@ def upload_avatar(request):
             "success": False,
             "reason": str(e)
         }, status=500)
+
+
+@csrf_exempt
+@login_required
+def update_current_city(request):
+    # auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+    data = json.loads(request.body)
+    new_current_city = data.get('city')
+
+    city = new_current_city.split()[0]
+    if new_current_city.find(' ') != -1:
+        adm2 = new_current_city.split()[1]
+        if adm2.find('区') != -1:
+            adm2 += '区'  # TODO fix area
+    else:
+        adm2 = ''
+    user_current_city = UserCurrentCity.objects.get(user=request.user)
+    user_current_city.cityName = city
+    user_current_city.adm2 = adm2
+
+    json_response = {
+        "success": True,
+        "reason": ""
+    }
+
+    return JsonResponse(json_response, status=200)

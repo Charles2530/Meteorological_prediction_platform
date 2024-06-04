@@ -312,16 +312,18 @@ def subscribed_cities_summary(request):
     json_response = {
         'success': True,
         'currentCity': {
-            'name': current_city_name,
-            'adm2': current_adm2  # TODO adm2
+            'city': {
+                'name': current_city_name,
+                'adm2': current_adm2,  # TODO adm2
+            },
+            'temp': RealtimeWeather.objects.get(cityName=current_city_name).temp,
+            'cond_icon': RealtimeWeather.objects.get(cityName=current_city_name).icon,
         },
-        'temp': RealtimeWeather.objects.get(cityName=current_city_name).temp,
-        'cond_icon': RealtimeWeather.objects.get(cityName=current_city_name).icon,
         'careCitiesList': [
             {
                 'city': {
                     'name': subscription.cityName.split()[0],
-                    'adm2': ''  # TODO adm2
+                    'adm2': '',  # TODO adm2
                 },
                 'temp': RealtimeWeather.objects.get(cityName=subscription.cityName.split()[0]).temp,
                 'cond_icon': RealtimeWeather.objects.get(cityName=subscription.cityName.split()[0]).icon,
@@ -758,8 +760,14 @@ def get_top_hazard(request: HttpRequest):
 @require_http_methods(['GET'])
 def get_city_info(request: HttpRequest):
     city = request.GET.get("city")
-    # TODO to remove
-    cityId = City2CityId.objects.filter(cityName='北京市').first().cityId
+    city_name = city.split()[0]
+    if city.find(' ') != -1:
+        adm2 = city.split()[1]
+        if adm2.find('区') != -1:
+            adm2 += '区'  # TODO fix area
+    else:
+        adm2 = ''
+    cityId = City2CityId.objects.filter(cityName=city_name, adm2=adm2).first().cityId
     # use API to get weather and air
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
@@ -805,7 +813,7 @@ def get_current_city_info(request: HttpRequest):
     city_name = UserCurrentCity.objects.get(user=user)
     # city_name = '北京市'
     # TODO to remove
-    cityId = City2CityId.objects.filter(cityName=city_name)[0].cityId
+    cityId = City2CityId.objects.filter(cityName=city_name).first().cityId
     # use API to get weather and air
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/

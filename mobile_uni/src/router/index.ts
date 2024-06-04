@@ -1,5 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { UserRole } from "@/types/user";
+import { useUserInfo } from "@/stores/userInfo";
+import { useLoginConfig } from "@/stores/loginConfig";
+
 // 速览首页
 const Home = () => import("@/views/home/index.vue");
 // 地图页面
@@ -63,16 +66,22 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
-
+const userInfo = useUserInfo();
+const themeConfig = useLoginConfig();
 router.beforeEach((to, from, next) => {
   if (
     routes.some((item) =>
       new RegExp("^" + item.path.split("/:")[0] + "(?:/.*)?$").test(to.path)
     )
   ) {
-    next();
+    const permissions = to.meta.permission;
+    if (permissions.includes(userRole)) {
+      next(); 
+    } else {
+      themeConfig.showLoginPanel = true;
+    }
   } else {
-    next({ name: "404Page" });
+    next({ name: "404Page" }); 
   }
 });
 
