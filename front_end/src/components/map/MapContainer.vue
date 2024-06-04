@@ -45,13 +45,7 @@
             <div class="btnIconb"></div>
           </div>
         </el-button>
-        <el-button width="200px" :class="{ 'selected': buttonActive.f, 'unselected': !buttonActive.f }"
-          :active="buttonActive.f" @click="clickf">
-          <div class="btnDiv">
-            <div class="btnName">空气质量</div>
-            <div class="btnIconf"></div>
-          </div>
-        </el-button>
+        
         <el-button :class="{ 'selected': buttonActive.e, 'unselected': !buttonActive.e }" :active="buttonActive.e"
           @click="clicke">
           <div class="btnDiv">
@@ -72,6 +66,13 @@
 </template>
 
 <script setup lang="ts">
+// <el-button width="200px" :class="{ 'selected': buttonActive.f, 'unselected': !buttonActive.f }"
+//           :active="buttonActive.f" @click="clickf">
+//           <div class="btnDiv">
+//             <div class="btnName">空气质量</div>
+//             <div class="btnIconf"></div>
+//           </div>
+//         </el-button>
 import { onMounted, reactive } from "vue";
 import AMapLoader from "@amap/amap-jsapi-loader";
 import AMapWind from "amap-wind";
@@ -284,14 +285,26 @@ function object2Geojson3(data: Array<MapGeo>) {
   return featureCollection;
 }
 
+interface MapGeoRes{
+  data: Array<MapGeo>;
+}
+
+interface MapGeoRes{
+  data: Array<MapGeo>;
+}
+
+interface HazardRes{
+  data: Array<Hazard>;
+}
+
 async function getMapGeo() {
-  await get("/api/vis/getVisData/").then((res) => {
+  await get<MapGeoRes>("/api/vis/getVisData/").then((res) => {
     
     geo = new Loca.GeoJSONSource({
-      data: object2Geojson(<Array<MapGeo>>res.data.data),
+      data: object2Geojson(res.data.data),
     });
     aqiGeo = new Loca.GeoJSONSource({
-      data: object2Geojson3(<Array<MapGeo>>res.data.data),
+      data: object2Geojson3(res.data.data),
     });
     InitHeatMapTem();
     InitHeatMapWater();
@@ -312,15 +325,13 @@ async function getProInfo() {
 };
 
 function getHazardGeo() {
-  get("/api/getHazard/").then((res) => {
-    // console.log("aaa",res)
+  get<HazardRes>("/api/getHazard/").then((res) => {
     hazardGeo = new Loca.GeoJSONSource({
-      data: object2Geojson2(<Array<Hazard>>res.data.data),
+      data: object2Geojson2(res.data.data),
     });
-    get("/api/getHazardTop/").then((res) => {
-      console.log("aaa",res)
+    get<HazardRes>("/api/getHazardTop/").then((res) => {
       hazardTopGeo = new Loca.GeoJSONSource({
-        data: object2Geojson2(<Array<Hazard>>res.data.data),
+        data: object2Geojson2(res.data.data),
       });
       InitHazard();
     });
@@ -1084,6 +1095,7 @@ function InitAqi() {
   padding-left: 15px;
   padding-right: 15px;
   min-width: 180px;
+  max-width: 500px;
 }
 
 /* :deep(.amap-info-sharp) {

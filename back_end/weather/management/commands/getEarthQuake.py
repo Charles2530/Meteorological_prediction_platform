@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 import csv
-from weather.models import EarthQuakeInfo, LocationToInfo
+from weather.models import EarthQuakeInfo
 from openpyxl import load_workbook
 import requests
 from bs4 import BeautifulSoup
@@ -30,6 +30,7 @@ class Command(BaseCommand):
 
         soup = BeautifulSoup(response.text, 'html.parser')
 
+        EarthQuakeInfo.objects.all().delete()
         ls = soup.find_all('tr')
         for it in ls:
             if it.children is None:
@@ -50,6 +51,9 @@ class Command(BaseCommand):
             depth = clist[4].text
             location = clist[5].text
             key = time + ' ' + lat + ' ' + lon
+            if float(lat) > 53.5 or float(lat) < 3.5 or float(lon) > 135 or float(lon) < 73.5:
+                continue
+            print(float(lat), float(lon))
             info = EarthQuakeInfo(
                 level=level, time=time, lat=lat, lon=lon,
                 depth=depth, location=location, key=key

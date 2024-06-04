@@ -1,34 +1,33 @@
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
-  <div class="common-layout background-white">
+  <div class="scroll-layout background-transparent">
     <!-- {{ city }} -->
     <el-container>
       <el-header>
         <div id="chart_temp_perhour" ref="chart_temp_perhour" class="chart-container">
         </div>
       </el-header>
-      <el-main>
-        <div class="">
-          <el-row :gutter="20" justify="center" class="calendar-grid">
-            <el-col :span="2" v-for="(day, index) in realTimeWeatherList" :key="index" class="calendar-column">
-              <div class="ep-bg-purple-dark" />
-              <el-card class="card-container" shadow="hover">
-                <div class="info-text">{{ day.temperature }}℃</div>
-                <div class="perhour-icon">
-                  <i :class="'qi-' + day.condition_icon" class="icon" />
-                  <!-- <div class="tips-text">{{ day.condition }}</div> -->
-                </div>
-                <div class="perhour-icon">
-                  <el-icon size="20px" class="wind-icon" :style="{ transform: `rotate(${calculateAngle(day.wind360)}deg)` }">
-                    <Position />
-                  </el-icon>
-                  <!-- <div class="tips-text">{{ day.windScale }}级风</div> -->
-                </div>
-                <div class="info-text">{{ day.time }}</div>
-              </el-card>
-            </el-col>
-          </el-row>
-        </div>
+      <el-main style="padding-left: 0;padding-right:0;">
+        <el-row :gutter="0">
+          <el-col :span="2" v-for="(day, index) in realTimeWeatherList" :key="index" class="calendar-column">
+            <div class="ep-bg-purple-dark" />
+            <el-card class="card-container" shadow="hover">
+              <div class="info-text">{{ day.temperature }}℃</div>
+              <div class="perhour-icon">
+                <i :class="'qi-' + day.condition_icon" class="icon" />
+                <!-- <div class="tips-text">{{ day.condition }}</div> -->
+              </div>
+              <div class="perhour-icon">
+                <el-icon size="20px" class="wind-icon"
+                  :style="{ transform: `rotate(${calculateAngle(day.wind360)}deg)` }">
+                  <Position />
+                </el-icon>
+                <!-- <div class="tips-text">{{ day.windScale }}级风</div> -->
+              </div>
+              <div class="info-text">{{ day.time }}</div>
+            </el-card>
+          </el-col>
+        </el-row>
       </el-main>
     </el-container>
   </div>
@@ -64,7 +63,7 @@ const calculateAngle = (wind360: number) => wind360 + 135;
 interface RealTimeWeather {
   time: string,
   condition: string,
-  condition_icon:number,
+  condition_icon: number,
   temperature: number,
   humidity: number,
   windScale: number,
@@ -80,8 +79,8 @@ const get_data = async () => {
   get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: props.city }).then((res) => {
     realTimeWeatherList.value.splice(0, realTimeWeatherList.value.length, ...res.data.realTimeWeatherList);
     // console.log("getdata")
-    if (realTimeWeatherList.value.length > 11) {
-      realTimeWeatherList.value = realTimeWeatherList.value.slice(0, 11);
+    if (realTimeWeatherList.value.length > 12) {
+      realTimeWeatherList.value = realTimeWeatherList.value.slice(0, 12);
     }
   });
 };
@@ -191,16 +190,16 @@ const renderChart = async (
       // right: "10%",
       top: "20%",
       bottom: "20%",
-      left: "-1%",
-      right: "-1%",
+      left: "-3%",
+      right: "-3%",
       containLabel: true,
     },
-    legend: {
-      orient: "horizontal",
-      left: "right",
-      top: "top",
-      data: ["温度", "湿度", "AQI", "气压"],
-    },
+    // legend: {
+    //   orient: "horizontal",
+    //   left: "right",
+    //   top: "top",
+    //   data: ["温度", "湿度", "AQI", "气压"],
+    // },
 
     series: [
       {
@@ -277,13 +276,18 @@ onMounted(() => Promise.all([get_data()]).then(() => {
 
 
 <style scoped>
+.background-transparent {
+  background: transparent;
+  border-color: transparent;
+}
+
 .max-md-bg-gradient {
-  background-color:#67E1D2;
+  background-color: #67E1D2;
   box-shadow: 0 10px 30px -12px rgba(7, 89, 133, 0.45);
 }
-.common-layout {
-  background-color:transparent;
-  width: 1000px;
+
+.scroll-layout {
+  width: 800px;
 }
 
 .chart-container {
@@ -317,7 +321,7 @@ onMounted(() => Promise.all([get_data()]).then(() => {
 .card-container:hover {
   margin-top: -10px;
   margin: -1px;
-  color: #409EFF;
+  color: wheat;
 }
 
 .perhour-icon {
@@ -337,7 +341,8 @@ onMounted(() => Promise.all([get_data()]).then(() => {
   font-size: 15px;
   font-family: 'Courier New', Courier, monospace;
   display: flex;
-  justify-content: center; /* 水平居中 */
+  justify-content: center;
+  /* 水平居中 */
 }
 
 .info-text {
@@ -346,5 +351,4 @@ onMounted(() => Promise.all([get_data()]).then(() => {
   justify-content: center;
   /* 水平居中 */
 }
-
 </style>

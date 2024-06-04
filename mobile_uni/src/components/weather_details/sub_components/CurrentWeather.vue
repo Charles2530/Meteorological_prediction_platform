@@ -1,15 +1,14 @@
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
-  <div class="w-full font-semibold text-md flex-wrap text-white">
+  <div class="w-full font-semibold text-md flex-wrap text-white  background-transparent">
     <div class="
         flex 
         flex-col 
         relative
         h-full
-        max-md-bg-gradient
       ">
       <!-- pc端的地区和时间 -->
-      <div class="area-time flex flex-col py-3  px-10">
+      <div class="area-time flex flex-col py-3" style="align-items: center;">
         <div class="flex">
           <div class="">
             <span>{{ `${city.adm2} ${city.name}` }}</span>
@@ -31,9 +30,9 @@
         <div class="weather-icon max-md-relative opacity-30" style="padding-right: 12px;">
           <i :class="'qi-' + weather.condition_icon" style="font-size: 100px;"></i>
         </div>
-        <div class="temperature-info flex flex-col md-ml-10">
+        <div class="temperature-info flex flex-col">
           <span class="temperature">{{ `${weather.temp}°C` }}</span>
-          <span class="condition max-md-hidden">{{ weather.condition }}</span>
+          <span >{{ weather.condition }}</span>
         </div>
       </div>
     </div>
@@ -59,6 +58,11 @@ const searchForPC = () => {
 </script>
 
 <style scoped>
+.background-transparent{
+  background: transparent;
+  border-color: transparent;
+}
+
 .max-md-bg-gradient {
   background-image: linear-gradient(to right, #67E1D2, #54A8FF);
   /* box-shadow: 0 10px 30px -12px rgba(7, 89, 133, 0.45); */
@@ -70,6 +74,7 @@ const searchForPC = () => {
 
 .weather-info {
   margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .temperature-info {
@@ -81,6 +86,6 @@ const searchForPC = () => {
   background-clip: text;
   -webkit-background-clip: text;
   /* color: transparent; */
-  background-image: linear-gradient(to bottom right, white 40%, ...);
+  /* background-image: linear-gradient(to bottom right, white 40%, ...); */
 }
 </style>

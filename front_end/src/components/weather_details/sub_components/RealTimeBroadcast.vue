@@ -102,8 +102,8 @@ const get_data = async () => {
   get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: props.city }).then((res) => {
     realTimeWeatherList.value.splice(0, realTimeWeatherList.value.length, ...res.data.realTimeWeatherList);
     // console.log("getdata")
-    if (realTimeWeatherList.value.length > 11) {
-      realTimeWeatherList.value = realTimeWeatherList.value.slice(0, 11);
+    if (realTimeWeatherList.value.length > 12) {
+      realTimeWeatherList.value = realTimeWeatherList.value.slice(0, 12);
     }
   });
 };
@@ -142,7 +142,7 @@ const renderChart = async (
   chartInstance_history.setOption({
     // Adjusted to have only one visualMap for all series
     visualMap: {
-      show: true,
+      show: false,
       type: "continuous",
       seriesIndex: 0, // This is now referring to the first (and only) series index that needs a visualMap
       min: 10,
@@ -215,16 +215,16 @@ const renderChart = async (
       // right: "10%",
       top: "20%",
       bottom: "20%",
-      left: "4%",
-      right: "4%",
+      left: "0%",
+      right: "0%",
       containLabel: true,
     },
-    legend: {
-      orient: "horizontal",
-      left: "right",
-      top: "top",
-      data: ["温度", "湿度", "AQI", "气压"],
-    },
+    // legend: {
+    //   orient: "horizontal",
+    //   left: "right",
+    //   top: "top",
+    //   data: ["温度", "湿度", "AQI", "气压"],
+    // },
 
     series: [
       {

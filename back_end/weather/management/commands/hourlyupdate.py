@@ -12,6 +12,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument(
             '--D',
+            action='store_true',
             help='Delete all items in database',
         )
         
@@ -39,6 +40,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         if kwargs['D']:
+            print('Delete all')
             WeatherInfo.objects.all().delete()
         
         if kwargs["U"]:

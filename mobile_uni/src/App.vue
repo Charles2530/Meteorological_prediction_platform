@@ -31,6 +31,7 @@ const NavBar = defineAsyncComponent(() => import("@c/topBar/navBar.vue"));
 }
 .main-page {
   box-sizing: border-box;
+  padding: 0px;
   height: calc(100vh - 92px);
   overflow-y: scroll;
   overflow-x: hidden;
