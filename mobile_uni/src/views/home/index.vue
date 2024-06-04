@@ -199,7 +199,7 @@ onMounted(() => {
 
 // 根据天气换壁纸
 
-const weatherMap: WeatherMap = {
+const weatherMap = {
   '晴': 'bg-mobile-sunny',
   // '下雨': 'bg-mobile-rainy',
   // '夜晚': 'bg-mobile-night',

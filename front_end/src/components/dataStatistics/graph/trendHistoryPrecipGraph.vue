@@ -36,6 +36,9 @@ watch(
       renderChart_precip_history(AqiDataList.value);
     })
 );
+addEventListener("resize", () => {
+  if (chartInstance_precip_history) chartInstance_precip_history.resize();
+});
 onMounted(() =>
   Promise.all([fetchCityAqiChange()]).then(() => {
     renderChart_precip_history(AqiDataList.value);

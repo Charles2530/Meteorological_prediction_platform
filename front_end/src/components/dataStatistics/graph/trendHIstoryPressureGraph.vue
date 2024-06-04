@@ -36,6 +36,10 @@ watch(
       renderChart_pressure_history(AqiDataList.value);
     })
 );
+addEventListener("resize", () => {
+  if (chartInstance_pressure_history !== null)
+    chartInstance_pressure_history.resize();
+});
 onMounted(() =>
   Promise.all([fetchCityAqiChange()]).then(() => {
     renderChart_pressure_history(AqiDataList.value);

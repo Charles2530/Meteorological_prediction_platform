@@ -41,6 +41,9 @@ onMounted(() =>
     renderChart_aqi_history(AqiDataList.value);
   })
 );
+addEventListener("resize", () => {
+  if (chartInstance_aqi_history !== null) chartInstance_aqi_history.resize();
+});
 const fetchCityAqiChange = throttle(
   async () =>
     get<AqiChangeResponse>("/api/weather/aqi/city_change/", {

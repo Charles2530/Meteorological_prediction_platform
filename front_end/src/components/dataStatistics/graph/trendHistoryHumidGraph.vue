@@ -51,6 +51,10 @@ const fetchCityAqiChange = throttle(
     }),
   1000
 );
+addEventListener("resize", () => {
+  if (chartInstance_humid_history !== null)
+    chartInstance_humid_history.resize();
+});
 let chartInstance_humid_history: echarts.ECharts | null = null;
 const renderChart_humid_history = async (tempData: humidNode[]) => {
   if (chartInstance_humid_history === null)
