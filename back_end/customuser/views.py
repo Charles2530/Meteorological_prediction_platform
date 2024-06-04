@@ -56,7 +56,7 @@ def my_login(request):
                 "token": user.username,
                 "userInfo": {
                     "username": user.username,
-                    "avatar": UserAvatar.objects.get(user=user).avatar,
+                    "avatar": "http://dummyimage.com/88x31",  # UserAvatar.objects.get(user=user).avatar, TODO
                     # "role": 2 if user.is_staff else 1,
                     "role": 2 if user.is_staff else 1,
                     "email": user.email
@@ -115,8 +115,8 @@ def my_register(request):
             avatar = "http://dummyimage.com/88x31"
         )
         user_avatar.save()
-        authenticate(username=username, password=password)
-        login(request, user)
+        # authenticate(username=username, password=password)
+        # login(request, user)
 
         info = {
             "token": str(AccessToken.for_user(user)),
@@ -182,13 +182,17 @@ def user_list(request):
         "userlist": []
     }
 
+    system_admin = ['ziwei'] # exclude django admin
+
     # 遍历当前页的用户，构造userlist
     for user in page_obj:
+        if user.username in system_admin:
+            continue
         user_data = {
             "uid": user.id,
             "username": user.username,
             "email": user.email,
-            "avatar": UserAvatar.objects.get(user=user).avatar,
+            "avatar": "http://dummyimage.com/88x31",  # UserAvatar.objects.get(user=user).avatar, TODO
             "role": 2 if user.is_staff else 1,
             "last_login": user.last_login.strftime(
                 '%Y-%m-%d %H:%M:%S') if user.last_login is not None else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -224,7 +228,7 @@ def delete_user(request):
     # 假设这里仅检查User模型中是否存在对应的uid
     try:
         user = request.user
-        if uid == user.uid:  # 删除当前用户，不允许
+        if uid == user.id:  # 删除当前用户，不允许
             response_data = {
                 "success": False,
                 "reason": "Cannot delete current user"
@@ -290,7 +294,6 @@ def user_authorization(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff or u.is_superuser)
 def update_user_email(request):
-    print(request.user,request.body)
     authorization = request.META.get("HTTP_AUTHORIZATION")
     if not authorization:
         return JsonResponse({"success": False, "reason": "Authorization header is required."}, status=401)
@@ -316,7 +319,8 @@ def update_user_email(request):
         except User.DoesNotExist:
             return JsonResponse({"success": False, "reason": request.POST}, status=400)
 
-        user.set_email(new_email)
+        user.email = new_email
+        user.save()
 
         return JsonResponse({"success": True}, status=200)
 
@@ -444,7 +448,8 @@ def update_current_user_password(request):
     user = request.user
 
     # 验证旧密码
-    if not user or not check_password(old_password, user.password):
+    # if not user or not check_password(old_password, new_password):
+    if not user:
         return JsonResponse({
             "success": False,
             "reason": _("userInfo.operate.password.auth")
@@ -459,8 +464,7 @@ def update_current_user_password(request):
 
     # 更新用户密码
     try:
-        user.password = new_password  # 使用Django内置的密码散列
-        user.save()
+        user.set_password(new_password)
         # 如果使用Django的session，更新session中的密码
         # update_session_auth_hash(request, user)
 
@@ -502,7 +506,8 @@ def update_current_user_email(request):
     user = request.user
 
     try:
-        user.set_email(email)
+        user.email = email
+        user.save()
         return JsonResponse({
             "success": True,
             "reason": ""  # 成功时reason字段可以为空字符串

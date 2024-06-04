@@ -102,7 +102,8 @@ def get_alarm_notice(request):
 def subscribe(request):
     if request.method == 'POST':
         try:
-            cities = request.POST.get('cities')
+            data = json.loads(request.body)
+            cities = data.get('cities')
             user = request.user
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
@@ -131,11 +132,12 @@ def subscribe(request):
             "success": True,
             "tableData": []
         }
-        cities = CitySubscription.objects.filter(user=request.user).values('cityName')
+        # cities = CitySubscription.objects.filter(user=request.user).values('cityName')
+        cities = CitySubscription.objects.filter(user=request.user)
         print('-----', cities, '-----')
         for city in cities:
             city_json = {
-                "city": city,
+                "city": city.cityName,
                 "status": "已订阅",
             }
             response_json['tableData'].append(city_json)

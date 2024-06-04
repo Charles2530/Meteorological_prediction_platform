@@ -12,6 +12,7 @@ class Command(BaseCommand):
         # Named (optional) arguments
         parser.add_argument(
             '--D',
+            action='store_true',
             help='Delete all items in database',
         )
 
@@ -57,6 +58,7 @@ class Command(BaseCommand):
         # print(len(LocationToInfo.objects.all()))
         # return
         if kwargs['D']:
+            print('Delete all')
             LocationToInfo.objects.all().delete()
             return
 
