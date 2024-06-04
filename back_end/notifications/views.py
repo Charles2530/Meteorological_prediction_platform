@@ -104,21 +104,21 @@ def subscribe(request):
         try:
             data = json.loads(request.body)
             cities = data.get('cities')
+            city = cities.split()[0]
+            adm2 = cities.split()[1] if cities.find(' ') != -1 else ''
+            if cities.find('区') != -1:
+                adm2 = adm2 + '区'
             user = request.user
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
             print('-----', user.username, cities, '-----')
-            # city_obj, created = CitySubscription.objects.update_or_create(
-            #     user=user,
-            #     cityName=cities,
-            # )
-            # city_obj.save()
-            if CitySubscription.objects.filter(user=user, cityName=cities).exists():
-                CitySubscription.objects.filter(user=user, cityName=cities).delete()
+            if CitySubscription.objects.filter(user=user, cityName=cities, adm2=adm2).exists():
+                CitySubscription.objects.filter(user=user, cityName=cities, adm2=adm2).delete()
             else:
                 city_subscription = CitySubscription(
                     user=user,
-                    cityName=cities
+                    cityName=city,
+                    adm2=adm2
                 )
                 city_subscription.save()
 
@@ -137,7 +137,7 @@ def subscribe(request):
         print('-----', cities, '-----')
         for city in cities:
             city_json = {
-                "city": city.cityName,
+                "city": city.cityName + ' ' + city.adm2,
                 "status": "已订阅",
             }
             response_json['tableData'].append(city_json)

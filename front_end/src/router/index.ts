@@ -19,7 +19,7 @@ const UserManage = () => import("@/components/manage/userManager.vue");
 const DataManage = () => import("@/components/manage/dataManager.vue");
 // 404页面
 const Page404 = () => import("@/views/Page404.vue");
-const routes = [
+const routes:any = [
   {
     path: "/",
     redirect: "/home",
@@ -45,7 +45,7 @@ const routes = [
     name: "History",
     component: History,
     meta: {
-      permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
+      permission: [UserRole.User, UserRole.Administrator],
     },
   },
   {
@@ -53,7 +53,7 @@ const routes = [
     name: "Statistics",
     component: Statistics,
     meta: {
-      permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
+      permission: [UserRole.User, UserRole.Administrator],
     },
   },
   {
@@ -61,7 +61,7 @@ const routes = [
     name: "Alarm",
     component: Alarm,
     meta: {
-      permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
+      permission: [UserRole.User, UserRole.Administrator],
     },
   },
   {
