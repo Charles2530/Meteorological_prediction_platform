@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { UserRole } from "@/types/user";
+import { useUserInfo } from "@/stores/userInfo";
+import { useLoginConfig } from "@/stores/loginConfig";
 // 定义路由部分
 // 网站首页
 const Home = () => import("@/views/home/index.vue");
@@ -19,7 +21,7 @@ const UserManage = () => import("@/components/manage/userManager.vue");
 const DataManage = () => import("@/components/manage/dataManager.vue");
 // 404页面
 const Page404 = () => import("@/views/Page404.vue");
-const routes = [
+const routes: any = [
   {
     path: "/",
     redirect: "/home",
@@ -45,7 +47,7 @@ const routes = [
     name: "History",
     component: History,
     meta: {
-      permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
+      permission: [UserRole.User, UserRole.Administrator],
     },
   },
   {
@@ -53,7 +55,7 @@ const routes = [
     name: "Statistics",
     component: Statistics,
     meta: {
-      permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
+      permission: [UserRole.User, UserRole.Administrator],
     },
   },
   {
@@ -61,7 +63,7 @@ const routes = [
     name: "Alarm",
     component: Alarm,
     meta: {
-      permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
+      permission: [UserRole.User, UserRole.Administrator],
     },
   },
   {
@@ -105,16 +107,28 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   if (
-//     routes.some((item) =>
-//       new RegExp("^" + item.path.split("/:")[0] + "(?:/.*)?$").test(to.path)
-//     )
-//   ) {
-//     next();
-//   } else {
-//     next({ name: "404Page" });
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  if (
+    routes.some((item: any) =>
+      new RegExp("^" + item.path.split("/:")[0] + "(?:/.*)?$").test(to.path)
+    )
+  ) {
+    if (to.name !== "Home") {
+      const userInfo = useUserInfo();
+      const themeConfig = useLoginConfig();
+      const permissions = to.meta.permission;
+      console.log(permissions);
+      if (permissions.includes(userInfo.role)) {
+        next();
+      } else {
+        themeConfig.showLoginPanel = true;
+      }
+    } else {
+      next();
+    }
+  } else {
+    next({ name: "404Page" });
+  }
+});
 
 export default router;

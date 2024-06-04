@@ -11,7 +11,6 @@ from django.views.decorators.http import require_http_methods
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from customuser.models import Profile
 from .models import Notification, WeatherForecast, CitySubscription
 from .serializers import NotificationSerializer, CitySubscriptionSerializer, WeatherForecastSerializer
 from .task import fetch_catastrophic_forecast_cities_list, fetch_weather_catastrophic_forecast
@@ -103,22 +102,23 @@ def get_alarm_notice(request):
 def subscribe(request):
     if request.method == 'POST':
         try:
-            cities = request.POST.get('cities')
-            profile = request.user
+            data = json.loads(request.body)
+            cities = data.get('cities')
+            city = cities.split()[0]
+            adm2 = cities.split()[1] if cities.find(' ') != -1 else ''
+            if cities.find('区') != -1:
+                adm2 = adm2 + '区'
+            user = request.user
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
-            print('-----', profile.username, cities, '-----')
-            # city_obj, created = CitySubscription.objects.update_or_create(
-            #     user=profile,
-            #     cityName=cities,
-            # )
-            # city_obj.save()
-            if CitySubscription.objects.filter(user=profile, cityName=cities).exists():
-                CitySubscription.objects.filter(user=profile, cityName=cities).delete()
+            print('-----', user.username, cities, '-----')
+            if CitySubscription.objects.filter(user=user, cityName=cities, adm2=adm2).exists():
+                CitySubscription.objects.filter(user=user, cityName=cities, adm2=adm2).delete()
             else:
                 city_subscription = CitySubscription(
-                    user=profile,
-                    cityName=cities
+                    user=user,
+                    cityName=city,
+                    adm2=adm2
                 )
                 city_subscription.save()
 
@@ -132,11 +132,12 @@ def subscribe(request):
             "success": True,
             "tableData": []
         }
-        cities = CitySubscription.objects.filter(user=request.user).values('cityName')
+        # cities = CitySubscription.objects.filter(user=request.user).values('cityName')
+        cities = CitySubscription.objects.filter(user=request.user)
         print('-----', cities, '-----')
         for city in cities:
             city_json = {
-                "city": city,
+                "city": city.cityName + ' ' + city.adm2,
                 "status": "已订阅",
             }
             response_json['tableData'].append(city_json)

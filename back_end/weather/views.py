@@ -230,8 +230,8 @@ def index(request):
 def overview(request):
     # query daily weather data
 
-    realtime_weather = RealtimeWeather.objects.get(cityName='北京市')  # TODO change city
-    daily_weather = DailyWeather.objects.get(city='北京市', fxDate=datetime.now())
+    realtime_weather = RealtimeWeather.objects.filter(cityName='北京市').first()  # TODO change city
+    daily_weather = DailyWeather.objects.filter(city='北京市', fxDate=datetime.now()).first()
     realtime_air_quality = RealtimeAirQuality.objects.get(cityName='北京市')  # TODO
     response_json = {
         "weather": {
@@ -245,7 +245,8 @@ def overview(request):
             "pressure": realtime_weather.pressure,
             "ray": "中等",  # TODO change with real data
             "sunrise_time": daily_weather.sunrise,  # daily
-            "sunset_time": daily_weather.sunset  # daily
+            "sunset_time": daily_weather.sunset,  # daily
+            "humidity": daily_weather.humidity,
         },
         "search": True
     }
@@ -264,7 +265,7 @@ def realtime(request):
     for i in range(-5, 6):
         real_dt = now_dt + timedelta(hours=i)
         query_dt = rounded_dt + timedelta(hours=i)
-        hourly_weather = WeatherInfo.objects.get(time=query_dt)
+        hourly_weather = WeatherInfo.objects.filter(time=query_dt).first()
         realTimeWeatherList.append({
             "time": real_dt.strftime('%I:%M'),
             "condition": hourly_weather["text"],
@@ -296,24 +297,36 @@ def delete_care_city(request):
 @require_http_methods(['GET'])
 @login_required
 def subscribed_cities_summary(request):
-    profile = request.user
-    subscriptions = CitySubscription.objects.filter(user=profile)
+    user = request.user
+    current_city = UserCurrentCity.objects.get(user=user)
+    subscriptions = CitySubscription.objects.filter(user=user)
+    print('-----', current_city.cityName, '-----')
+    if current_city.cityName.find(' ') != -1:
+        current_city_name = current_city.cityName.split()[0]
+        current_adm2 = current_city.cityName.split()[1]
+    else:
+        current_city_name = current_city.cityName
+        current_adm2 = ''
+    print('-----', 'current_city_name', current_city_name, '-----')
+    print('-----', 'current_adm2', current_adm2, '-----')
     json_response = {
         'success': True,
         'currentCity': {
-            'name': profile.currentCityName,
-            'adm2': ''  # TODO adm2
+            'city': {
+                'name': current_city_name,
+                'adm2': current_adm2,  # TODO adm2
+            },
+            'temp': RealtimeWeather.objects.get(cityName=current_city_name).temp,
+            'cond_icon': RealtimeWeather.objects.get(cityName=current_city_name).icon,
         },
-        'temp': RealtimeWeather.objects.get(cityName=profile.currentCityName).temp,
-        'cond_icon': RealtimeWeather.objects.get(cityName=profile.currentCityName).icon,
         'careCitiesList': [
             {
                 'city': {
-                    'name': subscription.cityName,
-                    'adm2': ''  # TODO adm2
+                    'name': subscription.cityName.split()[0],
+                    'adm2': '',  # TODO adm2
                 },
-                'temp': RealtimeWeather.objects.get(cityName=subscription.cityName).temp,
-                'cond_icon': RealtimeWeather.objects.get(cityName=subscription.cityName).icon,
+                'temp': RealtimeWeather.objects.get(cityName=subscription.cityName.split()[0]).temp,
+                'cond_icon': RealtimeWeather.objects.get(cityName=subscription.cityName.split()[0]).icon,
             }
             for subscription in subscriptions
         ]
@@ -668,11 +681,11 @@ def getProInfo(request):
 @login_required
 @require_http_methods(['POST'])
 def update_current_city(request):
-    profile = request.user
+    user = request.user
     city = request.POST.get('city')
     if city:
-        profile.currentCityName = city
-        profile.save()
+        user.currentCityName = city
+        user.save()
         return JsonResponse({
             "success": True,
             "reason": ""
@@ -690,8 +703,8 @@ def get_hazard(request: HttpRequest):
     response_json = [
         {
             "place": info.cityName,
-            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
-            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
+            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
+            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
             "type": info.typeName,
             "time": '',  # TODO fix date str time
             "level": info.severity,
@@ -719,8 +732,8 @@ def get_top_hazard(request: HttpRequest):
     response_json = [
         {
             "place": info.cityName,
-            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
-            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
+            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
+            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
             "type": info.typeName,
             "time": '',  # TODO fix date str time
             "level": info.severity,
@@ -730,7 +743,7 @@ def get_top_hazard(request: HttpRequest):
 
     eq_info = EarthQuakeInfo.objects.all()
     for info in eq_info:
-        if float(str(infor.level)) > 3.5:
+        if float(str(info.level)) > 5.0:
             response_json.append({
                 "place": info.location,
                 "longitude": info.lon,
@@ -747,8 +760,14 @@ def get_top_hazard(request: HttpRequest):
 @require_http_methods(['GET'])
 def get_city_info(request: HttpRequest):
     city = request.GET.get("city")
-    # TODO to remove
-    cityId = City2CityId.objects.filter(cityName='北京市').first().cityId
+    city_name = city.split()[0]
+    if city.find(' ') != -1:
+        adm2 = city.split()[1]
+        if adm2.find('区') != -1:
+            adm2 += '区'  # TODO fix area
+    else:
+        adm2 = ''
+    cityId = City2CityId.objects.filter(cityName=city_name, adm2=adm2).first().cityId
     # use API to get weather and air
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
@@ -794,7 +813,7 @@ def get_current_city_info(request: HttpRequest):
     city_name = UserCurrentCity.objects.get(user=user)
     # city_name = '北京市'
     # TODO to remove
-    cityId = City2CityId.objects.filter(cityName=city_name)[0].cityId
+    cityId = City2CityId.objects.filter(cityName=city_name).first().cityId
     # use API to get weather and air
     # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
     # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/

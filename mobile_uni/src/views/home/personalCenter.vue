@@ -305,8 +305,10 @@ const confirmPassword = (formEl: FormInstance | undefined) => {
   formEl.validate((valid) => {
     if (valid) {
       const encodePasswordForm = {
-        oldPassword: md5(passwordForm.oldPassword),
-        newPassword: md5(passwordForm.newPassword),
+        // oldPassword: md5(passwordForm.oldPassword),
+        oldPassword: passwordForm.oldPassword,
+        // newPassword: md5(passwordForm.newPassword),
+        newPassword: passwordForm.newPassword,
       };
       post<PasswordResponse>("/api/operate/password/", encodePasswordForm).then(
         (res) => {

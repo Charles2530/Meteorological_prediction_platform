@@ -1,5 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { UserRole } from "@/types/user";
+import { useUserInfo } from "@/stores/userInfo";
+import { useLoginConfig } from "@/stores/loginConfig";
+
 // 速览首页
 const Home = () => import("@/views/home/index.vue");
 // 地图页面
@@ -10,7 +13,7 @@ const Weather = () => import("@/views/home/weatherView.vue");
 const User = () => import("@/views/home/personalCenter.vue");
 // 404页面
 const Page404 = () => import("@/views/Page404.vue");
-const routes = [
+const routes: any = [
   {
     path: "/",
     redirect: "/home",
@@ -20,7 +23,7 @@ const routes = [
         name: "Home",
         component: Home,
         meta: {
-          permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
+          permission: [UserRole.User, UserRole.Administrator],
         },
       },
       {
@@ -44,7 +47,7 @@ const routes = [
         name: "Weather",
         component: Weather,
         meta: {
-          permission: [UserRole.Visitor, UserRole.User, UserRole.Administrator],
+          permission: [UserRole.User, UserRole.Administrator],
         },
       },
     ],
@@ -63,14 +66,25 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
-
 router.beforeEach((to, from, next) => {
   if (
-    routes.some((item) =>
+    routes.some((item: any) =>
       new RegExp("^" + item.path.split("/:")[0] + "(?:/.*)?$").test(to.path)
     )
   ) {
-    next();
+    if (to.name !== "Home") {
+      const userInfo = useUserInfo();
+      const themeConfig = useLoginConfig();
+      const permissions = to.meta.permission;
+      console.log(permissions);
+      if (permissions.includes(userInfo.role)) {
+        next();
+      } else {
+        themeConfig.showLoginPanel = true;
+      }
+    } else {
+      next();
+    }
   } else {
     next({ name: "404Page" });
   }

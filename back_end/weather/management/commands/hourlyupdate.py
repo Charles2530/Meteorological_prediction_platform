@@ -12,6 +12,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument(
             '--D',
+            action='store_true',
             help='Delete all items in database',
         )
         
@@ -39,6 +40,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         if kwargs['D']:
+            print('Delete all')
             WeatherInfo.objects.all().delete()
         
         if kwargs["U"]:
@@ -69,16 +71,13 @@ class Command(BaseCommand):
             weather = json.loads(weather.content.decode('utf-8'))
             # print(weather)
             for hourly in weather["hourly"]:
-                date_time = datetime.fromisoformat(hourly["fxTime"])
-                timezon = pytz.timezone('Asia/Shanghai')
-                date_time = date_time.astimezone(timezon)
+                shanghai_timezone = pytz.timezone('Asia/Shanghai')
+                dt = datetime.fromisoformat(hourly["fxTime"]).astimezone(shanghai_timezone)
 
                 temp_aqi = 28 + random.uniform(-10, 40)
 
                 data = WeatherInfo(
-                    # time = date_time,
-                    time=timezon.localize(datetime.now()),
-                    # time = datetime.now(),
+                    time=dt,
                     cityName=current_city,
                     temp=hourly["temp"],
                     text=hourly["text"],
@@ -101,7 +100,7 @@ class Command(BaseCommand):
 
                 data = WeatherInfo(
                     # time = date_time + timedelta(days = -1),
-                    time=timezon.localize(datetime.now() + timedelta(days=-1)),
+                    time=shanghai_timezone.localize(datetime.now() + timedelta(days=-1)),
                     # time = datetime.now() + timedelta(days = -1),
                     cityName=current_city,
                     temp=hourly["temp"],

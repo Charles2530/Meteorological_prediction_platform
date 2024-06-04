@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'rest_framework',
-    'rest_framework_simplejwt',
+    # 'rest_framework_simplejwt',
     'customuser',
     "weather",
     "notifications",
@@ -62,19 +62,19 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    # "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    'http://114.116.201.133:3306',
-    'http://114.116.201.133:8000',
-    'http://114.116.201.133:8080',
-    'http://114.116.201.133:8888'
-]
+# CORS_ORIGIN_WHITELIST = [
+#     'http://114.116.201.133:3306',
+#     'http://114.116.201.133:8000',
+#     'http://114.116.201.133:8080',
+#     'http://114.116.201.133:8888'
+# ]
 
 ROOT_URLCONF = "back_end.urls"
 
@@ -107,7 +107,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'customuser.Profile'
+# AUTH_USER_MODEL = 'customuser.Profile'
 CUSTOM_USER = True
 
 # Password validation
@@ -216,11 +216,12 @@ SIMPLE_JWT = {
 #     },
 # }
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.ModelBackend'
 ]
 
-SESSION_COOKIE_AGE = 1209600  # 2周
-SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_HTTPONLY = True
+# SESSION_COOKIE_AGE = 1209600  # 2周
+# SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_HTTPONLY = True
 
 # LOGIN_URL = 'api/login/'  # cas login url
+# CSRF_USE_SESSIONS = True

@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime
 
-from customuser.models import Profile
+from django.contrib.auth.models import User
 
 
 class Notification(models.Model):
@@ -18,11 +18,12 @@ class Notification(models.Model):
 
 class CitySubscription(models.Model):
     user = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, verbose_name="订阅用户", default=None)
+        User, on_delete=models.CASCADE, verbose_name="订阅用户", default=None)
     cityName = models.CharField(max_length=40, verbose_name="城市名称")
+    adm2 = models.CharField(max_length=40, verbose_name="二级行政区域名称", default="")
 
     def __str__(self):
-        return f"{self.user.username} - {self.cityName}"
+        return f"{self.user.username} - {self.cityName} - {self.adm2}"
 
     class Meta:
         verbose_name = "用户订阅城市表"

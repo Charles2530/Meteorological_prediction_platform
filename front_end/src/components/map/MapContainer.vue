@@ -45,13 +45,7 @@
             <div class="btnIconb"></div>
           </div>
         </el-button>
-        <el-button width="200px" :class="{ 'selected': buttonActive.f, 'unselected': !buttonActive.f }"
-          :active="buttonActive.f" @click="clickf">
-          <div class="btnDiv">
-            <div class="btnName">空气质量</div>
-            <div class="btnIconf"></div>
-          </div>
-        </el-button>
+        
         <el-button :class="{ 'selected': buttonActive.e, 'unselected': !buttonActive.e }" :active="buttonActive.e"
           @click="clicke">
           <div class="btnDiv">
@@ -72,6 +66,13 @@
 </template>
 
 <script setup lang="ts">
+// <el-button width="200px" :class="{ 'selected': buttonActive.f, 'unselected': !buttonActive.f }"
+//           :active="buttonActive.f" @click="clickf">
+//           <div class="btnDiv">
+//             <div class="btnName">空气质量</div>
+//             <div class="btnIconf"></div>
+//           </div>
+//         </el-button>
 import { onMounted, reactive } from "vue";
 import AMapLoader from "@amap/amap-jsapi-loader";
 import AMapWind from "amap-wind";
@@ -303,7 +304,7 @@ async function getMapGeo() {
       data: object2Geojson(res.data.data),
     });
     aqiGeo = new Loca.GeoJSONSource({
-      data: object2Geojson3(<Array<MapGeo>>res.data.data),
+      data: object2Geojson3(res.data.data),
     });
     InitHeatMapTem();
     InitHeatMapWater();
@@ -1094,6 +1095,7 @@ function InitAqi() {
   padding-left: 15px;
   padding-right: 15px;
   min-width: 180px;
+  max-width: 500px;
 }
 
 /* :deep(.amap-info-sharp) {

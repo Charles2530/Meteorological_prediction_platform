@@ -204,7 +204,8 @@ const submitLoginForm = (formEl: FormInstance | undefined) => {
     if (valid) {
       const encodeLoginForm = {
         username: loginForm.username,
-        password: md5(loginForm.password),
+        // password: md5(loginForm.password),
+        password: loginForm.password,
       };
       post<LoginResponse>("/api/login/", encodeLoginForm).then(
         (res) => {
@@ -300,7 +301,8 @@ const submitRegisterForm = (formEl: FormInstance | undefined) => {
     if (valid) {
       const encodeRegisterForm = {
         username: registerForm.username,
-        password: md5(registerForm.password),
+        // password: md5(registerForm.password),
+        password: registerForm.password,
         email: registerForm.email,
       };
       post<RegisterResponse>("/api/register/", encodeRegisterForm).then(

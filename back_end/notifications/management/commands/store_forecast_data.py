@@ -12,6 +12,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument(
             '--D',
+            action='store_true',
             help='Delete all items in database',
         )
 
@@ -45,6 +46,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         if kwargs['D']:
+            print('Delete all')
             RealtimeWeather.objects.all().delete()
 
         if kwargs["U"]:
@@ -109,8 +111,8 @@ class Command(BaseCommand):
                 cityName=city_name,
                 typeName=warning_loc['typeName'],
                 time=datetime.fromisoformat(warning_loc['startTime']),
-                # severity=warning_loc['severity'],
-                severity=level_dict.get(warning_loc['severity'], 5),
+                severity=warning_loc['severity'],
+                # severity=level_dict.get(warning_loc['severity'], 5),
                 severityColor=warning_loc['severityColor'],
             )
             hazard_info.save()
