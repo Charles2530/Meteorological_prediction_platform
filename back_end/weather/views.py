@@ -230,8 +230,8 @@ def index(request):
 def overview(request):
     # query daily weather data
 
-    realtime_weather = RealtimeWeather.objects.get(cityName='北京市')  # TODO change city
-    daily_weather = DailyWeather.objects.get(city='北京市', fxDate=datetime.now())
+    realtime_weather = RealtimeWeather.objects.filter(cityName='北京市')[0]  # TODO change city
+    daily_weather = DailyWeather.objects.filter(city='北京市', fxDate=datetime.now())[0]
     realtime_air_quality = RealtimeAirQuality.objects.get(cityName='北京市')  # TODO
     response_json = {
         "weather": {
@@ -264,7 +264,7 @@ def realtime(request):
     for i in range(-5, 6):
         real_dt = now_dt + timedelta(hours=i)
         query_dt = rounded_dt + timedelta(hours=i)
-        hourly_weather = WeatherInfo.objects.get(time=query_dt)
+        hourly_weather = WeatherInfo.objects.filter(time=query_dt)[0]
         realTimeWeatherList.append({
             "time": real_dt.strftime('%I:%M'),
             "condition": hourly_weather["text"],
@@ -296,16 +296,16 @@ def delete_care_city(request):
 @require_http_methods(['GET'])
 @login_required
 def subscribed_cities_summary(request):
-    profile = request.user
-    subscriptions = CitySubscription.objects.filter(user=profile)
+    user = request.user
+    subscriptions = CitySubscription.objects.filter(user=user)
     json_response = {
         'success': True,
         'currentCity': {
-            'name': profile.currentCityName,
+            'name': user.currentCityName,
             'adm2': ''  # TODO adm2
         },
-        'temp': RealtimeWeather.objects.get(cityName=profile.currentCityName).temp,
-        'cond_icon': RealtimeWeather.objects.get(cityName=profile.currentCityName).icon,
+        'temp': RealtimeWeather.objects.get(cityName=user.currentCityName).temp,
+        'cond_icon': RealtimeWeather.objects.get(cityName=user.currentCityName).icon,
         'careCitiesList': [
             {
                 'city': {
@@ -668,11 +668,11 @@ def getProInfo(request):
 @login_required
 @require_http_methods(['POST'])
 def update_current_city(request):
-    profile = request.user
+    user = request.user
     city = request.POST.get('city')
     if city:
-        profile.currentCityName = city
-        profile.save()
+        user.currentCityName = city
+        user.save()
         return JsonResponse({
             "success": True,
             "reason": ""
@@ -690,8 +690,8 @@ def get_hazard(request: HttpRequest):
     response_json = [
         {
             "place": info.cityName,
-            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
-            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
+            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
+            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
             "type": info.typeName,
             "time": '',  # TODO fix date str time
             "level": info.severity,
@@ -719,8 +719,8 @@ def get_top_hazard(request: HttpRequest):
     response_json = [
         {
             "place": info.cityName,
-            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
-            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
+            "longitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[1].strip(),
+            "latitude": City2CityId.objects.filter(cityName=info.cityName).first().location.split(',')[0].strip(),
             "type": info.typeName,
             "time": '',  # TODO fix date str time
             "level": info.severity,
@@ -730,7 +730,7 @@ def get_top_hazard(request: HttpRequest):
 
     eq_info = EarthQuakeInfo.objects.all()
     for info in eq_info:
-        if float(str(infor.level)) > 3.5:
+        if float(str(info.level)) > 5.0:
             response_json.append({
                 "place": info.location,
                 "longitude": info.lon,

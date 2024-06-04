@@ -107,7 +107,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'customuser.Profile'
+# AUTH_USER_MODEL = 'customuser.Profile'
 CUSTOM_USER = True
 
 # Password validation
@@ -216,7 +216,7 @@ SIMPLE_JWT = {
 #     },
 # }
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.ModelBackend'
 ]
 
 SESSION_COOKIE_AGE = 1209600  # 2周
@@ -224,3 +224,4 @@ SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
 
 # LOGIN_URL = 'api/login/'  # cas login url
+CSRF_USE_SESSIONS = True

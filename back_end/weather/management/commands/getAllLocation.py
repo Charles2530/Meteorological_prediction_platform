@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from weather.models import LocationToInfo
+from weather.models import LocationToInfo, City2CityId
 import requests
 import json
 import time
@@ -58,6 +58,7 @@ class Command(BaseCommand):
         # return
         if kwargs['D']:
             LocationToInfo.objects.all().delete()
+            return
 
         if kwargs["U"]:
             print("Refresh all")
@@ -66,6 +67,7 @@ class Command(BaseCommand):
             url = 'https://devapi.qweather.com/v7/grid-weather/now'
         else:
             url = 'https://api.qweather.com/v7/grid-weather/now'
+            url_aqi = 'https://api.qweather.com/v7/air/now'
 
         stride = kwargs["stride"]
         for lon in range(73, 136, stride):
@@ -114,7 +116,7 @@ class Command(BaseCommand):
 
                     print(location, ":", Info)
                     if Info["code"] != '200':
-                        print("Warning:", location, "get failed!", Info["code"])
+                        print("Warning:", location, "AQI get failed!", Info["code"])
                         print("check code on: https://dev.qweather.com/docs/resource/status-code/")
                         if Info["code"] != '402':
                             locationInfo.save()
@@ -136,6 +138,31 @@ class Command(BaseCommand):
                     locationInfo.humidity = Info["humidity"]
                     locationInfo.precip = Info["precip"]
                     locationInfo.pressure = Info["pressure"]
+                    locationInfo.save()
+
+                    # while True:
+                    #     Info = requests.get(url_aqi, params={
+                    #         'key': kwargs["key"],
+                    #         'location': location,
+                    #     })
+                    #     Info = json.loads(Info.content.decode('utf-8'))
+                    #     if Info["code"] == '429':
+                    #         print("wait to access")
+                    #         time.sleep(30)
+                    #         continue
+                    #     break
+
+                    # if Info["code"] != '200':
+                    #     print("Warning:", location, "get failed!", Info["code"])
+                    #     print("check code on: https://dev.qweather.com/docs/resource/status-code/")
+                    #     if Info["code"] == '402':
+                    #         self.stdout.write(self.style.ERROR('Quata ran out!'))
+                    #         return
+                    #     continue
+                    # print(Info)
+                    # locationInfo.aqi = int(Info["now"]["aqi"])
+                    # print(int(Info["now"]["aqi"]))
+
                     locationInfo.save()
 
 

@@ -11,7 +11,6 @@ from django.views.decorators.http import require_http_methods
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from customuser.models import Profile
 from .models import Notification, WeatherForecast, CitySubscription
 from .serializers import NotificationSerializer, CitySubscriptionSerializer, WeatherForecastSerializer
 from .task import fetch_catastrophic_forecast_cities_list, fetch_weather_catastrophic_forecast
@@ -104,20 +103,20 @@ def subscribe(request):
     if request.method == 'POST':
         try:
             cities = request.POST.get('cities')
-            profile = request.user
+            user = request.user
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
-            print('-----', profile.username, cities, '-----')
+            print('-----', user.username, cities, '-----')
             # city_obj, created = CitySubscription.objects.update_or_create(
-            #     user=profile,
+            #     user=user,
             #     cityName=cities,
             # )
             # city_obj.save()
-            if CitySubscription.objects.filter(user=profile, cityName=cities).exists():
-                CitySubscription.objects.filter(user=profile, cityName=cities).delete()
+            if CitySubscription.objects.filter(user=user, cityName=cities).exists():
+                CitySubscription.objects.filter(user=user, cityName=cities).delete()
             else:
                 city_subscription = CitySubscription(
-                    user=profile,
+                    user=user,
                     cityName=cities
                 )
                 city_subscription.save()
