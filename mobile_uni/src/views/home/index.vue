@@ -23,9 +23,9 @@
 <template>
   <!-- <div style="color: white;"> {{mapRainyWeather(weather.condition)}}</div> -->
   <!-- bg-mobile-sunny bg-mobile-rainy  bg-mobile-night bg-mobile-cloudy bg-mobile-overcast-->
-  <div :class="mapRainyWeather(weather.condition)" class="bg-cover bg-no-repeat" style="height: 138vh;overflow: auto">
+  <div :class="mapRainyWeather(weather.condition)" class="bg-cover bg-no-repeat" style="height: 130vh;overflow: auto">
     <el-container class="background-transparent">
-      <el-button class="switch-button background-transparent" size="small" type="" :icon="Switch"
+      <el-button class="switch-button background-transparent" size="small" type="info" :icon="Switch"
         @click="drawer = true">
         切换城市
       </el-button>
@@ -199,7 +199,7 @@ onMounted(() => {
 
 // 根据天气换壁纸
 
-const weatherMap: WeatherMap = {
+const weatherMap = {
   '晴': 'bg-mobile-sunny',
   // '下雨': 'bg-mobile-rainy',
   // '夜晚': 'bg-mobile-night',
