@@ -115,12 +115,12 @@ const props = defineProps({
 const aqi_ = ref(0);
 const category_ = ref("优");
 const pollutionList = ref<PollutionData>({
-    "PM10": 95,
-    "PM2.5": 73,
-    "NO2": 70,
-    "SO2": 43,
-    "O3": 86,
-    "CO": 45
+    "PM10": 0,
+    "PM2.5": 0,
+    "NO2": 0,
+    "SO2": 0,
+    "O3": 0,
+    "CO": 0
 });
 
 
