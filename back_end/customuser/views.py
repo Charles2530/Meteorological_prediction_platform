@@ -621,8 +621,8 @@ def update_current_city(request):
     city = new_current_city.split()[0]
     if new_current_city.find(' ') != -1:
         adm2 = new_current_city.split()[1]
-        if adm2.find('区') != -1:
-            adm2 += '区'  # TODO fix area
+        # if adm2.find('区') != -1:
+        #     adm2 += '区'  # TODO fix area
     else:
         adm2 = ''
     user_current_city = UserCurrentCity.objects.get(user=request.user)

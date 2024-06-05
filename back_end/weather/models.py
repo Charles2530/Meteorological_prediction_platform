@@ -4,7 +4,6 @@ from datetime import datetime
 
 # Create your models here.
 class RealtimeWeather(models.Model):
-    id = models.AutoField(primary_key=True, default=0)
     cityName = models.CharField(max_length=40, default='北京市')
     adm2 = models.CharField(max_length=40, default='北京市')
     temp = models.IntegerField()
@@ -19,6 +18,9 @@ class RealtimeWeather(models.Model):
     precip = models.FloatField()
     pressure = models.IntegerField()
 
+    def __str__(self):
+        return f"{self.cityName} - {self.adm2}"
+
     class Meta:
         unique_together = ('cityName', 'adm2')
         constraints = [
@@ -30,7 +32,6 @@ class RealtimeWeather(models.Model):
 
 
 class RealtimeAirQuality(models.Model):
-    id = models.AutoField(primary_key=True, default=0)
     cityName = models.CharField(max_length=40, default='北京市')
     adm2 = models.CharField(max_length=40, default='北京市')
     aqi = models.IntegerField()
@@ -42,6 +43,9 @@ class RealtimeAirQuality(models.Model):
     so2 = models.CharField(max_length=10)
     co = models.CharField(max_length=10)
     o3 = models.CharField(max_length=10)
+
+    def __str__(self):
+        return f"{self.cityName} - {self.adm2}"
 
     class Meta:
         unique_together = ('cityName', 'adm2')
@@ -79,7 +83,8 @@ class HourlyWeather(models.Model):
 
 class DailyWeather(models.Model):
     id = models.AutoField(primary_key=True)
-    city = models.CharField(max_length=50, default="北京市")
+    city = models.CharField(max_length=40, default="北京市")
+    adm2 = models.CharField(max_length=40, default='海淀')
     fxDate = models.DateField(default=datetime.now)
     sunrise = models.CharField(max_length=40, default='')
     sunset = models.CharField(max_length=40, default='')
@@ -158,6 +163,9 @@ class City2CityId(models.Model):
     areaName = models.CharField(max_length=40, default="")
     location = models.CharField(max_length=40, default="non_location_info")
 
+    def __str__(self):
+        return f"{self.cityName} - {self.areaName} - {self.cityId} - {self.location}"
+
     class Meta:
         verbose_name = "城市"
         verbose_name_plural = "城市"
@@ -167,6 +175,9 @@ class City2CityId(models.Model):
 class ProGeography(models.Model):
     proName = models.CharField(primary_key=True, max_length=20)
     geographyInfo = models.TextField(max_length=2000)
+
+    def __str__(self):
+        return self.proName
 
     class Meta:
         verbose_name = "城市地理信息"
@@ -190,9 +201,10 @@ class ProGeography(models.Model):
 
 class WeatherInfo(models.Model):
     # hourly
-    id = models.AutoField(primary_key=True, default=0)
+    id = models.AutoField(primary_key=True)
     time = models.DateTimeField(default=datetime.now)
     cityName = models.CharField(max_length=40, default="北京市")
+    adm2 = models.CharField(max_length=40, default='海淀')
     temp = models.IntegerField(default=0)
     text = models.CharField(max_length=10, default="")
     precip = models.FloatField(default=0.0)
@@ -208,9 +220,9 @@ class WeatherInfo(models.Model):
         return "weather info for " + self.cityName + " " + self.time.strftime('%Y-%m-%d %H:%M:%S')
 
     class Meta:
-        unique_together = ('time', 'cityName')
+        unique_together = ('time', 'cityName', 'adm2')
         constraints = [
-            models.UniqueConstraint(fields=['time', 'cityName'], name='unique_time_city')
+            models.UniqueConstraint(fields=['time', 'cityName', 'adm2'], name='unique_time_city_adm2')
         ]
 
         verbose_name = "每小时天气"

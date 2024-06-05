@@ -106,12 +106,12 @@ def subscribe(request):
             cities = data.get('cities')
             city = cities.split()[0]
             adm2 = cities.split()[1] if cities.find(' ') != -1 else ''
-            if cities.find('区') != -1:
-                adm2 = adm2 + '区'
+            # if cities.find('区') != -1:
+            #     adm2 = adm2 + '区'
             user = request.user
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
-            print('-----', user.username, cities, '-----')
+            # print('-----', user.username, cities, '-----')
             if CitySubscription.objects.filter(user=user, cityName=cities, adm2=adm2).exists():
                 CitySubscription.objects.filter(user=user, cityName=cities, adm2=adm2).delete()
             else:

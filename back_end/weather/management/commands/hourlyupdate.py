@@ -1,10 +1,11 @@
 from django.core.management.base import BaseCommand, CommandParser
-from weather.models import WeatherInfo
+from weather.models import WeatherInfo, City2CityId
 import json
 from datetime import datetime, timedelta
 import requests
 import pytz
 import random
+
 
 class Command(BaseCommand):
     help = 'Store daily weather into database'
@@ -14,12 +15,6 @@ class Command(BaseCommand):
             '--D',
             action='store_true',
             help='Delete all items in database',
-        )
-        
-        parser.add_argument(
-            '--U',
-            action="store_true",
-            help="Refresh All DailyWeather with in the specified month even existed already",
         )
 
         parser.add_argument(
@@ -42,43 +37,38 @@ class Command(BaseCommand):
         if kwargs['D']:
             print('Delete all')
             WeatherInfo.objects.all().delete()
-        
-        if kwargs["U"]:
-            print("Refresh all")
-        
+
         if kwargs['dev']:
             url = 'https://devapi.qweather.com/v7/weather/168h'
         else:
             url = 'https://api.qweather.com/v7/weather/168h'
-        
-        target_locations = ['101010100',  # Beijing
-                            '101020100',  # Shanghai
-                            '101030100',  # Tianjin
-                            '101040100'   # Chongqing
-                            ]
-        target_cities = [
-            '北京市',
-            '上海市',
-            '天津市',
-            '重庆市'
-        ]
-        for location, current_city in zip(target_locations, target_cities):
+
+        for location_int in range(101010100, 101011800, 100):
+            location_id = str(location_int)
             weather = requests.get(url, params={
                 'key': kwargs['key'],
-                'location': location,
+                'location': location_id,
             })
+
+            city = City2CityId.objects.get(cityId=location_id)
+            city_name = city.cityName
+            adm2 = city.areaName
+
+            print('-----', city_name, '-', adm2, '-----', 'in hourly update')
 
             weather = json.loads(weather.content.decode('utf-8'))
             # print(weather)
             for hourly in weather["hourly"]:
                 shanghai_timezone = pytz.timezone('Asia/Shanghai')
                 dt = datetime.fromisoformat(hourly["fxTime"]).astimezone(shanghai_timezone)
+                rounded_dt = dt.replace(minute=0, second=0, microsecond=0)
 
                 temp_aqi = 28 + random.uniform(-10, 40)
 
                 data = WeatherInfo(
-                    time=dt,
-                    cityName=current_city,
+                    time=rounded_dt,
+                    cityName=city_name,
+                    adm2=adm2,
                     temp=hourly["temp"],
                     text=hourly["text"],
                     wind360=hourly["wind360"],
@@ -98,11 +88,12 @@ class Command(BaseCommand):
 
                 temp_aqi = 47 + random.uniform(-40, 40)
 
+                rounded_former_time = (datetime.now() + timedelta(days=-1)).replace(minute=0, second=0, microsecond=0)
+
                 data = WeatherInfo(
-                    # time = date_time + timedelta(days = -1),
-                    time=shanghai_timezone.localize(datetime.now() + timedelta(days=-1)),
-                    # time = datetime.now() + timedelta(days = -1),
-                    cityName=current_city,
+                    time=shanghai_timezone.localize(rounded_former_time),
+                    cityName=city_name,
+                    adm2=adm2,
                     temp=hourly["temp"],
                     text=hourly["text"],
                     wind360=hourly["wind360"],
