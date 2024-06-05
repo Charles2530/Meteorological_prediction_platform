@@ -177,15 +177,13 @@ const deleteSubscribe = () => {
     }
   );
 };
+const all_notifications = reactive<NotificationData[]>([]);
 const notifications = reactive<NotificationData[]>([]);
 const global_notifications = reactive<NotificationData[]>([]);
 interface NotificationResponse {
   notifications: NotificationData[];
 }
 const fetchNotifications = async () => {
-  //   if (isSearching.value) {
-  //     return;
-  //   }
   get<NotificationResponse>("/api/alarm_resent_notices/").then((res) => {
     global_notifications.splice(
       0,
@@ -195,6 +193,11 @@ const fetchNotifications = async () => {
   });
   get<NotificationResponse>("/api/alarm_notices/").then((res) => {
     notifications.splice(0, notifications.length, ...res.data.notifications);
+    all_notifications.splice(
+      0,
+      notifications.length,
+      ...res.data.notifications
+    );
   });
 };
 onMounted(() => {
@@ -265,7 +268,6 @@ const subscribe = () => {
 };
 // search part
 const search = ref("");
-const isSearching = computed(() => search.value !== "");
 const searchNotice = function () {
   if (search.value === "") {
     ElMessage({
@@ -274,13 +276,13 @@ const searchNotice = function () {
     });
     return;
   }
-  fetchNotifications();
-  console.log(notifications,search.value.split(" ")[1])
   // 过滤通知列表
-  const filteredNotifications = notifications.filter((notification) =>  
-        notification.city.includes(search.value)
+  const filteredNotifications = all_notifications.filter((notification) =>
+    notification.city.includes(search.value)
   );
+  console.log(filteredNotifications);
   notifications.splice(0, notifications.length, ...filteredNotifications);
+  console.log(notifications);
 };
 const levelsLoaded = ref(false);
 watch(levels, () => {
