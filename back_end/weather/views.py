@@ -413,9 +413,9 @@ def rank(request):
     if norm == 'humid':
         norm = 'humidity'
     ascending = request.GET.get('order_type')
-    if ascending:
+    if ascending == 'true':
         top_weather_info = WeatherInfo.objects.all().order_by('-' + norm)[:length]
-    else:
+    elif ascending == 'false':
         top_weather_info = WeatherInfo.objects.all().order_by(norm)[:length]
     response_json = {
         "status": True,
