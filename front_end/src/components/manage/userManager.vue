@@ -4,49 +4,48 @@
       <el-table
         :data="userlist"
         v-loading="loading"
-        class="table"
         size="small"
         table-layout="auto"
       >
         <el-table-column :label="manage.user.uid">
           <el-table-column prop="uid">
-            <template #header>
+            <!-- <template #header>
               <el-input
                 v-model="request.uid"
                 size="small"
                 :suffix-icon="Search"
                 @keyup.enter="getUserList"
               />
-            </template>
+            </template> -->
           </el-table-column>
         </el-table-column>
         <el-table-column :label="manage.user.username">
           <el-table-column prop="username">
-            <template #header>
+            <!-- <template #header>
               <el-input
                 v-model="request.username"
                 size="small"
                 :suffix-icon="Search"
                 @keyup.enter="getUserList"
               />
-            </template>
+            </template> -->
           </el-table-column>
         </el-table-column>
         <el-table-column :label="manage.user.email">
           <el-table-column prop="email">
-            <template #header>
+            <!-- <template #header>
               <el-input
                 v-model="request.email"
                 size="small"
                 :suffix-icon="Search"
                 @keyup.enter="getUserList"
               />
-            </template>
+            </template> -->
           </el-table-column>
         </el-table-column>
         <el-table-column :label="manage.user.role.label" width="120">
           <el-table-column prop="role" width="120">
-            <template #header>
+            <!-- <template #header>
               <el-select
                 v-model="request.role"
                 size="small"
@@ -70,7 +69,7 @@
                   }}</el-tag>
                 </el-option>
               </el-select>
-            </template>
+            </template> -->
             <template #default="scope">
               <el-tag v-if="scope.row.role == 1" type="info">
                 {{ manage.user.role.User }}
@@ -568,6 +567,7 @@ const manage = {
 <style scoped>
 .panel {
   height: 100%;
+  width: 100%;
 }
 .pagination {
   display: flex;
