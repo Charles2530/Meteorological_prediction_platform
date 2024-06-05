@@ -21,10 +21,12 @@
 </template> -->
 
 <template>
-  <div class="common-layout" style="margin-left: 1%;margin-right: 1%;max-height:100vh;overflow: auto;border-radius: 5px;">
+  <div class="common-layout"
+    style="margin-left: 1%;margin-right: 1%;max-height:100vh;overflow: auto;border-radius: 5px;">
     <el-container style="background: white">
       <el-aside width="70%">
-        <el-button size="small" type="" :icon="Switch" style="font-size: xx-small;background-color: transparent;" @click="drawer = true">
+        <el-button size="small" type="" :icon="Switch" style="font-size: xx-small;background-color: transparent;"
+          @click="drawer = true">
           切换城市
         </el-button>
         <el-container class="rounded-lg" style="background: rgb(54, 131, 195);height: 43vh;margin-top: 0px;">
@@ -54,7 +56,7 @@
 
 
 
-  <el-drawer v-model="drawer" direction="ltr" @close="handleDrawerClose">
+  <el-drawer v-model="drawer" direction="ltr">
     <template #header="{ close, titleId, titleClass }">
       <div :id="titleId" :class="titleClass" style="font-size: 20px;color:black; text-align: center;  ">关心的城市</div>
       <el-button type="info" @click="dialogVisible = true" :icon="Plus" />
@@ -200,6 +202,12 @@ onMounted(() => {
   get_care_cities();
   get_overview_data();
 });
+
+watch(city, () => {
+  get_overview_data();
+}, { deep: true })
+
+
 // 抽屉
 import { Delete, House, Plus } from "@element-plus/icons-vue";
 const drawer = ref(false)
@@ -221,7 +229,7 @@ const removeCity = (index: number) => {
       success: boolean;
       reason?: string;
     }
-    post<DeleteResponse>("/api/weather/care_cities/del/", {city: careCitiesList.value[index].city}).then((res) => {
+    post<DeleteResponse>("/api/weather/care_cities/del/", { city: careCitiesList.value[index].city }).then((res) => {
       const response = res.data;
       if (response.success) {
         ElMessage.success("已删除");
@@ -237,16 +245,8 @@ const selectCity = (selectedCity: City, index: number) => {
   city.value = selectedCity;
   selectedCityIndex.value = index;
 };
-const handleDrawerClose = () => {
-  // 调用刷新函数
-  refreshData();
-};
-const refreshData = () => {
-  get_overview_data();
-};
 
 // 对话框
-
 import { Search } from '@element-plus/icons-vue'
 // import searchCity from "@/components/topBar/searchCity.vue"
 
@@ -270,7 +270,7 @@ const handleConfirm = () => {
       success: boolean;
       reason?: string;
     }
-    post<AddResponse>("/api/weather/care_cities/add/", {  city: tempSelectedCity.value  }).then((res) => {
+    post<AddResponse>("/api/weather/care_cities/add/", { city: tempSelectedCity.value }).then((res) => {
       const response = res.data;
       if (response.success) {
         ElMessage.success("已添加");
