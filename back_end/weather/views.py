@@ -290,14 +290,48 @@ def city_rank(request):
     return JsonResponse({'city_list_max_temp': city_list_max_temp}, status=200)
 
 
+@login_required
 @require_http_methods(['POST'])
 def add_care_city(request):
-    pass
+    city_name = request.GET.get('city[name]')
+    adm2 = request.GET.get('city[adm2]')
+    user = request.user
+    if not city_name:
+        return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
+    # print('-----', user.username, cities, '-----')
+    if CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).exists():
+        CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).delete()
+    else:
+        city_subscription = CitySubscription(
+            user=user,
+            cityName=city,
+            adm2=adm2
+        )
+        city_subscription.save()
+
+    return JsonResponse({'status': True})
 
 
+@login_required
 @require_http_methods(['POST'])
 def delete_care_city(request):
-    pass
+    city_name = request.GET.get('city[name]')
+    adm2 = request.GET.get('city[adm2]')
+    user = request.user
+    if not city_name:
+        return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
+    # print('-----', user.username, cities, '-----')
+    if CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).exists():
+        CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).delete()
+    else:
+        city_subscription = CitySubscription(
+            user=user,
+            cityName=city,
+            adm2=adm2
+        )
+        city_subscription.save()
+
+    return JsonResponse({'status': True})
 
 
 @require_http_methods(['GET'])
