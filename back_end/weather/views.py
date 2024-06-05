@@ -229,10 +229,16 @@ def index(request):
 @require_http_methods(['GET'])
 def overview(request):
     # query daily weather data
+    city_name = request.GET.get('city[name]')
+    adm2 = request.GET.get('city[adm2]')
 
-    realtime_weather = RealtimeWeather.objects.filter(cityName='北京市').first()  # TODO change city
-    daily_weather = DailyWeather.objects.filter(city='北京市', fxDate=datetime.now()).first()
-    realtime_air_quality = RealtimeAirQuality.objects.get(cityName='北京市')  # TODO
+    realtime_weather = RealtimeWeather.objects.get(cityName=city_name, adm2=adm2)
+    daily_weather = DailyWeather.objects.filter(city='北京市', fxDate=datetime.now()).first()  # TODO adm2
+    realtime_air_quality = RealtimeAirQuality.objects.filter(cityName=city_name, adm2=adm2).first()
+    if realtime_weather is None:
+        realtime_weather = RealtimeWeather.objects.filter(cityName='北京市').first()
+    if realtime_air_quality is None:
+        realtime_air_quality = RealtimeAirQuality.objects.filter(cityName='北京市').first()
     response_json = {
         "weather": {
             "condition": realtime_weather.text,
@@ -257,17 +263,17 @@ def overview(request):
 @require_http_methods(['GET'])
 def realtime(request):
     # query realtime weather data
+    # query hourly weather data
 
     realTimeWeatherList = []
-    now_dt = datetime.now()
     rounded_dt = datetime.now().replace(minute=0, second=0, microsecond=0)
-    rounded_dt += timedelta(days=1)  # use tomorrow data for query
-    for i in range(-5, 6):
-        real_dt = now_dt + timedelta(hours=i)
-        query_dt = rounded_dt + timedelta(hours=i)
+    fake_rounded_dt = rounded_dt + timedelta(days=1)  # use tomorrow data for query
+    for i in range(-5, 7):
+        query_dt = fake_rounded_dt + timedelta(hours=i)
+        print_dt = rounded_dt + timedelta(hours=i)
         hourly_weather = WeatherInfo.objects.filter(time=query_dt).first()
         realTimeWeatherList.append({
-            "time": real_dt.strftime('%I:%M'),
+            "time": print_dt.strftime('%I:%M'),
             "condition": hourly_weather["text"],
             "temperature": int(hourly_weather["temp"]),
             "humidity": int(hourly_weather["humidity"]),
@@ -284,14 +290,48 @@ def city_rank(request):
     return JsonResponse({'city_list_max_temp': city_list_max_temp}, status=200)
 
 
+@login_required
 @require_http_methods(['POST'])
 def add_care_city(request):
-    pass
+    city_name = request.GET.get('city[name]')
+    adm2 = request.GET.get('city[adm2]')
+    user = request.user
+    if not city_name:
+        return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
+    # print('-----', user.username, cities, '-----')
+    if CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).exists():
+        CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).delete()
+    else:
+        city_subscription = CitySubscription(
+            user=user,
+            cityName=city,
+            adm2=adm2
+        )
+        city_subscription.save()
+
+    return JsonResponse({'status': True})
 
 
+@login_required
 @require_http_methods(['POST'])
 def delete_care_city(request):
-    pass
+    city_name = request.GET.get('city[name]')
+    adm2 = request.GET.get('city[adm2]')
+    user = request.user
+    if not city_name:
+        return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
+    # print('-----', user.username, cities, '-----')
+    if CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).exists():
+        CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).delete()
+    else:
+        city_subscription = CitySubscription(
+            user=user,
+            cityName=city,
+            adm2=adm2
+        )
+        city_subscription.save()
+
+    return JsonResponse({'status': True})
 
 
 @require_http_methods(['GET'])
@@ -300,36 +340,49 @@ def subscribed_cities_summary(request):
     user = request.user
     current_city = UserCurrentCity.objects.get(user=user)
     subscriptions = CitySubscription.objects.filter(user=user)
-    print('-----', current_city.cityName, '-----')
+    # print('-----', current_city.cityName, '-----')
     if current_city.cityName.find(' ') != -1:
         current_city_name = current_city.cityName.split()[0]
         current_adm2 = current_city.cityName.split()[1]
     else:
         current_city_name = current_city.cityName
-        current_adm2 = ''
-    print('-----', 'current_city_name', current_city_name, '-----')
-    print('-----', 'current_adm2', current_adm2, '-----')
+        current_adm2 = current_city.adm2
+        if current_city.adm2 == '':
+            current_adm2 = '海淀'  # TODO 区
+        # elif current_city.adm2.find('区') == -1:
+        #     current_adm2 += '区'
+    # print('-----', 'current_city_name', current_city_name, '-----')
+    # print('-----', 'current_adm2', current_adm2, '-----')
+    care_cities_list = []
+    for subscription in subscriptions:
+        subscription_city_name = subscription.cityName
+        subscription_adm2 = subscription.adm2
+        if subscription_adm2 == '':
+            current_adm2 = '海淀'  # TODO 区
+        # elif subscription_adm2.find('区') == -1:
+        #     current_adm2 += '区'
+        realtime_weather = RealtimeWeather.objects.get(cityName=subscription_city_name, adm2=subscription_adm2)
+        if realtime_weather is None:
+            realtime_weather = RealtimeWeather.objects.first()
+        care_cities_list.append({
+                'city': {
+                    'name': subscription_city_name,
+                    'adm2': subscription_adm2,
+                },
+                'temp': realtime_weather.temp,
+                'cond_icon': realtime_weather.icon,
+            })
     json_response = {
         'success': True,
         'currentCity': {
             'city': {
                 'name': current_city_name,
-                'adm2': current_adm2,  # TODO adm2
+                'adm2': current_adm2,
             },
-            'temp': RealtimeWeather.objects.get(cityName=current_city_name).temp,
-            'cond_icon': RealtimeWeather.objects.get(cityName=current_city_name).icon,
+            'temp': RealtimeWeather.objects.get(cityName=current_city_name, adm2=current_adm2).temp,
+            'cond_icon': RealtimeWeather.objects.get(cityName=current_city_name, adm2=current_adm2).icon,
         },
-        'careCitiesList': [
-            {
-                'city': {
-                    'name': subscription.cityName.split()[0],
-                    'adm2': '',  # TODO adm2
-                },
-                'temp': RealtimeWeather.objects.get(cityName=subscription.cityName.split()[0]).temp,
-                'cond_icon': RealtimeWeather.objects.get(cityName=subscription.cityName.split()[0]).icon,
-            }
-            for subscription in subscriptions
-        ]
+        'careCitiesList': care_cities_list,
     }
     return JsonResponse(json_response)
 
@@ -339,7 +392,7 @@ def aqi_detail(request):
     name = request.GET.get('city[name]')
     adm2 = request.GET.get('city[adm2]')
 
-    aqi_info = RealtimeAirQuality.objects.get(cityName='北京市')  # TODO change city
+    aqi_info = RealtimeAirQuality.objects.get(cityName='北京市', adm2='北京市')  # TODO change city
     response_json = {
         "aqi": float(aqi_info.aqi),
         "category": aqi_info.category,
@@ -360,15 +413,15 @@ def rank(request):
     if norm == 'humid':
         norm = 'humidity'
     ascending = request.GET.get('order_type')
-    if ascending:
+    if ascending == 'true':
         top_weather_info = WeatherInfo.objects.all().order_by('-' + norm)[:length]
-    else:
+    elif ascending == 'false':
         top_weather_info = WeatherInfo.objects.all().order_by(norm)[:length]
     response_json = {
         "status": True,
         "ranks": [
             {
-                "city": info.cityName,
+                "city": info.cityName + ' ' + info.adm2,
                 "level": 'todo',  # TODO 划分等级
                 "norm": getattr(info, norm)
             }
@@ -486,7 +539,7 @@ def temp_city_change_detail(request):
         "data": [
             {
                 "time": info.fxDate,
-                "temp": str((float(info.tempMax) + float(info.tempMin)) / 2),
+                "temp": (float(info.tempMax) + float(info.tempMin)) / 2,
                 "maxTemp": info.tempMax,
                 "minTemp": info.tempMin
             }
@@ -541,6 +594,7 @@ def winspeed_city_change(request):
     city = request.GET.get('city')
     period = int(request.GET.get('periods'))
     length = min(period, len(DailyWeather.objects.all())) + 1
+    # print(period, len(DailyWeather.objects.all()))
     all_info = DailyWeather.objects.filter(
         city=city).order_by('-fxDate')[:length]
     response_json = {
@@ -548,7 +602,7 @@ def winspeed_city_change(request):
         "data": [
             {
                 "time": info.fxDate,
-                "winSpeed": info.windSpeedDay,
+                "winSpeed": float(info.windSpeedDay),
             }
             for info in all_info
         ]
@@ -767,85 +821,68 @@ def get_city_info(request: HttpRequest):
             adm2 += '区'  # TODO fix area
     else:
         adm2 = ''
-    cityId = City2CityId.objects.filter(cityName=city_name, adm2=adm2).first().cityId
-    # use API to get weather and air
-    # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
-    # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
-    weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
-        'key': pri_key,
-        'location': cityId,
-    })
-    air = requests.get('https://devapi.qweather.com/v7/air/now', params={
-        'key': pri_key,
-        'location': cityId,
-    })
 
-    weather = json.loads(weather.content.decode('utf-8'))
-    air = json.loads(air.content.decode('utf-8'))
+    weather = RealtimeWeather.objects.get(cityName=city_name, adm2=adm2)
+    air = RealtimeAirQuality.objects.get(cityName=city_name, adm2=adm2)
 
-    date_time = datetime.fromisoformat(weather["updateTime"])
-    timezon = pytz.timezone('Asia/Shanghai')
+    shanghai_timezone = pytz.timezone('Asia/Shanghai')
     retList = {
         "status": True,
         "message": {
-            "time": date_time.astimezone(timezon).strftime("%Y-%m-%d %H:%M"),
-            "city": city,
-            "temp": float(weather["now"]["temp"]),
-            "text": weather["now"]["text"],
-            "precip": float(weather["now"]["precip"]),
-            "wind360": float(weather["now"]["wind360"]),
-            "windScale": int(weather["now"]["windScale"]),
-            "windSpeed": float(weather["now"]["windSpeed"]),
-            "humidity": int(weather["now"]["humidity"]),
-            "pressure": int(weather["now"]["pressure"]),
-            "aqi": int(air["now"]["aqi"]),
-            "category": air["now"]["category"],
+            "time": datetime.now(shanghai_timezone).strftime("%Y-%m-%d %H:%M"),
+            "city": city_name + ' ' + adm2,
+            "temp": float(weather.temp),
+            "text": weather.text,
+            "precip": float(weather.precip),
+            "wind360": float(weather.wind360),
+            "windScale": int(weather.windScale),
+            "windSpeed": float(weather.windSpeed),
+            "humidity": int(weather.humidity),
+            "pressure": int(weather.pressure),
+            "aqi": int(air.aqi),
+            "category": air.category,
         },
     }
     return JsonResponse(retList, status=200)
 
 
 @csrf_exempt
-@login_required
 @require_http_methods(['GET'])
 def get_current_city_info(request: HttpRequest):
-    user = request.user
-    city_name = UserCurrentCity.objects.get(user=user)
-    # city_name = '北京市'
-    # TODO to remove
-    cityId = City2CityId.objects.filter(cityName=city_name).first().cityId
-    # use API to get weather and air
-    # weather : 实时天气 https://dev.qweather.com/docs/api/weather/weather-now/
-    # air : 实时空气质量 https://dev.qweather.com/docs/api/air/air-now/
-    weather = requests.get('https://devapi.qweather.com/v7/weather/now', params={
-        'key': pri_key,
-        'location': cityId,
-    })
-    air = requests.get('https://devapi.qweather.com/v7/air/now', params={
-        'key': pri_key,
-        'location': cityId,
-    })
+    if request.user.is_authenticated:
+        user = request.user
+        city_name = UserCurrentCity.objects.get(user=user).cityName
+        adm2 = UserCurrentCity.objects.get(user=user).adm2
+    else:
+        city_name = '北京市'
+        adm2 = '北京'
 
-    weather = json.loads(weather.content.decode('utf-8'))
-    air = json.loads(air.content.decode('utf-8'))
+    try:
+        weather = RealtimeWeather.objects.get(cityName=city_name, adm2=adm2)
+    except RealtimeWeather.DoesNotExist:
+        weather = RealtimeWeather.objects.first()
 
-    date_time = datetime.fromisoformat(weather["updateTime"])
-    timezon = pytz.timezone('Asia/Shanghai')
+    try:
+        air = RealtimeAirQuality.objects.get(cityName=city_name, adm2=adm2)
+    except RealtimeAirQuality.DoesNotExist:
+        air = RealtimeAirQuality.objects.first()
+
+    shanghai_timezone = pytz.timezone('Asia/Shanghai')
     retList = {
         "status": True,
         "message": {
-            "time": date_time.astimezone(timezon).strftime("%Y-%m-%d %H:%M"),
-            "city": city_name,
-            "temp": float(weather["now"]["temp"]),
-            "text": weather["now"]["text"],
-            "precip": float(weather["now"]["precip"]),
-            "wind360": float(weather["now"]["wind360"]),
-            "windScale": int(weather["now"]["windScale"]),
-            "windSpeed": float(weather["now"]["windSpeed"]),
-            "humidity": int(weather["now"]["humidity"]),
-            "pressure": int(weather["now"]["pressure"]),
-            "aqi": int(air["now"]["aqi"]),
-            "category": air["now"]["category"],
+            "time": datetime.now(shanghai_timezone).strftime("%Y-%m-%d %H:%M"),
+            "city": city_name + ' ' + adm2,
+            "temp": float(weather.temp),
+            "text": weather.text,
+            "precip": float(weather.precip),
+            "wind360": float(weather.wind360),
+            "windScale": int(weather.windScale),
+            "windSpeed": float(weather.windSpeed),
+            "humidity": int(weather.humidity),
+            "pressure": int(weather.pressure),
+            "aqi": int(air.aqi),
+            "category": air.category,
         },
     }
     return JsonResponse(retList, status=200)

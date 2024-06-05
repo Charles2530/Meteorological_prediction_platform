@@ -90,25 +90,28 @@ class Command(BaseCommand):
             })
             warning_loc = json.loads(warning_loc_response.content.decode('utf-8'))['warning'].pop()
 
+            city = City2CityId.objects.get(cityId=location_id)
+            city_name = city.cityName
+            adm2 = city.areaName
+            location = city.location
+
             weather_forecast = WeatherForecast(
                 id=warning_loc['id'],
                 img="https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
                 title=warning_loc['title'],
                 # date=forecast['startTime'],
-                city=warning_loc['sender'],
+                city=city_name,
+                adm2=adm2,
                 level=level_dict.get(warning_loc['severity'], 5),
                 content=warning_loc['text'],
                 instruction="请有关单位和人员做好防范准备。"
             )
             weather_forecast.save()
 
-            city = City2CityId.objects.get(cityId=location_id)
-            location = city.location
-            city_name = city.cityName
-
             hazard_info = HazardInfo(
                 location=location,
                 cityName=city_name,
+                adm2=adm2,
                 typeName=warning_loc['typeName'],
                 time=datetime.fromisoformat(warning_loc['startTime']),
                 severity=warning_loc['severity'],

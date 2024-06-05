@@ -160,7 +160,6 @@ const createFilter = (queryString: string) => {
 const loadAll = () => {
   return china_cities;
 };
-const locations = china_cities;
 const undo_subscribe_dialog = ref(false);
 const form = reactive({
   city: "",
@@ -178,36 +177,13 @@ const deleteSubscribe = () => {
     }
   );
 };
-const notifications_example = ref<NotificationData[]>([
-  {
-    id: 1,
-    img: "https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
-    title: "内蒙古通辽市扎鲁特旗气象台发布大风蓝色预警[IV级/一般]",
-    date: "2024-04-12T12:09:08",
-    city: "内蒙古通辽市",
-    level: 4,
-    content:
-      "内蒙古通辽市扎鲁特旗气象台2024年04月12日12时09分发布大风蓝色预警信号:24小时内扎鲁特旗可能受大风影响，平均风力可达6级以上，或者阵风7级以上;或者已经受大风影响，平均风力为6~7级，或者阵风7~8级并可能持续。",
-    instruction: "请有关单位和人员做好防范准备。",
-  },
-]);
+const all_notifications = reactive<NotificationData[]>([]);
 const notifications = reactive<NotificationData[]>([]);
 const global_notifications = reactive<NotificationData[]>([]);
 interface NotificationResponse {
   notifications: NotificationData[];
 }
 const fetchNotifications = async () => {
-  if (isSearching.value) {
-    return;
-  }
-  //   get<NotificationResponse>("/api/alarm_notices").then((res) => {
-  //     notifications.splice(
-  //       0,
-  //       notifications.length + notifications_example.value.length,
-  //       ...notifications_example.value,
-  //       ...res.data.notifications
-  //     );
-  //   });
   get<NotificationResponse>("/api/alarm_resent_notices/").then((res) => {
     global_notifications.splice(
       0,
@@ -217,6 +193,11 @@ const fetchNotifications = async () => {
   });
   get<NotificationResponse>("/api/alarm_notices/").then((res) => {
     notifications.splice(0, notifications.length, ...res.data.notifications);
+    all_notifications.splice(
+      0,
+      notifications.length,
+      ...res.data.notifications
+    );
   });
 };
 onMounted(() => {
@@ -287,8 +268,6 @@ const subscribe = () => {
 };
 // search part
 const search = ref("");
-const city = ref("");
-const isSearching = computed(() => search.value !== "");
 const searchNotice = function () {
   if (search.value === "") {
     ElMessage({
@@ -297,12 +276,13 @@ const searchNotice = function () {
     });
     return;
   }
-  fetchNotifications();
   // 过滤通知列表
-  const filteredNotifications = notifications.filter((notification) =>
+  const filteredNotifications = all_notifications.filter((notification) =>
     notification.city.includes(search.value)
   );
+  console.log(filteredNotifications);
   notifications.splice(0, notifications.length, ...filteredNotifications);
+  console.log(notifications);
 };
 const levelsLoaded = ref(false);
 watch(levels, () => {

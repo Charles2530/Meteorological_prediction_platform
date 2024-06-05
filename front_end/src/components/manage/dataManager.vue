@@ -83,7 +83,7 @@
         <el-table
           :data="currentPageData"
           v-loading="loading"
-          class="table mt-4 mx-4"
+          class="mt-4 mx-4"
           highlight-current-row
           stripe
           size="small"
