@@ -360,13 +360,12 @@ const loadAll = () => {
   return china_cities;
 };
 
+
 const handleSelect = (item: LabelItem) => {
   state.value = item.label;
-  console.log("tempSelectedCity");
-  console.log(tempSelectedCity.value);
-  tempSelectedCity.value.name = item.label;
-  tempSelectedCity.value.adm2 = item.label;
-
+  var splitStr=item.label.split(' ')
+  tempSelectedCity.value.name = splitStr[0];
+  tempSelectedCity.value.adm2 = splitStr[1];
 };
 
 interface CityInfoResponse {
