@@ -31,7 +31,7 @@
         max-md:justify-between
         relative
         special-font" style="margin-top: 110px;">
-        <div class="max-md:relative opacity-30">
+        <div class="max-md:relative opacity-80">
           <!-- <QWeatherIcon class="max-md:absolute " :icon="props.weather.icon" :size="300" :fill="true" /> -->
           <!-- <el-icon size="150" color="yellow">
             <Sunny />
@@ -40,7 +40,7 @@
         </div>
         <div class="flex flex-col md:ml-10 ">
 
-          <span class="text-5xl bg-clip-text text-transparent bg-gradient-to-br from-white from-40% ..."
+          <span class="text-5xl bg-clip-text text-transparent bg-gradient-to-br from-white from-70% ..."
             style="margin-bottom: 20px;">{{
               `${weather.temp}°C` }}</span>
           <span class="text-3xl max-md:hidden">&nbsp;{{ weather.condition }}</span>

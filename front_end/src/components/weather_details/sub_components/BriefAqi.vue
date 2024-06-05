@@ -52,7 +52,7 @@
       </template>
       <!-- <el-row>
         <el-col :span="9"> -->
-      <el-button class="quality-description text-slate-600" style="border: none;">
+      <el-button class="quality-description text-slate-600" style="border: none;background-color: transparent;">
         {{ category_ }}
       </el-button>
       <!-- </el-col> -->
