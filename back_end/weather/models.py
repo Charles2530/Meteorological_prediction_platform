@@ -220,10 +220,10 @@ class WeatherInfo(models.Model):
         return "weather info for " + self.cityName + " " + self.time.strftime('%Y-%m-%d %H:%M:%S')
 
     class Meta:
-        unique_together = ('time', 'cityName', 'adm2')
-        constraints = [
-            models.UniqueConstraint(fields=['time', 'cityName', 'adm2'], name='unique_time_city_adm2')
-        ]
+        # unique_together = ('time', 'cityName', 'adm2')
+        # constraints = [
+        #     models.UniqueConstraint(fields=['time', 'cityName', 'adm2'], name='unique_time_city_adm2')
+        # ]
 
         verbose_name = "每小时天气"
         verbose_name_plural = "每小时天气"
