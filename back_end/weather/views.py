@@ -234,7 +234,7 @@ def overview(request):
 
     realtime_weather = RealtimeWeather.objects.get(cityName=city_name, adm2=adm2)
     daily_weather = DailyWeather.objects.filter(city='北京市', fxDate=datetime.now()).first()  # TODO adm2
-    realtime_air_quality = RealtimeAirQuality.objects.get(cityName=city_name, adm2=adm2)
+    realtime_air_quality = RealtimeAirQuality.objects.filter(cityName=city_name, adm2=adm2).first()
     if realtime_weather is None:
         realtime_weather = RealtimeWeather.objects.filter(cityName='北京市').first()
     if realtime_air_quality is None:
@@ -539,7 +539,7 @@ def temp_city_change_detail(request):
         "data": [
             {
                 "time": info.fxDate,
-                "temp": str((float(info.tempMax) + float(info.tempMin)) / 2),
+                "temp": (float(info.tempMax) + float(info.tempMin)) / 2,
                 "maxTemp": info.tempMax,
                 "minTemp": info.tempMin
             }
@@ -594,6 +594,7 @@ def winspeed_city_change(request):
     city = request.GET.get('city')
     period = int(request.GET.get('periods'))
     length = min(period, len(DailyWeather.objects.all())) + 1
+    # print(period, len(DailyWeather.objects.all()))
     all_info = DailyWeather.objects.filter(
         city=city).order_by('-fxDate')[:length]
     response_json = {
@@ -601,7 +602,7 @@ def winspeed_city_change(request):
         "data": [
             {
                 "time": info.fxDate,
-                "winSpeed": info.windSpeedDay,
+                "winSpeed": float(info.windSpeedDay),
             }
             for info in all_info
         ]

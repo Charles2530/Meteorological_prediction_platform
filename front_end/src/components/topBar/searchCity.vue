@@ -34,7 +34,7 @@ const getPresentCity = async () => {
     currentCity.value = res.data.message.city;
   });
   if (!currentCity.value) {
-    currentCity.value = "北京市";
+    currentCity.value = "北京市 北京";
   }
 };
 interface LabelItem {
