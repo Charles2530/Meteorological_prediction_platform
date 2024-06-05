@@ -108,7 +108,7 @@ def my_register(request):
         user_current_city = UserCurrentCity(
             user=user,
             cityName='北京市',
-            adm2='北京市'
+            adm2='北京'
         )
         user_current_city.save()
         user_avatar = UserAvatar(

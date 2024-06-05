@@ -50,11 +50,14 @@
                   <!-- </el-row>
                 <el-row :gutter="2"> -->
                   <el-col :span="12">
-                    <el-card>
+                    <!-- <el-card>
                       <trendHistoryAqiGraph
                         :city="selectedLocation"
                         :periods="periods"
                       />
+                    </el-card> -->
+                    <el-card>
+                      <trendHistoryWinSpeedGraph :city="selectedLocation" :periods="periods"/>
                     </el-card>
                   </el-col>
                 </el-row>

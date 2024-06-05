@@ -5,7 +5,7 @@ from datetime import datetime
 # Create your models here.
 class RealtimeWeather(models.Model):
     cityName = models.CharField(max_length=40, default='北京市')
-    adm2 = models.CharField(max_length=40, default='北京市')
+    adm2 = models.CharField(max_length=40, default='北京')
     temp = models.IntegerField()
     feelsLike = models.IntegerField()
     icon = models.CharField(max_length=20)
@@ -22,10 +22,10 @@ class RealtimeWeather(models.Model):
         return f"{self.cityName} - {self.adm2}"
 
     class Meta:
-        unique_together = ('cityName', 'adm2')
-        constraints = [
-            models.UniqueConstraint(fields=['cityName', 'adm2'], name='unique_city_adm2_in_RealtimeWeather')
-        ]
+        # unique_together = ('cityName', 'adm2')
+        # constraints = [
+        #     models.UniqueConstraint(fields=['cityName', 'adm2'], name='unique_city_adm2_in_RealtimeWeather')
+        # ]
 
         verbose_name = "实时天气"
         verbose_name_plural = "实时天气"
@@ -33,7 +33,7 @@ class RealtimeWeather(models.Model):
 
 class RealtimeAirQuality(models.Model):
     cityName = models.CharField(max_length=40, default='北京市')
-    adm2 = models.CharField(max_length=40, default='北京市')
+    adm2 = models.CharField(max_length=40, default='北京')
     aqi = models.IntegerField()
     level = models.IntegerField()
     category = models.CharField(max_length=10)
@@ -48,10 +48,10 @@ class RealtimeAirQuality(models.Model):
         return f"{self.cityName} - {self.adm2}"
 
     class Meta:
-        unique_together = ('cityName', 'adm2')
-        constraints = [
-            models.UniqueConstraint(fields=['cityName', 'adm2'], name='unique_city_adm2_in_RealtimeAirQuality')
-        ]
+        # unique_together = ('cityName', 'adm2')
+        # constraints = [
+        #     models.UniqueConstraint(fields=['cityName', 'adm2'], name='unique_city_adm2_in_RealtimeAirQuality')
+        # ]
 
         verbose_name = "实时空气质量"
         verbose_name_plural = "实时空气质量"
@@ -84,7 +84,7 @@ class HourlyWeather(models.Model):
 class DailyWeather(models.Model):
     id = models.AutoField(primary_key=True)
     city = models.CharField(max_length=40, default="北京市")
-    adm2 = models.CharField(max_length=40, default='海淀')
+    adm2 = models.CharField(max_length=40, default='北京')
     fxDate = models.DateField(default=datetime.now)
     sunrise = models.CharField(max_length=40, default='')
     sunset = models.CharField(max_length=40, default='')
@@ -204,7 +204,7 @@ class WeatherInfo(models.Model):
     id = models.AutoField(primary_key=True)
     time = models.DateTimeField(default=datetime.now)
     cityName = models.CharField(max_length=40, default="北京市")
-    adm2 = models.CharField(max_length=40, default='海淀')
+    adm2 = models.CharField(max_length=40, default='北京')
     temp = models.IntegerField(default=0)
     text = models.CharField(max_length=10, default="")
     precip = models.FloatField(default=0.0)
@@ -266,7 +266,8 @@ class EarthQuakeInfo(models.Model):
 
 class HazardInfo(models.Model):
     location = models.CharField(max_length=40, default='', primary_key=True)
-    cityName = models.CharField(max_length=20, default='')
+    cityName = models.CharField(max_length=40, default='')
+    adm2 = models.CharField(max_length=40, default='')
     typeName = models.CharField(max_length=15)
     time = models.DateTimeField()  # update by pubTime
     severity = models.CharField(max_length=15)

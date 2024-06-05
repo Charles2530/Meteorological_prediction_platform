@@ -160,7 +160,6 @@ const createFilter = (queryString: string) => {
 const loadAll = () => {
   return china_cities;
 };
-const locations = china_cities;
 const undo_subscribe_dialog = ref(false);
 const form = reactive({
   city: "",
@@ -287,7 +286,6 @@ const subscribe = () => {
 };
 // search part
 const search = ref("");
-const city = ref("");
 const isSearching = computed(() => search.value !== "");
 const searchNotice = function () {
   if (search.value === "") {
@@ -298,9 +296,10 @@ const searchNotice = function () {
     return;
   }
   fetchNotifications();
+  console.log(notifications,search.value.split(" ")[1])
   // 过滤通知列表
-  const filteredNotifications = notifications.filter((notification) =>
-    notification.city.includes(search.value)
+  const filteredNotifications = notifications.filter((notification) =>  
+        notification.city.includes(search.value)
   );
   notifications.splice(0, notifications.length, ...filteredNotifications);
 };

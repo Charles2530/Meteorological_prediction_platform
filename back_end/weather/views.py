@@ -233,7 +233,7 @@ def overview(request):
     adm2 = request.GET.get('city[adm2]')
 
     realtime_weather = RealtimeWeather.objects.get(cityName=city_name, adm2=adm2)
-    daily_weather = DailyWeather.objects.filter(city='北京市', fxDate=datetime.now()).first()
+    daily_weather = DailyWeather.objects.filter(city='北京市', fxDate=datetime.now()).first()  # TODO adm2
     realtime_air_quality = RealtimeAirQuality.objects.get(cityName=city_name, adm2=adm2)
     if realtime_weather is None:
         realtime_weather = RealtimeWeather.objects.filter(cityName='北京市').first()
@@ -267,12 +267,13 @@ def realtime(request):
 
     realTimeWeatherList = []
     rounded_dt = datetime.now().replace(minute=0, second=0, microsecond=0)
-    rounded_dt += timedelta(days=1)  # use tomorrow data for query
-    for i in range(-5, 6):
-        query_dt = rounded_dt + timedelta(hours=i)
+    fake_rounded_dt = rounded_dt + timedelta(days=1)  # use tomorrow data for query
+    for i in range(-5, 7):
+        query_dt = fake_rounded_dt + timedelta(hours=i)
+        print_dt = rounded_dt + timedelta(hours=i)
         hourly_weather = WeatherInfo.objects.filter(time=query_dt).first()
         realTimeWeatherList.append({
-            "time": query_dt.strftime('%I:%M'),
+            "time": print_dt.strftime('%I:%M'),
             "condition": hourly_weather["text"],
             "temperature": int(hourly_weather["temp"]),
             "humidity": int(hourly_weather["humidity"]),
@@ -386,7 +387,7 @@ def rank(request):
         "status": True,
         "ranks": [
             {
-                "city": info.cityName,
+                "city": info.cityName + ' ' + info.adm2,
                 "level": 'todo',  # TODO 划分等级
                 "norm": getattr(info, norm)
             }
@@ -811,15 +812,25 @@ def get_city_info(request: HttpRequest):
 
 
 @csrf_exempt
-@login_required
 @require_http_methods(['GET'])
 def get_current_city_info(request: HttpRequest):
-    user = request.user
-    city_name = UserCurrentCity.objects.get(user=user)
-    adm2 = UserCurrentCity.objects.get(user=user)
+    if request.user.is_authenticated:
+        user = request.user
+        city_name = UserCurrentCity.objects.get(user=user).cityName
+        adm2 = UserCurrentCity.objects.get(user=user).adm2
+    else:
+        city_name = '北京市'
+        adm2 = '北京'
 
-    weather = RealtimeWeather.objects.get(cityName=city_name, adm2=adm2)
-    air = RealtimeAirQuality.objects.get(cityName=city_name, adm2=adm2)
+    try:
+        weather = RealtimeWeather.objects.get(cityName=city_name, adm2=adm2)
+    except RealtimeWeather.DoesNotExist:
+        weather = RealtimeWeather.objects.first()
+
+    try:
+        air = RealtimeAirQuality.objects.get(cityName=city_name, adm2=adm2)
+    except RealtimeAirQuality.DoesNotExist:
+        air = RealtimeAirQuality.objects.first()
 
     shanghai_timezone = pytz.timezone('Asia/Shanghai')
     retList = {
