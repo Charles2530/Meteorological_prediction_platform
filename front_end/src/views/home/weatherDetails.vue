@@ -234,9 +234,9 @@ function mapRainyWeather(chineseWeather: string): string {
   if (chineseWeather.includes('雨')) {
     return 'bg-mobile-rainy';
   } 
-  // else if (currentTime >= 20 || currentTime < 5) { // 如果当前时间为晚上（20:00-06:00），返回对应的夜晚背景
-  //   return 'bg-mobile-night';
-  // } 
+  else if (currentTime >= 20 || currentTime < 5) { // 如果当前时间为晚上（20:00-06:00），返回对应的夜晚背景
+    return 'bg-mobile-night';
+  } 
   else {
     return weatherMap[chineseWeather] || 'bg-mobile-sunny'; // 如果没有对应的映射，返回 'Unknown'
   }
