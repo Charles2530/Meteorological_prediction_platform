@@ -26,7 +26,7 @@
       </el-col>
     </el-row>
     <div class="my-2">
-      <div v-if="Match" class="ranking-container bg-white my-4 p-2">
+      <div class="ranking-container bg-white my-4 p-2">
         <NormRankings :city_ranks="CityNormRankings" :norm="norm" />
       </div>
     </div>
