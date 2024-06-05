@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from datetime import date, datetime
 
 
 # Create your models here.
@@ -85,7 +85,7 @@ class DailyWeather(models.Model):
     id = models.AutoField(primary_key=True)
     city = models.CharField(max_length=40, default="北京市")
     adm2 = models.CharField(max_length=40, default='北京')
-    fxDate = models.DateField(default=datetime.now)
+    fxDate = models.DateField(default=date.today)
     sunrise = models.CharField(max_length=40, default='')
     sunset = models.CharField(max_length=40, default='')
     # moonrise = models.DateTimeField(default=datetime.now)
@@ -115,7 +115,7 @@ class DailyWeather(models.Model):
     aqi = models.IntegerField(default=0)
 
     def __str__(self):
-        return "daily weather for " + str(self.fxDate) + " at location"
+        return "daily weather for " + str(self.fxDate) + " at " + self.city + '-' + self.adm2
 
     class Meta:
         verbose_name = "每日天气"
@@ -206,9 +206,11 @@ class WeatherInfo(models.Model):
     cityName = models.CharField(max_length=40, default="北京市")
     adm2 = models.CharField(max_length=40, default='北京')
     temp = models.IntegerField(default=0)
+    icon = models.IntegerField(default=0)
     text = models.CharField(max_length=10, default="")
     precip = models.FloatField(default=0.0)
     wind360 = models.IntegerField(default=0)
+    windDir = models.CharField(max_length=20, default='')
     windScale = models.CharField(max_length=5, default="0")
     windSpeed = models.IntegerField(default=0)
     humidity = models.IntegerField(default=0)

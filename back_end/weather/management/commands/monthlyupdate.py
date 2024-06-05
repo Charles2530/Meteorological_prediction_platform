@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandParser
-from weather.models import DailyWeather
+from weather.models import DailyWeather, City2CityId
 import json
 from datetime import datetime
 import requests
@@ -50,27 +50,33 @@ class Command(BaseCommand):
         if kwargs['dev']:
             url = 'https://devapi.qweather.com/v7/weather/7d'
         else:
-            url = 'https://api.qweather.com/v7/weather/7d'
+            url = 'https://api.qweather.com/v7/weather/30d'
+
+        location_id = '101010100'
 
         weather = requests.get(url, params={
             'key': kwargs['key'],
-            'location': '101010100',
+            'location': location_id,
         })
 
         weather = json.loads(weather.content.decode('utf-8'))
+
+        city = City2CityId.objects.get(cityId=location_id)
+        city_name = city.cityName
+        adm2 = city.areaName
+
         # print(weather)
         for daily in weather["daily"]:
-            date_time = datetime.fromisoformat(daily["fxDate"])
-            timezon = pytz.timezone('Asia/Shanghai')
-            date_time = date_time.astimezone(timezon)
+            temp_date_time = datetime.fromisoformat(daily["fxDate"])
+            shanghai_timezone = pytz.timezone('Asia/Shanghai')
+            date_time = temp_date_time.astimezone(shanghai_timezone)
 
             temp_aqi = random.randint(10, 150)  # TODO
 
             data = DailyWeather(
-                # time = date_time,
-                fxDate=timezon.localize(datetime.now()),
-                # time = datetime.now(),
-                city='北京市',
+                fxDate=date_time,
+                city=city_name,
+                adm2=adm2,
                 sunrise=daily["sunrise"],
                 sunset=daily["sunset"],
                 tempMax=daily["tempMax"],
