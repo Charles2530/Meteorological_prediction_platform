@@ -3,6 +3,7 @@ import json
 import requests
 from django.core.management.base import BaseCommand, CommandParser
 from weather.models import RealtimeWeather, RealtimeAirQuality
+from weather.models import City2CityId
 
 
 class Command(BaseCommand):
@@ -52,48 +53,56 @@ class Command(BaseCommand):
             weather_url = 'https://api.qweather.com/v7/weather/now'
             air_quality_url = 'https://api.qweather.com/v7/air/now'
 
-        weather = requests.get(weather_url, params={
-            'key': kwargs['key'],
-            'location': '101010100',  # TODO change city
-        })
-        air_quality = requests.get(air_quality_url, params={
-            'key': kwargs['key'],
-            'location': '101010100',  # TODO change city
-        })
+        for location_int in range(101010100, 101011800, 100):
+            location_id = str(location_int)
+            weather = requests.get(weather_url, params={
+                'key': kwargs['key'],
+                'location': location_id,  # TODO change city
+            })
+            air_quality = requests.get(air_quality_url, params={
+                'key': kwargs['key'],
+                'location': location_id,  # TODO change city
+            })
 
-        weather = json.loads(weather.content.decode('utf-8'))
-        air_quality = json.loads(air_quality.content.decode('utf-8'))
-        now_weather = weather["now"]
-        now_air_quality = air_quality["now"]
+            weather = json.loads(weather.content.decode('utf-8'))
+            air_quality = json.loads(air_quality.content.decode('utf-8'))
+            now_weather = weather["now"]
+            now_air_quality = air_quality["now"]
 
-        realtime_weather = RealtimeWeather(
-            cityName='北京市',  # TODO change city
-            temp=now_weather["temp"],
-            feelsLike=now_weather["feelsLike"],
-            icon=now_weather["icon"],
-            text=now_weather["text"],
-            wind360=now_weather["wind360"],
-            windDir=now_weather["windDir"],
-            windScale=now_weather["windScale"],
-            windSpeed=now_weather["windSpeed"],
-            humidity=now_weather['humidity'],
-            precip=now_weather["precip"],
-            pressure=now_weather["pressure"],
-        )
-        realtime_weather.save()
+            city = City2CityId.objects.get(cityId=location_id)
+            city_name = city.cityName
+            adm2 = city.areaName
 
-        realtime_air_quality = RealtimeAirQuality(
-            cityName='北京市',  # TODO change city name
-            aqi=int(now_air_quality['aqi']),
-            level=int(now_air_quality['level']),
-            category=now_air_quality['category'],
-            pm10=now_air_quality['pm10'],
-            pm2p5=now_air_quality['pm2p5'],
-            no2=now_air_quality['no2'],
-            so2=now_air_quality['so2'],
-            co=now_air_quality['co'],
-            o3=now_air_quality['o3']
-        )
-        realtime_air_quality.save()
+            realtime_weather = RealtimeWeather(
+                cityName=city_name,
+                adm2=adm2,
+                temp=now_weather["temp"],
+                feelsLike=now_weather["feelsLike"],
+                icon=now_weather["icon"],
+                text=now_weather["text"],
+                wind360=now_weather["wind360"],
+                windDir=now_weather["windDir"],
+                windScale=now_weather["windScale"],
+                windSpeed=now_weather["windSpeed"],
+                humidity=now_weather['humidity'],
+                precip=now_weather["precip"],
+                pressure=now_weather["pressure"],
+            )
+            realtime_weather.save()
+
+            realtime_air_quality = RealtimeAirQuality(
+                cityName=city_name,
+                adm2=adm2,
+                aqi=int(now_air_quality['aqi']),
+                level=int(now_air_quality['level']),
+                category=now_air_quality['category'],
+                pm10=now_air_quality['pm10'],
+                pm2p5=now_air_quality['pm2p5'],
+                no2=now_air_quality['no2'],
+                so2=now_air_quality['so2'],
+                co=now_air_quality['co'],
+                o3=now_air_quality['o3']
+            )
+            realtime_air_quality.save()
 
         self.stdout.write(self.style.SUCCESS('Successfully updated realtime weather and air quality.'))
