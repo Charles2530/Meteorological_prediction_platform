@@ -275,9 +275,10 @@ const searchNotice = function () {
     return;
   }
   fetchNotifications();
+  console.log(notifications,search.value.split(" ")[1])
   // 过滤通知列表
-  const filteredNotifications = notifications.filter((notification) =>
-    notification.city.includes(search.value)
+  const filteredNotifications = notifications.filter((notification) =>  
+        notification.city.includes(search.value)
   );
   notifications.splice(0, notifications.length, ...filteredNotifications);
 };

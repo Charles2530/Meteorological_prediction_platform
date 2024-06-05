@@ -1,12 +1,12 @@
 <template>
   <!-- {{ city }} -->
   <div class="air-quality-indicator">
-    <div style="font-size:xx-small">
+    <div style="font-size:15px">
       空气质量
     </div>
     <el-row style="width: 100%;">
       <el-col :span="15">
-        <div id="chart_brief_aqi_bar" ref="chart_brief_aqi_bar" style="height: 220px;  width: 100%;  margin: 0 auto">
+        <div id="chart_brief_aqi_bar" ref="chart_brief_aqi_bar" style="height: 160px;  width: 100%;  margin: 0 auto">
         </div>
       </el-col>
       <el-col :span="9">
@@ -216,7 +216,7 @@ const renderChart = async (
         startAngle: -120,
         endAngle: -60,
         center: ['40%', '46%'],
-        radius: '80%',
+        radius: '70%',
         min: 0,
         max: 350,
         splitNumber: 7,
@@ -244,14 +244,14 @@ const renderChart = async (
         pointer: {
           icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
           length: '60%',
-          width: 7,
+          width: 4,
           offsetCenter: [0, '-0%'],
           itemStyle: {
             color: 'gray',
           }
         },
         axisTick: {
-          length: 1,
+          length: 0,
           lineStyle: {
             color: 'auto',
             width: 1
@@ -297,7 +297,7 @@ const renderChart = async (
           fontSize: 20
         },
         detail: {
-          fontSize: 30,
+          fontSize: 20,
           offsetCenter: [0, '-25%'],
           valueAnimation: true,
           formatter: function (value: number) {

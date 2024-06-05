@@ -67,7 +67,6 @@ class WeatherForecastView(APIView):
 
 @login_required
 def get_alarm_notice(request):
-    locations = WeatherForecast.objects.all()
     response_json = {
         "success": True,
         "notifications": []
@@ -76,23 +75,24 @@ def get_alarm_notice(request):
     user = request.user
 
     cities = CitySubscription.objects.filter(user=user)
-    for forecast in locations:
-        for city in cities:
-            if city.cityName in forecast.city:
-                forecast_json = {
-                    # "id": forecast.id,
-                    # TODO:change pic
-                    # "img": "https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
-                    "img": forecast.img,
-                    "title": forecast.title,
-                    "date": "2024-10-24",
-                    "city": city,
-                    "level": forecast.level,
-                    "content": forecast.content,
-                    "instruction": forecast.instruction,
-                }
-                response_json['notifications'].append(forecast_json)
-                break
+    for city in cities:
+        city_name = city.cityName
+        adm2 = city.adm2
+        forecasts = WeatherForecast.objects.filter(city=city_name, adm2=adm2)
+        for forecast in forecasts:
+            forecast_json = {
+                # "id": forecast.id,
+                # TODO:change pic
+                # "img": "https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
+                "img": forecast.img,
+                "title": forecast.title,
+                "date": "2024-10-24",
+                "city": city_name + ' ' + adm2,
+                "level": forecast.level,
+                "content": forecast.content,
+                "instruction": forecast.instruction,
+            }
+            response_json['notifications'].append(forecast_json)
     return JsonResponse(response_json, status=200)
 
 
@@ -106,12 +106,12 @@ def subscribe(request):
             cities = data.get('cities')
             city = cities.split()[0]
             adm2 = cities.split()[1] if cities.find(' ') != -1 else ''
-            if cities.find('区') != -1:
-                adm2 = adm2 + '区'
+            # if cities.find('区') != -1:
+            #     adm2 = adm2 + '区'
             user = request.user
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
-            print('-----', user.username, cities, '-----')
+            # print('-----', user.username, cities, '-----')
             if CitySubscription.objects.filter(user=user, cityName=cities, adm2=adm2).exists():
                 CitySubscription.objects.filter(user=user, cityName=cities, adm2=adm2).delete()
             else:

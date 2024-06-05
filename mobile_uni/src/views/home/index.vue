@@ -23,9 +23,9 @@
 <template>
   <!-- <div style="color: white;"> {{mapRainyWeather(weather.condition)}}</div> -->
   <!-- bg-mobile-sunny bg-mobile-rainy  bg-mobile-night bg-mobile-cloudy bg-mobile-overcast-->
-  <div :class="mapRainyWeather(weather.condition)" class="bg-cover bg-no-repeat" style="height: 138vh;overflow: auto">
+  <div :class="mapRainyWeather(weather.condition)" class="bg-cover bg-no-repeat" style="height: 130vh;overflow: auto">
     <el-container class="background-transparent">
-      <el-button class="switch-button background-transparent" size="small" type="" :icon="Switch"
+      <el-button class="switch-button background-transparent" size="small" type="info" :icon="Switch"
         @click="drawer = true">
         切换城市
       </el-button>
@@ -58,7 +58,7 @@
 
 
 
-  <el-drawer v-model="drawer" direction="utd" @close="handleDrawerClose" style="width: 100%;">
+  <el-drawer v-model="drawer" direction="utd" style="width: 100%;">
     <template #header="{ close, titleId, titleClass }">
       <div :id="titleId" :class="titleClass" class="drawer-header">关心的城市</div>
       <el-button class="add-button" type="info" @click="dialogVisible = true" :icon="Plus" />
@@ -197,9 +197,13 @@ onMounted(() => {
   get_overview_data();
 });
 
+watch(city, () => {
+  get_overview_data();
+}, { deep: true })
+
 // 根据天气换壁纸
 
-const weatherMap: WeatherMap = {
+const weatherMap = {
   '晴': 'bg-mobile-sunny',
   // '下雨': 'bg-mobile-rainy',
   // '夜晚': 'bg-mobile-night',
@@ -256,16 +260,8 @@ const selectCity = (selectedCity: City, index: number) => {
   city.value = selectedCity;
   selectedCityIndex.value = index;
 };
-const handleDrawerClose = () => {
-  // 调用刷新函数
-  refreshData();
-};
-const refreshData = () => {
-  get_overview_data();
-};
 
 // 对话框
-
 import { ElMessageBox } from 'element-plus'
 import { Search } from '@element-plus/icons-vue'
 // import searchCity from "@/components/topBar/searchCity.vue"

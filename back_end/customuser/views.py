@@ -44,7 +44,7 @@ def my_login(request):
         password = data.get('password')
 
         if not username or not password:
-            return JsonResponse({"success": False, "reason": "Username and password required"}, status=400)
+            return JsonResponse({"success": False, "reason": "需要用户名和密码"}, status=400)
 
         validate_user_input(username, password, None, None)  # 需要定义这个函数
 
@@ -64,7 +64,7 @@ def my_login(request):
             }
             return JsonResponse({"success": True, "info": info})
         else:
-            return JsonResponse({"success": False, "reason": "Authentication failed"}, status=401)
+            return JsonResponse({"success": False, "reason": "密码错误,请重新输入"}, status=200)
 
     except ValidationError as e:
         return JsonResponse({"success": False, "reason": str(e)}, status=400)
@@ -108,7 +108,7 @@ def my_register(request):
         user_current_city = UserCurrentCity(
             user=user,
             cityName='北京市',
-            adm2='北京市'
+            adm2='北京'
         )
         user_current_city.save()
         user_avatar = UserAvatar(
@@ -621,8 +621,8 @@ def update_current_city(request):
     city = new_current_city.split()[0]
     if new_current_city.find(' ') != -1:
         adm2 = new_current_city.split()[1]
-        if adm2.find('区') != -1:
-            adm2 += '区'  # TODO fix area
+        # if adm2.find('区') != -1:
+        #     adm2 += '区'  # TODO fix area
     else:
         adm2 = ''
     user_current_city = UserCurrentCity.objects.get(user=request.user)
