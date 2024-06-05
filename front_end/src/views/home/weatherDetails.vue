@@ -21,15 +21,16 @@
 </template> -->
 
 <template>
-  <div class="common-layout"
+<div :class="mapRainyWeather(weather.condition)" class="bg-cover bg-no-repeat"
     style="margin-left: 1%;margin-right: 1%;max-height:100vh;overflow: auto;border-radius: 5px;">
-    <el-container style="background: white">
+    <el-container style="background: transparent">
       <el-aside width="70%">
-        <el-button size="small" type="" :icon="Switch" style="font-size: xx-small;background-color: transparent;"
+        <!-- <div :class="mapRainyWeather(weather.condition)" class="bg-cover bg-no-repeat"> -->
+        <el-button size="small" type="info" :icon="Switch" style="font-size: xx-small;background-color: transparent;"
           @click="drawer = true">
           切换城市
         </el-button>
-        <el-container class="rounded-lg" style="background: rgb(54, 131, 195);height: 43vh;margin-top: 0px;">
+        <el-container class="rounded-lg" style="background: transparent;height: 43vh;margin-top: 0px;">
           <!-- <el-col :span="16"> -->
           <CurrentWeather class="md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
           </CurrentWeather>
@@ -38,16 +39,16 @@
           <CurrentWeatherRight class="md:basis-3/5" :weather="weather" />
           <!-- </el-col> -->
         </el-container>
-        <el-card  :body-style="{ padding: '0px' }" style="min-height: 20vh;max-height: 43vh;margin-bottom:15px;">
+        <el-card  :body-style="{ padding: '0px' }" style="min-height: 20vh;max-height: 43vh;margin-bottom:15px;background-color:rgb(255,255,255,0.5);border-color: transparent;border-radius: 20px;">
           <RealTimeBroadcast :city="city" />
         </el-card>
       </el-aside>
 
-      <el-main style="width: 800px;">
-        <el-card>
+      <el-main style="width: 800px;background-color:transparent;">
+        <el-card style="background-color:rgb(255,255,255,0.5);border-color: transparent;border-radius: 20px;">
           <BriefAqi :city="city" />
         </el-card>
-        <el-card style="height:53vh;overflow: hidden;">
+        <el-card style="height:53vh;overflow: hidden;background-color:rgb(255,255,255,0.5);border-color: transparent;border-radius: 20px;">
           <CityRanking />
         </el-card>
       </el-main>
@@ -142,7 +143,18 @@ const city = ref<City>({
 });
 const currentCity = ref<CareCity>()
 const careCitiesList = ref<CareCity[]>([])
-const weather = ref({})
+const weather = ref<Weather41>({
+  aqi: 0,
+  humidity: 0,
+  condition: '',
+  condition_icon: 0,
+  precip: 0,
+  precip_probability: 0,
+  pressure: 0,
+  ray: '',
+  temp: 0,
+  temp_feel: 0
+});
 const searchShow = ref(false)
 
 // interface接口
@@ -207,6 +219,28 @@ watch(city, () => {
   get_overview_data();
 }, { deep: true })
 
+// 根据天气换壁纸
+
+const weatherMap = {
+  '晴': 'bg-mobile-sunny',
+  // '下雨': 'bg-mobile-rainy',
+  // '夜晚': 'bg-mobile-night',
+  '多云': 'bg-mobile-cloudy',
+  '阴': 'bg-mobile-overcast'
+};
+// 根据 *雨* 的通配映射到 bg-mobile-rainy
+function mapRainyWeather(chineseWeather: string): string {
+  const currentTime = new Date().getHours();
+  if (chineseWeather.includes('雨')) {
+    return 'bg-mobile-rainy';
+  } 
+  // else if (currentTime >= 20 || currentTime < 5) { // 如果当前时间为晚上（20:00-06:00），返回对应的夜晚背景
+  //   return 'bg-mobile-night';
+  // } 
+  else {
+    return weatherMap[chineseWeather] || 'bg-mobile-sunny'; // 如果没有对应的映射，返回 'Unknown'
+  }
+}
 
 // 抽屉
 import { Delete, House, Plus } from "@element-plus/icons-vue";
@@ -382,7 +416,7 @@ import dataStatistics from "@/components/dataStatistics/dataStatistics.vue";
 }
 
 .chart {
-  width: 95%;
+  width: 97%;
   height: 92%;
   background: linear-gradient(to bottom, #ffffff, #ffffff);
   margin: 0 auto;

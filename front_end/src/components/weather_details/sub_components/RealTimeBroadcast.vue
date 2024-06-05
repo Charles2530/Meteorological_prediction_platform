@@ -1,6 +1,6 @@
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
-  <div class="common-layout" style="background:white;">
+  <div class="common-layout" style="background:transparent;border-color: transparent;">
     <!-- {{ city }} -->
     <el-container>
       <el-header>
