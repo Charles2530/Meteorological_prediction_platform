@@ -38,7 +38,7 @@
           <CurrentWeatherRight class="md:basis-3/5" :weather="weather" />
           <!-- </el-col> -->
         </el-container>
-        <el-card style="min-height: 20vh;max-height: 43vh;margin-bottom:15px;">
+        <el-card  :body-style="{ padding: '0px' }" style="min-height: 20vh;max-height: 43vh;margin-bottom:15px;">
           <RealTimeBroadcast :city="city" />
         </el-card>
       </el-aside>
@@ -107,7 +107,7 @@
       </el-col>
       <el-col :span="21">
         <el-autocomplete style="width: 100%;" v-model="state" :fetch-suggestions="querySearch" clearable
-          class="inline-input w-100" highlight-first-item :value-key="'label'" />
+          class="inline-input w-100"  @select="handleSelect" highlight-first-item :value-key="'label'" />
       </el-col>
     </el-row>
     <template #footer>
@@ -271,6 +271,7 @@ const handleConfirm = () => {
       reason?: string;
     }
     post<AddResponse>("/api/weather/care_cities/add/", { city: tempSelectedCity.value }).then((res) => {
+    console.log(tempSelectedCity.value);
       const response = res.data;
       if (response.success) {
         ElMessage.success("已添加");
@@ -337,10 +338,9 @@ const loadAll = () => {
 
 const handleSelect = (item: LabelItem) => {
   state.value = item.label;
-  console.log("tempSelectedCity");
-  console.log(tempSelectedCity.value);
-  tempSelectedCity.value.name = item.label;
-  tempSelectedCity.value.adm2 = item.label;
+  var splitStr=item.label.split(' ')
+  tempSelectedCity.value.name = splitStr[0];
+  tempSelectedCity.value.adm2 = splitStr[1];
 };
 
 onMounted(() => {
@@ -374,7 +374,7 @@ import dataStatistics from "@/components/dataStatistics/dataStatistics.vue";
 </script> -->
 
 <!-- !!!因为涉及到组件也要使用下面的css样式，所以不要scoped不然丑 -->
-<style>
+<style lang="scss" scoped>
 .selected-card {
   /* border: 2px solid rgb(183, 255, 0); 修改为你想要的边框颜色 */
   margin-left: -20px;
