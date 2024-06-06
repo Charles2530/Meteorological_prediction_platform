@@ -39,6 +39,12 @@ class Command(BaseCommand):
             help='Print process',
         )
 
+        parser.add_argument(
+            '--precise',
+            action='store_true',
+            help='Specify accuracy more precisely',
+        )
+
     def handle(self, *args, **kwargs):
         if kwargs['D']:
             print('Delete all')
@@ -53,22 +59,41 @@ class Command(BaseCommand):
 
         shanghai_timezone = pytz.timezone('Asia/Shanghai')
 
+        if WeatherInfo.objects.count() > 0:
+            # delete incomplete data
+            city_name = WeatherInfo.objects.last().cityName
+            adm2 = WeatherInfo.objects.last().adm2
+            WeatherInfo.objects.filter(cityName=city_name, adm2=adm2).delete()
+
         for city in City2CityId.objects.all():
             location_id = city.cityId
             city_name = city.cityName
             adm2 = city.areaName
 
+            if not kwargs['precise']:
+                if WeatherInfo.objects.filter(cityName=city_name, adm2=adm2).exists():
+                    print(city_name, adm2, 'already exists')
+                    continue
+
             if not kwargs['dev']:
                 for i in range(-9, 0):
                     query_date = date.today() + timedelta(days=i)
-                    historic_weather = requests.get(historic_url, params={
-                        'key': kwargs['key'],
-                        'location': location_id,
-                        'date': query_date.strftime('%Y%m%d')
-                    })
 
-                    historic_weather = json.loads(historic_weather.content.decode('utf-8'))
+                    while True:
+                        historic_weather = requests.get(historic_url, params={
+                            'key': kwargs['key'],
+                            'location': location_id,
+                            'date': query_date.strftime('%Y%m%d')
+                        })
+                        historic_weather = json.loads(historic_weather.content.decode('utf-8'))
+                        if historic_weather['code'] == '429':
+                            print("wait to access")
+                            time.sleep(30)
+                            continue
+                        break
 
+                    if historic_weather['code'] == '404':
+                        continue
                     # print('historic_weather', historic_weather)
 
                     for hourly in historic_weather["weatherHourly"]:
@@ -76,6 +101,10 @@ class Command(BaseCommand):
                         date_time = temp_date_time.astimezone(shanghai_timezone)
 
                         temp_aqi = random.randint(10, 150)  # TODO
+
+                        if kwargs['precise']:
+                            if WeatherInfo.objects.filter(time=date_time, cityName=city_name, adm2=adm2).exists():
+                                continue
 
                         data = WeatherInfo(
                             time=date_time,
@@ -95,20 +124,30 @@ class Command(BaseCommand):
 
                         data.save()
 
-            weather = requests.get(url, params={
-                'key': kwargs['key'],
-                'location': location_id,
-            })
+            while True:
+                weather = requests.get(url, params={
+                    'key': kwargs['key'],
+                    'location': location_id,
+                })
+                weather = json.loads(weather.content.decode('utf-8'))
+                if weather['code'] == '429':
+                    print("wait to access")
+                    time.sleep(30)
+                    continue
+                break
 
-            # print('-----', city_name, '-', adm2, '-----', 'in hourly update')
-
-            weather = json.loads(weather.content.decode('utf-8'))
+            if weather['code'] == '404':
+                continue
             # print(weather)
             for hourly in weather["hourly"]:
                 dt = datetime.fromisoformat(hourly["fxTime"]).astimezone(shanghai_timezone)
                 rounded_dt = dt.replace(minute=0, second=0, microsecond=0)
 
                 temp_aqi = 28 + random.uniform(-10, 40)
+
+                if kwargs['precise']:
+                    if WeatherInfo.objects.filter(time=date_time, cityName=city_name, adm2=adm2).exists():
+                        continue
 
                 data = WeatherInfo(
                     time=rounded_dt,

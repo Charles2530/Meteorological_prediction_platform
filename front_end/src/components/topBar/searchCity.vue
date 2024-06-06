@@ -1,6 +1,6 @@
 <template>
   <div class="flex gap-4">
-    <div class="sub-title my-2 text-sm text-white">
+    <div class="sub-title  text-sm text-white">
       当前城市 {{ currentCity }}
     </div>
     <el-autocomplete
@@ -91,7 +91,7 @@ onMounted(() => {
 }
 
 .sub-title {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: bold;
   color: #ffffff;
   text-shadow: 1px 1px 2px #000000;

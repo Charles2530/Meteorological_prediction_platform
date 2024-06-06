@@ -37,9 +37,12 @@ class WeatherForecast(models.Model):
     # date = models.DateTimeField()
     city = models.CharField(max_length=40)
     adm2 = models.CharField(max_length=40, default='')
-    level = models.CharField(max_length=20, default='')
+    level = models.IntegerField(default=0)
     content = models.TextField()
     instruction = models.TextField()
+
+    def __str__(self):
+        return f"{self.city} - {self.adm2}"
 
     class Meta:
         verbose_name = "天气预报"

@@ -61,7 +61,7 @@ def my_login(request):
                 # "token": user.username,
                 "userInfo": {
                     "username": user.username,
-                    "avatar": "http://dummyimage.com/88x31",  # UserAvatar.objects.get(user=user).avatar, TODO
+                    "avatar": str(UserAvatar.objects.get(user=user).avatar),
                     # "role": 2 if user.is_staff else 1,
                     "role": 2 if user.is_staff else 1,
                     "email": user.email
@@ -70,6 +70,7 @@ def my_login(request):
             return JsonResponse({"success": True, "info": info})
         else:
             return JsonResponse({"success": False, "reason": "用户名或密码错误，请重新输入"}, status=200)
+            # return JsonResponse({"success": False, "reason": user.password}, status=200)
 
     except ValidationError as e:
         return JsonResponse({"success": False, "reason": str(e)}, status=400)
@@ -121,15 +122,15 @@ def my_register(request):
             avatar="http://dummyimage.com/88x31"
         )
         user_avatar.save()
-        # authenticate(username=username, password=password)
-        # login(request, user)
+        authenticate(username=username, password=password)
+        login(request, new_user)
 
         info = {
             "token": str(AccessToken.for_user(new_user)),
             # "token": user.username,
             "userInfo": {
                 "username": new_user.username,
-                "avatar": UserAvatar.objects.get(user=new_user).avatar,
+                "avatar": str(UserAvatar.objects.get(user=new_user).avatar),
                 "email": new_user.email,
                 "role": role
             }
@@ -193,7 +194,7 @@ def user_list(request):
             "uid": user.id,
             "username": user.username,
             "email": user.email,
-            "avatar": "http://dummyimage.com/88x31",  # UserAvatar.objects.get(user=user).avatar, TODO
+            "avatar": str(UserAvatar.objects.get(user=user).avatar),
             "role": 2 if user.is_staff else 1,
             "last_login": user.last_login.strftime(
                 '%Y-%m-%d %H:%M:%S') if user.last_login is not None else datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -334,8 +335,8 @@ def update_user_email(request):
 
 
 @csrf_exempt
-# @login_required
-# @user_passes_test(lambda u: u.is_staff or u.is_superuser)
+@login_required
+@user_passes_test(lambda u: u.is_staff or u.is_superuser)
 def update_user_password(request):
     authorization = request.META.get("HTTP_AUTHORIZATION")
 
@@ -359,6 +360,7 @@ def update_user_password(request):
     # target_user.set_password(password)
     target_user.password = password
     target_user.save()
+    update_session_auth_hash(request, user)
 
     return JsonResponse({"success": True}, status=200)
 
@@ -404,7 +406,7 @@ def user_info(request):
     # 准备返回的用户信息
     user_list_json = {
         "username": user.username,
-        "avatar": UserAvatar.objects.get(user=user).avatar,
+        "avatar": str(UserAvatar.objects.get(user=user).avatar),
         "role": 2 if user.is_staff else 1,
         "email": user.email
     }
@@ -451,7 +453,7 @@ def update_current_user_password(request):
         user.password = new_password
         user.save()
         # 如果使用Django的session，更新session中的密码
-        # update_session_auth_hash(request, user)
+        update_session_auth_hash(request, user)
 
         # 返回成功响应
         return JsonResponse({
@@ -520,19 +522,21 @@ def update_current_user_avatar(request):
         return JsonResponse({"success": False, "reason": "No file uploaded"}, status=400)
 
     user = request.user
+    print('-----', user.username, '-----')
     file_path = f'avatars/{user.id}/{file.name}'
     path = default_storage.save(file_path, ContentFile(file.read()))
     avatar_url = request.build_absolute_uri(settings.MEDIA_URL + path)
+    print('-----', avatar_url, '-----')
 
     try:
-        user_avatar = UserAvatar.objects.get(user=user),
+        user_avatar, created = UserAvatar.objects.get_or_create(user=user)
         print('-----', user_avatar, '-----')
         user_avatar.avatar = avatar_url
         user_avatar.save()
 
         return JsonResponse({
             "success": True,
-            "avatar": user_avatar.avatar,
+            "avatar": str(user_avatar.avatar),
             "reason": "elit"
         })
     except Exception as e:

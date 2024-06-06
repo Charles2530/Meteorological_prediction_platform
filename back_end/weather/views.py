@@ -286,13 +286,13 @@ def realtime(request):
         hourly_weather = WeatherInfo.objects.filter(cityName=city_name, adm2=adm2, time=query_dt).first()
         realTimeWeatherList.append({
             "time":  '此时' if i == 0 and is_today else print_dt.strftime('%H:%M'),
-            "condition": hourly_weather.text if hourly_weather else 0,
-            'condition_icon': hourly_weather.icon if hourly_weather else 0,
-            "temperature": int(hourly_weather.temp if hourly_weather else 0),
-            "humidity": int(hourly_weather.humidity if hourly_weather else 0),
-            "windScale": int(hourly_weather.windScale.split('-')[-1] if hourly_weather else 0),
-            "windDirection": hourly_weather.windDir if hourly_weather else 0,
-            'wind360': hourly_weather.wind360 if hourly_weather else 0,
+            "condition": hourly_weather.text if hourly_weather else '晴',
+            'condition_icon': hourly_weather.icon if hourly_weather else 100,
+            "temperature": int(hourly_weather.temp if hourly_weather else 21),
+            "humidity": int(hourly_weather.humidity) if hourly_weather else 33,
+            "windScale": int(hourly_weather.windScale.split('-')[-1]) if hourly_weather else 3,
+            "windDirection": hourly_weather.windDir if hourly_weather else '',
+            'wind360': hourly_weather.wind360 if hourly_weather else 149,
         })
 
     return JsonResponse({"realTimeWeatherList": realTimeWeatherList})
@@ -306,7 +306,7 @@ def city_rank(request):
     city_list_worst_aqi = []
     city_list_best_aqi = []
 
-    length = min(10, len(RealtimeWeather.objects.all())) + 1
+    length = min(10, len(RealtimeWeather.objects.all()) + 1)
     top_weather_info = RealtimeWeather.objects.all().order_by('-temp')[:length]
     for i in range(length):
         info = top_weather_info[i]
@@ -337,7 +337,7 @@ def city_rank(request):
             "item": getattr(info, 'precip')
         })
 
-    length = min(10, len(RealtimeAirQuality.objects.all())) + 1
+    length = min(10, len(RealtimeAirQuality.objects.all()) + 1)
     top_weather_info = RealtimeAirQuality.objects.all().order_by('-aqi')[:length]
     for i in range(length):
         info = top_weather_info[i]
@@ -443,7 +443,7 @@ def subscribed_cities_summary(request):
             realtime_weather = RealtimeWeather.objects.filter(cityName=subscription_city_name,
                                                               adm2=subscription_adm2).first()
         except RealtimeWeather.DoesNotExist:
-            realtime_weather = RealtimeWeather.objects.first()
+            realtime_weather = RealtimeWeather.objects.filter(cityName=subscription_city_name).first()
         care_cities_list.append({
             'city': {
                 'name': subscription_city_name,
@@ -452,6 +452,10 @@ def subscribed_cities_summary(request):
             'temp': realtime_weather.temp,
             'cond_icon': realtime_weather.icon,
         })
+    try:
+        current_realtime_weather = RealtimeWeather.objects.get(cityName=current_city_name, adm2=current_adm2)
+    except RealtimeWeather.DoesNotExist:
+        current_realtime_weather = RealtimeWeather.objects.filter(cityName=current_city_name).first()
     json_response = {
         'success': True,
         'currentCity': {
@@ -459,8 +463,8 @@ def subscribed_cities_summary(request):
                 'name': current_city_name,
                 'adm2': current_adm2,
             },
-            'temp': RealtimeWeather.objects.get(cityName=current_city_name, adm2=current_adm2).temp,
-            'cond_icon': RealtimeWeather.objects.get(cityName=current_city_name, adm2=current_adm2).icon,
+            'temp': current_realtime_weather.temp,
+            'cond_icon': current_realtime_weather.icon,
         },
         'careCitiesList': care_cities_list,
     }

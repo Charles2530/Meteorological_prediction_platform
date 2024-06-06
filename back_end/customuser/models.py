@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -5,7 +6,8 @@ from django.db import models
 class UserAvatar(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, verbose_name="当前用户", default=None)
-    avatar = models.CharField(max_length=100, verbose_name="头像URL")
+    avatar = models.ImageField(upload_to='../../back_end/media/', null=True, blank=True)
+    # avatar = models.CharField(max_length=100, verbose_name="头像URL")
 
     def __str__(self):
         return f"{self.user.username} - {self.avatar}"

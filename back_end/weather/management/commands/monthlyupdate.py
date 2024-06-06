@@ -62,22 +62,40 @@ class Command(BaseCommand):
 
         shanghai_timezone = pytz.timezone('Asia/Shanghai')
 
+        if DailyWeather.objects.count() > 0:
+            # delete incomplete data
+            city_name = DailyWeather.objects.last().city
+            adm2 = DailyWeather.objects.last().adm2
+            DailyWeather.objects.filter(city=city_name, adm2=adm2).delete()
+
         for city in City2CityId.objects.all():
             location_id = city.cityId
             city_name = city.cityName
             adm2 = city.areaName
 
+            if DailyWeather.objects.filter(city=city_name, adm2=adm2).exists():
+                print(city_name, adm2, 'already exists')
+                continue
+
             if not kwargs['dev']:
                 for i in range(-9, 0):
                     query_date = date.today() + timedelta(days=i)
-                    historic_weather = requests.get(historic_url, params={
-                        'key': kwargs['key'],
-                        'location': location_id,
-                        'date': query_date.strftime('%Y%m%d')
-                    })
 
-                    historic_weather = json.loads(historic_weather.content.decode('utf-8'))
+                    while True:
+                        historic_weather = requests.get(historic_url, params={
+                            'key': kwargs['key'],
+                            'location': location_id,
+                            'date': query_date.strftime('%Y%m%d')
+                        })
+                        historic_weather = json.loads(historic_weather.content.decode('utf-8'))
+                        if historic_weather['code'] == '429':
+                            print("wait to access")
+                            time.sleep(30)
+                            continue
+                        break
 
+                    if historic_weather['code'] == '404':
+                        continue
                     # print('historic_weather', historic_weather)
 
                     daily = historic_weather["weatherDaily"]
@@ -105,12 +123,19 @@ class Command(BaseCommand):
 
                     data.save()
 
-            weather = requests.get(url, params={
-                'key': kwargs['key'],
-                'location': location_id,
-            })
-
-            weather = json.loads(weather.content.decode('utf-8'))
+            while True:
+                weather = requests.get(url, params={
+                    'key': kwargs['key'],
+                    'location': location_id,
+                })
+                weather = json.loads(weather.content.decode('utf-8'))
+                if weather['code'] == '429':
+                    print("wait to access")
+                    time.sleep(30)
+                    continue
+                break
+            if weather['code'] == '404':
+                continue
 
             # print(weather)
             for daily in weather["daily"]:
@@ -140,6 +165,6 @@ class Command(BaseCommand):
 
                 data.save()
                 
-                if kwargs['print']:
-                    print('finish', city_name, adm2)
+            if kwargs['print']:
+                print('finish', city_name, adm2)
         self.stdout.write(self.style.SUCCESS('Successfully updated monthly weather info.'))

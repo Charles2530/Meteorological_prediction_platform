@@ -64,17 +64,40 @@ class Command(BaseCommand):
             location_id = city.cityId
             city_name = city.cityName
             adm2 = city.areaName
-            weather = requests.get(weather_url, params={
-                'key': kwargs['key'],
-                'location': location_id,
-            })
-            air_quality = requests.get(air_quality_url, params={
-                'key': kwargs['key'],
-                'location': location_id,
-            })
 
-            weather = json.loads(weather.content.decode('utf-8'))
-            air_quality = json.loads(air_quality.content.decode('utf-8'))
+            if RealtimeWeather.objects.filter(cityName=city_name, adm2=adm2).exists():
+                print(city_name, adm2, 'already exists')
+                continue
+
+            while True:
+                weather = requests.get(weather_url, params={
+                    'key': kwargs['key'],
+                    'location': location_id,
+                })
+                weather = json.loads(weather.content.decode('utf-8'))
+
+                if weather['code'] == '429':
+                    print("wait to access")
+                    time.sleep(30)
+                    continue
+
+                air_quality = requests.get(air_quality_url, params={
+                    'key': kwargs['key'],
+                    'location': location_id,
+                })
+                air_quality = json.loads(air_quality.content.decode('utf-8'))
+
+                if air_quality['code'] == '429':
+                    print("wait to access")
+                    time.sleep(30)
+                    continue
+
+                break
+
+            if weather['code'] == '404' or air_quality['code'] == '404':
+                print('cannot get', location_id)
+                continue
+
             now_weather = weather["now"]
             now_air_quality = air_quality["now"]
 
