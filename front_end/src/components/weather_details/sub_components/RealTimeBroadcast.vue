@@ -1,7 +1,14 @@
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
   <div class="common-layout" style="background:transparent;border-color: transparent;">
-    <!-- {{ city }} -->
+    <el-select v-model="selectedDate" placeholder="请选择日期" @change="handleChange" style="width: 150px;  background-color: transparent;">
+    <el-option
+      v-for="option in dateOptions"
+      :key="option.value"
+      :label="option.label"
+      :value="option.value">
+    </el-option>
+  </el-select>
     <el-container>
       <el-header>
         <div id="chart_temp_perhour" ref="chart_temp_perhour" style="height: 120px;  width: 100%;  margin: 0 auto">
@@ -86,6 +93,8 @@ const props = defineProps({
 // });
 const realTimeWeatherList = ref<RealTimeWeather[]>([]);
 const calculateAngle = (wind360: number) => wind360 + 135;
+
+const date = ref('');
 interface RealTimeWeather {
   time: string,
   condition: string,
@@ -116,6 +125,31 @@ watch(() => props.city, () => Promise.all([get_data()]).then(() => {
     realTimeWeatherList.value,
   );
 }));
+
+// 日期切换选择
+const selectedDate = ref(null);
+const dateOptions = ref([]);
+
+function generateDateOptions() {
+  const today = new Date();
+  for (let i = -7; i <= 7; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
+    const formattedDate = formatDate(date);
+    dateOptions.value.push({ label: formattedDate, value: formattedDate });
+  }
+}
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function handleChange(value) {
+  console.log('Selected Date:', value);
+}
 
 // 初始化 ECharts 实例
 let chartInstance_history: echarts.ECharts | null = null;
@@ -273,6 +307,7 @@ const renderChart = async (
 //   // });
 // }));
 onMounted(() => Promise.all([get_data()]).then(() => {
+  generateDateOptions();
   console.log(realTimeWeatherList.value);
   setTimeout(() => {
     renderChart(
@@ -303,6 +338,8 @@ onMounted(() => Promise.all([get_data()]).then(() => {
 
 
 <style lang="scss" scoped>
+
+
 .calendar-container {
   margin-top: 2vh;
   padding: 0px;
