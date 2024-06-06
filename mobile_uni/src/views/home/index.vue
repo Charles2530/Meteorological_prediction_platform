@@ -120,8 +120,8 @@ import CityRanking from '@/components/weather_details/sub_components/CityRanking
 import { Switch } from '@element-plus/icons-vue'
 // const careCitiesList = ref([])
 const city = ref<City>({
-  name: '市',
-  adm2: '区'
+  name: '北京市',
+  adm2: '北京'
 });
 const currentCity = ref<CareCity>()
 const careCitiesList = ref<CareCity[]>([])
@@ -360,13 +360,12 @@ const loadAll = () => {
   return china_cities;
 };
 
+
 const handleSelect = (item: LabelItem) => {
   state.value = item.label;
-  console.log("tempSelectedCity");
-  console.log(tempSelectedCity.value);
-  tempSelectedCity.value.name = item.label;
-  tempSelectedCity.value.adm2 = item.label;
-
+  var splitStr=item.label.split(' ')
+  tempSelectedCity.value.name = splitStr[0];
+  tempSelectedCity.value.adm2 = splitStr[1];
 };
 
 interface CityInfoResponse {

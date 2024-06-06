@@ -29,7 +29,8 @@ const __admin = ref(false);
 watch(
   () => userInfo.role,
   () => {
-    __admin.value = userInfo.role == UserRole.Administrator;
+    console.log("change:",userInfo.role);
+    __admin.value = (userInfo.role == UserRole.Administrator);
   }
 );
 </script>

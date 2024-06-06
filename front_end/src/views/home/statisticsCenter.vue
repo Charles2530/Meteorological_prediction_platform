@@ -29,7 +29,7 @@
                 />
                 <div class="slider-demo-block">
                   <span class="demonstration">时间维度</span>
-                  <el-slider v-model="periods" />
+                  <el-slider v-model="periods" :max="45" :min="5"/>
                 </div>
 
                 <trendHistoryGraph
@@ -123,9 +123,8 @@ import WeatherDataRankVM from "@c/dataStatistics/rank/WeatherDataRankVM.vue";
 import { china_cities } from "@/stores/cities";
 import aiTemperGraph from "@c/dataStatistics/graph/aiTemperGraph.vue";
 const city = ref("");
-const selectedLocation = ref("北京市");
+const selectedLocation = ref("北京市 北京");
 const periods = ref(30);
-const locations = china_cities;
 interface LabelItem {
   label: string;
   value: string;

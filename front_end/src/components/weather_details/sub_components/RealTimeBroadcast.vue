@@ -1,13 +1,13 @@
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
-  <div class="common-layout" style="background:white;">
+  <div class="common-layout" style="background:transparent;border-color: transparent;">
     <!-- {{ city }} -->
     <el-container>
       <el-header>
-        <div id="chart_temp_perhour" ref="chart_temp_perhour" style="height: 80px;  width: 100%;  margin: 0 auto">
+        <div id="chart_temp_perhour" ref="chart_temp_perhour" style="height: 120px;  width: 100%;  margin: 0 auto">
         </div>
       </el-header>
-      <el-main>
+      <el-main style="padding: 2px;">
         <div class="calendar-container">
           <el-row :gutter="0" justify="center">
             <!-- <div style="margin: -10px;"> -->
@@ -25,19 +25,22 @@
             <el-col :span="2" v-for="(day, index) in realTimeWeatherList" :key="index">
               <div class="ep-bg-purple-dark" />
               <!-- <div style="height:70% !important"> -->
-              <el-card style="width:auto" shadow="hover">
+              <el-card :body-style="{ padding: '0px', paddingTop: '20px', paddingBottom: '20px' }" style="width:auto"
+                shadow="hover">
                 <div class="info-text">{{ day.temperature }}℃</div>
                 <div class="icon-couple">
                   <!-- {{day.condition_icon  }} -->
                   <!-- <i class="qi-${day.condition_icon}" style="font-size: 25px;"></i> -->
-                  <i class="perhour-icon"  :class="'qi-' + day.condition_icon" ></i>
+                  <i class="perhour-icon" :class="'qi-' + day.condition_icon"></i>
                   <div class="tips-text">{{ day.condition }}</div>
                 </div>
                 <div class="icon-couple">
-                  <el-icon size="25px" class="perhour-icon" 
-                    :style="{ transform: `rotate(${calculateAngle(day.wind360)}deg)` }">
-                    <Position />
-                  </el-icon>
+                  <div style="display: flex; justify-content: center;">
+                    <el-icon size="25px" class="perhour-icon"
+                      :style="{ transform: `rotate(${calculateAngle(day.wind360)}deg)` }">
+                      <Position />
+                    </el-icon>
+                  </div>
                   <div class="tips-text">{{ day.windScale }}级风</div>
                 </div>
                 <div class="info-text">{{ day.time }}</div>
@@ -145,9 +148,9 @@ const renderChart = async (
       show: false,
       type: "continuous",
       seriesIndex: 0, // This is now referring to the first (and only) series index that needs a visualMap
-      min: 10,
-      max: 40,
-      color: ['red', 'blue',] ,// 使用内置的蓝到红的渐变色
+      min: 15,
+      max: 30,
+      color: ['red', 'blue',],// 使用内置的蓝到红的渐变色
       itemHeight: 60, // 调整图例的高度
       itemWidth: 12
     },
@@ -213,10 +216,10 @@ const renderChart = async (
       // bottom: "20%",
       // left: "10%",
       // right: "10%",
-      top: "20%",
-      bottom: "20%",
-      left: "0%",
-      right: "0%",
+      top: "10%",
+      bottom: "-30%",
+      left: "-2%",
+      right: "-2%",
       containLabel: true,
     },
     // legend: {
@@ -301,7 +304,7 @@ onMounted(() => Promise.all([get_data()]).then(() => {
 
 <style lang="scss" scoped>
 .calendar-container {
-  margin-top: -2vh;
+  margin-top: 2vh;
   padding: 0px;
 }
 
@@ -337,6 +340,7 @@ onMounted(() => Promise.all([get_data()]).then(() => {
   margin-top: 12px;
   margin-bottom: 12px;
 }
+
 .perhour-icon {
   font-size: 25px;
   margin-bottom: 10px;
@@ -364,6 +368,7 @@ onMounted(() => Promise.all([get_data()]).then(() => {
   // background-color: rgb(188, 243, 243);
   background-color: transparent;
   /* 设置背景色为透明 */
+  padding: 0px;
   margin: 0px;
   border-radius: 20px;
   border-color: transparent;

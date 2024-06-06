@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full text-[#333333] font-semibold text-md flex-wrap" style="font-size: 20px;"
+  <div class="w-full text-[#333333] font-semibold text-md flex-wrap" style="font-size: 20px;background-color:transparent;"
     >
     <div class="
         flex 
@@ -10,7 +10,7 @@
         bg-[#FFFFFF] 
         shadow-[0_10px_30px_-12px_rgba(7,89,133,0.45)] 
         h-full
-      ">
+      " style="background-color:rgb(255,255,255,0.5);">
       <div class="flex justify-between">
         <!-- <span>天气详情</span> -->
         <!-- <button @click="refresh"><img class="w-6 h-6" src="@/assets/refresh.png" alt="refresh"></button> -->

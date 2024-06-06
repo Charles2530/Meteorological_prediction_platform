@@ -99,7 +99,6 @@ import { post, get } from "@/api/index.ts";
 const get_his_overview = async () => {
   get<WeatherData41>("/api/weather/overview/", city).then((res) => {
     weather.value = res.data.weather;
-    console.log(weather.value);
     // city.value = res.data.city;
     // searchShow.value = res.data.searchShow
   });
@@ -112,7 +111,6 @@ const get_his_overview = async () => {
 onMounted(() => {
   get_his_overview();
 });
-console.log("----------------------------------------------------------------");
 // console.log(weather.value);
 </script>
 <style scoped>
