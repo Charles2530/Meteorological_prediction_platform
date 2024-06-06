@@ -29,22 +29,6 @@
     </el-row>
     <el-row :gutter="20">
       <el-col :span="18">
-        <el-card class="box-card">
-          <div class="clearfix">
-            <span>全国灾害信息速递 </span>
-          </div>
-          <div
-            v-for="(notification, index) in global_notifications"
-            :key="notification.id"
-            :id="'notification-' + notification.id"
-            class="text item"
-          >
-            <div class="text-blue-500 text-xl text-center">
-              第{{ index + 1 }}条预警信息
-            </div>
-            <noticeItem :notification="notification" />
-          </div>
-        </el-card>
         <el-card class="box-card" v-if="notifications.length === 0">
           <div class="clearfix">
             <span>订阅相关灾害信息 </span>
@@ -64,8 +48,23 @@
             <noticeItem :notification="notification" />
           </div>
         </el-card>
+        <el-card class="box-card">
+          <div class="clearfix">
+            <span>全国灾害信息速递 </span>
+          </div>
+          <div
+            v-for="(notification, index) in global_notifications"
+            :key="notification.id"
+            :id="'notification-' + notification.id"
+            class="text item"
+          >
+            <div class="text-blue-500 text-xl text-center">
+              第{{ index + 1 }}条预警信息
+            </div>
+            <noticeItem :notification="notification" />
+          </div>
+        </el-card>
       </el-col>
-
       <el-col :span="6">
         <el-card class="box-card">
           <div class="clearfix">
