@@ -25,6 +25,7 @@ export const useUserInfo = defineStore("userInfo", {
         email: "",
         role: UserRole.Visitor,
       });
+      console.log("logout success", Local.get("Bearer"));
       Local.remove("Bearer");
       router.push({ name: "Home" });
     },
