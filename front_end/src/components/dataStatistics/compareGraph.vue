@@ -66,7 +66,11 @@ const loadAll = () => {
 
 const getNewCompare = async () =>
   Promise.all([getPresentCity1(), getPresentCity2()]).then(() => {
-    renderChart(getValueList1(), getValueList2());
+    setTimeout(() => {
+        let render1:number[]=getValueList1();
+        let render2:number[]=getValueList2()
+        renderChart(render1,render2);
+    }, 500);
   });
 interface CityInfoResponse {
   status: boolean;
@@ -111,7 +115,6 @@ const getPresentCity2 = async () => {
     cityMessage2.value.category = res.data.message.category;
   });
 };
-const locations = china_cities;
 const getKeyList = function () {
   let keyList: string[] = [];
   keyList.push("温度");
@@ -231,7 +234,9 @@ const getValueList2 = function () {
 onMounted(() =>
   Promise.all([getPresentCity1(), getPresentCity2()]).then(() => {
     labels.value = loadAll();
-    renderChart(getValueList1(), getValueList2());
+    setTimeout(() => {
+        renderChart(getValueList1(), getValueList2());
+    }, 1000);
   })
 );
 const renderChart = async (data1: number[], data2: number[]) => {

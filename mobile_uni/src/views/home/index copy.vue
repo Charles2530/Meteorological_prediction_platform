@@ -203,13 +203,13 @@ const removeCity = (index: number) => {
   if (index >= 0 && index < careCitiesList.value.length) {
     // POST request
     interface DeleteResponse {
-      success: boolean;
+      status: boolean;
       reason?: string;
     }
     const request: City = careCitiesList.value[index].city;
     post<DeleteResponse>("/api/weather/care_cities/del/", request).then((res) => {
       const response = res.data;
-      if (response.success) {
+      if (response.status) {
         ElMessage.success("已删除");
       } else ElMessage.error("无效的请求");
     });
