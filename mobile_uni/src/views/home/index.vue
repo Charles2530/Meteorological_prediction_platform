@@ -284,18 +284,19 @@ const handleConfirm = () => {
   if (tempSelectedCity.value) {
     // POST request
     interface AddResponse {
-      success: boolean;
+      status: boolean;
       reason?: string;
     }
-    const request: City = tempSelectedCity.value;
-    post<AddResponse>("/api/weather/care_cities/add/", request).then((res) => {
+    post<AddResponse>("/api/weather/care_cities/add/", { city: tempSelectedCity.value }).then((res) => {
+    console.log(tempSelectedCity.value);
       const response = res.data;
-      // if (response.success) {
-      //   ElMessage.success("已添加");
-      // } else ElMessage.error("无效的请求");
+      if (response.status) {
+        ElMessage.success("已添加");
+        // 刷新重新调用接口
+        get_care_cities();
+      } else ElMessage.error("无效的请求");
     });
-    // 刷新重新调用接口
-    get_care_cities();
+
   }
   // 关闭对话框
   dialogVisible.value = false;

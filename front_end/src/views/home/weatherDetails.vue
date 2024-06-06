@@ -309,10 +309,11 @@ const handleConfirm = () => {
       const response = res.data;
       if (response.status) {
         ElMessage.success("已添加");
+        // 刷新重新调用接口
+        get_care_cities();
       } else ElMessage.error("无效的请求");
     });
-    // 刷新重新调用接口
-    get_care_cities();
+
   }
   // 关闭对话框
   dialogVisible.value = false;

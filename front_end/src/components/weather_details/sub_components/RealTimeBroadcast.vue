@@ -149,10 +149,9 @@ function formatDate(date) {
 
 function handleChange(value) {
   console.log(selectedDate.value);
-  get_data();
-  renderChart(
-    realTimeWeatherList.value
-  );
+  get_data().then(() => {
+  renderChart(realTimeWeatherList.value);
+});
 }
 
 // 初始化 ECharts 实例

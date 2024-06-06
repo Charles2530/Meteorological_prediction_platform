@@ -85,7 +85,7 @@ interface RealTimeWeatherData {
 }
 
 const get_data = async () => {
-  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: props.city }).then((res) => {
+  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: props.city,selectedDate:selectedDate.value }).then((res) => {
     realTimeWeatherList.value.splice(0, realTimeWeatherList.value.length, ...res.data.realTimeWeatherList);
     // console.log("getdata")
     if (realTimeWeatherList.value.length > 12) {
@@ -107,7 +107,7 @@ const dateOptions = ref([]);
 
 function generateDateOptions() {
   const today = new Date();
-  for (let i = -7; i <= 7; i++) {
+  for (let i = -5; i <= 5; i++) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
     const formattedDate = formatDate(date);
@@ -124,12 +124,10 @@ function formatDate(date) {
 
 function handleChange(value) {
   console.log(selectedDate.value);
-  get_data();
-  renderChart(
-    realTimeWeatherList.value
-  );
+  get_data().then(() => {
+  renderChart(realTimeWeatherList.value);
+});
 }
-
 
 // 初始化 ECharts 实例
 let chartInstance_history: echarts.ECharts | null = null;
@@ -319,6 +317,7 @@ onMounted(() => Promise.all([get_data()]).then(() => {
 
 
 <style scoped>
+
 .background-transparent {
   background: transparent;
   border-color: transparent;
