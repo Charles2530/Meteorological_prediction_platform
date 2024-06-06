@@ -1,21 +1,33 @@
 <template>
   <div id="mapContainer">
-    <div class="input-card" style="position: relative; z-index: 100; top:25%; width: 100px;">
+    <div
+      class="input-card"
+      style="position: relative; z-index: 100; top: 25%; width: 100px"
+    >
       <div class="layerbtns">
-        <el-button :class="{ 'selected': buttonActive.A, 'unselected': !buttonActive.A }" :active="buttonActive.A"
-          @click="clickA">
+        <el-button
+          :class="{ selected: buttonActive.A, unselected: !buttonActive.A }"
+          :active="buttonActive.A"
+          @click="clickA"
+        >
           <div class="btnDiv">
             <div class="btnName2">标准图层</div>
           </div>
         </el-button>
-        <el-button :class="{ 'selected': buttonActive.B, 'unselected': !buttonActive.B }" :active="buttonActive.B"
-          @click="clickB">
+        <el-button
+          :class="{ selected: buttonActive.B, unselected: !buttonActive.B }"
+          :active="buttonActive.B"
+          @click="clickB"
+        >
           <div class="btnDiv">
             <div class="btnName2">地形图层</div>
           </div>
         </el-button>
-        <el-button :class="{ 'selected': buttonActive.C, 'unselected': !buttonActive.C }" :active="buttonActive.C"
-          @click="clickC">
+        <el-button
+          :class="{ selected: buttonActive.C, unselected: !buttonActive.C }"
+          :active="buttonActive.C"
+          @click="clickC"
+        >
           <div class="btnDiv">
             <div class="btnName2">卫星图层</div>
           </div>
@@ -24,37 +36,53 @@
       <br />
       <br />
       <div class="layerbtns">
-        <el-button :class="{ 'selected': buttonActive.d, 'unselected': !buttonActive.d }" :active="buttonActive.d"
-          @click="clickd">
+        <el-button
+          :class="{ selected: buttonActive.d, unselected: !buttonActive.d }"
+          :active="buttonActive.d"
+          @click="clickd"
+        >
           <div class="btnDiv">
             <div class="btnName">地理环境</div>
             <div class="btnIcond"></div>
           </div>
         </el-button>
-        <el-button width="600px" :class="{ 'selected': buttonActive.a, 'unselected': !buttonActive.a }"
-          :active="buttonActive.a" @click="clicka">
+        <el-button
+          width="600px"
+          :class="{ selected: buttonActive.a, unselected: !buttonActive.a }"
+          :active="buttonActive.a"
+          @click="clicka"
+        >
           <div class="btnDiv">
             <div class="btnName">气温</div>
             <div class="btnIcona"></div>
           </div>
         </el-button>
-        <el-button :class="{ 'selected': buttonActive.b, 'unselected': !buttonActive.b }" :active="buttonActive.b"
-          @click="clickb">
+        <el-button
+          :class="{ selected: buttonActive.b, unselected: !buttonActive.b }"
+          :active="buttonActive.b"
+          @click="clickb"
+        >
           <div class="btnDiv">
             <div class="btnName">降水</div>
             <div class="btnIconb"></div>
           </div>
         </el-button>
-        
-        <el-button :class="{ 'selected': buttonActive.e, 'unselected': !buttonActive.e }" :active="buttonActive.e"
-          @click="clicke">
+
+        <el-button
+          :class="{ selected: buttonActive.e, unselected: !buttonActive.e }"
+          :active="buttonActive.e"
+          @click="clicke"
+        >
           <div class="btnDiv">
             <div class="btnName">灾害</div>
             <div class="btnIcone"></div>
           </div>
         </el-button>
-        <el-button :class="{ 'selected': buttonActive.c, 'unselected': !buttonActive.c }" :active="buttonActive.c"
-          @click="clickc">
+        <el-button
+          :class="{ selected: buttonActive.c, unselected: !buttonActive.c }"
+          :active="buttonActive.c"
+          @click="clickc"
+        >
           <div class="btnDiv">
             <div class="btnName">风场</div>
             <div class="btnIconc"></div>
@@ -86,17 +114,17 @@ import { getAssetsFileAQI } from "@/utils/pub-use";
 };
 
 const pos_info = reactive({
-  pixel: null,          //所在网格
-  lng: 0,               //所在经度
-  lat: 0,               //所在纬度
-  adcode: "100000",     //所在行政区划编码
-  provinceCode: "",      //所在省编码
+  pixel: null, //所在网格
+  lng: 0, //所在经度
+  lat: 0, //所在纬度
+  adcode: "100000", //所在行政区划编码
+  provinceCode: "", //所在省编码
   provinceName: "中国", //所在省名称
-  cityName: "",         //所在市名称
-  districtName: "",      //所在县名称
-  name: "",              //拼接名称
-  weatherInfo: <Point>{},  //格点天气数据
-  geoInfo: "",             //格点所在省份地理数据
+  cityName: "", //所在市名称
+  districtName: "", //所在县名称
+  name: "", //拼接名称
+  weatherInfo: <Point>{}, //格点天气数据
+  geoInfo: "", //格点所在省份地理数据
   searcher: null,
   geoCoder: null,
   polygons: <any>[],
@@ -120,7 +148,7 @@ const buttonActive = reactive({
   f: false,
 });
 
-declare let Loca: any
+declare let Loca: any;
 
 let map: {
   clearMap(): unknown;
@@ -137,7 +165,8 @@ let map: {
       data: any;
       target: any;
       pixel: any;
-      type: any; lnglat: { lng: any; lat: any }
+      type: any;
+      lnglat: { lng: any; lat: any };
     }) => void
   ) => void;
   setZoom: (arg0: number) => void;
@@ -155,15 +184,122 @@ let AAMap: {
 } = null;
 
 let loca: {
-  [x: string]: any; remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void;
+  [x: string]: any;
+  remove(pl: {
+    setSource: (arg0: any) => void;
+    setStyle: (arg0: {
+      radius: (
+        i: any,
+        feature: { properties: { level: string | number } }
+      ) => number;
+      color: (i: any, feature: { properties: any }) => string;
+      borderWidth: number;
+      blurRadius: number;
+      unit: string;
+    }) => void;
+    addAnimate: (arg0: {
+      key: string;
+      value: number[];
+      duration: number;
+      easing: string;
+      transform: number;
+      random: boolean;
+      delay: number;
+      yoyo: boolean;
+      repeat: number;
+    }) => void;
+  }): unknown;
+  add: (arg0: any) => void;
 } = null;
 
 let heatmapTem: {
-  remove(): unknown; setLoca(loca: { remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }): unknown; destroy(): unknown; setSource: any; addAnimate: any; queryFeature?: any; setStyle?: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void;
+  remove(): unknown;
+  setLoca(loca: {
+    remove(pl: {
+      setSource: (arg0: any) => void;
+      setStyle: (arg0: {
+        radius: (
+          i: any,
+          feature: { properties: { level: string | number } }
+        ) => number;
+        color: (i: any, feature: { properties: any }) => string;
+        borderWidth: number;
+        blurRadius: number;
+        unit: string;
+      }) => void;
+      addAnimate: (arg0: {
+        key: string;
+        value: number[];
+        duration: number;
+        easing: string;
+        transform: number;
+        random: boolean;
+        delay: number;
+        yoyo: boolean;
+        repeat: number;
+      }) => void;
+    }): unknown;
+    add: (arg0: any) => void;
+  }): unknown;
+  destroy(): unknown;
+  setSource: any;
+  addAnimate: any;
+  queryFeature?: any;
+  setStyle?: (arg0: {
+    radius: (
+      i: any,
+      feature: { properties: { level: string | number } }
+    ) => number;
+    color: (i: any, feature: { properties: any }) => string;
+    borderWidth: number;
+    blurRadius: number;
+    unit: string;
+  }) => void;
 } = null;
 
 let heatmapWater: {
-  remove(): unknown; setLoca(loca: { remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }): unknown; destroy(): unknown; setSource: any; addAnimate: any; queryFeature?: any; setStyle?: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void;
+  remove(): unknown;
+  setLoca(loca: {
+    remove(pl: {
+      setSource: (arg0: any) => void;
+      setStyle: (arg0: {
+        radius: (
+          i: any,
+          feature: { properties: { level: string | number } }
+        ) => number;
+        color: (i: any, feature: { properties: any }) => string;
+        borderWidth: number;
+        blurRadius: number;
+        unit: string;
+      }) => void;
+      addAnimate: (arg0: {
+        key: string;
+        value: number[];
+        duration: number;
+        easing: string;
+        transform: number;
+        random: boolean;
+        delay: number;
+        yoyo: boolean;
+        repeat: number;
+      }) => void;
+    }): unknown;
+    add: (arg0: any) => void;
+  }): unknown;
+  destroy(): unknown;
+  setSource: any;
+  addAnimate: any;
+  queryFeature?: any;
+  setStyle?: (arg0: {
+    radius: (
+      i: any,
+      feature: { properties: { level: string | number } }
+    ) => number;
+    color: (i: any, feature: { properties: any }) => string;
+    borderWidth: number;
+    blurRadius: number;
+    unit: string;
+  }) => void;
 } = null;
 
 let windLayer: AMapWind = null;
@@ -174,16 +310,80 @@ let scatter: {
   getScatterLayer(): unknown;
   on(arg0: string, arg1: (event: any) => void): unknown;
   setLoca: (arg0: {
-    [x: string]: any; remove(pl: {
-      setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: {
-        key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number // 设置安全密钥
-        ; yoyo: boolean; repeat: number;
+    [x: string]: any;
+    remove(pl: {
+      setSource: (arg0: any) => void;
+      setStyle: (arg0: {
+        radius: (
+          i: any,
+          feature: { properties: { level: string | number } }
+        ) => number;
+        color: (i: any, feature: { properties: any }) => string;
+        borderWidth: number;
+        blurRadius: number;
+        unit: string;
       }) => void;
-    }): unknown; add: (arg0: any) => void;
-  }) => void; remove: () => void; setSource: (arg0: null, arg1: { unit: string; size: number[]; texture: string; borderWidth: number; }) => void; queryFeature: (arg0: any) => any;
+      addAnimate: (arg0: {
+        key: string;
+        value: number[];
+        duration: number;
+        easing: string;
+        transform: number;
+        random: boolean;
+        delay: number; // 设置安全密钥
+        yoyo: boolean;
+        repeat: number;
+      }) => void;
+    }): unknown;
+    add: (arg0: any) => void;
+  }) => void;
+  remove: () => void;
+  setSource: (
+    arg0: null,
+    arg1: { unit: string; size: number[]; texture: string; borderWidth: number }
+  ) => void;
+  queryFeature: (arg0: any) => any;
 } = null;
 
-let breath: { setLoca: (arg0: { [x: string]: any; remove(pl: { setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void; }): unknown; add: (arg0: any) => void; }) => void; remove: () => void; setSource: (arg0: any) => void; setStyle: (arg0: { unit: string; size: number[]; texture: string; animate: boolean; duration: number; }) => void; } = null;
+let breath: {
+  setLoca: (arg0: {
+    [x: string]: any;
+    remove(pl: {
+      setSource: (arg0: any) => void;
+      setStyle: (arg0: {
+        radius: (
+          i: any,
+          feature: { properties: { level: string | number } }
+        ) => number;
+        color: (i: any, feature: { properties: any }) => string;
+        borderWidth: number;
+        blurRadius: number;
+        unit: string;
+      }) => void;
+      addAnimate: (arg0: {
+        key: string;
+        value: number[];
+        duration: number;
+        easing: string;
+        transform: number;
+        random: boolean;
+        delay: number;
+        yoyo: boolean;
+        repeat: number;
+      }) => void;
+    }): unknown;
+    add: (arg0: any) => void;
+  }) => void;
+  remove: () => void;
+  setSource: (arg0: any) => void;
+  setStyle: (arg0: {
+    unit: string;
+    size: number[];
+    texture: string;
+    animate: boolean;
+    duration: number;
+  }) => void;
+} = null;
 
 let wms: null = null;
 
@@ -194,29 +394,86 @@ let aqiLayer: {
   getScatterLayer(): unknown;
   on(arg0: string, arg1: () => void): unknown;
   setLoca: (arg0: {
-    [x: string]: any; remove(pl: {
-      setSource: (arg0: any) => void; setStyle: (arg0: { radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number; blurRadius: number; unit: string; }) => void; addAnimate: (arg0: {
-        key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number // 设置安全密钥
-        ; yoyo: boolean; repeat: number;
+    [x: string]: any;
+    remove(pl: {
+      setSource: (arg0: any) => void;
+      setStyle: (arg0: {
+        radius: (
+          i: any,
+          feature: { properties: { level: string | number } }
+        ) => number;
+        color: (i: any, feature: { properties: any }) => string;
+        borderWidth: number;
+        blurRadius: number;
+        unit: string;
       }) => void;
-    }): unknown; add: (arg0: any) => void;
-  }) => void; remove: () => void; setSource: (arg0: null, arg1: {
-    icon: {
-      type: string; image: (_index: any, feature: { properties: { aqi: any; mom: string | any[]; }; }) => string; size: number[]; anchor: string;
-    }; extData: (_index: any, feat: { properties: any; }) => any;
+      addAnimate: (arg0: {
+        key: string;
+        value: number[];
+        duration: number;
+        easing: string;
+        transform: number;
+        random: boolean;
+        delay: number; // 设置安全密钥
+        yoyo: boolean;
+        repeat: number;
+      }) => void;
+    }): unknown;
+    add: (arg0: any) => void;
   }) => void;
+  remove: () => void;
+  setSource: (
+    arg0: null,
+    arg1: {
+      icon: {
+        type: string;
+        image: (
+          _index: any,
+          feature: { properties: { aqi: any; mom: string | any[] } }
+        ) => string;
+        size: number[];
+        anchor: string;
+      };
+      extData: (_index: any, feat: { properties: any }) => any;
+    }
+  ) => void;
 } = null;
 
 let infoWindow: {
   getIsOpen(): any;
-  setContent: (arg0: string) => void; open: (arg0: {
-    clearMap: () => unknown; setCenter: (markersPosition: any[], arg1: boolean, arg2: number) => unknown; setFitView: (polygons: any, arg1: boolean) => unknown; setLimitBounds: (bounds: any) => unknown; getCenter: any; addControl: (arg0: any) => void; add: (arg0: any) => void; remove: (arg0: any) => void; on: (arg0: string, arg1: (e: {
-      target: any; pixel: any; type: any; lnglat: {
-        lng: any // 设置安全密钥
-        ; lat: any;
-      };
-    }) => void) => void; setZoom: (arg0: number) => void;
-  }, arg1: any) => void; getIsopen: () => any; close: () => void;
+  setContent: (arg0: string) => void;
+  open: (
+    arg0: {
+      clearMap: () => unknown;
+      setCenter: (
+        markersPosition: any[],
+        arg1: boolean,
+        arg2: number
+      ) => unknown;
+      setFitView: (polygons: any, arg1: boolean) => unknown;
+      setLimitBounds: (bounds: any) => unknown;
+      getCenter: any;
+      addControl: (arg0: any) => void;
+      add: (arg0: any) => void;
+      remove: (arg0: any) => void;
+      on: (
+        arg0: string,
+        arg1: (e: {
+          target: any;
+          pixel: any;
+          type: any;
+          lnglat: {
+            lng: any; // 设置安全密钥
+            lat: any;
+          };
+        }) => void
+      ) => void;
+      setZoom: (arg0: number) => void;
+    },
+    arg1: any
+  ) => void;
+  getIsopen: () => any;
+  close: () => void;
 } = null;
 
 var geo: null = null;
@@ -227,11 +484,34 @@ var hazardTopGeo: null = null;
 
 // let windData: { data: any[]; }[]=null;
 
-var disProvince: { destroy: () => void; setMap: (arg0: { clearMap(): unknown; setCenter(markersPosition: any[], arg1: boolean, arg2: number): unknown; setFitView(polygons: any, arg1: boolean): unknown; setLimitBounds(bounds: any): unknown; getCenter: any; addControl: (arg0: any) => void; add: (arg0: any) => void; remove: (arg0: any) => void; on: (arg0: string, arg1: (e: { data: any; target: any; pixel: any; type: any; lnglat: { lng: any; lat: any; }; }) => void) => void; setZoom: (arg0: number) => void; }) => void; } = null;
+var disProvince: {
+  destroy: () => void;
+  setMap: (arg0: {
+    clearMap(): unknown;
+    setCenter(markersPosition: any[], arg1: boolean, arg2: number): unknown;
+    setFitView(polygons: any, arg1: boolean): unknown;
+    setLimitBounds(bounds: any): unknown;
+    getCenter: any;
+    addControl: (arg0: any) => void;
+    add: (arg0: any) => void;
+    remove: (arg0: any) => void;
+    on: (
+      arg0: string,
+      arg1: (e: {
+        data: any;
+        target: any;
+        pixel: any;
+        type: any;
+        lnglat: { lng: any; lat: any };
+      }) => void
+    ) => void;
+    setZoom: (arg0: number) => void;
+  }) => void;
+} = null;
 
 var draw_adcode = "100000";
 
-var ranks = ["error", "优", "良好", "轻度污染", "中度污染", "重度污染"]
+var ranks = ["error", "优", "良好", "轻度污染", "中度污染", "重度污染"];
 // var colors=["#000000","#84c77e","#c0dd83","#f8ed84","#f3956e","#e65d5b"]
 onMounted(() => {
   initMap();
@@ -239,11 +519,11 @@ onMounted(() => {
 
 function object2Geojson(data: Array<MapGeo>) {
   var features = new Array();
-  var featureCollection = { "type": "FeatureCollection", "features": features };
+  var featureCollection = { type: "FeatureCollection", features: features };
 
   for (let i = 0; i < data.length; i++) {
-    var feature = { "type": "Feature", "properties": {}, "geometry": {}, };
-    var geometry = { "type": "Point", "coordinates": new Array() };
+    var feature = { type: "Feature", properties: {}, geometry: {} };
+    var geometry = { type: "Point", coordinates: new Array() };
     geometry.coordinates = [data[i].LON, data[i].LAT];
     feature.properties = data[i];
     feature.geometry = geometry;
@@ -255,11 +535,10 @@ function object2Geojson(data: Array<MapGeo>) {
 
 function object2Geojson2(data: Array<Hazard>) {
   var features = new Array();
-  var featureCollection = { "type": "FeatureCollection", "features": features };
-
+  var featureCollection = { type: "FeatureCollection", features: features };
   for (let i = 0; i < data.length; i++) {
-    var feature = { "type": "Feature", "properties": {}, "geometry": {}, };
-    var geometry = { "type": "Point", "coordinates": new Array() };
+    var feature = { type: "Feature", properties: {}, geometry: {} };
+    var geometry = { type: "Point", coordinates: new Array() };
     geometry.coordinates = [data[i].longitude, data[i].latitude];
     feature.properties = data[i];
     feature.geometry = geometry;
@@ -271,11 +550,11 @@ function object2Geojson2(data: Array<Hazard>) {
 
 function object2Geojson3(data: Array<MapGeo>) {
   var features = new Array();
-  var featureCollection = { "type": "FeatureCollection", "features": features };
+  var featureCollection = { type: "FeatureCollection", features: features };
 
-  for (let i = 0; i < data.length; i+=17) {
-    var feature = { "type": "Feature", "properties": {}, "geometry": {}, };
-    var geometry = { "type": "Point", "coordinates": new Array() };
+  for (let i = 0; i < data.length; i += 17) {
+    var feature = { type: "Feature", properties: {}, geometry: {} };
+    var geometry = { type: "Point", coordinates: new Array() };
     geometry.coordinates = [data[i].LON, data[i].LAT];
     feature.properties = data[i];
     feature.geometry = geometry;
@@ -285,21 +564,20 @@ function object2Geojson3(data: Array<MapGeo>) {
   return featureCollection;
 }
 
-interface MapGeoRes{
+interface MapGeoRes {
   data: Array<MapGeo>;
 }
 
-interface MapGeoRes{
+interface MapGeoRes {
   data: Array<MapGeo>;
 }
 
-interface HazardRes{
+interface HazardRes {
   data: Array<Hazard>;
 }
 
 async function getMapGeo() {
   await get<MapGeoRes>("/api/vis/getVisData/").then((res) => {
-    
     geo = new Loca.GeoJSONSource({
       data: object2Geojson(res.data.data),
     });
@@ -313,16 +591,21 @@ async function getMapGeo() {
 }
 
 async function getPointInfo() {
-  await get<Point>("/api/vis/getPointInfo/", { LON: pos_info.lng, LAT: pos_info.lat }).then((res) => {
+  await get<Point>("/api/vis/getPointInfo/", {
+    LON: pos_info.lng,
+    LAT: pos_info.lat,
+  }).then((res) => {
     pos_info.weatherInfo = res.data;
   });
 }
 
 async function getProInfo() {
-  await get<ProInfo>("/api/getProInfo/", { proName: pos_info.provinceName }).then((res) => {
+  await get<ProInfo>("/api/getProInfo/", {
+    proName: pos_info.provinceName,
+  }).then((res) => {
     pos_info.geoInfo = res.data.geography;
   });
-};
+}
 
 function getHazardGeo() {
   get<HazardRes>("/api/getHazard/").then((res) => {
@@ -336,14 +619,15 @@ function getHazardGeo() {
       InitHazard();
     });
   });
-};
+}
 
 function initMap() {
   AMapLoader.load({
     key: "671116f417c14e708dd09edf8d4ab63a",
     version: "2.0",
-    Loca: {                // 是否加载 Loca， 缺省不加载
-      version: "2.0.0",  // Loca 版本，缺省 1.3.2
+    Loca: {
+      // 是否加载 Loca， 缺省不加载
+      version: "2.0.0", // Loca 版本，缺省 1.3.2
     },
     plugins: [
       "AMap.Scale",
@@ -351,8 +635,8 @@ function initMap() {
       "AMap.MapType",
       "AMap.DistrictSearch",
       "AMap.Geocoder",
-      'AMap.PlaceSearch',
-      'AMap.Autocomplete',
+      "AMap.PlaceSearch",
+      "AMap.Autocomplete",
     ],
   })
     .then((AMap) => {
@@ -371,7 +655,7 @@ function initMap() {
       });
       // map.setLimitBounds(new AMap.Bounds([50,60],[150,0]));
       loca = new Loca.Container({
-        map: map
+        map: map,
       });
       //卫星图层
       sate = new AMap.TileLayer.Satellite({ zIndex: 1 });
@@ -409,16 +693,15 @@ function initMap() {
       //   url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/traffic.json',
       // });
 
-
-      map.addControl(new AMap.Scale({ position: 'LB' }));
-      map.addControl(new AMap.ToolBar({ liteStyle: true, position: 'LT' }));
+      map.addControl(new AMap.Scale({ position: "LB" }));
+      map.addControl(new AMap.ToolBar({ liteStyle: true, position: "LT" }));
       map.add(wms);
       // map.add(sate);
       map.add(disCountry);
       pos_info.searcher = new AMap.DistrictSearch(pos_info.opts);
       pos_info.geoCoder = new AMap.Geocoder();
       infoWindow = new AAMap.InfoWindow({
-        content: "",  //传入 dom 对象，或者 html 字符串
+        content: "", //传入 dom 对象，或者 html 字符串
       });
       handlerMapClick();
       getMapGeo();
@@ -445,11 +728,11 @@ function drawBounds() {
       depth: 0,
       styles: {
         // 'fill': 'linear-gradient(to right top, rgba(26, 79, 158, 1),rgb(243, 179, 179, 1))',
-        'fill': '',
-        'province-stroke': 'purple',
-        'city-stroke': 'white', // 中国地级市边界
-        'county-stroke': 'rgba(255,255,255,0.5)' // 中国区县边界
-      }
+        fill: "",
+        "province-stroke": "purple",
+        "city-stroke": "white", // 中国地级市边界
+        "county-stroke": "rgba(255,255,255,0.5)", // 中国区县边界
+      },
     });
     disProvince.setMap(map);
   }
@@ -466,8 +749,12 @@ async function handlerMapClick() {
     // 根据坐标获取位置信息
     pos_info.geoCoder.getAddress(
       markersPosition,
-      async (status: string, result: { regeocode: { addressComponent: any } }) => {
-        if (status === "complete" && result.regeocode) { //判断是否为中国境内
+      async (
+        status: string,
+        result: { regeocode: { addressComponent: any } }
+      ) => {
+        if (status === "complete" && result.regeocode) {
+          //判断是否为中国境内
           let addressComponent = result.regeocode.addressComponent;
           pos_info.adcode = addressComponent.adcode;
           pos_info.provinceName = addressComponent.province;
@@ -476,24 +763,34 @@ async function handlerMapClick() {
           pos_info.provinceCode = addressComponent.adcode.substr(0, 2) + "0000";
           if (pos_info.cityName != "") {
             if (pos_info.districtName != "") {
-              pos_info.name = '当前位置：' + pos_info.provinceName + "/" + pos_info.cityName + "/" + pos_info.districtName;
+              pos_info.name =
+                "当前位置：" +
+                pos_info.provinceName +
+                "/" +
+                pos_info.cityName +
+                "/" +
+                pos_info.districtName;
             } else {
-              pos_info.name = '当前位置：' + pos_info.provinceCode + "/" + pos_info.cityName;
+              pos_info.name =
+                "当前位置：" + pos_info.provinceCode + "/" + pos_info.cityName;
             }
           } else {
-            pos_info.name = '当前位置：' + pos_info.provinceName;
+            pos_info.name = "当前位置：" + pos_info.provinceName;
           }
           // let cityId = parseInt(adcode.substr(0, 4) + '00')
           // let areaId = adcode
-          if (pos_info.provinceCode != "100000") {  //国内各省，高亮区域并跟随中心
+          if (pos_info.provinceCode != "100000") {
+            //国内各省，高亮区域并跟随中心
             await showInfoWindow();
-          } else {                                  //刚刚好是中国，取消高亮并重设中心
+          } else {
+            //刚刚好是中国，取消高亮并重设中心
             pos_info.provinceName = "中国";
             map.remove(pos_info.polygons); //清除结果
             map.setCenter([105, 36], false, 30);
             map.setZoom(4.8);
           }
-        } else {  //非中国境内，设为中国
+        } else {
+          //非中国境内，设为中国
           pos_info.adcode = "100000";
           pos_info.provinceName = "中国";
           pos_info.cityName = "";
@@ -513,60 +810,56 @@ async function showInfoWindow() {
     `<div><span style="font-size: 13px;">${pos_info.lat}°N ${pos_info.lng}°E</span>`,
   ];
 
-  if (buttonActive.d) {  //地形图层
+  if (buttonActive.d) {
+    //地形图层
     drawBounds();
     await getProInfo();
     content.push(
       `<span style="font-size: 18px;"><b>${pos_info.name}</b></span>`,
-      `<span style="font-size: 14px;">${pos_info.provinceName}地理概况：${pos_info.geoInfo}</span>`,
+      `<span style="font-size: 14px;">${pos_info.provinceName}地理概况：${pos_info.geoInfo}</span>`
     );
     content.push("</div>");
-    infoWindow.setContent(content.join('<br>'));
+    infoWindow.setContent(content.join("<br>"));
     // 打开信息窗体
-    let dd = map.getCenter()
-    dd.lat = pos_info.lat
-    dd.lng = pos_info.lng
+    let dd = map.getCenter();
+    dd.lat = pos_info.lat;
+    dd.lng = pos_info.lng;
     infoWindow.open(map, dd);
-  }
-  else if (buttonActive.e) {
+  } else if (buttonActive.e) {
     var feat = scatter.queryFeature(pos_info.pixel);
     if (feat) {
       content.push(
         `<span style="font-size: 24px;"><b>${feat.properties.type} ${feat.properties.level}</b></span>`,
-        `<span style="font-size: 13px;">${feat.properties.place}</span>`,
+        `<span style="font-size: 13px;">${feat.properties.place}</span>`
       );
       content.push("</div>");
-      infoWindow.setContent(content.join('<br>'));
+      infoWindow.setContent(content.join("<br>"));
       // 打开信息窗体
-      let dd = map.getCenter()
-      dd.lat = pos_info.lat
-      dd.lng = pos_info.lng
+      let dd = map.getCenter();
+      dd.lat = pos_info.lat;
+      dd.lng = pos_info.lng;
       infoWindow.open(map, dd);
-    }
-    else {
+    } else {
       if (infoWindow.getIsOpen()) infoWindow.close();
     }
-  }
-  else if (buttonActive.a || buttonActive.b || buttonActive.f) {
+  } else if (buttonActive.a || buttonActive.b || buttonActive.f) {
     await getPointInfo();
     if (buttonActive.a) {
       content.push(
         `<span style="font-size: 24px;"><b>${pos_info.weatherInfo.temp}℃</b></span>`,
-        `<span style="font-size: 13px;">气温</span>`,
+        `<span style="font-size: 13px;">气温</span>`
       );
-    }
-    else if (buttonActive.b) {
+    } else if (buttonActive.b) {
       content.push(
         `<span style="font-size: 24px;"><b>${pos_info.weatherInfo.precip}mm</b></span>`,
-        `<span style="font-size: 13px;">降水量</span>`,
+        `<span style="font-size: 13px;">降水量</span>`
       );
-    }
-    else if (buttonActive.f) {
+    } else if (buttonActive.f) {
       var type = Math.floor(pos_info.weatherInfo.aqi / 50) + 1;
       if (type > 5) type = 5;
       content.push(
         `<span style="font-size: 24px;"><b>${pos_info.weatherInfo.aqi}</b></span>`,
-        `<span style="font-size: 13px;">AQI  空气质量：${ranks[type]}</span>`,
+        `<span style="font-size: 13px;">AQI  空气质量：${ranks[type]}</span>`
       );
     }
     // else if(buttonActive.c) {
@@ -574,15 +867,14 @@ async function showInfoWindow() {
     // content.push(`风场：u${wind.u},v${wind.v},speed${wind.speed}，angle${wind.angle}，direction${wind.direction}`);
     // }
     content.push("</div>");
-    infoWindow.setContent(content.join('<br>'));
+    infoWindow.setContent(content.join("<br>"));
     // 打开信息窗体
-    let dd = map.getCenter()
-    dd.lat = pos_info.lat
-    dd.lng = pos_info.lng
+    let dd = map.getCenter();
+    dd.lat = pos_info.lat;
+    dd.lng = pos_info.lng;
     infoWindow.open(map, dd);
   }
 }
-
 
 function clickA() {
   // if(infoWindow.getIsOpen()) showInfoWindow();
@@ -628,8 +920,7 @@ function clicka() {
     else if (buttonActive.f) clickf();
     if (infoWindow.getIsOpen()) showInfoWindow();
     heatmapTem.setLoca(loca);
-  }
-  else {
+  } else {
     heatmapTem.remove();
   }
 }
@@ -644,8 +935,7 @@ function clickb() {
     else if (buttonActive.f) clickf();
     if (infoWindow.getIsOpen()) showInfoWindow();
     heatmapWater.setLoca(loca);
-  }
-  else {
+  } else {
     heatmapWater.remove();
   }
 }
@@ -660,8 +950,7 @@ function clickc() {
     else if (buttonActive.f) clickf();
     if (infoWindow.getIsOpen()) infoWindow.close();
     showWind();
-  }
-  else {
+  } else {
     windLayer.remove();
   }
 }
@@ -675,8 +964,7 @@ function clickd() {
     else if (buttonActive.e) clicke();
     else if (buttonActive.f) clickf();
     if (infoWindow.getIsOpen()) showInfoWindow();
-  }
-  else {
+  } else {
     disProvince && disProvince.setMap(null);
     draw_adcode = "100000";
   }
@@ -694,8 +982,7 @@ function clicke() {
     breath.setLoca(loca);
     if (infoWindow.getIsOpen()) showInfoWindow();
     // loca.animate.start();
-  }
-  else {
+  } else {
     scatter.remove();
     breath.remove();
   }
@@ -711,8 +998,7 @@ function clickf() {
     else if (buttonActive.a) clicka();
     aqiLayer.setLoca(loca);
     if (infoWindow.getIsOpen()) showInfoWindow();
-  }
-  else {
+  } else {
     aqiLayer.remove();
     // loca.remove(aqiLayer);
   }
@@ -720,10 +1006,12 @@ function clickf() {
 
 //显示风场图层
 function showWind() {
-  import('amap-wind').then(({ WindLayer }) => {
-    fetch('https://sakitam.oss-cn-beijing.aliyuncs.com/codepen/wind-layer/json/wind.json')
-      .then(res => res.json())
-      .then(res => {
+  import("amap-wind").then(({ WindLayer }) => {
+    fetch(
+      "https://sakitam.oss-cn-beijing.aliyuncs.com/codepen/wind-layer/json/wind.json"
+    )
+      .then((res) => res.json())
+      .then((res) => {
         // windData = res;
         windLayer = new WindLayer(res, {
           windOptions: {
@@ -748,7 +1036,7 @@ function showWind() {
               "rgb(245,64,32)",
               "rgb(237,45,28)",
               "rgb(220,24,32)",
-              "rgb(180,0,35)"
+              "rgb(180,0,35)",
             ],
             lineWidth: 5,
           },
@@ -799,18 +1087,21 @@ function InitHeatMapTem() {
   heatmapTem.setSource(geo, {
     // radius: 200000,
     radius: 80000,
-    unit: 'meter',
+    unit: "meter",
     gradient: {
-      0.1: '#2A85B8',
-      0.2: '#16B0A9',
-      0.3: '#29CF6F',
-      0.4: '#5CE182',
-      0.5: '#7DF675',
-      0.6: '#FFF100',
-      0.7: '#FAA53F',
-      1: '#D04343',
+      0.1: "#2A85B8",
+      0.2: "#16B0A9",
+      0.3: "#29CF6F",
+      0.4: "#5CE182",
+      0.5: "#7DF675",
+      0.6: "#FFF100",
+      0.7: "#FAA53F",
+      1: "#D04343",
     },
-    value: function (_index: any, feature: { properties: { temp: any; mom: string | any[]; }; }) {
+    value: function (
+      _index: any,
+      feature: { properties: { temp: any; mom: string | any[] } }
+    ) {
       return feature.properties.temp;
     },
   });
@@ -831,27 +1122,29 @@ function InitHeatMapWater() {
 
   heatmapWater.setSource(geo, {
     radius: 70000,
-    unit: 'meter',
+    unit: "meter",
     height: 500000,
 
     gradient: {
-      0.1: '#EAF3F7',
-      0.2: '#98D5EE',
-      0.3: '#59C7F6',
-      0.4: '#60B1F4',
-      0.5: '#4E92CE',
-      0.6: '#3185CF',
-      0.7: '#0A69BC',
-      1: '#083D99',
+      0.1: "#EAF3F7",
+      0.2: "#98D5EE",
+      0.3: "#59C7F6",
+      0.4: "#60B1F4",
+      0.5: "#4E92CE",
+      0.6: "#3185CF",
+      0.7: "#0A69BC",
+      1: "#083D99",
     },
-    value: function (_index: any, feature: { properties: { precip: any; mom: string | any[]; }; }) {
+    value: function (
+      _index: any,
+      feature: { properties: { precip: any; mom: string | any[] } }
+    ) {
       return feature.properties.precip;
     },
-    heightBezier: [0, .53, .37, .98],
+    heightBezier: [0, 0.53, 0.37, 0.98],
   });
 
   //   loca.add(heatmapWater);
-
 }
 
 //初始化灾害图层
@@ -865,9 +1158,9 @@ function InitHazard() {
   });
 
   scatter.setSource(hazardGeo, {
-    unit: 'px',
+    unit: "px",
     size: [20, 20],
-    texture: 'https://a.amap.com/Loca/static/loca-v2/demos/images/blue.png',
+    texture: "https://a.amap.com/Loca/static/loca-v2/demos/images/blue.png",
     borderWidth: 0,
   });
 
@@ -876,9 +1169,10 @@ function InitHazard() {
   });
   breath.setSource(hazardTopGeo);
   breath.setStyle({
-    unit: 'px',
+    unit: "px",
     size: [50, 50],
-    texture: 'https://a.amap.com/Loca/static/loca-v2/demos/images/breath_red.png',
+    texture:
+      "https://a.amap.com/Loca/static/loca-v2/demos/images/breath_red.png",
     animate: true,
     duration: 1000,
   });
@@ -890,19 +1184,22 @@ function InitAqi() {
   aqiLayer = new Loca.LabelsLayer({
     zindex: 100,
     fitView: true,
-    eventSupport: false,  // 图层事件支持，LabelsLayer 默认开启
-    collision: false  // 是否开启文字自动避让
+    eventSupport: false, // 图层事件支持，LabelsLayer 默认开启
+    collision: false, // 是否开启文字自动避让
   });
   aqiLayer.setSource(aqiGeo, {
     icon: {
-      type: 'image',
-      image: function (_index: any, feature: { properties: { aqi: any; mom: string | any[]; }; }) {
+      type: "image",
+      image: function (
+        _index: any,
+        feature: { properties: { aqi: any; mom: string | any[] } }
+      ) {
         var type: number = Math.floor(feature.properties.aqi / 50) + 1;
         if (type > 5) type = 5;
         return getAssetsFileAQI(type + ".png");
       },
       size: [30, 30],
-      anchor: 'center',
+      anchor: "center",
     },
     // text: {
     //     // 每项配置都可使用回调函数来动态配置
@@ -922,14 +1219,15 @@ function InitAqi() {
     //     },
     //     direction: 'bottom',
     // },
-    extData: function (_index: any, feature: { properties: { adcode: any; aqi: any; mom: string | any[]; }; }) {
+    extData: function (
+      _index: any,
+      feature: { properties: { adcode: any; aqi: any; mom: string | any[] } }
+    ) {
       var type: number = Math.floor(feature.properties.aqi / 50) + 1;
       if (type > 5) type = 5;
       return { type: type, adcode: feature.properties.adcode };
     },
-
   });
-
 }
 </script>
 
@@ -937,7 +1235,6 @@ function InitAqi() {
 #mapContainer {
   width: 100%;
   height: 100%;
-
 }
 
 .layerbtns[data-iconsize="0"] {
@@ -992,7 +1289,11 @@ function InitAqi() {
   border: 1px solid #3924a7;
   border-radius: 30px;
   /* background-color: rgba(8, 122, 0, 0.5); */
-  background: linear-gradient(to right top, rgba(26, 79, 158, 0.5), rgb(243, 179, 179, 0.5));
+  background: linear-gradient(
+    to right top,
+    rgba(26, 79, 158, 0.5),
+    rgb(243, 179, 179, 0.5)
+  );
   display: flex;
   width: 105px;
   margin: 0.3em 0 0.3em 0.4em;
@@ -1084,7 +1385,6 @@ function InitAqi() {
   color: black;
   font-weight: 600;
 }
-
 
 :deep(.amap-info-outer) {
   /* background:linear-gradient(to right top, rgba(26, 79, 158, 0.9),rgb(243, 179, 179, 0.9));
