@@ -1,14 +1,11 @@
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
   <div class="common-layout" style="background:transparent;border-color: transparent;">
-    <el-select v-model="selectedDate" :placeholder="selectedDate" @change="handleChange" style="width: 130px;border-radius: 50px;">
-    <el-option
-      v-for="option in dateOptions"
-      :key="option.value"
-      :label="option.label"
-      :value="option.value">
-    </el-option>
-  </el-select>
+    <el-select v-model="selectedDate" :placeholder="selectedDate" @change="handleChange"
+      style="width: 130px;border-radius: 50px;">
+      <el-option v-for="option in dateOptions" :key="option.value" :label="option.label" :value="option.value">
+      </el-option>
+    </el-select>
     <el-container>
       <el-header>
         <div id="chart_temp_perhour" ref="chart_temp_perhour" style="height: 120px;  width: 100%;  margin: 0 auto">
@@ -110,7 +107,7 @@ interface RealTimeWeatherData {
 }
 
 const get_data = async () => {
-  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: props.city,selectedDate:selectedDate.value }).then((res) => {
+  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: props.city, selectedDate: selectedDate.value }).then((res) => {
     realTimeWeatherList.value.splice(0, realTimeWeatherList.value.length, ...res.data.realTimeWeatherList);
     // console.log("getdata")
     if (realTimeWeatherList.value.length > 12) {
@@ -120,11 +117,19 @@ const get_data = async () => {
 };
 
 watch(() => props.city, () => Promise.all([get_data()]).then(() => {
-  selectedDate.value=new Date().toISOString().substr(0, 10);
+  // selectedDate.value=new Date().toISOString().substr(0, 10);
   renderChart(
     realTimeWeatherList.value,
   );
 }));
+
+// watch(() => selectedDate, () => Promise.all([get_data()]).then(() => {
+//   console.log("watch2");
+//   selectedDate.value=new Date().toISOString().substr(0, 10);
+//   renderChart(
+//     realTimeWeatherList.value,
+//   );
+// }));
 
 // 日期切换选择
 const selectedDate = ref(new Date().toISOString().substr(0, 10)); // 初始化为今天的日期
@@ -149,9 +154,18 @@ function formatDate(date) {
 
 function handleChange(value) {
   console.log(selectedDate.value);
-  get_data().then(() => {
-  renderChart(realTimeWeatherList.value);
-});
+  Promise.all([get_data()]).then(() => {
+    renderChart(realTimeWeatherList.value);
+  });
+  // 等待 300 毫秒
+  setTimeout(() => {
+    // 获取数据并渲染图表
+    renderChart(realTimeWeatherList.value);
+  }, 300);
+
+  //   get_data().then(() => {
+  //   renderChart(realTimeWeatherList.value);
+  // });
 }
 
 // 初始化 ECharts 实例
@@ -266,6 +280,51 @@ const renderChart = async (
     //   data: ["温度", "湿度", "AQI", "气压"],
     // },
 
+    // series: [
+    //   {
+    //     type: "line",
+    //     showSymbol: false,
+    //     name: "温度",
+    //     data: normalizedTemperatures,
+    //     markPoint: {
+    //       data: [
+    //         // { type: 'max', name: '最大值' },
+    //         // { type: 'min', name: '最小值' }
+    //         // { type: 'max', name: '最大值', symbol: 'circle', symbolSize: 25, itemStyle: { color: 'red' } },
+    //         // { type: 'min', name: '最小值', symbol: 'circle', symbolSize: 25, itemStyle: { color: 'blue' } }
+    //         { 
+    //       type: 'max', 
+    //       name: '最大值', 
+    //       symbol: 'circle', 
+    //       symbolSize: 25, 
+    //       itemStyle: { color: 'red' }, 
+    //       label: {
+    //         show: true,
+    //         formatter: function (params) {
+    //           return ;
+    //         }
+    //       }
+    //     },
+    //     { 
+    //       type: 'min', 
+    //       name: '最小值', 
+    //       symbol: 'circle', 
+    //       symbolSize: 25, 
+    //       itemStyle: { color: 'blue' }, 
+    //       label: {
+    //         show: true,
+    //         formatter: function (params) {
+    //           return `原始值: ${temperatures[params.dataIndex]}`;
+    //         }
+    //       }
+    //     }
+    //       ]
+
+    //     },
+    //     smooth: true // 这里设置平滑曲线
+    //   }
+    // ],
+
     series: [
       {
         type: "line",
@@ -341,6 +400,14 @@ onMounted(() => Promise.all([get_data()]).then(() => {
 
 
 <style lang="scss" scoped>
+:deep(.el-select__wrapper) {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+:deep(.el-select__placeholder) {
+  color: black;
+}
+
 .calendar-container {
   margin-top: 2vh;
   padding: 0px;

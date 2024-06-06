@@ -1,7 +1,7 @@
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
   <div class="scroll-layout background-transparent">
-    <el-select v-model="selectedDate" :placeholder="selectedDate" @change="handleChange" style="width: 130px;border-radius: 50px;">
+    <el-select v-model="selectedDate" :placeholder="selectedDate" @change="handleChange" style="width: 150px;border-radius: 50px;">
     <el-option
       v-for="option in dateOptions"
       :key="option.value"
@@ -124,9 +124,18 @@ function formatDate(date) {
 
 function handleChange(value) {
   console.log(selectedDate.value);
-  get_data().then(() => {
-  renderChart(realTimeWeatherList.value);
-});
+  Promise.all([get_data()]).then(() => {
+    renderChart(realTimeWeatherList.value);
+  });
+  // 等待 300 毫秒
+  setTimeout(() => {
+    // 获取数据并渲染图表
+    renderChart(realTimeWeatherList.value);
+  }, 300);
+
+  //   get_data().then(() => {
+  //   renderChart(realTimeWeatherList.value);
+  // });
 }
 
 // 初始化 ECharts 实例
@@ -317,6 +326,13 @@ onMounted(() => Promise.all([get_data()]).then(() => {
 
 
 <style scoped>
+:deep(.el-select__wrapper ) {
+  background-color: rgba(255,255,255,0);
+}
+
+:deep(.el-select__placeholder ) {
+  color: black;
+}
 
 .background-transparent {
   background: transparent;
