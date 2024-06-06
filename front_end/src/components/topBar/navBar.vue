@@ -29,9 +29,14 @@ const __admin = ref(false);
 watch(
   () => userInfo.role,
   () => {
+    console.log("change:", userInfo.role);
     __admin.value = userInfo.role == UserRole.Administrator;
   }
 );
+onMounted(() => {
+  console.log("change:", userInfo.role);
+  __admin.value = userInfo.role == UserRole.Administrator;
+});
 </script>
 
 <style scoped>

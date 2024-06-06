@@ -42,6 +42,7 @@ class Command(BaseCommand):
         if kwargs['D']:
             print('Delete all')
             RealtimeWeather.objects.all().delete()
+            RealtimeAirQuality.objects.all().delete()
 
         if kwargs["U"]:
             print("Refresh all")
@@ -73,36 +74,38 @@ class Command(BaseCommand):
             city_name = city.cityName
             adm2 = city.areaName
 
-            realtime_weather = RealtimeWeather(
-                cityName=city_name,
-                adm2=adm2,
-                temp=now_weather["temp"],
-                feelsLike=now_weather["feelsLike"],
-                icon=now_weather["icon"],
-                text=now_weather["text"],
-                wind360=now_weather["wind360"],
-                windDir=now_weather["windDir"],
-                windScale=now_weather["windScale"],
-                windSpeed=now_weather["windSpeed"],
-                humidity=now_weather['humidity'],
-                precip=now_weather["precip"],
-                pressure=now_weather["pressure"],
-            )
-            realtime_weather.save()
+            if not RealtimeWeather.objects.filter(cityName=city_name, adm2=adm2).exists():
+                realtime_weather = RealtimeWeather(
+                    cityName=city_name,
+                    adm2=adm2,
+                    temp=now_weather["temp"],
+                    feelsLike=now_weather["feelsLike"],
+                    icon=now_weather["icon"],
+                    text=now_weather["text"],
+                    wind360=now_weather["wind360"],
+                    windDir=now_weather["windDir"],
+                    windScale=now_weather["windScale"],
+                    windSpeed=now_weather["windSpeed"],
+                    humidity=now_weather['humidity'],
+                    precip=now_weather["precip"],
+                    pressure=now_weather["pressure"],
+                )
+                realtime_weather.save()
 
-            realtime_air_quality = RealtimeAirQuality(
-                cityName=city_name,
-                adm2=adm2,
-                aqi=int(now_air_quality['aqi']),
-                level=int(now_air_quality['level']),
-                category=now_air_quality['category'],
-                pm10=now_air_quality['pm10'],
-                pm2p5=now_air_quality['pm2p5'],
-                no2=now_air_quality['no2'],
-                so2=now_air_quality['so2'],
-                co=now_air_quality['co'],
-                o3=now_air_quality['o3']
-            )
-            realtime_air_quality.save()
+            if not RealtimeAirQuality.objects.filter(cityName=city_name, adm2=adm2).exists():
+                realtime_air_quality = RealtimeAirQuality(
+                    cityName=city_name,
+                    adm2=adm2,
+                    aqi=int(now_air_quality['aqi']),
+                    level=int(now_air_quality['level']),
+                    category=now_air_quality['category'],
+                    pm10=now_air_quality['pm10'],
+                    pm2p5=now_air_quality['pm2p5'],
+                    no2=now_air_quality['no2'],
+                    so2=now_air_quality['so2'],
+                    co=now_air_quality['co'],
+                    o3=now_air_quality['o3']
+                )
+                realtime_air_quality.save()
 
         self.stdout.write(self.style.SUCCESS('Successfully updated realtime weather and air quality.'))

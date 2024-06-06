@@ -406,13 +406,13 @@ def delete_data(request):
 def user_info(request):
     auth_header = request.META.get('HTTP_AUTHORIZATION', '')
     if not auth_header:
-        return JsonResponse({'reason': 'manage.invalid'}, status=400)
+        return JsonResponse({'reason': '当前尚未登录'}, status=200)
 
-    try:
-        auth_header = auth_header.decode(HTTP_HEADER_ENCODING)
-        # token = auth_header.split(' ')[1]  # 假设token在Authorization头的'Bearer '之后
-    except (UnicodeDecodeError, AttributeError, IndexError):
-        return JsonResponse({'reason': 'manage.invalid'}, status=400)
+    # try:
+    #     auth_header = auth_header.decode(HTTP_HEADER_ENCODING)
+    #     # token = auth_header.split(' ')[1]  # 假设token在Authorization头的'Bearer '之后
+    # except (UnicodeDecodeError, AttributeError, IndexError):
+    #     return JsonResponse({'reason': 'manage.invalid'}, status=400)
 
     # try:
     #     # 使用Django REST framework的token认证系统解析token
@@ -628,6 +628,7 @@ def update_current_city(request):
     user_current_city = UserCurrentCity.objects.get(user=request.user)
     user_current_city.cityName = city
     user_current_city.adm2 = adm2
+    user_current_city.save()
 
     json_response = {
         "success": True,

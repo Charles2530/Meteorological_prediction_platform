@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { UserRole } from "@/types/user";
 import { useUserInfo } from "@/stores/userInfo";
 import { useLoginConfig } from "@/stores/loginConfig";
+import { get } from "@/api/index";
+import { UserInfo } from "@/types/user";
 // 定义路由部分
 // 网站首页
 const Home = () => import("@/views/home/index.vue");
@@ -113,19 +115,19 @@ router.beforeEach((to, from, next) => {
       new RegExp("^" + item.path.split("/:")[0] + "(?:/.*)?$").test(to.path)
     )
   ) {
-    if (to.name !== "Home") {
-      const userInfo = useUserInfo();
-      const themeConfig = useLoginConfig();
+    const userInfo = useUserInfo();
+    const themeConfig = useLoginConfig();
+    get<UserInfo>("/api/get_info/").then((res) => {
+      userInfo.login(res.data);
+      console.log(to.meta.permission, userInfo.role, "getToken");
       const permissions = to.meta.permission;
-      console.log(permissions);
       if (permissions.includes(userInfo.role)) {
+        themeConfig.showLoginPanel = false;
         next();
       } else {
         themeConfig.showLoginPanel = true;
       }
-    } else {
-      next();
-    }
+    });
   } else {
     next({ name: "404Page" });
   }

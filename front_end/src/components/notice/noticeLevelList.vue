@@ -9,7 +9,6 @@ import * as echarts from "echarts";
 const chartRef = ref<HTMLElement | null>(null);
 onMounted(() => {
   chartRef.value = document.getElementById("chart");
-  console.log(chartRef.value);
   initChart();
 });
 addEventListener("resize", () => {

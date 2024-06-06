@@ -112,8 +112,8 @@ def subscribe(request):
             if not cities:
                 return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
             # print('-----', user.username, cities, '-----')
-            if CitySubscription.objects.filter(user=user, cityName=cities, adm2=adm2).exists():
-                CitySubscription.objects.filter(user=user, cityName=cities, adm2=adm2).delete()
+            if CitySubscription.objects.filter(user=user, cityName=city, adm2=adm2).exists():
+                CitySubscription.objects.filter(user=user, cityName=city, adm2=adm2).delete()
             else:
                 city_subscription = CitySubscription(
                     user=user,

@@ -168,7 +168,6 @@ const undo_subscribe = () => {
   undo_subscribe_dialog.value = true;
 };
 const deleteSubscribe = () => {
-  console.log(form.city);
   undo_subscribe_dialog.value = false;
   tableData.value = tableData.value.filter((item) => item.city !== form.city);
   post<SubscribeResponse>("/api/subscribe/", { cities: form.city }).then(
@@ -212,7 +211,6 @@ const routerToNoticeId = function () {
     const query = params[1].split("=");
     if (query[0] === "notificationId") {
       const notificationId = parseInt(query[1]);
-      console.log(notificationId);
       const notificationElement = document.getElementById(
         `notification-${notificationId}`
       );

@@ -197,12 +197,12 @@ const removeCity = (index: number) => {
   if (index >= 0 && index < careCitiesList.value.length) {
     // POST request
     interface DeleteResponse {
-      success: boolean;
+      status: boolean;
       reason?: string;
     }
     post<DeleteResponse>("/api/weather/care_cities/del/", {city: careCitiesList.value[index].city}).then((res) => {
       const response = res.data;
-      if (response.success) {
+      if (response.status) {
         ElMessage.success("已删除");
       } else ElMessage.error("无效的请求");
     });
@@ -247,12 +247,12 @@ const handleConfirm = () => {
   if (tempSelectedCity.value) {
     // POST request
     interface AddResponse {
-      success: boolean;
+      status: boolean;
       reason?: string;
     }
     post<AddResponse>("/api/weather/care_cities/add/", {  city: tempSelectedCity.value  }).then((res) => {
       const response = res.data;
-      if (response.success) {
+      if (response.status) {
         ElMessage.success("已添加");
       } else ElMessage.error("无效的请求");
     });

@@ -367,9 +367,9 @@ interface SearchWeatherHourlyListResponse {
 const weatherData: CityWeatherData[] = reactive([]);
 const handleSearch = () => {
   post<SearchWeatherHourlyListResponse>("/api/manage/data/search/", {
-    type: selectType.value,
-    time: selectedDate.value,
-    address: selectedLocation.value,
+    type: selectType.value||"",
+    time: selectedDate.value||"",
+    address: selectedLocation.value||"",
   }).then((res) => {
     if (res.status) {
       weatherData.splice(0, weatherData.length, ...res.data.weatherHourlyList);
@@ -453,7 +453,7 @@ interface DeleteForm {
   city: string;
 }
 interface DeleteResponse {
-  success: boolean;
+  status: boolean;
   reason?: string;
 }
 const deleteWeather = throttle((index: number) => {
@@ -464,7 +464,7 @@ const deleteWeather = throttle((index: number) => {
   weatherData.splice(index, 1);
   post<DeleteResponse>("/api/manage/data/delete/", request).then((res) => {
     const response = res.data;
-    if (response.success) {
+    if (response.status) {
       ElMessage.success(weatherInfo.dialogs.delete);
     } else ElMessage.error(weatherInfo.invaild);
   });

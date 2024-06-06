@@ -1,7 +1,7 @@
 import csv
 import json
 import random
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 import pytz
 import requests
@@ -232,27 +232,32 @@ def overview(request):
     city_name = request.GET.get('city[name]')
     adm2 = request.GET.get('city[adm2]')
 
-    realtime_weather = RealtimeWeather.objects.get(cityName=city_name, adm2=adm2)
-    daily_weather = DailyWeather.objects.filter(city='北京市', fxDate=datetime.now()).first()  # TODO adm2
-    realtime_air_quality = RealtimeAirQuality.objects.filter(cityName=city_name, adm2=adm2).first()
-    if realtime_weather is None:
+    try:
+        realtime_weather = RealtimeWeather.objects.get(cityName=city_name, adm2=adm2)
+    except RealtimeWeather.DoesNotExist:
         realtime_weather = RealtimeWeather.objects.filter(cityName='北京市').first()
-    if realtime_air_quality is None:
+    try:
+        daily_weather = DailyWeather.objects.filter(city=city_name, adm2=adm2, fxDate=date.today()).first()
+    except DailyWeather.DoesNotExist:
+        daily_weather = DailyWeather.objects.filter(city='北京市').first()
+    try:
+        realtime_air_quality = RealtimeAirQuality.objects.filter(cityName=city_name, adm2=adm2).first()
+    except RealtimeAirQuality.DoesNotExist:
         realtime_air_quality = RealtimeAirQuality.objects.filter(cityName='北京市').first()
     response_json = {
         "weather": {
-            "condition": realtime_weather.text,
-            "condition_icon": realtime_weather.icon,
-            "temp": realtime_weather.temp,
-            "temp_feel": realtime_weather.feelsLike,
-            "precip": realtime_weather.precip,
+            "condition": realtime_weather.text if realtime_weather else 0,
+            "condition_icon": realtime_weather.icon if realtime_weather else 0,
+            "temp": realtime_weather.temp if realtime_weather else 0,
+            "temp_feel": realtime_weather.feelsLike if realtime_weather else 0,
+            "precip": realtime_weather.precip if realtime_weather else 0,
             "precip_probability": 10,  # TODO change with real data
-            "aqi": realtime_air_quality.aqi,
-            "pressure": realtime_weather.pressure,
+            "aqi": realtime_air_quality.aqi if realtime_air_quality else 0,
+            "pressure": realtime_weather.pressure if realtime_air_quality else 0,
             "ray": "中等",  # TODO change with real data
-            "sunrise_time": daily_weather.sunrise,  # daily
-            "sunset_time": daily_weather.sunset,  # daily
-            "humidity": daily_weather.humidity,
+            "sunrise_time": daily_weather.sunrise if daily_weather else 0,
+            "sunset_time": daily_weather.sunset if daily_weather else 0,
+            "humidity": daily_weather.humidity if daily_weather else 0,
         },
         "search": True
     }
@@ -264,21 +269,25 @@ def overview(request):
 def realtime(request):
     # query realtime weather data
     # query hourly weather data
+    city_name = request.GET.get('city[name]')
+    adm2 = request.GET.get('city[adm2]')
 
     realTimeWeatherList = []
     rounded_dt = datetime.now().replace(minute=0, second=0, microsecond=0)
     fake_rounded_dt = rounded_dt + timedelta(days=1)  # use tomorrow data for query
-    for i in range(-5, 7):
+    for i in range(-10, 14, 2):
         query_dt = fake_rounded_dt + timedelta(hours=i)
         print_dt = rounded_dt + timedelta(hours=i)
-        hourly_weather = WeatherInfo.objects.filter(time=query_dt).first()
+        hourly_weather = WeatherInfo.objects.filter(cityName=city_name, adm2=adm2, time=query_dt).first()
         realTimeWeatherList.append({
-            "time": print_dt.strftime('%I:%M'),
-            "condition": hourly_weather["text"],
-            "temperature": int(hourly_weather["temp"]),
-            "humidity": int(hourly_weather["humidity"]),
-            "windSpeed": int(hourly_weather["windSpeed"]),
-            "windDirection": hourly_weather["windDir"]
+            "time": print_dt.strftime('%H:%M') if i != 0 else '此时',
+            "condition": hourly_weather.text if hourly_weather else 0,
+            'condition_icon': hourly_weather.icon if hourly_weather else 0,
+            "temperature": int(hourly_weather.temp if hourly_weather else 0),
+            "humidity": int(hourly_weather.humidity if hourly_weather else 0),
+            "windScale": int(hourly_weather.windScale.split('-')[-1] if hourly_weather else 0),
+            "windDirection": hourly_weather.windDir if hourly_weather else 0,
+            'wind360': hourly_weather.wind360 if hourly_weather else 0,
         })
 
     return JsonResponse({"realTimeWeatherList": realTimeWeatherList})
@@ -286,25 +295,91 @@ def realtime(request):
 
 @require_http_methods(['GET'])
 def city_rank(request):
-    city_list_max_temp = {}
-    return JsonResponse({'city_list_max_temp': city_list_max_temp}, status=200)
+    city_list_max_temp = []
+    city_list_min_temp = []
+    city_list_precip = []
+    city_list_worst_aqi = []
+    city_list_best_aqi = []
+
+    length = min(10, len(RealtimeWeather.objects.all())) + 1
+    top_weather_info = RealtimeWeather.objects.all().order_by('-temp')[:length]
+    for i in range(length):
+        info = top_weather_info[i]
+        city_list_max_temp.append({
+            'no': i + 1,
+            "city": info.adm2,
+            'province': info.cityName,
+            "item": getattr(info, 'temp')
+        })
+
+    top_weather_info = RealtimeWeather.objects.all().order_by('temp')[:length]
+    for i in range(length):
+        info = top_weather_info[i]
+        city_list_min_temp.append({
+            'no': i + 1,
+            "city": info.adm2,
+            'province': info.cityName,
+            "item": getattr(info, 'temp')
+        })
+
+    top_weather_info = RealtimeWeather.objects.all().order_by('-precip')[:length]
+    for i in range(length):
+        info = top_weather_info[i]
+        city_list_precip.append({
+            'no': i + 1,
+            "city": info.adm2,
+            'province': info.cityName,
+            "item": getattr(info, 'precip')
+        })
+
+    length = min(10, len(RealtimeAirQuality.objects.all())) + 1
+    top_weather_info = RealtimeAirQuality.objects.all().order_by('-aqi')[:length]
+    for i in range(length):
+        info = top_weather_info[i]
+        city_list_worst_aqi.append({
+            'no': i + 1,
+            "city": info.adm2,
+            'province': info.cityName,
+            "item": getattr(info, 'aqi')
+        })
+
+    top_weather_info = RealtimeAirQuality.objects.all().order_by('aqi')[:length]
+    for i in range(length):
+        info = top_weather_info[i]
+        city_list_best_aqi.append({
+            'no': i + 1,
+            "city": info.adm2,
+            'province': info.cityName,
+            "item": getattr(info, 'aqi')
+        })
+
+    json_response = {
+        'city_list_max_temp': city_list_max_temp,
+        'city_list_min_temp': city_list_min_temp,
+        'city_list_precip': city_list_precip,
+        'city_list_worst_aqi': city_list_worst_aqi,
+        'city_list_best_aqi': city_list_best_aqi,
+    }
+
+    return JsonResponse(json_response, status=200)
 
 
+@csrf_exempt
 @login_required
 @require_http_methods(['POST'])
 def add_care_city(request):
-    city_name = request.GET.get('city[name]')
-    adm2 = request.GET.get('city[adm2]')
+    data = json.loads(request.body)
+
+    city_name = data.get('city').get('name')
+    adm2 = data.get('city').get('adm2')
     user = request.user
     if not city_name:
         return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
     # print('-----', user.username, cities, '-----')
-    if CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).exists():
-        CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).delete()
-    else:
+    if not CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).exists():
         city_subscription = CitySubscription(
             user=user,
-            cityName=city,
+            cityName=city_name,
             adm2=adm2
         )
         city_subscription.save()
@@ -312,24 +387,20 @@ def add_care_city(request):
     return JsonResponse({'status': True})
 
 
+@csrf_exempt
 @login_required
 @require_http_methods(['POST'])
 def delete_care_city(request):
-    city_name = request.GET.get('city[name]')
-    adm2 = request.GET.get('city[adm2]')
+    data = json.loads(request.body)
+
+    city_name = data.get('city').get('name')
+    adm2 = data.get('city').get('adm2')
     user = request.user
     if not city_name:
         return JsonResponse({'status': False, 'message': 'No cities provided.'}, status=400)
     # print('-----', user.username, cities, '-----')
     if CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).exists():
         CitySubscription.objects.filter(user=user, cityName=city_name, adm2=adm2).delete()
-    else:
-        city_subscription = CitySubscription(
-            user=user,
-            cityName=city,
-            adm2=adm2
-        )
-        city_subscription.save()
 
     return JsonResponse({'status': True})
 
@@ -361,17 +432,21 @@ def subscribed_cities_summary(request):
             current_adm2 = '海淀'  # TODO 区
         # elif subscription_adm2.find('区') == -1:
         #     current_adm2 += '区'
-        realtime_weather = RealtimeWeather.objects.get(cityName=subscription_city_name, adm2=subscription_adm2)
-        if realtime_weather is None:
+        if subscription_city_name == current_city_name and subscription_adm2 == current_adm2:
+            continue
+        try:
+            realtime_weather = RealtimeWeather.objects.filter(cityName=subscription_city_name,
+                                                              adm2=subscription_adm2).first()
+        except RealtimeWeather.DoesNotExist:
             realtime_weather = RealtimeWeather.objects.first()
         care_cities_list.append({
-                'city': {
-                    'name': subscription_city_name,
-                    'adm2': subscription_adm2,
-                },
-                'temp': realtime_weather.temp,
-                'cond_icon': realtime_weather.icon,
-            })
+            'city': {
+                'name': subscription_city_name,
+                'adm2': subscription_adm2,
+            },
+            'temp': realtime_weather.temp,
+            'cond_icon': realtime_weather.icon,
+        })
     json_response = {
         'success': True,
         'currentCity': {
@@ -392,37 +467,39 @@ def aqi_detail(request):
     name = request.GET.get('city[name]')
     adm2 = request.GET.get('city[adm2]')
 
-    aqi_info = RealtimeAirQuality.objects.get(cityName='北京市', adm2='北京市')  # TODO change city
+    aqi_info = RealtimeAirQuality.objects.filter(cityName=name, adm2=adm2).first()
     response_json = {
-        "aqi": float(aqi_info.aqi),
-        "category": aqi_info.category,
-        "pm10": float(aqi_info.pm10),
-        "pm2.5": float(aqi_info.pm2p5),
-        "no2": float(aqi_info.no2),
-        "so2": float(aqi_info.so2),
-        "co": float(aqi_info.co),
-        "o3": float(aqi_info.o3),
+        "aqi": float(aqi_info.aqi if aqi_info else 0),
+        "category": aqi_info.category if aqi_info else "良",
+        "pm10": float(aqi_info.pm10 if aqi_info else 0),
+        "pm2.5": float(aqi_info.pm2p5 if aqi_info else 0),
+        "no2": float(aqi_info.no2 if aqi_info else 0),
+        "so2": float(aqi_info.so2 if aqi_info else 0),
+        "co": float(aqi_info.co if aqi_info else 0),
+        "o3": float(aqi_info.o3 if aqi_info else 0),
     }
     return JsonResponse(response_json)
 
 
 @require_http_methods(['GET'])
 def rank(request):
-    length = min(10, len(WeatherInfo.objects.all())) + 1
+    length = min(10, len(WeatherInfo.objects.all()) + 1)
+
     norm = request.GET.get('norm')
     if norm == 'humid':
         norm = 'humidity'
+
     ascending = request.GET.get('order_type')
     if ascending == 'true':
         top_weather_info = WeatherInfo.objects.all().order_by('-' + norm)[:length]
-    elif ascending == 'false':
+    else:
         top_weather_info = WeatherInfo.objects.all().order_by(norm)[:length]
     response_json = {
         "status": True,
         "ranks": [
             {
                 "city": info.cityName + ' ' + info.adm2,
-                "level": 'todo',  # TODO 划分等级
+                "level": "优" if ascending == "true" else "正常",
                 "norm": getattr(info, norm)
             }
             for info in top_weather_info
@@ -431,11 +508,17 @@ def rank(request):
     return JsonResponse(response_json, status=200)
 
 
+@login_required
 @require_http_methods(['GET'])
 def aqi_current_city_change(request):
-    length = min(30, len(DailyWeather.objects.all())) + 1
+    user = request.user
+    city = UserCurrentCity(user=user)
+    city_name = city.cityName
+    adm2 = city.adm2
+
+    length = min(30, len(DailyWeather.objects.all()) + 1)
     all_info = DailyWeather.objects.filter(
-        city='北京市').order_by('-fxDate')[:length]
+        city=city_name, adm2=adm2).order_by('-fxDate')[:length]
     response_json = {
         "status": True,
         "data": [
@@ -452,162 +535,93 @@ def aqi_current_city_change(request):
 @require_http_methods(['GET'])
 def target_city_change(request, norm):
     city = request.GET.get('city')
+    city_name = city.split()[0]
+    if city.find(' ') != -1:
+        adm2 = city.split()[1]
+    else:
+        adm2 = ''
     period = int(request.GET.get('periods'))
-    length = min(period, len(DailyWeather.objects.all())) + 1
-    all_info = DailyWeather.objects.filter(
-        city=city).order_by('-fxDate')[:length]
-    response_json = {
-        "status": True,
-        "data": [
-            {
-                "time": info.fxDate,
-                norm: info.norm,  # TODO
-            }
-            for info in all_info
-        ]
+    length = min(period, len(DailyWeather.objects.all()) + 1)
+    try:
+        all_info = DailyWeather.objects.filter(
+            city=city_name, adm2=adm2).order_by('fxDate')[:length]
+    except DailyWeather.DoesNotExist:
+        all_info = DailyWeather.objects.filter(
+            city=city_name).order_by('fxDate')[:length]
+
+    norm_dict = {
+        'humid': 'humidity',
+        'temp': 'tempMax',
+        'winSpeed': 'windSpeedDay',
     }
+    new_norm = norm_dict.get(norm, norm)
+    if norm == 'temp_detail':
+        response_json = {
+            "status": True,
+            "data": [
+                {
+                    "time": info.fxDate,
+                    "temp": (float(info.tempMax) + float(info.tempMin)) / 2,
+                    "maxTemp": info.tempMax,
+                    "minTemp": info.tempMin
+                }
+                for info in all_info
+            ]
+        }
+    else:
+        response_json = {
+            "status": True,
+            "data": [
+                {
+                    "time": info.fxDate,
+                    norm: getattr(info, new_norm),
+                }
+                for info in all_info
+            ]
+        }
     return JsonResponse(response_json, status=200)
 
 
+@login_required
 @require_http_methods(['GET'])
 def aqi_target_city_change(request):
-    city = request.GET.get('city')
-    period = int(request.GET.get('periods'))
-    length = min(period, len(DailyWeather.objects.all())) + 1
-    all_info = DailyWeather.objects.filter(
-        city=city).order_by('-fxDate')[:length]
-    response_json = {
-        "status": True,
-        "data": [
-            {
-                "time": info.fxDate,
-                "aqi": info.aqi,
-            }
-            for info in all_info
-        ]
-    }
-    return JsonResponse(response_json, status=200)
+    return target_city_change(request, 'aqi')
 
 
+@login_required
 @require_http_methods(['GET'])
 def humid_city_change(request):
-    city = request.GET.get('city')
-    period = int(request.GET.get('periods'))
-    length = min(period, len(DailyWeather.objects.all())) + 1
-    all_info = DailyWeather.objects.filter(
-        city=city).order_by('-fxDate')[:length]
-    response_json = {
-        "status": True,
-        "data": [
-            {
-                "time": info.fxDate,
-                "humid": info.humidity,
-            }
-            for info in all_info
-        ]
-    }
-    return JsonResponse(response_json, status=200)
+    return target_city_change(request, 'humid')
 
 
+@login_required
+@require_http_methods(['GET'])
 def temp_city_change(request):
-    city = request.GET.get('city')
-    period = int(request.GET.get('periods'))
-    length = min(period, len(DailyWeather.objects.all())) + 1
-    all_info = DailyWeather.objects.filter(
-        city=city).order_by('-fxDate')[:length]
-    response_json = {
-        "status": True,
-        "data": [
-            {
-                "time": info.fxDate,
-                "temp": info.tempMax,
-            }
-            for info in all_info
-        ]
-    }
-    return JsonResponse(response_json, status=200)
+    return target_city_change(request, 'temp')
 
 
+@login_required
+@require_http_methods(['GET'])
 def temp_city_change_detail(request):
-    city = request.GET.get('city')
-    period = int(request.GET.get('periods'))
-    length = min(period, len(DailyWeather.objects.all())) + 1
-    all_info = DailyWeather.objects.filter(
-        city=city).order_by('-fxDate')[:length]
-    response_json = {
-        "status": True,
-        "data": [
-            {
-                "time": info.fxDate,
-                "temp": (float(info.tempMax) + float(info.tempMin)) / 2,
-                "maxTemp": info.tempMax,
-                "minTemp": info.tempMin
-            }
-            for info in all_info
-        ]
-    }
-    return JsonResponse(response_json, status=200)
+    return target_city_change(request, 'temp_detail')
 
 
+@login_required
 @require_http_methods(['GET'])
 def pressure_city_change(request):
-    city = request.GET.get('city')
-    period = int(request.GET.get('periods'))
-    length = min(period, len(DailyWeather.objects.all())) + 1
-    all_info = DailyWeather.objects.filter(
-        city=city).order_by('-fxDate')[:length]
-    response_json = {
-        "status": True,
-        "data": [
-            {
-                "time": info.fxDate,
-                "pressure": info.pressure,
-            }
-            for info in all_info
-        ]
-    }
-    return JsonResponse(response_json, status=200)
+    return target_city_change(request, 'pressure')
 
 
+@login_required
 @require_http_methods(['GET'])
 def precip_city_change(request):
-    city = request.GET.get('city')
-    period = int(request.GET.get('periods'))
-    length = min(period, len(DailyWeather.objects.all())) + 1
-    all_info = DailyWeather.objects.filter(
-        city=city).order_by('-fxDate')[:length]
-    response_json = {
-        "status": True,
-        "data": [
-            {
-                "time": info.fxDate,
-                "precip": info.precip,
-            }
-            for info in all_info
-        ]
-    }
-    return JsonResponse(response_json, status=200)
+    return target_city_change(request, 'precip')
 
 
+@login_required
 @require_http_methods(['GET'])
 def winspeed_city_change(request):
-    city = request.GET.get('city')
-    period = int(request.GET.get('periods'))
-    length = min(period, len(DailyWeather.objects.all())) + 1
-    # print(period, len(DailyWeather.objects.all()))
-    all_info = DailyWeather.objects.filter(
-        city=city).order_by('-fxDate')[:length]
-    response_json = {
-        "status": True,
-        "data": [
-            {
-                "time": info.fxDate,
-                "winSpeed": float(info.windSpeedDay),
-            }
-            for info in all_info
-        ]
-    }
-    return JsonResponse(response_json, status=200)
+    return target_city_change(request, 'winSpeed')
 
 
 @require_http_methods(['GET'])
@@ -737,18 +751,27 @@ def getProInfo(request):
 def update_current_city(request):
     user = request.user
     city = request.POST.get('city')
-    if city:
-        user.currentCityName = city
-        user.save()
-        return JsonResponse({
-            "success": True,
-            "reason": ""
-        })
-    else:
+
+    if not city:
         return JsonResponse({
             "success": False,
             "reason": "city doesn't exist"
         })
+
+    city_name = city.split()[0]
+    if city.find(' ') != -1:
+        adm2 = city.split(' ')[1]
+    else:
+        adm2 = ''
+
+    user_current_city = UserCurrentCity.objects.get(user=user)
+    user_current_city.cityName = city_name
+    user_current_city.adm2 = adm2
+    user_current_city.save()
+    return JsonResponse({
+        "success": True,
+        "reason": ""
+    })
 
 
 @require_http_methods(['GET'])
@@ -814,18 +837,41 @@ def get_top_hazard(request: HttpRequest):
 @require_http_methods(['GET'])
 def get_city_info(request: HttpRequest):
     city = request.GET.get("city")
+    shanghai_timezone = pytz.timezone('Asia/Shanghai')
+    if city == "" or not city:
+        retList = {
+            "status": True,
+            "message": {
+                "time": datetime.now(shanghai_timezone).strftime("%Y-%m-%d %H:%M"),
+                "city": "北京市 北京",
+                "temp": 25,
+                "text": "晴",
+                "precip": 0,
+                "wind360": 0,
+                "windScale": 0,
+                "windSpeed": 0,
+                "humidity": 0,
+                "pressure": 1000,
+                "aqi": 18,
+                "category": "优",
+            },
+        }
+        return JsonResponse(retList, status=204)
     city_name = city.split()[0]
     if city.find(' ') != -1:
         adm2 = city.split()[1]
-        if adm2.find('区') != -1:
-            adm2 += '区'  # TODO fix area
     else:
         adm2 = ''
 
-    weather = RealtimeWeather.objects.get(cityName=city_name, adm2=adm2)
-    air = RealtimeAirQuality.objects.get(cityName=city_name, adm2=adm2)
+    try:
+        weather = RealtimeWeather.objects.filter(cityName=city_name, adm2=adm2).first()
+    except RealtimeWeather.DoesNotExist:
+        weather = RealtimeWeather.objects.filter(cityName=city_name).first()
+    try:
+        air = RealtimeAirQuality.objects.filter(cityName=city_name, adm2=adm2).first()
+    except RealtimeAirQuality.DoesNotExist:
+        air = RealtimeAirQuality.objects.filter(cityName=city_name).first()
 
-    shanghai_timezone = pytz.timezone('Asia/Shanghai')
     retList = {
         "status": True,
         "message": {
@@ -863,7 +909,7 @@ def get_current_city_info(request: HttpRequest):
         weather = RealtimeWeather.objects.first()
 
     try:
-        air = RealtimeAirQuality.objects.get(cityName=city_name, adm2=adm2)
+        air = RealtimeAirQuality.objects.filter(cityName=city_name, adm2=adm2).first()
     except RealtimeAirQuality.DoesNotExist:
         air = RealtimeAirQuality.objects.first()
 
@@ -931,7 +977,8 @@ def add_weather_data(request):
 @login_required
 def delete_weather_data(request):
     data = json.loads(request.body)
-    WeatherInfo.objects.filter(time=data['time'], city=data['city']).delete()
+    WeatherInfo.objects.filter(time=data['time'], cityName=str(data['city']).split(' ')[0],
+                               adm2=str(data['city']).split(' ')[1]).delete()
 
     response_json = {
         "status": True,
@@ -943,6 +990,8 @@ def delete_weather_data(request):
 @login_required
 def search_weather_data(request):
     data = json.loads(request.body)
+    if data['time'] == None:
+        data['time'] = ""
     data_type = data['type'] if data['type'] else 'weather'
     from_time = data['time'][0] if len(data['time']) > 0 else None
     to_time = data['time'][1] if len(data['time']) > 1 else None
@@ -956,7 +1005,8 @@ def search_weather_data(request):
                         ) if from_time and to_time else Q()
 
         # 定义城市包含过滤条件
-        city_filter = Q(city__contains=address) if address else Q()
+        city_filter = Q(cityName__contains=address.split(' ')[0],
+                        adm2__contains=address.split(' ')[1]) if address else Q()
 
         # 执行查询
         weather_data = WeatherInfo.objects.filter(time_filter & city_filter)
@@ -968,7 +1018,7 @@ def search_weather_data(request):
         for data in weather_data:
             weather_data_list.append({
                 'time': data.time,
-                'city': data.cityName,
+                'city': data.cityName + " " + data.adm2,
                 'temp': data.temp,
                 'text': data.text,
                 'precip': data.precip,

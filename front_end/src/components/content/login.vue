@@ -141,7 +141,7 @@ const userInfo = useUserInfo();
 const loginConfig = useLoginConfig();
 const isLogin = ref(true);
 const checkLogin = () => {
-  if (!router.currentRoute.value.meta.permission.includes(userInfo.role)) {
+  if (!router.currentRoute.value.meta.permission?.includes(userInfo.role)) {
     console.log(
       "checkLogin: ",
       router.currentRoute.value.meta.permission,
