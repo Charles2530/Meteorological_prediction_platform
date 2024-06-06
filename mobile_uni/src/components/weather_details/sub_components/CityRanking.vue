@@ -10,8 +10,8 @@
         <el-table :data="highestTempRankings" style="width: 100%" :header-cell-style="{ 'text-align': 'center' }"
           :cell-style="{ 'text-align': 'center' }">
           <el-table-column prop="no" label="排名" height="auto" width="70" />
-          <el-table-column prop="city" label="城市" />
-          <el-table-column prop="province" label="所在省份" />
+          <el-table-column prop="city" label="区域" />
+          <el-table-column prop="province" label="所在城市" />
           <el-table-column prop="item" label="最高气温" />
         </el-table>
       </el-tab-pane>
@@ -19,8 +19,8 @@
         <el-table :data="lowestTempRankings" style="width: 100%" :header-cell-style="{ 'text-align': 'center' }"
           :cell-style="{ 'text-align': 'center' }">
           <el-table-column prop="no" label="排名" height="auto" width="70" />
-          <el-table-column prop="city" label="城市" />
-          <el-table-column prop="province" label="所在省份" />
+          <el-table-column prop="city" label="区域" />
+          <el-table-column prop="province" label="所在城市" />
           <el-table-column prop="item" label="最低气温" />
         </el-table>
       </el-tab-pane>
@@ -28,8 +28,8 @@
         <el-table :data="precipRankings" style="width: 100%" :header-cell-style="{ 'text-align': 'center' }"
           :cell-style="{ 'text-align': 'center' }">
           <el-table-column prop="no" label="排名" height="auto" width="70" />
-          <el-table-column prop="city" label="城市" />
-          <el-table-column prop="province" label="所在省份" />
+          <el-table-column prop="city" label="区域" />
+          <el-table-column prop="province" label="所在城市" />
           <el-table-column prop="item" label="24小时降水量" />
         </el-table>
       </el-tab-pane>
@@ -37,8 +37,8 @@
         <el-table :data="cityAqiRankings" style="width: 100%" :header-cell-style="{ 'text-align': 'center' }"
           :cell-style="{ 'text-align': 'center' }">
           <el-table-column prop="no" label="排名" height="auto" width="70" />
-          <el-table-column prop="city" label="城市" />
-          <el-table-column prop="province" label="所在省份" />
+          <el-table-column prop="city" label="区域" />
+          <el-table-column prop="province" label="所在城市" />
           <!-- <el-table-column prop="item" label="空气质量" /> -->
           <el-table-column prop="item" label="空气质量">
             <template #header>
@@ -64,7 +64,7 @@
 <!-- <template>
   <div>
     <p class="text-2xl font-bold mb-4 text-center">
-      中国城市空气质量排行
+      中国区域空气质量排行
       <el-switch
         class="mx-4 my-2"
         v-model="Match"
