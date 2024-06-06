@@ -18,8 +18,8 @@
         <el-switch
           v-model="Match"
           style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
-          active-text="最好"
-          inactive-text="最差"
+          active-text="升序"
+          inactive-text="降序"
           :active-action-icon="View"
           :inactive-action-icon="Hide"
         />

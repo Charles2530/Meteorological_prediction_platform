@@ -1,6 +1,23 @@
 <template>
   <div class="block text-center" style="height: 220px">
     <span class="demonstration text-2xl">AI热力图</span>
+    <el-select v-model="videoSrc" placeholder="请选择">
+      <el-option
+        label="温度"
+        :value="TemperaturePath"
+        value-key="temperature"
+      ></el-option>
+      <el-option
+        label="湿度"
+        :value="HumidityPath"
+        value-key="humidity"
+      ></el-option>
+      <el-option
+        label="气压"
+        :value="PressurePath"
+        value-key="pressure"
+      ></el-option>
+    </el-select>
     <div>
       <video
         ref="videoPlayer"
@@ -16,8 +33,11 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
 import videoPath from "@/assets/media/weather_forecast.mp4";
+import HumidityPath from "@/assets/media/humidity.mp4";
+import TemperaturePath from "@/assets/media/temperature.mp4";
+import PressurePath from "@/assets/media/windSpeed.mp4";
 
-const videoSrc = videoPath;
+const videoSrc = ref(TemperaturePath);
 const videoPlayer = ref<HTMLVideoElement | null>(null);
 const isPlaying = ref(false);
 
