@@ -18,83 +18,12 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from rest_framework import serializers
 from rest_framework import status, HTTP_HEADER_ENCODING
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import AllowAny
 from rest_framework.validators import ValidationError
-from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import AccessToken
 
 from .models import UserAvatar, UserCurrentCity
-
-
-class RegisterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password')
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            password=validated_data['password']
-        )
-        return user
-
-
-@method_decorator(csrf_exempt, name='dispatch')
-class LoginView(APIView):
-    permission_classes = [AllowAny]
-
-    def post(self, request):
-        data = request.data
-        username = data.get('username')
-        password = data.get('password')
-
-        if not username or not isinstance(username, str):
-            return Response({"success": False, "reason": "login.error.format"}, status=status.HTTP_400_BAD_REQUEST)
-
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-            token, _ = Token.objects.get_or_create(user=user)
-            info = {
-                "token": token.key,
-                "userInfo": {
-                    "username": username,
-                    "avatar": "http://dummyimage.com/88x31",
-                    "role": 2,  # 根据实际情况设置用户的角色
-                    "email": user.email
-                }
-            }
-            return Response({"success": True, "info": info})
-        else:
-            return Response({"success": False, "reason": "login.error.auth"}, status=status.HTTP_401_UNAUTHORIZED)
-
-
-@method_decorator(csrf_exempt, name='dispatch')
-class RegisterView(APIView):
-    permission_classes = [AllowAny]
-
-    def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            token = Token.objects.create(user=user)
-            info = {
-                "token": token.key,
-                "userInfo": {
-                    "username": user.username,
-                    "avatar": "",  # todo
-                    "email": user.email,
-                    "role": 2
-                }
-            }
-            return Response({"success": True, "info": info}, status=status.HTTP_201_CREATED)
-        else:
-            return Response({"success": False, "reason": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # Create your views here.
@@ -195,8 +124,8 @@ def my_register(request):
         # login(request, user)
 
         info = {
-            # "token": str(AccessToken.for_user(new_user)),
-            "token": user.username,
+            "token": str(AccessToken.for_user(new_user)),
+            # "token": user.username,
             "userInfo": {
                 "username": new_user.username,
                 "avatar": UserAvatar.objects.get(user=new_user).avatar,
@@ -592,16 +521,15 @@ def update_current_user_avatar(request):
 
     try:
         user_avatar = UserAvatar.objects.get(user=user).avatar,
-        user_avatar.avatar = file
+        user_avatar.avatar.save(f"{user.username}_avatar.png", ContentFile(file))
         user_avatar.save()
 
         return JsonResponse({
             "success": True,
-            "avatar": "http://dummyimage.com/100x100",
+            "avatar": user_avatar.avatar,
             "reason": "elit"
         })
     except Exception as e:
-        # 处理其他可能的异常
         return JsonResponse({
             "success": False,
             "reason": str(e),

@@ -271,16 +271,21 @@ def realtime(request):
     # query hourly weather data
     city_name = request.GET.get('city[name]')
     adm2 = request.GET.get('city[adm2]')
+    selectedDate= request.GET.get('selectedDate')
+    select_time=datetime.strptime(selectedDate, '%Y-%m-%d')
+    
 
     realTimeWeatherList = []
-    rounded_dt = datetime.now().replace(minute=0, second=0, microsecond=0)
+    # rounded_dt = datetime.now().replace(minute=0, second=0, microsecond=0)
+    rounded_dt = select_time
+    is_today = (rounded_dt==datetime.now().replace(minute=0, second=0, microsecond=0))
     fake_rounded_dt = rounded_dt + timedelta(days=1)  # use tomorrow data for query
     for i in range(-10, 14, 2):
         query_dt = fake_rounded_dt + timedelta(hours=i)
         print_dt = rounded_dt + timedelta(hours=i)
         hourly_weather = WeatherInfo.objects.filter(cityName=city_name, adm2=adm2, time=query_dt).first()
         realTimeWeatherList.append({
-            "time": print_dt.strftime('%H:%M') if i != 0 else '此时',
+            "time":  '此时' if i == 0 and is_today else print_dt.strftime('%H:%M'),
             "condition": hourly_weather.text if hourly_weather else 0,
             'condition_icon': hourly_weather.icon if hourly_weather else 0,
             "temperature": int(hourly_weather.temp if hourly_weather else 0),
