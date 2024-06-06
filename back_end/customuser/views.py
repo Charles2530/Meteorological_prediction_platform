@@ -2,6 +2,7 @@ import json
 import os
 from datetime import datetime
 
+from django.conf import settings
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.hashers import check_password, make_password
@@ -508,20 +509,25 @@ def update_current_user_email(request):
 @require_http_methods(["POST"])
 def update_current_user_avatar(request):
     auth_header = request.META.get('HTTP_AUTHORIZATION', '')
-    data = json.loads(request.body)
-    file = data.get('file')
-
     if not auth_header:
         return JsonResponse({
             "success": False,
             "reason": "Authorization header is missing"
         }, status=401)
 
+    file = request.FILES.get('file')
+    if not file:
+        return JsonResponse({"success": False, "reason": "No file uploaded"}, status=400)
+
     user = request.user
+    file_path = f'avatars/{user.id}/{file.name}'
+    path = default_storage.save(file_path, ContentFile(file.read()))
+    avatar_url = request.build_absolute_uri(settings.MEDIA_URL + path)
 
     try:
-        user_avatar = UserAvatar.objects.get(user=user).avatar,
-        user_avatar.avatar.save(f"{user.username}_avatar.png", ContentFile(file))
+        user_avatar = UserAvatar.objects.get(user=user),
+        print('-----', user_avatar, '-----')
+        user_avatar.avatar = avatar_url
         user_avatar.save()
 
         return JsonResponse({

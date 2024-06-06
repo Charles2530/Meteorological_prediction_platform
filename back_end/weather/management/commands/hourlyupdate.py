@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandParser
 from weather.models import WeatherInfo, City2CityId
 import json
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 import requests
 import pytz
 import random
@@ -33,33 +33,78 @@ class Command(BaseCommand):
             help="Use devapi instead of api",
         )
 
+        parser.add_argument(
+            '--print',
+            action='store_true',
+            help='Print process',
+        )
+
     def handle(self, *args, **kwargs):
         if kwargs['D']:
             print('Delete all')
             WeatherInfo.objects.all().delete()
 
         if kwargs['dev']:
+            historic_url = ''
             url = 'https://devapi.qweather.com/v7/weather/168h'
         else:
+            historic_url = 'https://api.qweather.com/v7/historical/weather'
             url = 'https://api.qweather.com/v7/weather/168h'
 
-        for location_int in range(101010100, 101011800, 100):
-            location_id = str(location_int)
+        shanghai_timezone = pytz.timezone('Asia/Shanghai')
+
+        for city in City2CityId.objects.all():
+            location_id = city.cityId
+            city_name = city.cityName
+            adm2 = city.areaName
+
+            if not kwargs['dev']:
+                for i in range(-9, 0):
+                    query_date = date.today() + timedelta(days=i)
+                    historic_weather = requests.get(historic_url, params={
+                        'key': kwargs['key'],
+                        'location': location_id,
+                        'date': query_date.strftime('%Y%m%d')
+                    })
+
+                    historic_weather = json.loads(historic_weather.content.decode('utf-8'))
+
+                    # print('historic_weather', historic_weather)
+
+                    for hourly in historic_weather["weatherHourly"]:
+                        temp_date_time = datetime.fromisoformat(hourly['time']).astimezone(shanghai_timezone)
+                        date_time = temp_date_time.astimezone(shanghai_timezone)
+
+                        temp_aqi = random.randint(10, 150)  # TODO
+
+                        data = WeatherInfo(
+                            time=date_time,
+                            cityName=city_name,
+                            adm2=adm2,
+                            temp=hourly["temp"],
+                            icon=hourly['icon'],
+                            text=hourly["text"],
+                            wind360=hourly["wind360"],
+                            windDir=hourly["windDir"],
+                            windScale=hourly["windScale"],
+                            windSpeed=hourly["windSpeed"],
+                            humidity=hourly["humidity"],
+                            pressure=hourly["pressure"],
+                            aqi=temp_aqi,
+                        )
+
+                        data.save()
+
             weather = requests.get(url, params={
                 'key': kwargs['key'],
                 'location': location_id,
             })
 
-            city = City2CityId.objects.get(cityId=location_id)
-            city_name = city.cityName
-            adm2 = city.areaName
-
-            print('-----', city_name, '-', adm2, '-----', 'in hourly update')
+            # print('-----', city_name, '-', adm2, '-----', 'in hourly update')
 
             weather = json.loads(weather.content.decode('utf-8'))
             # print(weather)
             for hourly in weather["hourly"]:
-                shanghai_timezone = pytz.timezone('Asia/Shanghai')
                 dt = datetime.fromisoformat(hourly["fxTime"]).astimezone(shanghai_timezone)
                 rounded_dt = dt.replace(minute=0, second=0, microsecond=0)
 
@@ -73,7 +118,7 @@ class Command(BaseCommand):
                     icon=hourly['icon'],
                     text=hourly["text"],
                     wind360=hourly["wind360"],
-                    windDir = hourly["windDir"],
+                    windDir=hourly["windDir"],
                     windScale=hourly["windScale"],
                     windSpeed=hourly["windSpeed"],
                     humidity=hourly["humidity"],
@@ -111,5 +156,8 @@ class Command(BaseCommand):
                 )
 
                 data.save()
+
+            if kwargs['print']:
+                print('finish', city_name, adm2)
             # city_name = ''
         self.stdout.write(self.style.SUCCESS('Successfully updated weather info.'))

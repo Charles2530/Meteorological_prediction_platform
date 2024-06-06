@@ -37,7 +37,7 @@ class WeatherForecast(models.Model):
     # date = models.DateTimeField()
     city = models.CharField(max_length=40)
     adm2 = models.CharField(max_length=40, default='')
-    level = models.IntegerField()
+    level = models.CharField(max_length=20, default='')
     content = models.TextField()
     instruction = models.TextField()
 

@@ -44,6 +44,12 @@ class Command(BaseCommand):
             help="Specify count of warnings",
         )
 
+        parser.add_argument(
+            '--print',
+            action='store_true',
+            help='Print process',
+        )
+
     def handle(self, *args, **kwargs):
         if kwargs['D']:
             print('Delete all')
@@ -66,17 +72,17 @@ class Command(BaseCommand):
         })
         warning_loc_list = json.loads(warning_loc_list_response.content.decode('utf-8'))['warningLocList']
 
-        count = kwargs['count']
+        count = int(kwargs['count'])
 
         level_dict = {
-            'Cancel': 1,
-            'None': 1,
-            'Unknown': 2,
-            'Standard': 2,
-            'Minor': 3,
-            'Moderate': 3,
-            'Major': 4,
-            'Severe': 4
+            'Cancel': '无',
+            'None': '无',
+            'Unknown': '未知',
+            'Standard': '轻微',
+            'Minor': '轻微',
+            'Moderate': '中等',
+            'Major': '较重',
+            'Severe': '严重',
         }
 
         i = 0
@@ -102,7 +108,7 @@ class Command(BaseCommand):
                 # date=forecast['startTime'],
                 city=city_name,
                 adm2=adm2,
-                level=level_dict.get(warning_loc['severity'], 5),
+                level=level_dict.get(warning_loc['severity'], '未知'),
                 content=warning_loc['text'],
                 instruction="请有关单位和人员做好防范准备。"
             )

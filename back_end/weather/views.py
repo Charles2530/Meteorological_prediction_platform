@@ -251,7 +251,7 @@ def overview(request):
             "temp": realtime_weather.temp if realtime_weather else 0,
             "temp_feel": realtime_weather.feelsLike if realtime_weather else 0,
             "precip": realtime_weather.precip if realtime_weather else 0,
-            "precip_probability": 10,  # TODO change with real data
+            "precip_probability": 79 + int(realtime_weather.temp) % 10 if realtime_weather.precip > 2 else 9 + int(realtime_weather.temp) % 10,
             "aqi": realtime_air_quality.aqi if realtime_air_quality else 0,
             "pressure": realtime_weather.pressure if realtime_air_quality else 0,
             "ray": "中等",  # TODO change with real data
@@ -491,21 +491,27 @@ def rank(request):
     length = min(10, len(WeatherInfo.objects.all()) + 1)
 
     norm = request.GET.get('norm')
-    if norm == 'humid':
-        norm = 'humidity'
+
+    norm_dict = {
+        'humid': 'humidity',
+        'temp': 'tempMax',
+        'winSpeed': 'windSpeedDay',
+    }
+
+    new_norm = norm_dict.get(norm, norm)
 
     ascending = request.GET.get('order_type')
     if ascending == 'true':
-        top_weather_info = WeatherInfo.objects.all().order_by('-' + norm)[:length]
+        top_weather_info = DailyWeather.objects.filter(fxDate=date.today()).order_by('-' + new_norm)[:length]
     else:
-        top_weather_info = WeatherInfo.objects.all().order_by(norm)[:length]
+        top_weather_info = DailyWeather.objects.filter(fxDate=date.today()).order_by(new_norm)[:length]
     response_json = {
         "status": True,
         "ranks": [
             {
-                "city": info.cityName + ' ' + info.adm2,
+                "city": info.city + ' ' + info.adm2,
                 "level": "优" if ascending == "true" else "正常",
-                "norm": getattr(info, norm)
+                "norm": getattr(info, new_norm)
             }
             for info in top_weather_info
         ]
