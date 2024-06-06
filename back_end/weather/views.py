@@ -619,7 +619,7 @@ def temp_city_change_detail(request):
         "data": [
             {
                 "time": info.fxDate,
-                "temp": str((float(info.tempMax) + float(info.tempMin)) / 2),
+                "temp": (float(info.tempMax) + float(info.tempMin)) / 2,
                 "maxTemp": info.tempMax,
                 "minTemp": info.tempMin
             }
@@ -681,7 +681,7 @@ def winspeed_city_change(request):
         "data": [
             {
                 "time": info.fxDate,
-                "winSpeed": info.windSpeedDay,
+                "winSpeed": int(info.windSpeedDay),
             }
             for info in all_info
         ]

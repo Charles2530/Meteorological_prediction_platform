@@ -120,8 +120,8 @@ import CityRanking from '@/components/weather_details/sub_components/CityRanking
 import { Switch } from '@element-plus/icons-vue'
 // const careCitiesList = ref([])
 const city = ref<City>({
-  name: '市',
-  adm2: '区'
+  name: '北京市',
+  adm2: '北京'
 });
 const currentCity = ref<CareCity>()
 const careCitiesList = ref<CareCity[]>([])
