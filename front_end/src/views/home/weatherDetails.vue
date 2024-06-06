@@ -30,7 +30,7 @@
           @click="drawer = true">
           切换城市
         </el-button>
-        <el-container class="rounded-lg" style="background: transparent;height: 43vh;margin-top: 0px;">
+        <el-container class="rounded-lg" style="background: transparent;height: 40vh;margin-top: 0px;">
           <!-- <el-col :span="16"> -->
           <CurrentWeather class="md:basis-3/5" :weather="weather" :city="city" :search="searchShow">
           </CurrentWeather>
@@ -39,7 +39,7 @@
           <CurrentWeatherRight class="md:basis-3/5" :weather="weather" />
           <!-- </el-col> -->
         </el-container>
-        <el-card  :body-style="{ padding: '0px' }" style="min-height: 20vh;max-height: 43vh;margin-bottom:15px;background-color:rgb(255,255,255,0.5);border-color: transparent;border-radius: 20px;">
+        <el-card  :body-style="{ padding: '0px' }" style="margin-top: 1.5vh; min-height: 20vh;max-height: 46vh;margin-bottom:15px;background-color:rgb(255,255,255,0.5);border-color: transparent;border-radius: 20px;">
           <RealTimeBroadcast :city="city" />
         </el-card>
       </el-aside>
@@ -48,7 +48,7 @@
         <el-card style="background-color:rgb(255,255,255,0.5);border-color: transparent;border-radius: 20px;">
           <BriefAqi :city="city" />
         </el-card>
-        <el-card style="height:53vh;overflow: hidden;background-color:rgb(255,255,255,0.5);border-color: transparent;border-radius: 20px;">
+        <el-card style="margin-top: 1.5vh; height:53vh;overflow: hidden;background-color:rgb(255,255,255,0.5);border-color: transparent;border-radius: 20px;">
           <CityRanking />
         </el-card>
       </el-main>
@@ -407,7 +407,7 @@ import AirQualityVM from "@/components/airQuality/AirQualityVM.vue";
 import dataStatistics from "@/components/dataStatistics/dataStatistics.vue";
 </script> -->
 
-<!-- !!!因为涉及到组件也要使用下面的css样式，所以不要scoped不然丑 -->
+
 <style lang="scss" scoped>
 .selected-card {
   /* border: 2px solid rgb(183, 255, 0); 修改为你想要的边框颜色 */

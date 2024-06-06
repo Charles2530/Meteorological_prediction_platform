@@ -1,7 +1,14 @@
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
   <div class="scroll-layout background-transparent">
-    <!-- {{ city }} -->
+    <el-select v-model="selectedDate" :placeholder="selectedDate" @change="handleChange" style="width: 130px;border-radius: 50px;">
+    <el-option
+      v-for="option in dateOptions"
+      :key="option.value"
+      :label="option.label"
+      :value="option.value">
+    </el-option>
+  </el-select>
     <el-container>
       <el-header>
         <div id="chart_temp_perhour" ref="chart_temp_perhour" class="chart-container">
@@ -11,18 +18,20 @@
         <el-row :gutter="0">
           <el-col :span="2" v-for="(day, index) in realTimeWeatherList" :key="index" class="calendar-column">
             <div class="ep-bg-purple-dark" />
-            <el-card class="card-container" shadow="hover">
+            <el-card :body-style="{ padding: '0px', paddingTop: '20px', paddingBottom: '20px' }" class="card-container" shadow="hover">
               <div class="info-text">{{ day.temperature }}℃</div>
               <div class="perhour-icon">
                 <i :class="'qi-' + day.condition_icon" class="icon" />
                 <!-- <div class="tips-text">{{ day.condition }}</div> -->
               </div>
               <div class="perhour-icon">
-                <el-icon size="20px" class="wind-icon"
-                  :style="{ transform: `rotate(${calculateAngle(day.wind360)}deg)` }">
-                  <Position />
-                </el-icon>
-                <!-- <div class="tips-text">{{ day.windScale }}级风</div> -->
+                <div style="display: flex; justify-content: center;">
+                    <el-icon size="20px" class="wind-icon"
+                      :style="{ transform: `rotate(${calculateAngle(day.wind360)}deg)` }">
+                      <Position />
+                    </el-icon>
+                  </div>
+                <div class="tips-text">{{ day.windScale }}级风</div>
               </div>
               <div class="info-text">{{ day.time }}</div>
             </el-card>
@@ -86,10 +95,41 @@ const get_data = async () => {
 };
 
 watch(() => props.city, () => Promise.all([get_data()]).then(() => {
+  selectedDate.value=new Date().toISOString().substr(0, 10);
   renderChart(
     realTimeWeatherList.value,
   );
 }));
+
+// 日期切换选择
+const selectedDate = ref(new Date().toISOString().substr(0, 10)); // 初始化为今天的日期
+const dateOptions = ref([]);
+
+function generateDateOptions() {
+  const today = new Date();
+  for (let i = -7; i <= 7; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
+    const formattedDate = formatDate(date);
+    dateOptions.value.push({ label: formattedDate, value: formattedDate });
+  }
+}
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function handleChange(value) {
+  console.log(selectedDate.value);
+  get_data();
+  renderChart(
+    realTimeWeatherList.value
+  );
+}
+
 
 // 初始化 ECharts 实例
 let chartInstance_history: echarts.ECharts | null = null;
@@ -122,9 +162,11 @@ const renderChart = async (
       show: false,
       type: "continuous",
       seriesIndex: 0, // This is now referring to the first (and only) series index that needs a visualMap
-      min: -10,
+      min: 15,
       max: 30,
-      color: ['red', 'blue',] // 使用内置的蓝到红的渐变色
+      color: ['red', 'blue',],// 使用内置的蓝到红的渐变色
+      itemHeight: 60, // 调整图例的高度
+      itemWidth: 12
     },
 
     title: [
@@ -188,8 +230,8 @@ const renderChart = async (
       // bottom: "20%",
       // left: "10%",
       // right: "10%",
-      top: "20%",
-      bottom: "20%",
+      top: "10%",
+      bottom: "-50%",
       left: "-3%",
       right: "-3%",
       containLabel: true,
@@ -245,6 +287,7 @@ const renderChart = async (
 //   // });
 // }));
 onMounted(() => Promise.all([get_data()]).then(() => {
+  generateDateOptions();
   console.log(realTimeWeatherList.value);
   setTimeout(() => {
     renderChart(
@@ -325,10 +368,13 @@ onMounted(() => Promise.all([get_data()]).then(() => {
 }
 
 .perhour-icon {
-  margin-top: -20px;
-  margin-bottom: 0px;
+  font-size: 25px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  /* 水平居中 */
 }
-
 .icon {
   font-size: 20px;
 }
@@ -338,7 +384,7 @@ onMounted(() => Promise.all([get_data()]).then(() => {
 }
 
 .tips-text {
-  font-size: 15px;
+  font-size: 10px;
   font-family: 'Courier New', Courier, monospace;
   display: flex;
   justify-content: center;

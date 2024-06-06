@@ -1,7 +1,7 @@
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
   <div class="common-layout" style="background:transparent;border-color: transparent;">
-    <el-select v-model="selectedDate" placeholder="请选择日期" @change="handleChange" style="width: 150px;  background-color: transparent;">
+    <el-select v-model="selectedDate" :placeholder="selectedDate" @change="handleChange" style="width: 130px;border-radius: 50px;">
     <el-option
       v-for="option in dateOptions"
       :key="option.value"
@@ -94,7 +94,6 @@ const props = defineProps({
 const realTimeWeatherList = ref<RealTimeWeather[]>([]);
 const calculateAngle = (wind360: number) => wind360 + 135;
 
-const date = ref('');
 interface RealTimeWeather {
   time: string,
   condition: string,
@@ -111,7 +110,7 @@ interface RealTimeWeatherData {
 }
 
 const get_data = async () => {
-  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: props.city }).then((res) => {
+  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: props.city,selectedDate:selectedDate.value }).then((res) => {
     realTimeWeatherList.value.splice(0, realTimeWeatherList.value.length, ...res.data.realTimeWeatherList);
     // console.log("getdata")
     if (realTimeWeatherList.value.length > 12) {
@@ -121,13 +120,14 @@ const get_data = async () => {
 };
 
 watch(() => props.city, () => Promise.all([get_data()]).then(() => {
+  selectedDate.value=new Date().toISOString().substr(0, 10);
   renderChart(
     realTimeWeatherList.value,
   );
 }));
 
 // 日期切换选择
-const selectedDate = ref(null);
+const selectedDate = ref(new Date().toISOString().substr(0, 10)); // 初始化为今天的日期
 const dateOptions = ref([]);
 
 function generateDateOptions() {
@@ -148,7 +148,11 @@ function formatDate(date) {
 }
 
 function handleChange(value) {
-  console.log('Selected Date:', value);
+  console.log(selectedDate.value);
+  get_data();
+  renderChart(
+    realTimeWeatherList.value
+  );
 }
 
 // 初始化 ECharts 实例
@@ -338,8 +342,6 @@ onMounted(() => Promise.all([get_data()]).then(() => {
 
 
 <style lang="scss" scoped>
-
-
 .calendar-container {
   margin-top: 2vh;
   padding: 0px;

@@ -23,7 +23,7 @@
 <template>
   <!-- <div style="color: white;"> {{mapRainyWeather(weather.condition)}}</div> -->
   <!-- bg-mobile-sunny bg-mobile-rainy  bg-mobile-night bg-mobile-cloudy bg-mobile-overcast-->
-  <div :class="mapRainyWeather(weather.condition)" class="bg-cover bg-no-repeat" style="height: 130vh;overflow: auto">
+  <div :class="mapRainyWeather(weather.condition)" class="bg-cover bg-no-repeat" style="height: auto;overflow: auto">
     <el-container class="background-transparent">
       <el-button class="switch-button background-transparent" size="small" type="info" :icon="Switch"
         @click="drawer = true">
@@ -44,13 +44,14 @@
           <RealTimeBroadcast :city="city" />
         </el-card>
       </el-main>
-      <el-footer>
+      <el-footer style="height: auto;">
         <!-- <el-main style="width: 800px;"> -->
         <el-card
           style="background-color: rgba(255, 255, 255, 0.2); /* 白色背景，透明度为 50% */border-color: transparent;border-radius: 30px;margin: 30px;margin-top: -10px;">
           <BriefAqi :city="city" />
         </el-card>
         <!-- </el-main> -->
+
       </el-footer>
     </el-container>
   </div>
