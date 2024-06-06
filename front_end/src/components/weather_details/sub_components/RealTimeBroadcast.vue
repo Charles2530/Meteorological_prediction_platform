@@ -137,7 +137,7 @@ const dateOptions = ref([]);
 
 function generateDateOptions() {
   const today = new Date();
-  for (let i = -7; i <= 7; i++) {
+  for (let i = -5; i <= 5; i++) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
     const formattedDate = formatDate(date);
