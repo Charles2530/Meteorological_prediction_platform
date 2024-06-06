@@ -4,7 +4,7 @@
       <TopBar />
     </el-header>
     <el-main
-      class="no-padding"
+      class="no-padding scroll"
       style="overflow: auto"
       :style="{ height: contentHeight }"
     >
@@ -24,6 +24,13 @@ const contentHeight = ref("calc(100vh - 60px)");
 </script>
 
 <style scoped>
+.scroll {
+
+}
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
 .no-padding {
   padding: 0px;
 }

@@ -310,6 +310,7 @@ const submitRegisterForm = (formEl: FormInstance | undefined) => {
           const response = res.data;
           if (response.success == true) {
             const info = response.info!;
+            userInfo.logout();
             userInfo.login(info.userInfo, info.token);
             loginConfig.$patch({ showLoginPanel: false });
             ElMessage({

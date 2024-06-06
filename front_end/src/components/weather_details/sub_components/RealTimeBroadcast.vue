@@ -1,7 +1,14 @@
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
   <div class="common-layout" style="background:transparent;border-color: transparent;">
-    <!-- {{ city }} -->
+    <el-select v-model="selectedDate" :placeholder="selectedDate" @change="handleChange" style="width: 130px;border-radius: 50px;">
+    <el-option
+      v-for="option in dateOptions"
+      :key="option.value"
+      :label="option.label"
+      :value="option.value">
+    </el-option>
+  </el-select>
     <el-container>
       <el-header>
         <div id="chart_temp_perhour" ref="chart_temp_perhour" style="height: 120px;  width: 100%;  margin: 0 auto">
@@ -86,6 +93,7 @@ const props = defineProps({
 // });
 const realTimeWeatherList = ref<RealTimeWeather[]>([]);
 const calculateAngle = (wind360: number) => wind360 + 135;
+
 interface RealTimeWeather {
   time: string,
   condition: string,
@@ -102,7 +110,7 @@ interface RealTimeWeatherData {
 }
 
 const get_data = async () => {
-  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: props.city }).then((res) => {
+  get<RealTimeWeatherData>("/api/weather/overview_realtime/", { city: props.city,selectedDate:selectedDate.value }).then((res) => {
     realTimeWeatherList.value.splice(0, realTimeWeatherList.value.length, ...res.data.realTimeWeatherList);
     // console.log("getdata")
     if (realTimeWeatherList.value.length > 12) {
@@ -112,10 +120,40 @@ const get_data = async () => {
 };
 
 watch(() => props.city, () => Promise.all([get_data()]).then(() => {
+  selectedDate.value=new Date().toISOString().substr(0, 10);
   renderChart(
     realTimeWeatherList.value,
   );
 }));
+
+// 日期切换选择
+const selectedDate = ref(new Date().toISOString().substr(0, 10)); // 初始化为今天的日期
+const dateOptions = ref([]);
+
+function generateDateOptions() {
+  const today = new Date();
+  for (let i = -7; i <= 7; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
+    const formattedDate = formatDate(date);
+    dateOptions.value.push({ label: formattedDate, value: formattedDate });
+  }
+}
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function handleChange(value) {
+  console.log(selectedDate.value);
+  get_data();
+  renderChart(
+    realTimeWeatherList.value
+  );
+}
 
 // 初始化 ECharts 实例
 let chartInstance_history: echarts.ECharts | null = null;
@@ -273,6 +311,7 @@ const renderChart = async (
 //   // });
 // }));
 onMounted(() => Promise.all([get_data()]).then(() => {
+  generateDateOptions();
   console.log(realTimeWeatherList.value);
   setTimeout(() => {
     renderChart(

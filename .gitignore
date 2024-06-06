@@ -2,3 +2,5 @@ back_end/uwsgi.log
 back_end/uwsgi.pid
 back_end/db.sqlite3
 */**/__pycache__
+model/ai-models-graphcast/model
+model/ai-models-graphcast/predictions.csv

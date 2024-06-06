@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.sites",
     "django.contrib.staticfiles",
     'rest_framework',
     # 'rest_framework_simplejwt',
@@ -69,12 +70,12 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-# CORS_ORIGIN_WHITELIST = [
-#     'http://114.116.201.133:3306',
-#     'http://114.116.201.133:8000',
-#     'http://114.116.201.133:8080',
-#     'http://114.116.201.133:8888'
-# ]
+CORS_ORIGIN_WHITELIST = [
+    'http://114.116.201.133:3306',
+    'http://114.116.201.133:8000',
+    'http://114.116.201.133:8080',
+    'http://114.116.201.133:8888'
+]
 
 ROOT_URLCONF = "back_end.urls"
 
@@ -168,6 +169,12 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# 用于生成完整URL时的站点信息
+SITE_ID = 1
 
 # LOGGING = {
 #     'version': 1,

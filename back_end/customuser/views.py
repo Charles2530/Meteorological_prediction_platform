@@ -1,6 +1,7 @@
 import json
 import os
 from datetime import datetime
+
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.hashers import check_password, make_password
@@ -13,12 +14,15 @@ from django.core.validators import validate_email
 from django.db.models.base import Model as Model
 from django.http import HttpResponse, JsonResponse
 from django.utils.deconstruct import deconstructible
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from rest_framework import status, HTTP_HEADER_ENCODING
 from rest_framework.authtoken.models import Token
+from rest_framework.validators import ValidationError
 from rest_framework_simplejwt.tokens import AccessToken
+
 from .models import UserAvatar, UserCurrentCity
 
 
@@ -52,8 +56,8 @@ def my_login(request):
         if user is not None:
             login(request, user)
             info = {
-                # "token": str(AccessToken.for_user(user)),
-                "token": user.username,
+                "token": str(AccessToken.for_user(user)),
+                # "token": user.username,
                 "userInfo": {
                     "username": user.username,
                     "avatar": "http://dummyimage.com/88x31",  # UserAvatar.objects.get(user=user).avatar, TODO
@@ -64,7 +68,7 @@ def my_login(request):
             }
             return JsonResponse({"success": True, "info": info})
         else:
-            return JsonResponse({"success": False, "reason": "密码错误,请重新输入"}, status=200)
+            return JsonResponse({"success": False, "reason": "用户名或密码错误，请重新输入"}, status=200)
 
     except ValidationError as e:
         return JsonResponse({"success": False, "reason": str(e)}, status=400)
@@ -101,18 +105,18 @@ def my_register(request):
             return JsonResponse({"success": False, "reason": "Username already exists"}, status=400)
 
         if role == 2:
-            user = User.objects.create_superuser(username=username, password=password, email=email)
+            new_user = User.objects.create_superuser(username=username, password=password, email=email)
         else:
-            user = User.objects.create_user(username=username, password=password, email=email)
-        user.save()
+            new_user = User.objects.create_user(username=username, password=password, email=email)
+        # new_user.save()
         user_current_city = UserCurrentCity(
-            user=user,
+            user=new_user,
             cityName='北京市',
             adm2='北京'
         )
         user_current_city.save()
         user_avatar = UserAvatar(
-            user=user,
+            user=new_user,
             avatar="http://dummyimage.com/88x31"
         )
         user_avatar.save()
@@ -120,12 +124,12 @@ def my_register(request):
         # login(request, user)
 
         info = {
-            "token": str(AccessToken.for_user(user)),
+            "token": str(AccessToken.for_user(new_user)),
             # "token": user.username,
             "userInfo": {
-                "username": user.username,
-                "avatar": UserAvatar.objects.get(user=user).avatar,
-                "email": user.email,
+                "username": new_user.username,
+                "avatar": UserAvatar.objects.get(user=new_user).avatar,
+                "email": new_user.email,
                 "role": role
             }
         }
@@ -142,13 +146,10 @@ def my_register(request):
 @login_required
 @user_passes_test(lambda u: u.is_staff or u.is_superuser)
 def user_list(request):
-    # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")
     if not authorization:
-        # 返回401未授权错误
         return JsonResponse({"error": "Authorization header is required."}, status=401)
 
-    # 从请求体中获取数据
     try:
         data = json.loads(request.body)
         page = data.get('page')
@@ -158,10 +159,8 @@ def user_list(request):
         uid = data.get('id')
         username = data.get('username')
     except json.JSONDecodeError:
-        # 返回400错误，请求格式不正确
         return JsonResponse({"error": "Invalid JSON format in request body."}, status=400)
 
-    # 获取用户数据
     users = User.objects.all()
 
     # 分页处理
@@ -232,12 +231,11 @@ def delete_user(request):
         if uid == user.id:  # 删除当前用户，不允许
             response_data = {
                 "success": False,
-                "reason": "Cannot delete current user"
+                "reason": "不能删除当前用户"
             }
         else:
             target_user = User.objects.get(id=uid)
             target_user.delete()
-            # 如果用户存在，设置success为True
             response_data = {"success": True}
 
         return JsonResponse(response_data, status=200)  # 返回200成功响应
@@ -247,14 +245,12 @@ def delete_user(request):
         return JsonResponse(response_data, status=404)  # 返回404用户不存在
 
 
-@csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
+@csrf_exempt
 @login_required
 @user_passes_test(lambda u: u.is_staff or u.is_superuser)
 def user_authorization(request):
-    # 从请求头中获取Authorization
     authorization = request.META.get("HTTP_AUTHORIZATION")
     if not authorization:
-        # 返回401未授权错误
         return JsonResponse({"error": "Authorization header is required."}, status=401)
 
     # 从请求体中获取uid和role
@@ -336,9 +332,9 @@ def update_user_email(request):
         return JsonResponse({"success": False, "reason": "other user"}, status=400)
 
 
-@csrf_exempt  # 禁用CSRF令牌检查，因为这是API视图
-@login_required
-@user_passes_test(lambda u: u.is_staff or u.is_superuser)
+@csrf_exempt
+# @login_required
+# @user_passes_test(lambda u: u.is_staff or u.is_superuser)
 def update_user_password(request):
     authorization = request.META.get("HTTP_AUTHORIZATION")
 
@@ -347,37 +343,22 @@ def update_user_password(request):
     uid = data.get('uid')
     password = data.get('password')
 
-    if not user.is_staff:
-        raise PermissionDenied(
-            "User does not have the permission to change password.")
-    # try:
-    #     # 假设我们通过某种方式验证管理员的Authorization
-    #     # 例如，使用Django的authenticate函数，或者自定义的验证逻辑
-    #     admin_user = User.objects.get(id=uid)
-    #     if not check_password(authorization, admin_user.password):
-    #         raise PermissionDenied
+    if not user.is_staff or not user.is_superuser:
+        return JsonResponse({"success": False, "reason": "当前用户无权限"}, status=403)
 
-    #     # 检查管理员角色
-    #     if not admin_user.is_staff:  # 假设is_staff属性表示管理员
-    #         raise PermissionDenied
-    # except User.DoesNotExist:
-    #     return JsonResponse({"success": False, "reason": "manage.invalid"}, status=400)
-    # except PermissionDenied:
-    #     return JsonResponse({"success": False, "reason": "permission.denied"}, status=403)
-
-    # 检查用户是否存在
     try:
         target_user = User.objects.get(id=uid)
     except User.DoesNotExist:
-        return JsonResponse({"success": False, "reason": "manage.invalid"}, status=400)
+        return JsonResponse({"success": False, "reason": "用户不存在"}, status=400)
 
-    # 验证密码格式
-    if not password or len(password) < 8:  # 假设密码至少8位
-        return JsonResponse({"success": False, "reason": "manage.user.operate.password.format"}, status=400)
+    # check password
+    # if not password or len(password) < 8:  # 假设密码至少8位
+    #     return JsonResponse({"success": False, "reason": "manage.user.operate.password.format"}, status=400)
 
-    target_user.set_password(password)
+    # target_user.set_password(password)
+    target_user.password = password
+    target_user.save()
 
-    # 操作成功，返回success为True
     return JsonResponse({"success": True}, status=200)
 
 
@@ -395,9 +376,7 @@ def delete_data(request):
         item.delete()
         return JsonResponse({"success": True}, status=200)  # 如果删除成功，返回200成功
     except User.DoesNotExist:
-        return JsonResponse({"success": False}, status=404)  # 如果数据不存在，返回404错误
-    except Exception as e:
-        return JsonResponse({"success": False}, status=500)  # 返回500服务器错误
+        return JsonResponse({"success": False}, status=404)
 
 
 @csrf_exempt
@@ -433,7 +412,7 @@ def user_info(request):
 
 
 @csrf_exempt
-@login_required
+# @login_required
 @require_http_methods(["POST"])
 def update_current_user_password(request):
     auth_header = request.META.get('HTTP_AUTHORIZATION', '')
@@ -467,7 +446,9 @@ def update_current_user_password(request):
 
     # 更新用户密码
     try:
-        user.set_password(new_password)
+        # user.set_password(new_password)
+        user.password = new_password
+        user.save()
         # 如果使用Django的session，更新session中的密码
         # update_session_auth_hash(request, user)
 
@@ -540,16 +521,15 @@ def update_current_user_avatar(request):
 
     try:
         user_avatar = UserAvatar.objects.get(user=user).avatar,
-        user_avatar.avatar = file
+        user_avatar.avatar.save(f"{user.username}_avatar.png", ContentFile(file))
         user_avatar.save()
 
         return JsonResponse({
             "success": True,
-            "avatar": "http://dummyimage.com/100x100",
+            "avatar": user_avatar.avatar,
             "reason": "elit"
         })
     except Exception as e:
-        # 处理其他可能的异常
         return JsonResponse({
             "success": False,
             "reason": str(e),
