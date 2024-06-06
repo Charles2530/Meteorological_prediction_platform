@@ -74,26 +74,19 @@ router.beforeEach((to, from, next) => {
       new RegExp("^" + item.path.split("/:")[0] + "(?:/.*)?$").test(to.path)
     )
   ) {
-    if (to.name !== "Home") {
-        const userInfo = useUserInfo();
-        const themeConfig = useLoginConfig();
-        get<UserInfo>("/api/get_info/").then((res) => {
-            userInfo.login(res.data);
-            console.log("getToken")
-            if (router.currentRoute.value.meta.permission?.includes(userInfo.role)){
-                themeConfig.showLoginPanel = false;
-                next()
-            }else {
-                themeConfig.showLoginPanel = true;
-            }
-            });
-        // console.log(permissions);
-        // if (permissions.includes(userInfo.role)) {
-        //     next();
-        // } 
-    } else {
-      next();
-    }
+    const userInfo = useUserInfo();
+    const themeConfig = useLoginConfig();
+    get<UserInfo>("/api/get_info/").then((res) => {
+      userInfo.login(res.data);
+      console.log(to.meta.permission, userInfo.role, "getToken");
+      const permissions = to.meta.permission;
+      if (permissions.includes(userInfo.role)) {
+        themeConfig.showLoginPanel = false;
+        next();
+      } else {
+        themeConfig.showLoginPanel = true;
+      }
+    });
   } else {
     next({ name: "404Page" });
   }
