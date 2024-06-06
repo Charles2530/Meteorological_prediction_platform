@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { UserRole } from "@/types/user";
 import { useUserInfo } from "@/stores/userInfo";
 import { useLoginConfig } from "@/stores/loginConfig";
+import { get } from "@/api/index";
+import { UserInfo } from "@/types/user";
 
 // 速览首页
 const Home = () => import("@/views/home/index.vue");
@@ -73,15 +75,22 @@ router.beforeEach((to, from, next) => {
     )
   ) {
     if (to.name !== "Home") {
-      const userInfo = useUserInfo();
-      const themeConfig = useLoginConfig();
-      const permissions = to.meta.permission;
-      console.log(permissions);
-      if (permissions.includes(userInfo.role)) {
-        next();
-      } else {
-        themeConfig.showLoginPanel = true;
-      }
+        const userInfo = useUserInfo();
+        const themeConfig = useLoginConfig();
+        get<UserInfo>("/api/get_info/").then((res) => {
+            userInfo.login(res.data);
+            console.log("getToken")
+            if (router.currentRoute.value.meta.permission?.includes(userInfo.role)){
+                themeConfig.showLoginPanel = false;
+                next()
+            }else {
+                themeConfig.showLoginPanel = true;
+            }
+            });
+        // console.log(permissions);
+        // if (permissions.includes(userInfo.role)) {
+        //     next();
+        // } 
     } else {
       next();
     }

@@ -195,7 +195,6 @@ onMounted(() => {
 });
 
 const getProInfo = async () => {
-  console.log(proName.value);
   get<ProInfo>("/api/getProInfo/", { proName: proName.value }).then((res) => {
     proInfo.value = res.data;
   });

@@ -63,7 +63,16 @@ const createFilter = (queryString: string) => {
 const loadAll = () => {
   return china_cities;
 };
-
+watch(()=>location1,()=>{
+    if(location1.value==""){
+        getNewCompare()
+    }
+})
+watch(()=>location2,()=>{
+    if(location2.value==""){
+        getNewCompare()
+    }
+})
 const getNewCompare = async () =>
   Promise.all([getPresentCity1(), getPresentCity2()]).then(() => {
     setTimeout(() => {
@@ -80,40 +89,46 @@ const cityMessage1 = ref<CityWeatherData>({} as CityWeatherData);
 const cityMessage2 = ref<CityWeatherData>({} as CityWeatherData);
 let chartInstance_compare: echarts.ECharts | null = null;
 const getPresentCity1 = async () => {
-  get<CityInfoResponse>("/api/getCityInfo/", {
-    city: location1.value,
-  }).then((res) => {
-    cityMessage1.value.time = res.data.message.time;
-    cityMessage1.value.city = res.data.message.city;
-    cityMessage1.value.temp = res.data.message.temp;
-    cityMessage1.value.text = res.data.message.text;
-    cityMessage1.value.precip = res.data.message.precip;
-    cityMessage1.value.wind360 = res.data.message.wind360;
-    cityMessage1.value.windScale = res.data.message.windScale;
-    cityMessage1.value.windSpeed = res.data.message.windSpeed;
-    cityMessage1.value.humidity = res.data.message.humidity;
-    cityMessage1.value.pressure = res.data.message.pressure;
-    cityMessage1.value.aqi = res.data.message.aqi;
-    cityMessage1.value.category = res.data.message.category;
-  });
+    if(location1.value==""){
+        return;
+    }
+    get<CityInfoResponse>("/api/getCityInfo/", {
+        city: location1.value,
+    }).then((res) => {
+        cityMessage1.value.time = res.data.message.time;
+        cityMessage1.value.city = res.data.message.city;
+        cityMessage1.value.temp = res.data.message.temp;
+        cityMessage1.value.text = res.data.message.text;
+        cityMessage1.value.precip = res.data.message.precip;
+        cityMessage1.value.wind360 = res.data.message.wind360;
+        cityMessage1.value.windScale = res.data.message.windScale;
+        cityMessage1.value.windSpeed = res.data.message.windSpeed;
+        cityMessage1.value.humidity = res.data.message.humidity;
+        cityMessage1.value.pressure = res.data.message.pressure;
+        cityMessage1.value.aqi = res.data.message.aqi;
+        cityMessage1.value.category = res.data.message.category;
+    });
 };
 const getPresentCity2 = async () => {
-  get<CityInfoResponse>("/api/getCityInfo/", {
-    city: location2.value,
-  }).then((res) => {
-    cityMessage2.value.time = res.data.message.time;
-    cityMessage2.value.city = res.data.message.city;
-    cityMessage2.value.temp = res.data.message.temp;
-    cityMessage2.value.text = res.data.message.text;
-    cityMessage2.value.precip = res.data.message.precip;
-    cityMessage2.value.wind360 = res.data.message.wind360;
-    cityMessage2.value.windScale = res.data.message.windScale;
-    cityMessage2.value.windSpeed = res.data.message.windSpeed;
-    cityMessage2.value.humidity = res.data.message.humidity;
-    cityMessage2.value.pressure = res.data.message.pressure;
-    cityMessage2.value.aqi = res.data.message.aqi;
-    cityMessage2.value.category = res.data.message.category;
-  });
+    if(location2.value==""){
+        return;
+    }
+    get<CityInfoResponse>("/api/getCityInfo/", {
+        city: location2.value,
+    }).then((res) => {
+        cityMessage2.value.time = res.data.message.time;
+        cityMessage2.value.city = res.data.message.city;
+        cityMessage2.value.temp = res.data.message.temp;
+        cityMessage2.value.text = res.data.message.text;
+        cityMessage2.value.precip = res.data.message.precip;
+        cityMessage2.value.wind360 = res.data.message.wind360;
+        cityMessage2.value.windScale = res.data.message.windScale;
+        cityMessage2.value.windSpeed = res.data.message.windSpeed;
+        cityMessage2.value.humidity = res.data.message.humidity;
+        cityMessage2.value.pressure = res.data.message.pressure;
+        cityMessage2.value.aqi = res.data.message.aqi;
+        cityMessage2.value.category = res.data.message.category;
+    });
 };
 const getKeyList = function () {
   let keyList: string[] = [];

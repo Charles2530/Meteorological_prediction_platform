@@ -101,7 +101,7 @@ class DailyWeather(models.Model):
     # wind360Day = models.FloatField(default=0.0)
     # windDirDay = models.CharField(max_length=20, default="")
     # windScaleDay = models.CharField(max_length=10, default="")
-    windSpeedDay = models.CharField(max_length=10, default="")
+    windSpeedDay = models.FloatField(default=0.0)
     # wind360Night = models.FloatField(default=0.0)
     # windDirNight = models.CharField(max_length=20, default="")
     # windScaleNight = models.CharField(max_length=10, default="")

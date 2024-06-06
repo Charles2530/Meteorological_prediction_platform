@@ -117,13 +117,11 @@ const get_data = async () => {
     { month: month.value }
   ).then((res) => {
     weatherList.value = res.data.weatherList;
-    console.log(weatherList.value);
   });
 };
 
 // const index: number = ref(0);
 // let weather = weatherList.value[index.value];
-console.log("----------------------------------------------------------------");
 function getWeather(index: number) {
   return weatherList.value[index];
 }
@@ -380,7 +378,6 @@ let weather = ref<Weather41>({
 const get_his_overview = async () => {
   get<WeatherData41>("/api/weather/overview/", city).then((res) => {
     weather.value = res.data.weather;
-    console.log(weather.value);
     // city.value = res.data.city;
     // searchShow.value = res.data.searchShow
   });
