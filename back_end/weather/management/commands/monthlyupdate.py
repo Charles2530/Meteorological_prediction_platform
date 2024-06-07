@@ -39,6 +39,12 @@ class Command(BaseCommand):
             help="Use devapi instead of api",
         )
 
+        parser.add_argument(
+            '--print',
+            action='store_true',
+            help='Print process',
+        )
+
     def handle(self, *args, **kwargs):
         if kwargs['D']:
             print('Delete all')
@@ -54,33 +60,90 @@ class Command(BaseCommand):
             historic_url = 'https://api.qweather.com/v7/historical/weather'
             url = 'https://api.qweather.com/v7/weather/30d'
 
-        location_id = '101010100'
-
-        city = City2CityId.objects.get(cityId=location_id)
-        city_name = city.cityName
-        adm2 = city.areaName
-
         shanghai_timezone = pytz.timezone('Asia/Shanghai')
 
-        if not kwargs['dev']:
-            for i in range(-9, 0):
-                query_date = date.today() + timedelta(days=i)
-                historic_weather = requests.get(historic_url, params={
+        if DailyWeather.objects.count() > 0:
+            # delete incomplete data
+            city_name = DailyWeather.objects.last().city
+            adm2 = DailyWeather.objects.last().adm2
+            DailyWeather.objects.filter(city=city_name, adm2=adm2).delete()
+
+        for city in City2CityId.objects.all():
+            location_id = city.cityId
+            city_name = city.cityName
+            adm2 = city.areaName
+
+            if DailyWeather.objects.filter(city=city_name, adm2=adm2).exists():
+                print(city_name, adm2, 'already exists')
+                continue
+
+            if not kwargs['dev']:
+                for i in range(-9, 0):
+                    query_date = date.today() + timedelta(days=i)
+
+                    while True:
+                        historic_weather = requests.get(historic_url, params={
+                            'key': kwargs['key'],
+                            'location': location_id,
+                            'date': query_date.strftime('%Y%m%d')
+                        })
+                        historic_weather = json.loads(historic_weather.content.decode('utf-8'))
+                        if historic_weather['code'] == '429':
+                            print("wait to access")
+                            time.sleep(30)
+                            continue
+                        break
+
+                    if historic_weather['code'] == '404':
+                        continue
+                    # print('historic_weather', historic_weather)
+
+                    daily = historic_weather["weatherDaily"]
+                    temp_date_time = datetime.strptime(daily['date'], '%Y-%m-%d')
+                    date_time = temp_date_time.astimezone(shanghai_timezone)
+
+                    temp_aqi = random.randint(10, 150)  # TODO
+                    temp_wind_speed = random.randint(1, 7)  # TODO
+
+                    data = DailyWeather(
+                        fxDate=date_time,
+                        city=city_name,
+                        adm2=adm2,
+                        sunrise=daily["sunrise"],
+                        sunset=daily["sunset"],
+                        tempMax=daily["tempMax"],
+                        tempMin=daily["tempMin"],
+                        humidity=daily["humidity"],
+                        windSpeedDay=temp_wind_speed,
+                        precip=daily["precip"],
+                        pressure=daily["pressure"],
+                        aqi=temp_aqi,
+                        # category = '优' if temp_aqi < 50 else '良'
+                    )
+
+                    data.save()
+
+            while True:
+                weather = requests.get(url, params={
                     'key': kwargs['key'],
                     'location': location_id,
-                    'date': query_date.strftime('%Y%m%d')
                 })
+                weather = json.loads(weather.content.decode('utf-8'))
+                if weather['code'] == '429':
+                    print("wait to access")
+                    time.sleep(30)
+                    continue
+                break
+            if weather['code'] == '404':
+                continue
 
-                historic_weather = json.loads(historic_weather.content.decode('utf-8'))
-
-                # print('historic_weather', historic_weather)
-
-                daily = historic_weather["weatherDaily"]
-                temp_date_time = datetime.strptime(daily['date'], '%Y-%m-%d')
+            # print(weather)
+            for daily in weather["daily"]:
+                temp_date_time = datetime.fromisoformat(daily["fxDate"])
+                shanghai_timezone = pytz.timezone('Asia/Shanghai')
                 date_time = temp_date_time.astimezone(shanghai_timezone)
 
                 temp_aqi = random.randint(10, 150)  # TODO
-                temp_wind_speed = random.randint(1, 7)  # TODO
 
                 data = DailyWeather(
                     fxDate=date_time,
@@ -91,47 +154,17 @@ class Command(BaseCommand):
                     tempMax=daily["tempMax"],
                     tempMin=daily["tempMin"],
                     humidity=daily["humidity"],
-                    windSpeedDay=temp_wind_speed,
+                    windSpeedDay=daily["windSpeedDay"],
                     precip=daily["precip"],
                     pressure=daily["pressure"],
+                    cloud=daily["cloud"],
+                    # dew = hourly["dew"],
                     aqi=temp_aqi,
                     # category = '优' if temp_aqi < 50 else '良'
                 )
 
                 data.save()
-
-        weather = requests.get(url, params={
-            'key': kwargs['key'],
-            'location': location_id,
-        })
-
-        weather = json.loads(weather.content.decode('utf-8'))
-
-        # print(weather)
-        for daily in weather["daily"]:
-            temp_date_time = datetime.fromisoformat(daily["fxDate"])
-            shanghai_timezone = pytz.timezone('Asia/Shanghai')
-            date_time = temp_date_time.astimezone(shanghai_timezone)
-
-            temp_aqi = random.randint(10, 150)  # TODO
-
-            data = DailyWeather(
-                fxDate=date_time,
-                city=city_name,
-                adm2=adm2,
-                sunrise=daily["sunrise"],
-                sunset=daily["sunset"],
-                tempMax=daily["tempMax"],
-                tempMin=daily["tempMin"],
-                humidity=daily["humidity"],
-                windSpeedDay=daily["windSpeedDay"],
-                precip=daily["precip"],
-                pressure=daily["pressure"],
-                cloud=daily["cloud"],
-                # dew = hourly["dew"],
-                aqi=temp_aqi,
-                # category = '优' if temp_aqi < 50 else '良'
-            )
-
-            data.save()
+                
+            if kwargs['print']:
+                print('finish', city_name, adm2)
         self.stdout.write(self.style.SUCCESS('Successfully updated monthly weather info.'))

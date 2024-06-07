@@ -38,6 +38,12 @@ class Command(BaseCommand):
             help="Use devapi instead of api",
         )
 
+        parser.add_argument(
+            '--print',
+            action='store_true',
+            help='Print process',
+        )
+
     def handle(self, *args, **kwargs):
         if kwargs['D']:
             print('Delete all')
@@ -54,25 +60,46 @@ class Command(BaseCommand):
             weather_url = 'https://api.qweather.com/v7/weather/now'
             air_quality_url = 'https://api.qweather.com/v7/air/now'
 
-        for location_int in range(101010100, 101011800, 100):
-            location_id = str(location_int)
-            weather = requests.get(weather_url, params={
-                'key': kwargs['key'],
-                'location': location_id,  # TODO change city
-            })
-            air_quality = requests.get(air_quality_url, params={
-                'key': kwargs['key'],
-                'location': location_id,  # TODO change city
-            })
-
-            weather = json.loads(weather.content.decode('utf-8'))
-            air_quality = json.loads(air_quality.content.decode('utf-8'))
-            now_weather = weather["now"]
-            now_air_quality = air_quality["now"]
-
-            city = City2CityId.objects.get(cityId=location_id)
+        for city in City2CityId.objects.all():
+            location_id = city.cityId
             city_name = city.cityName
             adm2 = city.areaName
+
+            if RealtimeWeather.objects.filter(cityName=city_name, adm2=adm2).exists():
+                print(city_name, adm2, 'already exists')
+                continue
+
+            while True:
+                weather = requests.get(weather_url, params={
+                    'key': kwargs['key'],
+                    'location': location_id,
+                })
+                weather = json.loads(weather.content.decode('utf-8'))
+
+                if weather['code'] == '429':
+                    print("wait to access")
+                    time.sleep(30)
+                    continue
+
+                air_quality = requests.get(air_quality_url, params={
+                    'key': kwargs['key'],
+                    'location': location_id,
+                })
+                air_quality = json.loads(air_quality.content.decode('utf-8'))
+
+                if air_quality['code'] == '429':
+                    print("wait to access")
+                    time.sleep(30)
+                    continue
+
+                break
+
+            if weather['code'] == '404' or air_quality['code'] == '404':
+                print('cannot get', location_id)
+                continue
+
+            now_weather = weather["now"]
+            now_air_quality = air_quality["now"]
 
             if not RealtimeWeather.objects.filter(cityName=city_name, adm2=adm2).exists():
                 realtime_weather = RealtimeWeather(
@@ -107,5 +134,8 @@ class Command(BaseCommand):
                     o3=now_air_quality['o3']
                 )
                 realtime_air_quality.save()
+
+            if kwargs['print']:
+                print('finish', city_name, adm2)
 
         self.stdout.write(self.style.SUCCESS('Successfully updated realtime weather and air quality.'))

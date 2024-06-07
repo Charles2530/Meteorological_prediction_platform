@@ -9,7 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     ContentAvatar: typeof import('./components/content/avatar.vue')['default']
     ContentLogin: typeof import('./components/content/login.vue')['default']
-    copy: typeof import('./components/weather_details/sub_components/BriefAqi copy.vue')['default']
     ElAutocomplete: typeof import('element-plus/es')['ElAutocomplete']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']

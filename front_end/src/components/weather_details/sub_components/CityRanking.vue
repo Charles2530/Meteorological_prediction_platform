@@ -11,8 +11,8 @@
           style="background-color: transparent;width: 100%;margin-top: -12px;"
           :header-cell-style="{ 'text-align': 'center' }" :cell-style="{ 'text-align': 'center' }">
           <el-table-column prop="no" label="排名" height="auto" width="70" />
-          <el-table-column prop="city" label="城市" />
-          <el-table-column prop="province" label="所在省份" />
+          <el-table-column prop="city" label="区域" />
+          <el-table-column prop="province" label="所在城市" />
           <el-table-column prop="item" label="最高气温" />
         </el-table>
       </el-tab-pane>
@@ -20,8 +20,8 @@
         <el-table :data="lowestTempRankings" height="290" style="width: 100%;margin-top: -12px;"
           :header-cell-style="{ 'text-align': 'center' }" :cell-style="{ 'text-align': 'center' }">
           <el-table-column prop="no" label="排名" height="auto" width="70" />
-          <el-table-column prop="city" label="城市" />
-          <el-table-column prop="province" label="所在省份" />
+          <el-table-column prop="city" label="区域" />
+          <el-table-column prop="province" label="所在城市" />
           <el-table-column prop="item" label="最低气温" />
         </el-table>
       </el-tab-pane>
@@ -29,8 +29,8 @@
         <el-table :data="precipRankings" height="290" style="width: 100%;margin-top: -12px;"
           :header-cell-style="{ 'text-align': 'center' }" :cell-style="{ 'text-align': 'center' }">
           <el-table-column prop="no" label="排名" height="auto" width="70" />
-          <el-table-column prop="city" label="城市" />
-          <el-table-column prop="province" label="所在省份" />
+          <el-table-column prop="city" label="区域" />
+          <el-table-column prop="province" label="所在城市" />
           <el-table-column prop="item" label="降水量" />
         </el-table>
       </el-tab-pane>
@@ -38,8 +38,8 @@
         <el-table :data="cityAqiRankings" height="290" style="width: 100%;margin-top: -12px;"
           :header-cell-style="{ 'text-align': 'center' }" :cell-style="{ 'text-align': 'center' }">
           <el-table-column prop="no" label="排名" height="auto" width="70" />
-          <el-table-column prop="city" label="城市" />
-          <el-table-column prop="province" label="所在省份" />
+          <el-table-column prop="city" label="区域" />
+          <el-table-column prop="province" label="所在城市" />
           <!-- <el-table-column prop="item" label="空气质量" /> -->
           <el-table-column prop="item" label="空气质量">
             <template #header>
@@ -49,7 +49,7 @@
                 <!-- </el-col> -->
                 <!-- <span></span> -->
                 <!-- <el-col :span="12"> -->
-                <el-button size="small" type="" :icon="cityAqiIcon" @click="changeAqiOrder()" style="padding: 0px;" />
+                <el-button size="small" type="" :icon="cityAqiIcon" @click="changeAqiOrder()" style="padding: 0px; background-color: transparent;color: black;" />
                 <!-- </el-col> -->
               </el-row>
             </template>
@@ -106,6 +106,7 @@ const tableData = ref({})
 import { View, Hide } from "@element-plus/icons-vue";
 import { get } from "@/api/index.ts";
 import QualityRanking from "./QualityRanking.vue";
+import { color } from 'echarts';
 onMounted(() => {
   getCityRankings();
   cityAqiRankings.value = bestCityAqiRankings;
@@ -194,4 +195,19 @@ const Match = ref(true);
 ::v-deep .el-table td{
     background:rgba(255,255,255,0)
 }
+
+:deep(.el-table) {
+ background-color: rgba(255,255,255,0);
+//  --el-table-row-hover-bg-color: rgba(255,255,255,0);
+}
+
+:deep(.el-table tr) {
+ background-color: rgba(255,255,255,0);
+}
+
+:deep(.el-table th.el-table__cell) {
+ background-color: rgba(255,255,255,0);
+ color: rgba(77, 6, 6, 0.753);
+}
+
 </style>
