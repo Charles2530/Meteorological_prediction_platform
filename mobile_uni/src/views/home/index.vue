@@ -195,7 +195,9 @@ const get_overview_data = async () => {
 };
 onMounted(() => {
   get_care_cities();
-  get_overview_data();
+  setTimeout(() => {
+    get_overview_data();
+  }, 300);
 });
 
 watch(city, () => {
@@ -246,7 +248,7 @@ const removeCity = (index: number) => {
     }
     const request: City = careCitiesList.value[index].city;
     post<DeleteResponse>("/api/weather/care_cities/del/", request).then((res) => {
-      const response = res.data;
+      // const response = res.data;
       //   if (response.success) {
       //     ElMessage.success("已删除");
       //   } else ElMessage.error("无效的请求");
@@ -289,13 +291,17 @@ const handleConfirm = () => {
     }
     post<AddResponse>("/api/weather/care_cities/add/", { city: tempSelectedCity.value }).then((res) => {
     console.log(tempSelectedCity.value);
-      const response = res.data;
-      if (response.status) {
-        ElMessage.success("已添加");
-        // 刷新重新调用接口
-        get_care_cities();
-      } else ElMessage.error("无效的请求");
+      // const response = res.data;
+      // if (response.status) {
+      //   ElMessage.success("已添加");
+      //   // 刷新重新调用接口
+      // } else ElMessage.error("无效的请求");
+      // get_care_cities();
     });
+
+    setTimeout(() => {
+      get_care_cities();
+  }, 300);
 
   }
   // 关闭对话框

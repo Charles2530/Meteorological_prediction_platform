@@ -117,17 +117,27 @@ router.beforeEach((to, from, next) => {
   ) {
     const userInfo = useUserInfo();
     const themeConfig = useLoginConfig();
-    get<UserInfo>("/api/get_info/").then((res) => {
-      userInfo.login(res.data);
-      console.log(to.meta.permission, userInfo.role, "getToken");
-      const permissions = to.meta.permission;
-      if (permissions.includes(userInfo.role)) {
-        themeConfig.showLoginPanel = false;
-        next();
-      } else {
-        themeConfig.showLoginPanel = true;
+    if (userInfo.role==UserRole.Visitor){
+        get<UserInfo>("/api/get_info/").then((res) => {
+            userInfo.login(res.data);
+            console.log(to.meta.permission, userInfo.role, "getToken");
+            const permissions = to.meta.permission;
+            if (permissions.includes(userInfo.role)) {
+              themeConfig.showLoginPanel = false;
+              next();
+            } else {
+              themeConfig.showLoginPanel = true;
+            }
+          });
+    } else {
+        const permissions = to.meta.permission;
+        if (permissions.includes(userInfo.role)) {
+            themeConfig.showLoginPanel = false;
+            next();
+        } else {
+            themeConfig.showLoginPanel = true;
+        }
       }
-    });
   } else {
     next({ name: "404Page" });
   }

@@ -176,7 +176,7 @@ const getValueList1 = function () {
   };
   let pressure_json = {
     name: "气压",
-    value: cityMessage1.value.pressure || 0,
+    value: cityMessage1.value.pressure-950 || 0,
     sum: 10,
   };
   let aqi_json = {
@@ -228,7 +228,7 @@ const getValueList2 = function () {
   };
   let pressure_json = {
     name: "气压",
-    value: cityMessage2.value.pressure || 0,
+    value: cityMessage2.value.pressure-950 || 0,
     sum: 20,
   };
   let aqi_json = {

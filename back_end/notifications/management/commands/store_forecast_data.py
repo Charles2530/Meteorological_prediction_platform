@@ -44,10 +44,17 @@ class Command(BaseCommand):
             help="Specify count of warnings",
         )
 
+        parser.add_argument(
+            '--print',
+            action='store_true',
+            help='Print process',
+        )
+
     def handle(self, *args, **kwargs):
         if kwargs['D']:
             print('Delete all')
-            RealtimeWeather.objects.all().delete()
+            WeatherForecast.objects.all().delete()
+            HazardInfo.objects.all().delete()
 
         if kwargs["U"]:
             print("Refresh all")
@@ -66,34 +73,69 @@ class Command(BaseCommand):
         })
         warning_loc_list = json.loads(warning_loc_list_response.content.decode('utf-8'))['warningLocList']
 
-        count = kwargs['count']
+        count = int(kwargs['count'])
 
         level_dict = {
-            'Cancel': 1,
-            'None': 1,
-            'Unknown': 2,
-            'Standard': 2,
-            'Minor': 3,
+            'Cancel': 0,
+            'None': 0,
+            'Unknown': 0,
+            'Standard': 1,
+            'Minor': 2,
             'Moderate': 3,
             'Major': 4,
-            'Severe': 4
+            'Severe': 5,
+        }
+
+        severity_dict = {
+            'Cancel': '无',
+            'None': '无',
+            'Unknown': '未知',
+            'Standard': '轻微',
+            'Minor': '轻微',
+            'Moderate': '中等',
+            'Major': '较重',
+            'Severe': '严重',
         }
 
         i = 0
+
+        if kwargs['print']:
+            print('get', count, 'items')
+
         for location in warning_loc_list:
             if i > count:
                 break
             location_id = location['locationId']
-            warning_loc_response = requests.get(location_url, params={
-                'key': kwargs['key'],
-                'location': location_id,
-            })
-            warning_loc = json.loads(warning_loc_response.content.decode('utf-8'))['warning'].pop()
 
-            city = City2CityId.objects.get(cityId=location_id)
-            city_name = city.cityName
-            adm2 = city.areaName
-            location = city.location
+            try:
+                city = City2CityId.objects.get(cityId=location_id)
+                city_name = city.cityName
+                adm2 = city.areaName
+                location = city.location
+            except City2CityId.DoesNotExist:
+                print('cannot get', location_id + '\'s warnings')
+                continue
+
+            if WeatherForecast.objects.filter(city=city_name, adm2=adm2).exists():
+                print(city_name, adm2, 'already exists')
+                continue
+
+            while True:
+                warning_loc_response = requests.get(location_url, params={
+                    'key': kwargs['key'],
+                    'location': location_id,
+                })
+                warning_loc_response = json.loads(warning_loc_response.content.decode('utf-8'))
+                if warning_loc_response['code'] == '429':
+                    print("wait to access")
+                    time.sleep(30)
+                    continue
+                break
+
+            if warning_loc_response['code'] == '404':
+                continue
+
+            warning_loc = warning_loc_response['warning'].pop()
 
             weather_forecast = WeatherForecast(
                 id=warning_loc['id'],
@@ -114,15 +156,14 @@ class Command(BaseCommand):
                 adm2=adm2,
                 typeName=warning_loc['typeName'],
                 time=datetime.fromisoformat(warning_loc['startTime']),
-                severity=warning_loc['severity'],
-                # severity=level_dict.get(warning_loc['severity'], 5),
+                severity=severity_dict.get(warning_loc['severity'], '未知'),
                 severityColor=warning_loc['severityColor'],
             )
             hazard_info.save()
 
             i += 1
 
+            if kwargs['print']:
+                print('finish', city_name, adm2)
+
         self.stdout.write(self.style.SUCCESS('Successfully updated catastrophic forecast data.'))
-
-
-
