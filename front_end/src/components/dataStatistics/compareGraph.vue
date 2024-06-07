@@ -30,7 +30,7 @@
     <div
       id="chart_compare"
       ref="chart_compare"
-      style="width: 400px; height: 400px; padding: 10px; margin: 0 auto"
+      style="width: 600px; height: 400px; padding: 10px; margin: 0 auto"
     ></div>
   </el-row>
 </template>
@@ -63,22 +63,28 @@ const createFilter = (queryString: string) => {
 const loadAll = () => {
   return china_cities;
 };
-watch(()=>location1,()=>{
-    if(location1.value==""){
-        getNewCompare()
+watch(
+  () => location1,
+  () => {
+    if (location1.value == "") {
+      getNewCompare();
     }
-})
-watch(()=>location2,()=>{
-    if(location2.value==""){
-        getNewCompare()
+  }
+);
+watch(
+  () => location2,
+  () => {
+    if (location2.value == "") {
+      getNewCompare();
     }
-})
+  }
+);
 const getNewCompare = async () =>
   Promise.all([getPresentCity1(), getPresentCity2()]).then(() => {
     setTimeout(() => {
-        let render1:number[]=getValueList1();
-        let render2:number[]=getValueList2()
-        renderChart(render1,render2);
+      let render1: number[] = getValueList1();
+      let render2: number[] = getValueList2();
+      renderChart(render1, render2);
     }, 500);
   });
 interface CityInfoResponse {
@@ -89,52 +95,52 @@ const cityMessage1 = ref<CityWeatherData>({} as CityWeatherData);
 const cityMessage2 = ref<CityWeatherData>({} as CityWeatherData);
 let chartInstance_compare: echarts.ECharts | null = null;
 const getPresentCity1 = async () => {
-    if(location1.value==""){
-        return;
-    }
-    get<CityInfoResponse>("/api/getCityInfo/", {
-        city: location1.value,
-    }).then((res) => {
-        cityMessage1.value.time = res.data.message.time;
-        cityMessage1.value.city = res.data.message.city;
-        cityMessage1.value.temp = res.data.message.temp;
-        cityMessage1.value.text = res.data.message.text;
-        cityMessage1.value.precip = res.data.message.precip;
-        cityMessage1.value.wind360 = res.data.message.wind360;
-        cityMessage1.value.windScale = res.data.message.windScale;
-        cityMessage1.value.windSpeed = res.data.message.windSpeed;
-        cityMessage1.value.humidity = res.data.message.humidity;
-        cityMessage1.value.pressure = res.data.message.pressure;
-        cityMessage1.value.aqi = res.data.message.aqi;
-        cityMessage1.value.category = res.data.message.category;
-    });
+  if (location1.value == "") {
+    return;
+  }
+  get<CityInfoResponse>("/api/getCityInfo/", {
+    city: location1.value,
+  }).then((res) => {
+    cityMessage1.value.time = res.data.message.time;
+    cityMessage1.value.city = res.data.message.city;
+    cityMessage1.value.temp = res.data.message.temp;
+    cityMessage1.value.text = res.data.message.text;
+    cityMessage1.value.precip = res.data.message.precip;
+    cityMessage1.value.wind360 = res.data.message.wind360;
+    cityMessage1.value.windScale = res.data.message.windScale;
+    cityMessage1.value.windSpeed = res.data.message.windSpeed;
+    cityMessage1.value.humidity = res.data.message.humidity;
+    cityMessage1.value.pressure = res.data.message.pressure;
+    cityMessage1.value.aqi = res.data.message.aqi;
+    cityMessage1.value.category = res.data.message.category;
+  });
 };
 const getPresentCity2 = async () => {
-    if(location2.value==""){
-        return;
-    }
-    get<CityInfoResponse>("/api/getCityInfo/", {
-        city: location2.value,
-    }).then((res) => {
-        cityMessage2.value.time = res.data.message.time;
-        cityMessage2.value.city = res.data.message.city;
-        cityMessage2.value.temp = res.data.message.temp;
-        cityMessage2.value.text = res.data.message.text;
-        cityMessage2.value.precip = res.data.message.precip;
-        cityMessage2.value.wind360 = res.data.message.wind360;
-        cityMessage2.value.windScale = res.data.message.windScale;
-        cityMessage2.value.windSpeed = res.data.message.windSpeed;
-        cityMessage2.value.humidity = res.data.message.humidity;
-        cityMessage2.value.pressure = res.data.message.pressure;
-        cityMessage2.value.aqi = res.data.message.aqi;
-        cityMessage2.value.category = res.data.message.category;
-    });
+  if (location2.value == "") {
+    return;
+  }
+  get<CityInfoResponse>("/api/getCityInfo/", {
+    city: location2.value,
+  }).then((res) => {
+    cityMessage2.value.time = res.data.message.time;
+    cityMessage2.value.city = res.data.message.city;
+    cityMessage2.value.temp = res.data.message.temp;
+    cityMessage2.value.text = res.data.message.text;
+    cityMessage2.value.precip = res.data.message.precip;
+    cityMessage2.value.wind360 = res.data.message.wind360;
+    cityMessage2.value.windScale = res.data.message.windScale;
+    cityMessage2.value.windSpeed = res.data.message.windSpeed;
+    cityMessage2.value.humidity = res.data.message.humidity;
+    cityMessage2.value.pressure = res.data.message.pressure;
+    cityMessage2.value.aqi = res.data.message.aqi;
+    cityMessage2.value.category = res.data.message.category;
+  });
 };
 const getKeyList = function () {
   let keyList: string[] = [];
   keyList.push("温度");
   keyList.push("降水");
-  keyList.push("风速");
+  keyList.push("风向");
   keyList.push("风级");
   keyList.push("风速");
   keyList.push("湿度");
@@ -146,42 +152,82 @@ const getValueList1 = function () {
   let valueList: any[] = [];
   let temp_json = {
     name: "温度",
-    value: cityMessage1.value.temp || 0,
+    // value: cityMessage1.value.temp || 0,
+    value:
+      (
+        cityMessage1.value.temp /
+        (cityMessage1.value.temp + cityMessage2.value.temp)
+      ).toFixed(2) || 0.5,
     sum: 30,
   };
   let precip_json = {
     name: "降水量",
-    value: cityMessage1.value.precip || 0,
+    // value: cityMessage1.value.precip || 0,
+    value:
+      (
+        cityMessage1.value.precip /
+        (cityMessage1.value.precip + cityMessage2.value.precip)
+      ).toFixed(2) || 0.5,
     sum: 30,
   };
   let wind360_json = {
-    name: "风速",
-    value: cityMessage1.value.wind360 || 0,
+    name: "风向",
+    // value: cityMessage1.value.wind360 || 0,
+    value:
+      (
+        cityMessage1.value.wind360 /
+        (cityMessage1.value.wind360 + cityMessage2.value.wind360)
+      ).toFixed(2) || 0.5,
     sum: 20,
   };
   let windScale_json = {
     name: "风级",
-    value: cityMessage1.value.windScale || 0,
+    // value: cityMessage1.value.windScale || 0,
+    value:
+      (
+        cityMessage1.value.windScale /
+        (cityMessage1.value.windScale + cityMessage2.value.windScale)
+      ).toFixed(2) || 0.5,
     sum: 10,
   };
   let windSpeed_json = {
     name: "风速",
-    value: cityMessage1.value.windSpeed || 0,
+    // value: cityMessage1.value.windSpeed || 0,
+    value:
+      (
+        cityMessage1.value.windSpeed /
+        (cityMessage1.value.windSpeed + cityMessage2.value.windSpeed)
+      ).toFixed(2) || 0.5,
     sum: 10,
   };
   let humidity_json = {
     name: "湿度",
-    value: cityMessage1.value.humidity || 0,
+    // value: cityMessage1.value.humidity || 0,
+    value:
+      (
+        cityMessage1.value.humidity /
+        (cityMessage1.value.humidity + cityMessage2.value.humidity)
+      ).toFixed(2) || 0.5,
     sum: 10,
   };
   let pressure_json = {
     name: "气压",
-    value: cityMessage1.value.pressure-950 || 0,
+    // value: cityMessage1.value.pressure || 0,
+    value:
+      (
+        cityMessage1.value.pressure /
+        (cityMessage1.value.pressure + cityMessage2.value.pressure)
+      ).toFixed(2) || 0.5,
     sum: 10,
   };
   let aqi_json = {
     name: "AQI",
-    value: cityMessage1.value.aqi || 0,
+    // value: cityMessage1.value.aqi || 0,
+    value:
+      (
+        cityMessage1.value.aqi /
+        (cityMessage1.value.aqi + cityMessage2.value.aqi)
+      ).toFixed(2) || 0.5,
     sum: 10,
   };
   valueList.push(temp_json);
@@ -198,42 +244,82 @@ const getValueList2 = function () {
   let valueList: any[] = [];
   let temp_json = {
     name: "温度",
-    value: cityMessage2.value.temp || 0,
-    sum: 30,
+    // value: cityMessage2.value.temp || 0,
+    value:
+      (
+        cityMessage2.value.temp /
+        (cityMessage1.value.temp + cityMessage2.value.temp)
+      ).toFixed(2) || 0.5,
+    sum: 20,
   };
   let precip_json = {
     name: "降水量",
-    value: cityMessage2.value.precip || 0,
-    sum: 30,
+    // value: cityMessage2.value.precip || 0,
+    value:
+      (
+        cityMessage2.value.precip /
+        (cityMessage1.value.precip + cityMessage2.value.precip)
+      ).toFixed(2) || 0.5,
+    sum: 20,
   };
   let wind360_json = {
-    name: "风速",
-    value: cityMessage2.value.wind360 || 0,
+    name: "风向",
+    // value: cityMessage2.value.wind360 || 0,
+    value:
+      (
+        cityMessage2.value.wind360 /
+        (cityMessage1.value.wind360 + cityMessage2.value.wind360)
+      ).toFixed(2) || 0.5,
     sum: 20,
   };
   let windScale_json = {
     name: "风级",
-    value: cityMessage2.value.windScale || 0,
+    // value: cityMessage2.value.windScale || 0,
+    value:
+      (
+        cityMessage2.value.windScale /
+        (cityMessage1.value.windScale + cityMessage2.value.windScale)
+      ).toFixed(2) || 0.5,
     sum: 20,
   };
   let windSpeed_json = {
     name: "风速",
-    value: cityMessage2.value.windSpeed || 0,
+    // value: cityMessage2.value.windSpeed || 0,
+    value:
+      (
+        cityMessage2.value.windSpeed /
+        (cityMessage1.value.windSpeed + cityMessage2.value.windSpeed)
+      ).toFixed(2) || 0.5,
     sum: 20,
   };
   let humidity_json = {
     name: "湿度",
-    value: cityMessage2.value.humidity || 0,
+    // value: cityMessage2.value.humidity || 0,
+    value:
+      (
+        cityMessage2.value.humidity /
+        (cityMessage1.value.humidity + cityMessage2.value.humidity)
+      ).toFixed(2) || 0.5,
     sum: 20,
   };
   let pressure_json = {
     name: "气压",
-    value: cityMessage2.value.pressure-950 || 0,
+    // value: cityMessage2.value.pressure || 0,
+    value:
+      (
+        cityMessage2.value.pressure /
+        (cityMessage1.value.pressure + cityMessage2.value.pressure)
+      ).toFixed(2) || 0.5,
     sum: 20,
   };
   let aqi_json = {
     name: "AQI",
-    value: cityMessage2.value.aqi || 0,
+    // value: cityMessage2.value.aqi || 0,
+    value:
+      (
+        cityMessage2.value.aqi /
+        (cityMessage1.value.aqi + cityMessage2.value.aqi)
+      ).toFixed(2) || 0.5,
     sum: 20,
   };
   valueList.push(temp_json);
@@ -250,7 +336,7 @@ onMounted(() =>
   Promise.all([getPresentCity1(), getPresentCity2()]).then(() => {
     labels.value = loadAll();
     setTimeout(() => {
-        renderChart(getValueList1(), getValueList2());
+      renderChart(getValueList1(), getValueList2());
     }, 1000);
   })
 );
@@ -277,6 +363,10 @@ const renderChart = async (data1: number[], data2: number[]) => {
       itemGap: 40,
       orient: "horizontal",
       icon: "circle",
+      textStyle: {
+        color: "#fff",
+        fontSize: 14,
+      },
     },
     grid: [
       {
@@ -303,10 +393,62 @@ const renderChart = async (data1: number[], data2: number[]) => {
     ],
     tooltip: {
       show: true,
-      formatter: "{b} : {c}",
+      formatter: function (params: any) {
+        let tooltipContent = "";
+        console.log(params);
+        let originalValue = params.data;
+        // if (params.seriesName === "城市1") {
+        if (originalValue.name === "温度") {
+          originalValue = (
+            originalValue.value *
+            (cityMessage1.value.temp + cityMessage2.value.temp)
+          ).toFixed(0);
+        } else if (originalValue.name === "降水量") {
+          originalValue = (
+            originalValue.value *
+            (cityMessage1.value.precip + cityMessage2.value.precip)
+          ).toFixed(0);
+        } else if (originalValue.name === "风向") {
+          originalValue = (
+            originalValue.value *
+            (cityMessage1.value.wind360 + cityMessage2.value.wind360)
+          ).toFixed(0);
+        } else if (originalValue.name === "风级") {
+          originalValue = (
+            originalValue.value *
+            (cityMessage1.value.windScale + cityMessage2.value.windScale)
+          ).toFixed(0);
+        } else if (originalValue.name === "风速") {
+          originalValue = (
+            originalValue.value *
+            (cityMessage1.value.windSpeed + cityMessage2.value.windSpeed)
+          ).toFixed(0);
+        } else if (originalValue.name === "湿度") {
+          originalValue = (
+            originalValue.value *
+            (cityMessage1.value.humidity + cityMessage2.value.humidity)
+          ).toFixed(0);
+        } else if (originalValue.name === "气压") {
+          originalValue = (
+            originalValue.value *
+            (cityMessage1.value.pressure + cityMessage2.value.pressure)
+          ).toFixed(0);
+        } else if (originalValue.name === "AQI") {
+          originalValue = (
+            originalValue.value *
+            (cityMessage1.value.aqi + cityMessage2.value.aqi)
+          ).toFixed(0);
+        }
+        // } else if (params.seriesName === "城市2") {
+        // }
+        tooltipContent += `${params.marker} ${params.name}: ${originalValue}<br/>`;
+        return tooltipContent;
+      },
     },
     xAxis: [
       {
+        min: 0,
+        max: 1,
         type: "value",
         inverse: true,
         axisLine: {
@@ -328,6 +470,8 @@ const renderChart = async (data1: number[], data2: number[]) => {
         show: false,
       },
       {
+        min: 0,
+        max: 1,
         gridIndex: 2,
         show: false,
         type: "value",

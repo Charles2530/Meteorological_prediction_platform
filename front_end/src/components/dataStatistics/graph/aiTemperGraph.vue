@@ -1,5 +1,5 @@
 <template>
-  <div class="block text-center" style="height: 220px">
+  <div class="block text-center" style="height: 270px">
     <span class="demonstration text-2xl">AI热力图</span>
     <el-select v-model="videoSrc" placeholder="请选择">
       <el-option
