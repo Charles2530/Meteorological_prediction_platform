@@ -171,6 +171,15 @@ const renderChart = async (
     tooltip: {
       trigger: "axis",
     },
+    legend: {
+      selectedMode: "single",
+      selected: {
+        温度: true, // 默认显示温度系列
+        湿度: false, // 默认不显示湿度系列
+        AQI: false, // 默认不显示AQI系列
+        气压: false, // 默认不显示气压系列
+      },
+    },
     xAxis: [
       {
         data: tempData.map((item) => item.time),

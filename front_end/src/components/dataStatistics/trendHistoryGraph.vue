@@ -325,6 +325,7 @@ const renderChart = async (
       containLabel: true,
     },
     legend: {
+      selectedMode: "single",
       orient: "horizontal",
       left: "right",
       top: "top",

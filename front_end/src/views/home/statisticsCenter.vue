@@ -4,7 +4,7 @@
       <el-main>
         <el-card>
           <el-row :gutter="20">
-            <el-col :span="18">
+            <el-col :span="17">
               <el-card>
                 <!-- <el-select
                   v-model="selectedLocation"
@@ -29,7 +29,7 @@
                 />
                 <div class="slider-demo-block">
                   <span class="demonstration">时间维度</span>
-                  <el-slider v-model="periods" :max="45" :min="5"/>
+                  <el-slider v-model="periods" :max="45" :min="5" />
                 </div>
 
                 <trendHistoryGraph
@@ -57,7 +57,10 @@
                       />
                     </el-card> -->
                     <el-card>
-                      <trendHistoryWinSpeedGraph :city="selectedLocation" :periods="periods"/>
+                      <trendHistoryWinSpeedGraph
+                        :city="selectedLocation"
+                        :periods="periods"
+                      />
                     </el-card>
                   </el-col>
                 </el-row>
@@ -93,7 +96,7 @@
                 </el-row> -->
               </el-card>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="7">
               <el-card>
                 <compareGraph />
               </el-card>
