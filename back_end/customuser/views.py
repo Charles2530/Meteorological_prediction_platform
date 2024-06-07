@@ -526,12 +526,14 @@ def update_current_user_avatar(request):
     file_path = f'avatars/{user.id}/{file.name}'
     path = default_storage.save(file_path, ContentFile(file.read()))
     avatar_url = request.build_absolute_uri(settings.MEDIA_URL + path)
-    print('-----', avatar_url, '-----')
+    # avatar_url = request.build_absolute_uri(path)
+    # print('-----', avatar_url, '-----')
 
     try:
         user_avatar, created = UserAvatar.objects.get_or_create(user=user)
         print('-----', user_avatar, '-----')
         user_avatar.avatar = avatar_url
+        # user_avatar.avatar = path
         user_avatar.save()
 
         return JsonResponse({

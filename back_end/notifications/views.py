@@ -84,7 +84,7 @@ def get_alarm_notice(request):
                 # "id": forecast.id,
                 # TODO:change pic
                 # "img": "https://ts1.cn.mm.bing.net/th/id/R-C.5b318dcf92724f1b99c194f891602f06?rik=eg7%2f2A2FtTorZA&riu=http%3a%2f%2fappdata.langya.cn%2fuploadfile%2f2020%2f0722%2f20200722090230374.jpg&ehk=DTXD%2bpXZoXFP8PBVpZeox9lN%2f5eoUhdebZg6f1gIPs0%3d&risl=&pid=ImgRaw&r=0",
-                "img": forecast.img,
+                "img": 'https://web.chinamcloud.com/yhdst/upload/Image/mrtp/2021/09/11/1_69a3bc65fc2041379cf5cde4f5a16619.jpeg?1631327799189' if forecast.title.find('雷电') != -1 else forecast.img,
                 "title": forecast.title,
                 "date": "2024-10-24",
                 "city": city_name + ' ' + adm2,
@@ -202,7 +202,7 @@ def get_recent(request):
         forecast_json = {
             # "id": forecast.id,
             # TODO:change pic
-            "img": forecast.img,
+            "img": 'https://web.chinamcloud.com/yhdst/upload/Image/mrtp/2021/09/11/1_69a3bc65fc2041379cf5cde4f5a16619.jpeg?1631327799189' if forecast.title.find('雷电') != -1 else forecast.img,
             "title": forecast.title,
             # "date": forecast.date,
             "date": "2024-05-10",

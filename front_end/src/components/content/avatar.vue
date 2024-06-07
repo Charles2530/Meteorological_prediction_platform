@@ -56,7 +56,7 @@ const handleAvatarSuccess: UploadProps["onSuccess"] = (response) => {
   if (response.success == true) {
     userInfo.setAvatar(response.avatar);
   } else {
-    ElMessage.error(response.reason);
+    //ElMessage.error(response.reason);
   }
 };
 

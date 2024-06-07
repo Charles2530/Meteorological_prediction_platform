@@ -49,13 +49,14 @@ service.interceptors.response.use(
         duration: 3000,
       });
       loginConfig.setShowLoginPanel(true);
-    } else {
-      ElMessage({
-        message: error.message,
-        type: "error",
-        duration: 3000,
-      });
-    }
+    } 
+    // else {
+    //   ElMessage({
+    //     message: error.message,
+    //     type: "error",
+    //     duration: 3000,
+    //   });
+    // }
     return Promise.reject(error);
   }
 );

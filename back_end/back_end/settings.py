@@ -170,8 +170,8 @@ REST_FRAMEWORK = {
     ]
 }
 
-MEDIA_URL = '/api/media/'
-# MEDIA_URL = '/Meteorological_prediction_platform/back_end/media/'
+# MEDIA_URL = '/media/'
+MEDIA_URL = '/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # 用于生成完整URL时的站点信息
