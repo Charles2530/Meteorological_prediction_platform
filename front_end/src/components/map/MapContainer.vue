@@ -302,47 +302,55 @@ let heatmapWater: {
   }) => void;
 } = null;
 
+let legend: { remove: () => void; }=null;
+
 let windLayer: AMapWind = null;
 
-let scatter: {
-  getLabelsLayer(): unknown;
-  getData(): unknown;
-  getScatterLayer(): unknown;
-  on(arg0: string, arg1: (event: any) => void): unknown;
-  setLoca: (arg0: {
-    [x: string]: any;
-    remove(pl: {
-      setSource: (arg0: any) => void;
-      setStyle: (arg0: {
-        radius: (
-          i: any,
-          feature: { properties: { level: string | number } }
-        ) => number;
-        color: (i: any, feature: { properties: any }) => string;
-        borderWidth: number;
-        blurRadius: number;
-        unit: string;
-      }) => void;
-      addAnimate: (arg0: {
-        key: string;
-        value: number[];
-        duration: number;
-        easing: string;
-        transform: number;
-        random: boolean;
-        delay: number; // 设置安全密钥
-        yoyo: boolean;
-        repeat: number;
-      }) => void;
-    }): unknown;
-    add: (arg0: any) => void;
-  }) => void;
-  remove: () => void;
-  setSource: (
-    arg0: null,
-    arg1: { unit: string; size: number[]; texture: string; borderWidth: number }
-  ) => void;
-  queryFeature: (arg0: any) => any;
+let scatter_wind: {
+queryFeature(pixel: any): unknown;
+setLoca: (arg0: {[x:string]: any; remove(pl: {
+setSource: (arg0: any) => void; setStyle: (arg0: {
+radius: (i: any, feature: { properties: { level: string | number; }; }) =>
+number; color: (i: any, feature: {
+properties: any;}) => string; borderWidth: number; blurRadius: number; unit: string;}) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void;}): unknown; add: (arg0: any) => void;
+}) => void; remove: () => void; setSource: (arg0: null, arg1: { unit: string; size: number[]; texture: string; borderWidth: number; }) => void;
+} = null;
+
+let scatter_earth: {
+queryFeature: (arg0: any) => void; setLoca: (arg0: {
+[x: string]: any; remove(pl: {
+setSource: (arg0: any) => void; setStyle: (arg0: {
+radius: (i: any, feature: { properties: { level: string | number; }; }) =>
+number; color: (i: any, feature: {
+properties:any;
+}) => string; borderWidth: number; blurRadius: number; unit: string;
+}) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void;
+}): unknown; add: (arg0: any) => void;
+}) => void; remove: () => void; setSource: (arg0: null, arg1: { unit: string; size: number[]; texture: string; borderWidth: number; }) => void;
+} = null;
+
+let scatter_elec: {
+queryFeature: (arg0: any) => unknown; setLoca: (arg0: {
+[x: string]: any; remove(pl: {
+setSource: (arg0: any) => void; setStyle: (arg0: {
+radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number;
+blurRadius: number;
+unit: string;
+}) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void;
+}): unknown; add: (arg0: any) => void;
+}) => void; remove: () => void; setSource: (arg0: null, arg1: { unit: string; size: number[]; texture: string; borderWidth: number; }) => void;
+} = null;
+
+let scatter_other: {
+queryFeature: (arg0: any) => unknown; setLoca: (arg0: {
+[x: string]: any; remove(pl: {
+setSource: (arg0: any) => void; setStyle: (arg0: {
+radius: (i: any, feature: { properties: { level: string | number; }; }) => number; color: (i: any, feature: { properties: any; }) => string; borderWidth: number;
+blurRadius: number;
+unit: string;
+}) => void; addAnimate: (arg0: { key: string; value: number[]; duration: number; easing: string; transform: number; random: boolean; delay: number; yoyo: boolean; repeat: number; }) => void;
+}): unknown; add: (arg0: any) => void;
+}) => void; remove: () => void; setSource: (arg0: null, arg1: { unit: string; size: number[]; texture: string; borderWidth: number; }) => void;
 } = null;
 
 let breath: {
@@ -479,7 +487,10 @@ let infoWindow: {
 var geo: null = null;
 var aqiGeo: null = null;
 
-var hazardGeo: null = null;
+var hazardGeo_wind: null = null;
+var hazardGeo_earth: null = null;
+var hazardGeo_elec: null = null;
+var hazardGeo_other: null = null;
 var hazardTopGeo: null = null;
 
 // let windData: { data: any[]; }[]=null;
@@ -548,20 +559,32 @@ function object2Geojson2(data: Array<Hazard>) {
   return featureCollection;
 }
 
-function object2Geojson3(data: Array<MapGeo>) {
-  var features = new Array();
-  var featureCollection = { type: "FeatureCollection", features: features };
+function object2Geojson3(data: Array<Hazard>) {
+  var features_wind = new Array();
+  var featureCollection_wind = { type: "FeatureCollection", features: features_wind };
+  var features_earth = new Array();
+  var featureCollection_earth = { type: "FeatureCollection", features: features_earth };
+  var features_elec = new Array();
+  var featureCollection_elec = { type: "FeatureCollection", features: features_elec };
+  var features_other = new Array();
+  var featureCollection_other = { type: "FeatureCollection", features: features_other };
 
-  for (let i = 0; i < data.length; i += 17) {
-    var feature = { type: "Feature", properties: {}, geometry: {} };
+  for (let i = 0; i < data.length; i++) {
+    var feature :{ type: string, properties: {type:string}, geometry: {} }  = { type: "Feature", properties: {type:""}, geometry: {} };
     var geometry = { type: "Point", coordinates: new Array() };
-    geometry.coordinates = [data[i].LON, data[i].LAT];
+    geometry.coordinates = [data[i].longitude, data[i].latitude];
     feature.properties = data[i];
     feature.geometry = geometry;
-    features.push(feature);
+    if(feature.properties.type=="地震") features_earth.push(feature);
+    else if(feature.properties.type=="大风") features_wind.push(feature);
+    else if(feature.properties.type=="雷电") features_elec.push(feature);
+    else features_other.push(feature);
   }
-  featureCollection.features = features;
-  return featureCollection;
+  featureCollection_wind.features = features_wind;
+  featureCollection_earth.features = features_earth;
+  featureCollection_elec.features = features_elec;
+  featureCollection_other.features = features_other;
+  return {"hazardGeo_wind":featureCollection_wind,"hazardGeo_earth":featureCollection_earth,"hazardGeo_elec":featureCollection_elec,"hazardGeo_other":featureCollection_other,};
 }
 
 interface MapGeoRes {
@@ -582,7 +605,7 @@ async function getMapGeo() {
       data: object2Geojson(res.data.data),
     });
     aqiGeo = new Loca.GeoJSONSource({
-      data: object2Geojson3(res.data.data),
+      data: object2Geojson(res.data.data),
     });
     InitHeatMapTem();
     InitHeatMapWater();
@@ -609,16 +632,31 @@ async function getProInfo() {
 
 function getHazardGeo() {
   get<HazardRes>("/api/getHazard/").then((res) => {
-    hazardGeo = new Loca.GeoJSONSource({
-      data: object2Geojson2(res.data.data),
+    // hazardGeo = new Loca.GeoJSONSource({
+    //   data: object2Geojson2(res.data.data),
+    // });
+    var hazardGeo = object2Geojson3(res.data.data);
+    hazardGeo_wind = new Loca.GeoJSONSource({
+      data: hazardGeo.hazardGeo_wind,
+    });
+    hazardGeo_earth = new Loca.GeoJSONSource({
+      data: hazardGeo.hazardGeo_earth,
+    });
+    hazardGeo_elec = new Loca.GeoJSONSource({
+      data: hazardGeo.hazardGeo_elec,
+    });
+    hazardGeo_other = new Loca.GeoJSONSource({
+      data: hazardGeo.hazardGeo_other,
     });
     get<HazardRes>("/api/getHazardTop/").then((res) => {
       hazardTopGeo = new Loca.GeoJSONSource({
         data: object2Geojson2(res.data.data),
       });
       InitHazard();
+      
     });
   });
+  
 }
 
 function initMap() {
@@ -826,7 +864,11 @@ async function showInfoWindow() {
     dd.lng = pos_info.lng;
     infoWindow.open(map, dd);
   } else if (buttonActive.e) {
-    var feat = scatter.queryFeature(pos_info.pixel);
+    // var feat = scatter.queryFeature(pos_info.pixel);
+    var feat  = scatter_wind.queryFeature(pos_info.pixel);
+    !feat && (feat = scatter_earth.queryFeature(pos_info.pixel));
+    !feat && (feat = scatter_elec.queryFeature(pos_info.pixel));
+    !feat && (feat = scatter_other.queryFeature(pos_info.pixel));
     if (feat) {
       content.push(
         `<span style="font-size: 24px;"><b>${feat.properties.type} ${feat.properties.level}</b></span>`,
@@ -920,8 +962,30 @@ function clicka() {
     else if (buttonActive.f) clickf();
     if (infoWindow.getIsOpen()) showInfoWindow();
     heatmapTem.setLoca(loca);
+    legend = new Loca.Legend({
+      loca:loca,
+      title: {
+          label: '气温图例',
+          fontColor: 'rgba(255,255,255,0.4)',
+          fontSize: '16px',
+      },
+      style: {
+          backgroundColor: 'rgba(255,255,255,0.1)',
+          right: '20px',
+          bottom: '30px',
+          fontSize: '12px',
+      },
+      dataMap: [
+          { label: '30℃', color: '#D04343' },
+          { label: '20℃', color: '#FC753F' },
+          { label: '10℃', color: '#FFF100' },
+          { label: '0℃', color: '#5CE182' },
+          { label: '-10℃', color: '#2A85B8' },
+      ],
+    });
   } else {
     heatmapTem.remove();
+    legend.remove();
   }
 }
 
@@ -935,8 +999,31 @@ function clickb() {
     else if (buttonActive.f) clickf();
     if (infoWindow.getIsOpen()) showInfoWindow();
     heatmapWater.setLoca(loca);
+    legend = new Loca.Legend({
+      loca:loca,
+      title: {
+          label: '降水图例',
+          fontColor: 'rgba(255,255,255,0.4)',
+          fontSize: '16px',
+      },
+      style: {
+          backgroundColor: 'rgba(255,255,255,0.1)',
+          right: '20px',
+          bottom: '30px',
+          fontSize: '12px',
+      },
+      dataMap: [
+          { label: '10mm', color: '#083D99' },
+          { label: '8mm', color: '#0A69BC' },
+          { label: '6mm', color: '#4E92CE' },
+          { label: '4mm', color: '#59C7F6' },
+          { label: '2mm', color: '#98D5EE' },
+
+      ],
+  });
   } else {
     heatmapWater.remove();
+    legend.remove();
   }
 }
 
@@ -978,13 +1065,41 @@ function clicke() {
     else if (buttonActive.d) clickd();
     else if (buttonActive.a) clicka();
     else if (buttonActive.f) clickf();
-    scatter.setLoca(loca);
+    scatter_wind.setLoca(loca);
+    scatter_earth.setLoca(loca);
+    scatter_elec.setLoca(loca);
+    scatter_other.setLoca(loca);
     breath.setLoca(loca);
+    legend = new Loca.Legend({
+      loca:loca,
+      title: {
+          label: '灾害图例',
+          fontColor: 'rgba(255,255,255,0.4)',
+          fontSize: '16px',
+      },
+      style: {
+          backgroundColor: 'rgba(255,255,255,0.1)',
+          right: '20px',
+          bottom: '30px',
+          fontSize: '12px',
+      },
+      dataMap: [
+          { label: '地震', color: '#00ff00' },
+          { label: '大风', color: '#87ceeb' },
+          { label: '雷电', color: '#ffa500' },
+          { label: '其他', color: '#808080' },
+      ],
+    });
     if (infoWindow.getIsOpen()) showInfoWindow();
     // loca.animate.start();
   } else {
-    scatter.remove();
+    // scatter.remove();
+    scatter_wind.remove();
+    scatter_earth.remove();
+    scatter_elec.remove();
+    scatter_other.remove();
     breath.remove();
+    legend.remove();
   }
 }
 
@@ -1086,22 +1201,23 @@ function InitHeatMapTem() {
 
   heatmapTem.setSource(geo, {
     // radius: 200000,
-    radius: 80000,
-    unit: "meter",
+    radius: 75000,
+    unit: 'meter',
+    max:30,
+    min:-10,
     gradient: {
-      0.1: "#2A85B8",
-      0.2: "#16B0A9",
-      0.3: "#29CF6F",
-      0.4: "#5CE182",
-      0.5: "#7DF675",
-      0.6: "#FFF100",
-      0.7: "#FAA53F",
-      1: "#D04343",
+      0: '#2A85B8',
+      // 0.15: '#16B0A9',
+      0.25: '#5CE182',
+      0.4: '#7DF675',
+      0.5: '#FFF100',
+      0.6: '#FCBD3F',
+      // 0.7: '#FAA53F',
+      0.75: '#FC753F',
+      // 0.9: '#FC753F',
+      1: '#D04343',
     },
-    value: function (
-      _index: any,
-      feature: { properties: { temp: any; mom: string | any[] } }
-    ) {
+    value: function (_index: any, feature: { properties: { temp: any; mom: string | any[]; }; }) {
       return feature.properties.temp;
     },
   });
@@ -1122,34 +1238,53 @@ function InitHeatMapWater() {
 
   heatmapWater.setSource(geo, {
     radius: 70000,
-    unit: "meter",
+    unit: 'meter',
     height: 500000,
-
+    max:10,
+    min:2,
     gradient: {
-      0.1: "#EAF3F7",
-      0.2: "#98D5EE",
-      0.3: "#59C7F6",
-      0.4: "#60B1F4",
-      0.5: "#4E92CE",
-      0.6: "#3185CF",
-      0.7: "#0A69BC",
-      1: "#083D99",
+      0: '#EAF3F7',
+      0.25: '#98D5EE',
+      0.3: '#59C7F6',
+      0.4: '#60B1F4',
+      0.5: '#4E92CE',
+      0.6: '#3185CF',
+      0.75: '#0A69BC',
+      1: '#083D99',
     },
-    value: function (
-      _index: any,
-      feature: { properties: { precip: any; mom: string | any[] } }
-    ) {
+    value: function (_index: any, feature: { properties: { precip: any; mom: string | any[]; }; }) {
       return feature.properties.precip;
     },
-    heightBezier: [0, 0.53, 0.37, 0.98],
   });
-
-  //   loca.add(heatmapWater);
 }
 
 //初始化灾害图层
 function InitHazard() {
-  scatter = new Loca.ScatterLayer({
+  // scatter = new Loca.ScatterLayer({
+  //   // loca,
+  //   zIndex: 15,
+  //   opacity: 1,
+  //   visible: true,
+  //   zooms: [2, 22],
+  // });
+
+  // scatter.setSource(hazardGeo, {
+  //   unit: "px",
+  //   size: [25, 25],
+  //   texture: "https://a.amap.com/Loca/static/loca-v2/demos/images/blue.png",
+  //   // texture: getAssetsFileAQI("green" + "_hazard" + ".png"),
+  //   // texture: function (_index: any, feature: { properties: { type: any; mom: string | any[]; }; }) {
+  //   //   var color = "";
+  //   //   console.log("111")
+  //   //   if(feature.properties.type=="地震") color="green";
+  //   //   else if(feature.properties.type=="大风") color="blue";
+  //   //   else if(feature.properties.type=="雷电") color="yellow";
+  //   //   else color="white";
+  //   //   return getAssetsFileAQI("green" + "_hazard" + ".png");
+  //   // },
+  //   borderWidth: 0,
+  // });
+  scatter_wind = new Loca.ScatterLayer({
     // loca,
     zIndex: 15,
     opacity: 1,
@@ -1157,12 +1292,58 @@ function InitHazard() {
     zooms: [2, 22],
   });
 
-  scatter.setSource(hazardGeo, {
+  scatter_wind.setSource(hazardGeo_wind, {
     unit: "px",
-    size: [20, 20],
-    texture: "https://a.amap.com/Loca/static/loca-v2/demos/images/blue.png",
+    size: [25, 25],
+    texture: getAssetsFileAQI("blue" + "_hazard2" + ".png"),
     borderWidth: 0,
   });
+
+  scatter_earth = new Loca.ScatterLayer({
+    // loca,
+    zIndex: 15,
+    opacity: 1,
+    visible: true,
+    zooms: [2, 22],
+  });
+
+  scatter_earth.setSource(hazardGeo_earth, {
+    unit: "px",
+    size: [25, 25],
+    texture: getAssetsFileAQI("green" + "_hazard2" + ".png"),
+    borderWidth: 0,
+  });
+
+  scatter_elec = new Loca.ScatterLayer({
+    // loca,
+    zIndex: 15,
+    opacity: 1,
+    visible: true,
+    zooms: [2, 22],
+  });
+
+  scatter_elec.setSource(hazardGeo_elec, {
+    unit: "px",
+    size: [25, 25],
+    texture: getAssetsFileAQI("yellow" + "_hazard2" + ".png"),
+    borderWidth: 0,
+  });
+
+  scatter_other = new Loca.ScatterLayer({
+    // loca,
+    zIndex: 15,
+    opacity: 1,
+    visible: true,
+    zooms: [2, 22],
+  });
+
+  scatter_other.setSource(hazardGeo_other, {
+    unit: "px",
+    size: [25, 25],
+    texture: getAssetsFileAQI("white" + "_hazard2" + ".png"),
+    borderWidth: 0,
+  });
+  
 
   breath = new Loca.ScatterLayer({
     zIndex: 15,

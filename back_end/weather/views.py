@@ -306,7 +306,7 @@ def city_rank(request):
     city_list_worst_aqi = []
     city_list_best_aqi = []
 
-    length = min(10, len(RealtimeWeather.objects.all()) + 1)
+    length = min(10, RealtimeWeather.objects.count() + 1)
     top_weather_info = RealtimeWeather.objects.all().order_by('-temp')[:length]
     for i in range(length):
         info = top_weather_info[i]
@@ -337,7 +337,7 @@ def city_rank(request):
             "item": getattr(info, 'precip')
         })
 
-    length = min(10, len(RealtimeAirQuality.objects.all()) + 1)
+    length = min(10, RealtimeAirQuality.objects.count() + 1)
     top_weather_info = RealtimeAirQuality.objects.all().order_by('-aqi')[:length]
     for i in range(length):
         info = top_weather_info[i]
@@ -492,7 +492,7 @@ def aqi_detail(request):
 
 @require_http_methods(['GET'])
 def rank(request):
-    length = min(10, len(WeatherInfo.objects.all()) + 1)
+    length = min(10, WeatherInfo.objects.count() + 1)
 
     norm = request.GET.get('norm')
 
@@ -531,7 +531,7 @@ def aqi_current_city_change(request):
     city_name = city.cityName
     adm2 = city.adm2
 
-    length = min(30, len(DailyWeather.objects.all()) + 1)
+    length = min(30, DailyWeather.objects.count() + 1)
     all_info = DailyWeather.objects.filter(
         city=city_name, adm2=adm2).order_by('-fxDate')[:length]
     response_json = {
@@ -556,7 +556,7 @@ def target_city_change(request, norm):
     else:
         adm2 = ''
     period = int(request.GET.get('periods'))
-    length = min(period, len(DailyWeather.objects.all()) + 1)
+    length = min(period, DailyWeather.objects.count() + 1)
     try:
         all_info = DailyWeather.objects.filter(
             city=city_name, adm2=adm2).order_by('fxDate')[:length]
@@ -1005,7 +1005,7 @@ def delete_weather_data(request):
 @login_required
 def search_weather_data(request):
     data = json.loads(request.body)
-    if data['time'] == None:
+    if data['time'] is None:
         data['time'] = ""
     data_type = data['type'] if data['type'] else 'weather'
     from_time = data['time'][0] if len(data['time']) > 0 else None
